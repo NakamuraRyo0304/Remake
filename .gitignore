@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+.vs/
+Converter_DDS/
+Converter_XMB/
+packages/
+x64/
