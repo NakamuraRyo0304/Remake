@@ -10,11 +10,12 @@
 #include "Libraries/SystemDatas/Button/Button.h"
 #include "Libraries/SystemDatas/XController/XController.h"
 // システム
-#include "System/AdminCamera/AdminCamera.h"
-#include "System/UI_Title/UI_Title.h"
+#include "Game/Cameras/AdminCamera/AdminCamera.h"
+#include "Game/TitleScene/System/UI_Title/UI_Title.h"
 // オブジェクト
-#include "Objects/Sky/Sky.h"
-#include "Objects/Logo/Logo.h"
+#include "Game/TitleScene/Objects/Sky/Sky.h"
+#include "Game/TitleScene/Objects/Logo/Logo.h"
+#include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
 #include "TitleScene.h"
 
 //==============================================================================
@@ -80,12 +81,12 @@ void TitleScene::Update()
 	{
 		if (m_ui->IsClickStart())
 		{
-			m_adminCamera->SetType(CameraType::OverHead);
+			m_adminCamera->SetType(CameraType::Title_OverHead);
 			ChangeScene(SCENE::TITLE);
 		}
 		if (m_ui->IsClickExit())
 		{
-			m_adminCamera->SetType(CameraType::OverHead);
+			m_adminCamera->SetType(CameraType::Title_OverHead);
 			ChangeScene(SCENE::EXIT);
 		}
 	}
@@ -96,6 +97,10 @@ void TitleScene::Update()
 	// スカイ球の更新(カメラを中心にスカイ球をセットする　描画切れを防ぐ)
 	m_sky->SetPosition(m_adminCamera->GetPosition());
 	m_sky->Update();
+
+	// トリの更新
+	m_birdTitle[0]->Update();
+	m_birdTitle[1]->Update();
 
 	// ロゴの更新
 	m_logo->Update();
@@ -115,6 +120,10 @@ void TitleScene::Draw()
 
 	// 空の描画
 	m_sky->Draw(*_states, _view, _projection);
+
+	// トリの描画
+	m_birdTitle[0]->Draw(*_states, _view, _projection);
+	m_birdTitle[1]->Draw(*_states, _view, _projection);
 
 	// ロゴの描画
 	m_logo->Draw(*_states, _view, _projection);
@@ -140,6 +149,8 @@ void TitleScene::Finalize()
 	m_sky.reset();
 	m_logo.reset();
 	m_ui.reset();
+	m_birdTitle[0].reset();
+	m_birdTitle[1].reset();
 }
 
 //==============================================================================
@@ -161,6 +172,10 @@ void TitleScene::CreateWDResources()
 
 	// UI作成
 	m_ui = std::make_unique<UI_Title>(GetWindowSize() / GetFullHDSize());
+
+	// トリオブジェクト作成
+	m_birdTitle[0] = std::make_unique<Bird_Title>();
+	m_birdTitle[1] = std::make_unique<Bird_Title>();
 }
 
 //==============================================================================
@@ -168,11 +183,8 @@ void TitleScene::CreateWDResources()
 //==============================================================================
 void TitleScene::SetSceneValues()
 {
-	// カメラの初期設定-マウス操作
-	GetSystemManager()->GetCamera()->SetEagleMode(true);
-	GetSystemManager()->GetCamera()->IsZeroClamp(true);
 	// カメラの初期設定-自動
-	m_adminCamera->SetType(CameraType::FixedPoint);
+	m_adminCamera->SetType(CameraType::Title_FixedPoint);
 	m_adminCamera->SetActive(true);
 }
 

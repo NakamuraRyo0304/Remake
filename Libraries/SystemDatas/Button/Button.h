@@ -38,9 +38,6 @@ private:
 	// 座標
 	DirectX::SimpleMath::Vector2 m_position;
 
-	// 補正座標
-	DirectX::SimpleMath::Vector2 m_correctionPosition;
-
 	// 色
 	DirectX::SimpleMath::Color m_color;
 
@@ -51,7 +48,7 @@ private:
 	DirectX::SimpleMath::Vector2 m_origin;
 
 	// 拡大率
-	DirectX::SimpleMath::Vector2 m_rate;
+	DirectX::SimpleMath::Vector2 m_rate, m_baseRate;
 
 	// 状態
 	State m_states;
@@ -77,7 +74,7 @@ public:
 	/// <param name="color">色指定</param>
 	/// <returns>なし</returns>
 	void Initialize(DirectX::SimpleMath::Vector2 position, DirectX::SimpleMath::Vector2 rate,
-		RECT_U rect,	DirectX::SimpleMath::Vector2 screenRatio, DirectX::XMVECTORF32 color = { 1,1,1,1 });
+		RECT_U rect, DirectX::SimpleMath::Vector2 screenRatio, DirectX::XMVECTORF32 color = { 1,1,1,1 });
 
 	/// <summary>
 	/// 更新処理
@@ -99,17 +96,14 @@ public:
 	// 拡大率を設定
 	void SetRate(const DirectX::SimpleMath::Vector2& rate) { m_rate = rate; }
 
-	// 補正座標を設定
-	void SetCorrectionPosition(const DirectX::SimpleMath::Vector2& pos) { m_correctionPosition = pos; }
+	// 元の拡大率を取得
+	const DirectX::SimpleMath::Vector2& GetBaseRate() { return m_baseRate; }
 
-private:
+	// 色を取得
+	const DirectX::SimpleMath::Color& GetColor() { return m_color; }
 
-	/// <summary>
-	/// ボタンの状態を変更
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void ChangeButton();
+	// 色を設定
+	void SetColor(const DirectX::SimpleMath::Color& color) { m_color = color; }
 
 };
 

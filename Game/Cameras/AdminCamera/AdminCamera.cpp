@@ -59,10 +59,10 @@ void AdminCamera::SetType(const Type& cameraType)
 
 	switch (cameraType)
 	{
-	case Type::FixedPoint:
+	case Type::Title_FixedPoint:
 		m_gameCamera = std::make_unique<FixedPointCamera>(m_screenSize);
 		break;
-	case Type::OverHead:
+	case Type::Title_OverHead:
 		m_gameCamera = std::make_unique<OverHeadCamera>(m_screenSize);
 		break;
 	default:

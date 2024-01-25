@@ -189,16 +189,17 @@
   <ItemGroup>
     <ClInclude Include="DeviceResources.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h" />
+    <ClInclude Include="Game\Cameras\FixedPointCamera\FixedPointCamera.h" />
+    <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\IScene\IScene.h" />
+    <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
     <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h" />
     <ClInclude Include="Game\TitleScene\Objects\Sky\Sky.h" />
-    <ClInclude Include="Game\TitleScene\System\AdminCamera\AdminCamera.h" />
-    <ClInclude Include="Game\TitleScene\System\FixedPointCamera\FixedPointCamera.h" />
-    <ClInclude Include="Game\TitleScene\System\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h" />
     <ClInclude Include="Game\TitleScene\TitleScene.h" />
     <ClInclude Include="Libraries\Factories\GeometricFactory.h" />
@@ -230,15 +231,16 @@
   <ItemGroup>
     <ClCompile Include="DeviceResources.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp" />
+    <ClCompile Include="Game\Cameras\FixedPointCamera\FixedPointCamera.cpp" />
+    <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
     <ClCompile Include="Game\IScene\IScene.cpp" />
+    <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Sky\Sky.cpp" />
-    <ClCompile Include="Game\TitleScene\System\AdminCamera\AdminCamera.cpp" />
-    <ClCompile Include="Game\TitleScene\System\FixedPointCamera\FixedPointCamera.cpp" />
-    <ClCompile Include="Game\TitleScene\System\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp" />
     <ClCompile Include="Game\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Libraries\Factories\GeometricFactory.cpp" />
@@ -300,9 +302,9 @@
     <None Include="Resources\DebugModels\Sphere.cmo" />
     <None Include="Resources\DebugModels\Susanne.cmo" />
     <None Include="Resources\Fonts\SegoeUI_18.spritefont" />
+    <None Include="Resources\Models\Bird.cmo" />
     <None Include="Resources\Models\ShineSky.cmo" />
     <None Include="Resources\Models\TitleLogoVer2.cmo" />
-    <None Include="Resources\Models\TitleStage.cmo" />
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli" />
     <None Include="Resources\Shaders\ParametersHeader.hlsli" />
     <None Include="Resources\Shaders\Particle\Particle.hlsli" />

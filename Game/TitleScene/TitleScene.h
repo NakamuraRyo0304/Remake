@@ -17,6 +17,7 @@
 class AdminCamera;
 class Sky;
 class Logo;
+class Bird_Title;
 class UI_Title;
 class TitleScene final : public IScene
 {
@@ -33,6 +34,9 @@ private:
 
 	// ÉçÉS
 	std::unique_ptr<Logo> m_logo;
+
+	// ÉgÉä
+	std::unique_ptr<Bird_Title> m_birdTitle[2];
 
 
 public:

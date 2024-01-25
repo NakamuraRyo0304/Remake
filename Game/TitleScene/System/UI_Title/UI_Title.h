@@ -28,8 +28,11 @@ private:
 
 private:
 
-	// ホバーした時の拡大率
-	static const DirectX::SimpleMath::Vector2 HOVER_RATE;
+	// ホバー時のアルファ値
+	static const float RELEASE_ALPHA;
+
+	// アルファ値の動作速度
+	static const float ALPHA_FADE_SPEED;
 
 public:
 

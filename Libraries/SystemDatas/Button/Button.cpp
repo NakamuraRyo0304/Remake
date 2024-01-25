@@ -7,6 +7,7 @@
 
 #include "pch.h"
 #include "Libraries/SystemDatas/Input/Input.h"
+#include "Libraries/UserUtility.h"
 #include "Button.h"
 
 //==============================================================================
@@ -14,7 +15,9 @@
 //==============================================================================
 Button::Button(const wchar_t* name, const wchar_t* image)
 	: m_name{ name }
-	, m_correctionPosition{}
+	, m_baseRate{}
+	, m_position{}
+	, m_size{}
 {
 	// 画像の設定
 	m_sprite = std::make_unique<DrawSprite>();
@@ -43,7 +46,7 @@ void Button::Initialize(SimpleMath::Vector2 position, SimpleMath::Vector2 rate, 
 	m_states = State::Release;
 
 	// 拡大率を設定
-	m_rate = rate * screenRatio;
+	m_baseRate = m_rate = rate * screenRatio;
 
 	// 色を設定
 	m_color = color;
@@ -81,9 +84,6 @@ void Button::Update()
 	{
 		m_states = State::Release;
 	}
-
-	// ボタンの状態を更新
-	ChangeButton();
 }
 
 //==============================================================================
@@ -91,27 +91,6 @@ void Button::Update()
 //==============================================================================
 void Button::Draw()
 {
-	m_sprite->DrawTexture(m_name, m_position + m_correctionPosition, m_color, m_rate, { 0,0 } , m_size);
-}
-
-//==============================================================================
-// ボタンの状態を変更する
-//==============================================================================
-void Button::ChangeButton()
-{
-	switch (m_states)
-	{
-	case Button::State::Release:
-		m_color = SimpleMath::Color(m_color.x, m_color.y, m_color.z, 1.0f);
-		break;
-	case Button::State::Hover:
-		m_color = SimpleMath::Color(m_color.x, m_color.y, m_color.z, 0.8f);
-		break;
-	case Button::State::Push:
-		m_color = SimpleMath::Color(m_color.x, m_color.y, m_color.z, 0.6f);
-		break;
-	default:
-		break;
-	}
+	m_sprite->DrawTexture(m_name, m_position, m_color, m_rate, { 0,0 } , m_size);
 }
 

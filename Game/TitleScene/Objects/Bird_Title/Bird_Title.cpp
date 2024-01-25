@@ -1,41 +1,43 @@
 /*
- *	@File	Logo.cpp
- *	@Brief	タイトルロゴオブジェクト。
- *	@Date	2024-01-25
+ *	@File	Bird_Title.cpp
+ *	@Brief	タイトルに表示するトリ。
+ *	@Date	2023-01-25
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-#include "Logo.h"
+#include "Bird_Title.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector3  Logo::MOVE_POS = { 0.0f,2.0f,0.0f };	// 移動先座標
-const float Logo::MODEL_SCALE = 1.5f;							// モデルのスケール
+const float Bird_Title::RESTART_LINE = -10.0f;
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Logo::Logo()
-	: IGameObject(L"Resources/Models/TitleLogoVer2.cmo", L"Resources/Models")
+Bird_Title::Bird_Title()
+	: IGameObject(L"Resources/Models/Bird.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Default);
-	SetName(L"Logo");
+	SetName(L"Bird_Title");
 	SetWeight(NON_WEIGHT);
 
-	SetPosition(SimpleMath::Vector3(0.0f,30.0f,50.0f));
+	SetPosition(SimpleMath::Vector3(0.0f, 30.0f, 0.0f));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * MODEL_SCALE);
+	SetScale(SimpleMath::Vector3::One);
+
+	// Xをランダムに変更
+	RandomXPosition();
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Logo::~Logo()
+Bird_Title::~Bird_Title()
 {
 	ReleaseModel();
 }
@@ -43,17 +45,22 @@ Logo::~Logo()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Logo::Update()
+void Bird_Title::Update()
 {
 	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
-	float _01Sin = sinf(_timer + 1) * 0.5f;
+
+	// 落下
+	SetPosition(GetPosition() - SimpleMath::Vector3::UnitY * 0.1f);
+
+	// ラインより下に行ったら再スタート
+	if (GetPosition().y < RESTART_LINE)
+	{
+		RandomXPosition();
+	}
 
 	// 回転
-	SetRotate(SimpleMath::Vector3::UnitX * _01Sin);
-
-	// 移動
-	SetPosition(UserUtility::Lerp(
-		GetPosition(), MOVE_POS, 0.1f));
+	SetRotate(SimpleMath::Vector3::UnitX * _timer +
+		SimpleMath::Vector3::UnitY * _timer + SimpleMath::Vector3::UnitZ * sinf(_timer));
 
 	// マトリクスを作成
 	CreateWorldMatrix();
@@ -62,8 +69,20 @@ void Logo::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Logo::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Bird_Title::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+}
+
+//==============================================================================
+// ランダムでX座標を再抽選する
+//==============================================================================
+void Bird_Title::RandomXPosition()
+{
+	// ランダムな座標を指定
+	float _x = static_cast<float>(UserUtility::Random(-10.0, 10.0));
+
+	// 座標をセットする
+	SetPosition(GetInitialPosition() + SimpleMath::Vector3::UnitX * _x);
 }

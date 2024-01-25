@@ -27,8 +27,8 @@ public:
 	// カメラタイプ
 	enum Type
 	{
-		FixedPoint,		// 定点カメラ
-		OverHead,		// 俯瞰カメラ
+		Title_FixedPoint,		// 定点カメラ
+		Title_OverHead,			// 俯瞰カメラ
 
 		Length,			// カメラの数
 	};

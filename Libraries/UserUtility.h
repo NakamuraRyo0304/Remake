@@ -139,12 +139,21 @@ namespace UserUtility
 	/// <summary>
 	/// ランダムな値を返す
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="min">下限</param>
+	/// <param name="max">上限</param>
 	/// <returns>ランダムな値</returns>
-	template<typename T>
-	inline T Random(T min, T max)
+	inline double Random(double min, double max)
 	{
-		return rand() % max + min;
+		// srandを使用して乱数生成器を初期化
+		static bool _first = false;
+		if (!_first)
+		{
+			std::srand(static_cast<unsigned int>(std::time(nullptr)));
+			_first = true;
+		}
+
+		// minからmaxの範囲のランダムな浮動小数点数を生成
+		return min + static_cast<double>(rand()) / RAND_MAX * (max - min);
 	}
 
 	/// <summary>
