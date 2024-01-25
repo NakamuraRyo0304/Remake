@@ -99,8 +99,7 @@ void TitleScene::Update()
 	m_sky->Update();
 
 	// トリの更新
-	m_birdTitle[0]->Update();
-	m_birdTitle[1]->Update();
+	m_birdTitle->Update();
 
 	// ロゴの更新
 	m_logo->Update();
@@ -122,8 +121,7 @@ void TitleScene::Draw()
 	m_sky->Draw(*_states, _view, _projection);
 
 	// トリの描画
-	m_birdTitle[0]->Draw(*_states, _view, _projection);
-	m_birdTitle[1]->Draw(*_states, _view, _projection);
+	m_birdTitle->Draw(*_states, _view, _projection);
 
 	// ロゴの描画
 	m_logo->Draw(*_states, _view, _projection);
@@ -149,8 +147,7 @@ void TitleScene::Finalize()
 	m_sky.reset();
 	m_logo.reset();
 	m_ui.reset();
-	m_birdTitle[0].reset();
-	m_birdTitle[1].reset();
+	m_birdTitle.reset();
 }
 
 //==============================================================================
@@ -174,8 +171,7 @@ void TitleScene::CreateWDResources()
 	m_ui = std::make_unique<UI_Title>(GetWindowSize() / GetFullHDSize());
 
 	// トリオブジェクト作成
-	m_birdTitle[0] = std::make_unique<Bird_Title>();
-	m_birdTitle[1] = std::make_unique<Bird_Title>();
+	m_birdTitle = std::make_unique<Bird_Title>();
 }
 
 //==============================================================================

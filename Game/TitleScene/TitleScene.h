@@ -36,7 +36,7 @@ private:
 	std::unique_ptr<Logo> m_logo;
 
 	// ƒgƒŠ
-	std::unique_ptr<Bird_Title> m_birdTitle[2];
+	std::unique_ptr<Bird_Title> m_birdTitle;
 
 
 public:

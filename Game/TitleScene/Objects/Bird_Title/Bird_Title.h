@@ -21,6 +21,9 @@ private:
 	// 再スタートライン
 	static const float RESTART_LINE;
 
+	// 鳥のスケール
+	static const float BIRD_SCALE;
+
 public:
 
 	/// <summary>

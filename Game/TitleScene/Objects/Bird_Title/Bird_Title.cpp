@@ -13,6 +13,7 @@
 // 定数の設定
 //==============================================================================
 const float Bird_Title::RESTART_LINE = -10.0f;
+const float Bird_Title::BIRD_SCALE = 2.0f;
 
 //==============================================================================
 // コンストラクタ
@@ -25,10 +26,10 @@ Bird_Title::Bird_Title()
 	SetName(L"Bird_Title");
 	SetWeight(NON_WEIGHT);
 
-	SetPosition(SimpleMath::Vector3(0.0f, 30.0f, 0.0f));
+	SetPosition(SimpleMath::Vector3(0.0f, 30.0f, -5.0f));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One);
+	SetScale(SimpleMath::Vector3::One * BIRD_SCALE);
 
 	// Xをランダムに変更
 	RandomXPosition();
