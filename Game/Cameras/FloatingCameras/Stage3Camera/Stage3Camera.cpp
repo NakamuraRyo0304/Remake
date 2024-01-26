@@ -34,6 +34,10 @@ Stage3Camera::~Stage3Camera()
 //==============================================================================
 void Stage3Camera::Update()
 {
+	// 浮遊している風の動き
+	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+	SetPosition(GetInitialPosition() + SimpleMath::Vector3::UnitY * sinf(_timer));
+
 	// ビュー行列をセット
 	SetView(SimpleMath::Matrix::CreateLookAt(GetPosition(), GetTarget(), GetUp()));
 }

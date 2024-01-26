@@ -22,6 +22,7 @@
 #include "../FloatingCameras/Stage1Camera/Stage1Camera.h"
 #include "../FloatingCameras/Stage2Camera/Stage2Camera.h"
 #include "../FloatingCameras/Stage3Camera/Stage3Camera.h"
+#include "../RotateCamera/RotateCamera.h"
 
 class AdminCamera
 {

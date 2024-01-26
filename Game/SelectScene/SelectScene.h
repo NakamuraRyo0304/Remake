@@ -17,6 +17,8 @@
 class AdminCamera;
 class Sky_Select;
 class UI_Select;
+class Sand;
+
 class SelectScene final : public IScene
 {
 private:
@@ -32,6 +34,8 @@ private:
 
 	// ƒZƒŒƒNƒg”Ô†
 	int m_stageSelection;
+
+	std::unique_ptr<Sand> m_sand;
 
 private:
 

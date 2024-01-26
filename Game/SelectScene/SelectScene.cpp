@@ -14,6 +14,7 @@
 #include "Game/SelectScene/System/UI_Select/UI_Select.h"
 #include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"
 // オブジェクト
+#include "Game/Common/Blocks/Sand/Sand.h"
 
 #include "SelectScene.h"
 
@@ -100,6 +101,9 @@ void SelectScene::Update()
 	// スカイ球の更新
 	m_sky->Update();
 	m_sky->SetPosition(m_adminCamera->GetPosition());
+
+
+	m_sand->Update();
 }
 
 //==============================================================================
@@ -116,6 +120,9 @@ void SelectScene::Draw()
 
 	// ステージオブジェクトの描画
 	m_sky->Draw(*_states, _view, _projection);
+
+	// テスト
+	m_sand->Draw(*_states, _view, _projection);
 
 	// UIの描画
 	m_ui->Draw();
@@ -154,6 +161,9 @@ void SelectScene::CreateWDResources()
 
 	// スカイ球作成
 	m_sky = std::make_unique<Sky_Select>();
+
+	// テスト
+	m_sand = std::make_unique<Sand>();
 }
 
 //==============================================================================

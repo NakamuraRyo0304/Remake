@@ -195,6 +195,8 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h" />
     <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
+    <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
+    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h" />
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
@@ -245,6 +247,8 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp" />
     <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
+    <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
+    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
@@ -322,6 +326,7 @@
     <None Include="Resources\DebugModels\Susanne.cmo" />
     <None Include="Resources\Fonts\SegoeUI_18.spritefont" />
     <None Include="Resources\Models\Bird.cmo" />
+    <None Include="Resources\Models\Sand.cmo" />
     <None Include="Resources\Models\ShineSky.cmo" />
     <None Include="Resources\Models\TitleLogoVer2.cmo" />
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli" />

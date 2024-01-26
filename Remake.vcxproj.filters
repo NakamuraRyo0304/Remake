@@ -218,6 +218,15 @@
     <Filter Include="Libraries\JsonHelper">
       <UniqueIdentifier>{2d636d8d-bce4-4de0-8f4b-9bf0b82ecc4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Cameras\RotateCamera">
+      <UniqueIdentifier>{153609d4-b01c-4909-84d6-81ca1be6864b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Blocks">
+      <UniqueIdentifier>{a1fd99d1-a2a8-4ad5-8899-5c8efece342a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Blocks\Sand">
+      <UniqueIdentifier>{5d513971-1986-4511-a736-0afa763327ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -364,6 +373,12 @@
     <ClInclude Include="Libraries\SystemDatas\JsonHelper\JsonHelper.h">
       <Filter>Libraries\JsonHelper</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h">
+      <Filter>Game\Cameras\RotateCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h">
+      <Filter>Game\Common\Blocks\Sand</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -492,6 +507,12 @@
     <ClCompile Include="Libraries\SystemDatas\JsonHelper\JsonHelper.cpp">
       <Filter>Libraries\JsonHelper</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp">
+      <Filter>Game\Cameras\RotateCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp">
+      <Filter>Game\Common\Blocks\Sand</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -600,6 +621,9 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Bird.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Sand.cmo">
       <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
