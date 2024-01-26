@@ -13,7 +13,7 @@
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/TitleScene/System/UI_Title/UI_Title.h"
 // オブジェクト
-#include "Game/TitleScene/Objects/Sky/Sky.h"
+#include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"
 #include "Game/TitleScene/Objects/Logo/Logo.h"
 #include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
 #include "TitleScene.h"
@@ -163,7 +163,7 @@ void TitleScene::CreateWDResources()
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
 	// スカイ球オブジェクト作成
-	m_sky = std::make_unique<Sky>();
+	m_sky = std::make_unique<Sky_Title>();
 
 	// ロゴオブジェクト作成
 	m_logo = std::make_unique<Logo>();

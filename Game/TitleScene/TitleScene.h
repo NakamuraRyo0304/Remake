@@ -15,7 +15,7 @@
 #include "Game/IScene/IScene.h"
 
 class AdminCamera;
-class Sky;
+class Sky_Title;
 class Logo;
 class Bird_Title;
 class UI_Title;
@@ -30,7 +30,7 @@ private:
 	std::unique_ptr<UI_Title> m_ui;
 
 	// ÉXÉJÉCãÖ
-	std::unique_ptr<Sky> m_sky;
+	std::unique_ptr<Sky_Title> m_sky;
 
 	// ÉçÉS
 	std::unique_ptr<Logo> m_logo;
