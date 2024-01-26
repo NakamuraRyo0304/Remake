@@ -188,6 +188,21 @@
     <Filter Include="Game\Scenes\TitleScene\Objects\Bird_Title">
       <UniqueIdentifier>{e58db793-2386-4ce4-ab5e-70c658c0e957}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\SelectScene">
+      <UniqueIdentifier>{4ea24e97-893f-4010-834f-566e39628d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\SelectScene\System">
+      <UniqueIdentifier>{4fc388af-ec76-4a52-abc1-32ea0fc03f1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\SelectScene\Objects">
+      <UniqueIdentifier>{9bfcd8a0-fdab-42ef-adf9-e1468a4473a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\SelectScene\System\UI_Select">
+      <UniqueIdentifier>{57f935fc-7c7a-4704-aa84-ffd23aed0889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\IUserInterface">
+      <UniqueIdentifier>{ed323384-5d37-4018-b31b-199047cd34f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -310,6 +325,15 @@
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h">
       <Filter>Game\Scenes\TitleScene\Objects\Bird_Title</Filter>
     </ClInclude>
+    <ClInclude Include="Game\SelectScene\SelectScene.h">
+      <Filter>Game\Scenes\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h">
+      <Filter>Game\Scenes\SelectScene\System\UI_Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
+      <Filter>Game\Common\IUserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -413,6 +437,15 @@
     </ClCompile>
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp">
       <Filter>Game\Scenes\TitleScene\Objects\Bird_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SelectScene\SelectScene.cpp">
+      <Filter>Game\Scenes\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp">
+      <Filter>Game\Scenes\SelectScene\System\UI_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
+      <Filter>Game\Common\IUserInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -37,16 +37,16 @@ Button::~Button()
 // 初期化処理
 //==============================================================================
 void Button::Initialize(SimpleMath::Vector2 position, SimpleMath::Vector2 rate, RECT_U rect,
-	SimpleMath::Vector2 screenRatio, XMVECTORF32 color)
+	SimpleMath::Vector2 screenRate, XMVECTORF32 color)
 {
 	// 座標を設定
-	m_position = position * screenRatio;
+	m_position = position * screenRate;
 
 	// ステータスを初期化
 	m_states = State::Release;
 
 	// 拡大率を設定
-	m_baseRate = m_rate = rate * screenRatio;
+	m_baseRate = m_rate = rate * screenRate;
 
 	// 色を設定
 	m_color = color;

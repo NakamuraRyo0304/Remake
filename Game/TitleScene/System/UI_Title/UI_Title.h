@@ -9,12 +9,12 @@
 #ifndef UI_TITLE
 #define UI_TITLE
 
-//==============================================================================
-// 使用ファイルのインクルード
-//==============================================================================
-#include "Libraries/SystemDatas/Button/Button.h"
+ //==============================================================================
+ // 親シーンクラス
+ //==============================================================================
+#include "Game/Common/IUserInterface/IUserInterface.h"
 
-class UI_Title
+class UI_Title final : public IUserInterface
 {
 private:
 
@@ -39,24 +39,34 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="screenRatio">画面比率</param>
+	/// <param name="scS">画面サイズ</param>
+	/// <param name="mscS">最大サイズ</param>
 	/// <returns>なし</returns>
-	UI_Title(DirectX::SimpleMath::Vector2 screenRatio);
+	UI_Title(DirectX::SimpleMath::Vector2 scS, DirectX::SimpleMath::Vector2 mscs);
 	~UI_Title();
+
+	/// <summary>
+	/// 初期化関数
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Initialize() override;
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	void Update();
+	void Update() override;
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	void Draw();
+	void Draw() override;
+
+public:
 
 	// スタートボタンを押した
 	const bool& IsClickStart() { return is_startClick; }

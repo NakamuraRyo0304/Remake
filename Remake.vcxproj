@@ -195,8 +195,11 @@
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
+    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\IScene\IScene.h" />
+    <ClInclude Include="Game\SelectScene\SelectScene.h" />
+    <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
     <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h" />
     <ClInclude Include="Game\TitleScene\Objects\Sky\Sky.h" />
@@ -236,8 +239,11 @@
     <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
+    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
     <ClCompile Include="Game\IScene\IScene.cpp" />
+    <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
+    <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Sky\Sky.cpp" />
