@@ -19,6 +19,7 @@ enum class SCENE : int
     NONE,       // ID無し
 
     TITLE,      // タイトルシーン
+    SELECT,     // セレクトシーン
     PLAY,       // ゲームシーン
     EXIT,       // 終了
 };

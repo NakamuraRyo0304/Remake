@@ -26,6 +26,7 @@
 //==============================================================================
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
 
 //==============================================================================
 // コンストラクタ
@@ -56,7 +57,7 @@ void SelectScene::Initialize()
 
 	// BGMを鳴らす
 	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, SoundManager::SE_MODE::LOOP);
+	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -104,8 +105,8 @@ void SelectScene::Draw()
 
 	// デバッグ描画
 #ifdef _DEBUG
-	//auto _grid = GetSystemManager()->GetGridFloor();
-	//_grid->Draw(*_states, _view, _projection, Colors::Green);
+	auto _grid = GetSystemManager()->GetGridFloor();
+	_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
 #endif
 }
@@ -130,7 +131,7 @@ void SelectScene::CreateWDResources()
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
-	// UIの作成
+	// UI作成
 	m_ui = std::make_unique<UI_Select>(GetWindowSize(), GetFullHDSize());
 }
 

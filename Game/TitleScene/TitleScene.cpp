@@ -28,6 +28,7 @@
 //==============================================================================
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
 
 //==============================================================================
 // コンストラクタ
@@ -58,7 +59,7 @@ void TitleScene::Initialize()
 
 	// BGMを鳴らす
 	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, SoundManager::SE_MODE::LOOP);
+	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -82,7 +83,7 @@ void TitleScene::Update()
 		if (m_ui->IsClickStart())
 		{
 			m_adminCamera->SetType(CameraType::Title_OverHead);
-			ChangeScene(SCENE::TITLE);
+			ChangeScene(SCENE::SELECT);
 		}
 		if (m_ui->IsClickExit())
 		{
