@@ -23,10 +23,10 @@ UI_Title::UI_Title(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	, is_startClick{ false }		// スタートフラグ
 	, is_exitClick{ false }			// イグジットフラグ
 {
-	m_start = std::make_unique<Button>(L"Start", L"Resources/Textures/Buttons/Start.dds");
-	m_exit  = std::make_unique<Button>(L"Exit",  L"Resources/Textures/Buttons/Exit.dds");
+	m_start = std::make_unique<Button>(L"Start", L"Resources/Textures/TitleScene/Start.dds");
+	m_exit  = std::make_unique<Button>(L"Exit",  L"Resources/Textures/TitleScene/Exit.dds");
 
-	// 初期化関数
+	// 初期化処理
 	Initialize();
 }
 

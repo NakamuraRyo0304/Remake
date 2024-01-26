@@ -12,6 +12,7 @@
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/SelectScene/System/UI_Select/UI_Select.h"
+#include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"
 // オブジェクト
 
 #include "SelectScene.h"
@@ -85,8 +86,9 @@ void SelectScene::Update()
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
 			m_stageSelection--;
 
-		// クランプ
-		m_stageSelection = UserUtility::Clamp(m_stageSelection, 1, MAX_SAMPLE_NUM);
+		// ループクランプ
+		m_stageSelection = UserUtility::LoopClamp(m_stageSelection, 1, MAX_SAMPLE_NUM);
+		m_ui->SetSelectionNum(m_stageSelection);
 	}
 
 	// カメラの切り替え処理
@@ -94,6 +96,10 @@ void SelectScene::Update()
 
 	// カメラの更新
 	m_adminCamera->Update();
+
+	// スカイ球の更新
+	m_sky->Update();
+	m_sky->SetPosition(m_adminCamera->GetPosition());
 }
 
 //==============================================================================
@@ -109,7 +115,7 @@ void SelectScene::Draw()
 	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
 
 	// ステージオブジェクトの描画
-
+	m_sky->Draw(*_states, _view, _projection);
 
 	// UIの描画
 	m_ui->Draw();
@@ -129,6 +135,7 @@ void SelectScene::Finalize()
 {
 	m_adminCamera.reset();
 	m_ui.reset();
+	m_sky.reset();
 }
 
 //==============================================================================
@@ -144,6 +151,9 @@ void SelectScene::CreateWDResources()
 
 	// UI作成
 	m_ui = std::make_unique<UI_Select>(GetWindowSize(), GetFullHDSize());
+
+	// スカイ球作成
+	m_sky = std::make_unique<Sky_Select>();
 }
 
 //==============================================================================
@@ -154,6 +164,9 @@ void SelectScene::SetSceneValues()
 	// カメラの初期設定-自動
 	m_adminCamera->SetType(CameraType::Title_FixedPoint);
 	m_adminCamera->SetActive(true);
+
+	// 選択中の番号を設定
+	m_ui->SetSelectionNum(m_stageSelection);
 }
 
 //==============================================================================

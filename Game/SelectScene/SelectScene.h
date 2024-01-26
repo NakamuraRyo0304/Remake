@@ -15,6 +15,7 @@
 #include "Game/IScene/IScene.h"
 
 class AdminCamera;
+class Sky_Select;
 class UI_Select;
 class SelectScene final : public IScene
 {
@@ -25,6 +26,9 @@ private:
 
 	// UI
 	std::unique_ptr<UI_Select> m_ui;
+
+	// スカイ球
+	std::unique_ptr<Sky_Select> m_sky;
 
 	// セレクト番号
 	int m_stageSelection;

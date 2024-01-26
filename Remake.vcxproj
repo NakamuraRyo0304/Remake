@@ -201,6 +201,7 @@
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\IScene\IScene.h" />
+    <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h" />
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
     <ClCompile Include="Game\IScene\IScene.cpp" />
+    <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp" />
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />
@@ -288,8 +290,11 @@
     <Image Include="Resources\DebugModels\Floor.dds" />
     <Image Include="Resources\Effects\Fire.png" />
     <Image Include="Resources\Effects\Fog.png" />
-    <Image Include="Resources\Textures\Buttons\Exit.dds" />
-    <Image Include="Resources\Textures\Buttons\Start.dds" />
+    <Image Include="Resources\Textures\SelectScene\Stage1.dds" />
+    <Image Include="Resources\Textures\SelectScene\Stage2.dds" />
+    <Image Include="Resources\Textures\SelectScene\Stage3.dds" />
+    <Image Include="Resources\Textures\TitleScene\Exit.dds" />
+    <Image Include="Resources\Textures\TitleScene\Start.dds" />
     <Image Include="Resources\Textures\Transitions\Rule_OldTV.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Crystal.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Grids.png" />

@@ -18,6 +18,26 @@ class UI_Select final : public IUserInterface
 {
 private:
 
+	// スプライト
+	std::unique_ptr<DrawSprite> m_sprites;
+
+	// 座標
+	std::map<const wchar_t*, DirectX::SimpleMath::Vector2> m_position;
+
+	// 色
+	std::map<const wchar_t*, DirectX::SimpleMath::Vector4> m_color;
+
+	// 選択ステージ番号
+	int m_stageSelection;
+
+private:
+
+	// 選択色
+	static const DirectX::SimpleMath::Vector4 RED_COLOR;
+
+	// 色変更速度
+	static const float COLOR_SPEED;
+
 public:
 	/// <summary>
 	/// コンストラクタ
@@ -48,6 +68,11 @@ public:
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
 	void Draw() override;
+
+public:
+
+	// 選択中のステージ番号を設定
+	void SetSelectionNum(const int& num) { m_stageSelection = num; }
 
 };
 

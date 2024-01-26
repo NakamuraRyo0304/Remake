@@ -146,9 +146,6 @@
     <Filter Include="Libraries\Button">
       <UniqueIdentifier>{c3c56367-d5ae-4056-94c5-c716410d2e43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Textures\Buttons">
-      <UniqueIdentifier>{f640fac7-b952-4473-89b6-e492eb507853}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Shaders\DisplayEffects\Particle">
       <UniqueIdentifier>{713ad622-9583-40ac-bf1a-363f96798494}</UniqueIdentifier>
     </Filter>
@@ -211,6 +208,15 @@
     </Filter>
     <Filter Include="Game\Cameras\Stage1Camera">
       <UniqueIdentifier>{e1469778-8469-4eb0-8d08-611cb168d53e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\TitleScene">
+      <UniqueIdentifier>{4696fe83-743d-4bfd-b57b-8ef085a4c476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\SelectScene">
+      <UniqueIdentifier>{9a008080-86c0-4091-abd0-a9b764315087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\SelectScene\Objects\Sky_Select">
+      <UniqueIdentifier>{76b3fd34-c766-41c7-95b1-38af00852ec4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +358,9 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h">
       <Filter>Game\Cameras\Stage3Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h">
+      <Filter>Game\Scenes\SelectScene\Objects\Sky_Select</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -474,6 +483,9 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp">
       <Filter>Game\Cameras\Stage3Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp">
+      <Filter>Game\Scenes\SelectScene\Objects\Sky_Select</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -508,11 +520,20 @@
     <Image Include="Resources\Effects\Fog.png">
       <Filter>Resources\Textures\Effects</Filter>
     </Image>
-    <Image Include="Resources\Textures\Buttons\Exit.dds">
-      <Filter>Resources\Textures\Buttons</Filter>
+    <Image Include="Resources\Textures\TitleScene\Start.dds">
+      <Filter>Resources\Textures\TitleScene</Filter>
     </Image>
-    <Image Include="Resources\Textures\Buttons\Start.dds">
-      <Filter>Resources\Textures\Buttons</Filter>
+    <Image Include="Resources\Textures\TitleScene\Exit.dds">
+      <Filter>Resources\Textures\TitleScene</Filter>
+    </Image>
+    <Image Include="Resources\Textures\SelectScene\Stage3.dds">
+      <Filter>Resources\Textures\SelectScene</Filter>
+    </Image>
+    <Image Include="Resources\Textures\SelectScene\Stage1.dds">
+      <Filter>Resources\Textures\SelectScene</Filter>
+    </Image>
+    <Image Include="Resources\Textures\SelectScene\Stage2.dds">
+      <Filter>Resources\Textures\SelectScene</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

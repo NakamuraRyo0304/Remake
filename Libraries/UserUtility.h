@@ -48,6 +48,27 @@ namespace UserUtility
 	}
 
 	/// <summary>
+	/// ループクランプ関数
+	/// </summary>
+	/// <param name="v">対象値</param>
+	/// <param name="min">最小値</param>
+	/// <param name="max">最大値</param>
+	/// <returns>範囲内：対象値、下限突破：最大値、上限突破：最小値</returns>
+	template<typename T>
+	inline T LoopClamp(
+		T v,
+		T min,
+		T max
+	)
+	{
+		if (v < min) { return max; }
+		if (v > max) { return min; }
+
+		return v;
+	}
+
+
+	/// <summary>
 	/// 指定した円の中に点があるかを判定する関数
 	/// </summary>
 	/// <param name="center">円の中心</param>
