@@ -26,6 +26,14 @@ private:
 	// UI
 	std::unique_ptr<UI_Select> m_ui;
 
+	// セレクト番号
+	int m_stageSelection;
+
+private:
+
+	// サンプルステージ番号
+	static const int MAX_SAMPLE_NUM;
+
 public:
 
 	/// <summary>
@@ -81,6 +89,15 @@ private:
 	/// <param name="states">コモンステート</param>
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
+
+private:
+
+	/// <summary>
+	/// カメラの切り替え処理
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void ChangeAdminCamera();
 };
 
 #endif // SELECTSCENE

@@ -19,7 +19,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-
+const int SelectScene::MAX_SAMPLE_NUM = 3;
 
 //==============================================================================
 // エイリアス宣言
@@ -33,6 +33,7 @@ using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
 //==============================================================================
 SelectScene::SelectScene()
 	: IScene()				// 基底クラスのコンストラクタ
+	, m_stageSelection{ 1 }	// ステージ１からスタート
 {
 	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのコンストラクタが呼ばれました。\n");
 }
@@ -78,13 +79,21 @@ void SelectScene::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-		// UI等の処理を行う
+		// ステージの選択
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+			m_stageSelection++;
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+			m_stageSelection--;
 
+		// クランプ
+		m_stageSelection = UserUtility::Clamp(m_stageSelection, 1, MAX_SAMPLE_NUM);
 	}
+
+	// カメラの切り替え処理
+	ChangeAdminCamera();
 
 	// カメラの更新
 	m_adminCamera->Update();
-
 }
 
 //==============================================================================
@@ -98,6 +107,8 @@ void SelectScene::Draw()
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
+
+	// ステージオブジェクトの描画
 
 
 	// UIの描画
@@ -154,8 +165,22 @@ void SelectScene::DebugDraw(CommonStates& states)
 	auto& _time = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 }, Colors::Black, L"SelectScene");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,0 }, Colors::Yellow, L"SelectScene");
+	_string.DrawFormatString(states, { 0,25 }, Colors::Yellow, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	_string.DrawFormatString(states, { 0,50 }, Colors::Yellow, L"FPS::%d", _time.GetFramesPerSecond());
+	_string.DrawFormatString(states, { 0,75 }, Colors::Yellow, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,100 }, Colors::Yellow, L"StageNum::%d", m_stageSelection);
+}
+
+//==============================================================================
+// カメラの切り替え処理
+//==============================================================================
+void SelectScene::ChangeAdminCamera()
+{
+	if (m_stageSelection == 1)
+		m_adminCamera->SetType(CameraType::Select1_Floating);
+	if (m_stageSelection == 2)
+		m_adminCamera->SetType(CameraType::Select2_Floating);
+	if (m_stageSelection == 3)
+		m_adminCamera->SetType(CameraType::Select3_Floating);
 }

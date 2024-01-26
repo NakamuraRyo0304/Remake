@@ -7,7 +7,6 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-
 #include "AdminCamera.h"
 
 //==============================================================================
@@ -64,6 +63,15 @@ void AdminCamera::SetType(const Type& cameraType)
 		break;
 	case Type::Title_OverHead:
 		m_gameCamera = std::make_unique<OverHeadCamera>(m_screenSize);
+		break;
+	case Type::Select1_Floating:
+		m_gameCamera = std::make_unique<Stage1Camera>(m_screenSize);
+		break;
+	case Type::Select2_Floating:
+		m_gameCamera = std::make_unique<Stage2Camera>(m_screenSize);
+		break;
+	case Type::Select3_Floating:
+		m_gameCamera = std::make_unique<Stage3Camera>(m_screenSize);
 		break;
 	default:
 		break;

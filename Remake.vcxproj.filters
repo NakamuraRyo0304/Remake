@@ -164,9 +164,6 @@
     <Filter Include="Game\Scenes\TitleScene\System">
       <UniqueIdentifier>{bbf0ba56-179e-4cf9-9f91-177ba9178b71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scenes\TitleScene\Objects\Sky">
-      <UniqueIdentifier>{c05b4263-449e-4f8a-8656-a253197190c6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scenes\TitleScene\Objects\Logo">
       <UniqueIdentifier>{06e6c5a8-6f76-48b2-be68-1bfb7332351a}</UniqueIdentifier>
     </Filter>
@@ -202,6 +199,18 @@
     </Filter>
     <Filter Include="Game\Common\IUserInterface">
       <UniqueIdentifier>{ed323384-5d37-4018-b31b-199047cd34f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\TitleScene\Objects\Sky_Title">
+      <UniqueIdentifier>{7a28e00a-23ca-4f3f-8884-d2e1f78a4792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Cameras\Stage3Camera">
+      <UniqueIdentifier>{c0512cb4-0710-4aa6-ae5d-d82291abe91f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Cameras\Stage2Camera">
+      <UniqueIdentifier>{19971566-f55d-4d8e-86eb-3f1ce9184586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Cameras\Stage1Camera">
+      <UniqueIdentifier>{e1469778-8469-4eb0-8d08-611cb168d53e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -304,9 +313,6 @@
     <ClInclude Include="Game\TitleScene\TitleScene.h">
       <Filter>Game\Scenes\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Game\TitleScene\Objects\Sky\Sky.h">
-      <Filter>Game\Scenes\TitleScene\Objects\Sky</Filter>
-    </ClInclude>
     <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
       <Filter>Game\Scenes\TitleScene\Objects\Logo</Filter>
     </ClInclude>
@@ -333,6 +339,18 @@
     </ClInclude>
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
       <Filter>Game\Common\IUserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h">
+      <Filter>Game\Scenes\TitleScene\Objects\Sky_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.h">
+      <Filter>Game\Cameras\Stage1Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h">
+      <Filter>Game\Cameras\Stage2Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h">
+      <Filter>Game\Cameras\Stage3Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -417,9 +435,6 @@
     <ClCompile Include="Game\TitleScene\TitleScene.cpp">
       <Filter>Game\Scenes\TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Game\TitleScene\Objects\Sky\Sky.cpp">
-      <Filter>Game\Scenes\TitleScene\Objects\Sky</Filter>
-    </ClCompile>
     <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
       <Filter>Game\Scenes\TitleScene\Objects\Logo</Filter>
     </ClCompile>
@@ -446,6 +461,18 @@
     </ClCompile>
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
       <Filter>Game\Common\IUserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp">
+      <Filter>Game\Scenes\TitleScene\Objects\Sky_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.cpp">
+      <Filter>Game\Cameras\Stage1Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp">
+      <Filter>Game\Cameras\Stage2Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp">
+      <Filter>Game\Cameras\Stage3Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
