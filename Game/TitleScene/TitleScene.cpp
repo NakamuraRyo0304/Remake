@@ -80,15 +80,11 @@ void TitleScene::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-		if (m_ui->IsClickStart())
+		// スペースを押したら遷移する
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
 			m_adminCamera->SetType(CameraType::Title_OverHead);
-			ChangeScene(SCENE::SELECT);
-		}
-		if (m_ui->IsClickExit())
-		{
-			m_adminCamera->SetType(CameraType::Title_OverHead);
-			ChangeScene(SCENE::EXIT);
+			m_ui->GetSelection() == UI_Title::Start ? ChangeScene(SCENE::SELECT) : ChangeScene(SCENE::EXIT);
 		}
 	}
 

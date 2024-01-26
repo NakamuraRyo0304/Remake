@@ -211,7 +211,6 @@
     <ClInclude Include="Game\TitleScene\TitleScene.h" />
     <ClInclude Include="Libraries\Factories\GeometricFactory.h" />
     <ClInclude Include="Libraries\Factories\ModelFactory.h" />
-    <ClInclude Include="Libraries\Json\json.hpp" />
     <ClInclude Include="Libraries\SystemDatas\Button\Button.h" />
     <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h" />
     <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h" />
@@ -221,6 +220,8 @@
     <ClInclude Include="Libraries\SystemDatas\DrawString\DrawString.h" />
     <ClInclude Include="Libraries\SystemDatas\GridFloor\GridFloor.h" />
     <ClInclude Include="Libraries\SystemDatas\Input\Input.h" />
+    <ClInclude Include="Libraries\SystemDatas\JsonHelper\json.hpp" />
+    <ClInclude Include="Libraries\SystemDatas\JsonHelper\JsonHelper.h" />
     <ClInclude Include="Libraries\SystemDatas\RayCast\RayCast.h" />
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.h" />
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Libraries\SystemDatas\DrawString\DrawString.cpp" />
     <ClCompile Include="Libraries\SystemDatas\GridFloor\GridFloor.cpp" />
     <ClCompile Include="Libraries\SystemDatas\Input\Input.cpp" />
+    <ClCompile Include="Libraries\SystemDatas\JsonHelper\JsonHelper.cpp" />
     <ClCompile Include="Libraries\SystemDatas\RayCast\RayCast.cpp" />
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.cpp" />
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp" />

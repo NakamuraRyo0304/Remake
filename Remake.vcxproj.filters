@@ -95,9 +95,6 @@
     <Filter Include="Libraries\Input">
       <UniqueIdentifier>{1d86355b-67c4-4f6c-be3d-d1e7a993934f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Json">
-      <UniqueIdentifier>{718f7214-f6de-43ad-b4ae-2b0537acd86e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Libraries\RenderTexture">
       <UniqueIdentifier>{ffd8475f-335a-4cce-9938-89286e20d436}</UniqueIdentifier>
     </Filter>
@@ -218,6 +215,9 @@
     <Filter Include="Game\Scenes\SelectScene\Objects\Sky_Select">
       <UniqueIdentifier>{76b3fd34-c766-41c7-95b1-38af00852ec4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries\JsonHelper">
+      <UniqueIdentifier>{2d636d8d-bce4-4de0-8f4b-9bf0b82ecc4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -273,9 +273,6 @@
     </ClInclude>
     <ClInclude Include="Game\IScene\IScene.h">
       <Filter>Game\IScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\Json\json.hpp">
-      <Filter>Json</Filter>
     </ClInclude>
     <ClInclude Include="RenderTexture.h">
       <Filter>Libraries\RenderTexture</Filter>
@@ -360,6 +357,12 @@
     </ClInclude>
     <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h">
       <Filter>Game\Scenes\SelectScene\Objects\Sky_Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\JsonHelper\json.hpp">
+      <Filter>Libraries\JsonHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\JsonHelper\JsonHelper.h">
+      <Filter>Libraries\JsonHelper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -485,6 +488,9 @@
     </ClCompile>
     <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp">
       <Filter>Game\Scenes\SelectScene\Objects\Sky_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\JsonHelper\JsonHelper.cpp">
+      <Filter>Libraries\JsonHelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,23 +16,32 @@
 
 class UI_Title final : public IUserInterface
 {
-private:
+public:
 
-	// ボタン
-	std::unique_ptr<Button> m_start;
-	std::unique_ptr<Button> m_exit;
-
-	// クリック判定
-	bool is_startClick;
-	bool is_exitClick;
+	// セレクトメニュー
+	enum TitleSelect { Start, Exit };
 
 private:
 
-	// ホバー時のアルファ値
-	static const float RELEASE_ALPHA;
+	// スプライト
+	std::unique_ptr<DrawSprite> m_sprites;
 
-	// アルファ値の動作速度
-	static const float ALPHA_FADE_SPEED;
+	// 座標
+	std::map<const wchar_t*, DirectX::SimpleMath::Vector2> m_position;
+
+	// 色
+	std::map<const wchar_t*, DirectX::SimpleMath::Vector4> m_color;
+
+	// 遷移先セレクト
+	int m_selection;
+
+private:
+
+	// 選択色
+	static const DirectX::SimpleMath::Vector4 RED_COLOR;
+
+	// 色変更速度
+	static const float COLOR_SPEED;
 
 public:
 
@@ -68,10 +77,8 @@ public:
 
 public:
 
-	// スタートボタンを押した
-	const bool& IsClickStart() { return is_startClick; }
-	// 終了ボタンを押した
-	const bool& IsClickExit() { return is_exitClick; }
+	// セレクト番号を返す
+	const int& GetSelection() { return m_selection; }
 };
 
 #endif // UI_TITLE
