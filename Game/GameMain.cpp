@@ -21,6 +21,7 @@ const XMVECTORF32 GameMain::FADE_COLOR = Colors::White;
 //==============================================================================
 #include "TitleScene/TitleScene.h"
 #include "SelectScene/SelectScene.h"
+#include "Editor/Editor.h"
 
 //==============================================================================
 // コンストラクタ
@@ -136,6 +137,13 @@ void GameMain::CreateScene()
 		case SCENE::SELECT:		// セレクトシーン
 		{
 			m_nowScene = std::make_unique<SelectScene>();
+
+			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
+			break;
+		}
+		case SCENE::EDIT:		// 制作シーン
+		{
+			m_nowScene = std::make_unique<Editor>();
 
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;

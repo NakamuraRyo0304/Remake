@@ -1,25 +1,36 @@
 /*
- *	@File	Sand.h
- *	@Brief	砂ブロック。
+ *	@File	Cloud.h
+ *	@Brief	雲ブロック。
  *	@Date	2023-01-27
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef SAND
-#define SAND
+#ifndef CLOUD
+#define CLOUD
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Sand : public IGameObject
+class Cloud : public IGameObject
 {
 private:
 
+	// 到着座標
+	DirectX::SimpleMath::Vector3 m_arrivePosition;
+
 	// 衝突フラグ
 	bool is_hit;
+
+	// 到着フラグ
+	bool is_arrive;
+
+private:
+
+	// 回転速度
+	static const float ROTATE_SPEED;
 
 public:
 
@@ -28,8 +39,8 @@ public:
 	/// </summary>
 	/// <param name="position">生成座標</param>
 	/// <returns>なし</returns>
-	Sand(DirectX::SimpleMath::Vector3 position);
-	~Sand();
+	Cloud(DirectX::SimpleMath::Vector3 position);
+	~Cloud();
 
 	/// <summary>
 	/// 更新処理
@@ -55,4 +66,4 @@ public:
 
 };
 
-#endif // SAND
+#endif // CLOUD

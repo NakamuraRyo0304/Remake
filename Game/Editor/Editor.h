@@ -1,13 +1,13 @@
 /*
- *	@File	SelectScene.h
- *	@Brief	セレクトシーン。
+ *	@File	Editor.h
+ *	@Brief	エディタ。
  *	@Date	2023-01-26
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef SELECTSCENE
-#define SELECTSCENE
+#ifndef EDITOR
+#define EDITOR
 
 //==============================================================================
 // 親シーンクラス
@@ -16,35 +16,17 @@
 
 class AdminCamera;
 class BlockManager;
-class Sky_Select;
-class UI_Select;
 
-class SelectScene final : public IScene
+class Editor final : public IScene
 {
 private:
 
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
 
-	// UI
-	std::unique_ptr<UI_Select> m_ui;
-
-	// スカイ球
-	std::unique_ptr<Sky_Select> m_sky;
-
 	// ブロックマネージャ
 	std::unique_ptr<BlockManager> m_blockManager;
 
-	// セレクト番号
-	int m_stageSelection;
-
-private:
-
-	// サンプルステージ番号
-	static const int MAX_SAMPLE_NUM;
-
-	// ０番はエディタの番号
-	const int EDITOR_NUM = 0;
 
 public:
 
@@ -53,8 +35,8 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	SelectScene();
-	~SelectScene();
+	Editor();
+	~Editor();
 
 	/// <summary>
 	/// 初期化処理
@@ -102,14 +84,6 @@ private:
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
 
-private:
-
-	/// <summary>
-	/// カメラの切り替え処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void ChangeAdminCamera();
 };
 
-#endif // SELECTSCENE
+#endif // Editor

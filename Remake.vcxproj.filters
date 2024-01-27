@@ -29,9 +29,6 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{f529bb67-c32b-4d65-9654-6bcdb90f737e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Datas">
-      <UniqueIdentifier>{f3bad4f2-1533-4662-844d-d95032de6ff6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Textures\Transitions">
       <UniqueIdentifier>{f9d95782-4241-4543-9752-b4f72d5e2465}</UniqueIdentifier>
     </Filter>
@@ -227,6 +224,21 @@
     <Filter Include="Game\Common\Blocks\Sand">
       <UniqueIdentifier>{5d513971-1986-4511-a736-0afa763327ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Common\BlockManager">
+      <UniqueIdentifier>{5f445990-5e05-4b23-9a6a-8e4fce7ee598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Blocks\StageJsonDatas">
+      <UniqueIdentifier>{c0ea1506-4887-41d2-960b-f9ef652b8bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Blocks\Cloud">
+      <UniqueIdentifier>{ea6fab6d-9842-435f-be30-da66296e84a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Blocks\Coin">
+      <UniqueIdentifier>{e9c1594a-f015-4351-8ed8-4a9b584057fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Editor">
+      <UniqueIdentifier>{43702bf3-7278-429a-bacc-02761f173d7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -379,6 +391,18 @@
     <ClInclude Include="Game\Common\Blocks\Sand\Sand.h">
       <Filter>Game\Common\Blocks\Sand</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\BlockManager\BlockManager.h">
+      <Filter>Game\Common\BlockManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h">
+      <Filter>Game\Common\Blocks\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Coin\Coin.h">
+      <Filter>Game\Common\Blocks\Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\Editor.h">
+      <Filter>Game\Scenes\Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -513,6 +537,18 @@
     <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp">
       <Filter>Game\Common\Blocks\Sand</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp">
+      <Filter>Game\Common\BlockManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp">
+      <Filter>Game\Common\Blocks\Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp">
+      <Filter>Game\Common\Blocks\Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\Editor.cpp">
+      <Filter>Game\Scenes\Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -575,9 +611,6 @@
     <None Include="Resources\Fonts\SegoeUI_18.spritefont">
       <Filter>Assets</Filter>
     </None>
-    <None Include="Datas\Progress.json">
-      <Filter>Datas</Filter>
-    </None>
     <None Include="Resources\DebugModels\Sphere.cmo">
       <Filter>Resources\DebugModels</Filter>
     </None>
@@ -624,6 +657,15 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Sand.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Stages\sample1.json">
+      <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
+    </None>
+    <None Include="Resources\Models\Cloud.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Coin.cmo">
       <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>

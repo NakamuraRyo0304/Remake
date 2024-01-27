@@ -1,25 +1,28 @@
 /*
- *	@File	Sand.h
- *	@Brief	砂ブロック。
+ *	@File	Coin.h
+ *	@Brief	コインブロック。
  *	@Date	2023-01-27
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef SAND
-#define SAND
+#ifndef COIN
+#define COIN
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Sand : public IGameObject
+class Coin : public IGameObject
 {
 private:
 
 	// 衝突フラグ
 	bool is_hit;
+
+	// アクティブフラグ
+	bool is_active;
 
 public:
 
@@ -28,8 +31,8 @@ public:
 	/// </summary>
 	/// <param name="position">生成座標</param>
 	/// <returns>なし</returns>
-	Sand(DirectX::SimpleMath::Vector3 position);
-	~Sand();
+	Coin(DirectX::SimpleMath::Vector3 position);
+	~Coin();
 
 	/// <summary>
 	/// 更新処理
@@ -53,6 +56,9 @@ public:
 	// 衝突を通知する
 	void NotificateHit(const bool& is) { is_hit = is; }
 
+	// アクティブフラグを切り替える
+	void SetActive(const bool flag) { is_active = flag; }
+
 };
 
-#endif // SAND
+#endif // COIN

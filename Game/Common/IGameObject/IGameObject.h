@@ -62,7 +62,7 @@ public:
 	/// <param name="dpath">ディレクトリパス</param>
 	/// <returns>なし</returns>
 	IGameObject(const wchar_t* mpath, const wchar_t* dpath);
-	~IGameObject() = default;
+	~IGameObject();
 
 	/// <summary>
 	/// 更新処理

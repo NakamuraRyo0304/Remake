@@ -1,24 +1,17 @@
 /*
- *	@File	TitleScene.cpp
- *	@Brief	タイトルシーン。
- *	@Date	2024-01-25
+ *	@File	Editor.cpp
+ *	@Brief	エディタ。
+ *	@Date	2023-01-26
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
-#include "Game/TitleScene/System/UI_Title/UI_Title.h"
 // オブジェクト
-#include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"
-#include "Game/TitleScene/Objects/Logo/Logo.h"
-#include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
-#include "TitleScene.h"
+#include "Game/Common/BlockManager/BlockManager.h"
 
-//==============================================================================
-// 定数の設定
-//==============================================================================
-
+#include "Editor.h"
 
 //==============================================================================
 // エイリアス宣言
@@ -26,27 +19,28 @@
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
+using HitKinds = BlockManager::BlockKinds;				// ブロックの種類
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-TitleScene::TitleScene()
+Editor::Editor()
 	: IScene()				// 基底クラスのコンストラクタ
 {
-	Debug::DrawString::GetInstance().DebugLog(L"TitleSceneのコンストラクタが呼ばれました。\n");
+	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-TitleScene::~TitleScene()
+Editor::~Editor()
 {
 }
 
 //==============================================================================
 // 初期化処理
 //==============================================================================
-void TitleScene::Initialize()
+void Editor::Initialize()
 {
 	// 画面依存の初期化
 	CreateWDResources();
@@ -62,45 +56,29 @@ void TitleScene::Initialize()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void TitleScene::Update()
+void Editor::Update()
 {
 	auto _input = Input::GetInstance();
 
 	// ソフト終了
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::EXIT); }
-
-	// UIの更新
-	m_ui->Update();
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
 
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-		// スペースを押したら遷移する
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
-		{
-			m_adminCamera->SetType(CameraType::Title_OverHead);
-			m_ui->GetSelection() == UI_Title::Start ? ChangeScene(SCENE::SELECT) : ChangeScene(SCENE::EXIT);
-		}
 	}
 
 	// カメラの更新
 	m_adminCamera->Update();
 
-	// スカイ球の更新(カメラを中心にスカイ球をセットする　描画切れを防ぐ)
-	m_sky->SetPosition(m_adminCamera->GetPosition());
-	m_sky->Update();
-
-	// トリの更新
-	m_birdTitle->Update();
-
-	// ロゴの更新
-	m_logo->Update();
+	// ブロックの更新
+	m_blockManager->Update();
 }
 
 //==============================================================================
 // 描画処理
 //==============================================================================
-void TitleScene::Draw()
+void Editor::Draw()
 {
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
@@ -109,23 +87,13 @@ void TitleScene::Draw()
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
 
-	// 空の描画
-	m_sky->Draw(*_states, _view, _projection);
-
-	// トリの描画
-	m_birdTitle->Draw(*_states, _view, _projection);
-
-	// ロゴの描画
-	m_logo->Draw(*_states, _view, _projection);
-
-	// UIの表示
-	m_ui->Draw();
-
+	// ブロックの描画
+	m_blockManager->Draw(*_states, _view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
-	//auto _grid = GetSystemManager()->GetGridFloor();
-	//_grid->Draw(*_states, _view, _projection, Colors::Green);
+	auto _grid = GetSystemManager()->GetGridFloor();
+	_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
 #endif
 }
@@ -133,19 +101,16 @@ void TitleScene::Draw()
 //==============================================================================
 // 終了処理
 //==============================================================================
-void TitleScene::Finalize()
+void Editor::Finalize()
 {
 	m_adminCamera.reset();
-	m_sky.reset();
-	m_logo.reset();
-	m_ui.reset();
-	m_birdTitle.reset();
+	m_blockManager.reset();
 }
 
 //==============================================================================
 // 画面、デバイス依存の初期化
 //==============================================================================
-void TitleScene::CreateWDResources()
+void Editor::CreateWDResources()
 {
 	// デフォルトカメラ設定
 	GetSystemManager()->GetCamera()->CreateProjection(GetWindowSize(), GetDefaultCameraAngle());
@@ -153,41 +118,31 @@ void TitleScene::CreateWDResources()
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
-	// スカイ球オブジェクト作成
-	m_sky = std::make_unique<Sky_Title>();
-
-	// ロゴオブジェクト作成
-	m_logo = std::make_unique<Logo>();
-
-	// UI作成
-	m_ui = std::make_unique<UI_Title>(GetWindowSize(), GetFullHDSize());
-
-	// トリオブジェクト作成
-	m_birdTitle = std::make_unique<Bird_Title>();
+	// ブロックマネージャ
+	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
 }
 
 //==============================================================================
 // シーン内の変数初期化関数
 //==============================================================================
-void TitleScene::SetSceneValues()
+void Editor::SetSceneValues()
 {
 	// カメラの初期設定-自動
 	m_adminCamera->SetType(CameraType::Title_FixedPoint);
 	m_adminCamera->SetActive(true);
-
 }
 
 //==============================================================================
 // デバッグ描画
 //==============================================================================
-void TitleScene::DebugDraw(CommonStates& states)
+void Editor::DebugDraw(CommonStates& states)
 {
 	auto& _string = Debug::DrawString::GetInstance();
 	auto& _time = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 },  Colors::Black, L"TitleScene");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,0 }, Colors::Yellow, L"Editor");
+	_string.DrawFormatString(states, { 0,25 }, Colors::Yellow, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	_string.DrawFormatString(states, { 0,50 }, Colors::Yellow, L"FPS::%d", _time.GetFramesPerSecond());
+	_string.DrawFormatString(states, { 0,75 }, Colors::Yellow, L"Timer::%.2f", _time.GetTotalSeconds());
 }

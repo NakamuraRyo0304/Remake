@@ -6,15 +6,12 @@
  */
 
 #include "pch.h"
- // ライブラリ
-#include "Libraries/SystemDatas/Button/Button.h"
-#include "Libraries/SystemDatas/XController/XController.h"
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/SelectScene/System/UI_Select/UI_Select.h"
 #include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"
 // オブジェクト
-#include "Game/Common/Blocks/Sand/Sand.h"
+#include "Game/Common/BlockManager/BlockManager.h"
 
 #include "SelectScene.h"
 
@@ -29,6 +26,7 @@ const int SelectScene::MAX_SAMPLE_NUM = 3;
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
+using HitKinds = BlockManager::BlockKinds;				// ブロックの種類
 
 //==============================================================================
 // コンストラクタ
@@ -69,8 +67,6 @@ void SelectScene::Initialize()
 void SelectScene::Update()
 {
 	auto _input = Input::GetInstance();
-	//auto _se = SoundManager::GetInstance();
-	//auto _xcon = XController::GetInstance();
 
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::EXIT); }
@@ -88,7 +84,7 @@ void SelectScene::Update()
 			m_stageSelection--;
 
 		// ループクランプ
-		m_stageSelection = UserUtility::LoopClamp(m_stageSelection, 1, MAX_SAMPLE_NUM);
+		m_stageSelection = UserUtility::LoopClamp(m_stageSelection, EDITOR_NUM, MAX_SAMPLE_NUM);
 		m_ui->SetSelectionNum(m_stageSelection);
 	}
 
@@ -102,8 +98,8 @@ void SelectScene::Update()
 	m_sky->Update();
 	m_sky->SetPosition(m_adminCamera->GetPosition());
 
-
-	m_sand->Update();
+	// ブロックの更新
+	m_blockManager->Update();
 }
 
 //==============================================================================
@@ -121,8 +117,8 @@ void SelectScene::Draw()
 	// ステージオブジェクトの描画
 	m_sky->Draw(*_states, _view, _projection);
 
-	// テスト
-	m_sand->Draw(*_states, _view, _projection);
+	// ブロックの描画
+	m_blockManager->Draw(*_states, _view, _projection);
 
 	// UIの描画
 	m_ui->Draw();
@@ -143,6 +139,7 @@ void SelectScene::Finalize()
 	m_adminCamera.reset();
 	m_ui.reset();
 	m_sky.reset();
+	m_blockManager.reset();
 }
 
 //==============================================================================
@@ -162,8 +159,8 @@ void SelectScene::CreateWDResources()
 	// スカイ球作成
 	m_sky = std::make_unique<Sky_Select>();
 
-	// テスト
-	m_sand = std::make_unique<Sand>();
+	// ブロックマネージャ
+	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
 }
 
 //==============================================================================
@@ -200,6 +197,8 @@ void SelectScene::DebugDraw(CommonStates& states)
 //==============================================================================
 void SelectScene::ChangeAdminCamera()
 {
+	if(m_stageSelection == EDITOR_NUM)
+		m_adminCamera->SetType(CameraType::Title_FixedPoint);
 	if (m_stageSelection == 1)
 		m_adminCamera->SetType(CameraType::Select1_Floating);
 	if (m_stageSelection == 2)
