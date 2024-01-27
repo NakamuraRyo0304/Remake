@@ -8,8 +8,11 @@
 #include "pch.h"
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
+#include "Game/Editor/System/UI_Editor/UI_Editor.h"
+#include "Game/Editor/System/WorldMouse/WorldMouse.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
+#include "Game/Common/Blocks/Coin/Coin.h"
 
 #include "Editor.h"
 
@@ -47,10 +50,6 @@ void Editor::Initialize()
 
 	// 変数の初期化
 	SetSceneValues();
-
-	// BGMを鳴らす
-	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -63,16 +62,27 @@ void Editor::Update()
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
 
+	// UIの更新
+	m_ui->Update();
+
 	// シーン遷移
 	if (IsCanUpdate())
 	{
+
 	}
 
 	// カメラの更新
 	m_adminCamera->Update();
 
+	// ワールドマウスの更新
+	m_worldMouse->Update();
+
 	// ブロックの更新
 	m_blockManager->Update();
+
+	m_coin->SetPosition(m_worldMouse->GetPosition());
+	m_coin->Update();
+
 }
 
 //==============================================================================
@@ -90,6 +100,14 @@ void Editor::Draw()
 	// ブロックの描画
 	m_blockManager->Draw(*_states, _view, _projection);
 
+	// UIの描画
+	m_ui->Draw();
+
+	// ワールドマウスの描画
+	m_worldMouse->Draw(_view, _projection);
+
+	m_coin->Draw(*_states, _view, _projection);
+
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
@@ -105,6 +123,8 @@ void Editor::Finalize()
 {
 	m_adminCamera.reset();
 	m_blockManager.reset();
+	m_ui.reset();
+	m_worldMouse.reset();
 }
 
 //==============================================================================
@@ -120,6 +140,14 @@ void Editor::CreateWDResources()
 
 	// ブロックマネージャ
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+
+	// UI作成
+	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
+
+	// ワールドマウスの作成
+	m_worldMouse = std::make_unique<WorldMouse>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
+
+	m_coin = std::make_unique<Coin>(SimpleMath::Vector3::Zero);
 }
 
 //==============================================================================
@@ -128,7 +156,7 @@ void Editor::CreateWDResources()
 void Editor::SetSceneValues()
 {
 	// カメラの初期設定-自動
-	m_adminCamera->SetType(CameraType::Title_FixedPoint);
+	m_adminCamera->SetType(CameraType::Select1_Floating);
 	m_adminCamera->SetActive(true);
 }
 

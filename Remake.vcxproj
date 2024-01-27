@@ -205,6 +205,8 @@
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
     <ClInclude Include="Game\Editor\Editor.h" />
+    <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h" />
+    <ClInclude Include="Game\Editor\System\WorldMouse\WorldMouse.h" />
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\IScene\IScene.h" />
     <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h" />
@@ -260,6 +262,8 @@
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
     <ClCompile Include="Game\Editor\Editor.cpp" />
+    <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp" />
+    <ClCompile Include="Game\Editor\System\WorldMouse\WorldMouse.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
     <ClCompile Include="Game\IScene\IScene.cpp" />
     <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp" />
@@ -304,6 +308,7 @@
     <Image Include="Resources\DebugModels\Floor.dds" />
     <Image Include="Resources\Effects\Fire.png" />
     <Image Include="Resources\Effects\Fog.png" />
+    <Image Include="Resources\Textures\SelectScene\Editor.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage1.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage2.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage3.dds" />

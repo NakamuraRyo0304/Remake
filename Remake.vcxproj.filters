@@ -239,6 +239,18 @@
     <Filter Include="Game\Scenes\Editor">
       <UniqueIdentifier>{43702bf3-7278-429a-bacc-02761f173d7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\Editor\System">
+      <UniqueIdentifier>{44ccf6ec-b236-4a83-a033-be503515d02c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Editor\Objects">
+      <UniqueIdentifier>{a54705ec-a4ce-4bac-b3de-e3c6637c38f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Editor\System\UI_Editor">
+      <UniqueIdentifier>{21b4488b-3045-4f71-a770-9859ab81a8d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Editor\System\WorldMouse">
+      <UniqueIdentifier>{e824eab9-8670-45da-8298-3339450ce206}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -403,6 +415,12 @@
     <ClInclude Include="Game\Editor\Editor.h">
       <Filter>Game\Scenes\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h">
+      <Filter>Game\Scenes\Editor\System\UI_Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\System\WorldMouse\WorldMouse.h">
+      <Filter>Game\Scenes\Editor\System\WorldMouse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -549,6 +567,12 @@
     <ClCompile Include="Game\Editor\Editor.cpp">
       <Filter>Game\Scenes\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp">
+      <Filter>Game\Scenes\Editor\System\UI_Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\System\WorldMouse\WorldMouse.cpp">
+      <Filter>Game\Scenes\Editor\System\WorldMouse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -596,6 +620,9 @@
       <Filter>Resources\Textures\SelectScene</Filter>
     </Image>
     <Image Include="Resources\Textures\SelectScene\Stage2.dds">
+      <Filter>Resources\Textures\SelectScene</Filter>
+    </Image>
+    <Image Include="Resources\Textures\SelectScene\Editor.dds">
       <Filter>Resources\Textures\SelectScene</Filter>
     </Image>
   </ItemGroup>

@@ -91,6 +91,9 @@ void SelectScene::Update()
 	// カメラの切り替え処理
 	ChangeAdminCamera();
 
+	// シーンセレクト
+	SelectNext();
+
 	// カメラの更新
 	m_adminCamera->Update();
 
@@ -205,4 +208,27 @@ void SelectScene::ChangeAdminCamera()
 		m_adminCamera->SetType(CameraType::Select2_Floating);
 	if (m_stageSelection == 3)
 		m_adminCamera->SetType(CameraType::Select3_Floating);
+}
+
+//==============================================================================
+// シーンを選択する
+//==============================================================================
+void SelectScene::SelectNext()
+{
+	auto _input = Input::GetInstance();
+
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+	{
+		// ステージを作る
+		if (m_stageSelection == EDITOR_NUM)
+			ChangeScene(SCENE::EDIT);
+
+		// ステージをプレイする
+		if (m_stageSelection == 1)
+			ChangeScene(SCENE::SELECT);
+		if (m_stageSelection == 2)
+			ChangeScene(SCENE::SELECT);
+		if (m_stageSelection == 3)
+			ChangeScene(SCENE::SELECT);
+	}
 }

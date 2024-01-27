@@ -16,10 +16,15 @@
 
 class AdminCamera;
 class BlockManager;
-
+class Coin;
+class UI_Editor;
+class WorldMouse;
 class Editor final : public IScene
 {
 private:
+
+	/////
+	std::unique_ptr<Coin> m_coin;
 
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
@@ -27,6 +32,11 @@ private:
 	// ブロックマネージャ
 	std::unique_ptr<BlockManager> m_blockManager;
 
+	// UI
+	std::unique_ptr<UI_Editor> m_ui;
+
+	// ワールド変換したマウス
+	std::unique_ptr<WorldMouse> m_worldMouse;
 
 public:
 

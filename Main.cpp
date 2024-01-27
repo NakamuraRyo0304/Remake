@@ -30,21 +30,21 @@ extern "C"
 // ワークエリア領域の取得
 #define GetMonitorRect(rc)  SystemParametersInfo(SPI_GETWORKAREA,0,rc,0)
 
-void QuestionFullScreen()
+void QuestionFullScreen(bool* fullFlag)
 {
-#ifndef _DEBUG
+#ifdef _DEBUG
     // 画面モード選択
     if (MessageBox(NULL,
         L"フルスクリーンにしますか？", L"画面モード設定",
         MB_YESNO) == IDYES)
     {
         // フルスクリーンにする
-        fullFlag = true;
+        *fullFlag = true;
     }
     else
     {
         // フルスクリーンにしない
-        fullFlag = false;
+        *fullFlag = false;
     }
 #endif
 }
@@ -52,10 +52,10 @@ void QuestionFullScreen()
 // デスクトップの画面中央に移動
 bool DesktopCenterWindow(HWND hWnd)
 {
-    RECT    rc1;                                            // デスクトップ領域
-    RECT    rc2;                                            // ウインドウ領域
-    INT     cx, cy;                                         // ウインドウ位置
-    INT     sx, sy;                                         // ウインドウサイズ
+    RECT    rc1{};                                            // デスクトップ領域
+    RECT    rc2{};                                            // ウインドウ領域
+    INT     cx{}, cy{};                                       // ウインドウ位置
+    INT     sx{}, sy{};                                       // ウインドウサイズ
 
     // サイズの取得
     GetMonitorRect(&rc1);                                   // デスクトップのサイズ
@@ -118,7 +118,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         // スクリーン用フラグ
         bool fullFlag = false;
 
-        QuestionFullScreen();
+        QuestionFullScreen(&fullFlag);
 
         HWND hwnd = CreateWindowExW(
             0,
