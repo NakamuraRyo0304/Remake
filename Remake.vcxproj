@@ -190,6 +190,7 @@
     <ClInclude Include="DeviceResources.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h" />
+    <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h" />
     <ClInclude Include="Game\Cameras\FixedPointCamera\FixedPointCamera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="DeviceResources.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp" />
+    <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp" />
     <ClCompile Include="Game\Cameras\FixedPointCamera\FixedPointCamera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp" />

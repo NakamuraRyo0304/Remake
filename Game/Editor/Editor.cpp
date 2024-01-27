@@ -83,6 +83,14 @@ void Editor::Update()
 	m_coin->SetPosition(m_worldMouse->GetPosition());
 	m_coin->Update();
 
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+	{
+		m_adminCamera->SetType(CameraType::Select3_Floating);
+	}
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::X))
+	{
+		m_adminCamera->SetType(CameraType::Select1_Floating);
+	}
 }
 
 //==============================================================================
@@ -95,7 +103,7 @@ void Editor::Draw()
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
+	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
 	// ブロックの描画
 	m_blockManager->Draw(*_states, _view, _projection);
@@ -156,7 +164,8 @@ void Editor::CreateWDResources()
 void Editor::SetSceneValues()
 {
 	// カメラの初期設定-自動
-	m_adminCamera->SetType(CameraType::Select1_Floating);
+	//m_adminCamera->SetType(CameraType::Select1_Floating);
+	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
 }
 
@@ -169,8 +178,10 @@ void Editor::DebugDraw(CommonStates& states)
 	auto& _time = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 }, Colors::Yellow, L"Editor");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Yellow, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Yellow, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Yellow, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,0 },  Colors::Black, L"Editor");
+	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
+	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
+		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
 }

@@ -23,6 +23,7 @@
 #include "../FloatingCameras/Stage2Camera/Stage2Camera.h"
 #include "../FloatingCameras/Stage3Camera/Stage3Camera.h"
 #include "../RotateCamera/RotateCamera.h"
+#include "../EditorCamera/EditorCamera.h"
 
 class AdminCamera
 {
@@ -36,6 +37,7 @@ public:
 		Select1_Floating,		// ステージ１の定点カメラ
 		Select2_Floating,		// ステージ２の定点カメラ
 		Select3_Floating,		// ステージ３の定点カメラ
+		Editor_Moving,			// エディタ時のフリー移動カメラ
 
 		Length,					// カメラの数
 	};

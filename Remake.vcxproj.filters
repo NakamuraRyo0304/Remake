@@ -251,6 +251,9 @@
     <Filter Include="Game\Scenes\Editor\System\WorldMouse">
       <UniqueIdentifier>{e824eab9-8670-45da-8298-3339450ce206}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Cameras\EditorCamera">
+      <UniqueIdentifier>{a9215648-0455-43df-9998-ce2380baac8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -421,6 +424,9 @@
     <ClInclude Include="Game\Editor\System\WorldMouse\WorldMouse.h">
       <Filter>Game\Scenes\Editor\System\WorldMouse</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h">
+      <Filter>Game\Cameras\EditorCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -572,6 +578,9 @@
     </ClCompile>
     <ClCompile Include="Game\Editor\System\WorldMouse\WorldMouse.cpp">
       <Filter>Game\Scenes\Editor\System\WorldMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp">
+      <Filter>Game\Cameras\EditorCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
