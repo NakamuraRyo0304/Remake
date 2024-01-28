@@ -1,20 +1,20 @@
 /*
- *	@File	UI_Select.h
- *	@Brief	セレクトUI。
- *	@Date	2023-01-26
+ *	@File	UI_Editor.h
+ *	@Brief	エディタUI。
+ *	@Date	2023-01-27
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef UI_SELECT
-#define UI_SELECT
+#ifndef UI_EDITOR
+#define UI_EDITOR
 
 //==============================================================================
 // 親シーンクラス
 //==============================================================================
 #include "Game/Common/IUserInterface/IUserInterface.h"
 
-class UI_Select final : public IUserInterface
+class UI_Editor final : public IUserInterface
 {
 private:
 
@@ -34,7 +34,6 @@ private:
 
 	// 選択色
 	static const DirectX::SimpleMath::Vector4 RED_COLOR;
-	static const DirectX::SimpleMath::Vector4 BLACK_COLOR;
 
 	// 色変更速度
 	static const float COLOR_SPEED;
@@ -46,8 +45,8 @@ public:
 	/// <param name="scS">画面サイズ</param>
 	/// <param name="mscS">最大サイズ</param>
 	/// <returns>なし</returns>
-	UI_Select(DirectX::SimpleMath::Vector2 scS, DirectX::SimpleMath::Vector2 mscs);
-	~UI_Select();
+	UI_Editor(DirectX::SimpleMath::Vector2 scS, DirectX::SimpleMath::Vector2 mscs);
+	~UI_Editor();
 
 	/// <summary>
 	/// 初期化関数
@@ -70,11 +69,6 @@ public:
 	/// <returns>なし</returns>
 	void Draw() override;
 
-public:
-
-	// 選択中のステージ番号を設定
-	void SetSelectionNum(const int& num) { m_stageSelection = num; }
-
 };
 
-#endif // UI_SELECT
+#endif // UI_EDITOR

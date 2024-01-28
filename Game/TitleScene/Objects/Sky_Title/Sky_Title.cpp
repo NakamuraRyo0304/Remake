@@ -20,8 +20,7 @@ Sky_Title::Sky_Title()
 	: IGameObject(L"Resources/Models/ShineSky.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Default);
-	SetName(L"SkyDome");
+	SetID(ID::Back_Sky);
 	SetWeight(NON_WEIGHT);
 
 	SetPosition(SimpleMath::Vector3::Zero);

@@ -26,7 +26,6 @@ const int SelectScene::MAX_SAMPLE_NUM = 3;
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using HitKinds = BlockManager::BlockKinds;				// ブロックの種類
 
 //==============================================================================
 // コンストラクタ
@@ -90,6 +89,9 @@ void SelectScene::Update()
 
 	// カメラの切り替え処理
 	ChangeAdminCamera();
+
+	// シーンセレクト
+	SelectNext();
 
 	// カメラの更新
 	m_adminCamera->Update();
@@ -161,6 +163,7 @@ void SelectScene::CreateWDResources()
 
 	// ブロックマネージャ
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_blockManager->SetPlay(true);
 }
 
 //==============================================================================
@@ -174,6 +177,9 @@ void SelectScene::SetSceneValues()
 
 	// 選択中の番号を設定
 	m_ui->SetSelectionNum(m_stageSelection);
+
+	// ブロックの初期化
+	m_blockManager->Initialize();
 }
 
 //==============================================================================
@@ -205,4 +211,27 @@ void SelectScene::ChangeAdminCamera()
 		m_adminCamera->SetType(CameraType::Select2_Floating);
 	if (m_stageSelection == 3)
 		m_adminCamera->SetType(CameraType::Select3_Floating);
+}
+
+//==============================================================================
+// シーンを選択する
+//==============================================================================
+void SelectScene::SelectNext()
+{
+	auto _input = Input::GetInstance();
+
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+	{
+		// ステージを作る
+		if (m_stageSelection == EDITOR_NUM)
+			ChangeScene(SCENE::EDIT);
+
+		// ステージをプレイする
+		if (m_stageSelection == 1)
+			ChangeScene(SCENE::SELECT);
+		if (m_stageSelection == 2)
+			ChangeScene(SCENE::SELECT);
+		if (m_stageSelection == 3)
+			ChangeScene(SCENE::SELECT);
+	}
 }

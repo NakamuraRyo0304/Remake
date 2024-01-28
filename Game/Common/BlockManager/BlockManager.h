@@ -14,42 +14,40 @@
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class JsonHelper;
-class Sand;
-class Cloud;
-class Coin;
+//==============================================================================
+// Json変換クラス
+//==============================================================================
+#include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"
+
+//==============================================================================
+// ブロックのインクルード
+//==============================================================================
+#include "../Blocks/Sand/Sand.h"			// 砂ブロック
+#include "../Blocks/Cloud/Cloud.h"			// 雲ブロック
+#include "../Blocks/Coin/Coin.h"			// コインブロック
+#include "../../Editor/Objects/Air/Air.h"	// ステージエディタ用判定ブロック
+
 class BlockManager
 {
-public:
-
-	// ブロックの種類
-	enum BlockKinds : UINT { SANDB, CLOUDB, COINB, LENGTHB };
-
-	// ブロックの参照用パラメーター
-	struct BlockParameter
-	{
-		int index;
-		BlockKinds kinds;
-		DirectX::SimpleMath::Vector3 pos;
-		BlockParameter(int index, BlockKinds kinds, const DirectX::SimpleMath::Vector3& pos)
-			: index(index), kinds(kinds), pos(pos) {};
-	};
-
 private:
 
 	// ブロックオブジェクト
 	std::vector<std::unique_ptr<Sand>> m_sands;
 	std::vector<std::unique_ptr<Cloud>> m_clouds;
 	std::vector<std::unique_ptr<Coin>> m_coins;
-
-	// ブロックの名前・座標
-	std::vector<BlockParameter> m_parameter;
+	std::vector<std::unique_ptr<Air>> m_air;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
 
 	// パス保存
 	std::wstring m_stagePath;
+
+	// 書き出し中フラグ(処理削減)
+	bool is_wrighting;
+
+	// プレイ時のフラグ（Trueでエディタ用描画を切る）
+	bool is_playing;
 
 public:
 
@@ -91,11 +89,11 @@ public:
 	/// <summary>
 	/// 衝突通知を送る
 	/// </summary>
-	/// <param name="kinds">通知を送る種類</param>
+	/// <param name="id">ブロックのID</param>
 	/// <param name="hit">設定　接触時：True/非接触時：False</param>
 	/// <param name="index">衝突したオブジェクト番号(-1で全通知)</param>
 	/// <returns>なし</returns>
-	void NotificateHit(const BlockKinds& kinds, const bool& hit, const int& index);
+	void NotificateHit(const ID& id, const bool& hit, const int& index);
 
 	// ステージパスを設定
 	void SetStagePath(const wchar_t* path) { m_stagePath = path; }
@@ -103,10 +101,36 @@ public:
 	// ステージを書き出す
 	void OutputStage();
 
+	// ゲームプレイするときはONにする
+	void SetPlay(bool play) { is_playing = play; }
+
 private:
 
-	// ブロックの種類から文字列を返す(書き出し用)
-	std::string GetBlockKinds(const BlockKinds& kinds);
+	// ブロックのIDから文字列を返す(書き出し用)
+	std::string GetBlockID(const ID& id);
+
+	// ブロックの種類を変更する
+	void ReplaceBlock();
+
+	// ブロック作成
+	void CreateBlock(ID id, DirectX::SimpleMath::Vector3 pos);
+
+	// 配列をリセットする
+	void ClearBlocks();
+
+	// 空気で埋める
+	void FillAir();
+
+public:
+
+	// 砂ブロックの配列を参照
+	std::vector<std::unique_ptr<Sand>>& GetSandBlock() { return m_sands; }
+	// 雲ブロックの配列を参照
+	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
+	// コインブロックの配列を参照
+	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+	// エアーブロックの配列を参照
+	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
 
 };
 

@@ -7,13 +7,21 @@
 
 #pragma once
 
-// オブジェクトID
+/// <summary>
+/// オブジェクトID
+/// Back:背景等|Obj:判定ありオブジェクト
+/// </summary>
 enum class ID
 {
 	Default,		// 設定なし
-	Player,			// プレイヤー
-	Enemy,			// 敵
-	Item,			// アイテム
+	Back_Bird,		// タイトルの鳥
+	Back_Logo,		// ロゴ
+	Back_Sky,		// スカイドーム
+	Obj_Air,		// エディタ用判定ブロック
+	Obj_Sand,		// 砂ブロック
+	Obj_Coin,		// コインブロック
+	Obj_Cloud,		// 雲ブロック
+	Deleted,		// 削除済み
 	Length,			// 全ID数
 };
 

@@ -22,8 +22,7 @@ Bird_Title::Bird_Title()
 	: IGameObject(L"Resources/Models/Bird.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Default);
-	SetName(L"Bird_Title");
+	SetID(ID::Back_Bird);
 	SetWeight(NON_WEIGHT);
 
 	SetPosition(SimpleMath::Vector3(0.0f, 30.0f, -5.0f));

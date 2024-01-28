@@ -27,7 +27,7 @@ const XMVECTORF32 GameMain::FADE_COLOR = Colors::White;
 // コンストラクタ
 //==============================================================================
 GameMain::GameMain()
-	: m_nextScene{ SCENE::TITLE }		// 次回のシーン
+	: m_nextScene{ SCENE::EDIT }		// 次回のシーン
 	, m_prevScene{ SCENE::NONE }		// 前回のシーン
 	, m_nowScene{ nullptr }				// 今のシーンポインタ
 	, m_screenSize{}					// スクリーンサイズ

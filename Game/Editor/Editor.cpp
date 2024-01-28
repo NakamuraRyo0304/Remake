@@ -8,6 +8,9 @@
 #include "pch.h"
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
+#include "Game/Editor/System/UI_Editor/UI_Editor.h"
+#include "Game/Editor/System/EditorCollision/EditorCollision.h"
+#include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
 
@@ -19,13 +22,13 @@
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using HitKinds = BlockManager::BlockKinds;				// ブロックの種類
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 Editor::Editor()
-	: IScene()				// 基底クラスのコンストラクタ
+	: IScene()						// 基底クラスのコンストラクタ
+	, m_selectionID{ ID::Obj_Sand }	// 初期は砂を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
@@ -47,10 +50,6 @@ void Editor::Initialize()
 
 	// 変数の初期化
 	SetSceneValues();
-
-	// BGMを鳴らす
-	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -63,16 +62,31 @@ void Editor::Update()
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
 
+	// UIの更新
+	m_ui->Update();
+
 	// シーン遷移
 	if (IsCanUpdate())
 	{
+
 	}
 
 	// カメラの更新
 	m_adminCamera->Update();
 
+	// ブロックを変更する
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Q))
+		m_selectionID = ID::Obj_Cloud;
+
+	// エディタコリジョンの更新
+	UpdateCollisions(m_selectionID);
+
 	// ブロックの更新
 	m_blockManager->Update();
+
+	// ステージを書き出す
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+		m_blockManager->OutputStage();
 }
 
 //==============================================================================
@@ -85,10 +99,16 @@ void Editor::Draw()
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
+	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
 	// ブロックの描画
 	m_blockManager->Draw(*_states, _view, _projection);
+
+	// UIの描画
+	m_ui->Draw();
+
+	// エディタコリジョンの描画関連処理
+	m_editorCollision->Draw(_view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -105,6 +125,8 @@ void Editor::Finalize()
 {
 	m_adminCamera.reset();
 	m_blockManager.reset();
+	m_ui.reset();
+	m_editorCollision.reset();
 }
 
 //==============================================================================
@@ -120,6 +142,13 @@ void Editor::CreateWDResources()
 
 	// ブロックマネージャ
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+
+	// UI作成
+	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
+
+	// エディタコリジョン作成
+	m_editorCollision = std::make_unique<EditorCollision>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
+
 }
 
 //==============================================================================
@@ -128,8 +157,16 @@ void Editor::CreateWDResources()
 void Editor::SetSceneValues()
 {
 	// カメラの初期設定-自動
-	m_adminCamera->SetType(CameraType::Title_FixedPoint);
+	//m_adminCamera->SetType(CameraType::Select1_Floating);
+	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
+
+	// IDを砂に設定
+	m_selectionID = ID::Obj_Sand;
+
+	// エディタ設定に変更して初期化
+	m_blockManager->SetPlay(false);
+	m_blockManager->Initialize();
 }
 
 //==============================================================================
@@ -141,8 +178,33 @@ void Editor::DebugDraw(CommonStates& states)
 	auto& _time = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 }, Colors::Yellow, L"Editor");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Yellow, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Yellow, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Yellow, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,0 },  Colors::Black, L"Editor");
+	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
+	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
+		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
+}
+
+//==============================================================================
+// コリジョンの更新
+//==============================================================================
+void Editor::UpdateCollisions(ID id)
+{
+	for (auto& air : m_blockManager->GetAirBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(air), id);
+	}
+	for (auto& sand : m_blockManager->GetSandBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(sand), id);
+	}
+	for (auto& cloud : m_blockManager->GetCloudBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(cloud), id);
+	}
+	for (auto& coin : m_blockManager->GetCoinBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(coin), id);
+	}
 }

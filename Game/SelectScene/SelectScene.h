@@ -110,6 +110,13 @@ private:
 	/// <param name="ˆø”–³‚µ"></param>
 	/// <returns>‚È‚µ</returns>
 	void ChangeAdminCamera();
+
+	/// <summary>
+	/// ƒV[ƒ“‘I‘ğ
+	/// </summary>
+	/// <param name="ˆø”–³‚µ"></param>
+	/// <returns>‚È‚µ</returns>
+	void SelectNext();
 };
 
 #endif // SELECTSCENE

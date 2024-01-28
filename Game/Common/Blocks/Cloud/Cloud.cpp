@@ -12,7 +12,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const float Cloud::ROTATE_SPEED = 15.0f;
+const float Cloud::ROTATE_SPEED = 15.0f;        // 回転速度
 
 //==============================================================================
 // コンストラクタ
@@ -24,8 +24,7 @@ Cloud::Cloud(SimpleMath::Vector3 position)
     , m_arrivePosition{}    	// 到着座標
 {
 	CreateModel();
-	SetID(ID::Default);
-	SetName(L"Cloud");
+	SetID(ID::Obj_Cloud);
 	SetWeight(1.0f);
 
 	SetPosition(SimpleMath::Vector3(position));

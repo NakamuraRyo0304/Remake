@@ -1,29 +1,23 @@
 /*
- *	@File	Coin.cpp
- *	@Brief	コインブロック。
- *	@Date	2023-01-27
+ *	@File	Air.cpp
+ *	@Brief	判定用オブジェクト（エディタ）。
+ *	@Date	2023-01-28
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
-#include "Libraries/UserUtility.h"
-#include "Coin.h"
-
-//==============================================================================
-// 定数の設定
-//==============================================================================
-
+#include "Air.h"
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Coin::Coin(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Coin.cmo", L"Resources/Models")
+Air::Air(SimpleMath::Vector3 position)
+	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models")
 	, is_hit{ false }		// 衝突フラグ
 	, is_active{ true }		// アクティブフラグ
 {
 	CreateModel();
-	SetID(ID::Obj_Coin);
+	SetID(ID::Obj_Air);
 	SetWeight(1.0f);
 
 	SetPosition(SimpleMath::Vector3(position));
@@ -35,7 +29,7 @@ Coin::Coin(SimpleMath::Vector3 position)
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Coin::~Coin()
+Air::~Air()
 {
 	ReleaseModel();
 }
@@ -43,7 +37,7 @@ Coin::~Coin()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Coin::Update()
+void Air::Update()
 {
 	// 非アクティブは処理しない
 	if (not is_active) return;
@@ -55,11 +49,10 @@ void Coin::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Coin::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Air::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
-	// 非アクティブは処理しない
-	if (not is_active) return;
-
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+	UNREFERENCED_PARAMETER(states);
+	UNREFERENCED_PARAMETER(view);
+	UNREFERENCED_PARAMETER(proj);
+	UNREFERENCED_PARAMETER(no_use_here);
 }

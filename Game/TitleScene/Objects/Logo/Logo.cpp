@@ -22,8 +22,7 @@ Logo::Logo()
 	: IGameObject(L"Resources/Models/TitleLogoVer2.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Default);
-	SetName(L"Logo");
+	SetID(ID::Back_Logo);
 	SetWeight(NON_WEIGHT);
 
 	SetPosition(SimpleMath::Vector3(0.0f,30.0f,50.0f));
