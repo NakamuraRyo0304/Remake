@@ -163,6 +163,10 @@ void Editor::SetSceneValues()
 
 	// IDを砂に設定
 	m_selectionID = ID::Obj_Sand;
+
+	// エディタ設定に変更して初期化
+	m_blockManager->SetPlay(false);
+	m_blockManager->Initialize();
 }
 
 //==============================================================================
@@ -187,6 +191,10 @@ void Editor::DebugDraw(CommonStates& states)
 //==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
+	for (auto& air : m_blockManager->GetAirBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(air), id);
+	}
 	for (auto& sand : m_blockManager->GetSandBlock())
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(sand), id);

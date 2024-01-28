@@ -22,9 +22,10 @@
 //==============================================================================
 // ブロックのインクルード
 //==============================================================================
-#include "../Blocks/Sand/Sand.h"		// 砂ブロック
-#include "../Blocks/Cloud/Cloud.h"		// 雲ブロック
-#include "../Blocks/Coin/Coin.h"		// コインブロック
+#include "../Blocks/Sand/Sand.h"			// 砂ブロック
+#include "../Blocks/Cloud/Cloud.h"			// 雲ブロック
+#include "../Blocks/Coin/Coin.h"			// コインブロック
+#include "../../Editor/Objects/Air/Air.h"	// ステージエディタ用判定ブロック
 
 class BlockManager
 {
@@ -34,6 +35,7 @@ private:
 	std::vector<std::unique_ptr<Sand>> m_sands;
 	std::vector<std::unique_ptr<Cloud>> m_clouds;
 	std::vector<std::unique_ptr<Coin>> m_coins;
+	std::vector<std::unique_ptr<Air>> m_air;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
@@ -43,6 +45,9 @@ private:
 
 	// 書き出し中フラグ(処理削減)
 	bool is_wrighting;
+
+	// プレイ時のフラグ（Trueでエディタ用描画を切る）
+	bool is_playing;
 
 public:
 
@@ -96,6 +101,9 @@ public:
 	// ステージを書き出す
 	void OutputStage();
 
+	// ゲームプレイするときはONにする
+	void SetPlay(bool play) { is_playing = play; }
+
 private:
 
 	// ブロックのIDから文字列を返す(書き出し用)
@@ -110,6 +118,9 @@ private:
 	// 配列をリセットする
 	void ClearBlocks();
 
+	// 空気で埋める
+	void FillAir();
+
 public:
 
 	// 砂ブロックの配列を参照
@@ -118,6 +129,8 @@ public:
 	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
 	// コインブロックの配列を参照
 	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+	// エアーブロックの配列を参照
+	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
 
 };
 

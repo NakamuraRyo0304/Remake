@@ -15,12 +15,13 @@
 //==============================================================================
 BlockManager::BlockManager(const wchar_t* stagePath)
 	: m_stagePath{ stagePath }		// ステージパスを格納
+	, is_playing{ false }			// プレイフラグ
 {
 	// Json読み込みシステム作成
 	m_jsonHelper = std::make_unique<JsonHelper>();
 
-	// 初期化処理
-	Initialize();
+	// ブロックをクリア
+	ClearBlocks();
 }
 
 //==============================================================================
@@ -38,12 +39,17 @@ BlockManager::~BlockManager()
 //==============================================================================
 void BlockManager::Initialize()
 {
+	// 先にエアーで埋める
+	if (is_playing == false)
+	{
+		FillAir();
+	}
+
 	// データを読み込む
 	m_jsonHelper->Load(m_stagePath.c_str());
 
 	// データを取得
 	Json _data = m_jsonHelper->GetData();
-	ClearBlocks();
 
 	for (int i = 0; i < _data.size(); i++)
 	{
@@ -65,6 +71,14 @@ void BlockManager::Initialize()
 		// 雲ブロックを格納
 		if (_name == "Cloud")
 			m_clouds.push_back(std::make_unique<Cloud>(_position));
+
+		if (is_playing == true) continue;
+
+		// 同じ場所にエアーがあったらその場所のエアーを消す
+		//if (m_air[i]->GetPosition() == _position)
+		//{
+		//	m_air[i].reset();
+		//}
 	}
 }
 
@@ -77,20 +91,22 @@ void BlockManager::Update()
 	for (auto& sand : m_sands)
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-		if (sand->GetID() == ID::Deleted) continue;
 		sand->Update();
 	}
 	for (auto& cloud : m_clouds)
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-		if (cloud->GetID() == ID::Deleted) continue;
 		cloud->Update();
 	}
 	for (auto& coin : m_coins)
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-		if (coin->GetID() == ID::Deleted) continue;
 		coin->Update();
+	}
+	for (auto& air : m_air)
+	{
+		if (UserUtility::IsNull(air.get())) continue;
+		air->Update();
 	}
 
 	// 置き換え捜査
@@ -106,24 +122,23 @@ void BlockManager::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMa
 	for (auto& sand : m_sands)
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-		if (sand->GetID() == ID::Deleted) continue;
 		sand->Draw(states, view, proj, option);
 	}
 	for (auto& cloud : m_clouds)
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-		if (cloud->GetID() == ID::Deleted) continue;
 		cloud->Draw(states, view, proj, option);
 	}
 	for (auto& coin : m_coins)
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-		if (coin->GetID() == ID::Deleted) continue;
 		coin->Draw(states, view, proj, option);
 	}
 }
 
-// 衝突通知をおこなう
+//==============================================================================
+// 衝突通知を送る
+//==============================================================================
 void BlockManager::NotificateHit(const ID& id, const bool& hit, const int& index)
 {
 	if (id == ID::Obj_Sand && index >= 0 && index < m_sands.size())
@@ -132,6 +147,13 @@ void BlockManager::NotificateHit(const ID& id, const bool& hit, const int& index
 		m_clouds[index]->NotificateHit(hit);
 	if (id == ID::Obj_Coin && index >= 0 && index < m_coins.size())
 		m_coins[index]->NotificateHit(hit);
+
+
+	// プレイ時はスキップ
+	if (is_playing) return;
+
+	if (id == ID::Obj_Air && index >= 0 && index < m_air.size())
+		m_air[index]->NotificateHit(hit);
 }
 
 //==============================================================================
@@ -208,13 +230,6 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
 
-		// ブロックが消されていた場合
-		if (sand->GetID() == ID::Deleted)
-		{
-			UserUtility::RemoveVec(m_sands, sand);
-			continue;
-		}
-
 		// 同じならスキップ
 		if (sand->GetID() == ID::Obj_Sand) continue;
 
@@ -225,13 +240,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& cloud : m_clouds)
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-
-		// ブロックが消されていた場合
-		if (cloud->GetID() == ID::Deleted)
-		{
-			UserUtility::RemoveVec(m_clouds, cloud);
-			continue;
-		}
 
 		// 同じならスキップ
 		if (cloud->GetID() == ID::Obj_Cloud) continue;
@@ -244,19 +252,23 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
 
-		// ブロックが消されていた場合
-		if (coin->GetID() == ID::Deleted)
-		{
-			UserUtility::RemoveVec(m_coins, coin);
-			continue;
-		}
-
 		// 同じならスキップ
 		if (coin->GetID() == ID::Obj_Coin) continue;
 
 		// 名前に対応したブロックに変更する
 		CreateBlock(coin->GetID(), coin->GetInitialPosition());
 		UserUtility::RemoveVec(m_coins, coin);
+	}
+	for (auto& air : m_air)
+	{
+		if (UserUtility::IsNull(air.get())) continue;
+
+		// 同じならスキップ
+		if (air->GetID() == ID::Obj_Air) continue;
+
+		// 名前に対応したブロックに変更する
+		CreateBlock(air->GetID(), air->GetInitialPosition());
+		UserUtility::RemoveVec(m_air, air);
 	}
 }
 
@@ -273,6 +285,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 		m_clouds.push_back(std::make_unique<Cloud>(pos));
 	if (id == ID::Obj_Coin)		// コイン
 		m_coins.push_back(std::make_unique<Coin>(pos));
+	if (id == ID::Obj_Air)		// エアー判定
+		m_air.push_back(std::make_unique<Air>(pos));
 }
 
 //==============================================================================
@@ -283,4 +297,24 @@ void BlockManager::ClearBlocks()
 	m_sands.clear();
 	m_clouds.clear();
 	m_coins.clear();
+	m_air.clear();
+}
+
+//==============================================================================
+// エアーで埋める 仮
+//==============================================================================
+void BlockManager::FillAir()
+{
+	for (int y = 0; y < 5; y++)
+	{
+		for (int x = 0; x < 10; x++)
+		{
+			for (int z = 0; z < 10; z++)
+			{
+				auto _pos = SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
+				m_air.push_back(std::make_unique<Air>(_pos));
+
+			}
+		}
+	}
 }

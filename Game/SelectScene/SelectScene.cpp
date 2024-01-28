@@ -163,6 +163,7 @@ void SelectScene::CreateWDResources()
 
 	// ブロックマネージャ
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_blockManager->SetPlay(true);
 }
 
 //==============================================================================
@@ -176,6 +177,9 @@ void SelectScene::SetSceneValues()
 
 	// 選択中の番号を設定
 	m_ui->SetSelectionNum(m_stageSelection);
+
+	// ブロックの初期化
+	m_blockManager->Initialize();
 }
 
 //==============================================================================

@@ -257,6 +257,9 @@
     <Filter Include="Game\Scenes\Editor\System\EditorCollision">
       <UniqueIdentifier>{da83059a-d6ac-48f5-8f8a-b9bb3f159743}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\Editor\Objects\Air">
+      <UniqueIdentifier>{f4fd3e44-416f-454f-a0ce-0133f95d7021}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -433,6 +436,9 @@
     <ClInclude Include="Game\Editor\System\EditorCollision\EditorCollision.h">
       <Filter>Game\Scenes\Editor\System\EditorCollision</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Editor\Objects\Air\Air.h">
+      <Filter>Game\Scenes\Editor\Objects\Air</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -590,6 +596,9 @@
     </ClCompile>
     <ClCompile Include="Game\Editor\System\EditorCollision\EditorCollision.cpp">
       <Filter>Game\Scenes\Editor\System\EditorCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
+      <Filter>Game\Scenes\Editor\Objects\Air</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,6 @@
 
 class AdminCamera;
 class BlockManager;
-class Coin;
 class EditorCollision;
 class UI_Editor;
 class Editor final : public IScene
