@@ -23,8 +23,7 @@ Coin::Coin(SimpleMath::Vector3 position)
 	, is_active{ true }		// アクティブフラグ
 {
 	CreateModel();
-	SetID(ID::Default);
-	SetName(L"Coin");
+	SetID(ID::Obj_Coin);
 	SetWeight(1.0f);
 
 	SetPosition(SimpleMath::Vector3(position));

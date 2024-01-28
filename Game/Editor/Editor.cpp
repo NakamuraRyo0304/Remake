@@ -9,10 +9,10 @@
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/Editor/System/UI_Editor/UI_Editor.h"
-#include "Game/Editor/System/WorldMouse/WorldMouse.h"
+#include "Game/Editor/System/EditorCollision/EditorCollision.h"
+#include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
-#include "Game/Common/Blocks/Coin/Coin.h"
 
 #include "Editor.h"
 
@@ -22,13 +22,13 @@
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using HitKinds = BlockManager::BlockKinds;				// ブロックの種類
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 Editor::Editor()
-	: IScene()				// 基底クラスのコンストラクタ
+	: IScene()						// 基底クラスのコンストラクタ
+	, m_selectionID{ ID::Obj_Sand }	// 初期は砂を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
@@ -74,23 +74,19 @@ void Editor::Update()
 	// カメラの更新
 	m_adminCamera->Update();
 
-	// ワールドマウスの更新
-	m_worldMouse->Update();
+	// ブロックを変更する
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Q))
+		m_selectionID = ID::Obj_Cloud;
+
+	// エディタコリジョンの更新
+	UpdateCollisions(m_selectionID);
 
 	// ブロックの更新
 	m_blockManager->Update();
 
-	m_coin->SetPosition(m_worldMouse->GetPosition());
-	m_coin->Update();
-
+	// ステージを書き出す
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
-	{
-		m_adminCamera->SetType(CameraType::Select3_Floating);
-	}
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::X))
-	{
-		m_adminCamera->SetType(CameraType::Select1_Floating);
-	}
+		m_blockManager->OutputStage();
 }
 
 //==============================================================================
@@ -111,10 +107,8 @@ void Editor::Draw()
 	// UIの描画
 	m_ui->Draw();
 
-	// ワールドマウスの描画
-	m_worldMouse->Draw(_view, _projection);
-
-	m_coin->Draw(*_states, _view, _projection);
+	// エディタコリジョンの描画関連処理
+	m_editorCollision->Draw(_view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -132,7 +126,7 @@ void Editor::Finalize()
 	m_adminCamera.reset();
 	m_blockManager.reset();
 	m_ui.reset();
-	m_worldMouse.reset();
+	m_editorCollision.reset();
 }
 
 //==============================================================================
@@ -152,10 +146,9 @@ void Editor::CreateWDResources()
 	// UI作成
 	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
 
-	// ワールドマウスの作成
-	m_worldMouse = std::make_unique<WorldMouse>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
+	// エディタコリジョン作成
+	m_editorCollision = std::make_unique<EditorCollision>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
 
-	m_coin = std::make_unique<Coin>(SimpleMath::Vector3::Zero);
 }
 
 //==============================================================================
@@ -167,6 +160,9 @@ void Editor::SetSceneValues()
 	//m_adminCamera->SetType(CameraType::Select1_Floating);
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
+
+	// IDを砂に設定
+	m_selectionID = ID::Obj_Sand;
 }
 
 //==============================================================================
@@ -184,4 +180,23 @@ void Editor::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
 	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
+}
+
+//==============================================================================
+// コリジョンの更新
+//==============================================================================
+void Editor::UpdateCollisions(ID id)
+{
+	for (auto& sand : m_blockManager->GetSandBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(sand), id);
+	}
+	for (auto& cloud : m_blockManager->GetCloudBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(cloud), id);
+	}
+	for (auto& coin : m_blockManager->GetCoinBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(coin), id);
+	}
 }

@@ -254,6 +254,9 @@
     <Filter Include="Game\Cameras\EditorCamera">
       <UniqueIdentifier>{a9215648-0455-43df-9998-ce2380baac8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\Editor\System\EditorCollision">
+      <UniqueIdentifier>{da83059a-d6ac-48f5-8f8a-b9bb3f159743}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -427,6 +430,9 @@
     <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h">
       <Filter>Game\Cameras\EditorCamera</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Editor\System\EditorCollision\EditorCollision.h">
+      <Filter>Game\Scenes\Editor\System\EditorCollision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -581,6 +587,9 @@
     </ClCompile>
     <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp">
       <Filter>Game\Cameras\EditorCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\System\EditorCollision\EditorCollision.cpp">
+      <Filter>Game\Scenes\Editor\System\EditorCollision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

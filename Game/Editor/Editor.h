@@ -14,17 +14,19 @@
 //==============================================================================
 #include "Game/IScene/IScene.h"
 
+//==============================================================================
+// オブジェクトステータス
+//==============================================================================
+#include "Game/Common/IGameObject/IGameObjectStates.h"
+
 class AdminCamera;
 class BlockManager;
 class Coin;
+class EditorCollision;
 class UI_Editor;
-class WorldMouse;
 class Editor final : public IScene
 {
 private:
-
-	/////
-	std::unique_ptr<Coin> m_coin;
 
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
@@ -35,8 +37,11 @@ private:
 	// UI
 	std::unique_ptr<UI_Editor> m_ui;
 
-	// ワールド変換したマウス
-	std::unique_ptr<WorldMouse> m_worldMouse;
+	// エディタコリジョン
+	std::unique_ptr<EditorCollision> m_editorCollision;
+
+	// 描画するオブジェクトID
+	ID m_selectionID;
 
 public:
 
@@ -94,6 +99,14 @@ private:
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
 
+private:
+
+	/// <summary>
+	/// コリジョン更新
+	/// </summary>
+	/// <param name="id">変更したいブロックのID</param>
+	/// <returns>なし</returns>
+	void UpdateCollisions(ID id);
 };
 
 #endif // Editor

@@ -10,6 +10,7 @@
 #define	USERUTILITY
 
 #include <iostream>
+#include <cassert>
 
 namespace UserUtility
 {
@@ -202,5 +203,68 @@ namespace UserUtility
 	{
 		return (fabsf(number1 - number2) < static_cast<T>(FLT_EPSILON));
 	}
+
+	/// <summary>
+	/// ポインタがnullかチェックする関数
+	/// </summary>
+	/// <param name="ptr">調べたいポインタ</param>
+	/// <returns>nullであればTrueを返す</returns>
+	template<typename T>
+	inline bool IsNull(T* ptr)
+	{
+		return ptr == nullptr;
+	}
+
+	/// <summary>
+	/// ポインタを完全開放する関数
+	/// </summary>
+	/// <param name="ptr">削除するポインタ</param>
+	/// <returns>削除が成功した場合は true，それ以外は false</returns>
+	template<typename T>
+	inline bool DeletePtr(T* ptr)
+	{
+		if (ptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+			return true;
+		}
+
+		return false;
+	}
+
+	/// <summary>
+	/// 基底クラスポインタに変換する関数
+	/// </summary>
+	/// <typeparam name="T">変換先の型</typeparam>
+	/// <typeparam name="U">変換元の型</typeparam>
+	/// <param name="ptr">変換対象のポインタ</param>
+	/// <returns>基底クラスポインタに変換されたポインタ（変換に失敗した場合はnullptr）</returns>
+	template<typename T, typename U>
+	inline T* UniqueCast(std::unique_ptr<U>& u)
+	{
+		// static_cast を使って安全な型変換を行います
+		return static_cast<T*>(u.get());
+	}
+
+	/// <summary>
+	/// std::vectorのイテレータを返す
+	/// </summary>
+	/// <param name="vec">ベクター配列</param>
+	/// <param name="val">削除したい要素</param>
+	/// <returns>無し/returns>
+	template<typename T>
+	inline void RemoveVec(std::vector<T>& vec, const T& val)
+	{
+		for (auto it = vec.begin(); it != vec.end(); ++it)
+		{
+			if (*it == val)
+			{
+				it = vec.erase(it); // イテレータを更新して削除
+				if (it == vec.end()) break; // イテレータが終端に達したら終了
+			}
+		}
+	}
+
 }
 #endif // USERUTILITY

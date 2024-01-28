@@ -26,7 +26,6 @@ const int SelectScene::MAX_SAMPLE_NUM = 3;
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using HitKinds = BlockManager::BlockKinds;				// ブロックの種類
 
 //==============================================================================
 // コンストラクタ

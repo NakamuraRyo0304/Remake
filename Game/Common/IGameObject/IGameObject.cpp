@@ -22,7 +22,6 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath)
 	, m_filePath{ path }			// モデルパス
 	, m_directoryPath{ dpath }		// ディレクトリパス
 	, m_id{ ID::Default }			// オブジェクトID
-	, m_name{ L"未設定" }			// オブジェクトの名前
 	, m_weight{}					// オブジェクトの重さ
 {
 	m_position = SimpleMath::Vector3::Zero;
@@ -32,7 +31,6 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath)
 	m_scale = SimpleMath::Vector3::One;
 	m_rotate = SimpleMath::Vector3::Zero;
 	m_id = ID::Default;
-	m_name = L"未設定";
 	m_weight = NON_WEIGHT;
 }
 

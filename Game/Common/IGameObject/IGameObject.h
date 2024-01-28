@@ -48,8 +48,6 @@ private:
 
 	// ---オブジェクトID---
 	ID m_id;
-	// ---オブジェクトの名前---
-	const wchar_t* m_name;
 
 	// ---オブジェクトの重さ---
 	double m_weight;
@@ -114,11 +112,6 @@ public:
 	const ID& GetID() { return m_id; }
 	// IDを設定
 	void SetID(const ID& id) { m_id = id; }
-
-	// 名前を取得
-	const wchar_t*& GetName() { return m_name; }
-	// 名前を設定
-	void SetName(const wchar_t* name) { m_name = name; }
 
 	// 重さを取得
 	const double& GetWeight() { return m_weight; }

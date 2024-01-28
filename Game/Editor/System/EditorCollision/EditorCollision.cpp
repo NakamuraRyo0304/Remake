@@ -1,58 +1,61 @@
 /*
- *	@File	Sand.cpp
- *	@Brief	砂ブロック。
- *	@Date	2023-01-27
+ *	@File	EditorCollision.cpp
+ *	@Brief	エディタの当たり判定。
+ *	@Date	2023-01-28
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
+#include "Game/Editor/System/WorldMouse/WorldMouse.h"
 #include "Libraries/UserUtility.h"
-#include "Sand.h"
+#include "EditorCollision.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-
+const float EditorCollision::HIT_RADIUS = 0.5f;		// 当たり判定の半径
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Sand::Sand(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models")
-	, is_hit{ false }
+EditorCollision::EditorCollision(SimpleMath::Matrix view, SimpleMath::Matrix proj)
 {
-	CreateModel();
-	SetID(ID::Obj_Sand);
-	SetWeight(1.0f);
-
-	SetPosition(SimpleMath::Vector3(position));
-	SetInitialPosition(GetPosition());
-	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * 0.5f);
+	// ワールドマウス作成
+	m_worldMouse = std::make_unique<WorldMouse>(view, proj);
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Sand::~Sand()
+EditorCollision::~EditorCollision()
 {
-	ReleaseModel();
 }
 
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Sand::Update()
+void EditorCollision::Update(IGameObject* object, ID setting)
 {
-	// マトリクスを作成
-	CreateWorldMatrix();
+	auto _mouse = Mouse::Get().GetState();
+
+	// ワールドマウスの更新
+	m_worldMouse->Update();
+
+	// 当たり判定（球）
+	if (UserUtility::CheckPointInSphere(m_worldMouse->GetPosition(), HIT_RADIUS, object->GetPosition()))
+	{
+		if (_mouse.leftButton)
+		{
+			object->SetID(setting);
+		}
+	}
 }
 
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Sand::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void EditorCollision::Draw(SimpleMath::Matrix view, SimpleMath::Matrix proj)
 {
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+	// 描画関連処理
+	m_worldMouse->Draw(view, proj);
 }
