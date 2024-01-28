@@ -104,6 +104,9 @@ public:
 	// ゲームプレイするときはONにする
 	void SetPlay(bool play) { is_playing = play; }
 
+	// ワイヤーフレームの切り替えフラグデフォルトはFalse
+	void SetWireFrame(bool frame);
+
 private:
 
 	// ブロックのIDから文字列を返す(書き出し用)

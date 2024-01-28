@@ -52,6 +52,9 @@ private:
 	// ---オブジェクトの重さ---
 	double m_weight;
 
+	// ---ワイヤーフレームフラグ---
+	bool is_wireframe;
+
 public:
 	/// <summary>
 	/// コンストラクタ
@@ -117,6 +120,11 @@ public:
 	const double& GetWeight() { return m_weight; }
 	// 重さを設定
 	void SetWeight(const double& weight) { m_weight = weight; }
+
+	// ワイヤーフレームを取得
+	const bool& GetWireFrameFlag() { return is_wireframe; }
+	// ワイヤーフレームを設定
+	void SetWireFrameFlag(const bool& flag) { is_wireframe = flag; }
 
 	// バウンディングボックスを取得
 	DirectX::BoundingBox GetBoundingBox() const

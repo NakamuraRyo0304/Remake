@@ -61,5 +61,5 @@ void Coin::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matr
 	if (not is_active) return;
 
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), no_use_here);
 }

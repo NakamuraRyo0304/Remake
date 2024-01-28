@@ -13,7 +13,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const float EditorCollision::HIT_RADIUS = 0.5f;		// 当たり判定の半径
+const float EditorCollision::HIT_RADIUS = 1.0f;		// 当たり判定の半径
 
 //==============================================================================
 // コンストラクタ
@@ -41,6 +41,9 @@ void EditorCollision::Update(IGameObject* object, ID setting)
 	// ワールドマウスの更新
 	m_worldMouse->Update();
 
+	// nullだったら処理をしない
+	if (UserUtility::IsNull(object)) return;
+
 	// 当たり判定（球）
 	if (UserUtility::CheckPointInSphere(m_worldMouse->GetPosition(), HIT_RADIUS, object->GetPosition()))
 	{
@@ -58,4 +61,12 @@ void EditorCollision::Draw(SimpleMath::Matrix view, SimpleMath::Matrix proj)
 {
 	// 描画関連処理
 	m_worldMouse->Draw(view, proj);
+}
+
+//==============================================================================
+// ワールドマウスの座標
+//==============================================================================
+SimpleMath::Vector3 EditorCollision::GetWorldMousePosition()
+{
+	return m_worldMouse->GetPosition();
 }

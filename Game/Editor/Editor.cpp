@@ -78,15 +78,15 @@ void Editor::Update()
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Q))
 		m_selectionID = ID::Obj_Cloud;
 
-	// エディタコリジョンの更新
-	UpdateCollisions(m_selectionID);
-
 	// ブロックの更新
 	m_blockManager->Update();
 
 	// ステージを書き出す
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 		m_blockManager->OutputStage();
+
+	// エディタコリジョンの更新
+	UpdateCollisions(m_selectionID);
 }
 
 //==============================================================================
@@ -142,6 +142,7 @@ void Editor::CreateWDResources()
 
 	// ブロックマネージャ
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_blockManager->SetPlay(false);
 
 	// UI作成
 	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
@@ -160,12 +161,12 @@ void Editor::SetSceneValues()
 	//m_adminCamera->SetType(CameraType::Select1_Floating);
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
+	m_adminCamera->SetEasing(false);
 
 	// IDを砂に設定
 	m_selectionID = ID::Obj_Sand;
 
-	// エディタ設定に変更して初期化
-	m_blockManager->SetPlay(false);
+	// ブロックの初期化
 	m_blockManager->Initialize();
 }
 
@@ -184,6 +185,8 @@ void Editor::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
 	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
+	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
+		m_editorCollision->GetWorldMousePosition().x, m_editorCollision->GetWorldMousePosition().y, m_editorCollision->GetWorldMousePosition().z);
 }
 
 //==============================================================================

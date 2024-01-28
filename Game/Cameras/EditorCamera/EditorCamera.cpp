@@ -22,7 +22,7 @@ EditorCamera::EditorCamera(const SimpleMath::Vector2& screenSize)
 	: IGameCamera(screenSize)
 {
 	// 座標と注視点をセット
-	SetPosition(SimpleMath::Vector3(0.0f, 5.0f, 12.0f));
+	SetPosition(SimpleMath::Vector3(0.0f, 5.0f, 24.0f));
 	SetTarget(SimpleMath::Vector3(0.0f, 0.0f, 0.0f));
 	// 初期状態を保持
 	SetInitialPosition(GetPosition());
@@ -43,6 +43,7 @@ void EditorCamera::Update()
 {
     auto _key = Keyboard::Get().GetState();
     auto _forward = UserUtility::GetDirectionVector(GetPosition(), GetTarget());
+    _forward.y = 0.0f;
 
     if (_key.W)
     {

@@ -9,7 +9,9 @@
 #ifndef EDITORCOLLISION
 #define EDITORCOLLISION
 
+//==============================================================================
 // ブロックマネージャ
+//==============================================================================
 #include "Game/Common/BlockManager/BlockManager.h"
 
 class WorldMouse;
@@ -55,7 +57,10 @@ public:
 	/// <returns>なし</returns>
 	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 
+public:
 
+	// ワールドマウスの座標
+	DirectX::SimpleMath::Vector3 GetWorldMousePosition();
 };
 
 #endif // EDITORCOLLISION

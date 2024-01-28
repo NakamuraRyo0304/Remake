@@ -39,7 +39,7 @@ BlockManager::~BlockManager()
 //==============================================================================
 void BlockManager::Initialize()
 {
-	// 先にエアーで埋める
+	// エディタモードの時、判定用エアーで埋める
 	if (is_playing == false)
 	{
 		FillAir();
@@ -72,13 +72,15 @@ void BlockManager::Initialize()
 		if (_name == "Cloud")
 			m_clouds.push_back(std::make_unique<Cloud>(_position));
 
+		// プレイモードはスキップ
 		if (is_playing == true) continue;
 
 		// 同じ場所にエアーがあったらその場所のエアーを消す
-		//if (m_air[i]->GetPosition() == _position)
-		//{
-		//	m_air[i].reset();
-		//}
+		if (UserUtility::IsNull(m_air[i].get())) continue;
+		if (m_air[i]->GetPosition() == _position)
+		{
+			m_air[i].reset();
+		}
 	}
 }
 
@@ -103,6 +105,10 @@ void BlockManager::Update()
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->Update();
 	}
+
+	// プレイモードはスキップ
+	if (is_playing == true) return;
+
 	for (auto& air : m_air)
 	{
 		if (UserUtility::IsNull(air.get())) continue;
@@ -204,6 +210,29 @@ void BlockManager::OutputStage()
 }
 
 //==============================================================================
+// ワイヤーフレームを設定
+//==============================================================================
+void BlockManager::SetWireFrame(bool frame)
+{
+	for (auto& sand : m_sands)
+	{
+		if (UserUtility::IsNull(sand.get())) continue;
+		sand->SetWireFrameFlag(frame);
+	}
+	for (auto& cloud : m_clouds)
+	{
+		if (UserUtility::IsNull(cloud.get())) continue;
+		cloud->SetWireFrameFlag(frame);
+
+	}
+	for (auto& coin : m_coins)
+	{
+		if (UserUtility::IsNull(coin.get())) continue;
+		coin->SetWireFrameFlag(frame);
+	}
+}
+
+//==============================================================================
 // ブロックの種類から書き出し用文字列を返す
 //==============================================================================
 std::string BlockManager::GetBlockID(const ID& id)
@@ -301,7 +330,7 @@ void BlockManager::ClearBlocks()
 }
 
 //==============================================================================
-// エアーで埋める 仮
+// エアーで埋める
 //==============================================================================
 void BlockManager::FillAir()
 {
@@ -313,7 +342,6 @@ void BlockManager::FillAir()
 			{
 				auto _pos = SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 				m_air.push_back(std::make_unique<Air>(_pos));
-
 			}
 		}
 	}
