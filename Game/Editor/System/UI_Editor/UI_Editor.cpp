@@ -10,22 +10,19 @@
 #include "UI_Editor.h"
 
 //==============================================================================
-// 定数の設定
+// エイリアス宣言
 //==============================================================================
-const SimpleMath::Vector4 UI_Editor::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
-const float UI_Editor::COLOR_SPEED = 0.075f;	// 色の変更速度
+using BN = UI_Editor::BUTTON_NAME;		// ボタンの名前
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)		// 基底クラス
-	, m_stageSelection{ 1 }			// ステージ１からスタート
-	, m_position{}					// 座標
-	, m_color{}						// 描画色
+	, m_buttons{}					// ボタン
+	, is_clicks{}					// クリック判定
 {
-	m_sprites = std::make_unique<DrawSprite>();
-	m_sprites->MakeSpriteBatch();
+	m_buttons.push_back(std::make_unique<Button>(L"Sand", L"Resources/Textures/Editor/Buttons/SandButton.dds"));
 
 	// 初期化処理
 	Initialize();
@@ -36,9 +33,7 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 //==============================================================================
 UI_Editor::~UI_Editor()
 {
-	m_sprites.reset();
-	m_position.clear();
-	m_color.clear();
+	m_buttons.clear();
 }
 
 //==============================================================================
@@ -46,20 +41,7 @@ UI_Editor::~UI_Editor()
 //==============================================================================
 void UI_Editor::Initialize()
 {
-	// スプライトの登録
-	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/SelectScene/Stage1.dds");
-	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/SelectScene/Stage2.dds");
-	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/SelectScene/Stage3.dds");
-
-	// 座標の設定
-	m_position.emplace(L"Stage1", SimpleMath::Vector2(50.0f, 50.0f));
-	m_position.emplace(L"Stage2", SimpleMath::Vector2(50.0f, 150.0f));
-	m_position.emplace(L"Stage3", SimpleMath::Vector2(50.0f, 250.0f));
-
-	// 色の設定
-	m_color.emplace(L"Stage1", SimpleMath::Vector4(0, 0, 0, 1));
-	m_color.emplace(L"Stage2", SimpleMath::Vector4(0, 0, 0, 1));
-	m_color.emplace(L"Stage3", SimpleMath::Vector4(0, 0, 0, 1));
+	m_buttons[BN::Sand_bn]->Initialize({ 1500,128 }, SimpleMath::Vector2::One * 0.5f, { 0,0,256,256 }, GetScreenRate());
 }
 
 //==============================================================================
@@ -67,21 +49,25 @@ void UI_Editor::Initialize()
 //==============================================================================
 void UI_Editor::Update()
 {
-	// 選択番号に応じて色を分ける
-	if(m_stageSelection == 1)
+	for (int i = 0; i < BN::Length; i++)
 	{
-		m_color[L"Stage1"] = UserUtility::Lerp(m_color[L"Stage1"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Stage2"] = m_color[L"Stage3"] = SimpleMath::Vector4(0, 0, 0, 1);
-	}
-	if(m_stageSelection == 2)
-	{
-		m_color[L"Stage2"] = UserUtility::Lerp(m_color[L"Stage2"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Stage1"] = m_color[L"Stage3"] = SimpleMath::Vector4(0, 0, 0, 1);
-	}
-	if(m_stageSelection == 3)
-	{
-		m_color[L"Stage3"] = UserUtility::Lerp(m_color[L"Stage3"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Stage1"] = m_color[L"Stage2"] = SimpleMath::Vector4(0, 0, 0, 1);
+		m_buttons[i]->Update();
+
+		// ボタンがクリックされたらTrueを入れる
+		is_clicks[i] = m_buttons[i]->GetState() == Button::State::Push;
+
+		// ホバーされたら暗めにする
+		bool _hover = m_buttons[i]->GetState() == Button::State::Hover;
+
+		// ボタンの色の更新
+		{
+			if (is_clicks[i])
+				m_buttons[i]->SetColor(SimpleMath::Color(0, 0, 0, 1));		// 黒くする
+			else if (_hover)
+				m_buttons[i]->SetColor(SimpleMath::Color(1, 1, 1, 0.5f));	// 薄くする
+			else
+				m_buttons[i]->SetColor(SimpleMath::Color(1, 1, 1, 1));		// 白くする（元の色）
+		}
 	}
 }
 
@@ -90,13 +76,8 @@ void UI_Editor::Update()
 //==============================================================================
 void UI_Editor::Draw()
 {
-	m_sprites->DrawTexture(L"Stage1", m_position[L"Stage1"] * GetScreenRate(),
-		m_color[L"Stage1"], SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
-	m_sprites->DrawTexture(L"Stage2", m_position[L"Stage2"] * GetScreenRate(),
-		m_color[L"Stage2"], SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
-	m_sprites->DrawTexture(L"Stage3", m_position[L"Stage3"] * GetScreenRate(),
-		m_color[L"Stage3"], SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
+	for (auto& button : m_buttons)
+	{
+		button->Draw();
+	}
 }

@@ -22,6 +22,7 @@
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
+using BN = UI_Editor::BUTTON_NAME;						// ボタンの名前
 
 //==============================================================================
 // コンストラクタ
@@ -71,19 +72,14 @@ void Editor::Update()
 
 	}
 
-	// カメラの更新
-	m_adminCamera->Update();
-
-	// ブロックを変更する
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Q))
-		m_selectionID = ID::Obj_Cloud;
-
 	// ブロックの更新
 	m_blockManager->Update();
 
-	// ステージを書き出す
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
-		m_blockManager->OutputStage();
+	// カメラの更新
+	m_adminCamera->Update();
+
+	// オブジェクトをセットする
+	SetDrawObject();
 
 	// エディタコリジョンの更新
 	UpdateCollisions(m_selectionID);
@@ -101,14 +97,11 @@ void Editor::Draw()
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
-	// ブロックの描画
-	m_blockManager->Draw(*_states, _view, _projection);
-
-	// UIの描画
-	m_ui->Draw();
-
 	// エディタコリジョンの描画関連処理
 	m_editorCollision->Draw(_view, _projection);
+
+	// ブロックの描画
+	m_blockManager->Draw(*_states, _view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -116,6 +109,9 @@ void Editor::Draw()
 	_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
 #endif
+
+	// UIの描画(最前面に描画)
+	m_ui->Draw();
 }
 
 //==============================================================================
@@ -210,4 +206,13 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(coin), id);
 	}
+}
+
+//==============================================================================
+// オブジェクトをセットする
+//==============================================================================
+void Editor::SetDrawObject()
+{
+	if (m_ui->IsClickButton(BN::Sand_bn))
+		m_selectionID = ID::Obj_Sand;
 }

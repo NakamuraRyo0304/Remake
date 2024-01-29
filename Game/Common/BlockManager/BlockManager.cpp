@@ -188,13 +188,6 @@ void BlockManager::OutputStage()
 	// _objectに格納されたブロック分出力する
 	while (_index < _objects.size())
 	{
-		// 消されていたらスキップ
-		if (_objects[_index]->GetID() == ID::Deleted)
-		{
-			_index++;
-			continue;
-		}
-
 		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
 		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
 

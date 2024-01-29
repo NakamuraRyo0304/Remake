@@ -252,7 +252,7 @@ namespace UserUtility
 	/// </summary>
 	/// <param name="vec">ベクター配列</param>
 	/// <param name="val">削除したい要素</param>
-	/// <returns>無し/returns>
+	/// <returns>無し</returns>
 	template<typename T>
 	inline void RemoveVec(std::vector<T>& vec, const T& val)
 	{
@@ -264,6 +264,27 @@ namespace UserUtility
 				if (it == vec.end()) break; // イテレータが終端に達したら終了
 			}
 		}
+	}
+
+	/// <summary>
+	/// 次の要素にインクリメントする
+	/// </summary>
+	/// <param name="val">要素</param>
+	/// <returns>ポインタにインクリメントされた値が入る</returns>
+	template<typename T>
+	inline void Increment(T* val)
+	{
+		(*val) = static_cast<T>(static_cast<int>(*val) + 1);
+	}
+	/// <summary>
+	/// 次の要素にデクリメントする
+	/// </summary>
+	/// <param name="val">要素</param>
+	/// <returns>ポインタにデクリメントされた値が入る</returns>
+	template<typename T>
+	inline void Decrement(T* val)
+	{
+		(*val) = static_cast<T>(static_cast<int>(*val) - 1);
 	}
 
 }

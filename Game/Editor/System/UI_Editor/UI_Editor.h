@@ -16,27 +16,24 @@
 
 class UI_Editor final : public IUserInterface
 {
-private:
+public:
 
-	// スプライト
-	std::unique_ptr<DrawSprite> m_sprites;
+	enum BUTTON_NAME
+	{
+		Sand_bn,
 
-	// 座標
-	std::map<const wchar_t*, DirectX::SimpleMath::Vector2> m_position;
+		Length
+	};
 
-	// 色
-	std::map<const wchar_t*, DirectX::SimpleMath::Vector4> m_color;
-
-	// 選択ステージ番号
-	int m_stageSelection;
 
 private:
 
-	// 選択色
-	static const DirectX::SimpleMath::Vector4 RED_COLOR;
+	// フラグ
+	bool is_clicks[BUTTON_NAME::Length];
 
-	// 色変更速度
-	static const float COLOR_SPEED;
+	// ボタン
+	std::vector<std::unique_ptr<Button>> m_buttons;
+
 
 public:
 	/// <summary>
@@ -68,6 +65,11 @@ public:
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
 	void Draw() override;
+
+public:
+
+	// ボタンのクリック状況を取得
+	const bool& IsClickButton(BUTTON_NAME name) { return is_clicks[name]; }
 
 };
 

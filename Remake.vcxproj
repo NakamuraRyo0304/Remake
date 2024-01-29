@@ -314,6 +314,7 @@
     <Image Include="Resources\DebugModels\Floor.dds" />
     <Image Include="Resources\Effects\Fire.png" />
     <Image Include="Resources\Effects\Fog.png" />
+    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds" />
     <Image Include="Resources\Textures\SelectScene\Editor.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage1.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage2.dds" />
