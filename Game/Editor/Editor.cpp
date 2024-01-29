@@ -22,6 +22,7 @@
 using KeyCode = Keyboard::Keys;							// キーコード
 using CameraType = AdminCamera::Type;					// カメラのタイプ
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
+using BN = UI_Editor::BUTTON_NAME;						// ボタンの名前
 
 //==============================================================================
 // コンストラクタ
@@ -68,25 +69,23 @@ void Editor::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-
+		if (m_ui->IsClickButton(BN::LoadFile))
+			m_blockManager->ReLoad();
+		if (m_ui->IsClickButton(BN::WriteFile))
+			m_blockManager->OutputStage();
 	}
-
-	// カメラの更新
-	m_adminCamera->Update();
-
-	// ブロックを変更する
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Q))
-		m_selectionID = ID::Obj_Cloud;
-
-	// エディタコリジョンの更新
-	UpdateCollisions(m_selectionID);
 
 	// ブロックの更新
 	m_blockManager->Update();
 
-	// ステージを書き出す
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
-		m_blockManager->OutputStage();
+	// カメラの更新
+	m_adminCamera->Update();
+
+	// オブジェクトをセットする
+	SetDrawObject();
+
+	// エディタコリジョンの更新
+	UpdateCollisions(m_selectionID);
 }
 
 //==============================================================================
@@ -101,14 +100,11 @@ void Editor::Draw()
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
-	// ブロックの描画
-	m_blockManager->Draw(*_states, _view, _projection);
-
-	// UIの描画
-	m_ui->Draw();
-
 	// エディタコリジョンの描画関連処理
 	m_editorCollision->Draw(_view, _projection);
+
+	// ブロックの描画
+	m_blockManager->Draw(*_states, _view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -116,6 +112,9 @@ void Editor::Draw()
 	_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
 #endif
+
+	// UIの描画(最前面に描画)
+	m_ui->Draw();
 }
 
 //==============================================================================
@@ -142,6 +141,7 @@ void Editor::CreateWDResources()
 
 	// ブロックマネージャ
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_blockManager->SetPlay(false);
 
 	// UI作成
 	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
@@ -160,12 +160,12 @@ void Editor::SetSceneValues()
 	//m_adminCamera->SetType(CameraType::Select1_Floating);
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
+	m_adminCamera->SetEasing(false);
 
 	// IDを砂に設定
 	m_selectionID = ID::Obj_Sand;
 
-	// エディタ設定に変更して初期化
-	m_blockManager->SetPlay(false);
+	// ブロックの初期化
 	m_blockManager->Initialize();
 }
 
@@ -184,6 +184,8 @@ void Editor::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
 	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
+	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
+		m_editorCollision->GetWorldMousePosition().x, m_editorCollision->GetWorldMousePosition().y, m_editorCollision->GetWorldMousePosition().z);
 }
 
 //==============================================================================
@@ -207,4 +209,17 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(coin), id);
 	}
+}
+
+//==============================================================================
+// オブジェクトをセットする
+//==============================================================================
+void Editor::SetDrawObject()
+{
+	if (m_ui->IsClickButton(BN::Sand_bn))
+		m_selectionID = ID::Obj_Sand;
+	if (m_ui->IsClickButton(BN::Cloud_bn))
+		m_selectionID = ID::Obj_Cloud;
+	if (m_ui->IsClickButton(BN::Coin_bn))
+		m_selectionID = ID::Obj_Coin;
 }

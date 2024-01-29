@@ -23,6 +23,7 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath)
 	, m_directoryPath{ dpath }		// ディレクトリパス
 	, m_id{ ID::Default }			// オブジェクトID
 	, m_weight{}					// オブジェクトの重さ
+	, is_wireframe{}				// ワイヤーフレームフラグ
 {
 	m_position = SimpleMath::Vector3::Zero;
 	m_initialPosition = SimpleMath::Vector3::Zero;
@@ -32,6 +33,7 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath)
 	m_rotate = SimpleMath::Vector3::Zero;
 	m_id = ID::Default;
 	m_weight = NON_WEIGHT;
+	is_wireframe = false;
 }
 
 //==============================================================================

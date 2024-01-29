@@ -106,6 +106,13 @@ private:
 	/// <param name="id">変更したいブロックのID</param>
 	/// <returns>なし</returns>
 	void UpdateCollisions(ID id);
+
+	/// <summary>
+	/// オブジェクトをセットする
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void SetDrawObject();
 };
 
 #endif // Editor

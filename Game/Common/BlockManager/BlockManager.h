@@ -18,6 +18,7 @@
 // Json変換クラス
 //==============================================================================
 #include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"
+#include "Libraries/SystemDatas/DiaLog/DiaLog.h"
 
 //==============================================================================
 // ブロックのインクルード
@@ -39,6 +40,9 @@ private:
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
+
+	// ダイアログ操作
+	std::unique_ptr<DiaLog> m_dialog;
 
 	// パス保存
 	std::wstring m_stagePath;
@@ -98,11 +102,27 @@ public:
 	// ステージパスを設定
 	void SetStagePath(const wchar_t* path) { m_stagePath = path; }
 
-	// ステージを書き出す
-	void OutputStage();
-
 	// ゲームプレイするときはONにする
 	void SetPlay(bool play) { is_playing = play; }
+
+	// ワイヤーフレームの切り替えフラグデフォルトはFalse
+	void SetWireFrame(bool frame);
+
+public:
+
+	//==============================================================================
+	// エディタ使用時に呼び出す関数
+	//==============================================================================
+
+	/// <summary>
+	/// ファイルをリロードする
+	/// </summary>
+	/// <param name="path">特定のパスを指定（エクスプローラーから開く場合はなにも入れない）</param>
+	/// <returns>なし</returns>
+	void ReLoad(const wchar_t* path = nullptr);
+
+	// ステージを書き出す
+	void OutputStage();
 
 private:
 
@@ -129,6 +149,8 @@ public:
 	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
 	// コインブロックの配列を参照
 	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+
+
 	// エアーブロックの配列を参照
 	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
 

@@ -260,6 +260,15 @@
     <Filter Include="Game\Scenes\Editor\Objects\Air">
       <UniqueIdentifier>{f4fd3e44-416f-454f-a0ce-0133f95d7021}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Textures\Editor">
+      <UniqueIdentifier>{ab374996-9329-4c9e-9565-e8d5151ba437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Editor\Buttons">
+      <UniqueIdentifier>{a6e10c42-f4c3-4529-bd04-8a118a77e9d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DiaLog">
+      <UniqueIdentifier>{3903a394-bba0-4336-bc8c-371e53b16247}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -439,6 +448,9 @@
     <ClInclude Include="Game\Editor\Objects\Air\Air.h">
       <Filter>Game\Scenes\Editor\Objects\Air</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
+      <Filter>Libraries\DiaLog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -600,6 +612,9 @@
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
       <Filter>Game\Scenes\Editor\Objects\Air</Filter>
     </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
+      <Filter>Libraries\DiaLog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -651,6 +666,21 @@
     </Image>
     <Image Include="Resources\Textures\SelectScene\Editor.dds">
       <Filter>Resources\Textures\SelectScene</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CloudButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -721,6 +751,9 @@
     </None>
     <None Include="Resources\Models\Coin.cmo">
       <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Stages\sample2.json">
+      <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

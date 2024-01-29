@@ -7,6 +7,8 @@
 
 #include "pch.h"
 #include "Libraries/SystemDatas/RayCast/RayCast.h"
+#include "Libraries/SystemDatas/Input/Input.h"
+#include "Libraries/UserUtility.h"
 #include "WorldMouse.h"
 
 //==============================================================================
@@ -16,6 +18,7 @@ WorldMouse::WorldMouse(SimpleMath::Matrix view, SimpleMath::Matrix proj)
     : m_view{ view }            // ビュー行列
     , m_projection{ proj }      // 射影行列
     , m_position{}              // 座標
+    , m_height{}                // Y座標の高さ
 {
     m_ray = std::make_unique<RayCast>();
 }
@@ -25,6 +28,7 @@ WorldMouse::WorldMouse(SimpleMath::Matrix view, SimpleMath::Matrix proj)
 //==============================================================================
 WorldMouse::~WorldMouse()
 {
+    m_ray.reset();
 }
 
 //==============================================================================
@@ -32,11 +36,27 @@ WorldMouse::~WorldMouse()
 //==============================================================================
 void WorldMouse::Update()
 {
-    // 例の更新
+    // レイの更新
     m_ray->Update();
 
-    // 座標を取得
-    m_position = m_ray->GetConvertedPosition();
+    // マウストラックの取得
+    auto& _input = Input::GetInstance()->GetMouseTrack();
+
+    // 右クリックで上昇
+    if (_input->rightButton == Mouse::ButtonStateTracker::PRESSED)
+    {
+        m_height += 0.001f;
+    }
+    if (_input->middleButton == Mouse::ButtonStateTracker::PRESSED)
+    {
+        m_height -= 0.001f;
+    }
+
+    // クランプ処理
+    m_height = UserUtility::Clamp(m_height, 0.0f, 5.0f);
+
+    // 座標を設定
+    m_position = m_ray->GetConvertedPosition() + SimpleMath::Vector3::UnitY * m_height;
 }
 
 //==============================================================================

@@ -23,6 +23,9 @@ private:
 	// ワールドマウスの座標
 	DirectX::SimpleMath::Vector3 m_position;
 
+	// 高さ
+	float m_height;
+
 public:
 
 	/// <summary>

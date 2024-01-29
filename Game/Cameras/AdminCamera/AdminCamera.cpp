@@ -22,6 +22,7 @@ AdminCamera::AdminCamera(const SimpleMath::Vector2& screenSize)
 	: m_screenSize{ screenSize }
 	, m_type{}
 	, is_active{ true }
+	, is_easing{ true }
 {
 }
 
@@ -44,9 +45,18 @@ void AdminCamera::Update()
 	m_gameCamera->Update();
 
 	// •âŠÔ‚µ‚È‚ª‚çˆÚ“®‚·‚é
-	m_position = SimpleMath::Vector3::Lerp(m_position, m_gameCamera->GetPosition(), MOVE_POS_SPEED);
-	m_target = SimpleMath::Vector3::Lerp(m_target, m_gameCamera->GetTarget(), FOLLOW_TARGET_SPEED);
-	m_view = SimpleMath::Matrix::CreateLookAt(m_position, m_target, m_gameCamera->GetUp());
+	if (is_easing)
+	{
+		m_position = SimpleMath::Vector3::Lerp(m_position, m_gameCamera->GetPosition(), MOVE_POS_SPEED);
+		m_target = SimpleMath::Vector3::Lerp(m_target, m_gameCamera->GetTarget(), FOLLOW_TARGET_SPEED);
+		m_view = SimpleMath::Matrix::CreateLookAt(m_position, m_target, m_gameCamera->GetUp());
+	}
+	else
+	{
+		m_position = m_gameCamera->GetPosition();
+		m_target = m_gameCamera->GetTarget();
+		m_view = SimpleMath::Matrix::CreateLookAt(m_position, m_target, m_gameCamera->GetUp());
+	}
 }
 
 //==============================================================================

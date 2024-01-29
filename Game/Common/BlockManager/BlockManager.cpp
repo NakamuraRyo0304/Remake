@@ -20,6 +20,9 @@ BlockManager::BlockManager(const wchar_t* stagePath)
 	// Json読み込みシステム作成
 	m_jsonHelper = std::make_unique<JsonHelper>();
 
+	// ダイアログアクセサ作成
+	m_dialog = std::make_unique<DiaLog>();
+
 	// ブロックをクリア
 	ClearBlocks();
 }
@@ -30,6 +33,7 @@ BlockManager::BlockManager(const wchar_t* stagePath)
 BlockManager::~BlockManager()
 {
 	m_jsonHelper.reset();
+	m_dialog.reset();
 	m_stagePath.clear();
 	ClearBlocks();
 }
@@ -39,7 +43,7 @@ BlockManager::~BlockManager()
 //==============================================================================
 void BlockManager::Initialize()
 {
-	// 先にエアーで埋める
+	// エディタモードの時、判定用エアーで埋める
 	if (is_playing == false)
 	{
 		FillAir();
@@ -72,13 +76,15 @@ void BlockManager::Initialize()
 		if (_name == "Cloud")
 			m_clouds.push_back(std::make_unique<Cloud>(_position));
 
+		// プレイモードはスキップ
 		if (is_playing == true) continue;
 
 		// 同じ場所にエアーがあったらその場所のエアーを消す
-		//if (m_air[i]->GetPosition() == _position)
-		//{
-		//	m_air[i].reset();
-		//}
+		if (UserUtility::IsNull(m_air[i].get())) continue;
+		if (m_air[i]->GetPosition() == _position)
+		{
+			m_air[i].reset();
+		}
 	}
 }
 
@@ -103,6 +109,10 @@ void BlockManager::Update()
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->Update();
 	}
+
+	// プレイモードはスキップ
+	if (is_playing == true) return;
+
 	for (auto& air : m_air)
 	{
 		if (UserUtility::IsNull(air.get())) continue;
@@ -157,50 +167,26 @@ void BlockManager::NotificateHit(const ID& id, const bool& hit, const int& index
 }
 
 //==============================================================================
-// ステージを書き出す 仮例
+// ワイヤーフレームを設定
 //==============================================================================
-void BlockManager::OutputStage()
+void BlockManager::SetWireFrame(bool frame)
 {
-	// オブジェクト配列
-	std::vector<IGameObject*> _objects;
 	for (auto& sand : m_sands)
 	{
-		_objects.push_back(sand.get());
+		if (UserUtility::IsNull(sand.get())) continue;
+		sand->SetWireFrameFlag(frame);
 	}
 	for (auto& cloud : m_clouds)
 	{
-		_objects.push_back(cloud.get());
+		if (UserUtility::IsNull(cloud.get())) continue;
+		cloud->SetWireFrameFlag(frame);
+
 	}
 	for (auto& coin : m_coins)
 	{
-		_objects.push_back(coin.get());
+		if (UserUtility::IsNull(coin.get())) continue;
+		coin->SetWireFrameFlag(frame);
 	}
-
-	Json _json;
-	int _index = 0;
-
-	// _objectに格納されたブロック分出力する
-	while (_index < _objects.size())
-	{
-		// 消されていたらスキップ
-		if (_objects[_index]->GetID() == ID::Deleted)
-		{
-			_index++;
-			continue;
-		}
-
-		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
-		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
-
-		_json[_index]["Position"]["X"] = _pos.x;
-		_json[_index]["Position"]["Y"] = _pos.y;
-		_json[_index]["Position"]["Z"] = _pos.z;
-		_index++;
-	}
-
-	// データを書き出す
-	std::string _output = _json.dump(2);
-	m_jsonHelper->Write(_output);
 }
 
 //==============================================================================
@@ -301,7 +287,7 @@ void BlockManager::ClearBlocks()
 }
 
 //==============================================================================
-// エアーで埋める 仮
+// エアーで埋める
 //==============================================================================
 void BlockManager::FillAir()
 {
@@ -313,8 +299,102 @@ void BlockManager::FillAir()
 			{
 				auto _pos = SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 				m_air.push_back(std::make_unique<Air>(_pos));
-
 			}
 		}
 	}
+}
+
+//==============================================================================
+// エクスプローラーからパスを取得する
+//==============================================================================
+void BlockManager::ReLoad(const wchar_t* path)
+{
+	// 開けなかったときのために一時保存する
+	std::wstring _tmp = m_stagePath;
+
+	// ダイアログが作られていなければ文字列を返さない
+	if (UserUtility::IsNull(m_dialog.get())) return;
+
+	// ブロックをすべて破棄する
+	ClearBlocks();
+
+	// パスがなかったらダイアログから開く
+	if (path == nullptr)
+	{
+		auto _path = m_dialog->GetExpFilePath();
+		if (not UserUtility::IsNull(_path))
+		{
+			m_stagePath = _path;
+		}
+	}
+	else
+	{
+		m_stagePath = path;
+	}
+
+	// ファイルの内容チェック(中身が空なら最初のパスを再代入)
+	if (m_stagePath.empty())
+	{
+		m_stagePath = _tmp;
+	}
+
+	// 初期化する
+	Initialize();
+}
+
+//==============================================================================
+// ステージを書き出す
+//==============================================================================
+void BlockManager::OutputStage()
+{
+	// 開けなかったときのために一時保存する
+	std::wstring _tmp = m_stagePath;
+
+	// パスを設定
+	auto _path = m_dialog->GetExpFilePath();
+	if (not UserUtility::IsNull(_path))
+	{
+		m_stagePath = _path;
+	}
+	else
+	{
+		m_stagePath = _tmp;
+	}
+
+	// パスを設定
+	m_jsonHelper->SetPath(m_stagePath.c_str());
+
+	// オブジェクト配列
+	std::vector<IGameObject*> _objects;
+	for (auto& sand : m_sands)
+	{
+		_objects.push_back(sand.get());
+	}
+	for (auto& cloud : m_clouds)
+	{
+		_objects.push_back(cloud.get());
+	}
+	for (auto& coin : m_coins)
+	{
+		_objects.push_back(coin.get());
+	}
+
+	Json _json;
+	int _index = 0;
+
+	// _objectに格納されたブロック分出力する
+	while (_index < _objects.size())
+	{
+		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
+		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
+
+		_json[_index]["Position"]["X"] = _pos.x;
+		_json[_index]["Position"]["Y"] = _pos.y;
+		_json[_index]["Position"]["Z"] = _pos.z;
+		_index++;
+	}
+
+	// データを書き出す
+	std::string _output = _json.dump(2);
+	m_jsonHelper->Write(_output);
 }

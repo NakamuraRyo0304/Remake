@@ -62,6 +62,9 @@ private:
 	// ビュー行列/プロジェクション行列
 	DirectX::SimpleMath::Matrix m_view, m_projection;
 
+	// 補間フラグ
+	bool is_easing;
+
 private:
 
 	// 移動速度
@@ -141,6 +144,12 @@ public:
 	/// <param name="引数無し"></param>
 	/// <returns>プロジェクション行列</returns>
 	DirectX::SimpleMath::Matrix& GetProjection() { return m_projection; }
+	/// <summary>
+	/// イージングの使用設定
+	/// </summary>
+	/// <param name="flag">ONで線形補完</param>
+	/// <returns>なし</returns>
+	void SetEasing(bool flag = true) { is_easing = flag; }
 };
 
 #endif // ADMINCAMERA
