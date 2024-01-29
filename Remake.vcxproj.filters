@@ -266,6 +266,9 @@
     <Filter Include="Resources\Textures\Editor\Buttons">
       <UniqueIdentifier>{a6e10c42-f4c3-4529-bd04-8a118a77e9d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries\DiaLog">
+      <UniqueIdentifier>{3903a394-bba0-4336-bc8c-371e53b16247}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -445,6 +448,9 @@
     <ClInclude Include="Game\Editor\Objects\Air\Air.h">
       <Filter>Game\Scenes\Editor\Objects\Air</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
+      <Filter>Libraries\DiaLog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -605,6 +611,9 @@
     </ClCompile>
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
       <Filter>Game\Scenes\Editor\Objects\Air</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
+      <Filter>Libraries\DiaLog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

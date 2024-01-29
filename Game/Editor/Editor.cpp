@@ -69,7 +69,14 @@ void Editor::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+		{
+			m_blockManager->ReLoad();
+		}
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+		{
+			m_blockManager->OutputStage();
+		}
 	}
 
 	// ブロックの更新

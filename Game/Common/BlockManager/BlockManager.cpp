@@ -20,6 +20,9 @@ BlockManager::BlockManager(const wchar_t* stagePath)
 	// Json読み込みシステム作成
 	m_jsonHelper = std::make_unique<JsonHelper>();
 
+	// ダイアログアクセサ作成
+	m_dialog = std::make_unique<DiaLog>();
+
 	// ブロックをクリア
 	ClearBlocks();
 }
@@ -30,6 +33,7 @@ BlockManager::BlockManager(const wchar_t* stagePath)
 BlockManager::~BlockManager()
 {
 	m_jsonHelper.reset();
+	m_dialog.reset();
 	m_stagePath.clear();
 	ClearBlocks();
 }
@@ -160,46 +164,6 @@ void BlockManager::NotificateHit(const ID& id, const bool& hit, const int& index
 
 	if (id == ID::Obj_Air && index >= 0 && index < m_air.size())
 		m_air[index]->NotificateHit(hit);
-}
-
-//==============================================================================
-// ステージを書き出す 仮例
-//==============================================================================
-void BlockManager::OutputStage()
-{
-	// オブジェクト配列
-	std::vector<IGameObject*> _objects;
-	for (auto& sand : m_sands)
-	{
-		_objects.push_back(sand.get());
-	}
-	for (auto& cloud : m_clouds)
-	{
-		_objects.push_back(cloud.get());
-	}
-	for (auto& coin : m_coins)
-	{
-		_objects.push_back(coin.get());
-	}
-
-	Json _json;
-	int _index = 0;
-
-	// _objectに格納されたブロック分出力する
-	while (_index < _objects.size())
-	{
-		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
-		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
-
-		_json[_index]["Position"]["X"] = _pos.x;
-		_json[_index]["Position"]["Y"] = _pos.y;
-		_json[_index]["Position"]["Z"] = _pos.z;
-		_index++;
-	}
-
-	// データを書き出す
-	std::string _output = _json.dump(2);
-	m_jsonHelper->Write(_output);
 }
 
 //==============================================================================
@@ -338,4 +302,86 @@ void BlockManager::FillAir()
 			}
 		}
 	}
+}
+
+//==============================================================================
+// エクスプローラーからパスを取得する
+//==============================================================================
+void BlockManager::ReLoad(const wchar_t* path)
+{
+	// 開けなかったときのために一時保存する
+	std::wstring _tmp = m_stagePath;
+
+	// ダイアログが作られていなければ文字列を返さない
+	if (UserUtility::IsNull(m_dialog.get())) return;
+
+	// ブロックをすべて破棄する
+	ClearBlocks();
+
+	// パスがなかったらダイアログから開く
+	if (path == nullptr)
+	{
+		auto _path = m_dialog->GetExpFilePath();
+		if (_path != nullptr)
+		{
+			m_stagePath = _path;
+		}
+	}
+	else
+	{
+		m_stagePath = path;
+	}
+
+	// ファイルの内容チェック(中身が空なら最初のパスを再代入)
+	if (m_stagePath.empty())
+	{
+		m_stagePath = _tmp;
+	}
+
+	// 初期化する
+	Initialize();
+}
+
+//==============================================================================
+// ステージを書き出す
+//==============================================================================
+void BlockManager::OutputStage()
+{
+	// パスを設定
+	auto _path = m_dialog->GetExpFilePath();
+	m_jsonHelper->SetPath(_path);
+
+	// オブジェクト配列
+	std::vector<IGameObject*> _objects;
+	for (auto& sand : m_sands)
+	{
+		_objects.push_back(sand.get());
+	}
+	for (auto& cloud : m_clouds)
+	{
+		_objects.push_back(cloud.get());
+	}
+	for (auto& coin : m_coins)
+	{
+		_objects.push_back(coin.get());
+	}
+
+	Json _json;
+	int _index = 0;
+
+	// _objectに格納されたブロック分出力する
+	while (_index < _objects.size())
+	{
+		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
+		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
+
+		_json[_index]["Position"]["X"] = _pos.x;
+		_json[_index]["Position"]["Y"] = _pos.y;
+		_json[_index]["Position"]["Z"] = _pos.z;
+		_index++;
+	}
+
+	// データを書き出す
+	std::string _output = _json.dump(2);
+	m_jsonHelper->Write(_output);
 }

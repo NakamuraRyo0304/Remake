@@ -226,6 +226,7 @@
     <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h" />
     <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h" />
     <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h" />
+    <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h" />
     <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h" />
     <ClInclude Include="Libraries\SystemDatas\DrawSprite\DrawSprite.h" />
     <ClInclude Include="Libraries\SystemDatas\DrawString\DrawString.h" />
@@ -286,6 +287,7 @@
     <ClCompile Include="Libraries\SystemDatas\Camera\Camera.cpp" />
     <ClCompile Include="Libraries\SystemDatas\Collider\ColliderHelper.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp" />
+    <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DrawSprite\DrawSprite.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DrawString\DrawString.cpp" />
