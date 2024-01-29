@@ -69,14 +69,10 @@ void Editor::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
-		{
+		if (m_ui->IsClickButton(BN::LoadFile))
 			m_blockManager->ReLoad();
-		}
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
-		{
+		if (m_ui->IsClickButton(BN::WriteFile))
 			m_blockManager->OutputStage();
-		}
 	}
 
 	// ブロックの更新
@@ -222,4 +218,8 @@ void Editor::SetDrawObject()
 {
 	if (m_ui->IsClickButton(BN::Sand_bn))
 		m_selectionID = ID::Obj_Sand;
+	if (m_ui->IsClickButton(BN::Cloud_bn))
+		m_selectionID = ID::Obj_Cloud;
+	if (m_ui->IsClickButton(BN::Coin_bn))
+		m_selectionID = ID::Obj_Coin;
 }

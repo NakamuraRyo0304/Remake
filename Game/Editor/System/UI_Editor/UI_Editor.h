@@ -20,7 +20,11 @@ public:
 
 	enum BUTTON_NAME
 	{
+		LoadFile,
+		WriteFile,
 		Sand_bn,
+		Cloud_bn,
+		Coin_bn,
 
 		Length
 	};

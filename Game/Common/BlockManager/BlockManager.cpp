@@ -322,7 +322,7 @@ void BlockManager::ReLoad(const wchar_t* path)
 	if (path == nullptr)
 	{
 		auto _path = m_dialog->GetExpFilePath();
-		if (_path != nullptr)
+		if (not UserUtility::IsNull(_path))
 		{
 			m_stagePath = _path;
 		}
@@ -347,9 +347,22 @@ void BlockManager::ReLoad(const wchar_t* path)
 //==============================================================================
 void BlockManager::OutputStage()
 {
+	// 開けなかったときのために一時保存する
+	std::wstring _tmp = m_stagePath;
+
 	// パスを設定
 	auto _path = m_dialog->GetExpFilePath();
-	m_jsonHelper->SetPath(_path);
+	if (not UserUtility::IsNull(_path))
+	{
+		m_stagePath = _path;
+	}
+	else
+	{
+		m_stagePath = _tmp;
+	}
+
+	// パスを設定
+	m_jsonHelper->SetPath(m_stagePath.c_str());
 
 	// オブジェクト配列
 	std::vector<IGameObject*> _objects;

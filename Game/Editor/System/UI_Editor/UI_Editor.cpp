@@ -22,7 +22,11 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	, m_buttons{}					// ボタン
 	, is_clicks{}					// クリック判定
 {
+	m_buttons.push_back(std::make_unique<Button>(L"Load", L"Resources/Textures/Editor/Buttons/LoadButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Write", L"Resources/Textures/Editor/Buttons/WriteButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Sand", L"Resources/Textures/Editor/Buttons/SandButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Cloud", L"Resources/Textures/Editor/Buttons/CloudButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Coin", L"Resources/Textures/Editor/Buttons/CoinButton.dds"));
 
 	// 初期化処理
 	Initialize();
@@ -41,7 +45,16 @@ UI_Editor::~UI_Editor()
 //==============================================================================
 void UI_Editor::Initialize()
 {
-	m_buttons[BN::Sand_bn]->Initialize({ 1500,128 }, SimpleMath::Vector2::One * 0.5f, { 0,0,256,256 }, GetScreenRate());
+	// ボタンのレクトと拡大率
+	RECT_U _bRect = { 0,0,256,256 };
+	SimpleMath::Vector2 _bRate = SimpleMath::Vector2::One * 0.5f;
+
+	// Position(X + 138  Y + 138)
+	m_buttons[BN::LoadFile]->Initialize({ 1638,54 }, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::WriteFile]->Initialize({ 1776,54 }, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::Sand_bn]->Initialize({ 1638,192 }, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::Cloud_bn]->Initialize({ 1776,192 }, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::Coin_bn]->Initialize({ 1638,330 }, _bRate, _bRect, GetScreenRate());
 }
 
 //==============================================================================

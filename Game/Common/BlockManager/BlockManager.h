@@ -149,6 +149,8 @@ public:
 	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
 	// コインブロックの配列を参照
 	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+
+
 	// エアーブロックの配列を参照
 	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
 
