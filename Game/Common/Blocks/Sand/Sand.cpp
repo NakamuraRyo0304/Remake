@@ -18,7 +18,7 @@
 // コンストラクタ
 //==============================================================================
 Sand::Sand(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models", position)
 	, is_hit{ false }
 {
 	CreateModel();
@@ -29,6 +29,7 @@ Sand::Sand(SimpleMath::Vector3 position)
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetInitialScale(GetScale());
 }
 
 //==============================================================================

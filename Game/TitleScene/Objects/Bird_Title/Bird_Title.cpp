@@ -29,6 +29,7 @@ Bird_Title::Bird_Title()
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One * BIRD_SCALE);
+	SetInitialScale(GetScale());
 
 	// X‚ğƒ‰ƒ“ƒ_ƒ€‚É•ÏX
 	RandomXPosition();

@@ -18,7 +18,7 @@
 // コンストラクタ
 //==============================================================================
 Coin::Coin(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Coin.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/Coin.cmo", L"Resources/Models", position)
 	, is_hit{ false }		// 衝突フラグ
 	, is_active{ true }		// アクティブフラグ
 {
@@ -30,6 +30,7 @@ Coin::Coin(SimpleMath::Vector3 position)
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetInitialScale(GetScale());
 }
 
 //==============================================================================

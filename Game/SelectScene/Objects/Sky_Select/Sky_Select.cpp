@@ -27,6 +27,7 @@ Sky_Select::Sky_Select()
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One);
+	SetInitialScale(GetScale());
 
 	// Ž©ŒÈ”­Œõ
 	GetModel()->UpdateEffects([](IEffect* effect)

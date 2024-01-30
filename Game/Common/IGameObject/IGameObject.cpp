@@ -12,12 +12,13 @@
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath)
+IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath, SimpleMath::Vector3 pos)
 	: m_world{}						// ワールド行列
 	, m_parentMatrix{}				// 親ワールド行列
-	, m_position{}					// 座標
-	, m_initialPosition{}			// 初期座標
+	, m_position{ pos }				// 座標
+	, m_initialPosition{ pos }		// 初期座標
 	, m_scale{}						// スケール
+	, m_initialScale{}				// 初期スケール
 	, m_rotate{}					// 回転
 	, m_filePath{ path }			// モデルパス
 	, m_directoryPath{ dpath }		// ディレクトリパス
@@ -25,15 +26,12 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath)
 	, m_weight{}					// オブジェクトの重さ
 	, is_wireframe{}				// ワイヤーフレームフラグ
 {
-	m_position = SimpleMath::Vector3::Zero;
-	m_initialPosition = SimpleMath::Vector3::Zero;
 	m_world = SimpleMath::Matrix::Identity;
 	m_parentMatrix = SimpleMath::Matrix::Identity;
-	m_scale = SimpleMath::Vector3::One;
-	m_rotate = SimpleMath::Vector3::Zero;
 	m_id = ID::Default;
 	m_weight = NON_WEIGHT;
 	is_wireframe = false;
+	CreateWorldMatrix();
 }
 
 //==============================================================================
