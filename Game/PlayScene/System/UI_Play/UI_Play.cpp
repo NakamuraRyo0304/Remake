@@ -1,0 +1,101 @@
+/*
+ *	@File	UI_Play.cpp
+ *	@Brief	プレイUI。
+ *	@Date	2023-01-30
+ *  @Author NakamuraRyo
+ */
+
+#include "pch.h"
+#include "Libraries/SystemDatas/Input/Input.h"
+#include "Libraries/UserUtility.h"
+#include "UI_Play.h"
+
+//==============================================================================
+// 定数の設定
+//==============================================================================
+const SimpleMath::Vector4 UI_Play::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
+const float UI_Play::COLOR_SPEED = 0.075f;	// 色の変更速度
+
+//==============================================================================
+// コンストラクタ
+//==============================================================================
+UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
+	: IUserInterface(scS, mscs)				// 基底クラス
+	, m_selection{ TitleSelect::Start }		// スタート
+	, m_position{}							// 座標
+	, m_color{}								// 描画色
+{
+	m_sprites = std::make_unique<DrawSprite>();
+	m_sprites->MakeSpriteBatch();
+
+	// 初期化処理
+	Initialize();
+}
+
+//==============================================================================
+// デストラクタ
+//==============================================================================
+UI_Play::~UI_Play()
+{
+	m_sprites.reset();
+	m_position.clear();
+	m_color.clear();
+}
+
+//==============================================================================
+// 初期化処理
+//==============================================================================
+void UI_Play::Initialize()
+{
+	// スプライトの登録
+	m_sprites->AddTextureData(L"Start", L"Resources/Textures/TitleScene/Start.dds");
+	m_sprites->AddTextureData(L"Exit", L"Resources/Textures/TitleScene/Exit.dds");
+
+	// 座標の設定
+	m_position.emplace(L"Start", SimpleMath::Vector2(1200.0f, 950.0f));
+	m_position.emplace(L"Exit", SimpleMath::Vector2(1600.0f, 950.0f));
+
+	// 色の設定
+	m_color.emplace(L"Start", SimpleMath::Vector4(0, 0, 0, 1));
+	m_color.emplace(L"Exit", SimpleMath::Vector4(0, 0, 0, 1));
+}
+
+//==============================================================================
+// 更新処理
+//==============================================================================
+void UI_Play::Update()
+{
+	auto& _input = Input::GetInstance()->GetKeyTrack();
+
+	// どちらかを押したら反転する
+	if (_input->IsKeyPressed(Keyboard::Keys::Right) ||
+		_input->IsKeyPressed(Keyboard::Keys::Left))
+	{
+		m_selection = m_selection == Start ? Exit : Start;
+	}
+
+	// 選択番号に応じて色を分ける
+	if (m_selection == TitleSelect::Start)
+	{
+		m_color[L"Start"] = UserUtility::Lerp(m_color[L"Start"], RED_COLOR, COLOR_SPEED);
+		m_color[L"Exit"] = SimpleMath::Vector4(0, 0, 0, 1);
+	}
+	if (m_selection == TitleSelect::Exit)
+	{
+		m_color[L"Exit"] = UserUtility::Lerp(m_color[L"Exit"], RED_COLOR, COLOR_SPEED);
+		m_color[L"Start"] = SimpleMath::Vector4(0, 0, 0, 1);
+	}
+}
+
+//==============================================================================
+// 描画処理
+//==============================================================================
+void UI_Play::Draw()
+{
+	m_sprites->DrawTexture(L"Start", m_position[L"Start"] * GetScreenRate(),
+		m_color[L"Start"], SimpleMath::Vector2::One * GetScreenRate(),
+		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 298, 97));
+	m_sprites->DrawTexture(L"Exit", m_position[L"Exit"] * GetScreenRate(),
+		m_color[L"Exit"], SimpleMath::Vector2::One * GetScreenRate(),
+		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 278, 97));
+}

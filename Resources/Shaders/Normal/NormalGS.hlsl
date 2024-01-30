@@ -1,11 +1,11 @@
 /*
- *	@File	ParticleGS.hlsl
- *	@Brief	パーティクルのジオメトリシェーダー
- *	@Date	2023-01-21
+ *	@File	NormalGS.hlsl
+ *	@Brief	ジオメトリシェーダー
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
-#include "Particle.hlsli"
+#include "Normal.hlsli"
 
 static const int VNUM = 4;
 

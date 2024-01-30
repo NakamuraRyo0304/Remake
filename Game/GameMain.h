@@ -46,11 +46,19 @@ private:
     // デフォルトのフェード速度
     const float DEFAULT_FADE_SPEED = 4.0f;
 
+    // プレイシーンのフェード速度
+    static const float PLAY_FADE_SPEED;
+
     // トランジションのパス
     static const wchar_t* FADE_TEXTURE_PATH;
 
     // トランジションの色
     static const DirectX::XMVECTORF32 FADE_COLOR;
+
+private:
+
+    // ステージ番号
+    int m_stageNumber;
 
 public:
     GameMain();
@@ -100,11 +108,11 @@ public:
     /// <returns>なし</returns>
     void CreateWDResources(const int& screenWidth, const int& screenHeight);
 
-    // シーンキャスタ    // 引数：T = 変換したい型名 / scene 現在のシーン
-    template<typename Scene>
-    Scene CastSceneType(std::unique_ptr<IScene>& scene)
+    // シーンキャスタ    // 引数：T = 変換したい型名 / scene 今のシーン
+    template<typename T>
+    T* CastSceneType(std::unique_ptr<IScene>& scene)
     {
-        return static_cast<Scene*>(scene.get());
+        return dynamic_cast<T*>(scene.get());
     }
 
     // ソフトを終了する

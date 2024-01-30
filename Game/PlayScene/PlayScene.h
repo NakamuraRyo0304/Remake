@@ -1,13 +1,13 @@
 /*
- *	@File	SelectScene.h
- *	@Brief	セレクトシーン。
- *	@Date	2023-01-26
+ *	@File	PlayScene.h
+ *	@Brief	プレイシーン。
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef SELECTSCENE
-#define SELECTSCENE
+#ifndef PLAYSCENE
+#define	PLAYSCENE
 
 //==============================================================================
 // 親シーンクラス
@@ -15,46 +15,29 @@
 #include "Game/IScene/IScene.h"
 
 class AdminCamera;
-class BlockManager;
-class Sky_Select;
-class UI_Select;
-
-class SelectScene final : public IScene
+class Sky_Play;
+class PlayScene final : public IScene
 {
 private:
+
+	// ステージ番号
+	int m_stageNumber;
 
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
 
-	// UI
-	std::unique_ptr<UI_Select> m_ui;
-
 	// スカイ球
-	std::unique_ptr<Sky_Select> m_sky;
+	std::unique_ptr<Sky_Play> m_sky;
 
-	// ブロックマネージャ
-	std::unique_ptr<BlockManager> m_blockManager;
-
-	// セレクト番号
-	int m_stageSelection;
-
-private:
-
-	// サンプルステージ番号
-	static const int MAX_SAMPLE_NUM;
-
-	// ０番はエディタの番号
-	const int EDITOR_NUM = 0;
 
 public:
-
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="number">ステージ番号</param>
 	/// <returns>なし</returns>
-	SelectScene();
-	~SelectScene();
+	PlayScene(const int& number);
+	~PlayScene();
 
 	/// <summary>
 	/// 初期化処理
@@ -101,27 +84,6 @@ private:
 	/// <param name="states">コモンステート</param>
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
-
-public:
-
-	// ステージ番号を取得
-	const int& GetSelectedNumber() { return m_stageSelection; }
-
-private:
-
-	/// <summary>
-	/// カメラの切り替え処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void ChangeAdminCamera();
-
-	/// <summary>
-	/// シーン選択
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void SelectNext();
 };
 
-#endif // SELECTSCENE
+#endif // PlayScene

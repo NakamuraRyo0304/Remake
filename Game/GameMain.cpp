@@ -15,6 +15,7 @@
 //==============================================================================
 const wchar_t* GameMain::FADE_TEXTURE_PATH = L"Resources/Textures/Transitions/Rule_Haze.png";
 const XMVECTORF32 GameMain::FADE_COLOR = Colors::White;
+const float GameMain::PLAY_FADE_SPEED = 2.0f;
 
 //==============================================================================
 // シーンのインクルード
@@ -22,15 +23,17 @@ const XMVECTORF32 GameMain::FADE_COLOR = Colors::White;
 #include "TitleScene/TitleScene.h"
 #include "SelectScene/SelectScene.h"
 #include "Editor/Editor.h"
+#include "PlayScene/PlayScene.h"
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 GameMain::GameMain()
-	: m_nextScene{ SCENE::EDIT }		// 次回のシーン
+	: m_nextScene{ SCENE::TITLE }		// 次回のシーン
 	, m_prevScene{ SCENE::NONE }		// 前回のシーン
 	, m_nowScene{ nullptr }				// 今のシーンポインタ
 	, m_screenSize{}					// スクリーンサイズ
+	, m_stageNumber{ 1 }				// ステージ番号
 {
 }
 
@@ -148,6 +151,13 @@ void GameMain::CreateScene()
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;
 		}
+		case SCENE::PLAY:		// ゲームシーン
+		{
+			m_nowScene = std::make_unique<PlayScene>(m_stageNumber);
+
+			m_fade->SetFadeSpeed(PLAY_FADE_SPEED);
+			break;
+		}
 		case SCENE::EXIT:		// ゲーム終了
 		{
 			if (m_fade->GetEndFlag()) { ExitApp(); }
@@ -175,6 +185,19 @@ void GameMain::DeleteScene()
 {
 	// シーンが作成されていなければ処理しない
 	if (not m_nowScene) return;
+
+
+	//==============================================================================
+	// シーン間の値受け渡しはここで行う
+	//==============================================================================
+
+	// 次のシーン：ゲームシーン / 処理：セレクトシーンからステージ番号を取得する
+	if (m_nextScene == SCENE::PLAY)
+	{
+		m_stageNumber = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
+	}
+
+
 
 	// 現シーンの終了処理
 	if (m_fade->GetFadeValue() >= m_fade->GetMaxValue())

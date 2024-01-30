@@ -18,7 +18,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const int SelectScene::MAX_SAMPLE_NUM = 3;
+const int SelectScene::MAX_SAMPLE_NUM = 3;		// サンプルステージ数
 
 //==============================================================================
 // エイリアス宣言
@@ -228,10 +228,10 @@ void SelectScene::SelectNext()
 
 		// ステージをプレイする
 		if (m_stageSelection == 1)
-			ChangeScene(SCENE::SELECT);
+			ChangeScene(SCENE::PLAY);
 		if (m_stageSelection == 2)
-			ChangeScene(SCENE::SELECT);
+			ChangeScene(SCENE::PLAY);
 		if (m_stageSelection == 3)
-			ChangeScene(SCENE::SELECT);
+			ChangeScene(SCENE::PLAY);
 	}
 }
