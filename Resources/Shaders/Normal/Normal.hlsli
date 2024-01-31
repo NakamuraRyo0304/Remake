@@ -11,7 +11,6 @@ cbuffer ConstBuffer	: register(b0)
 	matrix World;
 	matrix View;
 	matrix Proj;
-	float4 Move;
 };
 
 // 頂点シェーダーのインプット

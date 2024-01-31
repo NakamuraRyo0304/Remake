@@ -17,6 +17,7 @@ enum class ID
 	Back_Bird,		// タイトルの鳥
 	Back_Logo,		// ロゴ
 	Back_Sky,		// スカイドーム
+	Obj_Player,		// プレイヤ
 	Obj_Air,		// エディタ用判定ブロック
 	Obj_Sand,		// 砂ブロック
 	Obj_Coin,		// コインブロック

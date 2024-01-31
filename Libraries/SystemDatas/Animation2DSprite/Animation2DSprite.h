@@ -77,11 +77,12 @@ private:
 	// シェーダーリソースビュー
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_srv;
 
-	// カメラの位置
-	DirectX::SimpleMath::Vector3 m_cameraPosition, m_cameraTarget;
-
 	// ワールド行列
 	DirectX::SimpleMath::Matrix m_world;
+
+	// テクスチャの座標（三次元）
+	DirectX::SimpleMath::Vector3 m_position;
+
 
 public:
 
@@ -96,16 +97,17 @@ public:
 	/// <summary>
 	/// リソースの作成
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="path">テクスチャパス</param>
 	/// <returns>なし</returns>
-	void CreateResources();
+	void CreateResources(const wchar_t* path);
 
 	/// <summary>
 	/// 描画関数
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="view">ビュー行列</param>
+	/// <param name="proj">プロジェクション行列</param>
 	/// <returns>なし</returns>
-	void Draw();
+	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 
 	/// <summary>
 	/// ビルボード化関数
@@ -113,8 +115,11 @@ public:
 	/// <param name="eye">カメラ位置</param>
 	/// <param name="target">注視点</param>
 	/// <param name="up">上方向</param>
-	/// <returns>なし</returns>]
+	/// <returns>なし</returns>
 	void CreateBillboard(DirectX::SimpleMath::Vector3 eye, DirectX::SimpleMath::Vector3 target, DirectX::SimpleMath::Vector3 up);
+
+	// 座標を設定
+	void SetPosition(DirectX::SimpleMath::Vector3 pos) { m_position = pos; }
 
 private:
 
@@ -125,6 +130,19 @@ private:
 	/// <returns>なし</returns>
 	void CreateConstBuffer();
 
+	/// <summary>
+	/// シェーダーの作成
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>頂点シェーダーのデータ</returns>
+	std::vector<uint8_t> CreateShaders();
+
+	/// <summary>
+	/// インプットレイアウトの作成
+	/// </summary>
+	/// <param name="vs">頂点シェーダー</param>
+	/// <returns>なし</returns>
+	void CreateInputLayout(std::vector<uint8_t> vs);
 };
 
 #endif // ANIMATION2DSPRITE

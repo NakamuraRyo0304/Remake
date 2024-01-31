@@ -16,6 +16,8 @@
 
 class AdminCamera;
 class Sky_Play;
+class Player;
+class WorldMouse;
 class PlayScene final : public IScene
 {
 private:
@@ -29,6 +31,11 @@ private:
 	// スカイ球
 	std::unique_ptr<Sky_Play> m_sky;
 
+	// プレイヤー
+	std::unique_ptr<Player> m_player;
+
+	// ワールドマウス
+	std::unique_ptr<WorldMouse> m_worldMouse;
 
 public:
 	/// <summary>

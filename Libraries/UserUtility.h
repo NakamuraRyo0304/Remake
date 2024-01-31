@@ -266,6 +266,7 @@ namespace UserUtility
 		}
 	}
 
+
 	/// <summary>
 	/// 次の要素にインクリメントする
 	/// </summary>
@@ -287,5 +288,26 @@ namespace UserUtility
 		(*val) = static_cast<T>(static_cast<int>(*val) - 1);
 	}
 
+	/// <summary>
+	/// 点Aから点Bへの角度を計算する
+	/// </summary>
+	/// <param name="ax">点AのX座標</param>
+	/// <param name="ay">点AのY座標</param>
+	/// <param name="bx">点BのX座標</param>
+	/// <param name="by">点BのY座標</param>
+	/// <returns>点Aから見たときの点Bの角度</returns>
+	inline float CalcAngleAtoB(float ax, float ay, float bx, float by)
+	{
+		// アークタンジェントを使用して角度を計算し、正しい象限に調整
+		float _angle = atan2(by - ay, bx - ax);
+
+		// 角度が範囲[0, 2 * π)に収まるように調整
+		_angle = _angle < 0 ? _angle + static_cast<float>(2 * M_PI) : _angle;
+
+		// 角度をラジアンから度に変換
+		_angle *= UserUtility::Floor<float>(360.0f / (2.0f * M_PI));
+
+		return _angle;
+	}
 }
 #endif // USERUTILITY

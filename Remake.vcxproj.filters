@@ -278,11 +278,20 @@
     <Filter Include="Game\Scenes\PlayScene\Objects\Sky_Play">
       <UniqueIdentifier>{651deb3c-e72a-4e56-9170-1bc06d816d9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\Animation2DSprite">
-      <UniqueIdentifier>{5bd04576-2da3-4e2e-938b-18f453a4a277}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Shaders\Normal">
       <UniqueIdentifier>{04dfc141-398d-4f34-acdd-1246a2a15b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects\Player">
+      <UniqueIdentifier>{a427642f-6c2c-4f65-9712-cce71ba48eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Models\Player">
+      <UniqueIdentifier>{30990e30-a863-4e38-b862-b43b494d42dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Models\Block">
+      <UniqueIdentifier>{59806a78-1c28-44cb-970e-c3bf1f2a1a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects\Player\Parts">
+      <UniqueIdentifier>{9e6671f3-6c2b-46b7-974a-84f827247d6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -472,8 +481,11 @@
     <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h">
       <Filter>Game\Scenes\PlayScene\Objects\Sky_Play</Filter>
     </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Animation2DSprite\Animation2DSprite.h">
-      <Filter>Libraries\Animation2DSprite</Filter>
+    <ClInclude Include="Game\PlayScene\Objects\Player\Player.h">
+      <Filter>Game\Scenes\PlayScene\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h">
+      <Filter>Game\Scenes\PlayScene\Objects\Player\Parts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -645,8 +657,11 @@
     <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp">
       <Filter>Game\Scenes\PlayScene\Objects\Sky_Play</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Animation2DSprite\Animation2DSprite.cpp">
-      <Filter>Libraries\Animation2DSprite</Filter>
+    <ClCompile Include="Game\PlayScene\Objects\Player\Player.cpp">
+      <Filter>Game\Scenes\PlayScene\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp">
+      <Filter>Game\Scenes\PlayScene\Objects\Player\Parts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -770,23 +785,29 @@
     <None Include="Resources\Models\Bird.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Models\Sand.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
     <None Include="Resources\Stages\sample1.json">
       <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
-    </None>
-    <None Include="Resources\Models\Cloud.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\Coin.cmo">
-      <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Stages\sample2.json">
       <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
     </None>
     <None Include="Resources\Shaders\Normal\Normal.hlsli">
       <Filter>Resources\Shaders\Normal</Filter>
+    </None>
+    <None Include="Resources\Models\Cloud.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Coin.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Sand.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Head.cmo">
+      <Filter>Resources\Models\Player</Filter>
+    </None>
+    <None Include="Resources\Models\Body.cmo">
+      <Filter>Resources\Models\Player</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -837,5 +858,13 @@
     <FxCompile Include="Resources\Shaders\Normal\NormalVS.hlsl">
       <Filter>Resources\Shaders\Normal</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="..\Body.fbx">
+      <Filter>Resources\Models\Player</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="..\Head.fbx">
+      <Filter>Resources\Models\Player</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>

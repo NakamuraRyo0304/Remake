@@ -24,8 +24,6 @@ void main(point PS_INPUT input[1], inout TriangleStream<PS_INPUT> output)
 	{
 		PS_INPUT element;
 
-		float4 res = offset_array[i];
-
 		element.Pos =input[0].Pos + mul(offset_array[i]* input[0].Tex.x, World);
 
 		element.Pos = mul(element.Pos, View);

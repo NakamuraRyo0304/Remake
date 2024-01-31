@@ -1,6 +1,6 @@
 /*
- *	@File	NormalVS.hlsl
- *	@Brief	バーテックスシェーダー
+ *	@File	NormalPS.hlsl
+ *	@Brief	ピクセルシェーダー
  *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
