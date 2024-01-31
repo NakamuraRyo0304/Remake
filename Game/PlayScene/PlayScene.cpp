@@ -8,7 +8,7 @@
 #include "pch.h"
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
-#include "Game/Editor/System/WorldMouse/WorldMouse.h"
+#include "Game/Common/WorldMouse/WorldMouse.h"
 //#include "Game/PlayScene/System/UI_Title/UI_Title.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"

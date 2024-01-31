@@ -6,7 +6,7 @@
  */
 
 #include "pch.h"
-#include "Game/Editor/System/WorldMouse/WorldMouse.h"
+#include "Game/Common/WorldMouse/WorldMouse.h"
 #include "Libraries/UserUtility.h"
 #include "EditorCollision.h"
 

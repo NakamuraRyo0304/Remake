@@ -205,11 +205,11 @@
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
+    <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h" />
     <ClInclude Include="Game\Editor\Editor.h" />
     <ClInclude Include="Game\Editor\Objects\Air\Air.h" />
     <ClInclude Include="Game\Editor\System\EditorCollision\EditorCollision.h" />
     <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h" />
-    <ClInclude Include="Game\Editor\System\WorldMouse\WorldMouse.h" />
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\IScene\IScene.h" />
     <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h" />
@@ -270,11 +270,11 @@
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
+    <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp" />
     <ClCompile Include="Game\Editor\Editor.cpp" />
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp" />
     <ClCompile Include="Game\Editor\System\EditorCollision\EditorCollision.cpp" />
     <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp" />
-    <ClCompile Include="Game\Editor\System\WorldMouse\WorldMouse.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
     <ClCompile Include="Game\IScene\IScene.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp" />
