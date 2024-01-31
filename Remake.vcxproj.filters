@@ -140,9 +140,6 @@
     <Filter Include="Libraries\Button">
       <UniqueIdentifier>{c3c56367-d5ae-4056-94c5-c716410d2e43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Shaders\DisplayEffects\Particle">
-      <UniqueIdentifier>{713ad622-9583-40ac-bf1a-363f96798494}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Textures\Effects">
       <UniqueIdentifier>{d59574c2-fc61-4a44-a882-200da9e1ae34}</UniqueIdentifier>
     </Filter>
@@ -248,9 +245,6 @@
     <Filter Include="Game\Scenes\Editor\System\UI_Editor">
       <UniqueIdentifier>{21b4488b-3045-4f71-a770-9859ab81a8d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scenes\Editor\System\WorldMouse">
-      <UniqueIdentifier>{e824eab9-8670-45da-8298-3339450ce206}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Cameras\EditorCamera">
       <UniqueIdentifier>{a9215648-0455-43df-9998-ce2380baac8b}</UniqueIdentifier>
     </Filter>
@@ -268,6 +262,39 @@
     </Filter>
     <Filter Include="Libraries\DiaLog">
       <UniqueIdentifier>{3903a394-bba0-4336-bc8c-371e53b16247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene">
+      <UniqueIdentifier>{0d262490-73a8-42f6-8f86-ebcdda0b302a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\System">
+      <UniqueIdentifier>{e3393cea-0ba0-4131-8704-b557deb0986c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects">
+      <UniqueIdentifier>{9df0a1b4-c771-40b5-a239-172baabcca26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects\Sky_Play">
+      <UniqueIdentifier>{651deb3c-e72a-4e56-9170-1bc06d816d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Normal">
+      <UniqueIdentifier>{04dfc141-398d-4f34-acdd-1246a2a15b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects\Player">
+      <UniqueIdentifier>{a427642f-6c2c-4f65-9712-cce71ba48eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Models\Player">
+      <UniqueIdentifier>{30990e30-a863-4e38-b862-b43b494d42dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Models\Block">
+      <UniqueIdentifier>{59806a78-1c28-44cb-970e-c3bf1f2a1a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects\Player\Parts">
+      <UniqueIdentifier>{9e6671f3-6c2b-46b7-974a-84f827247d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\WorldMouse">
+      <UniqueIdentifier>{9d84454e-0654-433b-b636-602f6a18182a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\System\StageCollision">
+      <UniqueIdentifier>{9eaa7601-05a7-4ec0-85fe-5fdccaa32dfe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -436,9 +463,6 @@
     <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h">
       <Filter>Game\Scenes\Editor\System\UI_Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Editor\System\WorldMouse\WorldMouse.h">
-      <Filter>Game\Scenes\Editor\System\WorldMouse</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h">
       <Filter>Game\Cameras\EditorCamera</Filter>
     </ClInclude>
@@ -450,6 +474,24 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
       <Filter>Libraries\DiaLog</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\PlayScene.h">
+      <Filter>Game\Scenes\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h">
+      <Filter>Game\Scenes\PlayScene\Objects\Sky_Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Player\Player.h">
+      <Filter>Game\Scenes\PlayScene\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h">
+      <Filter>Game\Scenes\PlayScene\Objects\Player\Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h">
+      <Filter>Game\Common\WorldMouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h">
+      <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -600,9 +642,6 @@
     <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp">
       <Filter>Game\Scenes\Editor\System\UI_Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Editor\System\WorldMouse\WorldMouse.cpp">
-      <Filter>Game\Scenes\Editor\System\WorldMouse</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp">
       <Filter>Game\Cameras\EditorCamera</Filter>
     </ClCompile>
@@ -614,6 +653,24 @@
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
       <Filter>Libraries\DiaLog</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\PlayScene.cpp">
+      <Filter>Game\Scenes\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp">
+      <Filter>Game\Scenes\PlayScene\Objects\Sky_Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Player\Player.cpp">
+      <Filter>Game\Scenes\PlayScene\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp">
+      <Filter>Game\Scenes\PlayScene\Objects\Player\Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp">
+      <Filter>Game\Common\WorldMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp">
+      <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -728,9 +785,6 @@
     <None Include="Resources\DebugModels\face.cmo">
       <Filter>Resources\DebugModels</Filter>
     </None>
-    <None Include="Resources\Shaders\Particle\Particle.hlsli">
-      <Filter>Resources\Shaders\DisplayEffects\Particle</Filter>
-    </None>
     <None Include="Resources\Models\ShineSky.cmo">
       <Filter>Resources\Models</Filter>
     </None>
@@ -740,20 +794,29 @@
     <None Include="Resources\Models\Bird.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Models\Sand.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
     <None Include="Resources\Stages\sample1.json">
       <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
     </None>
-    <None Include="Resources\Models\Cloud.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\Coin.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
     <None Include="Resources\Stages\sample2.json">
       <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
+    </None>
+    <None Include="Resources\Shaders\Normal\Normal.hlsli">
+      <Filter>Resources\Shaders\Normal</Filter>
+    </None>
+    <None Include="Resources\Models\Cloud.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Coin.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Sand.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Head.cmo">
+      <Filter>Resources\Models\Player</Filter>
+    </None>
+    <None Include="Resources\Models\Body.cmo">
+      <Filter>Resources\Models\Player</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -795,14 +858,22 @@
     <FxCompile Include="Resources\Shaders\Transition\GS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\Particle\ParticleGS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\Particle</Filter>
+    <FxCompile Include="Resources\Shaders\Normal\NormalGS.hlsl">
+      <Filter>Resources\Shaders\Normal</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\Particle\ParticlePS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\Particle</Filter>
+    <FxCompile Include="Resources\Shaders\Normal\NormalPS.hlsl">
+      <Filter>Resources\Shaders\Normal</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\Particle\ParticleVS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\Particle</Filter>
+    <FxCompile Include="Resources\Shaders\Normal\NormalVS.hlsl">
+      <Filter>Resources\Shaders\Normal</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="..\Body.fbx">
+      <Filter>Resources\Models\Player</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="..\Head.fbx">
+      <Filter>Resources\Models\Player</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>

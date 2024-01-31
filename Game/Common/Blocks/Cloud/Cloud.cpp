@@ -18,7 +18,7 @@ const float Cloud::ROTATE_SPEED = 15.0f;        // 回転速度
 // コンストラクタ
 //==============================================================================
 Cloud::Cloud(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Cloud.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/Cloud.cmo", L"Resources/Models", position)
 	, is_hit{ false }			// 衝突フラグ
 	, is_arrive{ false }		// 到着フラグ
     , m_arrivePosition{}    	// 到着座標
@@ -31,6 +31,7 @@ Cloud::Cloud(SimpleMath::Vector3 position)
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One * 0.5f);
+    SetInitialScale(GetScale());
 
 	// 到着座標
 	m_arrivePosition = GetInitialPosition() + SimpleMath::Vector3::UnitY;

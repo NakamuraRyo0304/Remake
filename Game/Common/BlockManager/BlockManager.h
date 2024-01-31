@@ -90,15 +90,6 @@ public:
 
 public:
 
-	/// <summary>
-	/// 衝突通知を送る
-	/// </summary>
-	/// <param name="id">ブロックのID</param>
-	/// <param name="hit">設定　接触時：True/非接触時：False</param>
-	/// <param name="index">衝突したオブジェクト番号(-1で全通知)</param>
-	/// <returns>なし</returns>
-	void NotificateHit(const ID& id, const bool& hit, const int& index);
-
 	// ステージパスを設定
 	void SetStagePath(const wchar_t* path) { m_stagePath = path; }
 

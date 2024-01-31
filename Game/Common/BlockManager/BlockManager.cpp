@@ -147,26 +147,6 @@ void BlockManager::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMa
 }
 
 //==============================================================================
-// 衝突通知を送る
-//==============================================================================
-void BlockManager::NotificateHit(const ID& id, const bool& hit, const int& index)
-{
-	if (id == ID::Obj_Sand && index >= 0 && index < m_sands.size())
-		m_sands[index]->NotificateHit(hit);
-	if (id == ID::Obj_Cloud && index >= 0 && index < m_clouds.size())
-		m_clouds[index]->NotificateHit(hit);
-	if (id == ID::Obj_Coin && index >= 0 && index < m_coins.size())
-		m_coins[index]->NotificateHit(hit);
-
-
-	// プレイ時はスキップ
-	if (is_playing) return;
-
-	if (id == ID::Obj_Air && index >= 0 && index < m_air.size())
-		m_air[index]->NotificateHit(hit);
-}
-
-//==============================================================================
 // ワイヤーフレームを設定
 //==============================================================================
 void BlockManager::SetWireFrame(bool frame)

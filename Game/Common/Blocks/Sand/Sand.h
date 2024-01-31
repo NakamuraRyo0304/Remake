@@ -16,11 +16,6 @@
 
 class Sand : public IGameObject
 {
-private:
-
-	// Õ“Ëƒtƒ‰ƒO
-	bool is_hit;
-
 public:
 
 	/// <summary>
@@ -47,11 +42,6 @@ public:
 	/// <returns>‚È‚µ</returns>
 	void Draw(DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		ShaderLambda option = nullptr) override;
-
-public:
-
-	// Õ“Ë‚ğ’Ê’m‚·‚é
-	void NotificateHit(const bool& is) { is_hit = is; }
 
 };
 

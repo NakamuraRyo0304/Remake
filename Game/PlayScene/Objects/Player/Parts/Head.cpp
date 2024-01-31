@@ -1,40 +1,38 @@
 /*
- *	@File	Sand.cpp
- *	@Brief	砂ブロック。
- *	@Date	2023-01-27
+ *	@File	Head.cpp
+ *	@Brief	プレイヤー頭。
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
-#include "Libraries/UserUtility.h"
-#include "Sand.h"
+#include "Head.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
 
-
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Sand::Sand(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models", position)
+Head::Head()
+	: IGameObject(L"Resources/Models/Head.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Obj_Sand);
-	SetWeight(1.0f);
+	SetID(ID::Obj_Player);
+	SetWeight(2.0f);
 
-	SetPosition(SimpleMath::Vector3(position));
+	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetScale(SimpleMath::Vector3::One);
 	SetInitialScale(GetScale());
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Sand::~Sand()
+Head::~Head()
 {
 	ReleaseModel();
 }
@@ -42,7 +40,7 @@ Sand::~Sand()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Sand::Update()
+void Head::Update()
 {
 	// マトリクスを作成
 	CreateWorldMatrix();
@@ -51,8 +49,9 @@ void Sand::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Sand::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Head::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), no_use_here);
+	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
+	GetModel()->Draw(_context, states, _scale * GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
 }

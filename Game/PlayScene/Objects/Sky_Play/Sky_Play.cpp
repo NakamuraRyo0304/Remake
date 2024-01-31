@@ -1,40 +1,50 @@
 /*
- *	@File	Sand.cpp
- *	@Brief	砂ブロック。
- *	@Date	2023-01-27
+ *	@File	Sky_Play.cpp
+ *	@Brief	スカイドームオブジェクト。
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
-#include "Libraries/UserUtility.h"
-#include "Sand.h"
+#include "Sky_Play.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-
+const float Sky_Play::ROTATE_SPEED = 0.5f;
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Sand::Sand(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models", position)
+Sky_Play::Sky_Play()
+	: IGameObject(L"Resources/Models/ShineSky.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Obj_Sand);
-	SetWeight(1.0f);
+	SetID(ID::Back_Sky);
+	SetWeight(NON_WEIGHT);
 
-	SetPosition(SimpleMath::Vector3(position));
+	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetScale(SimpleMath::Vector3::One);
 	SetInitialScale(GetScale());
+
+	// 自己発光
+	GetModel()->UpdateEffects([](IEffect* effect)
+		{
+			auto _lights = dynamic_cast<IEffectLights*>(effect);
+			if (_lights)
+			{
+				_lights->SetAmbientLightColor(Colors::White);
+			}
+		}
+	);
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Sand::~Sand()
+Sky_Play::~Sky_Play()
 {
 	ReleaseModel();
 }
@@ -42,8 +52,13 @@ Sand::~Sand()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Sand::Update()
+void Sky_Play::Update()
 {
+	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+
+	// 回転
+	SetRotate(SimpleMath::Vector3(0.0f,_timer * ROTATE_SPEED, 0.0f));
+
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
@@ -51,8 +66,8 @@ void Sand::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Sand::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Sky_Play::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), no_use_here);
+	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
 }

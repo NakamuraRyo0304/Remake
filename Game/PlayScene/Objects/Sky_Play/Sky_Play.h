@@ -1,38 +1,35 @@
 /*
- *	@File	Coin.h
- *	@Brief	コインブロック。
- *	@Date	2023-01-27
+ *	@File	Sky_Play.h
+ *	@Brief	スカイドームオブジェクト。
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef COIN
-#define COIN
+#ifndef SKY_PLAY
+#define SKY_PLAY
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Coin : public IGameObject
+class Sky_Play : public IGameObject
 {
 private:
 
-	// 衝突フラグ
-	bool is_hit;
-
-	// アクティブフラグ
-	bool is_active;
+	// 回転速度
+	static const float ROTATE_SPEED;
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="position">生成座標</param>
+	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	Coin(DirectX::SimpleMath::Vector3 position);
-	~Coin();
+	Sky_Play();
+	~Sky_Play();
 
 	/// <summary>
 	/// 更新処理
@@ -51,14 +48,6 @@ public:
 	void Draw(DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		ShaderLambda option = nullptr) override;
 
-public:
-
-	// アクティブフラグを切り替える
-	void SetActive(const bool flag) { is_active = flag; }
-
-	// 衝突通知
-	void SetHitFlag(bool isHit) { is_hit = isHit; }
-
 };
 
-#endif // COIN
+#endif // SKY_PLAY

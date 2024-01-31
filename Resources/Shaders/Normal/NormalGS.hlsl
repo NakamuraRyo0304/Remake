@@ -1,11 +1,11 @@
 /*
- *	@File	ParticleGS.hlsl
- *	@Brief	パーティクルのジオメトリシェーダー
- *	@Date	2023-01-21
+ *	@File	NormalGS.hlsl
+ *	@Brief	ジオメトリシェーダー
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
-#include "Particle.hlsli"
+#include "Normal.hlsli"
 
 static const int VNUM = 4;
 
@@ -23,8 +23,6 @@ void main(point PS_INPUT input[1], inout TriangleStream<PS_INPUT> output)
 	for (int i = 0; i < VNUM; i++)
 	{
 		PS_INPUT element;
-
-		float4 res = offset_array[i];
 
 		element.Pos =input[0].Pos + mul(offset_array[i]* input[0].Tex.x, World);
 

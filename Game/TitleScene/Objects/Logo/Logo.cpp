@@ -29,6 +29,7 @@ Logo::Logo()
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One * MODEL_SCALE);
+	SetInitialScale(GetScale());
 }
 
 //==============================================================================

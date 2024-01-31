@@ -42,7 +42,8 @@ private:
 	DirectX::SimpleMath::Vector3 m_position;		// 現在の座標
 	DirectX::SimpleMath::Vector3 m_initialPosition;	// 初期の座標
 	// ---スケール---
-	DirectX::SimpleMath::Vector3 m_scale;
+	DirectX::SimpleMath::Vector3 m_scale;			// 現在のスケール
+	DirectX::SimpleMath::Vector3 m_initialScale;	// 初期のスケール
 	// ---回転---
 	DirectX::SimpleMath::Vector3 m_rotate;
 
@@ -61,9 +62,11 @@ public:
 	/// </summary>
 	/// <param name="mpath">モデルパス</param>
 	/// <param name="dpath">ディレクトリパス</param>
+	/// <param name="pos">初期位置</param>
 	/// <returns>なし</returns>
-	IGameObject(const wchar_t* mpath, const wchar_t* dpath);
-	~IGameObject();
+	IGameObject(const wchar_t* mpath, const wchar_t* dpath,
+		DirectX::SimpleMath::Vector3 pos = DirectX::SimpleMath::Vector3::Zero);
+	~IGameObject() = default;
 
 	/// <summary>
 	/// 更新処理
@@ -96,6 +99,10 @@ public:
 	const DirectX::SimpleMath::Vector3& GetScale() { return m_scale; }
 	// スケールを設定 param:: scale | 指定スケール
 	void SetScale(const DirectX::SimpleMath::Vector3& scale) { m_scale = scale; }
+	// 初期スケールを取得
+	const DirectX::SimpleMath::Vector3& GetInitialScale() { return m_initialScale; }
+	// 初期スケールを設定 param:: scale | 指定スケール
+	void SetInitialScale(const DirectX::SimpleMath::Vector3& scale) { m_initialScale = scale; }
 
 	// 回転を取得
 	const DirectX::SimpleMath::Vector3& GetRotate() { return m_rotate; }

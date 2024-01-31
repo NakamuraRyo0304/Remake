@@ -1,11 +1,11 @@
 /*
- *	@File	ParticleVS.hlsl
- *	@Brief	パーティクルのバーテックスシェーダー
- *	@Date	2023-01-21
+ *	@File	NormalPS.hlsl
+ *	@Brief	ピクセルシェーダー
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
-#include "Particle.hlsli"
+#include "Normal.hlsli"
 
 Texture2D tex : register(t0);
 SamplerState samLinear : register(s0);

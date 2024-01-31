@@ -1,7 +1,7 @@
 /*
- *	@File	Particle.hlsl
- *	@Brief	パーティクル
- *	@Date	2023-01-21
+ *	@File	Normal.hlsl
+ *	@Brief	そのまま出力する
+ *	@Date	2024-01-30
  *  @Author NakamuraRyo
  */
 
@@ -11,7 +11,6 @@ cbuffer ConstBuffer	: register(b0)
 	matrix World;
 	matrix View;
 	matrix Proj;
-	float4 Timer;
 };
 
 // 頂点シェーダーのインプット
