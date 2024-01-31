@@ -53,11 +53,11 @@ public:
 
 public:
 
-	// 衝突を通知する
-	void NotificateHit(const bool& is) { is_hit = is; }
-
 	// アクティブフラグを切り替える
 	void SetActive(const bool flag) { is_active = flag; }
+
+	// 衝突通知
+	void SetHitFlag(bool isHit) { is_hit = isHit; }
 
 };
 

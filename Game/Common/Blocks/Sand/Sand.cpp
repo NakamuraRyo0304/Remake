@@ -19,7 +19,6 @@
 //==============================================================================
 Sand::Sand(SimpleMath::Vector3 position)
 	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models", position)
-	, is_hit{ false }
 {
 	CreateModel();
 	SetID(ID::Obj_Sand);

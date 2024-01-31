@@ -66,7 +66,7 @@ public:
 	/// <returns>‚È‚µ</returns>
 	IGameObject(const wchar_t* mpath, const wchar_t* dpath,
 		DirectX::SimpleMath::Vector3 pos = DirectX::SimpleMath::Vector3::Zero);
-	~IGameObject();
+	~IGameObject() = default;
 
 	/// <summary>
 	/// XVˆ—

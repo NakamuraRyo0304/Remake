@@ -293,6 +293,9 @@
     <Filter Include="Game\Common\WorldMouse">
       <UniqueIdentifier>{9d84454e-0654-433b-b636-602f6a18182a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\PlayScene\System\StageCollision">
+      <UniqueIdentifier>{9eaa7601-05a7-4ec0-85fe-5fdccaa32dfe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -487,6 +490,9 @@
     <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h">
       <Filter>Game\Common\WorldMouse</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h">
+      <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -662,6 +668,9 @@
     </ClCompile>
     <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp">
       <Filter>Game\Common\WorldMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp">
+      <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

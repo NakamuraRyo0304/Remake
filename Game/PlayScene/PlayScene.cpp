@@ -9,6 +9,8 @@
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/Common/WorldMouse/WorldMouse.h"
+#include "Game/Common/BlockManager/BlockManager.h"
+#include "Game/PlayScene/System/StageCollision/StageCollision.h"
 //#include "Game/PlayScene/System/UI_Title/UI_Title.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
@@ -80,8 +82,16 @@ void PlayScene::Update()
 		// 追跡パスを追加
 		if (_input->GetMouseTrack()->leftButton == MouseClick::PRESSED)
 		{
-			m_player->PushBackFollowPath(m_worldMouse->GetPosition());
+			SimpleMath::Vector3 _followPath = m_worldMouse->GetPosition();
+			_followPath.y = m_player->GetPosition().y;
+			m_player->PushBackFollowPath(_followPath);
 		}
+	}
+
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+	{
+		m_player->ResetGoalPosition();
+		m_player->SetPosition({ 1.0f,0.5f,1.0f });
 	}
 
 	// カメラの更新
@@ -94,8 +104,14 @@ void PlayScene::Update()
 	m_sky->SetPosition(m_adminCamera->GetPosition());
 	m_sky->Update();
 
+	// ブロックの更新
+	m_blockManager->Update();
+
 	// プレイヤーの更新
 	m_player->Update();
+
+	// 当たり判定の更新
+	m_stageCollision->Update(m_player.get(), m_blockManager.get());
 }
 
 //==============================================================================
@@ -115,6 +131,9 @@ void PlayScene::Draw()
 
 	// 空の描画
 	m_sky->Draw(*_states, _view, _projection);
+
+	// ブロックの描画
+	m_blockManager->Draw(*_states, _view, _projection);
 
 	// プレイヤーの描画
 	m_player->Draw(*_states, _view, _projection);
@@ -140,6 +159,8 @@ void PlayScene::Finalize()
 	m_sky.reset();
 	m_player.reset();
 	m_worldMouse.reset();
+	m_blockManager.reset();
+	m_stageCollision.reset();
 }
 
 //==============================================================================
@@ -161,6 +182,12 @@ void PlayScene::CreateWDResources()
 
 	// ワールドマウス作成
 	m_worldMouse = std::make_unique<WorldMouse>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
+
+	// ブロックマネージャ作成(仮でサンプル１)
+	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+
+	// ステージコリジョン作成
+	m_stageCollision = std::make_unique<StageCollision>();
 }
 
 //==============================================================================
@@ -172,6 +199,10 @@ void PlayScene::SetSceneValues()
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
 	m_adminCamera->SetEasing(false);	// 補間を切る
+
+	// ブロックの初期設定
+	m_blockManager->SetPlay(true);
+	m_blockManager->Initialize();
 }
 
 //==============================================================================

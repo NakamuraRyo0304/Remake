@@ -26,6 +26,12 @@ private:
 	// 目的地キュー
 	std::vector<DirectX::SimpleMath::Vector3> m_goalPoints;
 
+	// 移動量
+	DirectX::SimpleMath::Vector3 m_velocity;
+
+	// 移動ギブアップタイム
+	float m_giveUpTime;
+
 	// 頭
 	std::unique_ptr<Head> m_head;
 
@@ -42,6 +48,9 @@ private:
 
 	// 到着範囲
 	static const float ARRIVE_RADIUS;
+
+	// 目的地到着の諦め時間
+	static const float GIVEUP_TIME;
 
 public:
 
@@ -77,6 +86,8 @@ public:
 
 	// 現在格納しているパスの数を取得
 	const std::vector<DirectX::SimpleMath::Vector3>& GetGoalPoints() { return m_goalPoints; }
+	// 格納しているパスを全削除
+	void ResetGoalPosition() { m_goalPoints.clear(); }
 };
 
 #endif // PLAYER

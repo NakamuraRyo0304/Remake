@@ -15,7 +15,9 @@
 #include "Game/IScene/IScene.h"
 
 class AdminCamera;
+class BlockManager;
 class Sky_Play;
+class StageCollision;
 class Player;
 class WorldMouse;
 class PlayScene final : public IScene
@@ -36,6 +38,12 @@ private:
 
 	// ワールドマウス
 	std::unique_ptr<WorldMouse> m_worldMouse;
+
+	// ブロックマネージャ
+	std::unique_ptr<BlockManager> m_blockManager;
+
+	// ステージの当たり判定
+	std::unique_ptr<StageCollision> m_stageCollision;
 
 public:
 	/// <summary>

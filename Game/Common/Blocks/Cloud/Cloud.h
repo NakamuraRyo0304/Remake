@@ -61,8 +61,8 @@ public:
 
 public:
 
-	// Õ“Ë‚ğ’Ê’m‚·‚é
-	void NotificateHit(const bool& is) { is_hit = is; }
+	// Õ“Ë’Ê’m
+	void SetHitFlag(bool isHit) { is_hit = isHit; }
 
 };
 
