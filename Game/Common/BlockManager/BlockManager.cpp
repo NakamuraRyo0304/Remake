@@ -43,6 +43,9 @@ BlockManager::~BlockManager()
 //==============================================================================
 void BlockManager::Initialize()
 {
+	// 一度データを削除
+	ClearBlocks();
+
 	// エディタモードの時、判定用エアーで埋める
 	if (is_playing == false)
 	{
@@ -195,8 +198,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& sand : m_sands)
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-
-		// 同じならスキップ
 		if (sand->GetID() == ID::Obj_Sand) continue;
 
 		// 名前に対応したブロックに変更する
@@ -206,8 +207,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& cloud : m_clouds)
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-
-		// 同じならスキップ
 		if (cloud->GetID() == ID::Obj_Cloud) continue;
 
 		// 名前に対応したブロックに変更する
@@ -217,8 +216,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& coin : m_coins)
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-
-		// 同じならスキップ
 		if (coin->GetID() == ID::Obj_Coin) continue;
 
 		// 名前に対応したブロックに変更する
@@ -228,8 +225,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& air : m_air)
 	{
 		if (UserUtility::IsNull(air.get())) continue;
-
-		// 同じならスキップ
 		if (air->GetID() == ID::Obj_Air) continue;
 
 		// 名前に対応したブロックに変更する
@@ -343,6 +338,8 @@ void BlockManager::OutputStage()
 
 	// オブジェクト配列
 	std::vector<IGameObject*> _objects;
+
+	// 書き出し用配列にセットする
 	for (auto& sand : m_sands)
 	{
 		_objects.push_back(sand.get());
@@ -356,22 +353,38 @@ void BlockManager::OutputStage()
 		_objects.push_back(coin.get());
 	}
 
-	Json _json;
-	int _index = 0;
-
-	// _objectに格納されたブロック分出力する
-	while (_index < _objects.size())
+	// 重複しているデータを単一データにする
+	std::unordered_map<std::string, Json> _uEntry;
+	for (auto& obj : _objects)
 	{
-		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
-		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
+		std::string _id = GetBlockID(obj->GetID());
+		SimpleMath::Vector3 _pos = obj->GetInitialPosition();
 
-		_json[_index]["Position"]["X"] = _pos.x;
-		_json[_index]["Position"]["Y"] = _pos.y;
-		_json[_index]["Position"]["Z"] = _pos.z;
-		_index++;
+		// ブロックの種類と初期位置から一意なキーを生成
+		// ID_X_Y_Zという単一キーを作成する(例：Sand_1_2_1,Cloud_3_3_7)
+		std::string _uKey = _id + "_" + std::to_string(_pos.x) + "_"
+			+ std::to_string(_pos.y) + "_" + std::to_string(_pos.z);
+
+		// キーが存在しない場合、エントリにデータを追加
+		if (_uEntry.find(_uKey) == _uEntry.end())
+		{
+			_uEntry[_uKey]["Path"] = _id;
+			_uEntry[_uKey]["Position"]["X"] = _pos.x;
+			_uEntry[_uKey]["Position"]["Y"] = _pos.y;
+			_uEntry[_uKey]["Position"]["Z"] = _pos.z;
+		}
 	}
 
-	// データを書き出す
-	std::string _output = _json.dump(2);
-	m_jsonHelper->Write(_output);
+	// 最終出力
+	Json _output;
+
+	// ユニークエントリを最終出力に登録する
+	for (const auto& entry : _uEntry)
+	{
+		_output.push_back(entry.second);	// second = Json型データ
+	}
+
+	// インデントをそろえて書き出し
+	std::string _str = _output.dump(2);
+	m_jsonHelper->Write(_str);
 }

@@ -74,6 +74,25 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
             coin->SetActive(false);
         }
     }
+    for (auto& cloud : blocks->GetCloudBlock())
+    {
+        SimpleMath::Vector3 _playerPos = player->GetPosition();
+        SimpleMath::Vector3 _playerScale = player->GetScale();
+        SimpleMath::Vector3 _cloudPos = cloud->GetPosition();
+        SimpleMath::Vector3 _cloudScale = cloud->GetScale();
+
+        // 境界球による当たり判定のカリング
+        if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _cloudPos)) continue;
+
+        // 当たり判定の実行：プレイヤー・雲
+        m_side = IsCollision(&_playerPos, _cloudPos, _playerScale, _cloudScale, true);
+
+        // 固有処理：雲の移動・プレイヤーの押し出し
+        if (m_side == Side::Up)
+        {
+            cloud->SetHitFlag(true);
+        }
+    }
 }
 
 //==============================================================================

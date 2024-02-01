@@ -326,6 +326,7 @@
     <Image Include="Resources\DebugModels\Floor.dds" />
     <Image Include="Resources\Effects\Fire.png" />
     <Image Include="Resources\Effects\Fog.png" />
+    <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloudButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds" />
@@ -375,6 +376,7 @@
     <None Include="Resources\Shaders\Transition\Transition.hlsli" />
     <None Include="Resources\Stages\sample1.json" />
     <None Include="Resources\Stages\sample2.json" />
+    <None Include="Resources\Stages\sample3.json" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\DisplayEffects\Brown\BrownPS.hlsl">

@@ -25,6 +25,7 @@ public:
 		Sand_bn,
 		Cloud_bn,
 		Coin_bn,
+		Air_bn,
 
 		Length
 	};

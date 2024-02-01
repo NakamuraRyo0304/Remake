@@ -248,7 +248,7 @@ namespace UserUtility
 	}
 
 	/// <summary>
-	/// std::vectorのイテレータを返す
+	/// std::vectorの選択した要素を削除する
 	/// </summary>
 	/// <param name="vec">ベクター配列</param>
 	/// <param name="val">削除したい要素</param>
@@ -265,7 +265,6 @@ namespace UserUtility
 			}
 		}
 	}
-
 
 	/// <summary>
 	/// 次の要素にインクリメントする

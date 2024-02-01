@@ -59,23 +59,6 @@ void Cloud::Update()
     {
         // 上昇させる
         SetPosition(UserUtility::Lerp(GetPosition(), m_arrivePosition, 0.1f));
-
-        // 到達したらフラグをOFF
-        if (std::abs(GetPosition().y - m_arrivePosition.y) < 0.01f)
-        {
-            is_arrive = true;
-        }
-    }
-    else
-    {
-        // 降下させる
-        SetPosition(UserUtility::Lerp(GetPosition(), GetInitialPosition(), 0.1f));
-
-        // 元の位置に戻ったらフラグをOFF
-        if (std::abs(GetPosition().y - GetInitialPosition().y) < 0.01f)
-        {
-            is_arrive = false;
-        }
     }
 
     // マトリクスを作成

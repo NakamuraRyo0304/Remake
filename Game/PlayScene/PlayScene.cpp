@@ -98,7 +98,7 @@ void PlayScene::Update()
 	m_adminCamera->Update();
 
 	// ワールドマウスの更新
-	m_worldMouse->Update(0.1f);
+	m_worldMouse->Update();
 
 	// スカイ球の更新(カメラを中心にスカイ球をセットする　描画切れを防ぐ)
 	m_sky->SetPosition(m_adminCamera->GetPosition());

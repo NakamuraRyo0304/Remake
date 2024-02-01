@@ -37,9 +37,9 @@ public:
 	/// <summary>
 	/// XVˆ—
 	/// </summary>
-	/// <param name="moveSpeed">Y²‚ÌˆÚ“®‘¬“x</param>
+	/// <param name="ˆø”–³‚µ"></param>
 	/// <returns>‚È‚µ</returns>
-	void Update(const float& moveSpeed);
+	void Update();
 
 	/// <summary>
 	/// •`‰æˆ—

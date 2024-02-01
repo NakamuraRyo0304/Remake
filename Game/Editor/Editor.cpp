@@ -87,7 +87,7 @@ void Editor::Update()
 	SetDrawObject();
 
 	// ワールドマウスを更新
-	m_worldMouse->Update(0.1f);
+	m_worldMouse->Update();
 	m_editorCollision->SetPosition(m_worldMouse->GetPosition());
 
 	// エディタコリジョンの更新
@@ -231,4 +231,6 @@ void Editor::SetDrawObject()
 		m_selectionID = ID::Obj_Cloud;
 	if (m_ui->IsClickButton(BN::Coin_bn))
 		m_selectionID = ID::Obj_Coin;
+	if (m_ui->IsClickButton(BN::Air_bn))
+		m_selectionID = ID::Obj_Air;
 }

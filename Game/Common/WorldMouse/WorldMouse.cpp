@@ -37,7 +37,7 @@ WorldMouse::~WorldMouse()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void WorldMouse::Update(const float& moveSpeed)
+void WorldMouse::Update()
 {
     // レイの更新
     m_ray->Update();
@@ -62,7 +62,7 @@ void WorldMouse::Update(const float& moveSpeed)
 
     // 座標を設定(線形補間移動)
     m_position = m_ray->GetConvertedPosition();
-    m_position.y = m_height;
+    m_position.y = static_cast<float>(m_height);
 }
 
 //==============================================================================
