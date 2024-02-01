@@ -13,7 +13,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const float EditorCollision::HIT_RADIUS = 1.0f;		// 当たり判定の半径
+const float EditorCollision::HIT_RADIUS = 0.5f;		// 当たり判定の半径
 
 //==============================================================================
 // コンストラクタ
@@ -39,7 +39,7 @@ void EditorCollision::Update(IGameObject* object, ID setting)
 	auto _mouse = Mouse::Get().GetState();
 
 	// ワールドマウスの更新
-	m_worldMouse->Update();
+	m_worldMouse->Update(0.01f);
 
 	// nullだったら処理をしない
 	if (UserUtility::IsNull(object)) return;

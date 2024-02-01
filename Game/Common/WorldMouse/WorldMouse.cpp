@@ -34,29 +34,34 @@ WorldMouse::~WorldMouse()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void WorldMouse::Update()
+void WorldMouse::Update(const float& moveSpeed)
 {
+    float _fps = static_cast<float>(DX::StepTimer::GetInstance().GetFramesPerSecond());
+
     // レイの更新
     m_ray->Update();
 
-    // マウストラックの取得
-    auto& _input = Input::GetInstance()->GetMouseTrack();
+    // キーボード・マウスの取得
+    auto _key = Keyboard::Get().GetState();
+    auto _mouse = Mouse::Get().GetState();
 
-    // 右クリックで上昇
-    if (_input->rightButton == Mouse::ButtonStateTracker::PRESSED)
+    // 右クリック＋左シフトで降下する
+    if (_mouse.rightButton && _key.LeftShift)
     {
-        m_height += 0.001f;
+        m_height -= moveSpeed * _fps;
     }
-    if (_input->middleButton == Mouse::ButtonStateTracker::PRESSED)
+    // 右クリックで上昇
+    else if (_mouse.rightButton)
     {
-        m_height -= 0.001f;
+        m_height += moveSpeed * _fps;
     }
 
     // クランプ処理
     m_height = UserUtility::Clamp(m_height, 0.0f, 5.0f);
 
     // 座標を設定
-    m_position = m_ray->GetConvertedPosition() + SimpleMath::Vector3::UnitY * m_height;
+    m_position =
+        m_ray->GetConvertedPosition() + SimpleMath::Vector3(0.0f, m_height, 0.0f);
 }
 
 //==============================================================================

@@ -25,6 +25,8 @@ const float Player::GIVEUP_TIME = 120.0f;	// 移動諦めタイムリミット
 Player::Player()
 	: IGameObject(L"Resources/Models/Body.cmo", L"Resources/Models")
 	, m_velocity{}			// 移動量
+	, m_coinNum{ 0 }		// 取得済みコイン枚数
+	, is_fall{ false }		// 落下フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Player);
@@ -106,6 +108,12 @@ void Player::Update()
 		m_giveUpTime = GIVEUP_TIME;
 	}
 
+	// 落下フラグがONの場合、重力をかける
+	if (is_fall)
+	{
+		SetPosition(GetPosition() + SimpleMath::Vector3(0.0f, -0.05f, 0.0f));
+	}
+
 	// マトリクスを計算
 	CreateWorldMatrix();
 
@@ -125,6 +133,7 @@ void Player::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Ma
 	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
 	GetModel()->Draw(_context, states, _scale * GetWorldMatrix(), view, proj, false, no_use_here);
 
+	// これ以降、子パーツの描画を行う
 	m_head->Draw(states, view, proj, no_use_here);
 }
 

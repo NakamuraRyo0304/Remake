@@ -32,6 +32,14 @@ private:
 	// 移動ギブアップタイム
 	float m_giveUpTime;
 
+	// 所有コイン枚数
+	int m_coinNum;
+
+	// 落下フラグ
+	bool is_fall;
+
+private:
+
 	// 頭
 	std::unique_ptr<Head> m_head;
 
@@ -88,6 +96,16 @@ public:
 	const std::vector<DirectX::SimpleMath::Vector3>& GetGoalPoints() { return m_goalPoints; }
 	// 格納しているパスを全削除
 	void ResetGoalPosition() { m_goalPoints.clear(); }
+
+	// コイン枚数を取得
+	const int& GetCoinNum() { return m_coinNum; }
+	// コイン枚数をカウントアップ
+	void CountUpCoins() { m_coinNum++; }
+
+	// 落下フラグを取得
+	const bool& IsFall() { return is_fall; }
+	// 落下フラグを設定
+	void SetFall(const bool& isFall) { is_fall = isFall; }
 };
 
 #endif // PLAYER

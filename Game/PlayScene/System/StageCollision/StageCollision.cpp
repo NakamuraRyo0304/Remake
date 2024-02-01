@@ -34,7 +34,6 @@ StageCollision::~StageCollision()
 //==============================================================================
 void StageCollision::Update(Player* player, BlockManager* blocks)
 {
-    // 砂ブロックの判定
     for (auto& sand : blocks->GetSandBlock())
     {
         SimpleMath::Vector3 _playerPos = player->GetPosition();
@@ -42,12 +41,38 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         SimpleMath::Vector3 _sandPos = sand->GetPosition();
         SimpleMath::Vector3 _sandScale = sand->GetScale();
 
-        // 範囲外で処理をスキップ
+        // 境界球による当たり判定のカリング
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _sandPos)) continue;
 
-        // プレイヤーとブロックの当たり判定を行う
+        // 当たり判定の実行：プレイヤー・砂
         m_side = IsCollision(&_playerPos, _sandPos, _playerScale, _sandScale, true);
+
+        // 固有処理：プレイヤー座標の押し戻し適用・落下の停止
+        player->SetFall(m_side != Side::Up ? true : false);
         player->SetPosition(_playerPos);
+    }
+    for (auto& coin : blocks->GetCoinBlock())
+    {
+        // 非アクティブなら処理しない
+        if (coin->IsActive() == false) continue;
+
+        SimpleMath::Vector3 _playerPos = player->GetPosition();
+        SimpleMath::Vector3 _playerScale = player->GetScale();
+        SimpleMath::Vector3 _coinPos = coin->GetPosition();
+        SimpleMath::Vector3 _coinScale = coin->GetScale();
+
+        // 境界球による当たり判定のカリング
+        if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _coinPos)) continue;
+
+        // 当たり判定の実行：プレイヤー・コイン
+        m_side = IsCollision(&_playerPos, _coinPos, _playerScale, _coinScale, false);
+
+        // 固有処理：コインのカウントアップ
+        if (m_side != Side::None)
+        {
+            player->CountUpCoins();
+            coin->SetActive(false);
+        }
     }
 }
 

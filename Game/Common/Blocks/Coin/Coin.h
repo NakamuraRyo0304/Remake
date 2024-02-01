@@ -53,6 +53,8 @@ public:
 
 public:
 
+	// アクティブフラグを取得
+	bool IsActive() { return is_active; }
 	// アクティブフラグを切り替える
 	void SetActive(const bool flag) { is_active = flag; }
 
