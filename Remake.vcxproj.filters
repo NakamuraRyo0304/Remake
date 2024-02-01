@@ -868,12 +868,4 @@
       <Filter>Resources\Shaders\Normal</Filter>
     </FxCompile>
   </ItemGroup>
-  <ItemGroup>
-    <MeshContentTask Include="..\Body.fbx">
-      <Filter>Resources\Models\Player</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="..\Head.fbx">
-      <Filter>Resources\Models\Player</Filter>
-    </MeshContentTask>
-  </ItemGroup>
 </Project>

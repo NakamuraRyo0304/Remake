@@ -71,7 +71,7 @@ void PlayScene::Update()
 	auto _input = Input::GetInstance();
 
 	// ソフト終了
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::EXIT); }
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
 
 	// UIの更新
 	//m_ui->Update();
@@ -98,7 +98,7 @@ void PlayScene::Update()
 	m_adminCamera->Update();
 
 	// ワールドマウスの更新
-	m_worldMouse->Update();
+	m_worldMouse->Update(0.01f);
 
 	// スカイ球の更新(カメラを中心にスカイ球をセットする　描画切れを防ぐ)
 	m_sky->SetPosition(m_adminCamera->GetPosition());
@@ -224,4 +224,5 @@ void PlayScene::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,150 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetGoalPoints().size());
+	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
 }

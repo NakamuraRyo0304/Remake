@@ -26,6 +26,7 @@ private:
 	// ‚‚³
 	float m_height;
 
+
 public:
 
 	/// <summary>
@@ -40,9 +41,9 @@ public:
 	/// <summary>
 	/// XVˆ—
 	/// </summary>
-	/// <param name="ˆø”–³‚µ"></param>
+	/// <param name="moveSpeed">Y²‚ÌˆÚ“®‘¬“x</param>
 	/// <returns>‚È‚µ</returns>
-	void Update();
+	void Update(const float& moveSpeed);
 
 	/// <summary>
 	/// •`‰æˆ—
