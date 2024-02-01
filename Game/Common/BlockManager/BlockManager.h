@@ -32,6 +32,39 @@ class BlockManager
 {
 private:
 
+	/// <summary>
+	/// ファンクタ
+	/// ソートの優先順位
+	/// </summary>
+	/// <returns>条件に応じたソートプロパティ</returns>
+	struct SortPriority
+	{
+		bool operator()(const Json& a, const Json& b) const
+		{
+			// 優先度①　IDの文字数が短い順にソート
+			if (a["Path"].get<std::string>().length() != b["Path"].get<std::string>().length())
+			{
+				return a["Path"].get<std::string>().length() < b["Path"].get<std::string>().length();
+			}
+
+			// 優先度②　IDが同じ場合、XZ座標の昇順にソート
+			if (a["Path"].get<std::string>() == b["Path"].get<std::string>())
+			{
+				if (a["Position"]["X"] != b["Position"]["X"])
+				{
+					return a["Position"]["X"] < b["Position"]["X"];
+				}
+				if (a["Position"]["Z"] != b["Position"]["Z"])
+				{
+					return a["Position"]["Z"] < b["Position"]["Z"];
+				}
+			}
+
+			// 優先度③　Y座標の昇順にソート
+			return a["Position"]["Y"] < b["Position"]["Y"];
+		}
+	};
+
 	// ブロックオブジェクト
 	std::vector<std::unique_ptr<Sand>> m_sands;
 	std::vector<std::unique_ptr<Cloud>> m_clouds;

@@ -339,19 +339,28 @@ void BlockManager::OutputStage()
 	// オブジェクト配列
 	std::vector<IGameObject*> _objects;
 
+	//==============================================================================
+	// 追加するのはここから>>>
+	//==============================================================================
+
 	// 書き出し用配列にセットする
 	for (auto& sand : m_sands)
 	{
-		_objects.push_back(sand.get());
+		_objects.push_back(sand.get());				// 砂
 	}
 	for (auto& cloud : m_clouds)
 	{
-		_objects.push_back(cloud.get());
+		_objects.push_back(cloud.get());			// 雲
 	}
 	for (auto& coin : m_coins)
 	{
-		_objects.push_back(coin.get());
+		_objects.push_back(coin.get());				// コイン
 	}
+
+
+	//==============================================================================
+	// <<<追加するのはここまで
+	//==============================================================================
 
 	// 重複しているデータを単一データにする
 	std::unordered_map<std::string, Json> _uEntry;
@@ -375,13 +384,22 @@ void BlockManager::OutputStage()
 		}
 	}
 
-	// 最終出力
-	Json _output;
-
-	// ユニークエントリを最終出力に登録する
+	// ユニークエントリをソートして最終出力に登録する
+	std::vector<Json> _sortedEntries;
 	for (const auto& entry : _uEntry)
 	{
-		_output.push_back(entry.second);	// second = Json型データ
+		_sortedEntries.push_back(entry.second);
+	}
+
+	// 文字列が多い・XZ昇順・Y昇順の優先度でソート
+	std::sort(_sortedEntries.begin(), _sortedEntries.end(), SortPriority());
+
+	// 最終出力配列
+	Json _output;
+	// 並び替えたJsonデータを最終出力配列に格納
+	for (const auto& sortedEntry : _sortedEntries)
+	{
+		_output.push_back(sortedEntry);    // second = Json型データ
 	}
 
 	// インデントをそろえて書き出し
