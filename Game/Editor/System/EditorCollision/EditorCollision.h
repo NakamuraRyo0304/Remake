@@ -19,8 +19,8 @@ class EditorCollision
 {
 private:
 
-	// ワールドマウス
-	std::unique_ptr<WorldMouse> m_worldMouse;
+	// 座標
+	DirectX::SimpleMath::Vector3 m_position;
 
 	// ビュー行列・射影行列
 	DirectX::SimpleMath::Matrix m_view, m_projection;
@@ -35,10 +35,9 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="view">ビュー行列</param>
-	/// <param name="proj">射影行列</param>
+	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	EditorCollision(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
+	EditorCollision();
 	~EditorCollision();
 
 	/// <summary>
@@ -49,18 +48,12 @@ public:
 	/// <returns>なし</returns>
 	void Update(IGameObject* object, ID setting);
 
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="view">ビュー行列</param>
-	/// <param name="proj">射影行列</param>
-	/// <returns>なし</returns>
-	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
-
 public:
 
-	// ワールドマウスの座標
-	DirectX::SimpleMath::Vector3 GetWorldMousePosition();
+	// 座標を取得
+	DirectX::SimpleMath::Vector3 GetPosition() { return m_position; }
+	// 座標を設定
+	void SetPosition(const DirectX::SimpleMath::Vector3& pos) { m_position = pos; }
 };
 
 #endif // EDITORCOLLISION

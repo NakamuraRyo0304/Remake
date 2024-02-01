@@ -10,6 +10,7 @@
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/Editor/System/UI_Editor/UI_Editor.h"
 #include "Game/Editor/System/EditorCollision/EditorCollision.h"
+#include "Game/Common/WorldMouse/WorldMouse.h"
 #include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
@@ -39,6 +40,7 @@ Editor::Editor()
 //==============================================================================
 Editor::~Editor()
 {
+	Finalize();
 }
 
 //==============================================================================
@@ -84,6 +86,10 @@ void Editor::Update()
 	// オブジェクトをセットする
 	SetDrawObject();
 
+	// ワールドマウスを更新
+	m_worldMouse->Update(0.1f);
+	m_editorCollision->SetPosition(m_worldMouse->GetPosition());
+
 	// エディタコリジョンの更新
 	UpdateCollisions(m_selectionID);
 }
@@ -100,11 +106,11 @@ void Editor::Draw()
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
-	// エディタコリジョンの描画関連処理
-	m_editorCollision->Draw(_view, _projection);
-
 	// ブロックの描画
 	m_blockManager->Draw(*_states, _view, _projection);
+
+	// ワールドマウスの描画関連を更新
+	m_worldMouse->Draw(_view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -126,6 +132,7 @@ void Editor::Finalize()
 	m_blockManager.reset();
 	m_ui.reset();
 	m_editorCollision.reset();
+	m_worldMouse.reset();
 }
 
 //==============================================================================
@@ -147,8 +154,10 @@ void Editor::CreateWDResources()
 	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
 
 	// エディタコリジョン作成
-	m_editorCollision = std::make_unique<EditorCollision>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
+	m_editorCollision = std::make_unique<EditorCollision>();
 
+	// ワールドマウス作成
+	m_worldMouse = std::make_unique<WorldMouse>();
 }
 
 //==============================================================================
@@ -185,7 +194,7 @@ void Editor::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
 	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
-		m_editorCollision->GetWorldMousePosition().x, m_editorCollision->GetWorldMousePosition().y, m_editorCollision->GetWorldMousePosition().z);
+		m_editorCollision->GetPosition().x, m_editorCollision->GetPosition().y, m_editorCollision->GetPosition().z);
 }
 
 //==============================================================================

@@ -17,14 +17,11 @@ private:
 	// レイ
 	std::unique_ptr<RayCast> m_ray;
 
-	// ビュー行列、射影行列
-	DirectX::SimpleMath::Matrix m_view, m_projection;
-
 	// ワールドマウスの座標
 	DirectX::SimpleMath::Vector3 m_position;
 
 	// 高さ
-	float m_height;
+	int m_height;
 
 
 public:
@@ -32,10 +29,9 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="view">ビュー行列</param>
-	/// <param name="proj">射影行列</param>
+	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	WorldMouse(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
+	WorldMouse();
 	~WorldMouse();
 
 	/// <summary>

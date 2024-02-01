@@ -327,9 +327,6 @@ void BlockManager::ReLoad(const wchar_t* path)
 //==============================================================================
 void BlockManager::OutputStage()
 {
-	// 開けなかったときのために一時保存する
-	std::wstring _tmp = m_stagePath;
-
 	// パスを設定
 	auto _path = m_dialog->GetExpFilePath();
 	if (not UserUtility::IsNull(_path))
@@ -338,7 +335,7 @@ void BlockManager::OutputStage()
 	}
 	else
 	{
-		m_stagePath = _tmp;
+		return;
 	}
 
 	// パスを設定
