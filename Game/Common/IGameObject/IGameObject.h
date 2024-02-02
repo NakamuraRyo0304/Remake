@@ -67,6 +67,13 @@ public:
 	IGameObject(const wchar_t* mpath, const wchar_t* dpath,
 		DirectX::SimpleMath::Vector3 pos = DirectX::SimpleMath::Vector3::Zero);
 	~IGameObject() = default;
+	bool operator==(const IGameObject& other) const
+	{
+		bool _id = m_id == other.m_id;
+		bool _iniPos = m_initialPosition == other.m_initialPosition;
+		bool _weight = m_weight == other.m_weight;
+		return _id && _iniPos && _weight;
+	}
 
 	/// <summary>
 	/// 更新処理
@@ -87,7 +94,7 @@ public:
 
 public:
 	// 座標を取得
-	const DirectX::SimpleMath::Vector3& GetPosition() { return m_position; }
+	const DirectX::SimpleMath::Vector3& GetPosition() const { return m_position; }
 	// 座標を設定 param:: pos | 指定座標
 	void SetPosition(const DirectX::SimpleMath::Vector3& pos) { m_position = pos; }
 	// 初期座標を取得
@@ -96,7 +103,7 @@ public:
 	void SetInitialPosition(const DirectX::SimpleMath::Vector3& pos) { m_initialPosition = pos; }
 
 	// スケールを取得
-	const DirectX::SimpleMath::Vector3& GetScale() { return m_scale; }
+	const DirectX::SimpleMath::Vector3& GetScale() const { return m_scale; }
 	// スケールを設定 param:: scale | 指定スケール
 	void SetScale(const DirectX::SimpleMath::Vector3& scale) { m_scale = scale; }
 	// 初期スケールを取得
@@ -105,21 +112,21 @@ public:
 	void SetInitialScale(const DirectX::SimpleMath::Vector3& scale) { m_initialScale = scale; }
 
 	// 回転を取得
-	const DirectX::SimpleMath::Vector3& GetRotate() { return m_rotate; }
+	const DirectX::SimpleMath::Vector3& GetRotate() const { return m_rotate; }
 	// 回転を設定 param:: rotate | 指定回転
 	void SetRotate(const DirectX::SimpleMath::Vector3& rotate) { m_rotate = rotate; }
 
 	// ワールドマトリクスを作成
 	void CreateWorldMatrix();
 	// ワールドマトリクスを取得
-	const DirectX::SimpleMath::Matrix& GetWorldMatrix() { return m_world; }
+	const DirectX::SimpleMath::Matrix& GetWorldMatrix() const { return m_world; }
 	// 親のマトリクスを取得
 	const DirectX::SimpleMath::Matrix& GetParentMatrix() { return m_parentMatrix; }
 	// 親のマトリクスを設定
 	void SetParentMatrix(const DirectX::SimpleMath::Matrix& matrix) { m_parentMatrix = matrix; }
 
 	// IDを取得
-	const ID& GetID() { return m_id; }
+	const ID& GetID() const { return m_id; }
 	// IDを設定
 	void SetID(const ID& id) { m_id = id; }
 

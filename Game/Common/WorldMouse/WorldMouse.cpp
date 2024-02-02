@@ -12,12 +12,15 @@
 #include "WorldMouse.h"
 
 //==============================================================================
+// エイリアス宣言
+//==============================================================================
+using MOUSE_BUTTON = Mouse::ButtonStateTracker;
+
+//==============================================================================
 // コンストラクタ
 //==============================================================================
-WorldMouse::WorldMouse(SimpleMath::Matrix view, SimpleMath::Matrix proj)
-    : m_view{ view }            // ビュー行列
-    , m_projection{ proj }      // 射影行列
-    , m_position{}              // 座標
+WorldMouse::WorldMouse()
+    : m_position{}              // 座標
     , m_height{}                // Y座標の高さ
 {
     m_ray = std::make_unique<RayCast>();
@@ -34,34 +37,32 @@ WorldMouse::~WorldMouse()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void WorldMouse::Update(const float& moveSpeed)
+void WorldMouse::Update()
 {
-    float _fps = static_cast<float>(DX::StepTimer::GetInstance().GetFramesPerSecond());
-
     // レイの更新
     m_ray->Update();
 
     // キーボード・マウスの取得
     auto _key = Keyboard::Get().GetState();
-    auto _mouse = Mouse::Get().GetState();
+    auto& _mt = Input::GetInstance()->GetMouseTrack();
 
     // 右クリック＋左シフトで降下する
-    if (_mouse.rightButton && _key.LeftShift)
+    if (_mt->rightButton == MOUSE_BUTTON ::PRESSED && _key.LeftShift)
     {
-        m_height -= moveSpeed * _fps;
+        m_height--;
     }
     // 右クリックで上昇
-    else if (_mouse.rightButton)
+    else if (_mt->rightButton == MOUSE_BUTTON::PRESSED)
     {
-        m_height += moveSpeed * _fps;
+        m_height++;
     }
 
     // クランプ処理
-    m_height = UserUtility::Clamp(m_height, 0.0f, 5.0f);
+    m_height = UserUtility::Clamp(m_height, 0, 5);
 
-    // 座標を設定
-    m_position =
-        m_ray->GetConvertedPosition() + SimpleMath::Vector3(0.0f, m_height, 0.0f);
+    // 座標を設定(線形補間移動)
+    m_position = m_ray->GetConvertedPosition();
+    m_position.y = static_cast<float>(m_height);
 }
 
 //==============================================================================

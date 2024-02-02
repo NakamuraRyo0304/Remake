@@ -13,6 +13,7 @@
 // 定数の設定
 //==============================================================================
 const float Cloud::ROTATE_SPEED = 15.0f;        // 回転速度
+const float Cloud::FALL_LIMIT = 180.0f;			// 落下リミット
 
 //==============================================================================
 // コンストラクタ
@@ -22,6 +23,7 @@ Cloud::Cloud(SimpleMath::Vector3 position)
 	, is_hit{ false }			// 衝突フラグ
 	, is_arrive{ false }		// 到着フラグ
     , m_arrivePosition{}    	// 到着座標
+    , m_fallTimer{}				// 落下タイマー
 {
 	CreateModel();
 	SetID(ID::Obj_Cloud);
@@ -35,6 +37,9 @@ Cloud::Cloud(SimpleMath::Vector3 position)
 
 	// 到着座標
 	m_arrivePosition = GetInitialPosition() + SimpleMath::Vector3::UnitY;
+
+	// 落下時間
+	m_fallTimer = 0.0f;
 }
 
 //==============================================================================
@@ -59,24 +64,21 @@ void Cloud::Update()
     {
         // 上昇させる
         SetPosition(UserUtility::Lerp(GetPosition(), m_arrivePosition, 0.1f));
-
-        // 到達したらフラグをOFF
-        if (std::abs(GetPosition().y - m_arrivePosition.y) < 0.01f)
-        {
-            is_arrive = true;
-        }
+		m_fallTimer++;
     }
-    else
-    {
-        // 降下させる
-        SetPosition(UserUtility::Lerp(GetPosition(), GetInitialPosition(), 0.1f));
 
-        // 元の位置に戻ったらフラグをOFF
-        if (std::abs(GetPosition().y - GetInitialPosition().y) < 0.01f)
-        {
-            is_arrive = false;
-        }
-    }
+	// 落下タイマーがリミットを越えたら元に戻す
+	if (m_fallTimer > FALL_LIMIT)
+	{
+		SetPosition(GetInitialPosition());
+
+		// 元の位置に戻ったらタイマーをリセットする
+		if (GetPosition() == GetInitialPosition())
+		{
+			m_fallTimer = 0.0f;
+			is_hit = false;
+		}
+	}
 
     // マトリクスを作成
     CreateWorldMatrix();

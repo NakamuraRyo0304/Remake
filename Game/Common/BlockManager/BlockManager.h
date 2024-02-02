@@ -23,13 +23,49 @@
 //==============================================================================
 // ブロックのインクルード
 //==============================================================================
-#include "../Blocks/Sand/Sand.h"			// 砂ブロック
-#include "../Blocks/Cloud/Cloud.h"			// 雲ブロック
-#include "../Blocks/Coin/Coin.h"			// コインブロック
-#include "../../Editor/Objects/Air/Air.h"	// ステージエディタ用判定ブロック
+#include "../Blocks/Sand/Sand.h"						// 砂ブロック
+#include "../Blocks/Cloud/Cloud.h"						// 雲ブロック
+#include "../Blocks/Coin/Coin.h"						// コインブロック
+#include "../../Editor/Objects/Air/Air.h"				// ステージエディタ用判定ブロック
+#include "../../Editor/Objects/EditChara/EditChara.h"	// ステージエディタ用プレイヤ
 
 class BlockManager
 {
+private:
+
+	/// <summary>
+	/// ファンクタ
+	/// ソートの優先順位
+	/// </summary>
+	/// <returns>条件に応じたソートプロパティ</returns>
+	struct SortPriority
+	{
+		bool operator()(const Json& a, const Json& b) const
+		{
+			// 優先度①　IDの文字数が短い順にソート
+			if (a["Path"].get<std::string>().length() != b["Path"].get<std::string>().length())
+			{
+				return a["Path"].get<std::string>().length() < b["Path"].get<std::string>().length();
+			}
+
+			// 優先度②　IDが同じ場合、XZ座標の昇順にソート
+			if (a["Path"].get<std::string>() == b["Path"].get<std::string>())
+			{
+				if (a["Position"]["X"] != b["Position"]["X"])
+				{
+					return a["Position"]["X"] < b["Position"]["X"];
+				}
+				if (a["Position"]["Z"] != b["Position"]["Z"])
+				{
+					return a["Position"]["Z"] < b["Position"]["Z"];
+				}
+			}
+
+			// 優先度③　Y座標の昇順にソート
+			return a["Position"]["Y"] < b["Position"]["Y"];
+		}
+	};
+
 private:
 
 	// ブロックオブジェクト
@@ -37,6 +73,7 @@ private:
 	std::vector<std::unique_ptr<Cloud>> m_clouds;
 	std::vector<std::unique_ptr<Coin>> m_coins;
 	std::vector<std::unique_ptr<Air>> m_air;
+	std::vector<std::unique_ptr<EditChara>> m_chara;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
@@ -46,9 +83,6 @@ private:
 
 	// パス保存
 	std::wstring m_stagePath;
-
-	// 書き出し中フラグ(処理削減)
-	bool is_wrighting;
 
 	// プレイ時のフラグ（Trueでエディタ用描画を切る）
 	bool is_playing;
@@ -144,6 +178,13 @@ public:
 
 	// エアーブロックの配列を参照
 	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
+	// プレイヤブロックの配列を参照
+	std::vector<std::unique_ptr<EditChara>>& GetPlayerBlock() { return m_chara; }
+
+public:
+
+	// プレイヤの座標を取得する
+	DirectX::SimpleMath::Vector3 GetPlayerPosition();
 
 };
 

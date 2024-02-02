@@ -98,7 +98,7 @@ void PlayScene::Update()
 	m_adminCamera->Update();
 
 	// ワールドマウスの更新
-	m_worldMouse->Update(0.01f);
+	m_worldMouse->Update();
 
 	// スカイ球の更新(カメラを中心にスカイ球をセットする　描画切れを防ぐ)
 	m_sky->SetPosition(m_adminCamera->GetPosition());
@@ -181,7 +181,7 @@ void PlayScene::CreateWDResources()
 	m_player = std::make_unique<Player>();
 
 	// ワールドマウス作成
-	m_worldMouse = std::make_unique<WorldMouse>(m_adminCamera->GetView(), m_adminCamera->GetProjection());
+	m_worldMouse = std::make_unique<WorldMouse>();
 
 	// ブロックマネージャ作成(仮でサンプル１)
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
@@ -203,6 +203,9 @@ void PlayScene::SetSceneValues()
 	// ブロックの初期設定
 	m_blockManager->SetPlay(true);
 	m_blockManager->Initialize();
+
+	// プレイヤーの座標を返す
+	m_player->SetPosition(m_blockManager->GetPlayerPosition());
 }
 
 //==============================================================================

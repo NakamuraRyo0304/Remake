@@ -23,6 +23,7 @@ class AdminCamera;
 class BlockManager;
 class EditorCollision;
 class UI_Editor;
+class WorldMouse;
 class Editor final : public IScene
 {
 private:
@@ -38,6 +39,9 @@ private:
 
 	// エディタコリジョン
 	std::unique_ptr<EditorCollision> m_editorCollision;
+
+	// ワールドマウス
+	std::unique_ptr<WorldMouse> m_worldMouse;
 
 	// 描画するオブジェクトID
 	ID m_selectionID;

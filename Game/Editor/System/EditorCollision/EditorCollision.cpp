@@ -6,7 +6,6 @@
  */
 
 #include "pch.h"
-#include "Game/Common/WorldMouse/WorldMouse.h"
 #include "Libraries/UserUtility.h"
 #include "EditorCollision.h"
 
@@ -18,10 +17,9 @@ const float EditorCollision::HIT_RADIUS = 0.5f;		// 当たり判定の半径
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-EditorCollision::EditorCollision(SimpleMath::Matrix view, SimpleMath::Matrix proj)
+EditorCollision::EditorCollision()
+	: m_position{}		// 座標
 {
-	// ワールドマウス作成
-	m_worldMouse = std::make_unique<WorldMouse>(view, proj);
 }
 
 //==============================================================================
@@ -38,35 +36,15 @@ void EditorCollision::Update(IGameObject* object, ID setting)
 {
 	auto _mouse = Mouse::Get().GetState();
 
-	// ワールドマウスの更新
-	m_worldMouse->Update(0.01f);
-
 	// nullだったら処理をしない
 	if (UserUtility::IsNull(object)) return;
 
 	// 当たり判定（球）
-	if (UserUtility::CheckPointInSphere(m_worldMouse->GetPosition(), HIT_RADIUS, object->GetPosition()))
+	if (UserUtility::CheckPointInSphere(m_position, HIT_RADIUS, object->GetPosition()))
 	{
 		if (_mouse.leftButton)
 		{
 			object->SetID(setting);
 		}
 	}
-}
-
-//==============================================================================
-// 描画処理
-//==============================================================================
-void EditorCollision::Draw(SimpleMath::Matrix view, SimpleMath::Matrix proj)
-{
-	// 描画関連処理
-	m_worldMouse->Draw(view, proj);
-}
-
-//==============================================================================
-// ワールドマウスの座標
-//==============================================================================
-SimpleMath::Vector3 EditorCollision::GetWorldMousePosition()
-{
-	return m_worldMouse->GetPosition();
 }

@@ -18,7 +18,6 @@ const float StageCollision::RADIUS = 1.0f;      // 当たり判定を行う半径
 // コンストラクタ
 //==============================================================================
 StageCollision::StageCollision()
-    : m_side{ Side::None }      // 衝突面
 {
 }
 
@@ -45,10 +44,10 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _sandPos)) continue;
 
         // 当たり判定の実行：プレイヤー・砂
-        m_side = IsCollision(&_playerPos, _sandPos, _playerScale, _sandScale, true);
+        auto _sandFlag = IsCollision(&_playerPos, _sandPos, _playerScale, _sandScale, true);
 
         // 固有処理：プレイヤー座標の押し戻し適用・落下の停止
-        player->SetFall(m_side != Side::Up ? true : false);
+        player->SetFall(_sandFlag != Side::Up ? true : false);
         player->SetPosition(_playerPos);
     }
     for (auto& coin : blocks->GetCoinBlock())
@@ -65,13 +64,35 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _coinPos)) continue;
 
         // 当たり判定の実行：プレイヤー・コイン
-        m_side = IsCollision(&_playerPos, _coinPos, _playerScale, _coinScale, false);
+        auto _coinFlag = IsCollision(&_playerPos, _coinPos, _playerScale, _coinScale, false);
 
         // 固有処理：コインのカウントアップ
-        if (m_side != Side::None)
+        if (_coinFlag != Side::None)
         {
             player->CountUpCoins();
             coin->SetActive(false);
+        }
+    }
+    for (auto& cloud : blocks->GetCloudBlock())
+    {
+        SimpleMath::Vector3 _playerPos = player->GetPosition();
+        SimpleMath::Vector3 _playerScale = player->GetScale();
+        SimpleMath::Vector3 _cloudPos = cloud->GetPosition();
+        SimpleMath::Vector3 _cloudScale = cloud->GetScale();
+
+        // 境界球による当たり判定のカリング
+        if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _cloudPos)) continue;
+
+        // 当たり判定の実行：プレイヤー・雲
+        auto _cloudFlag = IsCollision(&_playerPos, _cloudPos, _playerScale, _cloudScale, true);
+
+        // 固有処理：雲の移動・プレイヤーの押し出し
+        player->SetFall(_cloudFlag != Side::Up ? true : false);
+        if (_cloudFlag != Side::None)
+        {
+            cloud->SetHitFlag(true);
+            IsCollision(&_playerPos, cloud->GetPosition(), _playerScale, _cloudScale, true);
+            player->SetPosition(_playerPos);
         }
     }
 }

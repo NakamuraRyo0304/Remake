@@ -8,6 +8,7 @@
 #include "pch.h"
 #include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"
 #include "Libraries/UserUtility.h"
+#include <random>
 #include "BlockManager.h"
 
 //==============================================================================
@@ -43,6 +44,9 @@ BlockManager::~BlockManager()
 //==============================================================================
 void BlockManager::Initialize()
 {
+	// 一度データを削除
+	ClearBlocks();
+
 	// エディタモードの時、判定用エアーで埋める
 	if (is_playing == false)
 	{
@@ -75,6 +79,9 @@ void BlockManager::Initialize()
 		// 雲ブロックを格納
 		if (_name == "Cloud")
 			m_clouds.push_back(std::make_unique<Cloud>(_position));
+		// プレイヤブロックを格納
+		if (_name == "Player")
+			m_chara.push_back(std::make_unique<EditChara>(_position));
 
 		// プレイモードはスキップ
 		if (is_playing == true) continue;
@@ -113,6 +120,11 @@ void BlockManager::Update()
 	// プレイモードはスキップ
 	if (is_playing == true) return;
 
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		chara->Update();
+	}
 	for (auto& air : m_air)
 	{
 		if (UserUtility::IsNull(air.get())) continue;
@@ -144,6 +156,16 @@ void BlockManager::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMa
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->Draw(states, view, proj, option);
 	}
+
+
+	// プレイモードはスキップ
+	if (is_playing == true) return;
+
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		chara->Draw(states, view, proj, option);
+	}
 }
 
 //==============================================================================
@@ -167,6 +189,11 @@ void BlockManager::SetWireFrame(bool frame)
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->SetWireFrameFlag(frame);
 	}
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		chara->SetWireFrameFlag(frame);
+	}
 }
 
 //==============================================================================
@@ -182,6 +209,8 @@ std::string BlockManager::GetBlockID(const ID& id)
 		return "Coin";
 	case ID::Obj_Cloud:
 		return "Cloud";
+	case ID::Obj_Player:
+		return "Player";
 	default:
 		return "";
 	}
@@ -195,8 +224,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& sand : m_sands)
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-
-		// 同じならスキップ
 		if (sand->GetID() == ID::Obj_Sand) continue;
 
 		// 名前に対応したブロックに変更する
@@ -206,8 +233,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& cloud : m_clouds)
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-
-		// 同じならスキップ
 		if (cloud->GetID() == ID::Obj_Cloud) continue;
 
 		// 名前に対応したブロックに変更する
@@ -217,8 +242,6 @@ void BlockManager::ReplaceBlock()
 	for (auto& coin : m_coins)
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-
-		// 同じならスキップ
 		if (coin->GetID() == ID::Obj_Coin) continue;
 
 		// 名前に対応したブロックに変更する
@@ -228,13 +251,20 @@ void BlockManager::ReplaceBlock()
 	for (auto& air : m_air)
 	{
 		if (UserUtility::IsNull(air.get())) continue;
-
-		// 同じならスキップ
 		if (air->GetID() == ID::Obj_Air) continue;
 
 		// 名前に対応したブロックに変更する
 		CreateBlock(air->GetID(), air->GetInitialPosition());
 		UserUtility::RemoveVec(m_air, air);
+	}
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		if (chara->GetID() == ID::Obj_Player) continue;
+
+		// 名前に対応したブロックに変更する
+		CreateBlock(chara->GetID(), chara->GetInitialPosition());
+		UserUtility::RemoveVec(m_chara, chara);
 	}
 }
 
@@ -253,6 +283,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 		m_coins.push_back(std::make_unique<Coin>(pos));
 	if (id == ID::Obj_Air)		// エアー判定
 		m_air.push_back(std::make_unique<Air>(pos));
+	if (id == ID::Obj_Player)	// プレイヤ
+		m_chara.push_back(std::make_unique<EditChara>(pos));
 }
 
 //==============================================================================
@@ -264,6 +296,7 @@ void BlockManager::ClearBlocks()
 	m_clouds.clear();
 	m_coins.clear();
 	m_air.clear();
+	m_chara.clear();
 }
 
 //==============================================================================
@@ -282,6 +315,34 @@ void BlockManager::FillAir()
 			}
 		}
 	}
+}
+
+//==============================================================================
+// プレイヤーの座標を取得する
+//==============================================================================
+SimpleMath::Vector3 BlockManager::GetPlayerPosition()
+{
+	SimpleMath::Vector3 _playerPosition;
+
+	// プレイヤーが１つしかない場合はその座標を返す
+	// プレイヤーが２つ以上ある場合はランダムで返す
+	if (m_chara.size() == 1)
+	{
+		_playerPosition = m_chara[0]->GetInitialPosition();
+	}
+	else
+	{
+		// 乱数生成器のセットアップ
+		std::random_device _rd;
+		std::mt19937 _gen(_rd());
+		std::uniform_int_distribution<size_t> _distribution(0, m_chara.size() - 1);
+
+		// ランダムに1人のプレイヤーを選び、その座標を返す
+		size_t _randomIndex = _distribution(_gen);
+		_playerPosition = m_chara[_randomIndex]->GetInitialPosition();
+	}
+
+	return _playerPosition;
 }
 
 //==============================================================================
@@ -327,9 +388,6 @@ void BlockManager::ReLoad(const wchar_t* path)
 //==============================================================================
 void BlockManager::OutputStage()
 {
-	// 開けなかったときのために一時保存する
-	std::wstring _tmp = m_stagePath;
-
 	// パスを設定
 	auto _path = m_dialog->GetExpFilePath();
 	if (not UserUtility::IsNull(_path))
@@ -338,7 +396,7 @@ void BlockManager::OutputStage()
 	}
 	else
 	{
-		m_stagePath = _tmp;
+		return;
 	}
 
 	// パスを設定
@@ -346,35 +404,75 @@ void BlockManager::OutputStage()
 
 	// オブジェクト配列
 	std::vector<IGameObject*> _objects;
+
+	//==============================================================================
+	// 追加するのはここから>>>
+	//==============================================================================
+
+	// 書き出し用配列にセットする
 	for (auto& sand : m_sands)
 	{
-		_objects.push_back(sand.get());
+		_objects.push_back(sand.get());				// 砂
 	}
 	for (auto& cloud : m_clouds)
 	{
-		_objects.push_back(cloud.get());
+		_objects.push_back(cloud.get());			// 雲
 	}
 	for (auto& coin : m_coins)
 	{
-		_objects.push_back(coin.get());
+		_objects.push_back(coin.get());				// コイン
 	}
-
-	Json _json;
-	int _index = 0;
-
-	// _objectに格納されたブロック分出力する
-	while (_index < _objects.size())
+	for (auto& chara : m_chara)
 	{
-		_json[_index]["Path"] = GetBlockID(_objects[_index]->GetID());
-		SimpleMath::Vector3 _pos = _objects[_index]->GetInitialPosition();
-
-		_json[_index]["Position"]["X"] = _pos.x;
-		_json[_index]["Position"]["Y"] = _pos.y;
-		_json[_index]["Position"]["Z"] = _pos.z;
-		_index++;
+		_objects.push_back(chara.get());			// プレイヤ
 	}
 
-	// データを書き出す
-	std::string _output = _json.dump(2);
-	m_jsonHelper->Write(_output);
+
+	//==============================================================================
+	// <<<追加するのはここまで
+	//==============================================================================
+
+	// 重複しているデータを単一データにする
+	std::unordered_map<std::string, Json> _uEntry;
+	for (auto& obj : _objects)
+	{
+		std::string _id = GetBlockID(obj->GetID());
+		SimpleMath::Vector3 _pos = obj->GetInitialPosition();
+
+		// ブロックの種類と初期位置から一意なキーを生成
+		// ID_X_Y_Zという単一キーを作成する(例：Sand_1_2_1,Cloud_3_3_7)
+		std::string _uKey = _id + "_" + std::to_string(_pos.x) + "_"
+			+ std::to_string(_pos.y) + "_" + std::to_string(_pos.z);
+
+		// キーが存在しない場合、エントリにデータを追加
+		if (_uEntry.find(_uKey) == _uEntry.end())
+		{
+			_uEntry[_uKey]["Path"] = _id;
+			_uEntry[_uKey]["Position"]["X"] = _pos.x;
+			_uEntry[_uKey]["Position"]["Y"] = _pos.y;
+			_uEntry[_uKey]["Position"]["Z"] = _pos.z;
+		}
+	}
+
+	// ユニークエントリをソートして最終出力に登録する
+	std::vector<Json> _sortedEntries;
+	for (const auto& entry : _uEntry)
+	{
+		_sortedEntries.push_back(entry.second);
+	}
+
+	// 文字列が多い・XZ昇順・Y昇順の優先度でソート
+	std::sort(_sortedEntries.begin(), _sortedEntries.end(), SortPriority());
+
+	// 最終出力配列
+	Json _output;
+	// 並び替えたJsonデータを最終出力配列に格納
+	for (const auto& sortedEntry : _sortedEntries)
+	{
+		_output.push_back(sortedEntry);    // second = Json型データ
+	}
+
+	// インデントをそろえて書き出し
+	std::string _str = _output.dump(2);
+	m_jsonHelper->Write(_str);
 }

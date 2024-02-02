@@ -28,9 +28,6 @@ private:
 	// ‹«ŠE‹…”¼Œa
 	static const float RADIUS;
 
-	// Õ“Ë–Ê‚ğŠi”[
-	Side m_side;
-
 public:
 
 	/// <summary>
