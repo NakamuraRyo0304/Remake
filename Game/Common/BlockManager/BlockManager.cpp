@@ -8,6 +8,7 @@
 #include "pch.h"
 #include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"
 #include "Libraries/UserUtility.h"
+#include <random>
 #include "BlockManager.h"
 
 //==============================================================================
@@ -78,6 +79,9 @@ void BlockManager::Initialize()
 		// 雲ブロックを格納
 		if (_name == "Cloud")
 			m_clouds.push_back(std::make_unique<Cloud>(_position));
+		// プレイヤブロックを格納
+		if (_name == "Player")
+			m_chara.push_back(std::make_unique<EditChara>(_position));
 
 		// プレイモードはスキップ
 		if (is_playing == true) continue;
@@ -116,6 +120,11 @@ void BlockManager::Update()
 	// プレイモードはスキップ
 	if (is_playing == true) return;
 
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		chara->Update();
+	}
 	for (auto& air : m_air)
 	{
 		if (UserUtility::IsNull(air.get())) continue;
@@ -147,6 +156,16 @@ void BlockManager::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMa
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->Draw(states, view, proj, option);
 	}
+
+
+	// プレイモードはスキップ
+	if (is_playing == true) return;
+
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		chara->Draw(states, view, proj, option);
+	}
 }
 
 //==============================================================================
@@ -170,6 +189,11 @@ void BlockManager::SetWireFrame(bool frame)
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->SetWireFrameFlag(frame);
 	}
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		chara->SetWireFrameFlag(frame);
+	}
 }
 
 //==============================================================================
@@ -185,6 +209,8 @@ std::string BlockManager::GetBlockID(const ID& id)
 		return "Coin";
 	case ID::Obj_Cloud:
 		return "Cloud";
+	case ID::Obj_Player:
+		return "Player";
 	default:
 		return "";
 	}
@@ -231,6 +257,15 @@ void BlockManager::ReplaceBlock()
 		CreateBlock(air->GetID(), air->GetInitialPosition());
 		UserUtility::RemoveVec(m_air, air);
 	}
+	for (auto& chara : m_chara)
+	{
+		if (UserUtility::IsNull(chara.get())) continue;
+		if (chara->GetID() == ID::Obj_Player) continue;
+
+		// 名前に対応したブロックに変更する
+		CreateBlock(chara->GetID(), chara->GetInitialPosition());
+		UserUtility::RemoveVec(m_chara, chara);
+	}
 }
 
 //==============================================================================
@@ -248,6 +283,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 		m_coins.push_back(std::make_unique<Coin>(pos));
 	if (id == ID::Obj_Air)		// エアー判定
 		m_air.push_back(std::make_unique<Air>(pos));
+	if (id == ID::Obj_Player)	// プレイヤ
+		m_chara.push_back(std::make_unique<EditChara>(pos));
 }
 
 //==============================================================================
@@ -259,6 +296,7 @@ void BlockManager::ClearBlocks()
 	m_clouds.clear();
 	m_coins.clear();
 	m_air.clear();
+	m_chara.clear();
 }
 
 //==============================================================================
@@ -277,6 +315,34 @@ void BlockManager::FillAir()
 			}
 		}
 	}
+}
+
+//==============================================================================
+// プレイヤーの座標を取得する
+//==============================================================================
+SimpleMath::Vector3 BlockManager::GetPlayerPosition()
+{
+	SimpleMath::Vector3 _playerPosition;
+
+	// プレイヤーが１つしかない場合はその座標を返す
+	// プレイヤーが２つ以上ある場合はランダムで返す
+	if (m_chara.size() == 1)
+	{
+		_playerPosition = m_chara[0]->GetInitialPosition();
+	}
+	else
+	{
+		// 乱数生成器のセットアップ
+		std::random_device _rd;
+		std::mt19937 _gen(_rd());
+		std::uniform_int_distribution<size_t> _distribution(0, m_chara.size() - 1);
+
+		// ランダムに1人のプレイヤーを選び、その座標を返す
+		size_t _randomIndex = _distribution(_gen);
+		_playerPosition = m_chara[_randomIndex]->GetInitialPosition();
+	}
+
+	return _playerPosition;
 }
 
 //==============================================================================
@@ -355,6 +421,10 @@ void BlockManager::OutputStage()
 	for (auto& coin : m_coins)
 	{
 		_objects.push_back(coin.get());				// コイン
+	}
+	for (auto& chara : m_chara)
+	{
+		_objects.push_back(chara.get());			// プレイヤ
 	}
 
 

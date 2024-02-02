@@ -1,43 +1,21 @@
 /*
- *	@File	Cloud.h
- *	@Brief	雲ブロック。
- *	@Date	2023-01-27
+ *	@File	EditChara.h
+ *	@Brief	プレイヤー（エディタ）。
+ *	@Date	2024-02-02
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef CLOUD
-#define CLOUD
+#ifndef EDITCHARA
+#define EDITCHARA
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Cloud : public IGameObject
+class EditChara : public IGameObject
 {
-private:
-
-	// 到着座標
-	DirectX::SimpleMath::Vector3 m_arrivePosition;
-
-	// 衝突フラグ
-	bool is_hit;
-
-	// 到着フラグ
-	bool is_arrive;
-
-	// 落下タイマー
-	float m_fallTimer;
-
-private:
-
-	// 回転速度
-	static const float ROTATE_SPEED;
-
-	// 落下リミット
-	static const float FALL_LIMIT;
-
 public:
 
 	/// <summary>
@@ -45,8 +23,8 @@ public:
 	/// </summary>
 	/// <param name="position">生成座標</param>
 	/// <returns>なし</returns>
-	Cloud(DirectX::SimpleMath::Vector3 position);
-	~Cloud();
+	EditChara(DirectX::SimpleMath::Vector3 position);
+	~EditChara();
 
 	/// <summary>
 	/// 更新処理
@@ -63,13 +41,7 @@ public:
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
 	void Draw(DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
-		ShaderLambda option = nullptr) override;
-
-public:
-
-	// 衝突通知
-	void SetHitFlag(bool isHit) { is_hit = isHit; }
+		ShaderLambda option = nullptr) final;
 
 };
-
-#endif // CLOUD
+#endif // EDITCHARA

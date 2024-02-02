@@ -26,6 +26,7 @@ public:
 		Cloud_bn,
 		Coin_bn,
 		Air_bn,
+		Player_bn,
 
 		Length
 	};

@@ -23,10 +23,11 @@
 //==============================================================================
 // ブロックのインクルード
 //==============================================================================
-#include "../Blocks/Sand/Sand.h"			// 砂ブロック
-#include "../Blocks/Cloud/Cloud.h"			// 雲ブロック
-#include "../Blocks/Coin/Coin.h"			// コインブロック
-#include "../../Editor/Objects/Air/Air.h"	// ステージエディタ用判定ブロック
+#include "../Blocks/Sand/Sand.h"						// 砂ブロック
+#include "../Blocks/Cloud/Cloud.h"						// 雲ブロック
+#include "../Blocks/Coin/Coin.h"						// コインブロック
+#include "../../Editor/Objects/Air/Air.h"				// ステージエディタ用判定ブロック
+#include "../../Editor/Objects/EditChara/EditChara.h"	// ステージエディタ用プレイヤ
 
 class BlockManager
 {
@@ -65,11 +66,14 @@ private:
 		}
 	};
 
+private:
+
 	// ブロックオブジェクト
 	std::vector<std::unique_ptr<Sand>> m_sands;
 	std::vector<std::unique_ptr<Cloud>> m_clouds;
 	std::vector<std::unique_ptr<Coin>> m_coins;
 	std::vector<std::unique_ptr<Air>> m_air;
+	std::vector<std::unique_ptr<EditChara>> m_chara;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
@@ -79,9 +83,6 @@ private:
 
 	// パス保存
 	std::wstring m_stagePath;
-
-	// 書き出し中フラグ(処理削減)
-	bool is_wrighting;
 
 	// プレイ時のフラグ（Trueでエディタ用描画を切る）
 	bool is_playing;
@@ -177,6 +178,13 @@ public:
 
 	// エアーブロックの配列を参照
 	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
+	// プレイヤブロックの配列を参照
+	std::vector<std::unique_ptr<EditChara>>& GetPlayerBlock() { return m_chara; }
+
+public:
+
+	// プレイヤの座標を取得する
+	DirectX::SimpleMath::Vector3 GetPlayerPosition();
 
 };
 

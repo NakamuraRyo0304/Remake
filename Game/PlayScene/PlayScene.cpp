@@ -203,6 +203,9 @@ void PlayScene::SetSceneValues()
 	// ブロックの初期設定
 	m_blockManager->SetPlay(true);
 	m_blockManager->Initialize();
+
+	// プレイヤーの座標を返す
+	m_player->SetPosition(m_blockManager->GetPlayerPosition());
 }
 
 //==============================================================================

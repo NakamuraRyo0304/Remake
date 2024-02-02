@@ -218,6 +218,10 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(coin), id);
 	}
+	for (auto& chara : m_blockManager->GetPlayerBlock())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(chara), id);
+	}
 }
 
 //==============================================================================
@@ -233,4 +237,6 @@ void Editor::SetDrawObject()
 		m_selectionID = ID::Obj_Coin;
 	if (m_ui->IsClickButton(BN::Air_bn))
 		m_selectionID = ID::Obj_Air;
+	if (m_ui->IsClickButton(BN::Player_bn))
+		m_selectionID = ID::Obj_Player;
 }

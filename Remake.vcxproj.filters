@@ -296,6 +296,9 @@
     <Filter Include="Game\Scenes\PlayScene\System\StageCollision">
       <UniqueIdentifier>{9eaa7601-05a7-4ec0-85fe-5fdccaa32dfe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\Editor\Objects\EditChara">
+      <UniqueIdentifier>{ead85a19-dfe9-47f5-a4a5-ef2a5a1e8d48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -493,6 +496,9 @@
     <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h">
       <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
+      <Filter>Game\Scenes\Editor\Objects\EditChara</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -672,6 +678,9 @@
     <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp">
       <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
+      <Filter>Game\Scenes\Editor\Objects\EditChara</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -737,6 +746,12 @@
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds">
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
   </ItemGroup>
@@ -817,6 +832,9 @@
     </None>
     <None Include="Resources\Models\Body.cmo">
       <Filter>Resources\Models\Player</Filter>
+    </None>
+    <None Include="Resources\Stages\sample3.json">
+      <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
