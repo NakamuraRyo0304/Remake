@@ -192,7 +192,7 @@ void GameMain::DeleteScene()
 	//==============================================================================
 
 	// 次のシーン：ゲームシーン / 処理：セレクトシーンからステージ番号を取得する
-	if (m_nextScene == SCENE::PLAY)
+	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::SELECT)
 	{
 		m_stageNumber = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
 	}

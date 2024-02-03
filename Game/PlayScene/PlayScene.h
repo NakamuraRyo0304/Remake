@@ -99,6 +99,12 @@ private:
 	/// <param name="states">コモンステート</param>
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
+
+private:
+
+	// ステージ番号に応じてパスを返す
+	const wchar_t* GetStagePath();
+
 };
 
 #endif // PlayScene

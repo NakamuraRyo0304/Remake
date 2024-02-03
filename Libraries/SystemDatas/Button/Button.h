@@ -36,7 +36,10 @@ private:
 	const wchar_t* m_name;
 
 	// 座標
-	DirectX::SimpleMath::Vector2 m_position;
+	DirectX::SimpleMath::Vector2 m_position, m_adder;
+
+	// スクリーン倍率
+	DirectX::SimpleMath::Vector2 m_screenRate;
 
 	// 色
 	DirectX::SimpleMath::Color m_color;
@@ -104,6 +107,11 @@ public:
 
 	// 色を設定
 	void SetColor(const DirectX::SimpleMath::Color& color) { m_color = color; }
+
+	// 移動座標を取得
+	const DirectX::SimpleMath::Vector2& GetAdderPosition() { return m_adder; }
+	// 移動座標を設定
+	void SetAdderPosition(const DirectX::SimpleMath::Vector2 pos) { m_adder = pos; }
 
 };
 

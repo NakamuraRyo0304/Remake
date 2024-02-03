@@ -18,6 +18,8 @@ const float Player::MAX_SPEED = 1.0f;		// 最高速度
 const float Player::MS_RADIUS = 0.5f;		// 最高速で走る半径
 const float Player::ARRIVE_RADIUS = 0.1f;	// 到着みなし半径
 const float Player::GIVEUP_TIME = 120.0f;	// 移動諦めタイムリミット
+const float Player::DEATH_LINE = -5.0f;		// 死亡ライン
+const float Player::DEATH_ROTATE = 30.0f;	// 死亡時の回転
 
 //==============================================================================
 // コンストラクタ
@@ -26,7 +28,8 @@ Player::Player()
 	: IGameObject(L"Resources/Models/Body.cmo", L"Resources/Models")
 	, m_velocity{}			// 移動量
 	, m_coinNum{ 0 }		// 取得済みコイン枚数
-	, is_fall{ false }		// 落下フラグ
+	, is_fall{ true }		// 落下フラグ
+	, is_death{ false }		// 死亡フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Player);
@@ -35,7 +38,7 @@ Player::Player()
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One);
+	SetScale(SimpleMath::Vector3::One * 0.5f);
 	SetInitialScale(GetScale());
 
 	// パーツの作成
@@ -117,6 +120,19 @@ void Player::Update()
 	// マトリクスを計算
 	CreateWorldMatrix();
 
+	// 死亡判定
+	if (GetPosition().y < DEATH_LINE)
+	{
+		is_death = true;
+	}
+	if (GetPosition().y < DEATH_LINE / 2)
+	{
+		float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+
+		// 回転しながら落ちていく
+		SetRotate(GetRotate() + SimpleMath::Vector3(0.0f, XMConvertToRadians(_timer * DEATH_ROTATE), 0.0f));
+	}
+
 	// パーツの更新
 	m_head->Update();
 
@@ -127,14 +143,13 @@ void Player::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Player::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
-	GetModel()->Draw(_context, states, _scale * GetWorldMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(context, states, _scale * GetWorldMatrix(), view, proj, false, no_use_here);
 
 	// これ以降、子パーツの描画を行う
-	m_head->Draw(states, view, proj, no_use_here);
+	m_head->Draw(context, states, view, proj, no_use_here);
 }
 
 //==============================================================================

@@ -1,28 +1,25 @@
 /*
- *	@File	Coin.h
- *	@Brief	コインブロック。
- *	@Date	2023-01-27
+ *	@File	Goal.h
+ *	@Brief	ゴールオブジェクト。
+ *	@Date	2024-02-03
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef COIN
-#define COIN
+#ifndef GOAL
+#define GOAL
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Coin : public IGameObject
+class Goal : public IGameObject
 {
 private:
 
 	// 衝突フラグ
 	bool is_hit;
-
-	// アクティブフラグ
-	bool is_active;
 
 public:
 
@@ -31,8 +28,8 @@ public:
 	/// </summary>
 	/// <param name="position">生成座標</param>
 	/// <returns>なし</returns>
-	Coin(DirectX::SimpleMath::Vector3 position);
-	~Coin();
+	Goal(DirectX::SimpleMath::Vector3 position);
+	~Goal();
 
 	/// <summary>
 	/// 更新処理
@@ -54,14 +51,11 @@ public:
 
 public:
 
-	// アクティブフラグを取得
-	bool IsActive() { return is_active; }
-	// アクティブフラグを切り替える
-	void SetActive(const bool flag) { is_active = flag; }
+	// 衝突フラグをONにする(ゴール判定は１度のためONのみ)
+	void OnHitFlag() { is_hit = true; }
 
-	// 衝突通知
-	void SetHitFlag(bool isHit) { is_hit = isHit; }
-
+	// フラグ取得
+	bool IsHitFlag() const { return is_hit; }
 };
 
-#endif // COIN
+#endif // GOAL

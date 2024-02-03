@@ -1,35 +1,39 @@
 /*
- *	@File	Air.cpp
- *	@Brief	判定用オブジェクト（エディタ）。
- *	@Date	2023-01-28
+ *  @File   Goal.cpp
+ *  @Brief  ゴールオブジェクト。
+ *  @Date   2024-02-03
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
-#include "Air.h"
+#include "Libraries/UserUtility.h"
+#include "Goal.h"
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Air::Air(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models")
-	, is_hit{ false }		// 衝突フラグ
-	, is_active{ true }		// アクティブフラグ
+Goal::Goal(SimpleMath::Vector3 position)
+	: IGameObject(L"Resources/Models/Goal.cmo", L"Resources/Models", position)
+	, is_hit{ false }	// 衝突フラグ
 {
 	CreateModel();
-	SetID(ID::Obj_Air);
+	SetID(ID::Obj_Goal);
 	SetWeight(1.0f);
 
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetInitialScale(GetScale());
+
+	// 衝突フラグをオフにする
+	is_hit = false;
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Air::~Air()
+Goal::~Goal()
 {
 	ReleaseModel();
 }
@@ -37,11 +41,8 @@ Air::~Air()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Air::Update()
+void Goal::Update()
 {
-	// 非アクティブは処理しない
-	if (not is_active) return;
-
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
@@ -49,11 +50,7 @@ void Air::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Air::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Goal::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
-	UNREFERENCED_PARAMETER(context);
-	UNREFERENCED_PARAMETER(states);
-	UNREFERENCED_PARAMETER(view);
-	UNREFERENCED_PARAMETER(proj);
-	UNREFERENCED_PARAMETER(no_use_here);
+	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), no_use_here);
 }

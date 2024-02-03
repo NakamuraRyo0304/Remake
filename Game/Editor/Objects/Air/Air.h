@@ -43,12 +43,13 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
+	/// <param name="context">コンテキスト</param>
 	/// <param name="states">コモンステート</param>
 	/// <param name="view">ビュー行列</param>
 	/// <param name="proj">プロジェクション行列</param>
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
-	void Draw(DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
+	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		ShaderLambda option = nullptr) final;
 
 public:

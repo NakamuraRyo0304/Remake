@@ -67,7 +67,7 @@ void EditorCamera::Update()
 		m_viewPosition.y -= MOVE_SPEED;
 
 	// ループクランプする
-	m_viewPoint = UserUtility::LoopClamp(m_viewPoint, ViewPoint::PointFront, ViewPoint::PointUp);
+	m_viewPoint = UserUtility::LoopClamp(m_viewPoint, ViewPoint::PointFront, ViewPoint::PointLeft);
 
 	// ビューの位置を更新
 	UpdateViewPoint();
@@ -105,9 +105,6 @@ void EditorCamera::UpdateViewPoint()
 		m_viewPosition = SimpleMath::Vector3(-4.5f, m_viewPosition.y, 4.5f);
 		m_viewTarget = SimpleMath::Vector3(4.5f, 0.0f, 4.5f);
 		break;
-	case ViewPoint::PointUp:
-		m_viewPosition = GetInitialPosition() + SimpleMath::Vector3::UnitY * MOVE_SPEED;
-		m_viewTarget = GetInitialTarget();
 	default:
 		break;
 	}

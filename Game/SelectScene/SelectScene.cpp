@@ -111,16 +111,17 @@ void SelectScene::Draw()
 {
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
+	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
+	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
 	// ステージオブジェクトの描画
-	m_sky->Draw(*_states, _view, _projection);
+	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
-	m_blockManager->Draw(*_states, _view, _projection);
+	m_blockManager->Draw(_context, *_states, _view, _projection);
 
 	// UIの描画
 	m_ui->Draw();

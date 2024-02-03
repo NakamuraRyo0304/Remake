@@ -38,6 +38,9 @@ private:
 	// 落下フラグ
 	bool is_fall;
 
+	// 死亡フラグ
+	bool is_death;
+
 private:
 
 	// 頭
@@ -60,6 +63,12 @@ private:
 	// 目的地到着の諦め時間
 	static const float GIVEUP_TIME;
 
+	// 死亡ライン
+	static const float DEATH_LINE;
+
+	// 死亡時の回転
+	static const float DEATH_ROTATE;
+
 public:
 
 	/// <summary>
@@ -79,12 +88,13 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
+	/// <param name="context">コンテキスト</param>
 	/// <param name="states">コモンステート</param>
 	/// <param name="view">ビュー行列</param>
 	/// <param name="proj">プロジェクション行列</param>
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
-	void Draw(DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
+	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		ShaderLambda option = nullptr) override;
 
 public:
@@ -106,6 +116,11 @@ public:
 	const bool& IsFall() { return is_fall; }
 	// 落下フラグを設定
 	void SetFall(const bool& isFall) { is_fall = isFall; }
+
+	// 死亡フラグを取得
+	const bool& IsDeath() { return is_death; }
+	// 死亡フラグを設定
+	void SetDeath(const bool& isDeath) { is_death = isDeath; }
 };
 
 #endif // PLAYER

@@ -104,19 +104,20 @@ void TitleScene::Draw()
 {
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
+	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix  _projection = m_adminCamera->GetProjection();
+	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
 	// 空の描画
-	m_sky->Draw(*_states, _view, _projection);
+	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// トリの描画
-	m_birdTitle->Draw(*_states, _view, _projection);
+	m_birdTitle->Draw(_context, *_states, _view, _projection);
 
 	// ロゴの描画
-	m_logo->Draw(*_states, _view, _projection);
+	m_logo->Draw(_context, *_states, _view, _projection);
 
 	// UIの表示
 	m_ui->Draw();

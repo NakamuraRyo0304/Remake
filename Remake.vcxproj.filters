@@ -299,6 +299,12 @@
     <Filter Include="Game\Scenes\Editor\Objects\EditChara">
       <UniqueIdentifier>{ead85a19-dfe9-47f5-a4a5-ef2a5a1e8d48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Common\Blocks\Goal">
+      <UniqueIdentifier>{22f24c76-90a4-4ecb-8f6a-ab5821179f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\Editor\Objects\CursorObj">
+      <UniqueIdentifier>{0f11b2c2-16cc-468a-af70-25d702f09c9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -499,6 +505,9 @@
     <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
       <Filter>Game\Scenes\Editor\Objects\EditChara</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Goal\Goal.h">
+      <Filter>Game\Common\Blocks\Goal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -681,6 +690,9 @@
     <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
       <Filter>Game\Scenes\Editor\Objects\EditChara</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp">
+      <Filter>Game\Common\Blocks\Goal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -752,6 +764,15 @@
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds">
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
   </ItemGroup>
@@ -835,6 +856,9 @@
     </None>
     <None Include="Resources\Stages\sample3.json">
       <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
+    </None>
+    <None Include="Resources\Models\Goal.cmo">
+      <Filter>Resources\Models\Block</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

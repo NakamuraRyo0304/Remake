@@ -28,6 +28,7 @@
 #include "../Blocks/Coin/Coin.h"						// コインブロック
 #include "../../Editor/Objects/Air/Air.h"				// ステージエディタ用判定ブロック
 #include "../../Editor/Objects/EditChara/EditChara.h"	// ステージエディタ用プレイヤ
+#include "../Blocks/Goal/Goal.h"						// ゴールオブジェクト
 
 class BlockManager
 {
@@ -74,6 +75,7 @@ private:
 	std::vector<std::unique_ptr<Coin>> m_coins;
 	std::vector<std::unique_ptr<Air>> m_air;
 	std::vector<std::unique_ptr<EditChara>> m_chara;
+	std::vector<std::unique_ptr<Goal>> m_goals;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
@@ -114,12 +116,13 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
+	/// <param name="context">コンテキスト</param>
 	/// <param name="states">コモンステート</param>
 	/// <param name="view">ビュー行列</param>
 	/// <param name="proj">プロジェクション行列</param>
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
-	void Draw(DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
+	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		ShaderLambda option = nullptr);
 
 public:
@@ -129,9 +132,6 @@ public:
 
 	// ゲームプレイするときはONにする
 	void SetPlay(bool play) { is_playing = play; }
-
-	// ワイヤーフレームの切り替えフラグデフォルトはFalse
-	void SetWireFrame(bool frame);
 
 public:
 
@@ -148,6 +148,25 @@ public:
 
 	// ステージを書き出す
 	void OutputStage();
+
+	/// <summary>
+	/// 書き出し用オブジェクト追加関数
+	/// </summary>
+	/// <param name="objects">書き出しに使用する配列</param>
+	/// <param name="wish">任意のオブジェクトベクター配列</param>
+	/// <returns>なし</returns>
+	template <typename T>
+	void AddWriteObjects(std::vector<IGameObject*>* objects, std::vector<T>& wish)
+	{
+		// 空なら処理しない
+		if (wish.empty()) return;
+
+		// オブジェクトを追加する
+		for (auto& obj : wish)
+		{
+			objects->push_back(obj.get());
+		}
+	}
 
 private:
 
@@ -174,6 +193,8 @@ public:
 	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
 	// コインブロックの配列を参照
 	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+	// ゴールオブジェクトの配列を参照
+	std::vector<std::unique_ptr<Goal>>& GetGoalObject() { return m_goals; }
 
 
 	// エアーブロックの配列を参照
@@ -185,6 +206,9 @@ public:
 
 	// プレイヤの座標を取得する
 	DirectX::SimpleMath::Vector3 GetPlayerPosition();
+
+	// ゴール判定の取得
+	bool IsArrived();
 
 };
 

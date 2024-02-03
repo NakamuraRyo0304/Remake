@@ -73,9 +73,6 @@ void PlayScene::Update()
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
 
-	// UIの更新
-	//m_ui->Update();
-
 	// シーン遷移
 	if (IsCanUpdate())
 	{
@@ -86,13 +83,34 @@ void PlayScene::Update()
 			_followPath.y = m_player->GetPosition().y;
 			m_player->PushBackFollowPath(_followPath);
 		}
+
+		// ゴールしたらシーン遷移 仮でセレクトに
+		if (m_blockManager->IsArrived())
+		{
+			m_adminCamera->SetEasing(true);// 補間モードにする
+			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
+			{
+				m_adminCamera->SetType(CameraType::Select1_Floating);
+			}
+			ChangeScene(SCENE::SELECT);
+		}
+
+		// 死んだら再読み込み
+		if (m_player->IsDeath())
+		{
+			ChangeScene(SCENE::PLAY);
+		}
 	}
+
+#ifdef _DEBUG
 
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 	{
 		m_player->ResetGoalPosition();
 		m_player->SetPosition({ 1.0f,0.5f,1.0f });
 	}
+
+#endif
 
 	// カメラの更新
 	m_adminCamera->Update();
@@ -121,6 +139,7 @@ void PlayScene::Draw()
 {
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
+	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
@@ -130,17 +149,13 @@ void PlayScene::Draw()
 	m_worldMouse->Draw(_view, _projection);
 
 	// 空の描画
-	m_sky->Draw(*_states, _view, _projection);
+	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
-	m_blockManager->Draw(*_states, _view, _projection);
+	m_blockManager->Draw(_context, *_states, _view, _projection);
 
 	// プレイヤーの描画
-	m_player->Draw(*_states, _view, _projection);
-
-	// UIの表示
-//	m_ui->Draw();
-
+	m_player->Draw(_context, *_states, _view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -183,8 +198,8 @@ void PlayScene::CreateWDResources()
 	// ワールドマウス作成
 	m_worldMouse = std::make_unique<WorldMouse>();
 
-	// ブロックマネージャ作成(仮でサンプル１)
-	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	// ブロックマネージャ作成
+	m_blockManager = std::make_unique<BlockManager>(GetStagePath());
 
 	// ステージコリジョン作成
 	m_stageCollision = std::make_unique<StageCollision>();
@@ -228,4 +243,24 @@ void PlayScene::DebugDraw(CommonStates& states)
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetGoalPoints().size());
 	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
+}
+
+//==============================================================================
+// ステージのパスを取得する
+//==============================================================================
+const wchar_t* PlayScene::GetStagePath()
+{
+	switch (m_stageNumber)
+	{
+	case 1:
+		return L"Resources/Stages/sample1.json";
+	case 2:
+		return L"Resources/Stages/sample2.json";
+	case 3:
+		return L"Resources/Stages/sample3.json";
+
+
+	default:
+		return L"Resources/Stages/sample1.json";
+	}
 }

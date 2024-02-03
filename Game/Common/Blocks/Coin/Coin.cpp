@@ -56,11 +56,10 @@ void Coin::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Coin::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Coin::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
 	// 非アクティブは処理しない
 	if (not is_active) return;
 
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), no_use_here);
+	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), no_use_here);
 }

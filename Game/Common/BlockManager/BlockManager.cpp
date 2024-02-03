@@ -71,19 +71,17 @@ void BlockManager::Initialize()
 		SimpleMath::Vector3 _position = SimpleMath::Vector3(_x, _y, _z);
 
 		// 砂ブロックを格納
-		if (_name == "Sand")
-			m_sands.push_back(std::make_unique<Sand>(_position));
+		if (_name == "Sand")	m_sands.push_back(std::make_unique<Sand>(_position));
 		// コインを格納
-		if (_name == "Coin")
-			m_coins.push_back(std::make_unique<Coin>(_position));
+		if (_name == "Coin")	m_coins.push_back(std::make_unique<Coin>(_position));
 		// 雲ブロックを格納
-		if (_name == "Cloud")
-			m_clouds.push_back(std::make_unique<Cloud>(_position));
+		if (_name == "Cloud")	m_clouds.push_back(std::make_unique<Cloud>(_position));
 		// プレイヤブロックを格納
-		if (_name == "Player")
-			m_chara.push_back(std::make_unique<EditChara>(_position));
+		if (_name == "Player")	m_chara.push_back(std::make_unique<EditChara>(_position));
+		// ゴールオブジェクトを格納
+		if (_name == "Goal")	m_goals.push_back(std::make_unique<Goal>(_position));
 
-		// プレイモードはスキップ
+		// プレイモードはスキップ(処理の意味がないため)
 		if (is_playing == true) continue;
 
 		// 同じ場所にエアーがあったらその場所のエアーを消す
@@ -101,31 +99,36 @@ void BlockManager::Initialize()
 void BlockManager::Update()
 {
 	// オブジェクトの更新
-	for (auto& sand : m_sands)
+	for (auto& sand : m_sands)		// 砂ブロック
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
 		sand->Update();
 	}
-	for (auto& cloud : m_clouds)
+	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
 		cloud->Update();
 	}
-	for (auto& coin : m_coins)
+	for (auto& coin : m_coins)		// コイン
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
 		coin->Update();
+	}
+	for (auto& goal : m_goals)		// ゴールオブジェクト
+	{
+		if (UserUtility::IsNull(goal.get())) continue;
+		goal->Update();
 	}
 
 	// プレイモードはスキップ
 	if (is_playing == true) return;
 
-	for (auto& chara : m_chara)
+	for (auto& chara : m_chara)		// キャラオブジェクト
 	{
 		if (UserUtility::IsNull(chara.get())) continue;
 		chara->Update();
 	}
-	for (auto& air : m_air)
+	for (auto& air : m_air)			// エアー
 	{
 		if (UserUtility::IsNull(air.get())) continue;
 		air->Update();
@@ -138,61 +141,37 @@ void BlockManager::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void BlockManager::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
+void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
 {
 	// オブジェクトの描画
-	for (auto& sand : m_sands)
+	for (auto& sand : m_sands)		// 砂ブロック
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-		sand->Draw(states, view, proj, option);
+		sand->Draw(context, states, view, proj, option);
 	}
-	for (auto& cloud : m_clouds)
+	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-		cloud->Draw(states, view, proj, option);
+		cloud->Draw(context, states, view, proj, option);
 	}
-	for (auto& coin : m_coins)
+	for (auto& coin : m_coins)		// コイン
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-		coin->Draw(states, view, proj, option);
+		coin->Draw(context, states, view, proj, option);
 	}
-
+	for (auto& goal : m_goals)		// ゴールオブジェクト
+	{
+		if (UserUtility::IsNull(goal.get())) continue;
+		goal->Draw(context, states, view, proj, option);
+	}
 
 	// プレイモードはスキップ
 	if (is_playing == true) return;
 
-	for (auto& chara : m_chara)
+	for (auto& chara : m_chara)		// キャラオブジェクト
 	{
 		if (UserUtility::IsNull(chara.get())) continue;
-		chara->Draw(states, view, proj, option);
-	}
-}
-
-//==============================================================================
-// ワイヤーフレームを設定
-//==============================================================================
-void BlockManager::SetWireFrame(bool frame)
-{
-	for (auto& sand : m_sands)
-	{
-		if (UserUtility::IsNull(sand.get())) continue;
-		sand->SetWireFrameFlag(frame);
-	}
-	for (auto& cloud : m_clouds)
-	{
-		if (UserUtility::IsNull(cloud.get())) continue;
-		cloud->SetWireFrameFlag(frame);
-
-	}
-	for (auto& coin : m_coins)
-	{
-		if (UserUtility::IsNull(coin.get())) continue;
-		coin->SetWireFrameFlag(frame);
-	}
-	for (auto& chara : m_chara)
-	{
-		if (UserUtility::IsNull(chara.get())) continue;
-		chara->SetWireFrameFlag(frame);
+		chara->Draw(context, states, view, proj, option);
 	}
 }
 
@@ -211,6 +190,8 @@ std::string BlockManager::GetBlockID(const ID& id)
 		return "Cloud";
 	case ID::Obj_Player:
 		return "Player";
+	case ID::Obj_Goal:
+		return "Goal";
 	default:
 		return "";
 	}
@@ -266,6 +247,15 @@ void BlockManager::ReplaceBlock()
 		CreateBlock(chara->GetID(), chara->GetInitialPosition());
 		UserUtility::RemoveVec(m_chara, chara);
 	}
+	for (auto& goal : m_goals)
+	{
+		if (UserUtility::IsNull(goal.get())) continue;
+		if (goal->GetID() == ID::Obj_Goal) continue;
+
+		// 名前に対応したブロックに変更する
+		CreateBlock(goal->GetID(), goal->GetInitialPosition());
+		UserUtility::RemoveVec(m_goals, goal);
+	}
 }
 
 //==============================================================================
@@ -285,6 +275,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 		m_air.push_back(std::make_unique<Air>(pos));
 	if (id == ID::Obj_Player)	// プレイヤ
 		m_chara.push_back(std::make_unique<EditChara>(pos));
+	if (id == ID::Obj_Goal)		// ゴールオブジェクト
+		m_goals.push_back(std::make_unique<Goal>(pos));
 }
 
 //==============================================================================
@@ -297,6 +289,7 @@ void BlockManager::ClearBlocks()
 	m_coins.clear();
 	m_air.clear();
 	m_chara.clear();
+	m_goals.clear();
 }
 
 //==============================================================================
@@ -343,6 +336,23 @@ SimpleMath::Vector3 BlockManager::GetPlayerPosition()
 	}
 
 	return _playerPosition;
+}
+
+//==============================================================================
+// ゴール判定取得
+//==============================================================================
+bool BlockManager::IsArrived()
+{
+	if (m_goals.empty()) return false;
+
+	for (auto& goal : m_goals)
+	{
+		if (goal->IsHitFlag())
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 //==============================================================================
@@ -406,26 +416,14 @@ void BlockManager::OutputStage()
 	std::vector<IGameObject*> _objects;
 
 	//==============================================================================
-	// 追加するのはここから>>>
+	// 追加するのはここから>>> 書き出し用配列にセット
 	//==============================================================================
 
-	// 書き出し用配列にセットする
-	for (auto& sand : m_sands)
-	{
-		_objects.push_back(sand.get());				// 砂
-	}
-	for (auto& cloud : m_clouds)
-	{
-		_objects.push_back(cloud.get());			// 雲
-	}
-	for (auto& coin : m_coins)
-	{
-		_objects.push_back(coin.get());				// コイン
-	}
-	for (auto& chara : m_chara)
-	{
-		_objects.push_back(chara.get());			// プレイヤ
-	}
+	AddWriteObjects(&_objects, m_sands);		// 砂
+	AddWriteObjects(&_objects, m_clouds);		// 雲
+	AddWriteObjects(&_objects, m_coins);		// コイン
+	AddWriteObjects(&_objects, m_chara);		// 操作キャラ
+	AddWriteObjects(&_objects, m_goals);		// ゴール
 
 
 	//==============================================================================

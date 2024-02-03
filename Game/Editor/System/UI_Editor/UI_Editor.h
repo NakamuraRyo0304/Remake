@@ -27,6 +27,9 @@ public:
 		Coin_bn,
 		Air_bn,
 		Player_bn,
+		Goal_bn,
+		OC1_bn,
+		OC2_bn,
 
 		Length
 	};
@@ -39,6 +42,9 @@ private:
 
 	// ボタン
 	std::vector<std::unique_ptr<Button>> m_buttons;
+
+	// ボタンを画面外に隠すフラグ
+	bool is_blindFlag;
 
 
 public:
@@ -76,6 +82,14 @@ public:
 
 	// ボタンのクリック状況を取得
 	const bool& IsClickButton(BUTTON_NAME name) { return is_clicks[name]; }
+
+	// ボタンの加算座標を返す
+	const DirectX::SimpleMath::Vector2& GetAddPosition();
+
+private:
+
+	// ボタンの位置調整
+	void MoveButtonPosition();
 
 };
 
