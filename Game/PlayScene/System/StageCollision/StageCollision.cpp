@@ -41,8 +41,7 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
     ////  関数：UserUtility::CheckPointInSphere(プレイヤ座標, 範囲, オブジェ座標)           ////
     ////                                                                                    ////
     ////  ③当たり判定の実行を行う                                                          ////
-    ////  ※フラグ：TRUEの場合は座標を押し戻す/FALSEの場合は判定のみ行う                    ////
-    ////  関数：IsCollision(プレイヤ座標,オブジェ座標,プレイヤサイズ,オブジェサイズ,フラグ) ////
+    ////  関数：IsCollision(プレイヤ座標,オブジェ座標,プレイヤサイズ,オブジェサイズ)        ////
     ////                                                                                    ////
     ////  ④固有処理を行う                                                                  ////
     ////  押し戻しの適用やオブジェクトごとの処理                                            ////
@@ -57,7 +56,7 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         SimpleMath::Vector3 _pos = sand->GetPosition();
         SimpleMath::Vector3 _scale = sand->GetScale();
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale, true);
+        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
 
         // 固有処理：プレイヤー座標の押し戻し適用・落下の停止
         player->SetFall(_side != Side::Up ? true : false);
@@ -68,14 +67,14 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         SimpleMath::Vector3 _pos = cloud->GetPosition();
         SimpleMath::Vector3 _scale = cloud->GetScale();
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale, true);
+        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
 
         // 固有処理：雲の移動・プレイヤーの押し出し
         player->SetFall(_side != Side::Up ? true : false);
         if (_side != Side::None)
         {
             cloud->SetHitFlag(true);
-            IsCollision(&_playerPos, cloud->GetPosition(), _playerScale, _scale, true);
+            IsCollision(&_playerPos, cloud->GetPosition(), _playerScale, _scale);
             player->SetPosition(_playerPos);
         }
     }
@@ -85,7 +84,7 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         SimpleMath::Vector3 _pos = coin->GetPosition();
         SimpleMath::Vector3 _scale = coin->GetScale();
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale, false);
+        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
 
         // 固有処理：コインのカウントアップ
         if (_side != Side::None)
@@ -99,7 +98,7 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         SimpleMath::Vector3 _pos = goal->GetPosition();
         SimpleMath::Vector3 _scale = goal->GetScale();
         if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale, false);
+        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
 
         // 固有処理：ゴール判定をON
         if (_side != Side::None)
@@ -113,7 +112,7 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
 // 当たり判定の簡単なチェック
 //==============================================================================
 StageCollision::Side StageCollision::IsCollision(SimpleMath::Vector3* playerPos, const SimpleMath::Vector3& blockPos,
-    const SimpleMath::Vector3& playerScale, const SimpleMath::Vector3& blockScale, bool push)
+    const SimpleMath::Vector3& playerScale, const SimpleMath::Vector3& blockScale)
 {
     // 衝突面を初期化
     Side _side = Side::None;
@@ -146,13 +145,13 @@ StageCollision::Side StageCollision::IsCollision(SimpleMath::Vector3* playerPos,
             {
                 // ブロックの右側と当たった
                 _side = Side::Left;
-                if (push) playerPos->x += _overlap.x;
+                playerPos->x += _overlap.x;
             }
             else
             {
                 // ブロックの左側と当たった
                 _side = Side::Right;
-                if (push) playerPos->x -= _overlap.x;
+                playerPos->x -= _overlap.x;
             }
         }
         else if (_overlap.y < _overlap.x && _overlap.y < _overlap.z)
@@ -161,13 +160,13 @@ StageCollision::Side StageCollision::IsCollision(SimpleMath::Vector3* playerPos,
             {
                 // ブロックの上側と当たった
                 _side = Side::Down;
-                if (push) playerPos->y += _overlap.y;
+                playerPos->y += _overlap.y;
             }
             else
             {
                 // ブロックの下側と当たった
                 _side = Side::Up;
-                if (push) playerPos->y -= _overlap.y;
+                playerPos->y -= _overlap.y;
             }
         }
         else
@@ -176,13 +175,13 @@ StageCollision::Side StageCollision::IsCollision(SimpleMath::Vector3* playerPos,
             {
                 // ブロックの前側と当たった
                 _side = Side::Behind;
-                if (push) playerPos->z += _overlap.z;
+                playerPos->z += _overlap.z;
             }
             else
             {
                 // ブロックの後ろ側と当たった
                 _side = Side::Front;
-                if (push) playerPos->z -= _overlap.z;
+                playerPos->z -= _overlap.z;
             }
         }
     }

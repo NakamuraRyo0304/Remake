@@ -101,13 +101,14 @@ void Editor::Draw()
 {
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
+	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
 	// ブロックの描画
-	m_blockManager->Draw(*_states, _view, _projection);
+	m_blockManager->Draw(_context, *_states, _view, _projection);
 
 	// ワールドマウスの描画関連を更新
 	m_worldMouse->Draw(_view, _projection);

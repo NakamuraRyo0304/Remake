@@ -62,8 +62,7 @@ void Logo::Update()
 //==============================================================================
 // •`‰æˆ—
 //==============================================================================
-void Logo::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Logo::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
 {
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	GetModel()->Draw(_context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
 }

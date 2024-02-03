@@ -55,10 +55,9 @@ private:
 	/// <param name="blockPos">ブロック座標</param>
 	/// <param name="playerScale">プレイヤースケール</param>
 	/// <param name="blockScale">ブロックスケール</param>
-	/// <param name="push">押し戻しを行うフラグ（trueで押し戻す）</param>
 	/// <returns>衝突面</returns>
 	Side IsCollision(DirectX::SimpleMath::Vector3* playerPos, const DirectX::SimpleMath::Vector3& blockPos,
-		const DirectX::SimpleMath::Vector3& playerScale, const DirectX::SimpleMath::Vector3& blockScale, bool push = false);
+		const DirectX::SimpleMath::Vector3& playerScale, const DirectX::SimpleMath::Vector3& blockScale);
 };
 
 #endif // STAGECOLLISION

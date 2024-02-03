@@ -88,8 +88,17 @@ void PlayScene::Update()
 		if (m_blockManager->IsArrived())
 		{
 			m_adminCamera->SetEasing(true);// 補間モードにする
-			m_adminCamera->SetType(CameraType::Title_OverHead);
-			//ChangeScene(SCENE::SELECT);
+			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
+			{
+				m_adminCamera->SetType(CameraType::Select1_Floating);
+			}
+			ChangeScene(SCENE::SELECT);
+		}
+
+		// 死んだら再読み込み
+		if (m_player->IsDeath())
+		{
+			ChangeScene(SCENE::PLAY);
 		}
 	}
 
@@ -130,6 +139,7 @@ void PlayScene::Draw()
 {
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
+	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
@@ -139,13 +149,13 @@ void PlayScene::Draw()
 	m_worldMouse->Draw(_view, _projection);
 
 	// 空の描画
-	m_sky->Draw(*_states, _view, _projection);
+	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
-	m_blockManager->Draw(*_states, _view, _projection);
+	m_blockManager->Draw(_context, *_states, _view, _projection);
 
 	// プレイヤーの描画
-	m_player->Draw(*_states, _view, _projection);
+	m_player->Draw(_context, *_states, _view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -235,6 +245,9 @@ void PlayScene::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
 }
 
+//==============================================================================
+// ステージのパスを取得する
+//==============================================================================
 const wchar_t* PlayScene::GetStagePath()
 {
 	switch (m_stageNumber)
