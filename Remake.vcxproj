@@ -202,6 +202,7 @@
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h" />
     <ClInclude Include="Game\Common\Blocks\Sand\Sand.h" />
+    <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
@@ -271,6 +272,7 @@
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp" />
     <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp" />
+    <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
@@ -357,6 +359,7 @@
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\SkyFallモデル\CursorObj.blend" />
     <None Include="packages.config" />
     <Font Include="Resources\Fonts\myfile.spritefont">
       <FileType>Document</FileType>
@@ -373,6 +376,7 @@
     <None Include="Resources\Models\Body.cmo" />
     <None Include="Resources\Models\Cloud.cmo" />
     <None Include="Resources\Models\Coin.cmo" />
+    <None Include="Resources\Models\CursorObj.cmo" />
     <None Include="Resources\Models\Goal.cmo" />
     <None Include="Resources\Models\Head.cmo" />
     <None Include="Resources\Models\Sand.cmo" />

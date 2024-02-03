@@ -49,11 +49,11 @@ void Air::Update()
 //==============================================================================
 // ï`âÊèàóù
 //==============================================================================
-void Air::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Air::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
 {
 	UNREFERENCED_PARAMETER(context);
 	UNREFERENCED_PARAMETER(states);
 	UNREFERENCED_PARAMETER(view);
 	UNREFERENCED_PARAMETER(proj);
-	UNREFERENCED_PARAMETER(no_use_here);
+	UNREFERENCED_PARAMETER(option);
 }

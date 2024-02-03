@@ -1,40 +1,34 @@
 /*
- *	@File	Sand.cpp
- *	@Brief	砂ブロック。
- *	@Date	2023-01-27
+ *  @File   CursorObject.cpp
+ *  @Brief  3Dカーソルの位置にオブジェクトを描画。
+ *  @Date   2024-02-04
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
-#include "Libraries/UserUtility.h"
-#include "Sand.h"
-
-//==============================================================================
-// 定数の設定
-//==============================================================================
-
+#include "CursorObject.h"
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Sand::Sand(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models", position)
+CursorObject::CursorObject()
+	: IGameObject(L"Resources/Models/CursorObj.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Obj_Sand);
+	SetID(ID::CursorPos);
 	SetWeight(1.0f);
 
-	SetPosition(SimpleMath::Vector3(position));
+	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetScale(SimpleMath::Vector3::One * 0.25f);
 	SetInitialScale(GetScale());
 }
 
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Sand::~Sand()
+CursorObject::~CursorObject()
 {
 	ReleaseModel();
 }
@@ -42,8 +36,11 @@ Sand::~Sand()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Sand::Update()
+void CursorObject::Update()
 {
+	// 座標を設定する
+	SetPosition(m_cursorPosition);
+
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
@@ -51,7 +48,7 @@ void Sand::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Sand::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
+void CursorObject::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
 {
 	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), option);
 }

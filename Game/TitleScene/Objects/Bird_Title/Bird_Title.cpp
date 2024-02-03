@@ -70,9 +70,9 @@ void Bird_Title::Update()
 //==============================================================================
 // •`‰æˆ—
 //==============================================================================
-void Bird_Title::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Bird_Title::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
 {
-	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, option);
 }
 
 //==============================================================================
