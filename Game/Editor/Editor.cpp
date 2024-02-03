@@ -166,7 +166,6 @@ void Editor::CreateWDResources()
 void Editor::SetSceneValues()
 {
 	// カメラの初期設定-自動
-	//m_adminCamera->SetType(CameraType::Select1_Floating);
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
 	m_adminCamera->SetEasing(false);
@@ -193,8 +192,12 @@ void Editor::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
 	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
+	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
+		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
 	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_editorCollision->GetPosition().x, m_editorCollision->GetPosition().y, m_editorCollision->GetPosition().z);
+	_string.DrawFormatString(states, { 0,150 }, Colors::Black, L"AddPosition::%.2f,%.2f",
+		m_ui->GetAddPosition().x, m_ui->GetAddPosition().y);
 }
 
 //==============================================================================
@@ -202,25 +205,29 @@ void Editor::DebugDraw(CommonStates& states)
 //==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
-	for (auto& air : m_blockManager->GetAirBlock())
+	for (auto& obj : m_blockManager->GetAirBlock())
 	{
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(air), id);
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& sand : m_blockManager->GetSandBlock())
+	for (auto& obj : m_blockManager->GetSandBlock())
 	{
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(sand), id);
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& cloud : m_blockManager->GetCloudBlock())
+	for (auto& obj : m_blockManager->GetCloudBlock())
 	{
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(cloud), id);
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& coin : m_blockManager->GetCoinBlock())
+	for (auto& obj : m_blockManager->GetCoinBlock())
 	{
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(coin), id);
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& chara : m_blockManager->GetPlayerBlock())
+	for (auto& obj : m_blockManager->GetPlayerBlock())
 	{
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(chara), id);
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
+	}
+	for (auto& obj : m_blockManager->GetGoalObject())
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
 }
 
@@ -229,14 +236,10 @@ void Editor::UpdateCollisions(ID id)
 //==============================================================================
 void Editor::SetDrawObject()
 {
-	if (m_ui->IsClickButton(BN::Sand_bn))
-		m_selectionID = ID::Obj_Sand;
-	if (m_ui->IsClickButton(BN::Cloud_bn))
-		m_selectionID = ID::Obj_Cloud;
-	if (m_ui->IsClickButton(BN::Coin_bn))
-		m_selectionID = ID::Obj_Coin;
-	if (m_ui->IsClickButton(BN::Air_bn))
-		m_selectionID = ID::Obj_Air;
-	if (m_ui->IsClickButton(BN::Player_bn))
-		m_selectionID = ID::Obj_Player;
+	if (m_ui->IsClickButton(BN::Sand_bn))	m_selectionID = ID::Obj_Sand;	// 砂
+	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
+	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
+	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア
+	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
+	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
 }

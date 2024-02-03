@@ -73,9 +73,6 @@ void PlayScene::Update()
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
 
-	// UIの更新
-	//m_ui->Update();
-
 	// シーン遷移
 	if (IsCanUpdate())
 	{
@@ -86,13 +83,25 @@ void PlayScene::Update()
 			_followPath.y = m_player->GetPosition().y;
 			m_player->PushBackFollowPath(_followPath);
 		}
+
+		// ゴールしたらシーン遷移 仮でセレクトに
+		if (m_blockManager->IsArrived())
+		{
+			m_adminCamera->SetEasing(true);// 補間モードにする
+			m_adminCamera->SetType(CameraType::Title_OverHead);
+			//ChangeScene(SCENE::SELECT);
+		}
 	}
+
+#ifdef _DEBUG
 
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 	{
 		m_player->ResetGoalPosition();
 		m_player->SetPosition({ 1.0f,0.5f,1.0f });
 	}
+
+#endif
 
 	// カメラの更新
 	m_adminCamera->Update();
@@ -138,10 +147,6 @@ void PlayScene::Draw()
 	// プレイヤーの描画
 	m_player->Draw(*_states, _view, _projection);
 
-	// UIの表示
-//	m_ui->Draw();
-
-
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
@@ -183,8 +188,8 @@ void PlayScene::CreateWDResources()
 	// ワールドマウス作成
 	m_worldMouse = std::make_unique<WorldMouse>();
 
-	// ブロックマネージャ作成(仮でサンプル１)
-	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	// ブロックマネージャ作成
+	m_blockManager = std::make_unique<BlockManager>(GetStagePath());
 
 	// ステージコリジョン作成
 	m_stageCollision = std::make_unique<StageCollision>();
@@ -228,4 +233,21 @@ void PlayScene::DebugDraw(CommonStates& states)
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetGoalPoints().size());
 	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
+}
+
+const wchar_t* PlayScene::GetStagePath()
+{
+	switch (m_stageNumber)
+	{
+	case 1:
+		return L"Resources/Stages/sample1.json";
+	case 2:
+		return L"Resources/Stages/sample2.json";
+	case 3:
+		return L"Resources/Stages/sample3.json";
+
+
+	default:
+		return L"Resources/Stages/sample1.json";
+	}
 }

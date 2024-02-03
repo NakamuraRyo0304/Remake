@@ -17,6 +17,8 @@ Button::Button(const wchar_t* name, const wchar_t* image)
 	: m_name{ name }
 	, m_baseRate{}
 	, m_position{}
+	, m_adder{}
+	, m_screenRate{}
 	, m_size{}
 {
 	// 画像の設定
@@ -46,6 +48,7 @@ void Button::Initialize(SimpleMath::Vector2 position, SimpleMath::Vector2 rate, 
 	m_states = State::Release;
 
 	// 拡大率を設定
+	m_screenRate = screenRate;
 	m_baseRate = m_rate = rate * screenRate;
 
 	// 色を設定
@@ -67,8 +70,9 @@ void Button::Update()
 	float _left = static_cast<float>(m_size.bottom * m_rate.y);
 
 	// 範囲外に行ったらリリース
-	if (m_position.x < _ms.GetState().x && _ms.GetState().x < m_position.x + _right &&
-		m_position.y < _ms.GetState().y && _ms.GetState().y < m_position.y + _left)
+	auto _addPosition = m_adder * m_screenRate;
+	if ((m_position + _addPosition).x < _ms.GetState().x && _ms.GetState().x < (m_position + _addPosition).x + _right &&
+		(m_position + _addPosition).y < _ms.GetState().y && _ms.GetState().y < (m_position + _addPosition).y + _left)
 	{
 		// ボタンをクリックする
 		if (_mt->leftButton == Mouse::ButtonStateTracker::PRESSED)
@@ -91,6 +95,7 @@ void Button::Update()
 //==============================================================================
 void Button::Draw()
 {
-	m_sprite->DrawTexture(m_name, m_position, m_color, m_rate, { 0,0 } , m_size);
+	auto _addPosition = m_adder * m_screenRate;
+	m_sprite->DrawTexture(m_name, m_position + _addPosition, m_color, m_rate, { 0,0 } , m_size);
 }
 

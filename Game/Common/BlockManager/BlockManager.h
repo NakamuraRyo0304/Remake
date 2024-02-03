@@ -28,6 +28,7 @@
 #include "../Blocks/Coin/Coin.h"						// コインブロック
 #include "../../Editor/Objects/Air/Air.h"				// ステージエディタ用判定ブロック
 #include "../../Editor/Objects/EditChara/EditChara.h"	// ステージエディタ用プレイヤ
+#include "../Blocks/Goal/Goal.h"						// ゴールオブジェクト
 
 class BlockManager
 {
@@ -74,6 +75,7 @@ private:
 	std::vector<std::unique_ptr<Coin>> m_coins;
 	std::vector<std::unique_ptr<Air>> m_air;
 	std::vector<std::unique_ptr<EditChara>> m_chara;
+	std::vector<std::unique_ptr<Goal>> m_goals;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
@@ -146,6 +148,25 @@ public:
 	// ステージを書き出す
 	void OutputStage();
 
+	/// <summary>
+	/// 書き出し用オブジェクト追加関数
+	/// </summary>
+	/// <param name="objects">書き出しに使用する配列</param>
+	/// <param name="wish">任意のオブジェクトベクター配列</param>
+	/// <returns>なし</returns>
+	template <typename T>
+	void AddWriteObjects(std::vector<IGameObject*>* objects, std::vector<T>& wish)
+	{
+		// 空なら処理しない
+		if (wish.empty()) return;
+
+		// オブジェクトを追加する
+		for (auto& obj : wish)
+		{
+			objects->push_back(obj.get());
+		}
+	}
+
 private:
 
 	// ブロックのIDから文字列を返す(書き出し用)
@@ -171,6 +192,8 @@ public:
 	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
 	// コインブロックの配列を参照
 	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+	// ゴールオブジェクトの配列を参照
+	std::vector<std::unique_ptr<Goal>>& GetGoalObject() { return m_goals; }
 
 
 	// エアーブロックの配列を参照
@@ -182,6 +205,9 @@ public:
 
 	// プレイヤの座標を取得する
 	DirectX::SimpleMath::Vector3 GetPlayerPosition();
+
+	// ゴール判定の取得
+	bool IsArrived();
 
 };
 

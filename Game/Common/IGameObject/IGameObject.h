@@ -155,6 +155,8 @@ public:
 	std::unique_ptr<DirectX::Model>& GetModel() { return m_model; }
 	// モデルをリリースする
 	void ReleaseModel();
+	// モデルを変更する
+	void ChangeModel(const wchar_t* path);
 
 public:
 	// 頂点シェーダーを作成する

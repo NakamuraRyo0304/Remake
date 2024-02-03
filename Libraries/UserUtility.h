@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <cmath>
 
 namespace UserUtility
 {
@@ -19,7 +20,7 @@ namespace UserUtility
 	/// </summary>
 	/// <param name="a">開始値</param>
 	/// <param name="b">終了値</param>
-	/// <param name="t">かかる時間</param>
+	/// <param name="t">かかる時間（0.0から1.0の範囲で指定）</param>
 	/// <returns>補間中の値</returns>
 	template<typename T>
 	inline T Lerp(
@@ -307,6 +308,41 @@ namespace UserUtility
 		_angle *= UserUtility::Floor<float>(360.0f / (2.0f * M_PI));
 
 		return _angle;
+	}
+
+	/// <summary>
+	/// 値を入れ替える
+	/// </summary>
+	/// <param name="A">値１</param>
+	/// <param name="B">値２</param>
+	/// <returns>なし</returns>
+	template<typename T>
+	void Swap(T* A, T* B)
+	{
+		T _tmp = *A;
+		*A = *B;
+		*B = _tmp;
+	}
+
+	/// <summary>
+	/// イージングを使用した線形補完関数
+	/// </summary>
+	/// <param name="a">開始値</param>
+	/// <param name="b">終了値</param>
+	/// <param name="t">かかる時間（0.0から1.0の範囲で指定）</param>
+	/// <returns>補間中の値</returns>
+	template<typename T>
+	inline T EasedLerp(
+		T a,
+		T b,
+		float t
+	)
+	{
+		float _t = (t == 0.0f) ? 0.0f : (t == 1.0f) ? 1.0f : (t < 0.5f) ?
+			static_cast<float>(std::pow(2, 20 * t - 10)) / 2.0f :
+			(2.0f - static_cast<float>(std::pow(2, -20 * t + 10))) / 2.0f;
+
+		return a + _t * (b - a);
 	}
 }
 #endif // USERUTILITY
