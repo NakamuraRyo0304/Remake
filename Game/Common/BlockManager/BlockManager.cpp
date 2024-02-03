@@ -169,34 +169,6 @@ void BlockManager::Draw(CommonStates& states, SimpleMath::Matrix& view, SimpleMa
 }
 
 //==============================================================================
-// ワイヤーフレームを設定
-//==============================================================================
-void BlockManager::SetWireFrame(bool frame)
-{
-	for (auto& sand : m_sands)
-	{
-		if (UserUtility::IsNull(sand.get())) continue;
-		sand->SetWireFrameFlag(frame);
-	}
-	for (auto& cloud : m_clouds)
-	{
-		if (UserUtility::IsNull(cloud.get())) continue;
-		cloud->SetWireFrameFlag(frame);
-
-	}
-	for (auto& coin : m_coins)
-	{
-		if (UserUtility::IsNull(coin.get())) continue;
-		coin->SetWireFrameFlag(frame);
-	}
-	for (auto& chara : m_chara)
-	{
-		if (UserUtility::IsNull(chara.get())) continue;
-		chara->SetWireFrameFlag(frame);
-	}
-}
-
-//==============================================================================
 // ブロックの種類から書き出し用文字列を返す
 //==============================================================================
 std::string BlockManager::GetBlockID(const ID& id)

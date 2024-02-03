@@ -25,7 +25,6 @@ private:
 		PointRight,		// 右側位置
 		PointBack,		// 後方位置
 		PointLeft,		// 左側位置
-		PointUp,		// 上側位置
 
 		Length,			// 全要素数
 	};

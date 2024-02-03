@@ -130,9 +130,6 @@ public:
 	// ゲームプレイするときはONにする
 	void SetPlay(bool play) { is_playing = play; }
 
-	// ワイヤーフレームの切り替えフラグデフォルトはFalse
-	void SetWireFrame(bool frame);
-
 public:
 
 	//==============================================================================
