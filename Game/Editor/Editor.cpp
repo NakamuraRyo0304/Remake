@@ -225,27 +225,35 @@ void Editor::DebugDraw(CommonStates& states)
 //==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
-	for (auto& obj : m_blockManager->GetAirBlock())
+	//////////////////////////////////////////
+	///            ※複文省略              ///
+	//////////////////////////////////////////
+
+	for (auto& obj : m_blockManager->GetAirBlock())		// エアオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetSandBlock())
+	for (auto& obj : m_blockManager->GetSandBlock())	// 砂ブロック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetCloudBlock())
+	for (auto& obj : m_blockManager->GetCloudBlock())	// 雲ギミック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetCoinBlock())
+	for (auto& obj : m_blockManager->GetCoinBlock())	// コインオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetPlayerBlock())
+	for (auto& obj : m_blockManager->GetPlayerBlock())	// プレイヤオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetGoalObject())
+	for (auto& obj : m_blockManager->GetGoalObject())	// ゴールポイント
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
+	}
+	for (auto& obj : m_blockManager->GetSpikeEnemy())	// 棘エネミー
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -262,4 +270,5 @@ void Editor::SetDrawObject()
 	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア
 	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
 	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
+	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
 }

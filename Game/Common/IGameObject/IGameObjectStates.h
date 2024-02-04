@@ -23,6 +23,7 @@ enum class ID
 	Obj_Coin,		// コインブロック
 	Obj_Cloud,		// 雲ブロック
 	Obj_Goal,		// ゴールオブジェクト
+	Obj_Spike,		// 棘オブジェクト
 	CursorPos,		// カーソルの3D位置
 
 

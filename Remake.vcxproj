@@ -202,6 +202,7 @@
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h" />
     <ClInclude Include="Game\Common\Blocks\Sand\Sand.h" />
+    <ClInclude Include="Game\Common\Blocks\Spike\Spike.h" />
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
@@ -272,6 +273,7 @@
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp" />
     <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp" />
+    <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp" />
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
@@ -341,6 +343,7 @@
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds" />
+    <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
     <Image Include="Resources\Textures\SelectScene\Editor.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage1.dds" />
@@ -359,7 +362,6 @@
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\SkyFallモデル\CursorObj.blend" />
     <None Include="packages.config" />
     <Font Include="Resources\Fonts\myfile.spritefont">
       <FileType>Document</FileType>
@@ -381,11 +383,10 @@
     <None Include="Resources\Models\Head.cmo" />
     <None Include="Resources\Models\Sand.cmo" />
     <None Include="Resources\Models\ShineSky.cmo" />
+    <None Include="Resources\Models\Spike.cmo" />
     <None Include="Resources\Models\TitleLogoVer2.cmo" />
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli" />
-    <None Include="Resources\Shaders\Normal\Normal.hlsli" />
     <None Include="Resources\Shaders\ParametersHeader.hlsli" />
-    <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli" />
     <None Include="Resources\Shaders\Transition\Transition.hlsli" />
     <None Include="Resources\Stages\sample1.json" />
     <None Include="Resources\Stages\sample2.json" />
@@ -423,68 +424,6 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\DisplayEffects\VGS\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\DisplayEffects\VGS\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Normal\NormalGS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Normal\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Normal\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Normal\NormalPS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Normal\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Normal\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Normal\NormalVS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Normal\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Normal\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\Shaders\(filename).(cso)</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Resources\Shaders\(filename).(cso)</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS_Depth.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_VS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_VS_Depth.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\ShadowMap\%(Filename).cso</ObjectFileOutput>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\Transition\GS_Transition.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Transition\%(Filename).cso</ObjectFileOutput>

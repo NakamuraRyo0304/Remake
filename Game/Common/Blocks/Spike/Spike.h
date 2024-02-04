@@ -1,20 +1,20 @@
 /*
- *	@File	Air.h
- *	@Brief	判定用オブジェクト（エディタ）。
- *	@Date	2023-01-28
+ *	@File	Spike.h
+ *	@Brief	棘オブジェクト(敵)。
+ *	@Date	2024-02-04
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef AIR
-#define AIR
+#ifndef SPIKE
+#define SPIKE
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Air : public IGameObject
+class Spike : public IGameObject
 {
 private:
 
@@ -24,6 +24,11 @@ private:
 	// アクティブフラグ
 	bool is_active;
 
+private:
+
+	// 捕食回転速度
+	static const float EATING_SPEED;
+
 public:
 
 	/// <summary>
@@ -31,8 +36,8 @@ public:
 	/// </summary>
 	/// <param name="position">生成座標</param>
 	/// <returns>なし</returns>
-	Air(DirectX::SimpleMath::Vector3 position);
-	~Air();
+	Spike(DirectX::SimpleMath::Vector3 position);
+	~Spike();
 
 	/// <summary>
 	/// 更新処理
@@ -55,12 +60,16 @@ public:
 
 public:
 
-	// 衝突を通知する
-	void NotificateHit(const bool& is) { is_hit = is; }
-
+	// アクティブフラグを取得
+	bool IsActive() { return is_active; }
 	// アクティブフラグを切り替える
 	void SetActive(const bool flag) { is_active = flag; }
 
+	// 衝突通知を取得
+	bool IsHitFlag() { return is_hit; }
+	// 衝突通知
+	void SetHitFlag(bool isHit) { is_hit = isHit; }
+
 };
 
-#endif // AIR
+#endif // SPIKE

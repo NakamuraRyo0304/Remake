@@ -12,7 +12,8 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const float StageCollision::RADIUS = 1.0f;      // 当たり判定を行う半径
+const float StageCollision::RADIUS = 1.0f;          // 当たり判定を行う半径
+const float StageCollision::SPIKE_RADIUS = 0.5f;    // 棘エネミーの半径
 
 //==============================================================================
 // コンストラクタ
@@ -104,6 +105,20 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         if (_side != Side::None)
         {
             goal->OnHitFlag();
+        }
+    }
+    for (auto& spike : blocks->GetSpikeEnemy())         // 棘オブジェクト
+    {
+        SimpleMath::Vector3 _pos = spike->GetPosition();
+        SimpleMath::Vector3 _scale = spike->GetScale();
+        if (not UserUtility::CheckPointInSphere(_playerPos, SPIKE_RADIUS, _pos)) continue;
+        auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
+
+        // 固有処理：スパイクに衝突通知を送る・プレイヤを殺す
+        if (_side != Side::None)
+        {
+            spike->SetHitFlag(true);
+            player->SetDeath(true);
         }
     }
 }

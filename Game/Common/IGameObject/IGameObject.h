@@ -25,13 +25,6 @@ private:
 	// ---ディレクトリパス---
 	const wchar_t* m_directoryPath;
 
-	// ---頂点シェーダー---
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_VS;
-	// ---ピクセルシェーダー---
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS;
-	// ---ジオメトリシェーダー---
-	Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_GS;
-
 	// ---ワールド行列---
 	DirectX::SimpleMath::Matrix m_world;		// このオブジェクトのマトリクス
 	DirectX::SimpleMath::Matrix m_parentMatrix;	// 親のオブジェクトのマトリクス
@@ -152,26 +145,6 @@ public:
 	void ReleaseModel();
 	// モデルを変更する
 	void ChangeModel(const wchar_t* path);
-
-public:
-	// 頂点シェーダーを作成する
-	void CreateVSShader(const wchar_t* vsPath);
-	// 頂点シェーダーを取得する
-	ID3D11VertexShader* GetVSShader() { return m_VS.Get(); }
-	// 頂点シェーダーを設定する
-	void SetVSShader(ID3D11VertexShader* vsShader) { m_VS = vsShader; }
-	// ピクセルシェーダーを作成する
-	void CreatePSShader(const wchar_t* psPath);
-	// ピクセルシェーダーを取得する
-	ID3D11PixelShader* GetPSShader() { return m_PS.Get(); }
-	// ピクセルシェーダーを設定する
-	void SetPSShader(ID3D11PixelShader* psShader) { m_PS = psShader; }
-	// ジオメトリシェーダーを作成する
-	void CreateGSShader(const wchar_t* gsPath);
-	// ジオメトリシェーダーを取得する
-	ID3D11GeometryShader* GetGSShader() { return m_GS.Get(); }
-	// ジオメトリシェーダーを設定する
-	void SetGSShader(ID3D11GeometryShader* gsShader) { m_GS = gsShader; }
 };
 
 #endif // IGAMEOBJECT

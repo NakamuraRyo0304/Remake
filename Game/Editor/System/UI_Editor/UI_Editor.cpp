@@ -33,6 +33,7 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	m_buttons.push_back(std::make_unique<Button>(L"Goal", L"Resources/Textures/Editor/Buttons/GoalButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Open", L"Resources/Textures/Editor/Buttons/OpenBar.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Close", L"Resources/Textures/Editor/Buttons/CloseBar.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Spike", L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
 
 	// ‰Šú‰»ˆ—
 	Initialize();
@@ -76,6 +77,7 @@ void UI_Editor::Initialize()
 	m_buttons[BN::Air_bn]->Initialize(		{ _R, _Y + _OFF * 2}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Player_bn]->Initialize(	{ _L, _Y + _OFF * 3}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Goal_bn]->Initialize(		{ _R, _Y + _OFF * 3}, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::Spike_bn]->Initialize(	{ _L, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 
 }
 

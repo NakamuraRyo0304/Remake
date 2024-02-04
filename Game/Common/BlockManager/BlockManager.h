@@ -29,6 +29,7 @@
 #include "../../Editor/Objects/Air/Air.h"				// ステージエディタ用判定ブロック
 #include "../../Editor/Objects/EditChara/EditChara.h"	// ステージエディタ用プレイヤ
 #include "../Blocks/Goal/Goal.h"						// ゴールオブジェクト
+#include "../Blocks/Spike/Spike.h"						// 棘オブジェクト
 
 class BlockManager
 {
@@ -76,6 +77,7 @@ private:
 	std::vector<std::unique_ptr<Air>> m_air;
 	std::vector<std::unique_ptr<EditChara>> m_chara;
 	std::vector<std::unique_ptr<Goal>> m_goals;
+	std::vector<std::unique_ptr<Spike>> m_spikes;
 
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
@@ -196,6 +198,8 @@ public:
 	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
 	// ゴールオブジェクトの配列を参照
 	std::vector<std::unique_ptr<Goal>>& GetGoalObject() { return m_goals; }
+	// 棘オブジェクトの配列を参照
+	std::vector<std::unique_ptr<Spike>>& GetSpikeEnemy() { return m_spikes; }
 
 
 	// エアーブロックの配列を参照
@@ -210,6 +214,9 @@ public:
 
 	// ゴール判定の取得
 	bool IsArrived();
+
+	// 棘の衝突を取得
+	bool IsHitSpike();
 
 };
 

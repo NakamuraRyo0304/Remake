@@ -247,6 +247,27 @@ namespace UserUtility
 		// static_cast を使って安全な型変換を行います
 		return static_cast<T*>(u.get());
 	}
+	/// <summary>
+	/// std::vector の各要素を基底クラスポインタに変換する関数
+	/// </summary>
+	/// <typeparam name="T">変換先の型</typeparam>
+	/// <typeparam name="U">変換元の型</typeparam>
+	/// <param name="vec">変換対象の std::vector</param>
+	/// <returns>基底クラスポインタの std::vector（変換に失敗した場合は nullptr を含む）</returns>
+	template<typename T, typename U>
+	std::vector<T*> UniqueCastVector(const std::vector<std::unique_ptr<U>>& vec)
+	{
+		std::vector<T*> _result;
+		_result.reserve(vec.size());
+
+		for (const auto& element : vec)
+		{
+			T* _converted = UniqueCast<T>(element);
+			_result.push_back(_converted);
+		}
+
+		return _result;
+	}
 
 	/// <summary>
 	/// std::vectorの選択した要素を削除する

@@ -28,6 +28,9 @@ private:
 	// 境界球半径
 	static const float RADIUS;
 
+	// 棘エネミー固有の半径
+	static const float SPIKE_RADIUS;
+
 public:
 
 	/// <summary>

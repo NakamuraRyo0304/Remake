@@ -60,8 +60,8 @@ Player::~Player()
 //==============================================================================
 void Player::Update()
 {
-	// 配列が空じゃなかったら動かす
-	if (not m_goalPoints.empty())
+	// 目的地が存在しているかつ生存中の場合、目的地を追跡する
+	if (not m_goalPoints.empty() && not is_death)
 	{
 		m_giveUpTime--;
 

@@ -30,6 +30,7 @@ public:
 		Goal_bn,
 		OC1_bn,
 		OC2_bn,
+		Spike_bn,
 
 		Length
 	};

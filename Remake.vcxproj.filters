@@ -104,9 +104,6 @@
     <Filter Include="Libraries\DepthStencil">
       <UniqueIdentifier>{f5a43487-ff87-42d0-80f9-16ea9794b013}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Shaders\ShadowMap">
-      <UniqueIdentifier>{eb0e3c21-c3c1-4804-bc83-0e2673c1c061}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Libraries\ScreenEffects">
       <UniqueIdentifier>{67e400a2-a5fc-4f31-8d83-d35fe9b9ad80}</UniqueIdentifier>
     </Filter>
@@ -275,9 +272,6 @@
     <Filter Include="Game\Scenes\PlayScene\Objects\Sky_Play">
       <UniqueIdentifier>{651deb3c-e72a-4e56-9170-1bc06d816d9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Shaders\Normal">
-      <UniqueIdentifier>{04dfc141-398d-4f34-acdd-1246a2a15b1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scenes\PlayScene\Objects\Player">
       <UniqueIdentifier>{a427642f-6c2c-4f65-9712-cce71ba48eb9}</UniqueIdentifier>
     </Filter>
@@ -304,6 +298,9 @@
     </Filter>
     <Filter Include="Game\Scenes\Editor\Objects\CursorObj">
       <UniqueIdentifier>{0f11b2c2-16cc-468a-af70-25d702f09c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\Blocks\Spike">
+      <UniqueIdentifier>{bc5f6b0c-a2c6-4055-9b00-105a8843ae5c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +508,9 @@
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h">
       <Filter>Game\Scenes\Editor\Objects\CursorObj</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Spike\Spike.h">
+      <Filter>Game\Common\Blocks\Spike</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -699,6 +699,9 @@
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp">
       <Filter>Game\Scenes\Editor\Objects\CursorObj</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp">
+      <Filter>Game\Common\Blocks\Spike</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -781,6 +784,9 @@
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds">
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest">
@@ -815,9 +821,6 @@
     <None Include="Resources\Shaders\ParametersHeader.hlsli">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </None>
     <None Include="Resources\Shaders\Transition\Transition.hlsli">
       <Filter>Resources\Shaders\Transition</Filter>
     </None>
@@ -842,9 +845,6 @@
     <None Include="Resources\Stages\sample2.json">
       <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
     </None>
-    <None Include="Resources\Shaders\Normal\Normal.hlsli">
-      <Filter>Resources\Shaders\Normal</Filter>
-    </None>
     <None Include="Resources\Models\Cloud.cmo">
       <Filter>Resources\Models\Block</Filter>
     </None>
@@ -866,8 +866,12 @@
     <None Include="Resources\Models\Goal.cmo">
       <Filter>Resources\Models\Block</Filter>
     </None>
-    <None Include="..\SkyFallモデル\CursorObj.blend" />
-    <None Include="Resources\Models\CursorObj.cmo" />
+    <None Include="Resources\Models\CursorObj.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Spike.cmo">
+      <Filter>Resources\Models\Block</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\myfile.spritefont">
@@ -875,18 +879,6 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS.hlsl">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS_Depth.hlsl">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_VS.hlsl">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\ShadowMap\SM_VS_Depth.hlsl">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shaders\Transition\VS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
     </FxCompile>
@@ -907,15 +899,6 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\Transition\GS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Normal\NormalGS.hlsl">
-      <Filter>Resources\Shaders\Normal</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Normal\NormalPS.hlsl">
-      <Filter>Resources\Shaders\Normal</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Normal\NormalVS.hlsl">
-      <Filter>Resources\Shaders\Normal</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
