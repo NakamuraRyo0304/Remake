@@ -1,0 +1,32 @@
+//
+// memo.txt
+// 開発時用メモ
+// 最終更新日時
+// 2024/2/4/日
+
+
+〇現在作業中のファイル
+
+・敵同士の当たり判定（回避や衝突）
+EnemyCollision.cpp/h
+・死亡時のカメラ
+DeathCamera.cpp/h
+
+
+〇常時作業必須のファイル
+・ステージに使われるオブジェクト管理
+BlockManager.cpp/h
+　内容を追記[Initialize,Update,Draw,OutputStage,ClearBlocks,CreateBlock,ReplaceBlock,GetBlockID]
+　追加するオブジェクトの配列とゲッターを追記する
+
+・ステージとプレイヤの当たり判定
+StageCollision.cpp
+　内容を追記[Update]
+
+・オブジェクトのIDを管理するクラス
+IGameObjectStates.h
+　IDを追記する
+
+・エディタのボタン等を描画するクラス
+UI_Editor.cpp/h
+　ボタンを追加

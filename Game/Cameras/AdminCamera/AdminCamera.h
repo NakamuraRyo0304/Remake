@@ -24,6 +24,7 @@
 #include "../FloatingCameras/Stage3Camera/Stage3Camera.h"
 #include "../RotateCamera/RotateCamera.h"
 #include "../EditorCamera/EditorCamera.h"
+#include "../DeathCamera/DeathCamera.h"
 
 class AdminCamera
 {
@@ -38,6 +39,7 @@ public:
 		Select2_Floating,		// ステージ２の定点カメラ
 		Select3_Floating,		// ステージ３の定点カメラ
 		Editor_Moving,			// エディタ時のフリー移動カメラ
+		Death_Following,		// 死亡時のカメラ
 
 		Length,					// カメラの数
 	};
@@ -127,11 +129,23 @@ public:
 	/// <returns>目線の座標</returns>
 	DirectX::SimpleMath::Vector3 GetPosition() { return m_position; }
 	/// <summary>
+	/// 座標を設定
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <returns>なし</returns>
+	void SetPosition(DirectX::SimpleMath::Vector3 pos);
+	/// <summary>
 	/// 注視点を取得
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>注視点</returns>
 	DirectX::SimpleMath::Vector3 GetTarget() { return m_target; }
+	/// <summary>
+	/// 注視点を設定
+	/// </summary>
+	/// <param name="target">注視点</param>
+	/// <returns>なし</returns>
+	void SetTarget(DirectX::SimpleMath::Vector3 target);
 	/// <summary>
 	/// ビュー行列を取得
 	/// </summary>

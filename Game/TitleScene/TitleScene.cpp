@@ -124,9 +124,9 @@ void TitleScene::Draw()
 
 
 	// デバッグ描画
-#ifdef _DEBUG
-	//auto _grid = GetSystemManager()->GetGridFloor();
-	//_grid->Draw(*_states, _view, _projection, Colors::Green);
+#if _DEBUG
+	auto _grid = GetSystemManager()->GetGridFloor();
+	_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
 #endif
 }

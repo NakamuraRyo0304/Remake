@@ -85,7 +85,7 @@ void PlayScene::Update()
 			m_player->PushBackFollowPath(_followPath);
 		}
 
-		// ゴールしたらシーン遷移 仮でセレクトに
+		// ゴールしたらクリアへ(仮セレクト)
 		if (m_blockManager->IsArrived())
 		{
 			m_adminCamera->SetEasing(true);// 補間モードにする
@@ -99,11 +99,20 @@ void PlayScene::Update()
 		// 死んだら再読み込み
 		if (m_player->IsDeath())
 		{
+			m_adminCamera->SetEasing(true);// 補間モードにする
+			if (m_adminCamera->GetType() != CameraType::Death_Following)
+			{
+				m_adminCamera->SetType(CameraType::Death_Following);
+			}
+
+			// プレイヤを追いかける
+			m_adminCamera->SetTarget(m_player->GetPosition());
+			m_adminCamera->SetPosition(m_player->GetPosition() + SimpleMath::Vector3::UnitY);
 			ChangeScene(SCENE::PLAY);
 		}
 	}
 
-#ifdef _DEBUG
+#if _DEBUG
 
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 	{
@@ -118,8 +127,6 @@ void PlayScene::Update()
 
 	// ワールドマウスの更新
 	m_worldMouse->Update();
-
-	// カーソルオブジェクトを更新
 	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
 	m_cursorObject->Update();
 
@@ -223,6 +230,9 @@ void PlayScene::SetSceneValues()
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
 	m_adminCamera->SetEasing(false);	// 補間を切る
+
+	// プレイモードにする
+	m_worldMouse->ToPlayMode();
 
 	// ブロックの初期設定
 	m_blockManager->SetPlay(true);

@@ -129,7 +129,7 @@ void Editor::Draw()
 	m_cursorObject->Draw(_context, *_states, _view, _projection);
 
 	// デバッグ描画
-#ifdef _DEBUG
+#if _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
 	_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
@@ -192,6 +192,9 @@ void Editor::SetSceneValues()
 
 	// ブロックの初期化
 	m_blockManager->Initialize();
+
+	// エディタモードにする
+	m_worldMouse->ToEditMode();
 
 	// 座標を設定
 	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());

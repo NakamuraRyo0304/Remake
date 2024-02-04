@@ -22,6 +22,7 @@ using MOUSE_BUTTON = Mouse::ButtonStateTracker;
 WorldMouse::WorldMouse()
     : m_position{}              // 座標
     , m_height{}                // Y座標の高さ
+    , is_playing{ false }       // デフォルトはエディタモード
 {
     m_ray = std::make_unique<RayCast>();
 }
@@ -42,27 +43,37 @@ void WorldMouse::Update()
     // レイの更新
     m_ray->Update();
 
-    // キーボード・マウスの取得
-    auto _key = Keyboard::Get().GetState();
-    auto& _mt = Input::GetInstance()->GetMouseTrack();
-
-    // 右クリック＋左シフトで降下する
-    if (_mt->rightButton == MOUSE_BUTTON ::PRESSED && _key.LeftShift)
+    // プレイモードは最高高度にする
+    if (is_playing)
     {
-        m_height--;
+        // 座標を設定
+        m_position = m_ray->GetConvertedPosition();
+        m_position.y = static_cast<float>(5);
     }
-    // 右クリックで上昇
-    else if (_mt->rightButton == MOUSE_BUTTON::PRESSED)
+    else
     {
-        m_height++;
+        // キーボード・マウスの取得
+        auto _key = Keyboard::Get().GetState();
+        auto& _mt = Input::GetInstance()->GetMouseTrack();
+
+        // 右クリック＋左シフトで降下する
+        if (_mt->rightButton == MOUSE_BUTTON::PRESSED && _key.LeftShift)
+        {
+            m_height--;
+        }
+        // 右クリックで上昇
+        else if (_mt->rightButton == MOUSE_BUTTON::PRESSED)
+        {
+            m_height++;
+        }
+
+        // クランプ処理
+        m_height = UserUtility::Clamp(m_height, 0, 5);
+
+        // 座標を設定(線形補間移動)
+        m_position = m_ray->GetConvertedPosition();
+        m_position.y = static_cast<float>(m_height);
     }
-
-    // クランプ処理
-    m_height = UserUtility::Clamp(m_height, 0, 5);
-
-    // 座標を設定(線形補間移動)
-    m_position = m_ray->GetConvertedPosition();
-    m_position.y = static_cast<float>(m_height);
 }
 
 //==============================================================================

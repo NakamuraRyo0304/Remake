@@ -86,10 +86,35 @@ void AdminCamera::SetType(const Type& cameraType)
 	case Type::Editor_Moving:
 		m_gameCamera = std::make_unique<EditorCamera>(m_screenSize);
 		break;
+	case Type::Death_Following:
+		m_gameCamera = std::make_unique<DeathCamera>(m_screenSize);
+		break;
 	default:
 		break;
 	}
 
 	// プロジェクション行列をセット
 	m_projection = m_gameCamera->GetProjection();
+}
+
+//==============================================================================
+// 座標を設定
+//==============================================================================
+void AdminCamera::SetPosition(SimpleMath::Vector3 pos)
+{
+	if (UserUtility::IsNull(m_gameCamera.get())) return;
+
+	// 座標を設定
+	m_gameCamera->SetPosition(pos);
+}
+
+//==============================================================================
+// 注視点を設定
+//==============================================================================
+void AdminCamera::SetTarget(SimpleMath::Vector3 target)
+{
+	if(UserUtility::IsNull(m_gameCamera.get())) return;
+
+	// ターゲットを設定
+	m_gameCamera->SetTarget(target);
 }
