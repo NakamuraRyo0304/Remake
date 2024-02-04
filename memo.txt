@@ -9,8 +9,6 @@
 
 ・敵同士の当たり判定（回避や衝突）
 EnemyCollision.cpp/h
-・死亡時のカメラ
-DeathCamera.cpp/h
 
 
 〇常時作業必須のファイル
