@@ -47,10 +47,11 @@ public:
 	/// <param name="states">コモンステート</param>
 	/// <param name="view">ビュー行列</param>
 	/// <param name="proj">プロジェクション行列</param>
+	/// <param name="wireframe">ワイヤーフレーム</param>
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
-		ShaderLambda option = nullptr) override;
+		bool wireframe = false, ShaderLambda option = nullptr) override;
 
 };
 

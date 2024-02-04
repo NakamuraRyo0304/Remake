@@ -77,10 +77,16 @@ void SelectScene::Update()
 	if (IsCanUpdate())
 	{
 		// ステージの選択
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+		{
 			m_stageSelection++;
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+		}
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
+			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+		{
 			m_stageSelection--;
+		}
 
 		// ループクランプ
 		m_stageSelection = UserUtility::LoopClamp(m_stageSelection, EDITOR_NUM, MAX_SAMPLE_NUM);
@@ -150,9 +156,6 @@ void SelectScene::Finalize()
 //==============================================================================
 void SelectScene::CreateWDResources()
 {
-	// デフォルトカメラ設定
-	GetSystemManager()->GetCamera()->CreateProjection(GetWindowSize(), GetDefaultCameraAngle());
-
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 

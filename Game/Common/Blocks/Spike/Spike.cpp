@@ -1,27 +1,29 @@
 /*
- *	@File	Sand.cpp
- *	@Brief	砂ブロック。
- *	@Date	2023-01-27
+ *	@File	Spike.cpp
+ *	@Brief	棘オブジェクト(敵)。
+ *	@Date	2024-02-04
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-#include "Sand.h"
+#include "Spike.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-
+const float Spike::EATING_SPEED = XMConvertToRadians(15.0f);	// 捕食時の回転速度
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-Sand::Sand(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models", position)
+Spike::Spike(SimpleMath::Vector3 position)
+	: IGameObject(L"Resources/Models/Spike.cmo", L"Resources/Models", position)
+	, is_hit{ false }				// 衝突フラグ
+	, is_active{ true }				// アクティブフラグ
 {
 	CreateModel();
-	SetID(ID::Obj_Sand);
+	SetID(ID::Obj_Spike);
 	SetWeight(1.0f);
 
 	SetPosition(SimpleMath::Vector3(position));
@@ -34,7 +36,7 @@ Sand::Sand(SimpleMath::Vector3 position)
 //==============================================================================
 // デストラクタ
 //==============================================================================
-Sand::~Sand()
+Spike::~Spike()
 {
 	ReleaseModel();
 }
@@ -42,8 +44,29 @@ Sand::~Sand()
 //==============================================================================
 // 更新処理
 //==============================================================================
-void Sand::Update()
+void Spike::Update()
 {
+	// 非アクティブは処理しない
+	if (not is_active) return;
+
+	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+	float _12Sin = (sinf(_timer) + 1) * 0.5f + 1;
+
+	// 衝突通知が来たら実行
+	if (is_hit)
+	{
+		// 初期の二倍にする
+		SetScale(UserUtility::Lerp(GetScale(), GetInitialScale() * 2, 0.05f));
+
+		// 超速で回転する（捕食）
+		SetRotate(GetRotate() + SimpleMath::Vector3::UnitY * EATING_SPEED * _12Sin);
+	}
+	else
+	{
+		// 衝突していない間はうごめく
+		SetScale(GetInitialScale() * _12Sin * 0.5f);
+	}
+
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
@@ -51,8 +74,11 @@ void Sand::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Sand::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+void Spike::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
+	// 非アクティブは処理しない
+	if (not is_active) return;
+
 	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

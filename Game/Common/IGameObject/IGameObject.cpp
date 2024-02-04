@@ -24,13 +24,11 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath, SimpleMath::
 	, m_directoryPath{ dpath }		// ディレクトリパス
 	, m_id{ ID::Default }			// オブジェクトID
 	, m_weight{}					// オブジェクトの重さ
-	, is_wireframe{}				// ワイヤーフレームフラグ
 {
 	m_world = SimpleMath::Matrix::Identity;
 	m_parentMatrix = SimpleMath::Matrix::Identity;
 	m_id = ID::Default;
 	m_weight = NON_WEIGHT;
-	is_wireframe = false;
 	CreateWorldMatrix();
 }
 
@@ -67,9 +65,6 @@ void IGameObject::CreateModel()
 void IGameObject::ReleaseModel()
 {
 	m_model.reset();
-	m_VS.Reset();
-	m_PS.Reset();
-	m_GS.Reset();
 }
 
 //==============================================================================
@@ -79,52 +74,4 @@ void IGameObject::ChangeModel(const wchar_t* path)
 {
 	m_filePath = path;
 	CreateModel();
-}
-
-//==============================================================================
-// 頂点シェーダーを作成する
-//==============================================================================
-void IGameObject::CreateVSShader(const wchar_t* vsPath)
-{
-	auto _device = DX::DeviceResources::GetInstance()->GetD3DDevice();
-
-	// パスを読み込む
-	std::vector<uint8_t> _vs = DX::ReadData(vsPath);
-
-	// シェーダーを作成
-	DX::ThrowIfFailed(
-		_device->CreateVertexShader(_vs.data(), _vs.size(), nullptr,m_VS.ReleaseAndGetAddressOf())
-	);
-}
-
-//==============================================================================
-// ピクセルシェーダーを作成する
-//==============================================================================
-void IGameObject::CreatePSShader(const wchar_t* psPath)
-{
-	auto _device = DX::DeviceResources::GetInstance()->GetD3DDevice();
-
-	// パスを読み込む
-	std::vector<uint8_t> _ps = DX::ReadData(psPath);
-
-	// シェーダーを作成
-	DX::ThrowIfFailed(
-		_device->CreatePixelShader(_ps.data(), _ps.size(), nullptr, m_PS.ReleaseAndGetAddressOf())
-	);
-}
-
-//==============================================================================
-// ジオメトリシェーダーを作成する
-//==============================================================================
-void IGameObject::CreateGSShader(const wchar_t* gsPath)
-{
-	auto _device = DX::DeviceResources::GetInstance()->GetD3DDevice();
-
-	// パスを読み込む
-	std::vector<uint8_t> _gs = DX::ReadData(gsPath);
-
-	// シェーダーを作成
-	DX::ThrowIfFailed(
-		_device->CreateGeometryShader(_gs.data(), _gs.size(), nullptr, m_GS.ReleaseAndGetAddressOf())
-	);
 }

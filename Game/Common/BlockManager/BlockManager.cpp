@@ -80,6 +80,8 @@ void BlockManager::Initialize()
 		if (_name == "Player")	m_chara.push_back(std::make_unique<EditChara>(_position));
 		// ゴールオブジェクトを格納
 		if (_name == "Goal")	m_goals.push_back(std::make_unique<Goal>(_position));
+		// 棘オブジェクトを格納
+		if (_name == "Spike")	m_spikes.push_back(std::make_unique<Spike>(_position));
 
 		// プレイモードはスキップ(処理の意味がないため)
 		if (is_playing == true) continue;
@@ -119,6 +121,11 @@ void BlockManager::Update()
 		if (UserUtility::IsNull(goal.get())) continue;
 		goal->Update();
 	}
+	for (auto& spike : m_spikes)	// 棘オブジェクト
+	{
+		if (UserUtility::IsNull(spike.get())) continue;
+		spike->Update();
+	}
 
 	// プレイモードはスキップ
 	if (is_playing == true) return;
@@ -141,28 +148,34 @@ void BlockManager::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
+void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// オブジェクトの描画
 	for (auto& sand : m_sands)		// 砂ブロック
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-		sand->Draw(context, states, view, proj, option);
+		sand->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-		cloud->Draw(context, states, view, proj, option);
+		cloud->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& coin : m_coins)		// コイン
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-		coin->Draw(context, states, view, proj, option);
+		coin->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& goal : m_goals)		// ゴールオブジェクト
 	{
 		if (UserUtility::IsNull(goal.get())) continue;
-		goal->Draw(context, states, view, proj, option);
+		goal->Draw(context, states, view, proj, wireframe, option);
+	}
+	for (auto& spike : m_spikes)	// 棘オブジェクト
+	{
+		if (UserUtility::IsNull(spike.get())) continue;
+		spike->Draw(context, states, view, proj, wireframe, option);
 	}
 
 	// プレイモードはスキップ
@@ -171,7 +184,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states, Sim
 	for (auto& chara : m_chara)		// キャラオブジェクト
 	{
 		if (UserUtility::IsNull(chara.get())) continue;
-		chara->Draw(context, states, view, proj, option);
+		chara->Draw(context, states, view, proj, wireframe, option);
 	}
 }
 
@@ -192,6 +205,8 @@ std::string BlockManager::GetBlockID(const ID& id)
 		return "Player";
 	case ID::Obj_Goal:
 		return "Goal";
+	case ID::Obj_Spike:
+		return "Spike";
 	default:
 		return "";
 	}
@@ -256,6 +271,15 @@ void BlockManager::ReplaceBlock()
 		CreateBlock(goal->GetID(), goal->GetInitialPosition());
 		UserUtility::RemoveVec(m_goals, goal);
 	}
+	for (auto& spike : m_spikes)
+	{
+		if (UserUtility::IsNull(spike.get())) continue;
+		if (spike->GetID() == ID::Obj_Spike) continue;
+
+		// 名前に対応したブロックに変更する
+		CreateBlock(spike->GetID(), spike->GetInitialPosition());
+		UserUtility::RemoveVec(m_spikes, spike);
+	}
 }
 
 //==============================================================================
@@ -277,6 +301,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 		m_chara.push_back(std::make_unique<EditChara>(pos));
 	if (id == ID::Obj_Goal)		// ゴールオブジェクト
 		m_goals.push_back(std::make_unique<Goal>(pos));
+	if (id == ID::Obj_Spike)	// 棘オブジェクト
+		m_spikes.push_back(std::make_unique<Spike>(pos));
 }
 
 //==============================================================================
@@ -290,6 +316,7 @@ void BlockManager::ClearBlocks()
 	m_air.clear();
 	m_chara.clear();
 	m_goals.clear();
+	m_spikes.clear();
 }
 
 //==============================================================================
@@ -348,6 +375,23 @@ bool BlockManager::IsArrived()
 	for (auto& goal : m_goals)
 	{
 		if (goal->IsHitFlag())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+//==============================================================================
+// 棘の衝突取得
+//==============================================================================
+bool BlockManager::IsHitSpike()
+{
+	if (m_spikes.empty()) return false;
+
+	for (auto& spike : m_spikes)
+	{
+		if (spike->IsHitFlag())
 		{
 			return true;
 		}
@@ -424,6 +468,7 @@ void BlockManager::OutputStage()
 	AddWriteObjects(&_objects, m_coins);		// コイン
 	AddWriteObjects(&_objects, m_chara);		// 操作キャラ
 	AddWriteObjects(&_objects, m_goals);		// ゴール
+	AddWriteObjects(&_objects, m_spikes);		// 棘エネミー
 
 
 	//==============================================================================

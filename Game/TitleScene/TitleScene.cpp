@@ -148,9 +148,6 @@ void TitleScene::Finalize()
 //==============================================================================
 void TitleScene::CreateWDResources()
 {
-	// デフォルトカメラ設定
-	GetSystemManager()->GetCamera()->CreateProjection(GetWindowSize(), GetDefaultCameraAngle());
-
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 

@@ -21,6 +21,7 @@
 
 class AdminCamera;
 class BlockManager;
+class CursorObject;
 class EditorCollision;
 class UI_Editor;
 class WorldMouse;
@@ -42,6 +43,9 @@ private:
 
 	// ワールドマウス
 	std::unique_ptr<WorldMouse> m_worldMouse;
+
+	// カーソルオブジェクト
+	std::unique_ptr<CursorObject> m_cursorObject;
 
 	// 描画するオブジェクトID
 	ID m_selectionID;

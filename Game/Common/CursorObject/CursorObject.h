@@ -1,28 +1,25 @@
 /*
- *	@File	Bird_Title.h
- *	@Brief	タイトルに表示するトリ。
- *	@Date	2023-01-25
+ *  @File   CursorObject.h
+ *  @Brief  3Dカーソルの位置にオブジェクトを描画。
+ *  @Date   2024-02-04
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef BIRD_TITLE
-#define BIRD_TITLE
+#ifndef CURSOROBJECT
+#define CURSOROBJECT
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Bird_Title : public IGameObject
+class CursorObject : public IGameObject
 {
 private:
 
-	// 再スタートライン
-	static const float RESTART_LINE;
-
-	// 鳥のスケール
-	static const float BIRD_SCALE;
+	// カーソル座標
+	DirectX::SimpleMath::Vector3 m_cursorPosition;
 
 public:
 
@@ -31,8 +28,8 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	Bird_Title();
-	~Bird_Title();
+	CursorObject();
+	~CursorObject();
 
 	/// <summary>
 	/// 更新処理
@@ -53,14 +50,13 @@ public:
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
 
-private:
+public:
 
-	/// <summary>
-	/// ランダムでX座標を再抽選する
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void RandomXPosition();
+	// カーソル座標を取得
+	const DirectX::SimpleMath::Vector3& GetCursorPosition() { return m_cursorPosition; }
+	// カーソル座標を設定
+	void SetCursorPosition(const DirectX::SimpleMath::Vector3& pos) { m_cursorPosition = pos; }
+
 };
 
-#endif // STAGE_TITLE
+#endif // CURSOROBJECT

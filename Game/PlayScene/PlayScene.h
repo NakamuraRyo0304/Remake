@@ -16,6 +16,8 @@
 
 class AdminCamera;
 class BlockManager;
+class CursorObject;
+class JsonHelper;
 class Sky_Play;
 class StageCollision;
 class Player;
@@ -44,6 +46,9 @@ private:
 
 	// ステージの当たり判定
 	std::unique_ptr<StageCollision> m_stageCollision;
+
+	// カーソルオブジェクト
+	std::unique_ptr<CursorObject> m_cursorObject;
 
 public:
 	/// <summary>

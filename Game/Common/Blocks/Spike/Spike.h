@@ -1,38 +1,43 @@
 /*
- *	@File	Bird_Title.h
- *	@Brief	タイトルに表示するトリ。
- *	@Date	2023-01-25
+ *	@File	Spike.h
+ *	@Brief	棘オブジェクト(敵)。
+ *	@Date	2024-02-04
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef BIRD_TITLE
-#define BIRD_TITLE
+#ifndef SPIKE
+#define SPIKE
 
 //==============================================================================
 // 親オブジェクトクラス
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
-class Bird_Title : public IGameObject
+class Spike : public IGameObject
 {
 private:
 
-	// 再スタートライン
-	static const float RESTART_LINE;
+	// 衝突フラグ
+	bool is_hit;
 
-	// 鳥のスケール
-	static const float BIRD_SCALE;
+	// アクティブフラグ
+	bool is_active;
+
+private:
+
+	// 捕食回転速度
+	static const float EATING_SPEED;
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="position">生成座標</param>
 	/// <returns>なし</returns>
-	Bird_Title();
-	~Bird_Title();
+	Spike(DirectX::SimpleMath::Vector3 position);
+	~Spike();
 
 	/// <summary>
 	/// 更新処理
@@ -53,14 +58,18 @@ public:
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
 
-private:
+public:
 
-	/// <summary>
-	/// ランダムでX座標を再抽選する
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void RandomXPosition();
+	// アクティブフラグを取得
+	bool IsActive() { return is_active; }
+	// アクティブフラグを切り替える
+	void SetActive(const bool flag) { is_active = flag; }
+
+	// 衝突通知を取得
+	bool IsHitFlag() { return is_hit; }
+	// 衝突通知
+	void SetHitFlag(bool isHit) { is_hit = isHit; }
+
 };
 
-#endif // STAGE_TITLE
+#endif // SPIKE

@@ -60,8 +60,8 @@ Player::~Player()
 //==============================================================================
 void Player::Update()
 {
-	// 配列が空じゃなかったら動かす
-	if (not m_goalPoints.empty())
+	// 目的地が存在しているかつ生存中の場合、目的地を追跡する
+	if (not m_goalPoints.empty() && not is_death)
 	{
 		m_giveUpTime--;
 
@@ -143,13 +143,14 @@ void Player::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
-	GetModel()->Draw(context, states, _scale * GetWorldMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(context, states, _scale * GetWorldMatrix(), view, proj, wireframe, option);
 
 	// これ以降、子パーツの描画を行う
-	m_head->Draw(context, states, view, proj, no_use_here);
+	m_head->Draw(context, states, view, proj, wireframe, option);
 }
 
 //==============================================================================

@@ -14,6 +14,7 @@
 #include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
+#include "Game/Common/CursorObject/CursorObject.h"
 
 #include "Editor.h"
 
@@ -72,9 +73,14 @@ void Editor::Update()
 	if (IsCanUpdate())
 	{
 		if (m_ui->IsClickButton(BN::LoadFile))
+		{
 			m_blockManager->ReLoad();
+			m_adminCamera->SetType(CameraType::Editor_Moving);
+		}
 		if (m_ui->IsClickButton(BN::WriteFile))
+		{
 			m_blockManager->OutputStage();
+		}
 	}
 
 	// ブロックの更新
@@ -88,7 +94,13 @@ void Editor::Update()
 
 	// ワールドマウスを更新
 	m_worldMouse->Update();
+
+	// ワールドマウスの座標をコリジョン・視覚化オブジェクトに設定
+	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
 	m_editorCollision->SetPosition(m_worldMouse->GetPosition());
+
+	// カーソルオブジェクトを更新
+	m_cursorObject->Update();
 
 	// エディタコリジョンの更新
 	UpdateCollisions(m_selectionID);
@@ -113,6 +125,9 @@ void Editor::Draw()
 	// ワールドマウスの描画関連を更新
 	m_worldMouse->Draw(_view, _projection);
 
+	// カーソルオブジェクトの描画
+	m_cursorObject->Draw(_context, *_states, _view, _projection);
+
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
@@ -134,6 +149,7 @@ void Editor::Finalize()
 	m_ui.reset();
 	m_editorCollision.reset();
 	m_worldMouse.reset();
+	m_cursorObject.reset();
 }
 
 //==============================================================================
@@ -141,13 +157,10 @@ void Editor::Finalize()
 //==============================================================================
 void Editor::CreateWDResources()
 {
-	// デフォルトカメラ設定
-	GetSystemManager()->GetCamera()->CreateProjection(GetWindowSize(), GetDefaultCameraAngle());
-
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
-	// ブロックマネージャ
+	// ブロックマネージャ作成
 	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
 	m_blockManager->SetPlay(false);
 
@@ -159,6 +172,9 @@ void Editor::CreateWDResources()
 
 	// ワールドマウス作成
 	m_worldMouse = std::make_unique<WorldMouse>();
+
+	// カーソルオブジェクト作成
+	m_cursorObject = std::make_unique<CursorObject>();
 }
 
 //==============================================================================
@@ -176,6 +192,9 @@ void Editor::SetSceneValues()
 
 	// ブロックの初期化
 	m_blockManager->Initialize();
+
+	// 座標を設定
+	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
 }
 
 //==============================================================================
@@ -206,27 +225,35 @@ void Editor::DebugDraw(CommonStates& states)
 //==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
-	for (auto& obj : m_blockManager->GetAirBlock())
+	//////////////////////////////////////////
+	///            ※複文省略              ///
+	//////////////////////////////////////////
+
+	for (auto& obj : m_blockManager->GetAirBlock())		// エアオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetSandBlock())
+	for (auto& obj : m_blockManager->GetSandBlock())	// 砂ブロック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetCloudBlock())
+	for (auto& obj : m_blockManager->GetCloudBlock())	// 雲ギミック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetCoinBlock())
+	for (auto& obj : m_blockManager->GetCoinBlock())	// コインオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetPlayerBlock())
+	for (auto& obj : m_blockManager->GetPlayerBlock())	// プレイヤオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetGoalObject())
+	for (auto& obj : m_blockManager->GetGoalObject())	// ゴールポイント
+	{
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
+	}
+	for (auto& obj : m_blockManager->GetSpikeEnemy())	// 棘エネミー
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -243,4 +270,5 @@ void Editor::SetDrawObject()
 	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア
 	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
 	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
+	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
 }

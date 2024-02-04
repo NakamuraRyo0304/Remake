@@ -11,6 +11,11 @@
 #include "UI_Title.h"
 
 //==============================================================================
+// エイリアス宣言
+//==============================================================================
+using KeyCode = Keyboard::Keys;			// キーコード
+
+//==============================================================================
 // 定数の設定
 //==============================================================================
 const SimpleMath::Vector4 UI_Title::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
@@ -68,8 +73,8 @@ void UI_Title::Update()
 	auto& _input = Input::GetInstance()->GetKeyTrack();
 
 	// どちらかを押したら反転する
-	if (_input->IsKeyPressed(Keyboard::Keys::Right) ||
-		_input->IsKeyPressed(Keyboard::Keys::Left))
+	if (_input->IsKeyPressed(KeyCode::Right)	|| _input->IsKeyPressed(KeyCode::Left) ||
+		_input->IsKeyPressed(KeyCode::D)		|| _input->IsKeyPressed(KeyCode::A))
 	{
 		m_selection = m_selection == Start ? Exit : Start;
 	}

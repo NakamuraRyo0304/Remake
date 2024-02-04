@@ -15,6 +15,7 @@
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
+#include "Game/Common/CursorObject/CursorObject.h"
 #include "PlayScene.h"
 
 //==============================================================================
@@ -118,6 +119,10 @@ void PlayScene::Update()
 	// ワールドマウスの更新
 	m_worldMouse->Update();
 
+	// カーソルオブジェクトを更新
+	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
+	m_cursorObject->Update();
+
 	// スカイ球の更新(カメラを中心にスカイ球をセットする　描画切れを防ぐ)
 	m_sky->SetPosition(m_adminCamera->GetPosition());
 	m_sky->Update();
@@ -148,6 +153,9 @@ void PlayScene::Draw()
 	// ワールドマウスの描画
 	m_worldMouse->Draw(_view, _projection);
 
+	// カーソルオブジェクトの描画
+	m_cursorObject->Draw(_context, *_states, _view, _projection);
+
 	// 空の描画
 	m_sky->Draw(_context, *_states, _view, _projection);
 
@@ -176,6 +184,7 @@ void PlayScene::Finalize()
 	m_worldMouse.reset();
 	m_blockManager.reset();
 	m_stageCollision.reset();
+	m_cursorObject.reset();
 }
 
 //==============================================================================
@@ -183,9 +192,6 @@ void PlayScene::Finalize()
 //==============================================================================
 void PlayScene::CreateWDResources()
 {
-	// デフォルトカメラ設定
-	GetSystemManager()->GetCamera()->CreateProjection(GetWindowSize(), GetDefaultCameraAngle());
-
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
@@ -203,6 +209,9 @@ void PlayScene::CreateWDResources()
 
 	// ステージコリジョン作成
 	m_stageCollision = std::make_unique<StageCollision>();
+
+	// カーソルオブジェクト作成
+	m_cursorObject = std::make_unique<CursorObject>();
 }
 
 //==============================================================================
@@ -221,6 +230,9 @@ void PlayScene::SetSceneValues()
 
 	// プレイヤーの座標を返す
 	m_player->SetPosition(m_blockManager->GetPlayerPosition());
+
+	// カーソルオブジェクトにワールドマウスの座標を設定
+	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
 }
 
 //==============================================================================

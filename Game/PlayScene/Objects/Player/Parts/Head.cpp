@@ -49,8 +49,9 @@ void Head::Update()
 //==============================================================================
 // •`‰æˆ—
 //==============================================================================
-void Head::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Head::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda no_use_here)
 {
 	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
-	GetModel()->Draw(context, states, _scale * GetWorldMatrix() * GetParentMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(context, states, _scale * GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, no_use_here);
 }

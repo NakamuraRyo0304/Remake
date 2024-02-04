@@ -25,13 +25,6 @@ private:
 	// ---ディレクトリパス---
 	const wchar_t* m_directoryPath;
 
-	// ---頂点シェーダー---
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_VS;
-	// ---ピクセルシェーダー---
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS;
-	// ---ジオメトリシェーダー---
-	Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_GS;
-
 	// ---ワールド行列---
 	DirectX::SimpleMath::Matrix m_world;		// このオブジェクトのマトリクス
 	DirectX::SimpleMath::Matrix m_parentMatrix;	// 親のオブジェクトのマトリクス
@@ -52,9 +45,6 @@ private:
 
 	// ---オブジェクトの重さ---
 	double m_weight;
-
-	// ---ワイヤーフレームフラグ---
-	bool is_wireframe;
 
 public:
 	/// <summary>
@@ -88,10 +78,12 @@ public:
 	/// <param name="states">コモンステート</param>
 	/// <param name="view">ビュー行列</param>
 	/// <param name="proj">射影行列</param>
+	/// <param name="wireframe">ワイヤーフレーム</param>
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
-	virtual void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
-		ShaderLambda option = nullptr) = 0;
+	virtual void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states,
+		DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
+		bool wireframe = false, ShaderLambda option = nullptr) = 0;
 
 public:
 	// 座標を取得
@@ -136,11 +128,6 @@ public:
 	// 重さを設定
 	void SetWeight(const double& weight) { m_weight = weight; }
 
-	// ワイヤーフレームを取得
-	const bool& GetWireFrameFlag() { return is_wireframe; }
-	// ワイヤーフレームを設定
-	void SetWireFrameFlag(const bool& flag) { is_wireframe = flag; }
-
 	// バウンディングボックスを取得
 	DirectX::BoundingBox GetBoundingBox() const
 	{
@@ -158,26 +145,6 @@ public:
 	void ReleaseModel();
 	// モデルを変更する
 	void ChangeModel(const wchar_t* path);
-
-public:
-	// 頂点シェーダーを作成する
-	void CreateVSShader(const wchar_t* vsPath);
-	// 頂点シェーダーを取得する
-	ID3D11VertexShader* GetVSShader() { return m_VS.Get(); }
-	// 頂点シェーダーを設定する
-	void SetVSShader(ID3D11VertexShader* vsShader) { m_VS = vsShader; }
-	// ピクセルシェーダーを作成する
-	void CreatePSShader(const wchar_t* psPath);
-	// ピクセルシェーダーを取得する
-	ID3D11PixelShader* GetPSShader() { return m_PS.Get(); }
-	// ピクセルシェーダーを設定する
-	void SetPSShader(ID3D11PixelShader* psShader) { m_PS = psShader; }
-	// ジオメトリシェーダーを作成する
-	void CreateGSShader(const wchar_t* gsPath);
-	// ジオメトリシェーダーを取得する
-	ID3D11GeometryShader* GetGSShader() { return m_GS.Get(); }
-	// ジオメトリシェーダーを設定する
-	void SetGSShader(ID3D11GeometryShader* gsShader) { m_GS = gsShader; }
 };
 
 #endif // IGAMEOBJECT
