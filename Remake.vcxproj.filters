@@ -508,6 +508,9 @@
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h">
       <Filter>Game\Common\Blocks\Goal</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\CursorObject\CursorObject.h">
+      <Filter>Game\Scenes\Editor\Objects\CursorObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -693,6 +696,9 @@
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp">
       <Filter>Game\Common\Blocks\Goal</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp">
+      <Filter>Game\Scenes\Editor\Objects\CursorObj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -860,6 +866,8 @@
     <None Include="Resources\Models\Goal.cmo">
       <Filter>Resources\Models\Block</Filter>
     </None>
+    <None Include="..\SkyFallモデル\CursorObj.blend" />
+    <None Include="Resources\Models\CursorObj.cmo" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\myfile.spritefont">

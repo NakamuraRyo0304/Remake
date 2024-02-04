@@ -141,28 +141,29 @@ void BlockManager::Update()
 //==============================================================================
 // 描画処理
 //==============================================================================
-void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
+void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// オブジェクトの描画
 	for (auto& sand : m_sands)		// 砂ブロック
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
-		sand->Draw(context, states, view, proj, option);
+		sand->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
-		cloud->Draw(context, states, view, proj, option);
+		cloud->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& coin : m_coins)		// コイン
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
-		coin->Draw(context, states, view, proj, option);
+		coin->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& goal : m_goals)		// ゴールオブジェクト
 	{
 		if (UserUtility::IsNull(goal.get())) continue;
-		goal->Draw(context, states, view, proj, option);
+		goal->Draw(context, states, view, proj, wireframe, option);
 	}
 
 	// プレイモードはスキップ
@@ -171,7 +172,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states, Sim
 	for (auto& chara : m_chara)		// キャラオブジェクト
 	{
 		if (UserUtility::IsNull(chara.get())) continue;
-		chara->Draw(context, states, view, proj, option);
+		chara->Draw(context, states, view, proj, wireframe, option);
 	}
 }
 

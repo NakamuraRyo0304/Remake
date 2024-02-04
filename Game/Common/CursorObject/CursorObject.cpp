@@ -48,7 +48,8 @@ void CursorObject::Update()
 //==============================================================================
 // •`‰æˆ—
 //==============================================================================
-void CursorObject::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
+void CursorObject::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, GetWireFrameFlag(), option);
+	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

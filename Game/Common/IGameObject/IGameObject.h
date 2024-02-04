@@ -53,9 +53,6 @@ private:
 	// ---オブジェクトの重さ---
 	double m_weight;
 
-	// ---ワイヤーフレームフラグ---
-	bool is_wireframe;
-
 public:
 	/// <summary>
 	/// コンストラクタ
@@ -88,10 +85,12 @@ public:
 	/// <param name="states">コモンステート</param>
 	/// <param name="view">ビュー行列</param>
 	/// <param name="proj">射影行列</param>
+	/// <param name="wireframe">ワイヤーフレーム</param>
 	/// <param name="option">シェーダー等ラムダ式</param>
 	/// <returns>なし</returns>
-	virtual void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
-		ShaderLambda option = nullptr) = 0;
+	virtual void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states,
+		DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
+		bool wireframe = false, ShaderLambda option = nullptr) = 0;
 
 public:
 	// 座標を取得
@@ -135,11 +134,6 @@ public:
 	const double& GetWeight() { return m_weight; }
 	// 重さを設定
 	void SetWeight(const double& weight) { m_weight = weight; }
-
-	// ワイヤーフレームを取得
-	const bool& GetWireFrameFlag() { return is_wireframe; }
-	// ワイヤーフレームを設定
-	void SetWireFrameFlag(const bool& flag) { is_wireframe = flag; }
 
 	// バウンディングボックスを取得
 	DirectX::BoundingBox GetBoundingBox() const

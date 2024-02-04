@@ -66,7 +66,8 @@ void Sky_Title::Update()
 //==============================================================================
 // •`‰æˆ—
 //==============================================================================
-void Sky_Title::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda option)
+void Sky_Title::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, false, option);
+	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

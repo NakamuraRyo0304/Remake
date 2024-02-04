@@ -143,13 +143,14 @@ void Player::Update()
 //==============================================================================
 // •`‰æˆ—
 //==============================================================================
-void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states, SimpleMath::Matrix& view, SimpleMath::Matrix& proj, ShaderLambda no_use_here)
+void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states,
+	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
-	GetModel()->Draw(context, states, _scale * GetWorldMatrix(), view, proj, false, no_use_here);
+	GetModel()->Draw(context, states, _scale * GetWorldMatrix(), view, proj, wireframe, option);
 
 	// ‚±‚êˆÈ~AŽqƒp[ƒc‚Ì•`‰æ‚ðs‚¤
-	m_head->Draw(context, states, view, proj, no_use_here);
+	m_head->Draw(context, states, view, proj, wireframe, option);
 }
 
 //==============================================================================
