@@ -185,7 +185,7 @@ void Editor::SetSceneValues()
 	// ƒJƒƒ‰‚Ì‰Šúİ’è-©“®
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
-	m_adminCamera->SetEasing(false);
+	m_adminCamera->SetInterpolation(false);
 
 	// ID‚ğ»‚Éİ’è
 	m_selectionID = ID::Obj_Sand;

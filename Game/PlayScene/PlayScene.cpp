@@ -11,7 +11,6 @@
 #include "Game/Common/WorldMouse/WorldMouse.h"
 #include "Game/Common/BlockManager/BlockManager.h"
 #include "Game/PlayScene/System/StageCollision/StageCollision.h"
-//#include "Game/PlayScene/System/UI_Title/UI_Title.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
@@ -88,7 +87,7 @@ void PlayScene::Update()
 		// ゴールしたらクリアへ(仮セレクト)
 		if (m_blockManager->IsArrived())
 		{
-			m_adminCamera->SetEasing(true);// 補間モードにする
+			m_adminCamera->SetInterpolation(true);// 補間モードにする
 			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
 			{
 				m_adminCamera->SetType(CameraType::Select1_Floating);
@@ -99,7 +98,7 @@ void PlayScene::Update()
 		// 死んだら再読み込み
 		if (m_player->IsDeath())
 		{
-			m_adminCamera->SetEasing(true);// 補間モードにする
+			m_adminCamera->SetInterpolation(true);// 補間モードにする
 			if (m_adminCamera->GetType() != CameraType::Death_Following)
 			{
 				m_adminCamera->SetType(CameraType::Death_Following);
@@ -229,7 +228,7 @@ void PlayScene::SetSceneValues()
 	// カメラの初期設定-自動
 	m_adminCamera->SetType(CameraType::Editor_Moving);
 	m_adminCamera->SetActive(true);
-	m_adminCamera->SetEasing(false);	// 補間を切る
+	m_adminCamera->SetInterpolation(false);	// 補間を切る
 
 	// プレイモードにする
 	m_worldMouse->ToPlayMode();
