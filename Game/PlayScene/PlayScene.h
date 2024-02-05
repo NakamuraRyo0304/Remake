@@ -17,6 +17,7 @@
 class AdminCamera;
 class BlockManager;
 class CursorObject;
+class DepthStencil;
 class Sky_Play;
 class StageCollision;
 class Player;
@@ -48,6 +49,63 @@ private:
 
 	// カーソルオブジェクト
 	std::unique_ptr<CursorObject> m_cursorObject;
+
+private:
+
+	// シャドウマップのサイズ
+	static const int SHADOWMAP_SIZE = 512;
+
+	// レンダーテクスチャ
+	std::unique_ptr<DX::RenderTexture> m_renderTexture;
+
+	// デプスステンシル
+	std::unique_ptr<DepthStencil> m_depthStencil;
+
+	// デプス頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vsDep;
+
+	// デプスピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_psDep;
+
+	// ライトの位置
+	DirectX::SimpleMath::Vector3 m_lightPosition;
+
+	// ライトの回転
+	DirectX::SimpleMath::Quaternion m_lightRotate;
+
+	// シャドウマップのコンスタントバッファ
+	struct ShadowBuffer
+	{
+		DirectX::XMMATRIX lightViewProj;	// ライトの投影空間へ座標変換する行列
+		DirectX::XMVECTOR lightPosition;	// ライトの位置
+		DirectX::XMVECTOR lightDirection;	// ライトの方向
+		DirectX::XMVECTOR lightAmbient;		// ライトの環境光
+	};
+
+	// シャドウマップバッファへのポインタ
+	Microsoft::WRL::ComPtr<ID3D11Buffer> m_shadowConstant;
+
+	// ライト影響範囲のコンスタントバッファ
+	struct LightFovBuffer
+	{
+		float fCosTheta;		// スポットライトのfov/2
+		int pad[3];
+	};
+
+	// ライトフォブバッファへのポインタ
+	Microsoft::WRL::ComPtr<ID3D11Buffer> m_lightConstant;
+
+	// 頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vs;
+
+	// ピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_ps;
+
+	// サンプラー
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_sampler;
+
+	// スポットライトの範囲の角度
+	float m_lightTheta;
 
 public:
 	/// <summary>
