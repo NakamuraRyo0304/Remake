@@ -41,7 +41,7 @@ PlayScene::PlayScene(const int& number)
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
 
 	// スポットライトの範囲
-	m_lightTheta = 80.0f;
+	m_lightTheta = 85.0f;
 
 	// ライトの位置
 	m_lightPosition = SimpleMath::Vector3(4.5f, 10.0f, 10.0f);
@@ -197,29 +197,27 @@ void PlayScene::Draw()
 	// 定数バッファを更新
 	// -------------------------------------------------------------------------- //
 
+	// GPUからのアクセスをロック
 	D3D11_MAPPED_SUBRESOURCE _map;
-
-	// GPUが定数バッファに対してアクセスを行わないようにする
 	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_map);
 
 	// シャドウバッファを更新
 	ShadowBuffer _shadowBuff = {};
-	SimpleMath::Matrix m = _lightView * _lightProj;
-	_shadowBuff.lightViewProj = XMMatrixTranspose(m);
+	_shadowBuff.lightViewProj = XMMatrixTranspose(_lightView * _lightProj);
 	_shadowBuff.lightPosition = m_lightPosition;
 	_shadowBuff.lightDirection = _lightDir;
 	_shadowBuff.lightAmbient = SimpleMath::Color(0.3f, 0.3f, 0.3f);
 
 	*static_cast<ShadowBuffer*>(_map.pData) = _shadowBuff;
 
-	// GPUが定数バッファに対してのアクセスを許可する
+	// GPUからのアクセスをアンロック
 	_context->Unmap(m_shadowConstant.Get(), 0);
 
 	// ------------------------------------------------ //
 	// 影になるモデルを描画する
 	// ------------------------------------------------ //
 
-	auto _depth = [&]() {
+	ShaderLambda _depth = [&]() {
 		_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
 		_context->PSSetShader(m_psDep.Get(), nullptr, 0); };
 
@@ -238,11 +236,11 @@ void PlayScene::Draw()
 	_context->ClearRenderTargetView(_rtvDefault, Colors::CornflowerBlue);
 	_context->ClearDepthStencilView(_dsvDefault, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	_context->OMSetRenderTargets(1, &_rtvDefault, _dsvDefault);
-	auto const viewport = DX::DeviceResources::GetInstance()->GetScreenViewport();
-	_context->RSSetViewports(1, &viewport);
+	auto const _vpDefault = DX::DeviceResources::GetInstance()->GetScreenViewport();
+	_context->RSSetViewports(1, &_vpDefault);
 
 	// シェーダーの設定
-	auto _shadow = [&]() {
+	ShaderLambda _shadow = [&]() {
 		// 定数バッファの設定
 		ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
 		_context->VSSetConstantBuffers(1, 1, _buffer);
@@ -274,7 +272,7 @@ void PlayScene::Draw()
 	// プレイヤーの描画
 	m_player->Draw(_context, *states, _view, _projection, false, _shadow);
 
-	// リソースの割り当てを解除する（shadowMapRT）
+	// リソースの割り当てを解除する
 	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
 	_context->PSSetShaderResources(1, 1, _nullsrv);
 

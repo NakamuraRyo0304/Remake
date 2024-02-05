@@ -44,6 +44,9 @@ void AdminCamera::Update()
 	// 更新してセットする
 	m_gameCamera->Update();
 
+	// ビュー行列が同じになったら処理をしない
+	if (m_view == m_gameCamera->GetView()) return;
+
 	// 補間しながら移動する
 	if (is_interpolation)
 	{

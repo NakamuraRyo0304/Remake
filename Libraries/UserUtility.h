@@ -365,5 +365,15 @@ namespace UserUtility
 
 		return a + _t * (b - a);
 	}
+
+	/// <summary>
+	/// Vector3‚Ìâ‘Î’l•ÏŠ·
+	/// </summary>
+	/// <param name="v">•ÏŠ·‚µ‚½‚¢Vector3•Ï”</param>
+	/// <returns>â‘Î’l•ÏŠ·Œã‚ÌVector3</returns>
+	inline DirectX::SimpleMath::Vector3 AbsVector3(DirectX::SimpleMath::Vector3 v)
+	{
+		return DirectX::SimpleMath::Vector3(std::abs(v.x), std::abs(v.y), std::abs(v.z));
+	}
 }
 #endif // USERUTILITY
