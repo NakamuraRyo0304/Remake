@@ -55,17 +55,17 @@ private:
 	// シャドウマップのサイズ
 	static const int SHADOWMAP_SIZE = 512;
 
-	// シャドウマップ用（レンダーテクスチャ）
-	std::unique_ptr<DX::RenderTexture> m_shadowMapRT;
+	// レンダーテクスチャ
+	std::unique_ptr<DX::RenderTexture> m_renderTexture;
 
-	// シャドウマップ用（デプスステンシル）
-	std::unique_ptr<DepthStencil> m_shadowMapDS;
+	// デプスステンシル
+	std::unique_ptr<DepthStencil> m_depthStencil;
 
-	// 頂点シェーダー
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_VS_Depth;
+	// デプス頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vsDep;
 
-	// ピクセルシェーダー
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS_Depth;
+	// デプスピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_psDep;
 
 	// ライトの位置
 	DirectX::SimpleMath::Vector3 m_lightPosition;
@@ -89,23 +89,20 @@ private:
 	struct LightFovBuffer
 	{
 		float fCosTheta;		// スポットライトのfov/2
-		DirectX::SimpleMath::Vector3 pad;
+		int pad[3];
 	};
 
 	// ライトフォブバッファへのポインタ
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_lightConstant;
 
 	// 頂点シェーダー
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_VS;
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vs;
 
 	// ピクセルシェーダー
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_PS;
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_ps;
 
 	// サンプラー
-	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_shadowMapSampler;
-
-	// スポットライトのモデルへのポインタ
-	std::unique_ptr<DirectX::Model> m_spotLightModel;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_sampler;
 
 	// スポットライトの範囲の角度
 	float m_lightTheta;
