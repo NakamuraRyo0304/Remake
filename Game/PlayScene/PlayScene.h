@@ -17,7 +17,6 @@
 class AdminCamera;
 class BlockManager;
 class CursorObject;
-class JsonHelper;
 class Sky_Play;
 class StageCollision;
 class Player;
