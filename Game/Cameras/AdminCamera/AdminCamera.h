@@ -65,7 +65,7 @@ private:
 	DirectX::SimpleMath::Matrix m_view, m_projection;
 
 	// •âŠÔƒtƒ‰ƒO
-	bool is_easing;
+	bool is_interpolation;
 
 private:
 
@@ -163,7 +163,7 @@ public:
 	/// </summary>
 	/// <param name="flag">ON‚ÅüŒ`•âŠ®</param>
 	/// <returns>‚È‚µ</returns>
-	void SetEasing(bool flag = true) { is_easing = flag; }
+	void SetInterpolation(bool flag = true) { is_interpolation = flag; }
 };
 
 #endif // ADMINCAMERA

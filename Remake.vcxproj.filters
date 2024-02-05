@@ -302,6 +302,12 @@
     <Filter Include="Game\Common\Blocks\Spike">
       <UniqueIdentifier>{bc5f6b0c-a2c6-4055-9b00-105a8843ae5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Cameras\DeathCamera">
+      <UniqueIdentifier>{4f73a6e7-d6ed-473c-96bb-ad8b909f18e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\System\EnemyCollision">
+      <UniqueIdentifier>{bc3e1c8d-e83e-45eb-a3be-7de67774304b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -511,6 +517,12 @@
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h">
       <Filter>Game\Common\Blocks\Spike</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h">
+      <Filter>Game\Cameras\DeathCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h">
+      <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -702,6 +714,12 @@
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp">
       <Filter>Game\Common\Blocks\Spike</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp">
+      <Filter>Game\Cameras\DeathCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp">
+      <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -769,9 +787,6 @@
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds">
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
-      <Filter>Assets</Filter>
-    </Image>
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds">
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
@@ -785,6 +800,9 @@
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds">
+      <Filter>Resources\Textures\Editor\Buttons</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
       <Filter>Resources\Textures\Editor\Buttons</Filter>
     </Image>
   </ItemGroup>
@@ -900,5 +918,8 @@
     <FxCompile Include="Resources\Shaders\Transition\GS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="memo.txt" />
   </ItemGroup>
 </Project>
