@@ -308,6 +308,9 @@
     <Filter Include="Game\Scenes\PlayScene\System\EnemyCollision">
       <UniqueIdentifier>{bc3e1c8d-e83e-45eb-a3be-7de67774304b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Shaders\ShadowMap">
+      <UniqueIdentifier>{8d22173b-7950-4feb-9fb3-784132a4b043}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -890,6 +893,9 @@
     <None Include="Resources\Models\Spike.cmo">
       <Filter>Resources\Models\Block</Filter>
     </None>
+    <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Fonts\myfile.spritefont">
@@ -917,6 +923,18 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\Transition\GS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS.hlsl">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS_Depth.hlsl">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ShadowMap\SM_VS.hlsl">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ShadowMap\SM_VS_Depth.hlsl">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
