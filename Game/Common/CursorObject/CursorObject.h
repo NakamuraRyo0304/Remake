@@ -26,9 +26,11 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="path">モデルパス</param>
+	/// <param name="scale">スケール</param>
 	/// <returns>なし</returns>
-	CursorObject();
+	CursorObject(const wchar_t* path = L"Resources/Models/CursorObj.cmo",
+		DirectX::SimpleMath::Vector3 scale = DirectX::SimpleMath::Vector3::One * 0.25f);
 	~CursorObject();
 
 	/// <summary>

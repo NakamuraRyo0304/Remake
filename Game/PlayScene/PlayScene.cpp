@@ -26,6 +26,10 @@ const int PlayScene::SHADOWMAP_SIZE = 512;		// シャドウマップのサイズ
 const float PlayScene::AMBIENT_COLOR = 0.3f;	// アンビエントライトの色
 const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
 const float PlayScene::FLAG_START = 5.0f;		// 最高高度
+// ライトの位置・ライトの回転・ライトの範囲
+const SimpleMath::Vector3 PlayScene::LIGHT_POSITION = { 4.5f, 10.0f, 10.0f };
+const SimpleMath::Quaternion PlayScene::LIGHT_ROTATION = { 0.80f, 0.30f, -0.20f, 0.50f };
+const float PlayScene::LIGHT_THETA = 85.0f;
 
 //==============================================================================
 // エイリアス宣言
@@ -43,15 +47,6 @@ PlayScene::PlayScene(const int& number)
 	, m_stageNumber{ number }	// ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
-
-	// スポットライトの範囲
-	m_lightTheta = 85.0f;
-
-	// ライトの位置
-	m_lightPosition = SimpleMath::Vector3(4.5f, 10.0f, 10.0f);
-
-	// ライトの回転
-	m_lightRotate = SimpleMath::Quaternion(0.80f, 0.30f, -0.20f, 0.50f);
 }
 
 //==============================================================================
@@ -193,18 +188,18 @@ void PlayScene::Draw()
 	//==============================================================================
 	// ライトの方向
 	SimpleMath::Vector3 _lightDir =
-		SimpleMath::Vector3::Transform(SimpleMath::Vector3(0.0f, 0.0f, 1.0f), m_lightRotate);
+		SimpleMath::Vector3::Transform(SimpleMath::Vector3(0.0f, 0.0f, 1.0f), LIGHT_ROTATION);
 
 	// ビュー行列を作成
 	SimpleMath::Matrix _lightView = SimpleMath::Matrix::CreateLookAt(
-		m_lightPosition,
-		m_lightPosition + _lightDir,
+		LIGHT_POSITION,
+		LIGHT_POSITION + _lightDir,
 		SimpleMath::Vector3::UnitY
 	);
 
 	// 射影行列を作成
 	SimpleMath::Matrix _lightProj = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
-		XMConvertToRadians(m_lightTheta), 1.0f, 0.1f, 250.0f);
+		XMConvertToRadians(LIGHT_THETA), 1.0f, 0.1f, 250.0f);
 
 	//==============================================================================
 	// シャドウバッファを作成
@@ -216,7 +211,7 @@ void PlayScene::Draw()
 	// シャドウバッファを更新
 	ShadowBuffer _shadowBuff = {};
 	_shadowBuff.lightViewProj = XMMatrixTranspose(_lightView * _lightProj);
-	_shadowBuff.lightPosition = m_lightPosition;
+	_shadowBuff.lightPosition = LIGHT_POSITION;
 	_shadowBuff.lightDirection = _lightDir;
 	_shadowBuff.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
 	*static_cast<ShadowBuffer*>(_map.pData) = _shadowBuff;
@@ -227,13 +222,18 @@ void PlayScene::Draw()
 	//==============================================================================
 	// デプスラムダの作成
 	//==============================================================================
-	ShaderLambda _depth = [&]() {
-		_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
-		_context->PSSetShader(m_psDep.Get(), nullptr, 0); };
+	ShaderLambda _depth = [&]()
+		{
+			_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
+			_context->PSSetShader(m_psDep.Get(), nullptr, 0);
+		};
 
 	//==============================================================================
 	// 影オブジェクトを描画する
 	//==============================================================================
+
+	// カーソルの描画
+	m_cursorObject->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
 
 	// ブロックの描画
 	m_blockManager->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
@@ -259,31 +259,33 @@ void PlayScene::Draw()
 	//==============================================================================
 	// シャドウラムダの作成
 	//==============================================================================
-	ShaderLambda _shadow = [&]() {
-		// 定数バッファの設定
-		ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
-		_context->VSSetConstantBuffers(1, 1, _buffer);
-		_context->PSSetConstantBuffers(1, 2, _buffer);
+	ShaderLambda _shadow = [&]()
+		{
+			// 定数バッファの設定
+			ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
+			_context->VSSetConstantBuffers(1, 1, _buffer);
+			_context->PSSetConstantBuffers(1, 2, _buffer);
 
-		// 作成したシャドウマップをリソースとして設定
-		_context->PSSetShaderResources(1, 1, &_srvDefault);
+			// 作成したシャドウマップをリソースとして設定
+			_context->PSSetShaderResources(1, 1, &_srvDefault);
 
-		// テクスチャサンプラーの設定
-		ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
-		_context->PSSetSamplers(0, 2, _samplers);
+			// テクスチャサンプラーの設定
+			ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
+			_context->PSSetSamplers(0, 2, _samplers);
 
-		// シェーダーの設定
-		_context->VSSetShader(m_vs.Get(), nullptr, 0);
-		_context->PSSetShader(m_ps.Get(), nullptr, 0); };
+			// シェーダーの設定
+			_context->VSSetShader(m_vs.Get(), nullptr, 0);
+			_context->PSSetShader(m_ps.Get(), nullptr, 0);
+		};
 
 	// ワールドマウスの描画
 	m_worldMouse->Draw(_view, _projection);
 
-	// カーソルオブジェクトの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection);
-
 	// 空の描画
 	m_sky->Draw(_context, *_states, _view, _projection);
+
+	// カーソルオブジェクトの描画
+	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _shadow);
 
 	// ブロックの描画
 	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shadow);
@@ -294,7 +296,10 @@ void PlayScene::Draw()
 	// フラグの描画
 	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shadow);
 
+
+	//==============================================================================
 	// リソースの割り当てを解除する
+	//==============================================================================
 	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
 	_context->PSSetShaderResources(1, 1, _nullsrv);
 
@@ -345,11 +350,11 @@ void PlayScene::CreateWDResources()
 	m_stageCollision = std::make_unique<StageCollision>();
 
 	// カーソルオブジェクト作成
-	m_cursorObject = std::make_unique<CursorObject>();
+	m_cursorObject = std::make_unique<CursorObject>(
+		L"Resources/Models/Flag.cmo", SimpleMath::Vector3::One * 0.4f);
 
 	// フラグマネージャ作成
 	m_flagManager = std::make_unique<FlagManager>();
-
 
 	//==============================================================================
 	// シャドウマップ関連の作成
@@ -358,26 +363,38 @@ void PlayScene::CreateWDResources()
 	auto _device = DX::DeviceResources::GetInstance()->GetD3DDevice();
 
 	// レンダーテクスチャの作成
-	m_renderTexture = std::make_unique<DX::RenderTexture>(DXGI_FORMAT_R32_FLOAT);
-	m_renderTexture->SetDevice(_device);
-	m_renderTexture->SetWindow(_rect);
+	{
+		m_renderTexture = std::make_unique<DX::RenderTexture>(DXGI_FORMAT_R32_FLOAT);
+		m_renderTexture->SetDevice(_device);
+		m_renderTexture->SetWindow(_rect);
+	}
 
 	// デプスステンシルの作成
-	m_depthStencil = std::make_unique<DepthStencil>(DXGI_FORMAT_D32_FLOAT);
-	m_depthStencil->SetDevice(_device);
-	m_depthStencil->SetWindow(_rect);
+	{
+		m_depthStencil = std::make_unique<DepthStencil>(DXGI_FORMAT_D32_FLOAT);
+		m_depthStencil->SetDevice(_device);
+		m_depthStencil->SetWindow(_rect);
+	}
 
 	// デプス頂点シェーダーの作成
-	std::vector<uint8_t> _vsDep = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS_Depth.cso");
-	DX::ThrowIfFailed(
-		_device->CreateVertexShader(_vsDep.data(), _vsDep.size(), nullptr, m_vsDep.ReleaseAndGetAddressOf())
-	);
+	{
+		std::vector<uint8_t> _vsDep = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS_Depth.cso");
+		DX::ThrowIfFailed(
+			_device->CreateVertexShader(
+				_vsDep.data(), _vsDep.size(), nullptr, m_vsDep.ReleaseAndGetAddressOf()
+			)
+		);
+	}
 
 	// デプスピクセルシェーダーの作成
-	std::vector<uint8_t> _psDep = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS_Depth.cso");
-	DX::ThrowIfFailed(
-		_device->CreatePixelShader(_psDep.data(), _psDep.size(), nullptr, m_psDep.ReleaseAndGetAddressOf())
-	);
+	{
+		std::vector<uint8_t> _psDep = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS_Depth.cso");
+		DX::ThrowIfFailed(
+			_device->CreatePixelShader(
+				_psDep.data(), _psDep.size(), nullptr, m_psDep.ReleaseAndGetAddressOf()
+			)
+		);
+	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// 定数バッファ作成手順(頻繁)			 //	定数バッファ作成手順(極稀)			//
@@ -394,7 +411,9 @@ void PlayScene::CreateWDResources()
 		_desc.Usage = D3D11_USAGE_DYNAMIC;
 		_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-		DX::ThrowIfFailed(_device->CreateBuffer(&_desc, nullptr, m_shadowConstant.ReleaseAndGetAddressOf()));
+		DX::ThrowIfFailed(
+			_device->CreateBuffer(&_desc, nullptr, m_shadowConstant.ReleaseAndGetAddressOf())
+		);
 	}
 
 	// ライトフォブバッファの作成
@@ -404,20 +423,30 @@ void PlayScene::CreateWDResources()
 		_desc.Usage = D3D11_USAGE_DEFAULT;
 		_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		_desc.CPUAccessFlags = 0;
-		DX::ThrowIfFailed(_device->CreateBuffer(&_desc, nullptr, m_lightConstant.ReleaseAndGetAddressOf()));
+		DX::ThrowIfFailed(
+			_device->CreateBuffer(&_desc, nullptr, m_lightConstant.ReleaseAndGetAddressOf())
+		);
 	}
 
 	// 頂点シェーダーの作成
-	std::vector<uint8_t> _vs = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS.cso");
-	DX::ThrowIfFailed(
-		_device->CreateVertexShader(_vs.data(), _vs.size(), nullptr, m_vs.ReleaseAndGetAddressOf())
-	);
+	{
+		std::vector<uint8_t> _vs = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS.cso");
+		DX::ThrowIfFailed(
+			_device->CreateVertexShader(
+				_vs.data(), _vs.size(), nullptr, m_vs.ReleaseAndGetAddressOf()
+			)
+		);
+	}
 
 	// ピクセルシェーダーの作成
-	std::vector<uint8_t> _ps = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS.cso");
-	DX::ThrowIfFailed(
-		_device->CreatePixelShader(_ps.data(), _ps.size(), nullptr, m_ps.ReleaseAndGetAddressOf())
-	);
+	{
+		std::vector<uint8_t> _ps = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS.cso");
+		DX::ThrowIfFailed(
+			_device->CreatePixelShader(
+				_ps.data(), _ps.size(), nullptr, m_ps.ReleaseAndGetAddressOf()
+			)
+		);
+	}
 
 	// サンプラーの作成
 	{
@@ -457,7 +486,7 @@ void PlayScene::SetSceneValues()
 	// ライトバッファの更新
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 	LightFovBuffer _lightBuff = {};
-	_lightBuff.fCosTheta = cosf(XMConvertToRadians(m_lightTheta / 2.0f));
+	_lightBuff.fCosTheta = cosf(XMConvertToRadians(LIGHT_THETA / 2.0f));
 	_context->UpdateSubresource(m_lightConstant.Get(), 0, nullptr, &_lightBuff, 0, 0);
 }
 
@@ -481,8 +510,6 @@ void PlayScene::DebugDraw(CommonStates& states)
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetFollowPath().size());
 	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
-	_string.DrawFormatString(states, { 0,225 }, Colors::Black, L"Rotate::x%.2f,y%.2f,z%.2f,w%.2f",
-		m_lightRotate.x, m_lightRotate.y, m_lightRotate.z, m_lightRotate.w);
 }
 
 //==============================================================================

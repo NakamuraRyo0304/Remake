@@ -70,6 +70,15 @@ private:
 	// アンビエントライトの色
 	static const float AMBIENT_COLOR;
 
+	// ライトの位置
+	static const DirectX::SimpleMath::Vector3 LIGHT_POSITION;
+
+	// ライトの回転
+	static const DirectX::SimpleMath::Quaternion LIGHT_ROTATION;
+
+	// スポットライトの範囲の角度
+	static const float LIGHT_THETA;
+
 	// レンダーテクスチャ
 	std::unique_ptr<DX::RenderTexture> m_renderTexture;
 
@@ -81,12 +90,6 @@ private:
 
 	// デプスピクセルシェーダー
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_psDep;
-
-	// ライトの位置
-	DirectX::SimpleMath::Vector3 m_lightPosition;
-
-	// ライトの回転
-	DirectX::SimpleMath::Quaternion m_lightRotate;
 
 	// シャドウマップのコンスタントバッファ
 	struct ShadowBuffer
@@ -118,9 +121,6 @@ private:
 
 	// サンプラー
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_sampler;
-
-	// スポットライトの範囲の角度
-	float m_lightTheta;
 
 public:
 	/// <summary>

@@ -11,8 +11,8 @@
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-CursorObject::CursorObject()
-	: IGameObject(L"Resources/Models/CursorObj.cmo", L"Resources/Models")
+CursorObject::CursorObject(const wchar_t* path, SimpleMath::Vector3 scale)
+	: IGameObject(path, L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::CursorPos);
@@ -21,7 +21,7 @@ CursorObject::CursorObject()
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * 0.25f);
+	SetScale(scale);
 	SetInitialScale(GetScale());
 }
 

@@ -15,6 +15,7 @@
 // 定数の設定
 //==============================================================================
 const float WorldMouse::MAX_HEIGHT = 5.0f;          // 最高高度
+const float WorldMouse::PLAY_HEIGHT = 1.0f;         // プレイ時の高度
 
 //==============================================================================
 // エイリアス宣言
@@ -53,7 +54,7 @@ void WorldMouse::Update()
     {
         // 座標を設定
         m_position = m_ray->GetConvertedPosition();
-        m_position.y = MAX_HEIGHT;
+        m_position.y = PLAY_HEIGHT;
     }
     else
     {

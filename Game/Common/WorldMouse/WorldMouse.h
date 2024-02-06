@@ -31,6 +31,9 @@ private:
 	// Å‚‚“x
 	static const float MAX_HEIGHT;
 
+	// ƒvƒŒƒC‚Ì‚‚³
+	static const float PLAY_HEIGHT;
+
 public:
 
 	/// <summary>
