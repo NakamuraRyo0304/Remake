@@ -13,8 +13,8 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const float Player::MAX_SPEED = 0.5f;		// 最高速度
-const float Player::MS_RADIUS = 0.5f;		// 最高速で走る半径
+const float Player::MAX_SPEED = 0.78f;		// 最高速度
+const float Player::MS_RADIUS = 0.6f;		// 最高速で走る半径
 const float Player::ARRIVE_RADIUS = 0.1f;	// 到着みなし半径
 const float Player::GIVEUP_TIME = 120.0f;	// 移動諦めタイムリミット
 const float Player::DEATH_LINE = -5.0f;		// 死亡ライン
@@ -74,16 +74,9 @@ void Player::Update()
 		// 目的地までの距離を計算
 		auto _distanceToGoal = (m_goalPoints[0] - GetPosition()).Length();
 
-		// 速度の設定
+		// 速度の設定(ゴール周辺領域内なら最高速度で走る)
 		float _speed = 0.0f;
-		if (_distanceToGoal > MS_RADIUS)
-		{
-			_speed = MAX_SPEED;
-		}
-		else
-		{
-			_speed = MAX_SPEED * (_distanceToGoal / MS_RADIUS);
-		}
+		_speed = _distanceToGoal > MS_RADIUS ? MAX_SPEED : MAX_SPEED * (_distanceToGoal / MS_RADIUS);
 
 		// 移動速度を調整
 		SimpleMath::Vector3 _velocity = _dir * _speed;

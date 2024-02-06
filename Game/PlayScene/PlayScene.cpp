@@ -22,8 +22,10 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const int PlayScene::MAX_FOLLOW = 3;		// 最大追跡パス数
-const float PlayScene::FLAG_START = 5.0f;	// 最高高度
+const int PlayScene::SHADOWMAP_SIZE = 512;		// シャドウマップのサイズ
+const float PlayScene::AMBIENT_COLOR = 0.3f;	// アンビエントライトの色
+const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
+const float PlayScene::FLAG_START = 5.0f;		// 最高高度
 
 //==============================================================================
 // エイリアス宣言
@@ -175,9 +177,8 @@ void PlayScene::Draw()
 	// レンダーターゲットをシャドウマップ用に変更
 	//==============================================================================
 	auto _rtv = m_renderTexture->GetRenderTargetView();
-	auto _srv = m_renderTexture->GetShaderResourceView();
 	auto _dsv = m_depthStencil->GetDepthStencilView();
-	_context->ClearRenderTargetView(_rtv, SimpleMath::Color(1.0f, 1.0f, 1.0f, 1.0f));
+	_context->ClearRenderTargetView(_rtv, Colors::CornflowerBlue);
 	_context->ClearDepthStencilView(_dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	_context->OMSetRenderTargets(1, &_rtv, _dsv);
 	D3D11_VIEWPORT _vp = { 0.0f, 0.0f, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0.0f, 1.0f };
@@ -217,8 +218,7 @@ void PlayScene::Draw()
 	_shadowBuff.lightViewProj = XMMatrixTranspose(_lightView * _lightProj);
 	_shadowBuff.lightPosition = m_lightPosition;
 	_shadowBuff.lightDirection = _lightDir;
-	_shadowBuff.lightAmbient = SimpleMath::Color(0.3f, 0.3f, 0.3f);
-
+	_shadowBuff.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
 	*static_cast<ShadowBuffer*>(_map.pData) = _shadowBuff;
 
 	// GPUからのアクセスをアンロック
@@ -249,6 +249,7 @@ void PlayScene::Draw()
 	//==============================================================================
 	auto _rtvDefault = DX::DeviceResources::GetInstance()->GetRenderTargetView();
 	auto _dsvDefault = DX::DeviceResources::GetInstance()->GetDepthStencilView();
+	auto _srvDefault = m_renderTexture->GetShaderResourceView();
 	_context->ClearRenderTargetView(_rtvDefault, Colors::CornflowerBlue);
 	_context->ClearDepthStencilView(_dsvDefault, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	_context->OMSetRenderTargets(1, &_rtvDefault, _dsvDefault);
@@ -265,7 +266,7 @@ void PlayScene::Draw()
 		_context->PSSetConstantBuffers(1, 2, _buffer);
 
 		// 作成したシャドウマップをリソースとして設定
-		_context->PSSetShaderResources(1, 1, &_srv);
+		_context->PSSetShaderResources(1, 1, &_srvDefault);
 
 		// テクスチャサンプラーの設定
 		ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };

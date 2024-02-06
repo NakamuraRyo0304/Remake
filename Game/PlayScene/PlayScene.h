@@ -62,8 +62,13 @@ private:
 	// 旗の開始位置
 	static const float FLAG_START;
 
+private:
+
 	// シャドウマップのサイズ
-	static const int SHADOWMAP_SIZE = 512;
+	static const int SHADOWMAP_SIZE;
+
+	// アンビエントライトの色
+	static const float AMBIENT_COLOR;
 
 	// レンダーテクスチャ
 	std::unique_ptr<DX::RenderTexture> m_renderTexture;

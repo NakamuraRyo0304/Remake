@@ -49,6 +49,9 @@ void Coin::Update()
 	// 非アクティブは処理しない
 	if (not is_active) return;
 
+	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+	SetRotate(SimpleMath::Vector3::UnitY * XMConvertToRadians(_timer * 30));
+
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
