@@ -12,6 +12,7 @@
 #include "Game/Common/BlockManager/BlockManager.h"
 #include "Game/PlayScene/System/StageCollision/StageCollision.h"
 #include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"
+#include "Game/PlayScene/System/FlagManager/FlagManager.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
@@ -21,7 +22,8 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-
+const int PlayScene::MAX_FOLLOW = 3;		// 最大追跡パス数
+const float PlayScene::MAX_HEIGHT = 5.0f;	// 最高高度
 
 //==============================================================================
 // エイリアス宣言
@@ -90,9 +92,16 @@ void PlayScene::Update()
 		// 追跡パスを追加
 		if (_input->GetMouseTrack()->leftButton == MouseClick::PRESSED)
 		{
-			SimpleMath::Vector3 _followPath = m_worldMouse->GetPosition();
-			_followPath.y = m_player->GetPosition().y;
-			m_player->PushBackFollowPath(_followPath);
+			// プレイヤーの座標
+			SimpleMath::Vector3 _playerPos = m_worldMouse->GetPosition();
+			_playerPos.y = m_player->GetPosition().y;
+
+			// 旗の開始座標
+			SimpleMath::Vector3 _flagPos = m_worldMouse->GetPosition();
+			_flagPos.y = MAX_HEIGHT;
+
+			m_player->AddFollowPath(_playerPos, MAX_FOLLOW);
+			m_flagManager->AddFlag(_flagPos, _playerPos, MAX_FOLLOW);
 		}
 
 		// ゴールしたらクリアへ(仮セレクト)
@@ -122,6 +131,12 @@ void PlayScene::Update()
 		}
 	}
 
+	// 追跡パス数とフラグ数が一致しなくなったらフラグを削除
+	if (m_flagManager->GetFlags().size() - m_player->GetFollowPath().size() > 0)
+	{
+		m_flagManager->PickFlag();
+	}
+
 	// カメラの更新
 	m_adminCamera->Update();
 
@@ -142,6 +157,9 @@ void PlayScene::Update()
 
 	// 当たり判定の更新
 	m_stageCollision->Update(m_player.get(), m_blockManager.get());
+
+	// フラグマネージャの更新
+	m_flagManager->Update();
 }
 
 //==============================================================================
@@ -150,23 +168,18 @@ void PlayScene::Update()
 void PlayScene::Draw()
 {
 	// レンダリング変数を取得
-	auto states = GetSystemManager()->GetCommonStates();
+	auto _states = GetSystemManager()->GetCommonStates();
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
-	// -------------------------------------------------------------------------- //
-	// Pass1 シャドウマップの作成
-	// -------------------------------------------------------------------------- //
-
+	//==============================================================================
+	// レンダーターゲットをシャドウマップ用に変更
+	//==============================================================================
 	auto _rtv = m_renderTexture->GetRenderTargetView();
 	auto _srv = m_renderTexture->GetShaderResourceView();
 	auto _dsv = m_depthStencil->GetDepthStencilView();
-
-	// レンダーターゲットを変更（shadowMapRT）
 	_context->ClearRenderTargetView(_rtv, SimpleMath::Color(1.0f, 1.0f, 1.0f, 1.0f));
 	_context->ClearDepthStencilView(_dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	_context->OMSetRenderTargets(1, &_rtv, _dsv);
-
-	// ビューポートを設定
 	D3D11_VIEWPORT _vp = { 0.0f, 0.0f, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0.0f, 1.0f };
 	_context->RSSetViewports(1, &_vp);
 
@@ -174,10 +187,9 @@ void PlayScene::Draw()
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
 
-	// ------------------------------------------------ //
-	// ライト空間のビュー行列と射影行列を作成する
-	// ------------------------------------------------ //
-
+	//==============================================================================
+	// ライトの設定
+	//==============================================================================
 	// ライトの方向
 	SimpleMath::Vector3 _lightDir =
 		SimpleMath::Vector3::Transform(SimpleMath::Vector3(0.0f, 0.0f, 1.0f), m_lightRotate);
@@ -193,10 +205,9 @@ void PlayScene::Draw()
 	SimpleMath::Matrix _lightProj = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
 		XMConvertToRadians(m_lightTheta), 1.0f, 0.1f, 250.0f);
 
-	// -------------------------------------------------------------------------- //
-	// 定数バッファを更新
-	// -------------------------------------------------------------------------- //
-
+	//==============================================================================
+	// シャドウバッファを作成
+	//==============================================================================
 	// GPUからのアクセスをロック
 	D3D11_MAPPED_SUBRESOURCE _map;
 	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_map);
@@ -213,33 +224,40 @@ void PlayScene::Draw()
 	// GPUからのアクセスをアンロック
 	_context->Unmap(m_shadowConstant.Get(), 0);
 
-	// ------------------------------------------------ //
-	// 影になるモデルを描画する
-	// ------------------------------------------------ //
-
+	//==============================================================================
+	// デプスラムダの作成
+	//==============================================================================
 	ShaderLambda _depth = [&]() {
 		_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
 		_context->PSSetShader(m_psDep.Get(), nullptr, 0); };
 
+	//==============================================================================
+	// 影オブジェクトを描画する
+	//==============================================================================
+
 	// ブロックの描画
-	m_blockManager->Draw(_context, *states, _lightView, _lightProj, false, _depth);
+	m_blockManager->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *states, _lightView, _lightProj, false, _depth);
+	m_player->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
 
-	// -------------------------------------------------------------------------- //
-	// レンダーターゲットとビューポートを元に戻す
-	// -------------------------------------------------------------------------- //
+	// フラグの描画
+	m_flagManager->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
+
+	//==============================================================================
+	// レンダーターゲットをデフォルトに戻す
+	//==============================================================================
 	auto _rtvDefault = DX::DeviceResources::GetInstance()->GetRenderTargetView();
 	auto _dsvDefault = DX::DeviceResources::GetInstance()->GetDepthStencilView();
-
 	_context->ClearRenderTargetView(_rtvDefault, Colors::CornflowerBlue);
 	_context->ClearDepthStencilView(_dsvDefault, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	_context->OMSetRenderTargets(1, &_rtvDefault, _dsvDefault);
 	auto const _vpDefault = DX::DeviceResources::GetInstance()->GetScreenViewport();
 	_context->RSSetViewports(1, &_vpDefault);
 
-	// シェーダーの設定
+	//==============================================================================
+	// シャドウラムダの作成
+	//==============================================================================
 	ShaderLambda _shadow = [&]() {
 		// 定数バッファの設定
 		ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
@@ -250,7 +268,7 @@ void PlayScene::Draw()
 		_context->PSSetShaderResources(1, 1, &_srv);
 
 		// テクスチャサンプラーの設定
-		ID3D11SamplerState* _samplers[] = { states->LinearWrap(), m_sampler.Get() };
+		ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
 		_context->PSSetSamplers(0, 2, _samplers);
 
 		// シェーダーの設定
@@ -261,16 +279,19 @@ void PlayScene::Draw()
 	m_worldMouse->Draw(_view, _projection);
 
 	// カーソルオブジェクトの描画
-	m_cursorObject->Draw(_context, *states, _view, _projection);
+	m_cursorObject->Draw(_context, *_states, _view, _projection);
 
 	// 空の描画
-	m_sky->Draw(_context, *states, _view, _projection);
+	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *states, _view, _projection, false, _shadow);
+	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shadow);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *states, _view, _projection, false, _shadow);
+	m_player->Draw(_context, *_states, _view, _projection, false, _shadow);
+
+	// フラグの描画
+	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shadow);
 
 	// リソースの割り当てを解除する
 	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
@@ -279,8 +300,8 @@ void PlayScene::Draw()
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
-	_grid->Draw(*states, _view, _projection, Colors::Green);
-	DebugDraw(*states);
+	_grid->Draw(*_states, _view, _projection, Colors::Green);
+	DebugDraw(*_states);
 #endif
 }
 
@@ -296,6 +317,7 @@ void PlayScene::Finalize()
 	m_blockManager.reset();
 	m_stageCollision.reset();
 	m_cursorObject.reset();
+	m_flagManager.reset();
 }
 
 //==============================================================================
@@ -324,6 +346,8 @@ void PlayScene::CreateWDResources()
 	// カーソルオブジェクト作成
 	m_cursorObject = std::make_unique<CursorObject>();
 
+	// フラグマネージャ作成
+	m_flagManager = std::make_unique<FlagManager>();
 
 
 	//==============================================================================
@@ -454,7 +478,7 @@ void PlayScene::DebugDraw(CommonStates& states)
 		m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
 	_string.DrawFormatString(states, { 0,150 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
-	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetGoalPoints().size());
+	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetFollowPath().size());
 	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
 	_string.DrawFormatString(states, { 0,225 }, Colors::Black, L"Rotate::x%.2f,y%.2f,z%.2f,w%.2f",
 		m_lightRotate.x, m_lightRotate.y, m_lightRotate.z, m_lightRotate.w);

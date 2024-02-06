@@ -13,8 +13,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const int Player::MAX_PATH_NUM = 3;			// 最大パス数
-const float Player::MAX_SPEED = 1.0f;		// 最高速度
+const float Player::MAX_SPEED = 0.5f;		// 最高速度
 const float Player::MS_RADIUS = 0.5f;		// 最高速で走る半径
 const float Player::ARRIVE_RADIUS = 0.1f;	// 到着みなし半径
 const float Player::GIVEUP_TIME = 120.0f;	// 移動諦めタイムリミット
@@ -156,10 +155,10 @@ void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 //==============================================================================
 // 追跡パスを追加する
 //==============================================================================
-void Player::PushBackFollowPath(SimpleMath::Vector3 path)
+void Player::AddFollowPath(SimpleMath::Vector3 path, const int& max)
 {
 	// 最大数を越えたら追加しない
-	if (m_goalPoints.size() >= MAX_PATH_NUM) return;
+	if (m_goalPoints.size() >= max) return;
 
 	m_goalPoints.push_back(path);
 }

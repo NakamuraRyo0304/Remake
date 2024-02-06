@@ -48,9 +48,6 @@ private:
 
 private:
 
-	// 最大のパス数
-	static const int MAX_PATH_NUM;
-
 	// 最高速度
 	static const float MAX_SPEED;
 
@@ -101,10 +98,10 @@ public:
 public:
 
 	// フォローパスを設定
-	void PushBackFollowPath(DirectX::SimpleMath::Vector3 path);
+	void AddFollowPath(DirectX::SimpleMath::Vector3 path, const int& max);
 
-	// 現在格納しているパスの数を取得
-	const std::vector<DirectX::SimpleMath::Vector3>& GetGoalPoints() { return m_goalPoints; }
+	// 現在格納しているパスを取得
+	const std::vector<DirectX::SimpleMath::Vector3>& GetFollowPath() { return m_goalPoints; }
 	// 格納しているパスを全削除
 	void ResetGoalPosition() { m_goalPoints.clear(); }
 

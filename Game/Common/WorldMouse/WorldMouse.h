@@ -26,6 +26,11 @@ private:
 	// プレイモード
 	bool is_playing;
 
+private:
+
+	// 最高高度
+	static const float MAX_HEIGHT;
+
 public:
 
 	/// <summary>

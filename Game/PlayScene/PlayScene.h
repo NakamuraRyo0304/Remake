@@ -18,6 +18,7 @@ class AdminCamera;
 class BlockManager;
 class CursorObject;
 class DepthStencil;
+class FlagManager;
 class Sky_Play;
 class StageCollision;
 class Player;
@@ -50,7 +51,16 @@ private:
 	// カーソルオブジェクト
 	std::unique_ptr<CursorObject> m_cursorObject;
 
+	// フラグマネージャ
+	std::unique_ptr<FlagManager> m_flagManager;
+
 private:
+
+	// 最大追跡数
+	static const int MAX_FOLLOW;
+
+	// 最高高度
+	static const float MAX_HEIGHT;
 
 	// シャドウマップのサイズ
 	static const int SHADOWMAP_SIZE = 512;

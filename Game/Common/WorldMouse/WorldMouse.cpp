@@ -12,6 +12,11 @@
 #include "WorldMouse.h"
 
 //==============================================================================
+// 定数の設定
+//==============================================================================
+const float WorldMouse::MAX_HEIGHT = 5.0f;          // 最高高度
+
+//==============================================================================
 // エイリアス宣言
 //==============================================================================
 using MOUSE_BUTTON = Mouse::ButtonStateTracker;
@@ -48,7 +53,7 @@ void WorldMouse::Update()
     {
         // 座標を設定
         m_position = m_ray->GetConvertedPosition();
-        m_position.y = static_cast<float>(5);
+        m_position.y = MAX_HEIGHT;
     }
     else
     {
