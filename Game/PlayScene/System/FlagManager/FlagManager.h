@@ -71,6 +71,20 @@ public:
 	/// <param name="引数無し"></param>
 	/// <returns>フラグ配列</returns>
 	std::vector<std::unique_ptr<Flag>>& GetFlags() { return m_flags; }
+
+	/// <summary>
+	/// 一番先頭のフラグが伸びきったらTrueを返す
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	bool IsFirstArrived();
+
+	/// <summary>
+	/// 一番先頭のパスの座標を取得
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	const DirectX::SimpleMath::Vector3& GetFirstPath();
 };
 
 #endif // FLAGMANAGER

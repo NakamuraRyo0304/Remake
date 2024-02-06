@@ -12,6 +12,8 @@
  //==============================================================================
  // 定数の設定
  //==============================================================================
+const float Flag::FALL_SPEED = 0.05f;		// 落下速度
+const float Flag::CLOSED_MATCH = 0.1f;		// 近似一致
 
 //==============================================================================
 // コンストラクタ
@@ -19,6 +21,7 @@
 Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
 	: IGameObject(L"Resources/Models/Flag.cmo", L"Resources/Models")
 	, m_droppedPosition{}		// 落下位置
+	, is_arrive{ false }		// 到着フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Flag);
@@ -48,7 +51,13 @@ Flag::~Flag()
 void Flag::Update()
 {
 	// 落下していく
-	SetPosition(UserUtility::Lerp(GetPosition(), m_droppedPosition, 0.1f));
+	SetPosition(UserUtility::Lerp(GetPosition(), m_droppedPosition, FALL_SPEED));
+
+	// 位置が決定したらTrue
+	if (std::abs(GetPosition().y - m_droppedPosition.y) < CLOSED_MATCH)
+	{
+		is_arrive = true;
+	}
 
 	// マトリクスを作成
 	CreateWorldMatrix();

@@ -70,3 +70,30 @@ void FlagManager::PickFlag()
 {
 	UserUtility::RemoveVec(m_flags, m_flags[0]);
 }
+
+//==============================================================================
+// æ“ª‚Ìƒtƒ‰ƒO‚ª¶‚¦‚«‚Á‚½‚çTRUE
+//==============================================================================
+bool FlagManager::IsFirstArrived()
+{
+	if (m_flags.empty()) return false;
+
+	if (m_flags[0]->IsArrive())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//==============================================================================
+// æ“ª‚ÌÀ•W‚ðŽæ“¾
+//==============================================================================
+const SimpleMath::Vector3& FlagManager::GetFirstPath()
+{
+	if (m_flags.empty()) return SimpleMath::Vector3::Zero;
+
+	return m_flags[0]->GetPosition();
+}

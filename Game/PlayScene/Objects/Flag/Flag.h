@@ -21,6 +21,17 @@ private:
 	// 落下位置
 	DirectX::SimpleMath::Vector3 m_droppedPosition;
 
+	// 到着フラグ
+	bool is_arrive;
+
+private:
+
+	// 到着みなし値
+	static const float CLOSED_MATCH;
+
+	// 落下速度
+	static const float FALL_SPEED;
+
 public:
 
 	/// <summary>
@@ -51,6 +62,8 @@ public:
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
 
+	// 到着状況を取得(到着したらTrue)
+	bool IsArrive() { return is_arrive; }
 };
 
 #endif // FLAG

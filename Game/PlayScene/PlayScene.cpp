@@ -23,7 +23,7 @@
 // 定数の設定
 //==============================================================================
 const int PlayScene::MAX_FOLLOW = 3;		// 最大追跡パス数
-const float PlayScene::MAX_HEIGHT = 5.0f;	// 最高高度
+const float PlayScene::FLAG_START = 5.0f;	// 最高高度
 
 //==============================================================================
 // エイリアス宣言
@@ -98,7 +98,7 @@ void PlayScene::Update()
 
 			// 旗の開始座標
 			SimpleMath::Vector3 _flagPos = m_worldMouse->GetPosition();
-			_flagPos.y = MAX_HEIGHT;
+			_flagPos.y = FLAG_START;
 
 			m_player->AddFollowPath(_playerPos, MAX_FOLLOW);
 			m_flagManager->AddFlag(_flagPos, _playerPos, MAX_FOLLOW);

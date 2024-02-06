@@ -59,8 +59,8 @@ private:
 	// 最大追跡数
 	static const int MAX_FOLLOW;
 
-	// 最高高度
-	static const float MAX_HEIGHT;
+	// 旗の開始位置
+	static const float FLAG_START;
 
 	// シャドウマップのサイズ
 	static const int SHADOWMAP_SIZE = 512;
