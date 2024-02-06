@@ -43,7 +43,7 @@ void Air::Update()
 	if (not is_active) return;
 
 	// マトリクスを作成
-	CreateWorldMatrix();
+	//CreateWorldMatrix();
 }
 
 //==============================================================================
