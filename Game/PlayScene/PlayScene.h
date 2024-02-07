@@ -62,6 +62,10 @@ private:
 	// 旗の開始位置
 	static const float FLAG_START;
 
+	// ライトのニアクリップ・ファークリップ
+	const float LIGHT_NEAR = 0.1f;
+	const float LIGHT_FAR = 250.0f;
+
 private:
 
 	// シャドウマップのサイズ

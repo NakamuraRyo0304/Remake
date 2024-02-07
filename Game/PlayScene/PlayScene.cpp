@@ -186,37 +186,31 @@ void PlayScene::Draw()
 	//==============================================================================
 	// ライトの設定
 	//==============================================================================
-	// ライトの方向
-	SimpleMath::Vector3 _lightDir =
+	SimpleMath::Vector3 _lightDirection =
 		SimpleMath::Vector3::Transform(SimpleMath::Vector3(0.0f, 0.0f, 1.0f), LIGHT_ROTATION);
 
-	// ビュー行列を作成
 	SimpleMath::Matrix _lightView = SimpleMath::Matrix::CreateLookAt(
 		LIGHT_POSITION,
-		LIGHT_POSITION + _lightDir,
+		LIGHT_POSITION + _lightDirection,
 		SimpleMath::Vector3::UnitY
 	);
 
-	// 射影行列を作成
 	SimpleMath::Matrix _lightProj = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
-		XMConvertToRadians(LIGHT_THETA), 1.0f, 0.1f, 250.0f);
+		XMConvertToRadians(LIGHT_THETA), 1.0f, LIGHT_NEAR, LIGHT_FAR);
 
 	//==============================================================================
-	// シャドウバッファを作成
+	// シャドウバッファを作成 ロック->変換->アンロック
 	//==============================================================================
-	// GPUからのアクセスをロック
-	D3D11_MAPPED_SUBRESOURCE _map;
-	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_map);
+	D3D11_MAPPED_SUBRESOURCE _resource;
+	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_resource);
 
-	// シャドウバッファを更新
 	ShadowBuffer _shadowBuff = {};
 	_shadowBuff.lightViewProj = XMMatrixTranspose(_lightView * _lightProj);
 	_shadowBuff.lightPosition = LIGHT_POSITION;
-	_shadowBuff.lightDirection = _lightDir;
+	_shadowBuff.lightDirection = _lightDirection;
 	_shadowBuff.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
-	*static_cast<ShadowBuffer*>(_map.pData) = _shadowBuff;
+	*static_cast<ShadowBuffer*>(_resource.pData) = _shadowBuff;
 
-	// GPUからのアクセスをアンロック
 	_context->Unmap(m_shadowConstant.Get(), 0);
 
 	//==============================================================================

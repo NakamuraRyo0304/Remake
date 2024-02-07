@@ -526,6 +526,8 @@
     <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h">
       <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h" />
+    <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -723,6 +725,8 @@
     <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp">
       <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
     </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp" />
+    <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -890,11 +894,12 @@
     <None Include="Resources\Models\CursorObj.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Models\Spike.cmo">
-      <Filter>Resources\Models\Block</Filter>
-    </None>
     <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
       <Filter>Resources\Shaders\ShadowMap</Filter>
+    </None>
+    <None Include="Resources\Models\Flag.cmo" />
+    <None Include="Resources\Models\Spike.cmo">
+      <Filter>Resources\Models\Block</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -939,5 +944,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="memo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="..\Spike.fbx">
+      <Filter>Resources\Models\Block</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>
