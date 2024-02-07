@@ -1,3 +1,10 @@
+/*
+ *	@File	SM_PS_Depth.hlsl
+ *	@Brief	シャドウマップのピクセルデプス。
+ *	@Date	2024-02-08
+ *  @Author NakamuraRyo
+ */
+
 struct Input
 {
     float4 PositionPS : SV_Position;

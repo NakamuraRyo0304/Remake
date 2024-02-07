@@ -1,7 +1,7 @@
 /*
  *	@File	UserUtility.h
  *	@Brief	関数などの定義。
- *	@Date	2023-06-01
+ *	@Date	2024-02-08
  *  @Author NakamuraRyo
  */
 
@@ -374,6 +374,59 @@ namespace UserUtility
 	inline DirectX::SimpleMath::Vector3 AbsVector3(DirectX::SimpleMath::Vector3 v)
 	{
 		return DirectX::SimpleMath::Vector3(std::abs(v.x), std::abs(v.y), std::abs(v.z));
+	}
+
+	/// <summary>
+	/// 線分と球の当たり判定と押し戻しを行う関数
+	/// </summary>
+	/// <param name="p0">線分の開始地点</param>
+	/// <param name="p1">線分の終了地点</param>
+	/// <param name="circleCenter">オブジェクトの座標</param>
+	/// <param name="radius">球の半径</param>
+	/// <returns>当たったらTRUE</returns>
+	inline bool LineSegmentCircleIntersect(
+		DirectX::SimpleMath::Vector3 p0,
+		DirectX::SimpleMath::Vector3 p1,
+		DirectX::SimpleMath::Vector3 circleCenter,
+		double radius
+	)
+	{
+		// 線分の始点から終点までのベクトル
+		double _v1x = static_cast<double>(p1.x - p0.x);
+		double _v1y = static_cast<double>(p1.y - p0.y);
+		double _v1z = static_cast<double>(p1.z - p0.z);
+
+		// 点から線分の始点までのベクトル
+		double _v2x = static_cast<double>(circleCenter.x - p0.x);
+		double _v2y = static_cast<double>(circleCenter.y - p0.y);
+		double _v2z = static_cast<double>(circleCenter.z - p0.z);
+
+		// 線分の長さの二乗
+		double _squaredL1 = (_v1x * _v1x) + (_v1y * _v1y) + (_v1z * _v1z);
+		// 始点から点までの長さの二乗
+		double _squaredL2 = (_v2x * _v2x) + (_v2y * _v2y) + (_v2z * _v2z);
+
+		// 内積
+		double _dotProduct = (_v1x * _v2x) + (_v1y * _v2y) + (_v1z * _v2z);
+
+		if (_dotProduct == _squaredL1 * _squaredL2 && _squaredL1 >= _squaredL2)
+		{
+			// 線分と点が重なっているかつ、線分が点より長い場合
+			return true;
+		}
+
+		// 円の中心から線分への距離の二乗
+		double distance_squared =
+			std::abs((_v1x * _v2y) - (_v2x * _v1y)) * std::abs((_v1x * _v2y) - (_v2x * _v1y)) / _squaredL1;
+
+		if (distance_squared <= radius * radius)
+		{
+			// 線分と円が交差している場合
+			return true;
+		}
+
+		// それ以外の場合
+		return false;
 	}
 }
 #endif // USERUTILITY

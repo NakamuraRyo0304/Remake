@@ -62,26 +62,22 @@ private:
 	// 旗の開始位置
 	static const float FLAG_START;
 
-	// ライトのニアクリップ・ファークリップ
-	const float LIGHT_NEAR = 0.1f;
-	const float LIGHT_FAR = 250.0f;
-
 private:
 
 	// シャドウマップのサイズ
 	static const int SHADOWMAP_SIZE;
 
-	// アンビエントライトの色
+	// ライトの位置/回転/範囲の角度/環境光の色
+	static const DirectX::SimpleMath::Vector3 LIGHT_POSITION;
+	static const DirectX::SimpleMath::Quaternion LIGHT_ROTATION;
+	static const float LIGHT_THETA;
 	static const float AMBIENT_COLOR;
 
-	// ライトの位置
-	static const DirectX::SimpleMath::Vector3 LIGHT_POSITION;
+	// ライトのニアクリップ・ファークリップ
+	const float LIGHT_NEAR = 0.1f;
+	const float LIGHT_FAR = 250.0f;
 
-	// ライトの回転
-	static const DirectX::SimpleMath::Quaternion LIGHT_ROTATION;
-
-	// スポットライトの範囲の角度
-	static const float LIGHT_THETA;
+private:
 
 	// レンダーテクスチャ
 	std::unique_ptr<DX::RenderTexture> m_renderTexture;
@@ -89,13 +85,16 @@ private:
 	// デプスステンシル
 	std::unique_ptr<DepthStencil> m_depthStencil;
 
-	// デプス頂点シェーダー
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vsDep;
+	// 頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vsDep, m_vs;
 
-	// デプスピクセルシェーダー
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_psDep;
+	// ピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_psDep, m_ps;
 
-	// シャドウマップのコンスタントバッファ
+	// サンプラー
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_sampler;
+
+	// シャドウバッファ
 	struct ShadowBuffer
 	{
 		DirectX::XMMATRIX lightViewProj;	// ライトの投影空間へ座標変換する行列
@@ -104,27 +103,16 @@ private:
 		DirectX::XMVECTOR lightAmbient;		// ライトの環境光
 	};
 
-	// シャドウマップバッファへのポインタ
-	Microsoft::WRL::ComPtr<ID3D11Buffer> m_shadowConstant;
-
-	// ライト影響範囲のコンスタントバッファ
+	// ライトバッファ
 	struct LightFovBuffer
 	{
 		float fCosTheta;		// スポットライトのfov/2
 		int pad[3];
 	};
 
-	// ライトフォブバッファへのポインタ
-	Microsoft::WRL::ComPtr<ID3D11Buffer> m_lightConstant;
+	// シャドウ/ライトバッファ
+	Microsoft::WRL::ComPtr<ID3D11Buffer> m_shadowConstant, m_lightConstant;
 
-	// 頂点シェーダー
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vs;
-
-	// ピクセルシェーダー
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_ps;
-
-	// サンプラー
-	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_sampler;
 
 public:
 	/// <summary>

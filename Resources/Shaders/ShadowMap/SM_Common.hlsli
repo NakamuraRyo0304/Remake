@@ -1,3 +1,10 @@
+/*
+ *	@File	SM_Common.hlsli
+ *	@Brief	シャドウマップの共通要素
+ *	@Date	2024-02-08
+ *  @Author NakamuraRyo
+ */
+
 Texture2D<float4> Texture   : register(t0);
 sampler Sampler             : register(s0);
 

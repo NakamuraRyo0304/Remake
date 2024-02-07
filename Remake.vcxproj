@@ -209,7 +209,6 @@
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
-    <ClInclude Include="Game\Common\ShadowMap\ShadowMap.h" />
     <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h" />
     <ClInclude Include="Game\Editor\Editor.h" />
     <ClInclude Include="Game\Editor\Objects\Air\Air.h" />
@@ -284,7 +283,6 @@
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
-    <ClCompile Include="Game\Common\ShadowMap\ShadowMap.cpp" />
     <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp" />
     <ClCompile Include="Game\Editor\Editor.cpp" />
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp" />
