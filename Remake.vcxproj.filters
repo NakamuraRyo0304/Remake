@@ -311,6 +311,15 @@
     <Filter Include="Resources\Shaders\ShadowMap">
       <UniqueIdentifier>{8d22173b-7950-4feb-9fb3-784132a4b043}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Scenes\PlayScene\System\FlagManager">
+      <UniqueIdentifier>{66e422f4-7d8d-4cc4-943b-8d973bf9ba2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes\PlayScene\Objects\Flag">
+      <UniqueIdentifier>{1ac53174-e467-4725-a276-56e61c347657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Common\ShadowMap">
+      <UniqueIdentifier>{d3eaac4d-6379-4d40-80fc-c7bdde2f1370}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Icon\Icon.h">
@@ -526,8 +535,15 @@
     <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h">
       <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
     </ClInclude>
-    <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h" />
-    <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
+    <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h">
+      <Filter>Game\Scenes\PlayScene\System\FlagManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h">
+      <Filter>Game\Scenes\PlayScene\Objects\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\ShadowMap\ShadowMap.h">
+      <Filter>Game\Common\ShadowMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -725,8 +741,15 @@
     <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp">
       <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp" />
-    <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
+    <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp">
+      <Filter>Game\Scenes\PlayScene\System\FlagManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp">
+      <Filter>Game\Scenes\PlayScene\Objects\Flag</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\ShadowMap\ShadowMap.cpp">
+      <Filter>Game\Common\ShadowMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
@@ -897,9 +920,11 @@
     <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
       <Filter>Resources\Shaders\ShadowMap</Filter>
     </None>
-    <None Include="Resources\Models\Flag.cmo" />
     <None Include="Resources\Models\Spike.cmo">
       <Filter>Resources\Models\Block</Filter>
+    </None>
+    <None Include="Resources\Models\Flag.cmo">
+      <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -944,10 +969,5 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="memo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <MeshContentTask Include="..\Spike.fbx">
-      <Filter>Resources\Models\Block</Filter>
-    </MeshContentTask>
   </ItemGroup>
 </Project>
