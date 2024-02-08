@@ -62,6 +62,9 @@ private:
 	// 旗の開始位置
 	static const float FLAG_START;
 
+	// フラグサイズ（カーソル位置）
+	static const float FLAG_CURSOR_RATE;
+
 private:
 
 	// シャドウマップのサイズ

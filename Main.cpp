@@ -32,7 +32,7 @@ extern "C"
 
 void QuestionFullScreen(bool* fullFlag)
 {
-#ifdef _DEBUG
+#ifndef _DEBUG
     // 画面モード選択
     if (MessageBox(NULL,
         L"フルスクリーンにしますか？", L"画面モード設定",

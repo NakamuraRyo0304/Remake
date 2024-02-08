@@ -388,26 +388,26 @@ namespace UserUtility
 		DirectX::SimpleMath::Vector3 p0,
 		DirectX::SimpleMath::Vector3 p1,
 		DirectX::SimpleMath::Vector3 circleCenter,
-		double radius
+		float radius
 	)
 	{
 		// 線分の始点から終点までのベクトル
-		double _v1x = static_cast<double>(p1.x - p0.x);
-		double _v1y = static_cast<double>(p1.y - p0.y);
-		double _v1z = static_cast<double>(p1.z - p0.z);
+		float _v1x = p1.x - p0.x;
+		float _v1y = p1.y - p0.y;
+		float _v1z = p1.z - p0.z;
 
 		// 点から線分の始点までのベクトル
-		double _v2x = static_cast<double>(circleCenter.x - p0.x);
-		double _v2y = static_cast<double>(circleCenter.y - p0.y);
-		double _v2z = static_cast<double>(circleCenter.z - p0.z);
+		float _v2x = circleCenter.x - p0.x;
+		float _v2y = circleCenter.y - p0.y;
+		float _v2z = circleCenter.z - p0.z;
 
 		// 線分の長さの二乗
-		double _squaredL1 = (_v1x * _v1x) + (_v1y * _v1y) + (_v1z * _v1z);
+		float _squaredL1 = (_v1x * _v1x) + (_v1y * _v1y) + (_v1z * _v1z);
 		// 始点から点までの長さの二乗
-		double _squaredL2 = (_v2x * _v2x) + (_v2y * _v2y) + (_v2z * _v2z);
+		float _squaredL2 = (_v2x * _v2x) + (_v2y * _v2y) + (_v2z * _v2z);
 
 		// 内積
-		double _dotProduct = (_v1x * _v2x) + (_v1y * _v2y) + (_v1z * _v2z);
+		float _dotProduct = (_v1x * _v2x) + (_v1y * _v2y) + (_v1z * _v2z);
 
 		if (_dotProduct == _squaredL1 * _squaredL2 && _squaredL1 >= _squaredL2)
 		{
@@ -416,7 +416,7 @@ namespace UserUtility
 		}
 
 		// 円の中心から線分への距離の二乗
-		double distance_squared =
+		float distance_squared =
 			std::abs((_v1x * _v2y) - (_v2x * _v1y)) * std::abs((_v1x * _v2y) - (_v2x * _v1y)) / _squaredL1;
 
 		if (distance_squared <= radius * radius)

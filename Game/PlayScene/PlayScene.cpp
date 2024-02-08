@@ -31,6 +31,7 @@ const float PlayScene::LIGHT_THETA = 85.0f;		// ライトの範囲
 ////////////////////////////////////////////////////////////////////////////////
 const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
 const float PlayScene::FLAG_START = 5.0f;		// 最高高度
+const float PlayScene::FLAG_CURSOR_RATE = 0.4f;	// フラグカーソルの拡大率
 
 //==============================================================================
 // エイリアス宣言
@@ -350,7 +351,7 @@ void PlayScene::CreateWDResources()
 
 	// カーソルオブジェクト作成
 	m_cursorObject = std::make_unique<CursorObject>(
-		L"Resources/Models/Flag.cmo", SimpleMath::Vector3::One * 0.4f);
+		L"Resources/Models/Flag.cmo", SimpleMath::Vector3::One * FLAG_CURSOR_RATE);
 
 	// フラグマネージャ作成
 	m_flagManager = std::make_unique<FlagManager>();
@@ -498,17 +499,17 @@ void PlayScene::DebugDraw(CommonStates& states)
 	auto& _time = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 },  Colors::Black, L"PlayScene");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
-	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"StageNum::%.d", m_stageNumber);
-	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"PlayerPos::%.2f,%.2f,%.2f",
+	_string.DrawFormatString(states, { 0,0 },  Colors::DarkGreen, L"PlayScene");
+	_string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
+	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%.d", m_stageNumber);
+	_string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f",
 		m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
-	_string.DrawFormatString(states, { 0,150 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
+	_string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
-	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetFollowPath().size());
-	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
+	_string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
+	_string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
 }
 
 //==============================================================================
