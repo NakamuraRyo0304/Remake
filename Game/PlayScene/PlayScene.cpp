@@ -22,14 +22,16 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const int PlayScene::SHADOWMAP_SIZE = 512;		// シャドウマップのサイズ
-const float PlayScene::AMBIENT_COLOR = 0.3f;	// アンビエントライトの色
-const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
-const float PlayScene::FLAG_START = 5.0f;		// 最高高度
-// ライトの位置・ライトの回転・ライトの範囲
+const int PlayScene::SHADOWMAP_SIZE = 912;		// シャドウマップのサイズ
+const float PlayScene::AMBIENT_COLOR = 0.3f;	// 環境光の色
+// ライトの位置・ライトの回転
 const SimpleMath::Vector3 PlayScene::LIGHT_POSITION = { 4.5f, 10.0f, 10.0f };
 const SimpleMath::Quaternion PlayScene::LIGHT_ROTATION = { 0.80f, 0.30f, -0.20f, 0.50f };
-const float PlayScene::LIGHT_THETA = 85.0f;
+const float PlayScene::LIGHT_THETA = 85.0f;		// ライトの範囲
+////////////////////////////////////////////////////////////////////////////////
+const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
+const float PlayScene::FLAG_START = 5.0f;		// 最高高度
+const float PlayScene::FLAG_CURSOR_RATE = 0.4f;	// フラグカーソルの拡大率
 
 //==============================================================================
 // エイリアス宣言
@@ -157,6 +159,7 @@ void PlayScene::Update()
 
 	// フラグマネージャの更新
 	m_flagManager->Update();
+
 }
 
 //==============================================================================
@@ -179,23 +182,21 @@ void PlayScene::Draw()
 	D3D11_VIEWPORT _vp = { 0.0f, 0.0f, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0.0f, 1.0f };
 	_context->RSSetViewports(1, &_vp);
 
-	// カメラのマトリクスを取得
-	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
-
 	//==============================================================================
 	// ライトの設定
 	//==============================================================================
 	SimpleMath::Vector3 _lightDirection =
 		SimpleMath::Vector3::Transform(SimpleMath::Vector3(0.0f, 0.0f, 1.0f), LIGHT_ROTATION);
 
-	SimpleMath::Matrix _lightView = SimpleMath::Matrix::CreateLookAt(
+	// ビュー行列
+	SimpleMath::Matrix _view = SimpleMath::Matrix::CreateLookAt(
 		LIGHT_POSITION,
 		LIGHT_POSITION + _lightDirection,
 		SimpleMath::Vector3::UnitY
 	);
 
-	SimpleMath::Matrix _lightProj = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
+	// プロジェクション行列
+	SimpleMath::Matrix _projection = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
 		XMConvertToRadians(LIGHT_THETA), 1.0f, LIGHT_NEAR, LIGHT_FAR);
 
 	//==============================================================================
@@ -205,7 +206,7 @@ void PlayScene::Draw()
 	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_resource);
 
 	ShadowBuffer _shadowBuff = {};
-	_shadowBuff.lightViewProj = XMMatrixTranspose(_lightView * _lightProj);
+	_shadowBuff.lightViewProj = XMMatrixTranspose(_view * _projection);
 	_shadowBuff.lightPosition = LIGHT_POSITION;
 	_shadowBuff.lightDirection = _lightDirection;
 	_shadowBuff.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
@@ -227,28 +228,28 @@ void PlayScene::Draw()
 	//==============================================================================
 
 	// カーソルの描画
-	m_cursorObject->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
+	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _depth);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
+	m_blockManager->Draw(_context, *_states, _view, _projection, false, _depth);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
+	m_player->Draw(_context, *_states, _view, _projection, false, _depth);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _lightView, _lightProj, false, _depth);
+	m_flagManager->Draw(_context, *_states, _view, _projection, false, _depth);
 
 	//==============================================================================
 	// レンダーターゲットをデフォルトに戻す
 	//==============================================================================
-	auto _rtvDefault = DX::DeviceResources::GetInstance()->GetRenderTargetView();
-	auto _dsvDefault = DX::DeviceResources::GetInstance()->GetDepthStencilView();
-	auto _srvDefault = m_renderTexture->GetShaderResourceView();
-	_context->ClearRenderTargetView(_rtvDefault, Colors::CornflowerBlue);
-	_context->ClearDepthStencilView(_dsvDefault, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	_context->OMSetRenderTargets(1, &_rtvDefault, _dsvDefault);
-	auto const _vpDefault = DX::DeviceResources::GetInstance()->GetScreenViewport();
-	_context->RSSetViewports(1, &_vpDefault);
+	auto _srv = m_renderTexture->GetShaderResourceView();
+	_rtv = DX::DeviceResources::GetInstance()->GetRenderTargetView();
+	_dsv = DX::DeviceResources::GetInstance()->GetDepthStencilView();
+	_context->ClearRenderTargetView(_rtv, Colors::CornflowerBlue);
+	_context->ClearDepthStencilView(_dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	_context->OMSetRenderTargets(1, &_rtv, _dsv);
+	_vp = DX::DeviceResources::GetInstance()->GetScreenViewport();
+	_context->RSSetViewports(1, &_vp);
 
 	//==============================================================================
 	// シャドウラムダの作成
@@ -261,7 +262,7 @@ void PlayScene::Draw()
 			_context->PSSetConstantBuffers(1, 2, _buffer);
 
 			// 作成したシャドウマップをリソースとして設定
-			_context->PSSetShaderResources(1, 1, &_srvDefault);
+			_context->PSSetShaderResources(1, 1, &_srv);
 
 			// テクスチャサンプラーの設定
 			ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
@@ -271,6 +272,11 @@ void PlayScene::Draw()
 			_context->VSSetShader(m_vs.Get(), nullptr, 0);
 			_context->PSSetShader(m_ps.Get(), nullptr, 0);
 		};
+
+
+	// カメラのマトリクスを取得
+	_view = m_adminCamera->GetView();
+	_projection = m_adminCamera->GetProjection();
 
 	// ワールドマウスの描画
 	m_worldMouse->Draw(_view, _projection);
@@ -345,7 +351,7 @@ void PlayScene::CreateWDResources()
 
 	// カーソルオブジェクト作成
 	m_cursorObject = std::make_unique<CursorObject>(
-		L"Resources/Models/Flag.cmo", SimpleMath::Vector3::One * 0.4f);
+		L"Resources/Models/Flag.cmo", SimpleMath::Vector3::One * FLAG_CURSOR_RATE);
 
 	// フラグマネージャ作成
 	m_flagManager = std::make_unique<FlagManager>();
@@ -493,17 +499,17 @@ void PlayScene::DebugDraw(CommonStates& states)
 	auto& _time = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 },  Colors::Black, L"PlayScene");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
-	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"StageNum::%.d", m_stageNumber);
-	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"PlayerPos::%.2f,%.2f,%.2f",
+	_string.DrawFormatString(states, { 0,0 },  Colors::DarkGreen, L"PlayScene");
+	_string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
+	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%.d", m_stageNumber);
+	_string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f",
 		m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
-	_string.DrawFormatString(states, { 0,150 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
+	_string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
-	_string.DrawFormatString(states, { 0,175 }, Colors::Black, L"SettingPath::%d", m_player->GetFollowPath().size());
-	_string.DrawFormatString(states, { 0,200 }, Colors::Black, L"HaveCoinNum::%d", m_player->GetCoinNum());
+	_string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
+	_string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
 }
 
 //==============================================================================

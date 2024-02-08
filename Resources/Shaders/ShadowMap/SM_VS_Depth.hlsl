@@ -1,3 +1,10 @@
+/*
+ *	@File	SM_VS_Depth.hlsl
+ *	@Brief	シャドウマップの頂点デプス。
+ *	@Date	2024-02-08
+ *  @Author NakamuraRyo
+ */
+
 #include "SM_Common.hlsli"
 
 struct Input

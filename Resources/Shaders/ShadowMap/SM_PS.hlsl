@@ -15,7 +15,7 @@ struct Input
 };
 
 // マッハバンド対策
-#define SHADOW_EPSILON 0.0001f
+#define SHADOW_EPSILON 0.00015f
 
 float4 main(Input pin) : SV_TARGET0
 {
