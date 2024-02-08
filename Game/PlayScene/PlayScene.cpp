@@ -18,6 +18,7 @@
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
 #include "Game/Common/CursorObject/CursorObject.h"
+#include "Game/Common/Water/Water.h"
 #include "PlayScene.h"
 
 //==============================================================================
@@ -104,15 +105,19 @@ void PlayScene::Update()
 			m_flagManager->AddFlag(_flagPos, _playerPos, MAX_FOLLOW);
 		}
 
-		// ゴールしたらクリアへ(仮セレクト)
+		// ゴールしたらクリアへ
 		if (m_blockManager->IsArrived())
 		{
 			m_adminCamera->SetInterpolation(true);// 補間モードにする
 			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
 			{
+				// クリアシーンで使うテクスチャの作成
+				m_imageShot->TakePic(L"image.dds");
+
+				// カメラを設定(仮でセレクトフロ－ティング)
 				m_adminCamera->SetType(CameraType::Select1_Floating);
 			}
-			ChangeScene(SCENE::SELECT);
+			ChangeScene(SCENE::CLEAR);
 		}
 
 		// 死んだら再読み込み
@@ -304,12 +309,8 @@ void PlayScene::Draw()
 	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
 	_context->PSSetShaderResources(1, 1, _nullsrv);
 
-	// スクショを作成する
-	if (Input::GetInstance()->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
-	{
-		m_imageShot->TakePic(L"image.dds");
-		m_imageShot->Draw(SimpleMath::Vector2::Zero, SimpleMath::Vector2::One);
-	}
+	// 水面の描画
+	m_water->Draw(_view, _projection);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -333,6 +334,7 @@ void PlayScene::Finalize()
 	m_cursorObject.reset();
 	m_flagManager.reset();
 	m_imageShot.reset();
+	m_water.reset();
 }
 
 //==============================================================================
@@ -367,6 +369,9 @@ void PlayScene::CreateWDResources()
 
 	// スクショ作成
 	m_imageShot = std::make_unique<ImageShot>();
+
+	// 水面作成
+	m_water = std::make_unique<Water>();
 
 	//==============================================================================
 	// シャドウマップ関連の作成
@@ -500,6 +505,9 @@ void PlayScene::SetSceneValues()
 	LightFovBuffer _lightBuff = {};
 	_lightBuff.fCosTheta = cosf(XMConvertToRadians(LIGHT_THETA / 2.0f));
 	_context->UpdateSubresource(m_lightConstant.Get(), 0, nullptr, &_lightBuff, 0, 0);
+
+	// 水面の画像を読み込む
+	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
 }
 
 //==============================================================================

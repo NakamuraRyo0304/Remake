@@ -24,6 +24,7 @@ const float GameMain::PLAY_FADE_SPEED = 2.0f;
 #include "SelectScene/SelectScene.h"
 #include "Editor/Editor.h"
 #include "PlayScene/PlayScene.h"
+#include "ClearScene/ClearScene.h"
 
 //==============================================================================
 // コンストラクタ
@@ -156,6 +157,13 @@ void GameMain::CreateScene()
 			m_nowScene = std::make_unique<PlayScene>(m_stageNumber);
 
 			m_fade->SetFadeSpeed(PLAY_FADE_SPEED);
+			break;
+		}
+		case SCENE::CLEAR:		// クリアシーン
+		{
+			m_nowScene = std::make_unique<ClearScene>();
+
+			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;
 		}
 		case SCENE::EXIT:		// ゲーム終了

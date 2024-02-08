@@ -24,6 +24,7 @@ class Sky_Play;
 class StageCollision;
 class Player;
 class WorldMouse;
+class Water;
 class PlayScene final : public IScene
 {
 private:
@@ -57,6 +58,9 @@ private:
 
 	// ÉXÉNÉVÉá
 	std::unique_ptr<ImageShot> m_imageShot;
+
+	// êÖñ 
+	std::unique_ptr<Water> m_water;
 
 private:
 

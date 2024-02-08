@@ -39,6 +39,13 @@ HRESULT ImageShot::TakePic(const wchar_t* fileName)
     // バックバッファを取得
     HRESULT _hr = S_OK;
 
+    // バックバッファをフロントバッファにコピーする
+    _hr = _swapChain->Present(0, 0);
+    if (FAILED(_hr))
+    {
+        return _hr;
+    }
+
     // スワップチェーンからバックバッファを取得
     Microsoft::WRL::ComPtr<ID3D11Texture2D> _backBuffer;
     _hr = _swapChain->GetBuffer(0, IID_PPV_ARGS(_backBuffer.GetAddressOf()));
@@ -51,17 +58,12 @@ HRESULT ImageShot::TakePic(const wchar_t* fileName)
     std::wstring _filePath = L"Resources/Textures/ScreenShot/";
     _filePath += fileName;
 
-    // スクリーンショットを保存する
-    _hr = SaveDDSTextureToFile(_context, _backBuffer.Get(), _filePath.c_str());
-    if (FAILED(_hr))
-    {
-        return _hr;
-    }
-
     // 瞬間的にデータを追加する
     m_sprite->Clear();
     m_sprite->AddTextureData(L"image", _filePath.c_str());
 
+    // スクリーンショットを保存する
+    _hr = SaveDDSTextureToFile(_context, _backBuffer.Get(), _filePath.c_str());
     return _hr;
 }
 

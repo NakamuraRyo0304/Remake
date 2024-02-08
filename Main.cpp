@@ -32,7 +32,6 @@ extern "C"
 
 void QuestionFullScreen(bool* fullFlag)
 {
-#ifndef _DEBUG
     // 画面モード選択
     if (MessageBox(NULL,
         L"フルスクリーンにしますか？", L"画面モード設定",
@@ -46,7 +45,6 @@ void QuestionFullScreen(bool* fullFlag)
         // フルスクリーンにしない
         *fullFlag = false;
     }
-#endif
 }
 
 // デスクトップの画面中央に移動
