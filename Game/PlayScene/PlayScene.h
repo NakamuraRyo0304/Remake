@@ -19,6 +19,7 @@ class BlockManager;
 class CursorObject;
 class DepthStencil;
 class FlagManager;
+class ImageShot;
 class Sky_Play;
 class StageCollision;
 class Player;
@@ -53,6 +54,9 @@ private:
 
 	// フラグマネージャ
 	std::unique_ptr<FlagManager> m_flagManager;
+
+	// スクショ
+	std::unique_ptr<ImageShot> m_imageShot;
 
 private:
 

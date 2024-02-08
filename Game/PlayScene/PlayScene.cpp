@@ -13,6 +13,7 @@
 #include "Game/PlayScene/System/StageCollision/StageCollision.h"
 #include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"
 #include "Game/PlayScene/System/FlagManager/FlagManager.h"
+#include "Game/PlayScene/System/ImageShot/ImageShot.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
@@ -303,6 +304,13 @@ void PlayScene::Draw()
 	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
 	_context->PSSetShaderResources(1, 1, _nullsrv);
 
+	// スクショを作成する
+	if (Input::GetInstance()->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+	{
+		m_imageShot->TakePic(L"image.dds");
+		m_imageShot->Draw(SimpleMath::Vector2::Zero, SimpleMath::Vector2::One);
+	}
+
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
@@ -324,6 +332,7 @@ void PlayScene::Finalize()
 	m_stageCollision.reset();
 	m_cursorObject.reset();
 	m_flagManager.reset();
+	m_imageShot.reset();
 }
 
 //==============================================================================
@@ -355,6 +364,9 @@ void PlayScene::CreateWDResources()
 
 	// フラグマネージャ作成
 	m_flagManager = std::make_unique<FlagManager>();
+
+	// スクショ作成
+	m_imageShot = std::make_unique<ImageShot>();
 
 	//==============================================================================
 	// シャドウマップ関連の作成
