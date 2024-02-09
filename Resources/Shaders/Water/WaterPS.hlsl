@@ -93,6 +93,9 @@ float4 main(PS_INPUT input) : SV_TARGET
     // UVY値を左右に振る
     uv.y += cos(Time) * SWING_SPEED;
 
+    // 出力変数に入れる
+    float4 output = tex.Sample(samLinear, uv);
+
     // 出力する
-    return tex.Sample(samLinear, uv);
+    return output;
 }

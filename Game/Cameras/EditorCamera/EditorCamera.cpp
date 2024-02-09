@@ -14,6 +14,7 @@
 // 定数の設定
 //==============================================================================
 const float EditorCamera::MOVE_SPEED = 0.1f;
+const float EditorCamera::MAX_HEIGHT = 35.0f;
 
 //==============================================================================
 // エイリアス宣言
@@ -68,6 +69,9 @@ void EditorCamera::Update()
 
 	// ループクランプする
 	m_viewPoint = UserUtility::LoopClamp(m_viewPoint, ViewPoint::PointFront, ViewPoint::PointLeft);
+
+	// 高度をクランプする
+	m_viewPosition.y = UserUtility::Clamp(m_viewPosition.y, m_viewPosition.y, MAX_HEIGHT);
 
 	// ビューの位置を更新
 	UpdateViewPoint();

@@ -11,7 +11,7 @@
 
 class Water
 {
-public:
+private:
 
 	// コンスタントバッファ
 	struct ConstantBuffer
@@ -30,6 +30,12 @@ public:
 		float pad[3];
 	};
 
+	// 画像のスケール
+	static const float WATER_SCALE;
+
+	// 頂点数
+	static const UINT VERTEX_NUM;
+
 private:
 
 	// コンスタントバッファ
@@ -39,7 +45,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 
 	// プリミティブバッチ
-	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColorTexture>> m_batch;
+	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColorTexture>> m_primitive;
 
 	//コモンステート
 	std::unique_ptr<DirectX::CommonStates> m_states;
@@ -48,13 +54,13 @@ private:
 	std::vector<Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> m_texture;
 
 	// 頂点シェーダ
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vertexShader;
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vs;
 
 	// ピクセルシェーダ
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_pixelShader;
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> m_ps;
 
 	// ジオメトリシェーダ
-	Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_geometryShader;
+	Microsoft::WRL::ComPtr<ID3D11GeometryShader> m_gs;
 
 	// 行列
 	DirectX::SimpleMath::Matrix m_world;

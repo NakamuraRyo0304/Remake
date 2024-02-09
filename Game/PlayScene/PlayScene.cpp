@@ -530,6 +530,8 @@ void PlayScene::DebugDraw(CommonStates& states)
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	_string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
 	_string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
+	_string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f",
+		m_adminCamera->GetPosition().x, m_adminCamera->GetPosition().y, m_adminCamera->GetPosition().z);
 }
 
 //==============================================================================

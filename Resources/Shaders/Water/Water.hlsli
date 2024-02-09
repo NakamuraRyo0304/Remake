@@ -8,9 +8,9 @@
 // ïpî…Ç…çXêVÇ≥ÇÍÇÈÇ‡ÇÃ
 cbuffer ConstBuffer	: register(b0)
 {
-	matrix matWorld;
-	matrix matView;
-	matrix matProj;
+	matrix World;
+	matrix View;
+	matrix Proj;
     float Time;
     float3 pad;
 };
