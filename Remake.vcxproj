@@ -345,7 +345,6 @@
     <ResourceCompile Include="Resources\Icon\Icon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\DebugModels\Floor.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds" />
@@ -358,13 +357,13 @@
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
     <Image Include="Resources\Textures\ScreenShot\image.dds" />
-    <Image Include="Resources\Textures\SelectScene\Editor.dds" />
-    <Image Include="Resources\Textures\SelectScene\Stage1.dds" />
-    <Image Include="Resources\Textures\SelectScene\Stage2.dds" />
-    <Image Include="Resources\Textures\SelectScene\Stage3.dds" />
     <Image Include="Resources\Textures\ShaderTex\water.png" />
-    <Image Include="Resources\Textures\TitleScene\Exit.dds" />
-    <Image Include="Resources\Textures\TitleScene\Start.dds" />
+    <Image Include="Resources\Textures\Text\Editor.dds" />
+    <Image Include="Resources\Textures\Text\Exit.dds" />
+    <Image Include="Resources\Textures\Text\Stage1.dds" />
+    <Image Include="Resources\Textures\Text\Stage2.dds" />
+    <Image Include="Resources\Textures\Text\Stage3.dds" />
+    <Image Include="Resources\Textures\Text\Start.dds" />
     <Image Include="Resources\Textures\Transitions\Rule_OldTV.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Crystal.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Grids.png" />
@@ -380,13 +379,6 @@
     <Font Include="Resources\Fonts\myfile.spritefont">
       <FileType>Document</FileType>
     </Font>
-    <None Include="Resources\DebugModels\Cone.cmo" />
-    <None Include="Resources\DebugModels\Cube.cmo" />
-    <None Include="Resources\DebugModels\Cylinder.cmo" />
-    <None Include="Resources\DebugModels\face.cmo" />
-    <None Include="Resources\DebugModels\Floor.cmo" />
-    <None Include="Resources\DebugModels\Sphere.cmo" />
-    <None Include="Resources\DebugModels\Susanne.cmo" />
     <None Include="Resources\Fonts\SegoeUI_18.spritefont" />
     <None Include="Resources\Models\Bird.cmo" />
     <None Include="Resources\Models\Body.cmo" />

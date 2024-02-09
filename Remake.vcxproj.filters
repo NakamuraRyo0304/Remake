@@ -1,948 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Assets">
-      <UniqueIdentifier>58607b5c-a5fb-4b95-8ca7-4ab0549ccd33</UniqueIdentifier>
-      <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="GameLoop">
-      <UniqueIdentifier>{8a1eb1ff-b944-4453-9ebd-b07a051aeadc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="pch">
-      <UniqueIdentifier>{3e217278-3bac-4b95-9d22-e933b285749f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{d03fc034-8115-4f08-8c86-f4d43e011a31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures">
-      <UniqueIdentifier>{3675a529-c864-468b-aa6b-f9786b51642d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Models">
-      <UniqueIdentifier>{e2d29db9-cf39-4c1e-b545-e4e2c3719d5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SystemManager">
-      <UniqueIdentifier>{7f1eb7c5-76c0-4700-81fe-b6cfd2ba3176}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Factories">
-      <UniqueIdentifier>{a396931d-e107-4640-a03e-917f27bce54c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders">
-      <UniqueIdentifier>{f529bb67-c32b-4d65-9654-6bcdb90f737e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures\Transitions">
-      <UniqueIdentifier>{f9d95782-4241-4543-9752-b4f72d5e2465}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug">
-      <UniqueIdentifier>{41e515db-73d0-4fa1-ab5e-3d587078378c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug\GridFloor">
-      <UniqueIdentifier>{4b800ea6-ace5-4bd5-b7d6-2ff72fe944cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug\DrawString">
-      <UniqueIdentifier>{4e74567a-c8e0-4d55-897c-84489a262085}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\Transition">
-      <UniqueIdentifier>{151298cb-feda-4500-aab1-3584c5607d91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Factories\ModelFactory">
-      <UniqueIdentifier>{c3767df7-5267-458d-a9a2-8a69359e6bbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Factories\GeometricFactory">
-      <UniqueIdentifier>{f9b78170-e5bd-4833-a1f5-9b051c76c29a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\DebugModels">
-      <UniqueIdentifier>{11c637f0-ab74-4d95-8e8a-990acd7a23d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{c226b8f3-04c9-4197-9f34-2d9daaf66c7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\IScene">
-      <UniqueIdentifier>{972675d9-5a97-4792-95b5-af7e631221f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\GameMain">
-      <UniqueIdentifier>{941c7117-b2d9-4102-8ce2-6aca54491ae6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes">
-      <UniqueIdentifier>{ac0ca22b-0a98-41d8-99cb-c97109329248}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common">
-      <UniqueIdentifier>{2999f506-6ca0-48bd-b115-9db312159eb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries">
-      <UniqueIdentifier>3b11e4ac-5d12-4acb-a5e4-8faaa69519f9</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\Camera">
-      <UniqueIdentifier>{5653c5f1-8b91-4ec8-926b-a84d51730494}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\DeviceResources">
-      <UniqueIdentifier>{a2d73052-253b-4e9b-b2fa-e34918ac4ad7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\RayCast">
-      <UniqueIdentifier>{21ce2c6b-b070-4805-a3ba-cb7bf7bae8e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\HeaderOnly">
-      <UniqueIdentifier>{e6876608-32b7-4fe9-b504-5b194bd9baf0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\DrawSprite">
-      <UniqueIdentifier>{358594c6-9a83-47e0-b9bc-f4b09b8969aa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\SoundManager">
-      <UniqueIdentifier>{5db3329a-55cd-4424-9dad-4178c5cbb029}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\Input">
-      <UniqueIdentifier>{1d86355b-67c4-4f6c-be3d-d1e7a993934f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\RenderTexture">
-      <UniqueIdentifier>{ffd8475f-335a-4cce-9938-89286e20d436}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\IGameCamera">
-      <UniqueIdentifier>{54e587b1-e356-45e6-9c0a-e212dce0ffcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\IGameObject">
-      <UniqueIdentifier>{4d11e50a-da97-4cfb-9973-33a67164adbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\DepthStencil">
-      <UniqueIdentifier>{f5a43487-ff87-42d0-80f9-16ea9794b013}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\ScreenEffects">
-      <UniqueIdentifier>{67e400a2-a5fc-4f31-8d83-d35fe9b9ad80}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\ScreenEffects\Fade">
-      <UniqueIdentifier>{7b826768-63ae-4d90-82b5-5058e764653f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\ScreenEffects\Transition">
-      <UniqueIdentifier>{b0485016-99a5-4a69-882c-5eee1cc0bf3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\ScreenEffects\DisplayEffect">
-      <UniqueIdentifier>{4ab2b7b6-3d01-49fb-9771-2f2a3184eb7b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\DisplayEffects">
-      <UniqueIdentifier>{32fafcf3-8c3a-4dce-ba0d-2adfa77b3041}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\DisplayEffects\VGS">
-      <UniqueIdentifier>{dcfe3d94-ea5b-4c40-a837-b6bfda35abc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\DisplayEffects\Brown">
-      <UniqueIdentifier>{902bf672-101e-4039-9ad7-d44bd6607034}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\DisplayEffects\Monochrome">
-      <UniqueIdentifier>{3307120c-1ae2-49be-bfbd-3840460e3bf4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\XController">
-      <UniqueIdentifier>{2d890d82-ea99-44db-ae8a-76e2c1d135c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\Collider">
-      <UniqueIdentifier>{71c9a1be-a598-4f74-8295-e3bcfe6e3e2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\Button">
-      <UniqueIdentifier>{c3c56367-d5ae-4056-94c5-c716410d2e43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures\Effects">
-      <UniqueIdentifier>{d59574c2-fc61-4a44-a882-200da9e1ae34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene">
-      <UniqueIdentifier>{8893bd6f-1e61-4c48-ad02-79cb383339e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene\Objects">
-      <UniqueIdentifier>{d8578fdf-1848-4fc0-ad4f-d5921d2d1bb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene\System">
-      <UniqueIdentifier>{bbf0ba56-179e-4cf9-9f91-177ba9178b71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene\Objects\Logo">
-      <UniqueIdentifier>{06e6c5a8-6f76-48b2-be68-1bfb7332351a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene\System\UI_Title">
-      <UniqueIdentifier>{1966dff8-8f65-4ad6-8c83-e583fbadc39a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras">
-      <UniqueIdentifier>{8f57f185-2358-4347-918b-2568b641c9dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\AdminCamera">
-      <UniqueIdentifier>{5469a46d-47ea-4a4d-af65-35c2e6eb4e2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\OverHeadCamera">
-      <UniqueIdentifier>{f67ba86a-ef95-436b-95ae-f784a66d937c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\FixedCamera">
-      <UniqueIdentifier>{d92abc1b-5b09-44f7-b111-3db2d90e8f28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene\Objects\Bird_Title">
-      <UniqueIdentifier>{e58db793-2386-4ce4-ab5e-70c658c0e957}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\SelectScene">
-      <UniqueIdentifier>{4ea24e97-893f-4010-834f-566e39628d35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\SelectScene\System">
-      <UniqueIdentifier>{4fc388af-ec76-4a52-abc1-32ea0fc03f1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\SelectScene\Objects">
-      <UniqueIdentifier>{9bfcd8a0-fdab-42ef-adf9-e1468a4473a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\SelectScene\System\UI_Select">
-      <UniqueIdentifier>{57f935fc-7c7a-4704-aa84-ffd23aed0889}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\IUserInterface">
-      <UniqueIdentifier>{ed323384-5d37-4018-b31b-199047cd34f1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\TitleScene\Objects\Sky_Title">
-      <UniqueIdentifier>{7a28e00a-23ca-4f3f-8884-d2e1f78a4792}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\Stage3Camera">
-      <UniqueIdentifier>{c0512cb4-0710-4aa6-ae5d-d82291abe91f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\Stage2Camera">
-      <UniqueIdentifier>{19971566-f55d-4d8e-86eb-3f1ce9184586}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\Stage1Camera">
-      <UniqueIdentifier>{e1469778-8469-4eb0-8d08-611cb168d53e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures\TitleScene">
-      <UniqueIdentifier>{4696fe83-743d-4bfd-b57b-8ef085a4c476}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures\SelectScene">
-      <UniqueIdentifier>{9a008080-86c0-4091-abd0-a9b764315087}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\SelectScene\Objects\Sky_Select">
-      <UniqueIdentifier>{76b3fd34-c766-41c7-95b1-38af00852ec4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\JsonHelper">
-      <UniqueIdentifier>{2d636d8d-bce4-4de0-8f4b-9bf0b82ecc4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\RotateCamera">
-      <UniqueIdentifier>{153609d4-b01c-4909-84d6-81ca1be6864b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks">
-      <UniqueIdentifier>{a1fd99d1-a2a8-4ad5-8899-5c8efece342a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks\Sand">
-      <UniqueIdentifier>{5d513971-1986-4511-a736-0afa763327ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\BlockManager">
-      <UniqueIdentifier>{5f445990-5e05-4b23-9a6a-8e4fce7ee598}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks\StageJsonDatas">
-      <UniqueIdentifier>{c0ea1506-4887-41d2-960b-f9ef652b8bc7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks\Cloud">
-      <UniqueIdentifier>{ea6fab6d-9842-435f-be30-da66296e84a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks\Coin">
-      <UniqueIdentifier>{e9c1594a-f015-4351-8ed8-4a9b584057fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor">
-      <UniqueIdentifier>{43702bf3-7278-429a-bacc-02761f173d7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\System">
-      <UniqueIdentifier>{44ccf6ec-b236-4a83-a033-be503515d02c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\Objects">
-      <UniqueIdentifier>{a54705ec-a4ce-4bac-b3de-e3c6637c38f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\System\UI_Editor">
-      <UniqueIdentifier>{21b4488b-3045-4f71-a770-9859ab81a8d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\EditorCamera">
-      <UniqueIdentifier>{a9215648-0455-43df-9998-ce2380baac8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\System\EditorCollision">
-      <UniqueIdentifier>{da83059a-d6ac-48f5-8f8a-b9bb3f159743}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\Objects\Air">
-      <UniqueIdentifier>{f4fd3e44-416f-454f-a0ce-0133f95d7021}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures\Editor">
-      <UniqueIdentifier>{ab374996-9329-4c9e-9565-e8d5151ba437}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Textures\Editor\Buttons">
-      <UniqueIdentifier>{a6e10c42-f4c3-4529-bd04-8a118a77e9d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\DiaLog">
-      <UniqueIdentifier>{3903a394-bba0-4336-bc8c-371e53b16247}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene">
-      <UniqueIdentifier>{0d262490-73a8-42f6-8f86-ebcdda0b302a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\System">
-      <UniqueIdentifier>{e3393cea-0ba0-4131-8704-b557deb0986c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\Objects">
-      <UniqueIdentifier>{9df0a1b4-c771-40b5-a239-172baabcca26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\Objects\Sky_Play">
-      <UniqueIdentifier>{651deb3c-e72a-4e56-9170-1bc06d816d9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\Objects\Player">
-      <UniqueIdentifier>{a427642f-6c2c-4f65-9712-cce71ba48eb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Models\Player">
-      <UniqueIdentifier>{30990e30-a863-4e38-b862-b43b494d42dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Models\Block">
-      <UniqueIdentifier>{59806a78-1c28-44cb-970e-c3bf1f2a1a78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\Objects\Player\Parts">
-      <UniqueIdentifier>{9e6671f3-6c2b-46b7-974a-84f827247d6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\WorldMouse">
-      <UniqueIdentifier>{9d84454e-0654-433b-b636-602f6a18182a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\System\StageCollision">
-      <UniqueIdentifier>{9eaa7601-05a7-4ec0-85fe-5fdccaa32dfe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\Objects\EditChara">
-      <UniqueIdentifier>{ead85a19-dfe9-47f5-a4a5-ef2a5a1e8d48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks\Goal">
-      <UniqueIdentifier>{22f24c76-90a4-4ecb-8f6a-ab5821179f90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\Editor\Objects\CursorObj">
-      <UniqueIdentifier>{0f11b2c2-16cc-468a-af70-25d702f09c9a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Common\Blocks\Spike">
-      <UniqueIdentifier>{bc5f6b0c-a2c6-4055-9b00-105a8843ae5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Cameras\DeathCamera">
-      <UniqueIdentifier>{4f73a6e7-d6ed-473c-96bb-ad8b909f18e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\System\EnemyCollision">
-      <UniqueIdentifier>{bc3e1c8d-e83e-45eb-a3be-7de67774304b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\ShadowMap">
-      <UniqueIdentifier>{8d22173b-7950-4feb-9fb3-784132a4b043}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\System\FlagManager">
-      <UniqueIdentifier>{66e422f4-7d8d-4cc4-943b-8d973bf9ba2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scenes\PlayScene\Objects\Flag">
-      <UniqueIdentifier>{1ac53174-e467-4725-a276-56e61c347657}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Resources\Icon\Icon.h">
-      <Filter>Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>GameLoop</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameMain.h">
-      <Filter>Game\GameMain</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>pch</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceResources.h">
-      <Filter>Libraries\DeviceResources</Filter>
-    </ClInclude>
-    <ClInclude Include="StepTimer.h">
-      <Filter>Libraries\HeaderOnly</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemManager\SystemManager.h">
-      <Filter>SystemManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundList.h">
-      <Filter>Libraries\SoundManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h">
-      <Filter>Libraries\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DrawSprite\DrawSprite.h">
-      <Filter>Libraries\DrawSprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DrawString\DrawString.h">
-      <Filter>Debug\DrawString</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\GridFloor\GridFloor.h">
-      <Filter>Debug\GridFloor</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\RayCast\RayCast.h">
-      <Filter>Libraries\RayCast</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\SoundManager\SoundManager.h">
-      <Filter>Libraries\SoundManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Input\Input.h">
-      <Filter>Libraries\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\Factories\ModelFactory.h">
-      <Filter>Factories\ModelFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\Factories\GeometricFactory.h">
-      <Filter>Factories\GeometricFactory</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\IScene\IScene.h">
-      <Filter>Game\IScene</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderTexture.h">
-      <Filter>Libraries\RenderTexture</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h">
-      <Filter>Game\Common\IGameCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameObject\IGameObject.h">
-      <Filter>Game\Common\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ReadData.h">
-      <Filter>Libraries\HeaderOnly</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h">
-      <Filter>Game\Common\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h">
-      <Filter>Libraries\DepthStencil</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h">
-      <Filter>Libraries\ScreenEffects\Transition</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.h">
-      <Filter>Libraries\ScreenEffects\Fade</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\UserUtility.h">
-      <Filter>Game\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h">
-      <Filter>Libraries\ScreenEffects\DisplayEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\XController\XController.h">
-      <Filter>Libraries\XController</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h">
-      <Filter>Libraries\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Button\Button.h">
-      <Filter>Libraries\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\TitleScene\TitleScene.h">
-      <Filter>Game\Scenes\TitleScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
-      <Filter>Game\Scenes\TitleScene\Objects\Logo</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h">
-      <Filter>Game\Scenes\TitleScene\System\UI_Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h">
-      <Filter>Game\Cameras\OverHeadCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\FixedPointCamera\FixedPointCamera.h">
-      <Filter>Game\Cameras\FixedCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
-      <Filter>Game\Cameras\AdminCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h">
-      <Filter>Game\Scenes\TitleScene\Objects\Bird_Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\SelectScene\SelectScene.h">
-      <Filter>Game\Scenes\SelectScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h">
-      <Filter>Game\Scenes\SelectScene\System\UI_Select</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
-      <Filter>Game\Common\IUserInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h">
-      <Filter>Game\Scenes\TitleScene\Objects\Sky_Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.h">
-      <Filter>Game\Cameras\Stage1Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h">
-      <Filter>Game\Cameras\Stage2Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h">
-      <Filter>Game\Cameras\Stage3Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h">
-      <Filter>Game\Scenes\SelectScene\Objects\Sky_Select</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\JsonHelper\json.hpp">
-      <Filter>Libraries\JsonHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\JsonHelper\JsonHelper.h">
-      <Filter>Libraries\JsonHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h">
-      <Filter>Game\Cameras\RotateCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h">
-      <Filter>Game\Common\Blocks\Sand</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\BlockManager\BlockManager.h">
-      <Filter>Game\Common\BlockManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h">
-      <Filter>Game\Common\Blocks\Cloud</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Coin\Coin.h">
-      <Filter>Game\Common\Blocks\Coin</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Editor\Editor.h">
-      <Filter>Game\Scenes\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h">
-      <Filter>Game\Scenes\Editor\System\UI_Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h">
-      <Filter>Game\Cameras\EditorCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Editor\System\EditorCollision\EditorCollision.h">
-      <Filter>Game\Scenes\Editor\System\EditorCollision</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Editor\Objects\Air\Air.h">
-      <Filter>Game\Scenes\Editor\Objects\Air</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
-      <Filter>Libraries\DiaLog</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\PlayScene.h">
-      <Filter>Game\Scenes\PlayScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h">
-      <Filter>Game\Scenes\PlayScene\Objects\Sky_Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\Objects\Player\Player.h">
-      <Filter>Game\Scenes\PlayScene\Objects\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h">
-      <Filter>Game\Scenes\PlayScene\Objects\Player\Parts</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h">
-      <Filter>Game\Common\WorldMouse</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h">
-      <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
-      <Filter>Game\Scenes\Editor\Objects\EditChara</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Goal\Goal.h">
-      <Filter>Game\Common\Blocks\Goal</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\CursorObject\CursorObject.h">
-      <Filter>Game\Scenes\Editor\Objects\CursorObj</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Spike\Spike.h">
-      <Filter>Game\Common\Blocks\Spike</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h">
-      <Filter>Game\Cameras\DeathCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h">
-      <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h">
-      <Filter>Game\Scenes\PlayScene\System\FlagManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h">
-      <Filter>Game\Scenes\PlayScene\Objects\Flag</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Game.cpp">
-      <Filter>GameLoop</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>GameLoop</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameMain.cpp">
-      <Filter>Game\GameMain</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>pch</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceResources.cpp">
-      <Filter>Libraries\DeviceResources</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemManager\SystemManager.cpp">
-      <Filter>SystemManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Camera\Camera.cpp">
-      <Filter>Libraries\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DrawSprite\DrawSprite.cpp">
-      <Filter>Libraries\DrawSprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DrawString\DrawString.cpp">
-      <Filter>Debug\DrawString</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\GridFloor\GridFloor.cpp">
-      <Filter>Debug\GridFloor</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\RayCast\RayCast.cpp">
-      <Filter>Libraries\RayCast</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\SoundManager\SoundManager.cpp">
-      <Filter>Libraries\SoundManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Input\Input.cpp">
-      <Filter>Libraries\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\Factories\ModelFactory.cpp">
-      <Filter>Factories\ModelFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\Factories\GeometricFactory.cpp">
-      <Filter>Factories\GeometricFactory</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\IScene\IScene.cpp">
-      <Filter>Game\IScene</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTexture.cpp">
-      <Filter>Libraries\RenderTexture</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp">
-      <Filter>Game\Common\IGameCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
-      <Filter>Game\Common\IGameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp">
-      <Filter>Libraries\DepthStencil</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp">
-      <Filter>Libraries\ScreenEffects\Transition</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.cpp">
-      <Filter>Libraries\ScreenEffects\Fade</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp">
-      <Filter>Libraries\ScreenEffects\DisplayEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\XController\XController.cpp">
-      <Filter>Libraries\XController</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Collider\ColliderHelper.cpp">
-      <Filter>Libraries\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Button\Button.cpp">
-      <Filter>Libraries\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\TitleScene\TitleScene.cpp">
-      <Filter>Game\Scenes\TitleScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
-      <Filter>Game\Scenes\TitleScene\Objects\Logo</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp">
-      <Filter>Game\Scenes\TitleScene\System\UI_Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp">
-      <Filter>Game\Cameras\AdminCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp">
-      <Filter>Game\Cameras\OverHeadCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\FixedPointCamera\FixedPointCamera.cpp">
-      <Filter>Game\Cameras\FixedCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp">
-      <Filter>Game\Scenes\TitleScene\Objects\Bird_Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\SelectScene\SelectScene.cpp">
-      <Filter>Game\Scenes\SelectScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp">
-      <Filter>Game\Scenes\SelectScene\System\UI_Select</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
-      <Filter>Game\Common\IUserInterface</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp">
-      <Filter>Game\Scenes\TitleScene\Objects\Sky_Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.cpp">
-      <Filter>Game\Cameras\Stage1Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp">
-      <Filter>Game\Cameras\Stage2Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp">
-      <Filter>Game\Cameras\Stage3Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp">
-      <Filter>Game\Scenes\SelectScene\Objects\Sky_Select</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\JsonHelper\JsonHelper.cpp">
-      <Filter>Libraries\JsonHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp">
-      <Filter>Game\Cameras\RotateCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp">
-      <Filter>Game\Common\Blocks\Sand</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp">
-      <Filter>Game\Common\BlockManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp">
-      <Filter>Game\Common\Blocks\Cloud</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp">
-      <Filter>Game\Common\Blocks\Coin</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Editor\Editor.cpp">
-      <Filter>Game\Scenes\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp">
-      <Filter>Game\Scenes\Editor\System\UI_Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp">
-      <Filter>Game\Cameras\EditorCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Editor\System\EditorCollision\EditorCollision.cpp">
-      <Filter>Game\Scenes\Editor\System\EditorCollision</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
-      <Filter>Game\Scenes\Editor\Objects\Air</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
-      <Filter>Libraries\DiaLog</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\PlayScene.cpp">
-      <Filter>Game\Scenes\PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp">
-      <Filter>Game\Scenes\PlayScene\Objects\Sky_Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\Objects\Player\Player.cpp">
-      <Filter>Game\Scenes\PlayScene\Objects\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp">
-      <Filter>Game\Scenes\PlayScene\Objects\Player\Parts</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp">
-      <Filter>Game\Common\WorldMouse</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp">
-      <Filter>Game\Scenes\PlayScene\System\StageCollision</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
-      <Filter>Game\Scenes\Editor\Objects\EditChara</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp">
-      <Filter>Game\Common\Blocks\Goal</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp">
-      <Filter>Game\Scenes\Editor\Objects\CursorObj</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp">
-      <Filter>Game\Common\Blocks\Spike</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp">
-      <Filter>Game\Cameras\DeathCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp">
-      <Filter>Game\Scenes\PlayScene\System\EnemyCollision</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp">
-      <Filter>Game\Scenes\PlayScene\System\FlagManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp">
-      <Filter>Game\Scenes\PlayScene\Objects\Flag</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Resources\Icon\Icon.rc">
-      <Filter>Assets</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\Textures\Transitions\Rule_Rot.png">
-      <Filter>Resources\Textures\Transitions</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
-      <Filter>Resources\Textures\Transitions</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Crystal.png">
-      <Filter>Resources\Textures\Transitions</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Grids.png">
-      <Filter>Resources\Textures\Transitions</Filter>
-    </Image>
-    <Image Include="Resources\DebugModels\Floor.dds">
-      <Filter>Resources\DebugModels</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png">
-      <Filter>Resources\Textures\Transitions</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_OldTV.png">
-      <Filter>Resources\Textures\Transitions</Filter>
-    </Image>
-    <Image Include="Resources\Effects\Fire.png">
-      <Filter>Resources\Textures\Effects</Filter>
-    </Image>
-    <Image Include="Resources\Effects\Fog.png">
-      <Filter>Resources\Textures\Effects</Filter>
-    </Image>
-    <Image Include="Resources\Textures\TitleScene\Start.dds">
-      <Filter>Resources\Textures\TitleScene</Filter>
-    </Image>
-    <Image Include="Resources\Textures\TitleScene\Exit.dds">
-      <Filter>Resources\Textures\TitleScene</Filter>
-    </Image>
-    <Image Include="Resources\Textures\SelectScene\Stage3.dds">
-      <Filter>Resources\Textures\SelectScene</Filter>
-    </Image>
-    <Image Include="Resources\Textures\SelectScene\Stage1.dds">
-      <Filter>Resources\Textures\SelectScene</Filter>
-    </Image>
-    <Image Include="Resources\Textures\SelectScene\Stage2.dds">
-      <Filter>Resources\Textures\SelectScene</Filter>
-    </Image>
-    <Image Include="Resources\Textures\SelectScene\Editor.dds">
-      <Filter>Resources\Textures\SelectScene</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\CloudButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
-      <Filter>Resources\Textures\Editor\Buttons</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="settings.manifest">
-      <Filter>Assets</Filter>
-    </Manifest>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Resources\Fonts\SegoeUI_18.spritefont">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Resources\DebugModels\Sphere.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\DebugModels\Susanne.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\DebugModels\Cone.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\DebugModels\Cube.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\DebugModels\Cylinder.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\DebugModels\Floor.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\Shaders\ParametersHeader.hlsli">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="Resources\Shaders\Transition\Transition.hlsli">
-      <Filter>Resources\Shaders\Transition</Filter>
-    </None>
-    <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
-      <Filter>Resources\Shaders\DisplayEffects</Filter>
-    </None>
-    <None Include="Resources\DebugModels\face.cmo">
-      <Filter>Resources\DebugModels</Filter>
-    </None>
-    <None Include="Resources\Models\ShineSky.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\TitleLogoVer2.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\Bird.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Stages\sample1.json">
-      <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
-    </None>
-    <None Include="Resources\Stages\sample2.json">
-      <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
-    </None>
-    <None Include="Resources\Models\Cloud.cmo">
-      <Filter>Resources\Models\Block</Filter>
-    </None>
-    <None Include="Resources\Models\Coin.cmo">
-      <Filter>Resources\Models\Block</Filter>
-    </None>
-    <None Include="Resources\Models\Sand.cmo">
-      <Filter>Resources\Models\Block</Filter>
-    </None>
-    <None Include="Resources\Models\Head.cmo">
-      <Filter>Resources\Models\Player</Filter>
-    </None>
-    <None Include="Resources\Models\Body.cmo">
-      <Filter>Resources\Models\Player</Filter>
-    </None>
-    <None Include="Resources\Stages\sample3.json">
-      <Filter>Game\Common\Blocks\StageJsonDatas</Filter>
-    </None>
-    <None Include="Resources\Models\Goal.cmo">
-      <Filter>Resources\Models\Block</Filter>
-    </None>
-    <None Include="Resources\Models\CursorObj.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </None>
-    <None Include="Resources\Models\Spike.cmo">
-      <Filter>Resources\Models\Block</Filter>
-    </None>
-    <None Include="Resources\Models\Flag.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="Resources\Fonts\myfile.spritefont">
-      <Filter>Assets</Filter>
-    </Font>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Resources\Shaders\Transition\VS_Transition.hlsl">
-      <Filter>Resources\Shaders\Transition</Filter>
+    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayGS.hlsl">
+      <Filter>Resources\Shaders\Display</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayVS.hlsl">
+      <Filter>Resources\Shaders\Display</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\DisplayEffects\Brown\BrownPS.hlsl">
+      <Filter>Resources\Shaders\Display</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\DisplayEffects\Monochrome\MonochroPS.hlsl">
+      <Filter>Resources\Shaders\Display</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Water\WaterGS.hlsl">
+      <Filter>Resources\Shaders\Water</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Water\WaterPS.hlsl">
+      <Filter>Resources\Shaders\Water</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Water\WaterVS.hlsl">
+      <Filter>Resources\Shaders\Water</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\Transition\PS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayGS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\VGS</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayVS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\VGS</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Brown\BrownPS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\Brown</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Monochrome\MonochroPS.hlsl">
-      <Filter>Resources\Shaders\DisplayEffects\Monochrome</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shaders\Transition\GS_Transition.hlsl">
+      <Filter>Resources\Shaders\Transition</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Transition\VS_Transition.hlsl">
       <Filter>Resources\Shaders\Transition</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS.hlsl">
@@ -959,6 +45,912 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="memo.txt" />
+    <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp">
+      <Filter>Cameras\AdminCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\Camera\Camera.cpp">
+      <Filter>Cameras\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp">
+      <Filter>Cameras\EditorCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp">
+      <Filter>Cameras\DeathCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp">
+      <Filter>Interfaces\IGameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
+      <Filter>Interfaces\IGameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\IScene\IScene.cpp">
+      <Filter>Interfaces\IScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
+      <Filter>Interfaces\IUserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
+      <Filter>GameObjects\Common\Blocks\Air</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp">
+      <Filter>GameObjects\Title\Bird_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ClearScene\ClearScene.cpp">
+      <Filter>Scenes\ClearScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp">
+      <Filter>GameObjects\Common\Blocks\Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp">
+      <Filter>GameObjects\Common\Blocks\Coin</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp">
+      <Filter>GameObjects\Common\CursorObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\Button\Button.cpp">
+      <Filter>Libraries\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\Collider\ColliderHelper.cpp">
+      <Filter>Libraries\ColliderHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp">
+      <Filter>Libraries\DepthStencil</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceResources.cpp">
+      <Filter>Libraries\DeviceResources</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
+      <Filter>Libraries\DiaLog</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp">
+      <Filter>Libraries\DisplayEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DrawSprite\DrawSprite.cpp">
+      <Filter>Libraries\DrawSprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\DrawString\DrawString.cpp">
+      <Filter>Libraries\DrawString</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.cpp">
+      <Filter>Libraries\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Factories\GeometricFactory.cpp">
+      <Filter>Libraries\GeometricFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\GridFloor\GridFloor.cpp">
+      <Filter>Libraries\GridFloor</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\Input\Input.cpp">
+      <Filter>Libraries\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\JsonHelper\JsonHelper.cpp">
+      <Filter>Libraries\JsonHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Factories\ModelFactory.cpp">
+      <Filter>Libraries\ModelFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\RayCast\RayCast.cpp">
+      <Filter>Libraries\RayCast</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>Libraries\RenderTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\SoundManager\SoundManager.cpp">
+      <Filter>Libraries\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp">
+      <Filter>Libraries\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\XController\XController.cpp">
+      <Filter>Libraries\XContoller</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SelectScene\SelectScene.cpp">
+      <Filter>Scenes\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\TitleScene.cpp">
+      <Filter>Scenes\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\PlayScene.cpp">
+      <Filter>Scenes\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\Editor.cpp">
+      <Filter>Scenes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FixedPointCamera\FixedPointCamera.cpp">
+      <Filter>Cameras\FixedPointCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Main\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameMain.cpp">
+      <Filter>Main\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Main\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
+      <Filter>GameObjects\Title\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
+      <Filter>GameObjects\Edit\EditChara</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp">
+      <Filter>GameObjects\Common\BlockManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp">
+      <Filter>GameObjects\Play\Flag</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp">
+      <Filter>GameObjects\Common\Blocks\Goal</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp">
+      <Filter>Cameras\OverHeadCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp">
+      <Filter>GameSystems\Play\ImageShot</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\System\EditorCollision\EditorCollision.cpp">
+      <Filter>GameSystems\Editor\EditorCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp">
+      <Filter>GameSystems\Play\EnemyCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp">
+      <Filter>GameSystems\Play\FlagManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Player\Player.cpp">
+      <Filter>GameObjects\Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp">
+      <Filter>GameObjects\Play\Player\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp">
+      <Filter>GameObjects\Common\Blocks\Sand</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp">
+      <Filter>Cameras\RotateCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp">
+      <Filter>GameObjects\Title\Sky_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp">
+      <Filter>GameObjects\Play\Sky_Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp">
+      <Filter>GameObjects\Select\Sky_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp">
+      <Filter>GameObjects\Common\Blocks\Spike</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.cpp">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp">
+      <Filter>GameSystems\Editor\UI_Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp">
+      <Filter>GameSystems\Play\StageCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp">
+      <Filter>GameSystems\Select\UI_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp">
+      <Filter>GameSystems\Title\UI_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\Water\Water.cpp">
+      <Filter>GameObjects\Common\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp">
+      <Filter>GameObjects\Common\WorldMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemManager\SystemManager.cpp">
+      <Filter>Libraries\SystemManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
+      <Filter>Cameras\AdminCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h">
+      <Filter>Cameras\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h">
+      <Filter>Cameras\EditorCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h">
+      <Filter>Cameras\DeathCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h">
+      <Filter>Interfaces\IGameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\IGameObject\IGameObject.h">
+      <Filter>Interfaces\IGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h">
+      <Filter>Interfaces\IGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\IScene\IScene.h">
+      <Filter>Interfaces\IScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
+      <Filter>Interfaces\IUserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\Objects\Air\Air.h">
+      <Filter>GameObjects\Common\Blocks\Air</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h">
+      <Filter>GameObjects\Title\Bird_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\ClearScene.h">
+      <Filter>Scenes\ClearScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h">
+      <Filter>GameObjects\Common\Blocks\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Coin\Coin.h">
+      <Filter>GameObjects\Common\Blocks\Coin</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\CursorObject\CursorObject.h">
+      <Filter>GameObjects\Common\CursorObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\Button\Button.h">
+      <Filter>Libraries\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h">
+      <Filter>Libraries\ColliderHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h">
+      <Filter>Libraries\DepthStencil</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceResources.h">
+      <Filter>Libraries\DeviceResources</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
+      <Filter>Libraries\DiaLog</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h">
+      <Filter>Libraries\DisplayEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DrawSprite\DrawSprite.h">
+      <Filter>Libraries\DrawSprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\DrawString\DrawString.h">
+      <Filter>Libraries\DrawString</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.h">
+      <Filter>Libraries\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Factories\GeometricFactory.h">
+      <Filter>Libraries\GeometricFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\GridFloor\GridFloor.h">
+      <Filter>Libraries\GridFloor</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\Input\Input.h">
+      <Filter>Libraries\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\JsonHelper\json.hpp">
+      <Filter>Libraries\JsonHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\JsonHelper\JsonHelper.h">
+      <Filter>Libraries\JsonHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Factories\ModelFactory.h">
+      <Filter>Libraries\ModelFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\RayCast\RayCast.h">
+      <Filter>Libraries\RayCast</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>Libraries\RenderTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundList.h">
+      <Filter>Libraries\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\SoundManager\SoundManager.h">
+      <Filter>Libraries\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h">
+      <Filter>Libraries\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\XController\XController.h">
+      <Filter>Libraries\XContoller</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SelectScene\SelectScene.h">
+      <Filter>Scenes\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\TitleScene.h">
+      <Filter>Scenes\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\PlayScene.h">
+      <Filter>Scenes\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\Editor.h">
+      <Filter>Scenes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FixedPointCamera\FixedPointCamera.h">
+      <Filter>Cameras\FixedPointCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Main\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameMain.h">
+      <Filter>Main\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Main\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
+      <Filter>GameObjects\Title\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
+      <Filter>GameObjects\Edit\EditChara</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\BlockManager\BlockManager.h">
+      <Filter>GameObjects\Common\BlockManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h">
+      <Filter>GameObjects\Play\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Goal\Goal.h">
+      <Filter>GameObjects\Common\Blocks\Goal</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h">
+      <Filter>Cameras\OverHeadCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h">
+      <Filter>GameSystems\Play\ImageShot</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\System\EditorCollision\EditorCollision.h">
+      <Filter>GameSystems\Editor\EditorCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h">
+      <Filter>GameSystems\Play\EnemyCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h">
+      <Filter>GameSystems\Play\FlagManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Player\Player.h">
+      <Filter>GameObjects\Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h">
+      <Filter>GameObjects\Play\Player\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h">
+      <Filter>GameObjects\Common\Blocks\Sand</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h">
+      <Filter>Cameras\RotateCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h">
+      <Filter>GameObjects\Title\Sky_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h">
+      <Filter>GameObjects\Play\Sky_Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h">
+      <Filter>GameObjects\Select\Sky_Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Spike\Spike.h">
+      <Filter>GameObjects\Common\Blocks\Spike</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.h">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Icon\Icon.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h">
+      <Filter>GameSystems\Editor\UI_Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h">
+      <Filter>GameSystems\Play\StageCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h">
+      <Filter>GameSystems\Select\UI_Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h">
+      <Filter>GameSystems\Title\UI_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Water\Water.h">
+      <Filter>GameObjects\Common\Water</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h">
+      <Filter>GameObjects\Common\WorldMouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemManager\SystemManager.h">
+      <Filter>Libraries\SystemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StepTimer.h">
+      <Filter>Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadData.h">
+      <Filter>Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\UserUtility.h">
+      <Filter>Libraries</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CloudButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\ScreenShot\image.dds">
+      <Filter>Resources\Textures\ScreenShot</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_Crystal.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_Grids.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_OldTV.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_Rot.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\ShaderTex\water.png">
+      <Filter>Resources\Textures\Common</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage1.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage2.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage3.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Start.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Editor.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Exit.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Models\Bird.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Body.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Cloud.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Coin.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\CursorObj.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Flag.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Goal.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Head.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Sand.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\ShineSky.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Spike.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\TitleLogoVer2.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
+      <Filter>Resources\Shaders\Display</Filter>
+    </None>
+    <None Include="Resources\Shaders\Water\Water.hlsli">
+      <Filter>Resources\Shaders\Water</Filter>
+    </None>
+    <None Include="Resources\Shaders\Transition\Transition.hlsli">
+      <Filter>Resources\Shaders\Transition</Filter>
+    </None>
+    <None Include="Resources\Stages\sample1.json">
+      <Filter>Resources\Stages</Filter>
+    </None>
+    <None Include="Resources\Stages\sample2.json">
+      <Filter>Resources\Stages</Filter>
+    </None>
+    <None Include="Resources\Stages\sample3.json">
+      <Filter>Resources\Stages</Filter>
+    </None>
+    <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
+    </None>
+    <None Include="packages.config">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Resources\Fonts\SegoeUI_18.spritefont">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Resources\Shaders\ParametersHeader.hlsli">
+      <Filter>Resources\Shaders\ShadowMap</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Cameras">
+      <UniqueIdentifier>{ac810fae-cee3-46b6-8b7c-d8e7c8866690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\AdminCamera">
+      <UniqueIdentifier>{82100e63-67fa-4d58-93ef-1dd5ae3ec9d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\Camera">
+      <UniqueIdentifier>{4dd4b96c-db12-4eed-8d23-e3a3eb0ba21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\EditorCamera">
+      <UniqueIdentifier>{cdb17fcf-25ab-4e94-8621-13bf25c09423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\DeathCamera">
+      <UniqueIdentifier>{db6b919c-2ca2-489e-936e-e21fd51b5e89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{d9150a4d-91ae-4f88-89ee-9f469d00937b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IGameCamera">
+      <UniqueIdentifier>{3f829e01-4cbd-4434-b4ae-fbc9acf228dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IGameObject">
+      <UniqueIdentifier>{21cc561c-c77d-4e7c-a9de-c7abf01a0d79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IScene">
+      <UniqueIdentifier>{0b9324fe-c29c-42bf-b298-07373acdaf2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces\IUserInterface">
+      <UniqueIdentifier>{91acd816-9024-4985-bf64-43b5e063431e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{961ae1a8-4cc9-49b8-93ef-179696fc263e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common">
+      <UniqueIdentifier>{bf5daed2-9231-4b02-833d-137dd9a495e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Edit">
+      <UniqueIdentifier>{0f96f914-6949-4a16-8b13-c59e88519e4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title">
+      <UniqueIdentifier>{28cbb10d-5317-4c56-b937-a9ce652d9bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play">
+      <UniqueIdentifier>{0207da42-f576-43c2-87c5-e62d6fcbc943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear">
+      <UniqueIdentifier>{636ec3ad-b86d-4696-963b-187e191b33d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Bird_Title">
+      <UniqueIdentifier>{de7b4021-0cad-455b-81ed-506b86fe5511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{0c3f85ce-e792-45cf-bd28-566ea722938e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\ClearScene">
+      <UniqueIdentifier>{7fe57305-3927-48ed-a583-b5c5ede36d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\CursorObject">
+      <UniqueIdentifier>{3dadb200-95ed-4014-ac0b-45ea459aacc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks">
+      <UniqueIdentifier>{e7a9b045-7c46-4ed3-98c8-93116be00c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Coin">
+      <UniqueIdentifier>{a76fb650-c880-4953-93b2-437ab8e9dd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Air">
+      <UniqueIdentifier>{4191ed06-6491-44e0-9426-3e4b52be8cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Cloud">
+      <UniqueIdentifier>{6368c934-f301-485a-90e1-7905191c2387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{3ad9c081-e06e-446a-bfe9-b004eca43c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{8261d7f4-5dff-4662-a392-9f32dd953eef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Button">
+      <UniqueIdentifier>{bb053495-3104-4f9b-8647-d0a97549da4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Models">
+      <UniqueIdentifier>{cad1901c-791d-4104-bb8b-fa26e1c800f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{0fd03938-8966-477b-9813-7255c36e3ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Button">
+      <UniqueIdentifier>{cb066ea6-28c8-4e64-959a-bb3b6bd27c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\ColliderHelper">
+      <UniqueIdentifier>{8c7af528-41ef-45c9-97d0-ab60b1472104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DepthStencil">
+      <UniqueIdentifier>{14c5e0d2-60f9-4ea3-bfcc-18f84b1949cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DeviceResources">
+      <UniqueIdentifier>{9ececad1-98af-47c0-ad08-42b0a87bf55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DiaLog">
+      <UniqueIdentifier>{178a5624-923a-45f3-af1c-1012b9c44676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DisplayEffect">
+      <UniqueIdentifier>{268effdd-52b4-4bbd-a572-35226d8444c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DrawSprite">
+      <UniqueIdentifier>{a3ada18c-769a-468c-84cd-16be20e4dee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\DrawString">
+      <UniqueIdentifier>{e755f359-8670-4d56-807f-525ef8a19f83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Fade">
+      <UniqueIdentifier>{77646b62-b17f-4178-9d80-ac595319fc2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\GeometricFactory">
+      <UniqueIdentifier>{f0b5283b-8e70-40d7-bf47-1b1fe2340988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\GridFloor">
+      <UniqueIdentifier>{92a2e387-deac-49b0-ad65-ff2002c90520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Input">
+      <UniqueIdentifier>{51f4a992-6432-465f-8831-5ffc1f5b8b73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\JsonHelper">
+      <UniqueIdentifier>{f6ecee0d-0a68-4d20-86e4-4cd829fb8f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\ModelFactory">
+      <UniqueIdentifier>{08d8e60e-27d7-4109-bb8e-e98f03eec343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\RayCast">
+      <UniqueIdentifier>{573749ad-6d8a-47f0-a448-111b5ca0e339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\RenderTexture">
+      <UniqueIdentifier>{8f8bed21-3e5a-49e0-93f6-64ab10f5d7f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\SoundManager">
+      <UniqueIdentifier>{8d0c329e-95d3-49ae-85f6-8dae203b5f26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Transition">
+      <UniqueIdentifier>{c2449553-c227-4efc-91cf-5f1c42fe5b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\XContoller">
+      <UniqueIdentifier>{181cdb3d-7ee6-4f04-bf0d-9d179861bd7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders">
+      <UniqueIdentifier>{691a665d-8d45-4df5-ae88-c14fcc0033ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Display">
+      <UniqueIdentifier>{be7a6b1e-9be1-4a08-a0ba-361bba6eb5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Water">
+      <UniqueIdentifier>{2018b959-d427-4051-b765-0411e4415d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Transition">
+      <UniqueIdentifier>{1631818f-d9a4-4cac-89e9-7a1fdf95ba1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\ScreenShot">
+      <UniqueIdentifier>{afa8f898-3fa1-4c6a-9006-6bd836eabc5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Common">
+      <UniqueIdentifier>{cb99af56-c638-41de-a859-5fd4d9e294f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Text">
+      <UniqueIdentifier>{93d4f133-7011-4a03-a925-999ac4089e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SelectScene">
+      <UniqueIdentifier>{ef332ff6-2a21-4931-8e99-d61c6b92f121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\TitleScene">
+      <UniqueIdentifier>{b85374b2-ad82-4af1-8160-c06c0332371a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\PlayScene">
+      <UniqueIdentifier>{3c98f162-da8b-4859-89f6-32f4dbca5c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{99e372c1-0130-4cc2-9c45-02f81ffbc42f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Editor">
+      <UniqueIdentifier>{685cc4fc-0345-4928-9f60-4ccf1643cbbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\FixedPointCamera">
+      <UniqueIdentifier>{f47d7b42-9ea1-46c0-ac82-b114ffa00de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\Game">
+      <UniqueIdentifier>{bd7d3e74-9f9b-45a3-b5d7-6eb3c4ede6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\GameMain">
+      <UniqueIdentifier>{f58a9721-4610-4650-be53-2a26e7c0e115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\pch">
+      <UniqueIdentifier>{7ce8b178-bc69-4b35-94dc-a68f8b3f8764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Logo">
+      <UniqueIdentifier>{0175345c-9e1d-4ebd-93b9-123d18efa4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Edit\EditChara">
+      <UniqueIdentifier>{69bd8bca-5a6f-4110-9310-2a15f8a76ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\BlockManager">
+      <UniqueIdentifier>{5a90c2d1-29a8-4e0f-afdc-1bf2a676a0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Flag">
+      <UniqueIdentifier>{77106cdd-a184-400c-a6bd-5a7df296ff0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Goal">
+      <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\OverHeadCamera">
+      <UniqueIdentifier>{2111bc67-0600-496c-b301-2355e4a22b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems">
+      <UniqueIdentifier>{2051ee9e-f24d-4a14-a592-ac67f720453c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play">
+      <UniqueIdentifier>{71095349-e704-49c5-98a8-02ec1a790871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\ImageShot">
+      <UniqueIdentifier>{87bd4c8d-bdf5-4fa2-8eb7-438cbc180031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Editor">
+      <UniqueIdentifier>{31eb4ccd-54fb-44f6-b0ab-75a266c715fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Editor\EditorCollision">
+      <UniqueIdentifier>{f1072bf7-e1bd-4616-ace1-fc9df697e191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\EnemyCollision">
+      <UniqueIdentifier>{0a8cf271-a8c3-4797-80bf-dcaa33262ae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\FlagManager">
+      <UniqueIdentifier>{bfbc20d7-36a2-4461-8575-e49e1e1ff743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Rule">
+      <UniqueIdentifier>{5fa845e5-d61c-45e7-b994-80724d236c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Player">
+      <UniqueIdentifier>{33407447-12ae-4ea9-98e5-2d597e5461d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Player\Head">
+      <UniqueIdentifier>{189acabe-be83-4487-b775-732c63a45089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Sand">
+      <UniqueIdentifier>{6056ea33-2629-4dcb-b520-96254809c4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\RotateCamera">
+      <UniqueIdentifier>{cd0bfe37-9e72-4a6a-a371-7470a41bc050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Sky_Title">
+      <UniqueIdentifier>{da5652a9-a5d4-458d-8e59-deb0fb0ce823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Sky_Play">
+      <UniqueIdentifier>{4c38cfaf-66ce-43d1-aa36-18274abd874c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Select">
+      <UniqueIdentifier>{9143f698-53f8-4747-8974-4b0641b38f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Select\Sky_Select">
+      <UniqueIdentifier>{e4ae6031-f09d-48fe-a194-7a51d2e9dfcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Stages">
+      <UniqueIdentifier>{160a7611-043a-4161-8da3-32dc3cc53a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\ShadowMap">
+      <UniqueIdentifier>{c4f23cd3-b369-45e9-aac9-ab5c830b0d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Spike">
+      <UniqueIdentifier>{d651b34b-8148-4010-9436-6f3c0eaa2634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\StageCamera">
+      <UniqueIdentifier>{a6b9b28a-74af-40ab-a358-0f22d41d1ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{eb4229a8-5e37-44c7-b00a-d0499ba44437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Title">
+      <UniqueIdentifier>{c41892bb-cf26-4401-9a65-fe70c7c2bf99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Editor\UI_Editor">
+      <UniqueIdentifier>{6b1a11a7-b27c-4fe8-9d40-e7e55ed95970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\StageCollision">
+      <UniqueIdentifier>{12ec7c4e-b1fb-40e3-93f7-1abcfe628b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Select">
+      <UniqueIdentifier>{47ba904a-782c-47fa-9374-a4d8a7848ba4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Select\UI_Select">
+      <UniqueIdentifier>{da2e7085-93d6-4c4d-b6fc-9d017629f622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Title\UI_Title">
+      <UniqueIdentifier>{46b1ecab-f771-435e-9bde-cb1ab5dbdb22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Water">
+      <UniqueIdentifier>{52ed3740-cc8e-4ad5-9e2f-073db7d45a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\WorldMouse">
+      <UniqueIdentifier>{8652c02b-8b79-4043-aefc-bb4c67bb4bf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\SystemManager">
+      <UniqueIdentifier>{7df4f3b9-c755-4dce-ab3e-b29c0c6ef6ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\Icon\Icon.rc">
+      <Filter>Assets</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="memo.txt">
+      <Filter>Assets</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Fonts\myfile.spritefont">
+      <Filter>Assets</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="settings.manifest">
+      <Filter>Assets</Filter>
+    </Manifest>
   </ItemGroup>
 </Project>

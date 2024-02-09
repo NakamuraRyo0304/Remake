@@ -416,10 +416,10 @@ namespace UserUtility
 		}
 
 		// ‰~‚Ì’†S‚©‚çü•ª‚Ö‚Ì‹——£‚Ì“ñæ
-		float distance_squared =
+		float _distance =
 			std::abs((_v1x * _v2y) - (_v2x * _v1y)) * std::abs((_v1x * _v2y) - (_v2x * _v1y)) / _squaredL1;
 
-		if (distance_squared <= radius * radius)
+		if (_distance <= radius * radius)
 		{
 			// ü•ª‚Æ‰~‚ªŒğ·‚µ‚Ä‚¢‚éê‡
 			return true;

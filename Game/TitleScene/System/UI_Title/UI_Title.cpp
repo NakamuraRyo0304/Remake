@@ -53,8 +53,8 @@ UI_Title::~UI_Title()
 void UI_Title::Initialize()
 {
 	// スプライトの登録
-	m_sprites->AddTextureData(L"Start", L"Resources/Textures/TitleScene/Start.dds");
-	m_sprites->AddTextureData(L"Exit", L"Resources/Textures/TitleScene/Exit.dds");
+	m_sprites->AddTextureData(L"Start", L"Resources/Textures/Text/Start.dds");
+	m_sprites->AddTextureData(L"Exit",  L"Resources/Textures/Text/Exit.dds");
 
 	// 座標の設定
 	m_position.emplace(L"Start", SimpleMath::Vector2(1200.0f, 950.0f));

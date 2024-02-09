@@ -48,10 +48,10 @@ UI_Select::~UI_Select()
 void UI_Select::Initialize()
 {
 	// スプライトの登録
-	m_sprites->AddTextureData(L"Editor", L"Resources/Textures/SelectScene/Editor.dds");
-	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/SelectScene/Stage1.dds");
-	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/SelectScene/Stage2.dds");
-	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/SelectScene/Stage3.dds");
+	m_sprites->AddTextureData(L"Editor", L"Resources/Textures/Text/Editor.dds");
+	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/Text/Stage1.dds");
+	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/Text/Stage2.dds");
+	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/Text/Stage3.dds");
 
 	// 座標の設定
 	m_position.emplace(L"Editor", SimpleMath::Vector2(50.0f, 50.0f));
