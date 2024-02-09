@@ -19,10 +19,12 @@ class BlockManager;
 class CursorObject;
 class DepthStencil;
 class FlagManager;
+class ImageShot;
 class Sky_Play;
 class StageCollision;
 class Player;
 class WorldMouse;
+class Water;
 class PlayScene final : public IScene
 {
 private:
@@ -53,6 +55,12 @@ private:
 
 	// フラグマネージャ
 	std::unique_ptr<FlagManager> m_flagManager;
+
+	// スクショ
+	std::unique_ptr<ImageShot> m_imageShot;
+
+	// 水面
+	std::unique_ptr<Water> m_water;
 
 private:
 

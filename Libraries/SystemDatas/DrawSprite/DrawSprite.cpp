@@ -86,16 +86,21 @@ void DrawSprite::DrawTexture(const wchar_t* key, SimpleMath::Vector2 pos,
 	m_spriteBatch->End();
 }
 
-/// <summary>
-/// 回転量セッター
-/// </summary>
-/// <param name="key">登録キー</param>
-/// <param name="rotate">回転量</param>
-/// <returns>なし</returns>
+//==============================================================================
+// 回転を作成する
+//==============================================================================
 void DrawSprite::CreateRotation(const wchar_t* key, const float& rotate)
 {
 	// 回転量を格納
 	std::map<const wchar_t*, float>::iterator _rt = m_rotate.find(key);
 
 	_rt->second = rotate;
+}
+
+//==============================================================================
+// 画像データをクリアする
+//==============================================================================
+void DrawSprite::Clear()
+{
+	m_textures.clear();
 }

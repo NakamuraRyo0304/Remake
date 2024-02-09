@@ -43,6 +43,9 @@ private:
 	// 移動速度
 	static const float MOVE_SPEED;
 
+	// 最高高度
+	static const float MAX_HEIGHT;
+
 public:
 	/// <summary>
 	/// コンストラクタ

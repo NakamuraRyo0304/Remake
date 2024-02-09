@@ -88,6 +88,12 @@ public:
 	/// <param name="key">キー名</param>
 	/// <returns>回転量</returns>
 	const float GetRotate(const wchar_t* key) { auto it = m_rotate.find(key); return it->second; }
+	/// <summary>
+	/// スプライトをすべてクリアする
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Clear();
 };
 
 #endif // DRAWSPRITE

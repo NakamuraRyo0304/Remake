@@ -13,10 +13,12 @@
 #include "Game/PlayScene/System/StageCollision/StageCollision.h"
 #include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"
 #include "Game/PlayScene/System/FlagManager/FlagManager.h"
+#include "Game/PlayScene/System/ImageShot/ImageShot.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
 #include "Game/Common/CursorObject/CursorObject.h"
+#include "Game/Common/Water/Water.h"
 #include "PlayScene.h"
 
 //==============================================================================
@@ -103,15 +105,19 @@ void PlayScene::Update()
 			m_flagManager->AddFlag(_flagPos, _playerPos, MAX_FOLLOW);
 		}
 
-		// ゴールしたらクリアへ(仮セレクト)
+		// ゴールしたらクリアへ
 		if (m_blockManager->IsArrived())
 		{
 			m_adminCamera->SetInterpolation(true);// 補間モードにする
 			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
 			{
+				// クリアシーンで使うテクスチャの作成
+				m_imageShot->TakePic(L"image.dds");
+
+				// カメラを設定(仮でセレクトフロ－ティング)
 				m_adminCamera->SetType(CameraType::Select1_Floating);
 			}
-			ChangeScene(SCENE::SELECT);
+			ChangeScene(SCENE::CLEAR);
 		}
 
 		// 死んだら再読み込み
@@ -303,6 +309,9 @@ void PlayScene::Draw()
 	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
 	_context->PSSetShaderResources(1, 1, _nullsrv);
 
+	// 水面の描画
+	m_water->Draw(_view, _projection);
+
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
@@ -324,6 +333,8 @@ void PlayScene::Finalize()
 	m_stageCollision.reset();
 	m_cursorObject.reset();
 	m_flagManager.reset();
+	m_imageShot.reset();
+	m_water.reset();
 }
 
 //==============================================================================
@@ -355,6 +366,12 @@ void PlayScene::CreateWDResources()
 
 	// フラグマネージャ作成
 	m_flagManager = std::make_unique<FlagManager>();
+
+	// スクショ作成
+	m_imageShot = std::make_unique<ImageShot>();
+
+	// 水面作成
+	m_water = std::make_unique<Water>();
 
 	//==============================================================================
 	// シャドウマップ関連の作成
@@ -488,6 +505,9 @@ void PlayScene::SetSceneValues()
 	LightFovBuffer _lightBuff = {};
 	_lightBuff.fCosTheta = cosf(XMConvertToRadians(LIGHT_THETA / 2.0f));
 	_context->UpdateSubresource(m_lightConstant.Get(), 0, nullptr, &_lightBuff, 0, 0);
+
+	// 水面の画像を読み込む
+	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
 }
 
 //==============================================================================
@@ -510,6 +530,8 @@ void PlayScene::DebugDraw(CommonStates& states)
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	_string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
 	_string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
+	_string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f",
+		m_adminCamera->GetPosition().x, m_adminCamera->GetPosition().y, m_adminCamera->GetPosition().z);
 }
 
 //==============================================================================

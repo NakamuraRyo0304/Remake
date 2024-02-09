@@ -198,6 +198,7 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h" />
     <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
+    <ClInclude Include="Game\ClearScene\ClearScene.h" />
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h" />
     <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h" />
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
+    <ClInclude Include="Game\Common\Water\Water.h" />
     <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h" />
     <ClInclude Include="Game\Editor\Editor.h" />
     <ClInclude Include="Game\Editor\Objects\Air\Air.h" />
@@ -224,6 +226,7 @@
     <ClInclude Include="Game\PlayScene\PlayScene.h" />
     <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h" />
     <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
+    <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h" />
     <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h" />
     <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h" />
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
@@ -273,6 +276,7 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp" />
     <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
+    <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp" />
     <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp" />
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
@@ -283,6 +287,7 @@
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
+    <ClCompile Include="Game\Common\Water\Water.cpp" />
     <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp" />
     <ClCompile Include="Game\Editor\Editor.cpp" />
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp" />
@@ -298,6 +303,7 @@
     <ClCompile Include="Game\PlayScene\PlayScene.cpp" />
     <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp" />
     <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
+    <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp" />
     <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp" />
     <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp" />
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
@@ -340,8 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\DebugModels\Floor.dds" />
-    <Image Include="Resources\Effects\Fire.png" />
-    <Image Include="Resources\Effects\Fog.png" />
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds" />
@@ -353,10 +357,12 @@
     <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
+    <Image Include="Resources\Textures\ScreenShot\image.dds" />
     <Image Include="Resources\Textures\SelectScene\Editor.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage1.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage2.dds" />
     <Image Include="Resources\Textures\SelectScene\Stage3.dds" />
+    <Image Include="Resources\Textures\ShaderTex\water.png" />
     <Image Include="Resources\Textures\TitleScene\Exit.dds" />
     <Image Include="Resources\Textures\TitleScene\Start.dds" />
     <Image Include="Resources\Textures\Transitions\Rule_OldTV.png" />
@@ -398,6 +404,7 @@
     <None Include="Resources\Shaders\ParametersHeader.hlsli" />
     <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli" />
     <None Include="Resources\Shaders\Transition\Transition.hlsli" />
+    <None Include="Resources\Shaders\Water\Water.hlsli" />
     <None Include="Resources\Stages\sample1.json" />
     <None Include="Resources\Stages\sample2.json" />
     <None Include="Resources\Stages\sample3.json" />
@@ -490,6 +497,30 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Transition\%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Transition\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Water\WaterGS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Water\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Water\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Water\WaterPS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Water\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Water\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Water\WaterVS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\Water\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\Water\%(Filename).cso</ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

@@ -22,6 +22,7 @@ enum class SCENE : int
     SELECT,     // セレクトシーン
     PLAY,       // ゲームシーン
     EDIT,       // 制作シーン
+    CLEAR,      // クリアシーン
     EXIT,       // 終了
 };
 

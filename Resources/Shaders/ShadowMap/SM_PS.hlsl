@@ -1,3 +1,10 @@
+/*
+ *	@File	SM_PS.hlsl
+ *	@Brief	シャドウマップのピクセルシェーダー。
+ *	@Date	2024-02-08
+ *  @Author NakamuraRyo
+ */
+
 #include "SM_Common.hlsli"
 
 // シャドウマップテクスチャ
