@@ -175,7 +175,7 @@
       <Filter>GameObjects\Title\Logo</Filter>
     </ClCompile>
     <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
-      <Filter>GameObjects\Edit\EditChara</Filter>
+      <Filter>GameObjects\Editor\EditChara</Filter>
     </ClCompile>
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp">
       <Filter>GameObjects\Common\BlockManager</Filter>
@@ -254,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="Libraries\SystemManager\SystemManager.cpp">
       <Filter>Libraries\SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp">
+      <Filter>GameSystems\Play\UI_Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -393,7 +396,7 @@
       <Filter>GameObjects\Title\Logo</Filter>
     </ClInclude>
     <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
-      <Filter>GameObjects\Edit\EditChara</Filter>
+      <Filter>GameObjects\Editor\EditChara</Filter>
     </ClInclude>
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h">
       <Filter>GameObjects\Common\BlockManager</Filter>
@@ -484,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="Libraries\UserUtility.h">
       <Filter>Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h">
+      <Filter>GameSystems\Play\UI_Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -668,9 +674,6 @@
     <Filter Include="GameObjects\Common">
       <UniqueIdentifier>{bf5daed2-9231-4b02-833d-137dd9a495e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Edit">
-      <UniqueIdentifier>{0f96f914-6949-4a16-8b13-c59e88519e4b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Title">
       <UniqueIdentifier>{28cbb10d-5317-4c56-b937-a9ce652d9bd3}</UniqueIdentifier>
     </Filter>
@@ -827,9 +830,6 @@
     <Filter Include="GameObjects\Title\Logo">
       <UniqueIdentifier>{0175345c-9e1d-4ebd-93b9-123d18efa4d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Edit\EditChara">
-      <UniqueIdentifier>{69bd8bca-5a6f-4110-9310-2a15f8a76ffc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Common\BlockManager">
       <UniqueIdentifier>{5a90c2d1-29a8-4e0f-afdc-1bf2a676a0cc}</UniqueIdentifier>
     </Filter>
@@ -931,6 +931,15 @@
     </Filter>
     <Filter Include="Libraries\SystemManager">
       <UniqueIdentifier>{7df4f3b9-c755-4dce-ab3e-b29c0c6ef6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Editor">
+      <UniqueIdentifier>{0f96f914-6949-4a16-8b13-c59e88519e4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Editor\EditChara">
+      <UniqueIdentifier>{69bd8bca-5a6f-4110-9310-2a15f8a76ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play">
+      <UniqueIdentifier>{86bc4cb4-eec8-478f-80de-90bb9860d2ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

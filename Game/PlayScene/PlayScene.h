@@ -23,6 +23,7 @@ class ImageShot;
 class Sky_Play;
 class StageCollision;
 class Player;
+class UI_Play;
 class WorldMouse;
 class Water;
 class PlayScene final : public IScene
@@ -61,6 +62,9 @@ private:
 
 	// êÖñ 
 	std::unique_ptr<Water> m_water;
+
+	// UI
+	std::unique_ptr<UI_Play> m_ui;
 
 private:
 

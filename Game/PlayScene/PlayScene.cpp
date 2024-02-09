@@ -14,6 +14,7 @@
 #include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"
 #include "Game/PlayScene/System/FlagManager/FlagManager.h"
 #include "Game/PlayScene/System/ImageShot/ImageShot.h"
+#include "Game/PlayScene/System/UI_Play/UI_Play.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
@@ -166,6 +167,8 @@ void PlayScene::Update()
 	// フラグマネージャの更新
 	m_flagManager->Update();
 
+	// UIの更新
+	m_ui->Update();
 }
 
 //==============================================================================
@@ -312,6 +315,9 @@ void PlayScene::Draw()
 	// 水面の描画
 	m_water->Draw(_view, _projection);
 
+	// UIの描画
+	m_ui->Draw();
+
 	// デバッグ描画
 #ifdef _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
@@ -335,6 +341,7 @@ void PlayScene::Finalize()
 	m_flagManager.reset();
 	m_imageShot.reset();
 	m_water.reset();
+	m_ui.reset();
 }
 
 //==============================================================================
@@ -372,6 +379,9 @@ void PlayScene::CreateWDResources()
 
 	// 水面作成
 	m_water = std::make_unique<Water>();
+
+	// UI作成
+	m_ui = std::make_unique<UI_Play>(GetWindowSize(), GetFullHDSize());
 
 	//==============================================================================
 	// シャドウマップ関連の作成

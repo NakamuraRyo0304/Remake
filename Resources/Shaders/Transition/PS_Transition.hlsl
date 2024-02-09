@@ -24,5 +24,5 @@ float4 main(PS_INPUT input) : SV_TARGET
     float edge = saturate((color.b - TIME.x) / 0.1f);
     output.a *= (TIME.x - edge);
 
-    return output * input.Color;
+    return output;
 }

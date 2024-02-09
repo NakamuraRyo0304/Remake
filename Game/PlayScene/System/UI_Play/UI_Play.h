@@ -16,11 +16,6 @@
 
 class UI_Play final : public IUserInterface
 {
-public:
-
-	// セレクトメニュー
-	enum TitleSelect { Start, Exit };
-
 private:
 
 	// スプライト
@@ -32,8 +27,6 @@ private:
 	// 色
 	std::map<const wchar_t*, DirectX::SimpleMath::Vector4> m_color;
 
-	// 遷移先セレクト
-	int m_selection;
 
 private:
 
@@ -75,10 +68,6 @@ public:
 	/// <returns>なし</returns>
 	void Draw() override;
 
-public:
-
-	// セレクト番号を返す
-	const int& GetSelection() { return m_selection; }
 };
 
 #endif // UI_PLAY
