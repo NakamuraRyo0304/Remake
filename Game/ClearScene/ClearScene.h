@@ -14,18 +14,18 @@
 //==============================================================================
 #include "Game/IScene/IScene.h"
 
-class DrawSprite;
+class MomentCanv;
 class ClearScene final : public IScene
 {
 private:
 
-	// スプライト描画
-	std::unique_ptr<DrawSprite> m_sprite;
+	// モーメントキャンバス
+	std::unique_ptr<MomentCanv> m_momentCanv;
 
 private:
 
-	// プレイシーンのスクショのオフセット値
-	static const DirectX::SimpleMath::Vector2 PLAY_SC_OFFSET;
+	// モーメントキャンバスの座標
+	DirectX::SimpleMath::Vector2 m_momentCanvPosition;
 
 public:
 
