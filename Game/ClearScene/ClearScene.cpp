@@ -87,12 +87,15 @@ void ClearScene::Draw()
 	// 画面の拡大率
 	SimpleMath::Vector2 _rate = GetWindowSize() / GetFullHDSize();
 
+	// 画像の拡大率
+	SimpleMath::Vector2 _picRate = SimpleMath::Vector2::One * 0.5f;
+
 	// プレイシーンのスクショを描画
 	m_sprite->DrawTexture(L"PlayPic",
 		// 座標
 		PLAY_SC_OFFSET * _rate,
 		// 色 拡大率
-		SimpleMath::Vector4(1, 1, 1, 0.5f), SimpleMath::Vector2::One * 0.5f * _rate,
+		SimpleMath::Vector4(1, 1, 1, 1), _picRate,
 		// 中心位置	画面サイズ
 		SimpleMath::Vector2::Zero, _rect);
 

@@ -947,6 +947,9 @@
     <Filter Include="Resources\Textures\UI_Play">
       <UniqueIdentifier>{dd4d6a51-9a12-420d-8ee0-e6a61bda4200}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameSystems\Clear">
+      <UniqueIdentifier>{b66c267e-9764-45fc-9c40-a18050105b10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\Icon\Icon.rc">
