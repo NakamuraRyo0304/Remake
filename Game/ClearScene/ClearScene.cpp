@@ -7,13 +7,12 @@
 
 #include "pch.h"
 // システム
-#include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
+#include "Game/ClearScene/System/MomentCanv/MomentCanv.h"
 #include "ClearScene.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector2 ClearScene::PLAY_SC_OFFSET = { 50.0f, 50.0f };	// オフセット
 
 //==============================================================================
 // エイリアス宣言
@@ -26,6 +25,8 @@ using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
 // コンストラクタ
 //==============================================================================
 ClearScene::ClearScene()
+	: IScene()						// 基底クラスのコンストラクタ
+	, m_momentCanvPosition{}		// モーメントキャンバスの座標
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 }
@@ -60,6 +61,7 @@ void ClearScene::Update()
 {
 	auto _input = Input::GetInstance();
 	auto _key = Keyboard::Get().GetState();
+	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
 
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
@@ -69,9 +71,11 @@ void ClearScene::Update()
 	{
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
-			ChangeScene(SCENE::TITLE);
+			ChangeScene(SCENE::SELECT);
 		}
 	}
+
+	m_momentCanvPosition.y += sinf(_timer) * 2.0f;
 }
 
 //==============================================================================
@@ -79,22 +83,22 @@ void ClearScene::Update()
 //==============================================================================
 void ClearScene::Draw()
 {
+	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
 
-	// 画像のレクトを作成
-	RECT_U _rect = RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
+	// モーメントキャンバスのレクトと拡大率
+	RECT_U _rectMC =
+		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
+	SimpleMath::Vector2 _rateMC = GetWindowSize() / GetFullHDSize();
 
-	// 画面の拡大率
-	SimpleMath::Vector2 _rate = GetWindowSize() / GetFullHDSize();
-
-	// プレイシーンのスクショを描画
-	m_sprite->DrawTexture(L"PlayPic",
-		// 座標
-		PLAY_SC_OFFSET * _rate,
-		// 色 拡大率
-		SimpleMath::Vector4(1, 1, 1, 0.5f), SimpleMath::Vector2::One * 0.5f * _rate,
-		// 中心位置	画面サイズ
-		SimpleMath::Vector2::Zero, _rect);
+	// モーメントキャンバスの描画
+	m_momentCanv->Draw(
+		m_momentCanvPosition * _rateMC,
+		SimpleMath::Vector4(1, 1, 1, 1),
+		SimpleMath::Vector2::One * 0.5f,
+		SimpleMath::Vector2::Zero,
+		_rectMC
+	);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -107,7 +111,7 @@ void ClearScene::Draw()
 //==============================================================================
 void ClearScene::Finalize()
 {
-	m_sprite.reset();
+	m_momentCanv.reset();
 }
 
 //==============================================================================
@@ -115,9 +119,8 @@ void ClearScene::Finalize()
 //==============================================================================
 void ClearScene::CreateWDResources()
 {
-	// スプライト描画の作成
-	m_sprite = std::make_unique<DrawSprite>();
-	m_sprite->MakeSpriteBatch();
+	// モーメントキャンバスの作成
+	m_momentCanv = std::make_unique<MomentCanv>();
 
 }
 
@@ -126,8 +129,10 @@ void ClearScene::CreateWDResources()
 //==============================================================================
 void ClearScene::SetSceneValues()
 {
-	// スプライトの設定
-	m_sprite->AddTextureData(L"PlayPic", L"Resources/Textures/ScreenShot/image.dds");
+	// モーメントキャンバスの初期化
+	m_momentCanv->Initialize();
+	m_momentCanvPosition = { 50.0f,50.0f };
+
 }
 
 //==============================================================================

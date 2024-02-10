@@ -46,13 +46,13 @@ UI_Play::~UI_Play()
 void UI_Play::Initialize()
 {
 	// スプライトの登録
-	m_sprites->AddTextureData(L"Start", L"Resources/Textures/Text/Start.dds");
+	m_sprites->AddTextureData(L"Area", L"Resources/Textures/UI_Play/UI_Area.dds");
 
 	// 座標の設定
-	m_position.emplace(L"Start", SimpleMath::Vector2(1200.0f, 950.0f));
+	m_position.emplace(L"Area", SimpleMath::Vector2(1440.0f, 0.0f));
 
 	// 色の設定
-	m_color.emplace(L"Start", SimpleMath::Vector4(0, 0, 0, 1));
+	m_color.emplace(L"Area", SimpleMath::Vector4(0.5f, 0.5f, 0.5f, 0.5f));
 }
 
 //==============================================================================
@@ -67,7 +67,7 @@ void UI_Play::Update()
 //==============================================================================
 void UI_Play::Draw()
 {
-	m_sprites->DrawTexture(L"Start",
-		m_position[L"Start"], m_color[L"Start"],
-		SimpleMath::Vector2::One, SimpleMath::Vector2::Zero);
+	m_sprites->DrawTexture(L"Area",
+		m_position[L"Area"] * GetScreenRate(), m_color[L"Area"],
+		SimpleMath::Vector2::One * GetScreenRate(), SimpleMath::Vector2::Zero);
 }

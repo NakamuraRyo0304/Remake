@@ -258,6 +258,9 @@
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp">
       <Filter>GameSystems\Play\UI_Play</Filter>
     </ClCompile>
+    <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp">
+      <Filter>GameSystems\Clear\MomentCanv</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -491,6 +494,9 @@
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h">
       <Filter>GameSystems\Play\UI_Play</Filter>
     </ClInclude>
+    <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h">
+      <Filter>GameSystems\Clear\MomentCanv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -567,6 +573,9 @@
     </Image>
     <Image Include="Resources\Textures\Text\Exit.dds">
       <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Play\UI_Area.dds">
+      <Filter>Resources\Textures\UI_Play</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -940,6 +949,15 @@
     </Filter>
     <Filter Include="GameSystems\Play\UI_Play">
       <UniqueIdentifier>{86bc4cb4-eec8-478f-80de-90bb9860d2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\UI_Play">
+      <UniqueIdentifier>{dd4d6a51-9a12-420d-8ee0-e6a61bda4200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Clear">
+      <UniqueIdentifier>{b66c267e-9764-45fc-9c40-a18050105b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Clear\MomentCanv">
+      <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -199,6 +199,7 @@
     <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
+    <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h" />
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h" />
     <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h" />
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
@@ -278,6 +279,7 @@
     <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
+    <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp" />
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp" />
     <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp" />
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
@@ -372,6 +374,7 @@
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Rot.png" />
     <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png" />
+    <Image Include="Resources\Textures\UI_Play\UI_Area.dds" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest" />
