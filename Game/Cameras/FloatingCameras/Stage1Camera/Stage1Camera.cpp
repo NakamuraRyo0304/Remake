@@ -15,8 +15,8 @@ Stage1Camera::Stage1Camera(const SimpleMath::Vector2& screenSize)
 	: IGameCamera(screenSize)
 {
 	// 座標と注視点をセット
-	SetPosition(SimpleMath::Vector3(0.0f, 5.0f, 10.0f));
-	SetTarget(SimpleMath::Vector3(0.0f, 0.0f, 0.0f));
+	SetPosition(SimpleMath::Vector3(3.5f, 10.0f, 15.0f));
+	SetTarget(SimpleMath::Vector3(3.5f, 5.0f, 7.5f));
 	// 初期状態を保持
 	SetInitialPosition(GetPosition());
 	SetInitialTarget(GetTarget());

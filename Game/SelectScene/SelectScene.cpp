@@ -12,7 +12,6 @@
 #include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
-
 #include "SelectScene.h"
 
 //==============================================================================
@@ -124,7 +123,9 @@ void SelectScene::Draw()
 	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection);
+	m_stage1->Draw(_context, *_states, _view, _projection);
+	m_stage2->Draw(_context, *_states, _view, _projection);
+	m_stage3->Draw(_context, *_states, _view, _projection);
 
 	// UIの描画
 	m_ui->Draw();
@@ -145,7 +146,9 @@ void SelectScene::Finalize()
 	m_adminCamera.reset();
 	m_ui.reset();
 	m_sky.reset();
-	m_blockManager.reset();
+	m_stage1.reset();
+	m_stage2.reset();
+	m_stage3.reset();
 }
 
 //==============================================================================
@@ -163,8 +166,12 @@ void SelectScene::CreateWDResources()
 	m_sky = std::make_unique<Sky_Select>();
 
 	// ブロックマネージャ
-	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
-	m_blockManager->SetPlay(true);
+	m_stage1 = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_stage1->SetPlay(true);
+	m_stage2 = std::make_unique<BlockManager>(L"Resources/Stages/sample2.json");
+	m_stage2->SetPlay(true);
+	m_stage3 = std::make_unique<BlockManager>(L"Resources/Stages/sample3.json");
+	m_stage3->SetPlay(true);
 }
 
 //==============================================================================
@@ -173,15 +180,21 @@ void SelectScene::CreateWDResources()
 void SelectScene::SetSceneValues()
 {
 	// カメラの初期設定-自動
-	m_adminCamera->SetType(CameraType::Title_FixedPoint);
+	m_adminCamera->SetType(CameraType::Select1_Floating);
 	m_adminCamera->SetActive(true);
 
 	// 選択中の番号を設定
 	m_ui->SetSelectionNum(m_stageSelection);
 
 	// ブロックの初期化・一度だけ行列を計算する
-	m_blockManager->Initialize();
-	m_blockManager->Update();
+	m_stage1->Initialize();
+	m_stage1->Update();
+	m_stage2->Initialize();
+	m_stage2->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, 0.0f));
+	m_stage2->Update();
+	m_stage3->Initialize();
+	m_stage3->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
+	m_stage3->Update();
 }
 
 //==============================================================================
@@ -206,7 +219,7 @@ void SelectScene::DebugDraw(CommonStates& states)
 void SelectScene::ChangeAdminCamera()
 {
 	if(m_stageSelection == EDITOR_NUM)
-		m_adminCamera->SetType(CameraType::Title_FixedPoint);
+		m_adminCamera->SetType(CameraType::Select0_Floating);
 	if (m_stageSelection == 1)
 		m_adminCamera->SetType(CameraType::Select1_Floating);
 	if (m_stageSelection == 2)

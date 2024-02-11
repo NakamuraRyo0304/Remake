@@ -193,6 +193,7 @@
     <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h" />
     <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h" />
     <ClInclude Include="Game\Cameras\FixedPointCamera\FixedPointCamera.h" />
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp" />
     <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp" />
     <ClCompile Include="Game\Cameras\FixedPointCamera\FixedPointCamera.cpp" />
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage1Camera\Stage1Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp" />

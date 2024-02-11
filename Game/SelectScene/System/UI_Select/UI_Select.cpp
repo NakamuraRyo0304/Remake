@@ -70,7 +70,7 @@ void UI_Select::Initialize()
 
 
 	// ステージ画像パス
-	m_stageAlpha = 0.5f;
+	m_stageAlpha = 0.75f;
 	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/Stages/Stage1.dds");
 	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/Stages/Stage2.dds");
 	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/Stages/Stage3.dds");
