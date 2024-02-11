@@ -18,7 +18,6 @@ class AdminCamera;
 class BlockManager;
 class Sky_Select;
 class UI_Select;
-
 class SelectScene final : public IScene
 {
 private:
@@ -33,7 +32,7 @@ private:
 	std::unique_ptr<Sky_Select> m_sky;
 
 	// ブロックマネージャ
-	std::unique_ptr<BlockManager> m_blockManager;
+	std::unique_ptr<BlockManager> m_stage1, m_stage2, m_stage3;
 
 	// セレクト番号
 	int m_stageSelection;

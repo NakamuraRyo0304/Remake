@@ -7,24 +7,28 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
+#include "Game/PlayScene/System/UI_Play/UI_CoinNum/UI_CoinNum.h"
+#include "Game/PlayScene/System/UI_Play/UI_PlayArea/UI_PlayArea.h"
 #include "UI_Play.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 UI_Play::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
-const float UI_Play::COLOR_SPEED = 0.075f;	// 色の変更速度
+const SimpleMath::Vector4 UI_Play::BLACK = SimpleMath::Vector4(0, 0, 0, 1);	// 黒
+const SimpleMath::Vector4 UI_Play::WHITE = SimpleMath::Vector4(1, 1, 1, 1);	// 白
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)				// 基底クラス
-	, m_position{}							// 座標
-	, m_color{}								// 描画色
+	, m_coinNum{}							// コイン枚数
 {
-	m_sprites = std::make_unique<DrawSprite>();
-	m_sprites->MakeSpriteBatch();
+	// エリア作成
+	m_area = std::make_unique<UI_PlayArea>();
+
+	// 数字作成
+	m_coins = std::make_unique<UI_CoinNum>();
 
 	// 初期化処理
 	Initialize();
@@ -35,9 +39,7 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 //==============================================================================
 UI_Play::~UI_Play()
 {
-	m_sprites.reset();
-	m_position.clear();
-	m_color.clear();
+	m_area.reset();
 }
 
 //==============================================================================
@@ -45,14 +47,14 @@ UI_Play::~UI_Play()
 //==============================================================================
 void UI_Play::Initialize()
 {
-	// スプライトの登録
-	m_sprites->AddTextureData(L"Area", L"Resources/Textures/UI_Play/UI_Area.dds");
+	// エリアの設定
+	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), WHITE * 0.5f, GetScreenRate());
 
-	// 座標の設定
-	m_position.emplace(L"Area", SimpleMath::Vector2(1665.0f, 0.0f));
-
-	// 色の設定
-	m_color.emplace(L"Area", SimpleMath::Vector4(0.5f, 0.5f, 0.5f, 0.5f));
+	// コイン数の設定
+	m_coins->Initialize(
+		m_area->GetPosition() + SimpleMath::Vector2(64.0f, 320.0f), BLACK, GetScreenRate());
+	m_coins->SetCoinNum(m_coinNum);
+	m_coins->SetCoinMaxNum(m_coinNum);
 }
 
 //==============================================================================
@@ -60,6 +62,7 @@ void UI_Play::Initialize()
 //==============================================================================
 void UI_Play::Update()
 {
+	m_coins->SetCoinNum(m_coinNum);
 }
 
 //==============================================================================
@@ -67,7 +70,9 @@ void UI_Play::Update()
 //==============================================================================
 void UI_Play::Draw()
 {
-	m_sprites->DrawTexture(L"Area",
-		m_position[L"Area"] * GetScreenRate(), m_color[L"Area"],
-		SimpleMath::Vector2::One * GetScreenRate(), SimpleMath::Vector2::Zero);
+	// エリアを描画
+	m_area->Draw();
+
+	// コイン数を描画
+	m_coins->Draw();
 }

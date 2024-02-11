@@ -19,6 +19,7 @@
 //==============================================================================
 #include "../FixedPointCamera/FixedPointCamera.h"
 #include "../OverHeadCamera/OverHeadCamera.h"
+#include "../FloatingCameras/Stage0Camera/Stage0Camera.h"
 #include "../FloatingCameras/Stage1Camera/Stage1Camera.h"
 #include "../FloatingCameras/Stage2Camera/Stage2Camera.h"
 #include "../FloatingCameras/Stage3Camera/Stage3Camera.h"
@@ -35,6 +36,7 @@ public:
 	{
 		Title_FixedPoint,		// 定点カメラ
 		Title_OverHead,			// 俯瞰カメラ
+		Select0_Floating,		// ステージ０（エディタ）の定点カメラ
 		Select1_Floating,		// ステージ１の定点カメラ
 		Select2_Floating,		// ステージ２の定点カメラ
 		Select3_Floating,		// ステージ３の定点カメラ

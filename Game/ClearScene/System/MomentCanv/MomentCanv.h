@@ -24,6 +24,9 @@ private:
 	// 座標
 	DirectX::SimpleMath::Vector2 m_position;
 
+	// 画面拡大率
+	DirectX::SimpleMath::Vector2 m_screenRate;
+
 private:
 
 	// 最終座標
@@ -43,9 +46,9 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="screenRate">画面拡大率</param>
 	/// <returns>なし</returns>
-	MomentCanv();
+	MomentCanv(DirectX::SimpleMath::Vector2 screenRate);
 	~MomentCanv();
 
 	/// <summary>
@@ -65,13 +68,12 @@ public:
 	/// <summary>
 	/// 描画関数
 	/// </summary>
-	/// <param name="posRate">座標の拡大率</param>
 	/// <param name="color">色</param>
 	/// <param name="rate">拡大率</param>
 	/// <param name="origin">中心位置</param>
 	/// <param name="rect">切り取り位置</param>
 	/// <returns>なし</returns>
-	void Draw(DirectX::SimpleMath::Vector2 posRate, DirectX::SimpleMath::Vector4 color,
+	void Draw(DirectX::SimpleMath::Vector4 color,
 		DirectX::SimpleMath::Vector2 rate, DirectX::SimpleMath::Vector2 origin, RECT_U rect);
 };
 

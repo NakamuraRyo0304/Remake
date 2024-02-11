@@ -136,6 +136,9 @@ public:
 	// ゲームプレイするときはONにする
 	void SetPlay(bool play) { is_playing = play; }
 
+	// オフセット
+	void SelectOffset(const DirectX::SimpleMath::Vector3& offset);
+
 public:
 
 	//==============================================================================

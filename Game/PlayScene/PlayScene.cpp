@@ -113,7 +113,8 @@ void PlayScene::Update()
 			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
 			{
 				// クリアシーンで使うテクスチャの作成
-				m_imageShot->TakePic(L"image.dds");
+				m_imageShot->TakePic(L"Resources/Textures/ScreenShot/image.dds",
+					m_stageTexPath.c_str());	// コピーを作成してセレクトシーンで使う
 
 				// カメラを設定(仮でセレクトフロ－ティング)
 				m_adminCamera->SetType(CameraType::Select1_Floating);
@@ -168,6 +169,12 @@ void PlayScene::Update()
 	m_flagManager->Update();
 
 	// UIの更新
+	int _num = 0;
+	for (auto& coin : m_blockManager->GetCoinBlock())
+	{
+		if (coin->IsActive()) _num++;
+	}
+	m_ui->SetCoinNum(_num);
 	m_ui->Update();
 }
 
@@ -316,13 +323,13 @@ void PlayScene::Draw()
 	m_water->Draw(_view, _projection);
 
 	// UIの描画
-	m_ui->Draw();
+	//m_ui->Draw();
 
 	// デバッグ描画
 #ifdef _DEBUG
 	//auto _grid = GetSystemManager()->GetGridFloor();
 	//_grid->Draw(*_states, _view, _projection, Colors::Green);
-	DebugDraw(*_states);
+	//DebugDraw(*_states);
 #endif
 }
 
@@ -518,6 +525,9 @@ void PlayScene::SetSceneValues()
 
 	// 水面の画像を読み込む
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
+
+	// コインの枚数を設定
+	m_ui->SetCoinNum(static_cast<int>(m_blockManager->GetCoinBlock().size()));
 }
 
 //==============================================================================
@@ -549,6 +559,10 @@ void PlayScene::DebugDraw(CommonStates& states)
 //==============================================================================
 const wchar_t* PlayScene::GetStagePath()
 {
+	// スクショ保存先パスを指定
+	m_stageTexPath =
+		L"Resources/Textures/Stages/Stage" + std::to_wstring(m_stageNumber) + L".dds";
+
 	switch (m_stageNumber)
 	{
 	case 1:

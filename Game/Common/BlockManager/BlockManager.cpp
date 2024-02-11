@@ -11,6 +11,14 @@
 #include <random>
 #include "BlockManager.h"
 
+// 検索用メモ //
+///////////////////////////////////////////
+// ブロックを追加したら更新する関数      //
+// Initialize Update Draw                //
+// SelectOffset GetBlockID ReplaceBlock  //
+// ClearBlocks CreateBlock OutputStage   //
+///////////////////////////////////////////
+
 //==============================================================================
 // コンストラクタ
 //==============================================================================
@@ -185,6 +193,39 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	{
 		if (UserUtility::IsNull(chara.get())) continue;
 		chara->Draw(context, states, view, proj, wireframe, option);
+	}
+}
+
+//==============================================================================
+// オフセットを加算(セレクトシーンで主に呼び出す)
+//==============================================================================
+void BlockManager::SelectOffset(const SimpleMath::Vector3& offset)
+{
+	// オブジェクトの描画
+	for (auto& sand : m_sands)		// 砂ブロック
+	{
+		if (UserUtility::IsNull(sand.get())) continue;
+		sand->SetPosition(sand->GetInitialPosition() + offset);
+	}
+	for (auto& cloud : m_clouds)	// 雲ブロック
+	{
+		if (UserUtility::IsNull(cloud.get())) continue;
+		cloud->SetPosition(cloud->GetInitialPosition() + offset);
+	}
+	for (auto& coin : m_coins)		// コイン
+	{
+		if (UserUtility::IsNull(coin.get())) continue;
+		coin->SetPosition(coin->GetInitialPosition() + offset);
+	}
+	for (auto& goal : m_goals)		// ゴールオブジェクト
+	{
+		if (UserUtility::IsNull(goal.get())) continue;
+		goal->SetPosition(goal->GetInitialPosition() + offset);
+	}
+	for (auto& spike : m_spikes)	// 棘オブジェクト
+	{
+		if (UserUtility::IsNull(spike.get())) continue;
+		spike->SetPosition(spike->GetInitialPosition() + offset);
 	}
 }
 

@@ -9,32 +9,30 @@
 #ifndef UI_PLAY
 #define UI_PLAY
 
- //==============================================================================
- // 親シーンクラス
- //==============================================================================
+//==============================================================================
+// 親シーンクラス
+//==============================================================================
 #include "Game/Common/IUserInterface/IUserInterface.h"
 
+class UI_CoinNum;
+class UI_PlayArea;
 class UI_Play final : public IUserInterface
 {
 private:
 
-	// スプライト
-	std::unique_ptr<DrawSprite> m_sprites;
+	// UIエリア
+	std::unique_ptr<UI_PlayArea> m_area;
 
-	// 座標
-	std::map<const wchar_t*, DirectX::SimpleMath::Vector2> m_position;
+	// コイン数
+	std::unique_ptr<UI_CoinNum> m_coins;
 
-	// 色
-	std::map<const wchar_t*, DirectX::SimpleMath::Vector4> m_color;
-
+	// コイン数
+	int m_coinNum;
 
 private:
 
-	// 選択色
-	static const DirectX::SimpleMath::Vector4 RED_COLOR;
-
-	// 色変更速度
-	static const float COLOR_SPEED;
+	static const DirectX::SimpleMath::Vector4 BLACK;
+	static const DirectX::SimpleMath::Vector4 WHITE;
 
 public:
 
@@ -68,6 +66,8 @@ public:
 	/// <returns>なし</returns>
 	void Draw() override;
 
+	// コインの枚数を設定
+	void SetCoinNum(const int& num) { m_coinNum = num; }
 };
 
 #endif // UI_PLAY
