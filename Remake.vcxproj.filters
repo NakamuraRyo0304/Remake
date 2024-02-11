@@ -261,6 +261,12 @@
     <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp">
       <Filter>GameSystems\Clear\MomentCanv</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp">
+      <Filter>GameSystems\Common\DrawNumber</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp">
+      <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -497,6 +503,12 @@
     <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h">
       <Filter>GameSystems\Clear\MomentCanv</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h">
+      <Filter>GameSystems\Common\DrawNumber</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h">
+      <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -576,6 +588,9 @@
     </Image>
     <Image Include="Resources\Textures\UI_Play\UI_Area.dds">
       <Filter>Resources\Textures\UI_Play</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Number.dds">
+      <Filter>Resources\Textures\Text</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -958,6 +973,15 @@
     </Filter>
     <Filter Include="GameSystems\Clear\MomentCanv">
       <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Common">
+      <UniqueIdentifier>{6ecd8087-9773-44a0-b611-73a4c0f9ed66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Common\DrawNumber">
+      <UniqueIdentifier>{74a05f20-7dec-4ee3-aea3-179775d9af7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play\UI_PlayArea">
+      <UniqueIdentifier>{8ffb86e8-fa8f-4e71-9fee-fd9460200d2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

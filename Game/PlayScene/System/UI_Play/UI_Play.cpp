@@ -7,6 +7,8 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
+#include "Game/Common/DrawNumber/DrawNumber.h"
+#include "Game/PlayScene/System/UI_Play/UI_PlayArea/UI_PlayArea.h"
 #include "UI_Play.h"
 
 //==============================================================================
@@ -16,15 +18,25 @@ const SimpleMath::Vector4 UI_Play::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	
 const float UI_Play::COLOR_SPEED = 0.075f;	// 色の変更速度
 
 //==============================================================================
+// エイリアス宣言
+//==============================================================================
+using ValDigits = DrawNumber::Digits;		// 数字のディジット
+
+//==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)				// 基底クラス
-	, m_position{}							// 座標
-	, m_color{}								// 描画色
+	, m_coinNum{}							// コイン枚数
 {
-	m_sprites = std::make_unique<DrawSprite>();
-	m_sprites->MakeSpriteBatch();
+	// 数字作成
+	for (int i = 0; i < 2; i++)
+	{
+		m_nums[i] = std::make_unique<DrawNumber>();
+	}
+
+	// エリア作成
+	m_area = std::make_unique<UI_PlayArea>();
 
 	// 初期化処理
 	Initialize();
@@ -35,9 +47,8 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 //==============================================================================
 UI_Play::~UI_Play()
 {
-	m_sprites.reset();
-	m_position.clear();
-	m_color.clear();
+	m_nums->reset();
+	m_area.reset();
 }
 
 //==============================================================================
@@ -45,14 +56,16 @@ UI_Play::~UI_Play()
 //==============================================================================
 void UI_Play::Initialize()
 {
-	// スプライトの登録
-	m_sprites->AddTextureData(L"Area", L"Resources/Textures/UI_Play/UI_Area.dds");
+	// 数字の設定
+	m_nums[0]->SetPosition(SimpleMath::Vector2(1768.0f, 100.0f));
+	m_nums[0]->SetColor({ 0,0,0,1 });
+	m_nums[1]->SetPosition(SimpleMath::Vector2(1832.0f, 100.0f));
+	m_nums[1]->SetColor({ 0,0,0,1 });
 
-	// 座標の設定
-	m_position.emplace(L"Area", SimpleMath::Vector2(1665.0f, 0.0f));
+	// エリアの設定
+	m_area->SetPosition(SimpleMath::Vector2(1665.0f, 0.0f));
+	m_area->SetColor(SimpleMath::Vector4::One * 0.5f);
 
-	// 色の設定
-	m_color.emplace(L"Area", SimpleMath::Vector4(0.5f, 0.5f, 0.5f, 0.5f));
 }
 
 //==============================================================================
@@ -67,7 +80,10 @@ void UI_Play::Update()
 //==============================================================================
 void UI_Play::Draw()
 {
-	m_sprites->DrawTexture(L"Area",
-		m_position[L"Area"] * GetScreenRate(), m_color[L"Area"],
-		SimpleMath::Vector2::One * GetScreenRate(), SimpleMath::Vector2::Zero);
+	// エリアを描画
+	m_area->Draw(GetScreenRate());
+
+	// コインの枚数を描画
+	m_nums[0]->Draw(m_coinNum, ValDigits::Ten);
+	m_nums[1]->Draw(m_coinNum, ValDigits::One);
 }

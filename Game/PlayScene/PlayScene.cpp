@@ -168,6 +168,12 @@ void PlayScene::Update()
 	m_flagManager->Update();
 
 	// UIの更新
+	int _num = 0;
+	for (auto& coin : m_blockManager->GetCoinBlock())
+	{
+		if (coin->IsActive()) _num++;
+	}
+	m_ui->SetCoinNum(_num);
 	m_ui->Update();
 }
 
@@ -518,6 +524,10 @@ void PlayScene::SetSceneValues()
 
 	// 水面の画像を読み込む
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
+
+	// コインの枚数を設定
+	m_ui->SetCoinNum(static_cast<int>(m_blockManager->GetCoinBlock().size()));
+	m_ui->SetCoinMaxNum(static_cast<int>(m_blockManager->GetCoinBlock().size()));
 }
 
 //==============================================================================
