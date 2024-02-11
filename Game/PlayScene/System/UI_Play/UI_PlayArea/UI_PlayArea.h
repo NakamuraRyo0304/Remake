@@ -16,7 +16,7 @@ private:
 
 	// スプライト
 	std::unique_ptr<DrawSprite> m_sprites;
-	DirectX::SimpleMath::Vector2 m_position;
+	DirectX::SimpleMath::Vector2 m_position, m_rate;
 	DirectX::SimpleMath::Vector4 m_color;
 
 public:
@@ -30,11 +30,21 @@ public:
 	~UI_PlayArea();
 
 	/// <summary>
+	/// 初期化関数
+	/// </summary>
+	/// <param name="pos">座標</param>
+	/// <param name="color">文字色</param>
+	/// <param name="rate">拡大率</param>
+	/// <returns>なし</returns>
+	void Initialize(DirectX::SimpleMath::Vector2 pos, DirectX::SimpleMath::Vector4 color,
+		DirectX::SimpleMath::Vector2 rate);
+
+	/// <summary>
 	/// 描画関数
 	/// </summary>
-	/// <param name="screenRate">画面比率</param>
+	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	void Draw(DirectX::SimpleMath::Vector2 screenRate);
+	void Draw();
 
 public:
 

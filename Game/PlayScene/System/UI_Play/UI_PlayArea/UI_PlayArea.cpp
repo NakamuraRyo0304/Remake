@@ -32,11 +32,21 @@ UI_PlayArea::~UI_PlayArea()
 }
 
 //==============================================================================
-// •`‰æ‚·‚é
+// ‰Šú‰»ŠÖ”
 //==============================================================================
-void UI_PlayArea::Draw(SimpleMath::Vector2 ScreenRate)
+void UI_PlayArea::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
+	SimpleMath::Vector2 rate)
+{
+	m_position = pos;
+	m_rate = rate;
+	m_color = color;
+}
+
+//==============================================================================
+// •`‰æŠÖ”
+//==============================================================================
+void UI_PlayArea::Draw()
 {
 	m_sprites->DrawTexture(L"Area",
-		m_position * ScreenRate, m_color,
-		SimpleMath::Vector2::One * ScreenRate, SimpleMath::Vector2::Zero);
+		m_position * m_rate, m_color, m_rate, SimpleMath::Vector2::Zero);
 }

@@ -88,12 +88,10 @@ void ClearScene::Draw()
 	// モーメントキャンバスのレクトと拡大率、中心位置
 	RECT_U _rectMC =
 		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
-	SimpleMath::Vector2 _rateMC = GetWindowSize() / GetFullHDSize();
-	SimpleMath::Vector2 _originMC = GetWindowSize() * _rateMC * 0.5f;
-
+	SimpleMath::Vector2 _originMC = GetFullHDSize() * 0.5f;
 
 	// モーメントキャンバスの描画
-	m_momentCanv->Draw(_rateMC, SimpleMath::Vector4::One,
+	m_momentCanv->Draw(SimpleMath::Vector4::One,
 		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
 
 	// デバッグ描画
@@ -116,7 +114,7 @@ void ClearScene::Finalize()
 void ClearScene::CreateWDResources()
 {
 	// モーメントキャンバスの作成
-	m_momentCanv = std::make_unique<MomentCanv>();
+	m_momentCanv = std::make_unique<MomentCanv>(GetWindowSize() / GetFullHDSize());
 
 }
 

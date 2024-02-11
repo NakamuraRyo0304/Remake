@@ -30,6 +30,9 @@ private:
 	// 選択ステージ番号
 	int m_stageSelection;
 
+	// ステージ画像アルファ値
+	float m_stageAlpha;
+
 private:
 
 	// 選択色
@@ -38,6 +41,9 @@ private:
 
 	// 色変更速度
 	static const float COLOR_SPEED;
+
+	// 画像の座標
+	static const DirectX::SimpleMath::Vector2 STAGE_TEX_POS;
 
 public:
 	/// <summary>

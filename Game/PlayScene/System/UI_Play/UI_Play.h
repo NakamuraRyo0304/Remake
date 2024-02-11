@@ -14,21 +14,25 @@
 //==============================================================================
 #include "Game/Common/IUserInterface/IUserInterface.h"
 
-class DrawNumber;
+class UI_CoinNum;
 class UI_PlayArea;
 class UI_Play final : public IUserInterface
 {
 private:
 
-	// 数字を描画する
-	std::unique_ptr<DrawNumber> m_nums[4];
-
 	// UIエリア
 	std::unique_ptr<UI_PlayArea> m_area;
 
 	// コイン数
-	int m_coinNum, m_maxCoinNum;
+	std::unique_ptr<UI_CoinNum> m_coins;
 
+	// コイン数
+	int m_coinNum;
+
+private:
+
+	static const DirectX::SimpleMath::Vector4 BLACK;
+	static const DirectX::SimpleMath::Vector4 WHITE;
 
 public:
 
@@ -64,9 +68,6 @@ public:
 
 	// コインの枚数を設定
 	void SetCoinNum(const int& num) { m_coinNum = num; }
-	// コインの最大数を設定
-	void SetCoinMaxNum(const int& num) { m_maxCoinNum = num; }
-
 };
 
 #endif // UI_PLAY

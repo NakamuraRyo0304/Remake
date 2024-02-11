@@ -66,6 +66,9 @@ private:
 	// UI
 	std::unique_ptr<UI_Play> m_ui;
 
+	// ƒXƒNƒVƒ‡•Û‘¶æ
+	std::wstring m_stageTexPath;
+
 private:
 
 	// Å‘å’ÇÕ”

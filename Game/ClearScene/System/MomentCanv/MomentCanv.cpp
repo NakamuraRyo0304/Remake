@@ -20,8 +20,9 @@ const float MomentCanv::SPEED_TO_LAST = 0.1f;									// 速度
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-MomentCanv::MomentCanv()
-	: m_position{}		// 座標
+MomentCanv::MomentCanv(SimpleMath::Vector2 screenRate)
+	: m_position{}					// 座標
+	, m_screenRate{ screenRate }	// 画面比率
 {
 	// スプライト描画の作成
 	m_sprite = std::make_unique<DrawSprite>();
@@ -45,7 +46,7 @@ void MomentCanv::Initialize()
 	m_sprite->AddTextureData(L"PlayPic", L"Resources/Textures/ScreenShot/image.dds");
 
 	// 画面外から始める
-	m_position = OUT_POSITION;
+	m_position = OUT_POSITION * m_screenRate;
 }
 
 //==============================================================================
@@ -64,8 +65,9 @@ void MomentCanv::Update()
 //==============================================================================
 // 描画関数
 //==============================================================================
-void MomentCanv::Draw(SimpleMath::Vector2 posRate, SimpleMath::Vector4 color,
-	SimpleMath::Vector2 rate, SimpleMath::Vector2 origin, RECT_U rect)
+void MomentCanv::Draw(SimpleMath::Vector4 color, SimpleMath::Vector2 rate,
+	SimpleMath::Vector2 origin, RECT_U rect)
 {
-	m_sprite->DrawTexture(L"PlayPic", m_position * posRate, color, rate, origin, rect);
+	m_sprite->DrawTexture(L"PlayPic",
+		m_position * m_screenRate, color, rate, origin * m_screenRate, rect);
 }

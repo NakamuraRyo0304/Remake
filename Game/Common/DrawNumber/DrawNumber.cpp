@@ -65,7 +65,7 @@ void DrawNumber::Draw(UINT num, Digits digits)
 	m_rect = Cut(_tmp);
 
 	// ”Žš‚ð•`‰æ
-	m_sprite->DrawTexture(L"num", m_position,
+	m_sprite->DrawTexture(L"num", m_position * m_rate,
 		m_color, m_rate, m_origin, m_rect);
 }
 

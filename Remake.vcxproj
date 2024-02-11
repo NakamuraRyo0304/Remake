@@ -230,6 +230,7 @@
     <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
     <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h" />
     <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h" />
+    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h" />
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h" />
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h" />
     <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h" />
@@ -311,6 +312,7 @@
     <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp" />
     <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp" />
+    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.cpp" />
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp" />
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp" />
     <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp" />
@@ -366,12 +368,15 @@
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
     <Image Include="Resources\Textures\ScreenShot\image.dds" />
     <Image Include="Resources\Textures\ShaderTex\water.png" />
+    <Image Include="Resources\Textures\Stages\Stage1.dds" />
+    <Image Include="Resources\Textures\Stages\Stage2.dds" />
+    <Image Include="Resources\Textures\Stages\Stage3.dds" />
     <Image Include="Resources\Textures\Text\Editor.dds" />
     <Image Include="Resources\Textures\Text\Exit.dds" />
     <Image Include="Resources\Textures\Text\Number.dds" />
-    <Image Include="Resources\Textures\Text\Stage1.dds" />
-    <Image Include="Resources\Textures\Text\Stage2.dds" />
-    <Image Include="Resources\Textures\Text\Stage3.dds" />
+    <Image Include="Resources\Textures\Text\Stage1tex.dds" />
+    <Image Include="Resources\Textures\Text\Stage2tex.dds" />
+    <Image Include="Resources\Textures\Text\Stage3tex.dds" />
     <Image Include="Resources\Textures\Text\Start.dds" />
     <Image Include="Resources\Textures\Transitions\Rule_OldTV.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Crystal.png" />

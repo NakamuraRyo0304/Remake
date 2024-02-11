@@ -34,8 +34,9 @@ public:
     /// スクリーンショットを撮影して指定されたファイルパスに保存する
     /// </summary>
     /// <param name="filePath">保存先のパス</param>
+    /// <param name="copy">コピーしたいときはパスを入れる</param>
     /// <returns>なし</returns>
-    HRESULT TakePic(const wchar_t* filePath);
+    HRESULT TakePic(const wchar_t* filePath, const wchar_t* copy = nullptr);
 
     /// <summary>
     /// スクショを描画する

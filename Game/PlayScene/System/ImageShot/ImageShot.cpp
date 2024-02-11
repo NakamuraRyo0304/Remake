@@ -31,7 +31,7 @@ ImageShot::~ImageShot()
 //==============================================================================
 // スクリーンショットを撮影して指定されたパスに保存する
 //==============================================================================
-HRESULT ImageShot::TakePic(const wchar_t* fileName)
+HRESULT ImageShot::TakePic(const wchar_t* fileName, const wchar_t* copy)
 {
     auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
     auto _swapChain = DX::DeviceResources::GetInstance()->GetSwapChain();
@@ -54,16 +54,22 @@ HRESULT ImageShot::TakePic(const wchar_t* fileName)
         return _hr;
     }
 
-    // スクリーンショットを保存するファイルパスを作成
-    std::wstring _filePath = L"Resources/Textures/ScreenShot/";
-    _filePath += fileName;
-
     // 瞬間的にデータを追加する
     m_sprite->Clear();
-    m_sprite->AddTextureData(L"image", _filePath.c_str());
+    m_sprite->AddTextureData(L"image", fileName);
 
     // スクリーンショットを保存する
-    _hr = SaveDDSTextureToFile(_context, _backBuffer.Get(), _filePath.c_str());
+    _hr = SaveDDSTextureToFile(_context, _backBuffer.Get(), fileName);
+
+    // コピーしないならそのままハンドルを返す
+    if (copy == nullptr) return _hr;
+
+    // 保存された画像を指定したパスにコピーする
+    if (!CopyFile(fileName, copy, FALSE))
+    {
+        return HRESULT_FROM_WIN32(GetLastError());
+    }
+
     return _hr;
 }
 

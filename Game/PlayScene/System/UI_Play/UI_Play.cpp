@@ -7,14 +7,15 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-#include "Game/Common/DrawNumber/DrawNumber.h"
+#include "Game/PlayScene/System/UI_Play/UI_CoinNum/UI_CoinNum.h"
 #include "Game/PlayScene/System/UI_Play/UI_PlayArea/UI_PlayArea.h"
 #include "UI_Play.h"
 
 //==============================================================================
-// エイリアス宣言
+// 定数の設定
 //==============================================================================
-using ValDigits = DrawNumber::Digits;		// 数字のディジット
+const SimpleMath::Vector4 UI_Play::BLACK = SimpleMath::Vector4(0, 0, 0, 1);	// 黒
+const SimpleMath::Vector4 UI_Play::WHITE = SimpleMath::Vector4(1, 1, 1, 1);	// 白
 
 //==============================================================================
 // コンストラクタ
@@ -27,10 +28,7 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	m_area = std::make_unique<UI_PlayArea>();
 
 	// 数字作成
-	for (int i = 0; i < 2; i++)
-	{
-		m_nums[i] = std::make_unique<DrawNumber>();
-	}
+	m_coins = std::make_unique<UI_CoinNum>();
 
 	// 初期化処理
 	Initialize();
@@ -42,7 +40,6 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 UI_Play::~UI_Play()
 {
 	m_area.reset();
-	m_nums->reset();
 }
 
 //==============================================================================
@@ -51,17 +48,13 @@ UI_Play::~UI_Play()
 void UI_Play::Initialize()
 {
 	// エリアの設定
-	m_area->SetPosition(SimpleMath::Vector2(1665.0f, 0.0f));
-	m_area->SetColor(SimpleMath::Vector4::One * 0.5f);
+	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), WHITE * 0.5f, GetScreenRate());
 
-	// 数字の設定
-	m_nums[0]->SetPosition(
-		m_area->GetPosition() + SimpleMath::Vector2(64.0f, 320.0f));
-	m_nums[0]->SetColor({ 0,0,0,1 });
-	m_nums[1]->SetPosition(
-		m_area->GetPosition() + SimpleMath::Vector2(128.0f, 320.0f));
-	m_nums[1]->SetColor({ 0,0,0,1 });
-
+	// コイン数の設定
+	m_coins->Initialize(
+		m_area->GetPosition() + SimpleMath::Vector2(64.0f, 320.0f), BLACK, GetScreenRate());
+	m_coins->SetCoinNum(m_coinNum);
+	m_coins->SetCoinMaxNum(m_coinNum);
 }
 
 //==============================================================================
@@ -69,6 +62,7 @@ void UI_Play::Initialize()
 //==============================================================================
 void UI_Play::Update()
 {
+	m_coins->SetCoinNum(m_coinNum);
 }
 
 //==============================================================================
@@ -77,9 +71,8 @@ void UI_Play::Update()
 void UI_Play::Draw()
 {
 	// エリアを描画
-	m_area->Draw(GetScreenRate());
+	m_area->Draw();
 
-	// コインの枚数を描画
-	m_nums[0]->Draw(m_coinNum, ValDigits::Ten);
-	m_nums[1]->Draw(m_coinNum, ValDigits::One);
+	// コイン数を描画
+	m_coins->Draw();
 }
