@@ -29,13 +29,6 @@ private:
 	// コイン数
 	int m_coinNum, m_maxCoinNum;
 
-private:
-
-	// 選択色
-	static const DirectX::SimpleMath::Vector4 RED_COLOR;
-
-	// 色変更速度
-	static const float COLOR_SPEED;
 
 public:
 
