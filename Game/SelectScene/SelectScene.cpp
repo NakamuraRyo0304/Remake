@@ -105,9 +105,6 @@ void SelectScene::Update()
 	// スカイ球の更新
 	m_sky->Update();
 	m_sky->SetPosition(m_adminCamera->GetPosition());
-
-	// ブロックの更新
-	m_blockManager->Update();
 }
 
 //==============================================================================
@@ -182,8 +179,9 @@ void SelectScene::SetSceneValues()
 	// 選択中の番号を設定
 	m_ui->SetSelectionNum(m_stageSelection);
 
-	// ブロックの初期化
+	// ブロックの初期化・一度だけ行列を計算する
 	m_blockManager->Initialize();
+	m_blockManager->Update();
 }
 
 //==============================================================================
