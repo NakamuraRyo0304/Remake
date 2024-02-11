@@ -49,7 +49,7 @@ void UI_Play::Initialize()
 	m_sprites->AddTextureData(L"Area", L"Resources/Textures/UI_Play/UI_Area.dds");
 
 	// À•W‚Ìİ’è
-	m_position.emplace(L"Area", SimpleMath::Vector2(1440.0f, 0.0f));
+	m_position.emplace(L"Area", SimpleMath::Vector2(1665.0f, 0.0f));
 
 	// F‚Ìİ’è
 	m_color.emplace(L"Area", SimpleMath::Vector4(0.5f, 0.5f, 0.5f, 0.5f));

@@ -26,7 +26,6 @@ using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
 //==============================================================================
 ClearScene::ClearScene()
 	: IScene()						// 基底クラスのコンストラクタ
-	, m_momentCanvPosition{}		// モーメントキャンバスの座標
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 }
@@ -61,7 +60,6 @@ void ClearScene::Update()
 {
 	auto _input = Input::GetInstance();
 	auto _key = Keyboard::Get().GetState();
-	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
 
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
@@ -69,13 +67,14 @@ void ClearScene::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
+		// モーメントキャンバスの更新
+		m_momentCanv->Update();
+
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
 			ChangeScene(SCENE::SELECT);
 		}
 	}
-
-	m_momentCanvPosition.y += sinf(_timer) * 2.0f;
 }
 
 //==============================================================================
@@ -86,19 +85,16 @@ void ClearScene::Draw()
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
 
-	// モーメントキャンバスのレクトと拡大率
+	// モーメントキャンバスのレクトと拡大率、中心位置
 	RECT_U _rectMC =
 		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
 	SimpleMath::Vector2 _rateMC = GetWindowSize() / GetFullHDSize();
+	SimpleMath::Vector2 _originMC = GetWindowSize() * _rateMC * 0.5f;
+
 
 	// モーメントキャンバスの描画
-	m_momentCanv->Draw(
-		m_momentCanvPosition * _rateMC,
-		SimpleMath::Vector4(1, 1, 1, 1),
-		SimpleMath::Vector2::One * 0.5f,
-		SimpleMath::Vector2::Zero,
-		_rectMC
-	);
+	m_momentCanv->Draw(_rateMC, SimpleMath::Vector4::One,
+		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
 
 	// デバッグ描画
 #ifdef _DEBUG
@@ -131,7 +127,6 @@ void ClearScene::SetSceneValues()
 {
 	// モーメントキャンバスの初期化
 	m_momentCanv->Initialize();
-	m_momentCanvPosition = { 50.0f,50.0f };
 
 }
 

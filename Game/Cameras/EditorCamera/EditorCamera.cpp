@@ -94,11 +94,11 @@ void EditorCamera::UpdateViewPoint()
 	switch(m_viewPoint)
 	{
 	case ViewPoint::PointFront:
-		m_viewPosition = SimpleMath::Vector3(4.5f, m_viewPosition.y, 10.0f);
+		m_viewPosition = SimpleMath::Vector3(4.5f, m_viewPosition.y, 13.5f);
 		m_viewTarget = SimpleMath::Vector3(4.5f, 0.0f, 5.0f);
 		break;
 	case ViewPoint::PointRight:
-		m_viewPosition = SimpleMath::Vector3(10.0f, m_viewPosition.y, 4.5f);
+		m_viewPosition = SimpleMath::Vector3(13.5f, m_viewPosition.y, 4.5f);
 		m_viewTarget = SimpleMath::Vector3(5.0f, 0.0f, 4.5f);
 		break;
 	case ViewPoint::PointBack:

@@ -21,6 +21,23 @@ private:
 	// スプライト描画
 	std::unique_ptr<DrawSprite> m_sprite;
 
+	// 座標
+	DirectX::SimpleMath::Vector2 m_position;
+
+private:
+
+	// 最終座標
+	static const DirectX::SimpleMath::Vector2 LAST_POSITION;
+
+	// 画像の回転角度
+	static const float LAST_ROTATE;
+
+	// 移動・回転速度
+	static const float SPEED_TO_LAST;
+
+	// 画面外の座標
+	static const DirectX::SimpleMath::Vector2 OUT_POSITION;
+
 public:
 
 	/// <summary>
@@ -39,15 +56,22 @@ public:
 	void Initialize();
 
 	/// <summary>
+	/// 更新関数
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Update();
+
+	/// <summary>
 	/// 描画関数
 	/// </summary>
-	/// <param name="pos">座標</param>
+	/// <param name="posRate">座標の拡大率</param>
 	/// <param name="color">色</param>
 	/// <param name="rate">拡大率</param>
 	/// <param name="origin">中心位置</param>
 	/// <param name="rect">切り取り位置</param>
 	/// <returns>なし</returns>
-	void Draw(DirectX::SimpleMath::Vector2 pos, DirectX::SimpleMath::Vector4 color,
+	void Draw(DirectX::SimpleMath::Vector2 posRate, DirectX::SimpleMath::Vector4 color,
 		DirectX::SimpleMath::Vector2 rate, DirectX::SimpleMath::Vector2 origin, RECT_U rect);
 };
 

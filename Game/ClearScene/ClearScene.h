@@ -22,10 +22,7 @@ private:
 	// モーメントキャンバス
 	std::unique_ptr<MomentCanv> m_momentCanv;
 
-private:
 
-	// モーメントキャンバスの座標
-	DirectX::SimpleMath::Vector2 m_momentCanvPosition;
 
 public:
 
