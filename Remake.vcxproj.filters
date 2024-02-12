@@ -267,6 +267,12 @@
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp">
       <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
     </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.cpp">
+      <Filter>GameSystems\Play\UI_Play\UI_CoinNum</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.cpp">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -509,6 +515,12 @@
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h">
       <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h">
+      <Filter>GameSystems\Play\UI_Play\UI_CoinNum</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.h">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -568,15 +580,6 @@
     <Image Include="Resources\Textures\ShaderTex\water.png">
       <Filter>Resources\Textures\Common</Filter>
     </Image>
-    <Image Include="Resources\Textures\Text\Stage1.dds">
-      <Filter>Resources\Textures\Text</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Text\Stage2.dds">
-      <Filter>Resources\Textures\Text</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Text\Stage3.dds">
-      <Filter>Resources\Textures\Text</Filter>
-    </Image>
     <Image Include="Resources\Textures\Text\Start.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>
@@ -590,6 +593,24 @@
       <Filter>Resources\Textures\UI_Play</Filter>
     </Image>
     <Image Include="Resources\Textures\Text\Number.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Stages\Stage1.dds">
+      <Filter>Resources\Textures\Stages</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Stages\Stage2.dds">
+      <Filter>Resources\Textures\Stages</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Stages\Stage3.dds">
+      <Filter>Resources\Textures\Stages</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage1tex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage2tex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage3tex.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>
   </ItemGroup>
@@ -692,44 +713,11 @@
     <Filter Include="Interfaces\IUserInterface">
       <UniqueIdentifier>{91acd816-9024-4985-bf64-43b5e063431e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects">
-      <UniqueIdentifier>{961ae1a8-4cc9-49b8-93ef-179696fc263e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common">
-      <UniqueIdentifier>{bf5daed2-9231-4b02-833d-137dd9a495e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Title">
-      <UniqueIdentifier>{28cbb10d-5317-4c56-b937-a9ce652d9bd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Play">
-      <UniqueIdentifier>{0207da42-f576-43c2-87c5-e62d6fcbc943}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Clear">
-      <UniqueIdentifier>{636ec3ad-b86d-4696-963b-187e191b33d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Title\Bird_Title">
-      <UniqueIdentifier>{de7b4021-0cad-455b-81ed-506b86fe5511}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{0c3f85ce-e792-45cf-bd28-566ea722938e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes\ClearScene">
       <UniqueIdentifier>{7fe57305-3927-48ed-a583-b5c5ede36d1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\CursorObject">
-      <UniqueIdentifier>{3dadb200-95ed-4014-ac0b-45ea459aacc8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks">
-      <UniqueIdentifier>{e7a9b045-7c46-4ed3-98c8-93116be00c56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Coin">
-      <UniqueIdentifier>{a76fb650-c880-4953-93b2-437ab8e9dd99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Air">
-      <UniqueIdentifier>{4191ed06-6491-44e0-9426-3e4b52be8cec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Cloud">
-      <UniqueIdentifier>{6368c934-f301-485a-90e1-7905191c2387}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{3ad9c081-e06e-446a-bfe9-b004eca43c2e}</UniqueIdentifier>
@@ -851,18 +839,6 @@
     <Filter Include="Main\pch">
       <UniqueIdentifier>{7ce8b178-bc69-4b35-94dc-a68f8b3f8764}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Title\Logo">
-      <UniqueIdentifier>{0175345c-9e1d-4ebd-93b9-123d18efa4d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\BlockManager">
-      <UniqueIdentifier>{5a90c2d1-29a8-4e0f-afdc-1bf2a676a0cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Play\Flag">
-      <UniqueIdentifier>{77106cdd-a184-400c-a6bd-5a7df296ff0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Goal">
-      <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Cameras\OverHeadCamera">
       <UniqueIdentifier>{2111bc67-0600-496c-b301-2355e4a22b35}</UniqueIdentifier>
     </Filter>
@@ -890,38 +866,14 @@
     <Filter Include="Resources\Textures\Rule">
       <UniqueIdentifier>{5fa845e5-d61c-45e7-b994-80724d236c41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Play\Player">
-      <UniqueIdentifier>{33407447-12ae-4ea9-98e5-2d597e5461d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Play\Player\Head">
-      <UniqueIdentifier>{189acabe-be83-4487-b775-732c63a45089}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Sand">
-      <UniqueIdentifier>{6056ea33-2629-4dcb-b520-96254809c4f4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Cameras\RotateCamera">
       <UniqueIdentifier>{cd0bfe37-9e72-4a6a-a371-7470a41bc050}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Title\Sky_Title">
-      <UniqueIdentifier>{da5652a9-a5d4-458d-8e59-deb0fb0ce823}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Play\Sky_Play">
-      <UniqueIdentifier>{4c38cfaf-66ce-43d1-aa36-18274abd874c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Select">
-      <UniqueIdentifier>{9143f698-53f8-4747-8974-4b0641b38f4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Select\Sky_Select">
-      <UniqueIdentifier>{e4ae6031-f09d-48fe-a194-7a51d2e9dfcb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Stages">
       <UniqueIdentifier>{160a7611-043a-4161-8da3-32dc3cc53a7e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Shaders\ShadowMap">
       <UniqueIdentifier>{c4f23cd3-b369-45e9-aac9-ab5c830b0d9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Spike">
-      <UniqueIdentifier>{d651b34b-8148-4010-9436-6f3c0eaa2634}</UniqueIdentifier>
     </Filter>
     <Filter Include="Cameras\StageCamera">
       <UniqueIdentifier>{a6b9b28a-74af-40ab-a358-0f22d41d1ad0}</UniqueIdentifier>
@@ -947,20 +899,8 @@
     <Filter Include="GameSystems\Title\UI_Title">
       <UniqueIdentifier>{46b1ecab-f771-435e-9bde-cb1ab5dbdb22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Common\Water">
-      <UniqueIdentifier>{52ed3740-cc8e-4ad5-9e2f-073db7d45a3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Common\WorldMouse">
-      <UniqueIdentifier>{8652c02b-8b79-4043-aefc-bb4c67bb4bf4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Libraries\SystemManager">
       <UniqueIdentifier>{7df4f3b9-c755-4dce-ab3e-b29c0c6ef6ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Editor">
-      <UniqueIdentifier>{0f96f914-6949-4a16-8b13-c59e88519e4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Editor\EditChara">
-      <UniqueIdentifier>{69bd8bca-5a6f-4110-9310-2a15f8a76ffc}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameSystems\Play\UI_Play">
       <UniqueIdentifier>{86bc4cb4-eec8-478f-80de-90bb9860d2ed}</UniqueIdentifier>
@@ -982,6 +922,90 @@
     </Filter>
     <Filter Include="GameSystems\Play\UI_Play\UI_PlayArea">
       <UniqueIdentifier>{8ffb86e8-fa8f-4e71-9fee-fd9460200d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play\UI_CoinNum">
+      <UniqueIdentifier>{b00d738f-e46c-479b-8a6c-f0bfe958ed5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{961ae1a8-4cc9-49b8-93ef-179696fc263e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common">
+      <UniqueIdentifier>{bf5daed2-9231-4b02-833d-137dd9a495e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\CursorObject">
+      <UniqueIdentifier>{3dadb200-95ed-4014-ac0b-45ea459aacc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks">
+      <UniqueIdentifier>{e7a9b045-7c46-4ed3-98c8-93116be00c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Coin">
+      <UniqueIdentifier>{a76fb650-c880-4953-93b2-437ab8e9dd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Air">
+      <UniqueIdentifier>{4191ed06-6491-44e0-9426-3e4b52be8cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Cloud">
+      <UniqueIdentifier>{6368c934-f301-485a-90e1-7905191c2387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Goal">
+      <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Sand">
+      <UniqueIdentifier>{6056ea33-2629-4dcb-b520-96254809c4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Spike">
+      <UniqueIdentifier>{d651b34b-8148-4010-9436-6f3c0eaa2634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\BlockManager">
+      <UniqueIdentifier>{5a90c2d1-29a8-4e0f-afdc-1bf2a676a0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Water">
+      <UniqueIdentifier>{52ed3740-cc8e-4ad5-9e2f-073db7d45a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\WorldMouse">
+      <UniqueIdentifier>{8652c02b-8b79-4043-aefc-bb4c67bb4bf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title">
+      <UniqueIdentifier>{28cbb10d-5317-4c56-b937-a9ce652d9bd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Bird_Title">
+      <UniqueIdentifier>{de7b4021-0cad-455b-81ed-506b86fe5511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Logo">
+      <UniqueIdentifier>{0175345c-9e1d-4ebd-93b9-123d18efa4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Sky_Title">
+      <UniqueIdentifier>{da5652a9-a5d4-458d-8e59-deb0fb0ce823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play">
+      <UniqueIdentifier>{0207da42-f576-43c2-87c5-e62d6fcbc943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Flag">
+      <UniqueIdentifier>{77106cdd-a184-400c-a6bd-5a7df296ff0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Player">
+      <UniqueIdentifier>{33407447-12ae-4ea9-98e5-2d597e5461d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Player\Head">
+      <UniqueIdentifier>{189acabe-be83-4487-b775-732c63a45089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Sky_Play">
+      <UniqueIdentifier>{4c38cfaf-66ce-43d1-aa36-18274abd874c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Select">
+      <UniqueIdentifier>{9143f698-53f8-4747-8974-4b0641b38f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Select\Sky_Select">
+      <UniqueIdentifier>{e4ae6031-f09d-48fe-a194-7a51d2e9dfcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Editor">
+      <UniqueIdentifier>{0f96f914-6949-4a16-8b13-c59e88519e4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Editor\EditChara">
+      <UniqueIdentifier>{69bd8bca-5a6f-4110-9310-2a15f8a76ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Stages">
+      <UniqueIdentifier>{8404bdc5-f47b-4910-bb15-10c7242d321f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
