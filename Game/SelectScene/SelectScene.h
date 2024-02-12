@@ -32,7 +32,7 @@ private:
 	std::unique_ptr<Sky_Select> m_sky;
 
 	// ブロックマネージャ
-	std::unique_ptr<BlockManager> m_stage1, m_stage2, m_stage3;
+	std::unique_ptr<BlockManager> m_stage[4];
 
 	// セレクト番号
 	int m_stageSelection;

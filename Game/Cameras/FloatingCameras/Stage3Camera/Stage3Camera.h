@@ -34,4 +34,4 @@ public:
 	void Update() override;
 };
 
-#endif // STAGE2CAMERA
+#endif // STAGE3CAMERA

@@ -34,7 +34,7 @@ private:
 	const float NEAR_PLANE = 0.1f;
 
 	// カメラの最遠距離
-	const float FAR_PLANE = 200.0f;
+	const float FAR_PLANE = 220.0f;
 
 	// カメラアングル
 	const float ANGLE = 45.0f;

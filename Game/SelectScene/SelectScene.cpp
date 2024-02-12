@@ -17,7 +17,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const int SelectScene::MAX_SAMPLE_NUM = 3;		// サンプルステージ数
+const int SelectScene::MAX_SAMPLE_NUM = 4;		// サンプルステージ数
 
 //==============================================================================
 // エイリアス宣言
@@ -123,9 +123,10 @@ void SelectScene::Draw()
 	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
-	m_stage1->Draw(_context, *_states, _view, _projection);
-	m_stage2->Draw(_context, *_states, _view, _projection);
-	m_stage3->Draw(_context, *_states, _view, _projection);
+	for (int i = 0; i < MAX_SAMPLE_NUM; i++)
+	{
+		m_stage[i]->Draw(_context, *_states, _view, _projection);
+	}
 
 	// UIの描画
 	m_ui->Draw();
@@ -146,9 +147,7 @@ void SelectScene::Finalize()
 	m_adminCamera.reset();
 	m_ui.reset();
 	m_sky.reset();
-	m_stage1.reset();
-	m_stage2.reset();
-	m_stage3.reset();
+	m_stage->reset();
 }
 
 //==============================================================================
@@ -166,12 +165,10 @@ void SelectScene::CreateWDResources()
 	m_sky = std::make_unique<Sky_Select>();
 
 	// ブロックマネージャ
-	m_stage1 = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
-	m_stage1->SetPlay(true);
-	m_stage2 = std::make_unique<BlockManager>(L"Resources/Stages/sample2.json");
-	m_stage2->SetPlay(true);
-	m_stage3 = std::make_unique<BlockManager>(L"Resources/Stages/sample3.json");
-	m_stage3->SetPlay(true);
+	m_stage[0] = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_stage[1] = std::make_unique<BlockManager>(L"Resources/Stages/sample2.json");
+	m_stage[2] = std::make_unique<BlockManager>(L"Resources/Stages/sample3.json");
+	m_stage[3] = std::make_unique<BlockManager>(L"Resources/Stages/sample4.json");
 }
 
 //==============================================================================
@@ -186,16 +183,26 @@ void SelectScene::SetSceneValues()
 	// 選択中の番号を設定
 	m_ui->SetSelectionNum(m_stageSelection);
 
-	// ブロックの初期化・一度だけ行列を計算する
-	m_stage1->Initialize();
-	m_stage1->Update();
-	m_stage2->Initialize();
-	m_stage2->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, 0.0f));
-	m_stage2->Update();
-	m_stage3->Initialize();
-	m_stage3->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
-	m_stage3->Update();
+	// ブロックの初期設定
+	{
+		// プレイモードに設定して初期化
+		for (int i = 0; i < MAX_SAMPLE_NUM; i++)
+		{
+			m_stage[i]->SetPlay(true);
+			m_stage[i]->Initialize();
+		}
 
+		// オフセットを設定
+		m_stage[1]->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, 0.0f));
+		m_stage[2]->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
+		m_stage[3]->SelectOffset(SimpleMath::Vector3(0.0f, 0.0f, -10.5f));
+
+		// 行列計算
+		for (int i = 0; i < MAX_SAMPLE_NUM; i++)
+		{
+			m_stage[i]->Update();
+		}
+	}
 }
 
 //==============================================================================
@@ -227,6 +234,8 @@ void SelectScene::ChangeAdminCamera()
 		m_adminCamera->SetType(CameraType::Select2_Floating);
 	if (m_stageSelection == 3)
 		m_adminCamera->SetType(CameraType::Select3_Floating);
+	if (m_stageSelection == 4)
+		m_adminCamera->SetType(CameraType::Select4_Floating);
 }
 
 //==============================================================================
@@ -248,6 +257,8 @@ void SelectScene::SelectNext()
 		if (m_stageSelection == 2)
 			ChangeScene(SCENE::PLAY);
 		if (m_stageSelection == 3)
+			ChangeScene(SCENE::PLAY);
+		if (m_stageSelection == 4)
 			ChangeScene(SCENE::PLAY);
 	}
 }

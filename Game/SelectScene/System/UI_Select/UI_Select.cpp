@@ -55,18 +55,21 @@ void UI_Select::Initialize()
 	m_sprites->AddTextureData(L"Num1", L"Resources/Textures/Text/Stage1tex.dds");
 	m_sprites->AddTextureData(L"Num2", L"Resources/Textures/Text/Stage2tex.dds");
 	m_sprites->AddTextureData(L"Num3", L"Resources/Textures/Text/Stage3tex.dds");
+	m_sprites->AddTextureData(L"Num4", L"Resources/Textures/Text/Stage4tex.dds");
 
 	// 座標の設定
 	m_position.emplace(L"Editor", SimpleMath::Vector2(50.0f, 50.0f));
 	m_position.emplace(L"Num1", SimpleMath::Vector2(50.0f, 150.0f));
 	m_position.emplace(L"Num2", SimpleMath::Vector2(50.0f, 250.0f));
 	m_position.emplace(L"Num3", SimpleMath::Vector2(50.0f, 350.0f));
+	m_position.emplace(L"Num4", SimpleMath::Vector2(50.0f, 450.0f));
 
 	// 色の設定
 	m_color.emplace(L"Editor", BLACK_COLOR);
 	m_color.emplace(L"Num1", BLACK_COLOR);
 	m_color.emplace(L"Num2", BLACK_COLOR);
 	m_color.emplace(L"Num3", BLACK_COLOR);
+	m_color.emplace(L"Num4", BLACK_COLOR);
 
 
 	// ステージ画像パス
@@ -74,6 +77,7 @@ void UI_Select::Initialize()
 	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/Stages/Stage1.dds");
 	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/Stages/Stage2.dds");
 	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/Stages/Stage3.dds");
+	m_sprites->AddTextureData(L"Stage4", L"Resources/Textures/Stages/Stage4.dds");
 }
 
 //==============================================================================
@@ -85,22 +89,32 @@ void UI_Select::Update()
 	if(m_stageSelection == 0)
 	{
 		m_color[L"Editor"] = UserUtility::Lerp(m_color[L"Editor"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Num1"] = m_color[L"Num2"] = m_color[L"Num3"] = BLACK_COLOR;
+		m_color[L"Num1"] = m_color[L"Num2"] = m_color[L"Num3"] =
+			m_color[L"Num4"] = BLACK_COLOR;
 	}
 	if(m_stageSelection == 1)
 	{
 		m_color[L"Num1"] = UserUtility::Lerp(m_color[L"Num1"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num2"] = m_color[L"Num3"] = BLACK_COLOR;
+		m_color[L"Editor"] = m_color[L"Num2"] = m_color[L"Num3"] =
+			m_color[L"Num4"] = BLACK_COLOR;
 	}
 	if(m_stageSelection == 2)
 	{
 		m_color[L"Num2"] = UserUtility::Lerp(m_color[L"Num2"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num3"] = BLACK_COLOR;
+		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num3"] =
+			m_color[L"Num4"] = BLACK_COLOR;
 	}
 	if(m_stageSelection == 3)
 	{
 		m_color[L"Num3"] = UserUtility::Lerp(m_color[L"Num3"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num2"] = BLACK_COLOR;
+		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num2"] =
+			m_color[L"Num4"] = BLACK_COLOR;
+	}
+	if(m_stageSelection == 4)
+	{
+		m_color[L"Num4"] = UserUtility::Lerp(m_color[L"Num4"], RED_COLOR, COLOR_SPEED);
+		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num2"] =
+			m_color[L"Num3"] = BLACK_COLOR;
 	}
 }
 
@@ -120,6 +134,9 @@ void UI_Select::Draw()
 		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
 	m_sprites->DrawTexture(L"Num3", m_position[L"Num3"] * GetScreenRate(),
 		m_color[L"Num3"], SimpleMath::Vector2::One * GetScreenRate(),
+		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
+	m_sprites->DrawTexture(L"Num4", m_position[L"Num4"] * GetScreenRate(),
+		m_color[L"Num4"], SimpleMath::Vector2::One * GetScreenRate(),
 		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
 
 	// ステージ画像を描画
@@ -146,7 +163,13 @@ void UI_Select::Draw()
 			SimpleMath::Vector2::Zero);
 		return;
 	}
-	return;
+	case 4:
+	{
+		m_sprites->DrawTexture(L"Stage4", STAGE_TEX_POS * GetScreenRate(),
+			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
+			SimpleMath::Vector2::Zero);
+		return;
+	}
 	default:
 		return;
 	}

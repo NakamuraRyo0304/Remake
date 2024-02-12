@@ -233,27 +233,25 @@ void PlayScene::Draw()
 	//==============================================================================
 	// デプスラムダの作成
 	//==============================================================================
-	ShaderLambda _depth = [&]()
-		{
-			_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
-			_context->PSSetShader(m_psDep.Get(), nullptr, 0);
-		};
+	ShaderLambda _shader = [&]() {
+		_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
+		_context->PSSetShader(m_psDep.Get(), nullptr, 0); };
 
 	//==============================================================================
 	// 影オブジェクトを描画する
 	//==============================================================================
 
 	// カーソルの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _depth);
+	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection, false, _depth);
+	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _view, _projection, false, _depth);
+	m_player->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _view, _projection, false, _depth);
+	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	//==============================================================================
 	// レンダーターゲットをデフォルトに戻す
@@ -270,24 +268,18 @@ void PlayScene::Draw()
 	//==============================================================================
 	// シャドウラムダの作成
 	//==============================================================================
-	ShaderLambda _shadow = [&]()
-		{
-			// 定数バッファの設定
-			ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
-			_context->VSSetConstantBuffers(1, 1, _buffer);
-			_context->PSSetConstantBuffers(1, 2, _buffer);
+	_shader = [&]() {
+		// バッファ/リソースの設定
+		ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
+		_context->VSSetConstantBuffers(1, 1, _buffer);
+		_context->PSSetConstantBuffers(1, 2, _buffer);
+		_context->PSSetShaderResources(1, 1, &_srv);
 
-			// 作成したシャドウマップをリソースとして設定
-			_context->PSSetShaderResources(1, 1, &_srv);
-
-			// テクスチャサンプラーの設定
-			ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
-			_context->PSSetSamplers(0, 2, _samplers);
-
-			// シェーダーの設定
-			_context->VSSetShader(m_vs.Get(), nullptr, 0);
-			_context->PSSetShader(m_ps.Get(), nullptr, 0);
-		};
+		// サンプラー/シェーダーの設定
+		ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
+		_context->PSSetSamplers(0, 2, _samplers);
+		_context->VSSetShader(m_vs.Get(), nullptr, 0);
+		_context->PSSetShader(m_ps.Get(), nullptr, 0); };
 
 
 	// カメラのマトリクスを取得
@@ -301,16 +293,16 @@ void PlayScene::Draw()
 	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// カーソルオブジェクトの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _shadow);
+	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shadow);
+	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _view, _projection, false, _shadow);
+	m_player->Draw(_context, *_states, _view, _projection, false, _shader);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shadow);
+	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shader);
 
 
 	//==============================================================================
@@ -410,22 +402,37 @@ void PlayScene::CreateWDResources()
 		m_depthStencil->SetWindow(_rect);
 	}
 
-	// デプス頂点シェーダーの作成
+	// デプスシェーダーの作成
 	{
-		std::vector<uint8_t> _vsDep = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS_Depth.cso");
+		// 頂点シェーダー
+		std::vector<uint8_t> _shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS_Depth.cso");
 		DX::ThrowIfFailed(
 			_device->CreateVertexShader(
-				_vsDep.data(), _vsDep.size(), nullptr, m_vsDep.ReleaseAndGetAddressOf()
+				_shader.data(), _shader.size(), nullptr, m_vsDep.ReleaseAndGetAddressOf()
+			)
+		);
+		// ピクセルシェーダー
+		_shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS_Depth.cso");
+		DX::ThrowIfFailed(
+			_device->CreatePixelShader(
+				_shader.data(), _shader.size(), nullptr, m_psDep.ReleaseAndGetAddressOf()
 			)
 		);
 	}
-
-	// デプスピクセルシェーダーの作成
+	// シャドウシェーダーの作成
 	{
-		std::vector<uint8_t> _psDep = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS_Depth.cso");
+		// 頂点シェーダー
+		std::vector<uint8_t> _shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS.cso");
+		DX::ThrowIfFailed(
+			_device->CreateVertexShader(
+				_shader.data(), _shader.size(), nullptr, m_vs.ReleaseAndGetAddressOf()
+			)
+		);
+		// ピクセルシェーダー
+		_shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS.cso");
 		DX::ThrowIfFailed(
 			_device->CreatePixelShader(
-				_psDep.data(), _psDep.size(), nullptr, m_psDep.ReleaseAndGetAddressOf()
+				_shader.data(), _shader.size(), nullptr, m_ps.ReleaseAndGetAddressOf()
 			)
 		);
 	}
@@ -438,8 +445,9 @@ void PlayScene::CreateWDResources()
 	// ③CPU側から書き込みをできるように設定 //	③CPUのアクセスは制限する			//
 	//////////////////////////////////////////////////////////////////////////////////
 
-	// シャドウバッファの作成
+	// コンスタントバッファの作成
 	{
+		// シャドウ
 		D3D11_BUFFER_DESC _desc = {};
 		_desc.ByteWidth = static_cast<UINT>(sizeof(ShadowBuffer));
 		_desc.Usage = D3D11_USAGE_DYNAMIC;
@@ -448,37 +456,13 @@ void PlayScene::CreateWDResources()
 		DX::ThrowIfFailed(
 			_device->CreateBuffer(&_desc, nullptr, m_shadowConstant.ReleaseAndGetAddressOf())
 		);
-	}
-
-	// ライトフォブバッファの作成
-	{
-		D3D11_BUFFER_DESC _desc = {};
+		// ライト
 		_desc.ByteWidth = static_cast<UINT>(sizeof(LightFovBuffer));
 		_desc.Usage = D3D11_USAGE_DEFAULT;
 		_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		_desc.CPUAccessFlags = 0;
 		DX::ThrowIfFailed(
 			_device->CreateBuffer(&_desc, nullptr, m_lightConstant.ReleaseAndGetAddressOf())
-		);
-	}
-
-	// 頂点シェーダーの作成
-	{
-		std::vector<uint8_t> _vs = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS.cso");
-		DX::ThrowIfFailed(
-			_device->CreateVertexShader(
-				_vs.data(), _vs.size(), nullptr, m_vs.ReleaseAndGetAddressOf()
-			)
-		);
-	}
-
-	// ピクセルシェーダーの作成
-	{
-		std::vector<uint8_t> _ps = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS.cso");
-		DX::ThrowIfFailed(
-			_device->CreatePixelShader(
-				_ps.data(), _ps.size(), nullptr, m_ps.ReleaseAndGetAddressOf()
-			)
 		);
 	}
 
@@ -571,8 +555,8 @@ const wchar_t* PlayScene::GetStagePath()
 		return L"Resources/Stages/sample2.json";
 	case 3:
 		return L"Resources/Stages/sample3.json";
-
-
+	case 4:
+		return L"Resources/Stages/sample4.json";
 	default:
 		return L"Resources/Stages/sample1.json";
 	}

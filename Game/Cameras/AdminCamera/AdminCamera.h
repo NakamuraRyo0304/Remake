@@ -23,6 +23,7 @@
 #include "../FloatingCameras/Stage1Camera/Stage1Camera.h"
 #include "../FloatingCameras/Stage2Camera/Stage2Camera.h"
 #include "../FloatingCameras/Stage3Camera/Stage3Camera.h"
+#include "../FloatingCameras/Stage4Camera/Stage4Camera.h"
 #include "../RotateCamera/RotateCamera.h"
 #include "../EditorCamera/EditorCamera.h"
 #include "../DeathCamera/DeathCamera.h"
@@ -40,6 +41,7 @@ public:
 		Select1_Floating,		// ステージ１の定点カメラ
 		Select2_Floating,		// ステージ２の定点カメラ
 		Select3_Floating,		// ステージ３の定点カメラ
+		Select4_Floating,		// ステージ４の定点カメラ
 		Editor_Moving,			// エディタ時のフリー移動カメラ
 		Death_Following,		// 死亡時のカメラ
 

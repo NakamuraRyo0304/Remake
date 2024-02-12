@@ -88,6 +88,9 @@ void AdminCamera::SetType(const Type& cameraType)
 	case Type::Select3_Floating:
 		m_gameCamera = std::make_unique<Stage3Camera>(m_screenSize);
 		break;
+	case Type::Select4_Floating:
+		m_gameCamera = std::make_unique<Stage4Camera>(m_screenSize);
+		break;
 	case Type::Editor_Moving:
 		m_gameCamera = std::make_unique<EditorCamera>(m_screenSize);
 		break;
