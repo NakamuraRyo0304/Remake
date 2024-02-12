@@ -195,6 +195,7 @@ void SelectScene::SetSceneValues()
 	m_stage3->Initialize();
 	m_stage3->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
 	m_stage3->Update();
+
 }
 
 //==============================================================================
