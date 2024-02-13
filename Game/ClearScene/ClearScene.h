@@ -14,6 +14,7 @@
 //==============================================================================
 #include "Game/IScene/IScene.h"
 
+class BG_Clear;
 class MomentCanv;
 class ScoreBoard;
 class Timer;
@@ -33,6 +34,9 @@ private:
 
 	// ランダムカウント
 	std::unique_ptr<Timer> m_direction;
+
+	// バックグラウンド
+	std::unique_ptr<BG_Clear> m_backGround;
 
 	// クリア時間
 	float m_clearTime;

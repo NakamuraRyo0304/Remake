@@ -10,6 +10,7 @@
 #include "Game/ClearScene/System/MomentCanv/MomentCanv.h"
 #include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
+#include "Game/ClearScene/System/BG_Clear/BG_Clear.h"
 #include "Libraries/SystemDatas/Timer/Timer.h"
 #include "ClearScene.h"
 
@@ -114,6 +115,9 @@ void ClearScene::Draw()
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
 
+	// 背景の描画
+	m_backGround->Draw();
+
 	// モーメントキャンバスのレクトと拡大率、中心位置
 	RECT_U _rectMC =
 		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
@@ -149,6 +153,7 @@ void ClearScene::Finalize()
 	m_direction.reset();
 	m_coinBoard.reset();
 	m_timeBoard.reset();
+	m_backGround.reset();
 }
 
 //==============================================================================
@@ -168,6 +173,9 @@ void ClearScene::CreateWDResources()
 
 	// ディレクトタイマー作成(3秒)
 	m_direction = std::make_unique<Timer>(Timer::Mode::limited, 3.0f);
+
+	// 背景作成
+	m_backGround = std::make_unique<BG_Clear>();
 }
 
 //==============================================================================
@@ -177,6 +185,9 @@ void ClearScene::SetSceneValues()
 {
 	// モーメントキャンバスの初期化
 	m_momentCanv->Initialize();
+
+	// 背景の初期化
+	m_backGround->Initialize();
 
 	// スコアボードの初期化(1.5文字分間隔をあける)
 	m_coinBoard->Initialize({ 1500.0f,100.0f }, BLACK_COLOR,

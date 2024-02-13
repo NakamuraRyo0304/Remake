@@ -9,9 +9,13 @@
 #ifndef BG_CLEAR
 #define BG_CLEAR
 
+class DrawSprite;
 class BG_Clear
 {
 private:
+
+	// スプライト
+	std::unique_ptr<DrawSprite> m_sprite;
 
 public:
 
@@ -29,6 +33,13 @@ public:
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
 	void Initialize();
+
+	/// <summary>
+	/// 描画関数
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Draw();
 };
 
 #endif // BG_CLEAR

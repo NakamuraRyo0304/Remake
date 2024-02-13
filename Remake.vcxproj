@@ -365,6 +365,7 @@
     <ResourceCompile Include="Resources\Icon\Icon.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Textures\BackGround\cork.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds" />

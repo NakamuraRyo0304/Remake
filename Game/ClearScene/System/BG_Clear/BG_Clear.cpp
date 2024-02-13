@@ -6,6 +6,7 @@
  */
 
 #include "pch.h"
+#include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "BG_Clear.h"
 
 //==============================================================================
@@ -13,6 +14,7 @@
 //==============================================================================
 BG_Clear::BG_Clear()
 {
+	m_sprite = std::make_unique<DrawSprite>();
 }
 
 //==============================================================================
@@ -20,6 +22,7 @@ BG_Clear::BG_Clear()
 //==============================================================================
 BG_Clear::~BG_Clear()
 {
+	m_sprite.reset();
 }
 
 //==============================================================================
@@ -27,4 +30,15 @@ BG_Clear::~BG_Clear()
 //==============================================================================
 void BG_Clear::Initialize()
 {
+	m_sprite->MakeSpriteBatch();
+	m_sprite->AddTextureData(L"back", L"Resources/Textures/BackGround/cork.dds");
+}
+
+//==============================================================================
+// •`‰æŠÖ”
+//==============================================================================
+void BG_Clear::Draw()
+{
+	m_sprite->DrawTexture(L"back", SimpleMath::Vector2::Zero,
+		SimpleMath::Vector4::One, SimpleMath::Vector2::One, SimpleMath::Vector2::Zero);
 }
