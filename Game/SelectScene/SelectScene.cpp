@@ -24,9 +24,9 @@ using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-SelectScene::SelectScene()
-	: IScene()				// 基底クラスのコンストラクタ
-	, m_stageSelection{ 1 }	// ステージ１からスタート
+SelectScene::SelectScene(const int& selection)
+	: IScene()						// 基底クラスのコンストラクタ
+	, m_stageSelection{ selection }	// 選択番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのコンストラクタが呼ばれました。\n");
 }

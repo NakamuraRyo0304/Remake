@@ -51,9 +51,9 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="selection">選択ステージ</param>
 	/// <returns>なし</returns>
-	SelectScene();
+	SelectScene(const int& selection);
 	~SelectScene();
 
 	/// <summary>

@@ -79,22 +79,19 @@ void ClearScene::Update()
 		m_ui->Update();
 
 		// 次の遷移を選択
+		auto _selection = m_ui->GetSelecion();
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
 			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
 		{
-			auto _selection = m_ui->GetSelecion();
 			UserUtility::Increment(&_selection);	// インクリメント
-			_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
-			m_ui->SetSelection(_selection);
 		}
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
 			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
 		{
-			auto _selection = m_ui->GetSelecion();
 			UserUtility::Decrement(&_selection);	// デクリメント
-			_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
-			m_ui->SetSelection(_selection);
 		}
+		_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
+		m_ui->SetSelection(_selection);
 
 		// 次の遷移を決定
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))

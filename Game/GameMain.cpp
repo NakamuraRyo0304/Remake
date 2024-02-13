@@ -143,7 +143,7 @@ void GameMain::CreateScene()
 		}
 		case SCENE::SELECT:		// セレクトシーン
 		{
-			m_nowScene = std::make_unique<SelectScene>();
+			m_nowScene = std::make_unique<SelectScene>(m_stageNumber);
 
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;

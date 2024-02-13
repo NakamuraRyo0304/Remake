@@ -634,6 +634,15 @@
     <Image Include="Resources\Textures\Text\Stage4tex.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>
+    <Image Include="Resources\Textures\Text\Selecttex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Nexttex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\ReTrytex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Models\Bird.cmo">

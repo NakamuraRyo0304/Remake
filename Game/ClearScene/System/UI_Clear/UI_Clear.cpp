@@ -46,9 +46,9 @@ UI_Clear::~UI_Clear()
 void UI_Clear::Initialize()
 {
 	// •¶š‚Ìİ’è(•¶šƒpƒX)
-	m_sprites->AddTextureData(L"Next", L"Resources/Textures/Text/Editor.dds");
-	m_sprites->AddTextureData(L"ReStart", L"Resources/Textures/Text/Stage1tex.dds");
-	m_sprites->AddTextureData(L"Stages", L"Resources/Textures/Text/Stage2tex.dds");
+	m_sprites->AddTextureData(L"Next", L"Resources/Textures/Text/Nexttex.dds");
+	m_sprites->AddTextureData(L"ReStart", L"Resources/Textures/Text/ReTrytex.dds");
+	m_sprites->AddTextureData(L"Stages", L"Resources/Textures/Text/Selecttex.dds");
 
 	// •¶š‚²‚Æ‚Ìİ’è
 	Option _opt = {};

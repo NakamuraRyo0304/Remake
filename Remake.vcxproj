@@ -380,7 +380,10 @@
     <Image Include="Resources\Textures\Stages\Stage4.dds" />
     <Image Include="Resources\Textures\Text\Editor.dds" />
     <Image Include="Resources\Textures\Text\Exit.dds" />
+    <Image Include="Resources\Textures\Text\Nexttex.dds" />
     <Image Include="Resources\Textures\Text\Number.dds" />
+    <Image Include="Resources\Textures\Text\ReTrytex.dds" />
+    <Image Include="Resources\Textures\Text\Selecttex.dds" />
     <Image Include="Resources\Textures\Text\Stage1tex.dds" />
     <Image Include="Resources\Textures\Text\Stage2tex.dds" />
     <Image Include="Resources\Textures\Text\Stage3tex.dds" />
