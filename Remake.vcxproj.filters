@@ -255,7 +255,7 @@
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp">
       <Filter>GameSystems\Play\UI_Play</Filter>
     </ClCompile>
-    <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp">
+    <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp">
       <Filter>GameSystems\Clear\MomentCanv</Filter>
     </ClCompile>
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp">
@@ -282,7 +282,7 @@
     <ClCompile Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.cpp">
       <Filter>GameSystems\Clear\ScoreBoard</Filter>
     </ClCompile>
-    <ClCompile Include="Game\ClearScene\System\BG_Clear\BG_Clear.cpp">
+    <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp">
       <Filter>GameSystems\Clear\BG_Clear</Filter>
     </ClCompile>
   </ItemGroup>
@@ -518,7 +518,7 @@
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h">
       <Filter>GameSystems\Play\UI_Play</Filter>
     </ClInclude>
-    <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h">
+    <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h">
       <Filter>GameSystems\Clear\MomentCanv</Filter>
     </ClInclude>
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h">
@@ -542,7 +542,7 @@
     <ClInclude Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.h">
       <Filter>GameSystems\Clear\ScoreBoard</Filter>
     </ClInclude>
-    <ClInclude Include="Game\ClearScene\System\BG_Clear\BG_Clear.h">
+    <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h">
       <Filter>GameSystems\Clear\BG_Clear</Filter>
     </ClInclude>
   </ItemGroup>
