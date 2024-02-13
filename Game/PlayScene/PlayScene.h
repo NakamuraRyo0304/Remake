@@ -22,6 +22,7 @@ class FlagManager;
 class ImageShot;
 class Sky_Play;
 class StageCollision;
+class Timer;
 class Player;
 class UI_Play;
 class WorldMouse;
@@ -30,8 +31,11 @@ class PlayScene final : public IScene
 {
 private:
 
-	// ステージ番号
-	int m_stageNumber;
+	// ステージ番号・集めたコイン数
+	int m_stageNumber, m_collectedCoin;
+
+	// ゲームタイマー
+	float m_gameTimer;
 
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
@@ -65,6 +69,9 @@ private:
 
 	// UI
 	std::unique_ptr<UI_Play> m_ui;
+
+	// タイマー
+	std::unique_ptr<Timer> m_timer;
 
 	// スクショ保存先
 	std::wstring m_stageTexPath;
@@ -186,6 +193,14 @@ private:
 	/// <param name="states">コモンステート</param>
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
+
+public:
+
+	// ゲームタイマーを取得する
+	const float& GetGameTimer() { return m_gameTimer; }
+
+	// 集めたコイン数を取得する
+	const int& GetCollectedCoin() { return m_collectedCoin; }
 
 private:
 

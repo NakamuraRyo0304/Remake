@@ -24,8 +24,10 @@ using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-ClearScene::ClearScene()
+ClearScene::ClearScene(float time, int coins)
 	: IScene()						// 基底クラスのコンストラクタ
+	, m_clearTime{ time }			// クリアタイム
+	, m_collectedCoin{ coins }		// 集めたコイン数
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 }
@@ -140,5 +142,6 @@ void ClearScene::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,0 }, Colors::DarkGreen, L"ClearScene");
 	_string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
 	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Time::%.2f",m_clearTime);
+	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"Coin::%.d",m_collectedCoin);
 }

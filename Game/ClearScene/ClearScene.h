@@ -22,16 +22,21 @@ private:
 	// モーメントキャンバス
 	std::unique_ptr<MomentCanv> m_momentCanv;
 
+	// クリア時間
+	float m_clearTime;
 
+	// 集めたコイン数
+	int m_collectedCoin;
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="time">クリアタイム</param>
+	/// <param name="coins">コイン数</param>
 	/// <returns>なし</returns>
-	ClearScene();
+	ClearScene(float time, int coins);
 	~ClearScene();
 
 	/// <summary>

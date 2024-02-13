@@ -276,6 +276,9 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.cpp">
       <Filter>Cameras\StageCamera</Filter>
     </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\Timer\Timer.cpp">
+      <Filter>Libraries\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -526,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.h">
       <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\Timer\Timer.h">
+      <Filter>Libraries\Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1027,6 +1033,9 @@
     </Filter>
     <Filter Include="Resources\Textures\Stages">
       <UniqueIdentifier>{8404bdc5-f47b-4910-bb15-10c7242d321f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Timer">
+      <UniqueIdentifier>{d8bb3bb8-a59a-4de0-a708-98d556260b0b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

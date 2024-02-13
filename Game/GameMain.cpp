@@ -35,6 +35,8 @@ GameMain::GameMain()
 	, m_nowScene{ nullptr }				// 今のシーンポインタ
 	, m_screenSize{}					// スクリーンサイズ
 	, m_stageNumber{ 1 }				// ステージ番号
+	, m_clearTime{ 0.0f }				// クリア時間
+	, m_collectedCoin{ 0 }				// 集めたコイン数
 {
 }
 
@@ -161,7 +163,7 @@ void GameMain::CreateScene()
 		}
 		case SCENE::CLEAR:		// クリアシーン
 		{
-			m_nowScene = std::make_unique<ClearScene>();
+			m_nowScene = std::make_unique<ClearScene>(m_clearTime, m_collectedCoin);
 
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;
@@ -204,7 +206,12 @@ void GameMain::DeleteScene()
 	{
 		m_stageNumber = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
 	}
-
+	// 次のシーン：クリアシーン / 処理：プレイシーンからクリア時間・コイン数を取得する
+	if (m_nextScene == SCENE::CLEAR && m_prevScene == SCENE::PLAY)
+	{
+		m_clearTime = CastSceneType<PlayScene>(m_nowScene)->GetGameTimer();
+		m_collectedCoin = CastSceneType<PlayScene>(m_nowScene)->GetCollectedCoin();
+	}
 
 
 	// 現シーンの終了処理
