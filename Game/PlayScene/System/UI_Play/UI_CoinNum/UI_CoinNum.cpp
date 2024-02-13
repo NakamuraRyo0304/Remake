@@ -50,12 +50,12 @@ void UI_CoinNum::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
 	// ”Žš‚ÌÝ’è
 	m_nums[0]->SetPosition(pos);
 	m_nums[0]->SetColor(color);
-	m_nums[1]->SetPosition(m_nums[0]->GetPosition() + SimpleMath::Vector2::UnitX * SIZE);
+	m_nums[1]->SetPosition(m_nums[0]->GetPosition() + SimpleMath::Vector2(SIZE, 0.0f));
 	m_nums[1]->SetColor(color);
 
 	for (int i = 0; i < 2; i++)
 	{
-		m_nums[i]->SetRate(rate);
+		m_nums[i]->SetScreenRate(rate);
 	}
 }
 

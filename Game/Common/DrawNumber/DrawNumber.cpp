@@ -11,7 +11,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const UINT DrawNumber::SIZE = 64;		// １数字分のサイズ
+const UINT DrawNumber::SIZE = 128;		// １数字分のサイズ
 
 //==============================================================================
 // コンストラクタ
@@ -19,7 +19,8 @@ const UINT DrawNumber::SIZE = 64;		// １数字分のサイズ
 DrawNumber::DrawNumber()
 	: m_position{}		// 座標
 	, m_origin{}		// 中心座標
-	, m_rate{}			// 拡大率
+	, m_rate{}			// 文字拡大率
+	, m_screenRate{}	// 画面拡大率
 	, m_rect{}			// 切り取り位置
 	, m_color{}			// 色
 {
@@ -29,8 +30,9 @@ DrawNumber::DrawNumber()
 
 	// 初期化
 	m_position = m_origin = SimpleMath::Vector2::Zero;
-	m_rate = SimpleMath::Vector2::One;
+	m_screenRate = SimpleMath::Vector2::One;
 	m_color = SimpleMath::Vector4::One;
+	m_rate = SimpleMath::Vector2::One;
 }
 
 //==============================================================================
@@ -65,8 +67,8 @@ void DrawNumber::Draw(UINT num, Digits digits)
 	m_rect = Cut(_tmp);
 
 	// 数字を描画
-	m_sprite->DrawTexture(L"num", m_position * m_rate,
-		m_color, m_rate, m_origin, m_rect);
+	m_sprite->DrawTexture(L"num", m_position * m_screenRate,
+		m_color, m_screenRate * m_rate, m_origin, m_rect);
 }
 
 //==============================================================================

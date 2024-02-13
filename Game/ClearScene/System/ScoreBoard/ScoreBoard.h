@@ -1,16 +1,16 @@
 /*
- *  @File   UI_CoinNum.h
- *  @Brief  プレイシーンのUIのコイン数。
- *  @Date   2024-02-11
+ *  @File   ScoreBoard.h
+ *  @Brief  ゲームのスコアを表示する。
+ *  @Date   2024-02-13
  *  @Author NakamuraRyo
  */
 
 #pragma once
-#ifndef UI_COINNUM
-#define UI_COINNUM
+#ifndef SCOREBOARD
+#define SCOREBOARD
 
 class DrawNumber;
-class UI_CoinNum
+class ScoreBoard
 {
 private:
 
@@ -23,8 +23,8 @@ private:
 	// 色
 	DirectX::SimpleMath::Vector4 m_color;
 
-	// コイン数
-	int m_coinNum, m_maxCoinNum;
+	// 数値
+	int m_number;
 
 private:
 
@@ -38,18 +38,21 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
-	UI_CoinNum();
-	~UI_CoinNum();
+	ScoreBoard();
+	~ScoreBoard();
 
 	/// <summary>
 	/// 初期化関数
 	/// </summary>
 	/// <param name="pos">座標</param>
 	/// <param name="color">文字色</param>
-	/// <param name="rate">拡大率</param>
+	/// <param name="rate">文字拡大率</param>
+	/// <param name="scRate">画面拡大率</param>
+	/// <param name="span">文字間隔</param>
 	/// <returns>なし</returns>
 	void Initialize(DirectX::SimpleMath::Vector2 pos,
-		DirectX::SimpleMath::Vector4 color, DirectX::SimpleMath::Vector2 rate);
+		DirectX::SimpleMath::Vector4 color, DirectX::SimpleMath::Vector2 rate,
+		DirectX::SimpleMath::Vector2 scRate, double span);
 
 	/// <summary>
 	/// 描画関数
@@ -68,10 +71,8 @@ public:
 	const DirectX::SimpleMath::Vector4& GetColor() { return m_color; }
 	// 色を設定
 	void SetColor(const DirectX::SimpleMath::Vector4& color) { m_color = color; }
-	// コインの枚数を設定
-	void SetCoinNum(const int& num) { m_coinNum = num; }
-	// コインの最大数を設定
-	void SetCoinMaxNum(const int& num) { m_maxCoinNum = num; }
+	// 数値を設定
+	void SetNumber(const int& num) { m_number = num; }
 };
 
-#endif // UI_COINNUM
+#endif // SCOREBOARD

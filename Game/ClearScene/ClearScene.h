@@ -15,6 +15,8 @@
 #include "Game/IScene/IScene.h"
 
 class MomentCanv;
+class ScoreBoard;
+class Timer;
 class UI_Clear;
 class ClearScene final : public IScene
 {
@@ -26,11 +28,22 @@ private:
 	// UI
 	std::unique_ptr<UI_Clear> m_ui;
 
+	// スコアボード
+	std::unique_ptr<ScoreBoard> m_coinBoard, m_timeBoard;
+
+	// ランダムカウント
+	std::unique_ptr<Timer> m_direction;
+
 	// クリア時間
 	float m_clearTime;
 
 	// 集めたコイン数/ステージ番号/最大ステージ番号
 	int m_collectedCoin, m_stageNumber, m_maxNumber;
+
+private:
+
+	// 黒色
+	static const DirectX::SimpleMath::Vector4 BLACK_COLOR;
 
 public:
 
@@ -95,6 +108,11 @@ public:
 
 	// ステージ番号を取得する
 	const int& GetStageNumber() { return m_stageNumber; }
+
+private:
+
+	// シーン選択
+	void SceneSelection();
 
 };
 

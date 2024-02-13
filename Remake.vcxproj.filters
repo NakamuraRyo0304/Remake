@@ -258,6 +258,9 @@
     <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp">
       <Filter>GameSystems\Clear\MomentCanv</Filter>
     </ClCompile>
+    <ClCompile Include="Game\ClearScene\System\BG_Clear\BG_Clear.cpp">
+      <Filter>GameSystems\Clear\BG_Clear</Filter>
+    </ClCompile>
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClCompile>
@@ -518,6 +521,9 @@
     <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h">
       <Filter>GameSystems\Clear\MomentCanv</Filter>
     </ClInclude>
+    <ClCompile Include="Game\ClearScene\System\BG_Clear\BG_Clear.h">
+      <Filter>GameSystems\Clear\BG_Clear</Filter>
+    </ClCompile>
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClInclude>
