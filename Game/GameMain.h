@@ -58,10 +58,22 @@ private:
 
 private:
 
-    // ステージ番号
-    int m_stageNumber;
+    // ステージ番号/最大ステージ番号
+    int m_stageNumber, m_maxNumber;
+
+    // クリア時間
+    float m_clearTime;
+
+    // コイン数
+    int m_collectedCoin;
 
 public:
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="引数無し"></param>
+    /// <returns>なし</returns>
     GameMain();
     ~GameMain();
 

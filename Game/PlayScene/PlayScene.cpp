@@ -15,6 +15,7 @@
 #include "Game/PlayScene/System/FlagManager/FlagManager.h"
 #include "Game/PlayScene/System/ImageShot/ImageShot.h"
 #include "Game/PlayScene/System/UI_Play/UI_Play.h"
+#include "Libraries/SystemDatas/Timer/Timer.h"
 // オブジェクト
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
 #include "Game/PlayScene/Objects/Player/Player.h"
@@ -50,6 +51,8 @@ using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
 PlayScene::PlayScene(const int& number)
 	: IScene()					// 基底クラスのコンストラクタ
 	, m_stageNumber{ number }	// ステージ番号
+	, m_gameTimer{ 0.0f }		// ゲームタイマー
+	, m_collectedCoin{ 0 }		// 集めたコイン数
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
 }
@@ -91,6 +94,9 @@ void PlayScene::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
+		// タイマーの更新
+		m_timer->Update(true);
+
 		// 追跡パスを追加
 		if (_input->GetMouseTrack()->leftButton == MouseClick::PRESSED)
 		{
@@ -109,6 +115,12 @@ void PlayScene::Update()
 		// ゴールしたらクリアへ
 		if (m_blockManager->IsArrived())
 		{
+			// ゲームタイマー/集めたコイン数を取得
+			m_timer->Stop();
+			m_gameTimer = m_timer->GetCount();
+			m_collectedCoin = m_player->GetCoinNum();
+
+			// カメラ挙動
 			m_adminCamera->SetInterpolation(true);// 補間モードにする
 			if (m_adminCamera->GetType() != CameraType::Select1_Floating)
 			{
@@ -341,6 +353,7 @@ void PlayScene::Finalize()
 	m_imageShot.reset();
 	m_water.reset();
 	m_ui.reset();
+	m_timer.reset();
 }
 
 //==============================================================================
@@ -381,6 +394,9 @@ void PlayScene::CreateWDResources()
 
 	// UI作成
 	m_ui = std::make_unique<UI_Play>(GetWindowSize(), GetFullHDSize());
+
+	// タイマー作成
+	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
 
 	//==============================================================================
 	// シャドウマップ関連の作成
@@ -512,6 +528,9 @@ void PlayScene::SetSceneValues()
 
 	// コインの枚数を設定
 	m_ui->SetCoinNum(static_cast<int>(m_blockManager->GetCoinBlock().size()));
+
+	// タイマースタート
+	m_timer->Start();
 }
 
 //==============================================================================

@@ -202,6 +202,7 @@
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
     <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h" />
+    <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h" />
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h" />
     <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h" />
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
@@ -247,7 +248,6 @@
     <ClInclude Include="Libraries\Factories\ModelFactory.h" />
     <ClInclude Include="Libraries\SystemDatas\Button\Button.h" />
     <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h" />
-    <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h" />
     <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h" />
     <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h" />
     <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h" />
@@ -261,6 +261,7 @@
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.h" />
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h" />
     <ClInclude Include="Libraries\SystemDatas\SoundManager\SoundManager.h" />
+    <ClInclude Include="Libraries\SystemDatas\Timer\Timer.h" />
     <ClInclude Include="Libraries\SystemDatas\XController\XController.h" />
     <ClInclude Include="Libraries\SystemManager\SystemManager.h" />
     <ClInclude Include="Libraries\UserUtility.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp" />
+    <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp" />
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp" />
     <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp" />
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
@@ -331,7 +333,6 @@
     <ClCompile Include="Libraries\Factories\ModelFactory.cpp" />
     <ClCompile Include="Libraries\SystemDatas\Button\Button.cpp" />
     <ClCompile Include="Libraries\SystemDatas\Camera\Camera.cpp" />
-    <ClCompile Include="Libraries\SystemDatas\Collider\ColliderHelper.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp" />
@@ -344,6 +345,7 @@
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Fade\Fade.cpp" />
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp" />
     <ClCompile Include="Libraries\SystemDatas\SoundManager\SoundManager.cpp" />
+    <ClCompile Include="Libraries\SystemDatas\Timer\Timer.cpp" />
     <ClCompile Include="Libraries\SystemDatas\XController\XController.cpp" />
     <ClCompile Include="Libraries\SystemManager\SystemManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -378,7 +380,10 @@
     <Image Include="Resources\Textures\Stages\Stage4.dds" />
     <Image Include="Resources\Textures\Text\Editor.dds" />
     <Image Include="Resources\Textures\Text\Exit.dds" />
+    <Image Include="Resources\Textures\Text\Nexttex.dds" />
     <Image Include="Resources\Textures\Text\Number.dds" />
+    <Image Include="Resources\Textures\Text\ReTrytex.dds" />
+    <Image Include="Resources\Textures\Text\Selecttex.dds" />
     <Image Include="Resources\Textures\Text\Stage1tex.dds" />
     <Image Include="Resources\Textures\Text\Stage2tex.dds" />
     <Image Include="Resources\Textures\Text\Stage3tex.dds" />

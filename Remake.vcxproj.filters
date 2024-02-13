@@ -90,9 +90,6 @@
     <ClCompile Include="Libraries\SystemDatas\Button\Button.cpp">
       <Filter>Libraries\Button</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Collider\ColliderHelper.cpp">
-      <Filter>Libraries\ColliderHelper</Filter>
-    </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp">
       <Filter>Libraries\DepthStencil</Filter>
     </ClCompile>
@@ -273,6 +270,15 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.cpp">
       <Filter>Cameras\StageCamera</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.cpp">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\SystemDatas\Timer\Timer.cpp">
+      <Filter>Libraries\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp">
+      <Filter>GameSystems\Clear\UI_Clear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -322,9 +328,6 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\Button\Button.h">
       <Filter>Libraries\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h">
-      <Filter>Libraries\ColliderHelper</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h">
       <Filter>Libraries\DepthStencil</Filter>
@@ -470,6 +473,9 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h">
       <Filter>Cameras\StageCamera</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.h">
+      <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
     <ClInclude Include="Resources\Icon\Icon.h">
       <Filter>Assets</Filter>
     </ClInclude>
@@ -520,6 +526,12 @@
     </ClInclude>
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.h">
       <Filter>Cameras\StageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\SystemDatas\Timer\Timer.h">
+      <Filter>Libraries\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h">
+      <Filter>GameSystems\Clear\UI_Clear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -604,6 +616,9 @@
     <Image Include="Resources\Textures\Stages\Stage3.dds">
       <Filter>Resources\Textures\Stages</Filter>
     </Image>
+    <Image Include="Resources\Textures\Stages\Stage4.dds">
+      <Filter>Resources\Textures\Stages</Filter>
+    </Image>
     <Image Include="Resources\Textures\Text\Stage1tex.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>
@@ -611,6 +626,21 @@
       <Filter>Resources\Textures\Text</Filter>
     </Image>
     <Image Include="Resources\Textures\Text\Stage3tex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage3tex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Stage4tex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Selecttex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Nexttex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\ReTrytex.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>
   </ItemGroup>
@@ -669,6 +699,9 @@
     <None Include="Resources\Stages\sample3.json">
       <Filter>Resources\Stages</Filter>
     </None>
+    <None Include="Resources\Stages\sample3.json">
+      <Filter>Resources\Stages</Filter>
+    </None>
     <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
       <Filter>Resources\Shaders\ShadowMap</Filter>
     </None>
@@ -680,6 +713,9 @@
     </None>
     <None Include="Resources\Shaders\ParametersHeader.hlsli">
       <Filter>Resources\Shaders\ShadowMap</Filter>
+    </None>
+    <None Include="Resources\Stages\sample4.json">
+      <Filter>Resources\Stages</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -736,9 +772,6 @@
     </Filter>
     <Filter Include="Libraries\Button">
       <UniqueIdentifier>{cb066ea6-28c8-4e64-959a-bb3b6bd27c9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\ColliderHelper">
-      <UniqueIdentifier>{8c7af528-41ef-45c9-97d0-ab60b1472104}</UniqueIdentifier>
     </Filter>
     <Filter Include="Libraries\DepthStencil">
       <UniqueIdentifier>{14c5e0d2-60f9-4ea3-bfcc-18f84b1949cb}</UniqueIdentifier>
@@ -1006,6 +1039,12 @@
     </Filter>
     <Filter Include="Resources\Textures\Stages">
       <UniqueIdentifier>{8404bdc5-f47b-4910-bb15-10c7242d321f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Timer">
+      <UniqueIdentifier>{d8bb3bb8-a59a-4de0-a708-98d556260b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Clear\UI_Clear">
+      <UniqueIdentifier>{bd4d4905-6279-4b1d-8712-428985840ebd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

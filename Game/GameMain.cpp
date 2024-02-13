@@ -35,6 +35,9 @@ GameMain::GameMain()
 	, m_nowScene{ nullptr }				// 今のシーンポインタ
 	, m_screenSize{}					// スクリーンサイズ
 	, m_stageNumber{ 1 }				// ステージ番号
+	, m_clearTime{ 0.0f }				// クリア時間
+	, m_collectedCoin{ 0 }				// 集めたコイン数
+	, m_maxNumber{ 999 }				// 最大ステージ番号
 {
 }
 
@@ -140,7 +143,7 @@ void GameMain::CreateScene()
 		}
 		case SCENE::SELECT:		// セレクトシーン
 		{
-			m_nowScene = std::make_unique<SelectScene>();
+			m_nowScene = std::make_unique<SelectScene>(m_stageNumber);
 
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;
@@ -161,7 +164,8 @@ void GameMain::CreateScene()
 		}
 		case SCENE::CLEAR:		// クリアシーン
 		{
-			m_nowScene = std::make_unique<ClearScene>();
+			m_nowScene = std::make_unique<ClearScene>(
+				m_clearTime, m_collectedCoin, m_stageNumber, m_maxNumber);
 
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;
@@ -194,23 +198,41 @@ void GameMain::DeleteScene()
 	// シーンが作成されていなければ処理しない
 	if (not m_nowScene) return;
 
-
 	//==============================================================================
-	// シーン間の値受け渡しはここで行う
+	// シーン間の値受け渡しは　　<<ここから
 	//==============================================================================
 
-	// 次のシーン：ゲームシーン / 処理：セレクトシーンからステージ番号を取得する
+	// 次のシーン：ゲームシーン 前のシーン：セレクトシーン
+	// 処理：選択されたステージ番号を取得
 	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::SELECT)
 	{
 		m_stageNumber = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
+		m_maxNumber = CastSceneType<SelectScene>(m_nowScene)->GetMaxNumber();
+	}
+	// 次のシーン：ゲームシーン 前のシーン：クリアシーン
+	// 処理：前回プレイしたステージの次のステージの番号を取得
+	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::CLEAR)
+	{
+		m_stageNumber = CastSceneType<ClearScene>(m_nowScene)->GetStageNumber();
+	}
+
+	// 次のシーン：クリアシーン 前のシーン：プレイシーン
+	// 処理：ステージ番号、クリア時間、獲得コインを取得
+	if (m_nextScene == SCENE::CLEAR && m_prevScene == SCENE::PLAY)
+	{
+		m_clearTime = CastSceneType<PlayScene>(m_nowScene)->GetGameTimer();
+		m_collectedCoin = CastSceneType<PlayScene>(m_nowScene)->GetCollectedCoin();
+		m_stageNumber = CastSceneType<PlayScene>(m_nowScene)->GetStageNumber();
 	}
 
 
+	//==============================================================================
+	// シーン間の値受け渡しは　　<<ここまで
+	//==============================================================================
 
 	// 現シーンの終了処理
 	if (m_fade->GetFadeValue() >= m_fade->GetMaxValue())
 	{
-		// 現シーンの完全削除
 		m_nowScene->Finalize();
 		m_nowScene.reset();
 		m_prevScene = m_nextScene;
