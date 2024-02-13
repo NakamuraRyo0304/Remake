@@ -19,6 +19,7 @@ class MomentCanv;
 class ScoreBoard;
 class Timer;
 class UI_Clear;
+class Tape;
 class ClearScene final : public IScene
 {
 private:
@@ -37,6 +38,9 @@ private:
 
 	// バックグラウンド
 	std::unique_ptr<BG_Clear> m_backGround;
+
+	// テープ
+	std::unique_ptr<Tape> m_tape[2];
 
 	// クリア時間
 	float m_clearTime;

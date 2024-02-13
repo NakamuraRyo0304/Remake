@@ -203,6 +203,7 @@
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
     <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h" />
     <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h" />
+    <ClInclude Include="Game\ClearScene\Objects\Tape\Tape.h" />
     <ClInclude Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.h" />
     <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h" />
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h" />
@@ -291,6 +292,7 @@
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp" />
+    <ClCompile Include="Game\ClearScene\Objects\Tape\Tape.cpp" />
     <ClCompile Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.cpp" />
     <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp" />
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp" />
@@ -401,6 +403,8 @@
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Rot.png" />
     <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png" />
+    <Image Include="Resources\Textures\UI_Clear\tape1.dds" />
+    <Image Include="Resources\Textures\UI_Clear\tape2.dds" />
     <Image Include="Resources\Textures\UI_Play\UI_Area.dds" />
   </ItemGroup>
   <ItemGroup>

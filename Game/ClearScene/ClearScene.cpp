@@ -13,6 +13,7 @@
 // オブジェクト
 #include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
 #include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
+#include "Game/ClearScene/Objects/Tape/Tape.h"
 #include "ClearScene.h"
 
 //==============================================================================
@@ -131,6 +132,8 @@ void ClearScene::Draw()
 	// スコアボードの描画
 	if (m_momentCanv->IsEndMoving())
 	{
+		m_tape[0]->Draw();
+		m_tape[1]->Draw();
 		m_coinBoard->Draw();
 		m_timeBoard->Draw();
 	}
@@ -155,6 +158,8 @@ void ClearScene::Finalize()
 	m_coinBoard.reset();
 	m_timeBoard.reset();
 	m_backGround.reset();
+	m_tape[0].reset();
+	m_tape[1].reset();
 }
 
 //==============================================================================
@@ -177,6 +182,10 @@ void ClearScene::CreateWDResources()
 
 	// 背景作成
 	m_backGround = std::make_unique<BG_Clear>();
+
+	// テープ作成
+	m_tape[0] = std::make_unique<Tape>();
+	m_tape[1] = std::make_unique<Tape>();
 }
 
 //==============================================================================
@@ -195,6 +204,12 @@ void ClearScene::SetSceneValues()
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
 	m_timeBoard->Initialize({ 1500.0f,250.0f }, BLACK_COLOR,
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
+
+	// テープの初期化
+	m_tape[0]->Initialize({110.0f,460.0f}, SimpleMath::Vector2::One,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
+	m_tape[1]->Initialize({1150.0f,530.0f}, SimpleMath::Vector2::One,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
 }
 
 //==============================================================================

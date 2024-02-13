@@ -285,6 +285,9 @@
     <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp">
       <Filter>GameObjects\Clear\MomentCanv</Filter>
     </ClCompile>
+    <ClCompile Include="Game\ClearScene\Objects\Tape\Tape.cpp">
+      <Filter>GameObjects\Clear\Tape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -545,6 +548,9 @@
     <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h">
       <Filter>GameObjects\Clear\MomentCanv</Filter>
     </ClInclude>
+    <ClInclude Include="Game\ClearScene\Objects\Tape\Tape.h">
+      <Filter>GameObjects\Clear\Tape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -660,6 +666,12 @@
     </Image>
     <Image Include="Resources\Textures\BackGround\cork.dds">
       <Filter>Resources\Textures\BackGround</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Clear\tape1.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Clear\tape2.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -1075,6 +1087,12 @@
     </Filter>
     <Filter Include="GameObjects\Clear\MomentCanv">
       <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\Tape">
+      <UniqueIdentifier>{873062d5-2032-4a79-b8c1-216bc0579ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\UI_Clear">
+      <UniqueIdentifier>{71f79a94-a230-41ba-a093-6275cb1c2979}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
