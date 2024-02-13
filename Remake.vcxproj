@@ -201,6 +201,7 @@
     <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
+    <ClInclude Include="Game\ClearScene\System\BG_Clear\BG_Clear.h" />
     <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h" />
     <ClInclude Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.h" />
     <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h" />
@@ -288,6 +289,7 @@
     <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
+    <ClCompile Include="Game\ClearScene\System\BG_Clear\BG_Clear.cpp" />
     <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp" />
     <ClCompile Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.cpp" />
     <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp" />
