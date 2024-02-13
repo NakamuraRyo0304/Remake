@@ -255,9 +255,6 @@
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp">
       <Filter>GameSystems\Play\UI_Play</Filter>
     </ClCompile>
-    <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp">
-      <Filter>GameSystems\Clear\MomentCanv</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClCompile>
@@ -283,7 +280,10 @@
       <Filter>GameSystems\Clear\ScoreBoard</Filter>
     </ClCompile>
     <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp">
-      <Filter>GameSystems\Clear\BG_Clear</Filter>
+      <Filter>GameObjects\Clear\BG_Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp">
+      <Filter>GameObjects\Clear\MomentCanv</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,9 +518,6 @@
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h">
       <Filter>GameSystems\Play\UI_Play</Filter>
     </ClInclude>
-    <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h">
-      <Filter>GameSystems\Clear\MomentCanv</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClInclude>
@@ -543,7 +540,10 @@
       <Filter>GameSystems\Clear\ScoreBoard</Filter>
     </ClInclude>
     <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h">
-      <Filter>GameSystems\Clear\BG_Clear</Filter>
+      <Filter>GameObjects\Clear\BG_Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h">
+      <Filter>GameObjects\Clear\MomentCanv</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -959,9 +959,6 @@
     <Filter Include="GameSystems\Clear">
       <UniqueIdentifier>{b66c267e-9764-45fc-9c40-a18050105b10}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameSystems\Clear\MomentCanv">
-      <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameSystems\Common">
       <UniqueIdentifier>{6ecd8087-9773-44a0-b611-73a4c0f9ed66}</UniqueIdentifier>
     </Filter>
@@ -1064,14 +1061,20 @@
     <Filter Include="GameSystems\Clear\ScoreBoard">
       <UniqueIdentifier>{2d96af35-624f-4991-b608-c0a0d1b145f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameSystems\Clear\BG_Clear">
-      <UniqueIdentifier>{01805464-4984-4cda-a1df-a280efb06b23}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\SelectScene">
       <UniqueIdentifier>{ef332ff6-2a21-4931-8e99-d61c6b92f121}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Textures\BackGround">
       <UniqueIdentifier>{1e73e86d-e016-492f-871e-e3ea81cfe59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear">
+      <UniqueIdentifier>{80a8443f-f751-476e-adcf-bc28911fbcab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\BG_Clear">
+      <UniqueIdentifier>{01805464-4984-4cda-a1df-a280efb06b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\MomentCanv">
+      <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
