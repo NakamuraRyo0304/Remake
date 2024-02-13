@@ -90,9 +90,6 @@
     <ClCompile Include="Libraries\SystemDatas\Button\Button.cpp">
       <Filter>Libraries\Button</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Collider\ColliderHelper.cpp">
-      <Filter>Libraries\ColliderHelper</Filter>
-    </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp">
       <Filter>Libraries\DepthStencil</Filter>
     </ClCompile>
@@ -328,9 +325,6 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\Button\Button.h">
       <Filter>Libraries\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Collider\ColliderHelper.h">
-      <Filter>Libraries\ColliderHelper</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h">
       <Filter>Libraries\DepthStencil</Filter>
@@ -764,9 +758,6 @@
     <Filter Include="Libraries\Button">
       <UniqueIdentifier>{cb066ea6-28c8-4e64-959a-bb3b6bd27c9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\ColliderHelper">
-      <UniqueIdentifier>{8c7af528-41ef-45c9-97d0-ab60b1472104}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Libraries\DepthStencil">
       <UniqueIdentifier>{14c5e0d2-60f9-4ea3-bfcc-18f84b1949cb}</UniqueIdentifier>
     </Filter>
@@ -939,6 +930,9 @@
       <UniqueIdentifier>{b66c267e-9764-45fc-9c40-a18050105b10}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameSystems\Clear\MomentCanv">
+      <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Clear\UI_Clear">
       <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameSystems\Common">
