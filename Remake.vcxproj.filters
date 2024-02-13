@@ -276,6 +276,9 @@
     <ClCompile Include="Libraries\SystemDatas\Timer\Timer.cpp">
       <Filter>Libraries\Timer</Filter>
     </ClCompile>
+    <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp">
+      <Filter>GameSystems\Clear\UI_Clear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -526,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\Timer\Timer.h">
       <Filter>Libraries\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h">
+      <Filter>GameSystems\Clear\UI_Clear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -932,9 +938,6 @@
     <Filter Include="GameSystems\Clear\MomentCanv">
       <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameSystems\Clear\UI_Clear">
-      <UniqueIdentifier>{4c982803-ba56-4167-a9ed-c41bafc939fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameSystems\Common">
       <UniqueIdentifier>{6ecd8087-9773-44a0-b611-73a4c0f9ed66}</UniqueIdentifier>
     </Filter>
@@ -1030,6 +1033,9 @@
     </Filter>
     <Filter Include="Libraries\Timer">
       <UniqueIdentifier>{d8bb3bb8-a59a-4de0-a708-98d556260b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Clear\UI_Clear">
+      <UniqueIdentifier>{bd4d4905-6279-4b1d-8712-428985840ebd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,7 @@
 #include "Game/IScene/IScene.h"
 
 class MomentCanv;
+class UI_Clear;
 class ClearScene final : public IScene
 {
 private:
@@ -22,11 +23,14 @@ private:
 	// モーメントキャンバス
 	std::unique_ptr<MomentCanv> m_momentCanv;
 
+	// UI
+	std::unique_ptr<UI_Clear> m_ui;
+
 	// クリア時間
 	float m_clearTime;
 
-	// 集めたコイン数
-	int m_collectedCoin;
+	// 集めたコイン数/ステージ番号/最大ステージ番号
+	int m_collectedCoin, m_stageNumber, m_maxNumber;
 
 public:
 
@@ -35,8 +39,10 @@ public:
 	/// </summary>
 	/// <param name="time">クリアタイム</param>
 	/// <param name="coins">コイン数</param>
+	/// <param name="stage">ステージ番号</param>
+	/// <param name="max">最大ステージ番号</param>
 	/// <returns>なし</returns>
-	ClearScene(float time, int coins);
+	ClearScene(float time, int coins, int stage, int max);
 	~ClearScene();
 
 	/// <summary>
@@ -84,6 +90,11 @@ private:
 	/// <param name="states">コモンステート</param>
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
+
+public:
+
+	// ステージ番号を取得する
+	const int& GetStageNumber() { return m_stageNumber; }
 
 };
 

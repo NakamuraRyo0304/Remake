@@ -22,6 +22,14 @@ class SelectScene final : public IScene
 {
 private:
 
+	// サンプルステージ番号
+	static const int MAX_SAMPLE_NUM = 4;
+
+	// ０番はエディタの番号
+	const int EDITOR_NUM = 0;
+
+private:
+
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
 
@@ -32,18 +40,11 @@ private:
 	std::unique_ptr<Sky_Select> m_sky;
 
 	// ブロックマネージャ
-	std::unique_ptr<BlockManager> m_stage[4];
+	std::unique_ptr<BlockManager> m_stage[MAX_SAMPLE_NUM];
 
 	// セレクト番号
 	int m_stageSelection;
 
-private:
-
-	// サンプルステージ番号
-	static const int MAX_SAMPLE_NUM;
-
-	// ０番はエディタの番号
-	const int EDITOR_NUM = 0;
 
 public:
 
@@ -105,6 +106,9 @@ public:
 
 	// ステージ番号を取得
 	const int& GetSelectedNumber() { return m_stageSelection; }
+
+	// 最大ステージ番号を取得
+	const int& GetMaxNumber() { return MAX_SAMPLE_NUM; }
 
 private:
 

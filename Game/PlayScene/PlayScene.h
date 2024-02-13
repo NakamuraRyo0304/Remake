@@ -202,6 +202,9 @@ public:
 	// 集めたコイン数を取得する
 	const int& GetCollectedCoin() { return m_collectedCoin; }
 
+	// ステージ番号を取得する
+	const int& GetStageNumber() { return m_stageNumber; }
+
 private:
 
 	// ステージ番号に応じてパスを返す

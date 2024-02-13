@@ -58,8 +58,8 @@ private:
 
 private:
 
-    // ステージ番号
-    int m_stageNumber;
+    // ステージ番号/最大ステージ番号
+    int m_stageNumber, m_maxNumber;
 
     // クリア時間
     float m_clearTime;

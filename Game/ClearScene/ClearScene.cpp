@@ -8,6 +8,7 @@
 #include "pch.h"
 // システム
 #include "Game/ClearScene/System/MomentCanv/MomentCanv.h"
+#include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
 #include "ClearScene.h"
 
 //==============================================================================
@@ -20,14 +21,17 @@
 using KeyCode = Keyboard::Keys;							// キーコード
 using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
 using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
+using Selection = UI_Clear::SELECT;						// 次の選択
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-ClearScene::ClearScene(float time, int coins)
+ClearScene::ClearScene(float time, int coins, int stage, int max)
 	: IScene()						// 基底クラスのコンストラクタ
 	, m_clearTime{ time }			// クリアタイム
 	, m_collectedCoin{ coins }		// 集めたコイン数
+	, m_stageNumber{ stage }		// ステージ番号
+	, m_maxNumber{ max }			// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 }
@@ -61,7 +65,6 @@ void ClearScene::Initialize()
 void ClearScene::Update()
 {
 	auto _input = Input::GetInstance();
-	auto _key = Keyboard::Get().GetState();
 
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
@@ -72,9 +75,45 @@ void ClearScene::Update()
 		// モーメントキャンバスの更新
 		m_momentCanv->Update();
 
+		// UIの更新
+		m_ui->Update();
+
+		// 次の遷移を選択
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+		{
+			auto _selection = m_ui->GetSelecion();
+			UserUtility::Increment(&_selection);	// インクリメント
+			_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
+			m_ui->SetSelection(_selection);
+		}
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
+			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+		{
+			auto _selection = m_ui->GetSelecion();
+			UserUtility::Decrement(&_selection);	// デクリメント
+			_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
+			m_ui->SetSelection(_selection);
+		}
+
+		// 次の遷移を決定
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
-			ChangeScene(SCENE::SELECT);
+			switch (m_ui->GetSelecion())
+			{
+			case Selection::NEXT:
+				m_stageNumber++;
+				m_stageNumber = UserUtility::LoopClamp(m_stageNumber, 1, m_maxNumber);
+				ChangeScene(SCENE::PLAY);
+				break;
+			case Selection::RESTART:
+				ChangeScene(SCENE::PLAY);
+				break;
+			case Selection::STAGES:
+				ChangeScene(SCENE::SELECT);
+			default:
+				break;
+			}
 		}
 	}
 }
@@ -96,6 +135,9 @@ void ClearScene::Draw()
 	m_momentCanv->Draw(SimpleMath::Vector4::One,
 		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
 
+	// UIの描画
+	m_ui->Draw();
+
 	// デバッグ描画
 #ifdef _DEBUG
 	DebugDraw(*_states);
@@ -108,6 +150,7 @@ void ClearScene::Draw()
 void ClearScene::Finalize()
 {
 	m_momentCanv.reset();
+	m_ui.reset();
 }
 
 //==============================================================================
@@ -118,6 +161,8 @@ void ClearScene::CreateWDResources()
 	// モーメントキャンバスの作成
 	m_momentCanv = std::make_unique<MomentCanv>(GetWindowSize() / GetFullHDSize());
 
+	// UIの作成
+	m_ui = std::make_unique<UI_Clear>(GetWindowSize(), GetFullHDSize());
 }
 
 //==============================================================================
@@ -127,7 +172,6 @@ void ClearScene::SetSceneValues()
 {
 	// モーメントキャンバスの初期化
 	m_momentCanv->Initialize();
-
 }
 
 //==============================================================================
@@ -144,4 +188,5 @@ void ClearScene::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
 	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Time::%.2f",m_clearTime);
 	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"Coin::%.d",m_collectedCoin);
+	_string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"Stage::%.d", m_stageNumber);
 }

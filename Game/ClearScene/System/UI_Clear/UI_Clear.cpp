@@ -1,32 +1,28 @@
 /*
- *	@File	UI_Select.cpp
- *	@Brief	セレクトUI。
- *	@Date	2023-01-26
+ *	@File	UI_Clear.cpp
+ *	@Brief	クリアUI。
+ *	@Date	2023-02-13
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-#include "UI_Select.h"
+#include "UI_Clear.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 UI_Select::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
-const SimpleMath::Vector4 UI_Select::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
-const float UI_Select::COLOR_SPEED = 0.075f;	// 色の変更速度
-// ステージ画像の座標
-const SimpleMath::Vector2 UI_Select::STAGE_TEX_POS = SimpleMath::Vector2(475.0f, 200.0f);
+const SimpleMath::Vector4 UI_Clear::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
+const SimpleMath::Vector4 UI_Clear::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
+const float UI_Clear::COLOR_SPEED = 0.075f;	// 色の変更速度
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
-UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
+UI_Clear::UI_Clear(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)		// 基底クラス
-	, m_stageSelection{ 1 }			// ステージ１からスタート
-	, m_position{}					// 座標
-	, m_color{}						// 描画色
-	, m_stageAlpha{}				// ステージアルファ値
+	, m_select{ SELECT::NEXT }		// セレクト
+	, m_options{}					// オプション
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -38,139 +34,84 @@ UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 //==============================================================================
 // デストラクタ
 //==============================================================================
-UI_Select::~UI_Select()
+UI_Clear::~UI_Clear()
 {
 	m_sprites.reset();
-	m_position.clear();
-	m_color.clear();
+	m_options.clear();
 }
 
 //==============================================================================
 // 初期化処理
 //==============================================================================
-void UI_Select::Initialize()
+void UI_Clear::Initialize()
 {
 	// 文字の設定(文字パス)
-	m_sprites->AddTextureData(L"Editor", L"Resources/Textures/Text/Editor.dds");
-	m_sprites->AddTextureData(L"Num1", L"Resources/Textures/Text/Stage1tex.dds");
-	m_sprites->AddTextureData(L"Num2", L"Resources/Textures/Text/Stage2tex.dds");
-	m_sprites->AddTextureData(L"Num3", L"Resources/Textures/Text/Stage3tex.dds");
-	m_sprites->AddTextureData(L"Num4", L"Resources/Textures/Text/Stage4tex.dds");
+	m_sprites->AddTextureData(L"Next", L"Resources/Textures/Text/Editor.dds");
+	m_sprites->AddTextureData(L"ReStart", L"Resources/Textures/Text/Stage1tex.dds");
+	m_sprites->AddTextureData(L"Stages", L"Resources/Textures/Text/Stage2tex.dds");
 
-	// 座標の設定
-	m_position.emplace(L"Editor", SimpleMath::Vector2(50.0f, 50.0f));
-	m_position.emplace(L"Num1", SimpleMath::Vector2(50.0f, 150.0f));
-	m_position.emplace(L"Num2", SimpleMath::Vector2(50.0f, 250.0f));
-	m_position.emplace(L"Num3", SimpleMath::Vector2(50.0f, 350.0f));
-	m_position.emplace(L"Num4", SimpleMath::Vector2(50.0f, 450.0f));
-
-	// 色の設定
-	m_color.emplace(L"Editor", BLACK_COLOR);
-	m_color.emplace(L"Num1", BLACK_COLOR);
-	m_color.emplace(L"Num2", BLACK_COLOR);
-	m_color.emplace(L"Num3", BLACK_COLOR);
-	m_color.emplace(L"Num4", BLACK_COLOR);
-
-
-	// ステージ画像パス
-	m_stageAlpha = 0.75f;
-	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/Stages/Stage1.dds");
-	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/Stages/Stage2.dds");
-	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/Stages/Stage3.dds");
-	m_sprites->AddTextureData(L"Stage4", L"Resources/Textures/Stages/Stage4.dds");
+	// 文字ごとの設定
+	Option _opt = {};
+	_opt.pos = { 1500.0f,50.0f }; _opt.color = RED_COLOR;
+	m_options.emplace(L"Next", _opt);
+	_opt.pos = { 1500.0f,150.0f }; _opt.color = BLACK_COLOR;
+	m_options.emplace(L"ReStart", _opt);
+	_opt.pos = { 1500.0f,250.0f }; _opt.color = BLACK_COLOR;
+	m_options.emplace(L"Stages", _opt);
 }
 
 //==============================================================================
 // 更新処理
 //==============================================================================
-void UI_Select::Update()
+void UI_Clear::Update()
 {
 	// 選択番号に応じて色を分ける
-	if(m_stageSelection == 0)
-	{
-		m_color[L"Editor"] = UserUtility::Lerp(m_color[L"Editor"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Num1"] = m_color[L"Num2"] = m_color[L"Num3"] =
-			m_color[L"Num4"] = BLACK_COLOR;
-	}
-	if(m_stageSelection == 1)
-	{
-		m_color[L"Num1"] = UserUtility::Lerp(m_color[L"Num1"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num2"] = m_color[L"Num3"] =
-			m_color[L"Num4"] = BLACK_COLOR;
-	}
-	if(m_stageSelection == 2)
-	{
-		m_color[L"Num2"] = UserUtility::Lerp(m_color[L"Num2"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num3"] =
-			m_color[L"Num4"] = BLACK_COLOR;
-	}
-	if(m_stageSelection == 3)
-	{
-		m_color[L"Num3"] = UserUtility::Lerp(m_color[L"Num3"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num2"] =
-			m_color[L"Num4"] = BLACK_COLOR;
-	}
-	if(m_stageSelection == 4)
-	{
-		m_color[L"Num4"] = UserUtility::Lerp(m_color[L"Num4"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Editor"] = m_color[L"Num1"] = m_color[L"Num2"] =
-			m_color[L"Num3"] = BLACK_COLOR;
-	}
+	ChangeColor(m_select);
 }
 
 //==============================================================================
 // 描画処理
 //==============================================================================
-void UI_Select::Draw()
+void UI_Clear::Draw()
 {
-	m_sprites->DrawTexture(L"Editor", m_position[L"Editor"] * GetScreenRate(),
-		m_color[L"Editor"], SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 768, 128));
-	m_sprites->DrawTexture(L"Num1", m_position[L"Num1"] * GetScreenRate(),
-		m_color[L"Num1"], SimpleMath::Vector2::One * GetScreenRate(),
+	m_sprites->DrawTexture(L"Next", m_options[L"Next"].pos * GetScreenRate(),
+		m_options[L"Next"].color, SimpleMath::Vector2::One * GetScreenRate(),
 		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
-	m_sprites->DrawTexture(L"Num2", m_position[L"Num2"] * GetScreenRate(),
-		m_color[L"Num2"], SimpleMath::Vector2::One * GetScreenRate(),
+	m_sprites->DrawTexture(L"ReStart", m_options[L"ReStart"].pos * GetScreenRate(),
+		m_options[L"ReStart"].color, SimpleMath::Vector2::One * GetScreenRate(),
 		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
-	m_sprites->DrawTexture(L"Num3", m_position[L"Num3"] * GetScreenRate(),
-		m_color[L"Num3"], SimpleMath::Vector2::One * GetScreenRate(),
+	m_sprites->DrawTexture(L"Stages", m_options[L"Stages"].pos * GetScreenRate(),
+		m_options[L"Stages"].color, SimpleMath::Vector2::One * GetScreenRate(),
 		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
-	m_sprites->DrawTexture(L"Num4", m_position[L"Num4"] * GetScreenRate(),
-		m_color[L"Num4"], SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
+}
 
-	// ステージ画像を描画
-	switch (m_stageSelection)
+//==============================================================================
+// 色変更
+//==============================================================================
+void UI_Clear::ChangeColor(const SELECT& select)
+{
+	if (select == SELECT::NEXT)
 	{
-	case 1:
-	{
-		m_sprites->DrawTexture(L"Stage1", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
-			SimpleMath::Vector2::Zero);
-		return;
+		m_options[L"Next"].color =
+			UserUtility::Lerp(m_options[L"Next"].color, RED_COLOR, COLOR_SPEED);
+
+		m_options[L"ReStart"].color = BLACK_COLOR;
+		m_options[L"Stages"].color = BLACK_COLOR;
 	}
-	case 2:
+	if (select == SELECT::RESTART)
 	{
-		m_sprites->DrawTexture(L"Stage2", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
-			SimpleMath::Vector2::Zero);
-		return;
+		m_options[L"ReStart"].color =
+			UserUtility::Lerp(m_options[L"ReStart"].color, RED_COLOR, COLOR_SPEED);
+
+		m_options[L"Stages"].color = BLACK_COLOR;
+		m_options[L"Next"].color = BLACK_COLOR;
 	}
-	case 3:
+	if (select == SELECT::STAGES)
 	{
-		m_sprites->DrawTexture(L"Stage3", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
-			SimpleMath::Vector2::Zero);
-		return;
-	}
-	case 4:
-	{
-		m_sprites->DrawTexture(L"Stage4", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
-			SimpleMath::Vector2::Zero);
-		return;
-	}
-	default:
-		return;
+		m_options[L"Stages"].color =
+			UserUtility::Lerp(m_options[L"Stages"].color, RED_COLOR, COLOR_SPEED);
+
+		m_options[L"Next"].color = BLACK_COLOR;
+		m_options[L"ReStart"].color = BLACK_COLOR;
 	}
 }
