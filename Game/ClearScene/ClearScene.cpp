@@ -7,11 +7,12 @@
 
 #include "pch.h"
 // システム
-#include "Game/ClearScene/System/MomentCanv/MomentCanv.h"
 #include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
-#include "Game/ClearScene/System/BG_Clear/BG_Clear.h"
 #include "Libraries/SystemDatas/Timer/Timer.h"
+// オブジェクト
+#include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
+#include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
 #include "ClearScene.h"
 
 //==============================================================================
