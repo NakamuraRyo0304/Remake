@@ -279,6 +279,9 @@
     <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp">
       <Filter>GameSystems\Clear\UI_Clear</Filter>
     </ClCompile>
+    <ClInclude Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.cpp">
+      <Filter>GameSystems\Clear\ScoreBoard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -532,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h">
       <Filter>GameSystems\Clear\UI_Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.h">
+      <Filter>GameSystems\Clear\ScoreBoard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
