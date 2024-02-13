@@ -45,6 +45,9 @@ private:
 	// 画像の座標
 	static const DirectX::SimpleMath::Vector2 STAGE_TEX_POS;
 
+	// 画像の拡大率
+	static const float STAGE_TEX_RATE;
+
 public:
 	/// <summary>
 	/// コンストラクタ

@@ -378,6 +378,7 @@
     <Image Include="Resources\Textures\Stages\Stage2.dds" />
     <Image Include="Resources\Textures\Stages\Stage3.dds" />
     <Image Include="Resources\Textures\Stages\Stage4.dds" />
+    <Image Include="Resources\Textures\Stages\StageE.dds" />
     <Image Include="Resources\Textures\Text\Editor.dds" />
     <Image Include="Resources\Textures\Text\Exit.dds" />
     <Image Include="Resources\Textures\Text\Nexttex.dds" />

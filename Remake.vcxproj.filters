@@ -619,6 +619,9 @@
     <Image Include="Resources\Textures\Stages\Stage4.dds">
       <Filter>Resources\Textures\Stages</Filter>
     </Image>
+    <Image Include="Resources\Textures\Stages\StageE.dds">
+      <Filter>Resources\Textures\Stages</Filter>
+    </Image>
     <Image Include="Resources\Textures\Text\Stage1tex.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>

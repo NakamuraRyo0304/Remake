@@ -27,6 +27,9 @@ private:
 	// 画面拡大率
 	DirectX::SimpleMath::Vector2 m_screenRate;
 
+	// 動作終了フラグ
+	bool is_endMoving;
+
 private:
 
 	// 最終座標
@@ -75,6 +78,11 @@ public:
 	/// <returns>なし</returns>
 	void Draw(DirectX::SimpleMath::Vector4 color,
 		DirectX::SimpleMath::Vector2 rate, DirectX::SimpleMath::Vector2 origin, RECT_U rect);
+
+public:
+
+	// 動作の終了状況を取得する
+	const bool& IsEndMoving() { return is_endMoving; }
 };
 
 #endif // MOMENTCANV

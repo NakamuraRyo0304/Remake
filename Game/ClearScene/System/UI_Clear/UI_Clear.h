@@ -30,14 +30,19 @@ public:
 
 private:
 
-	// スプライト
-	std::unique_ptr<DrawSprite> m_sprites;
-
 	// オプション
 	std::map<const wchar_t*, Option> m_options;
 
 	// 選択
 	SELECT m_select;
+
+	// 動作終了フラグ
+	bool is_endMoving;
+
+private:
+
+	// スプライト
+	std::unique_ptr<DrawSprite> m_sprites;
 
 private:
 
@@ -47,6 +52,9 @@ private:
 
 	// 色変更速度
 	static const float COLOR_SPEED;
+
+	// 最終X座標
+	static const float LAST_POS_X;
 
 public:
 	/// <summary>
@@ -95,6 +103,9 @@ public:
 
 	// 次の操作を設定
 	void SetSelection(const SELECT& selection) { m_select = selection; }
+
+	// 動作の終了状況を取得する
+	const bool& IsEndMoving() { return is_endMoving; }
 };
 
 #endif // UI_CLEAR

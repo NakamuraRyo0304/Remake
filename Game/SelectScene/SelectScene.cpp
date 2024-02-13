@@ -128,9 +128,9 @@ void SelectScene::Draw()
 
 	// デバッグ描画
 #if _DEBUG
-	auto _grid = GetSystemManager()->GetGridFloor();
-	_grid->Draw(*_states, _view, _projection, Colors::Green);
-	DebugDraw(*_states);
+	//auto _grid = GetSystemManager()->GetGridFloor();
+	//_grid->Draw(*_states, _view, _projection, Colors::Green);
+	//DebugDraw(*_states);
 #endif
 }
 

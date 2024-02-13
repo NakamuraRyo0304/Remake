@@ -15,6 +15,7 @@
 const SimpleMath::Vector4 UI_Clear::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
 const SimpleMath::Vector4 UI_Clear::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
 const float UI_Clear::COLOR_SPEED = 0.075f;	// 色の変更速度
+const float UI_Clear::LAST_POS_X = 1450.0f;	// 最終X座標
 
 //==============================================================================
 // コンストラクタ
@@ -23,6 +24,7 @@ UI_Clear::UI_Clear(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)		// 基底クラス
 	, m_select{ SELECT::NEXT }		// セレクト
 	, m_options{}					// オプション
+	, is_endMoving{ false }			// 動作終了フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -52,11 +54,11 @@ void UI_Clear::Initialize()
 
 	// 文字ごとの設定
 	Option _opt = {};
-	_opt.pos = { 1500.0f,50.0f }; _opt.color = RED_COLOR;
+	_opt.pos = { LAST_POS_X * 2,750.0f }; _opt.color = RED_COLOR;
 	m_options.emplace(L"Next", _opt);
-	_opt.pos = { 1500.0f,150.0f }; _opt.color = BLACK_COLOR;
+	_opt.pos.y += 100.0f; _opt.color = BLACK_COLOR;
 	m_options.emplace(L"ReStart", _opt);
-	_opt.pos = { 1500.0f,250.0f }; _opt.color = BLACK_COLOR;
+	_opt.pos.y += 100.0f;
 	m_options.emplace(L"Stages", _opt);
 }
 
@@ -65,8 +67,21 @@ void UI_Clear::Initialize()
 //==============================================================================
 void UI_Clear::Update()
 {
-	// 選択番号に応じて色を分ける
-	ChangeColor(m_select);
+	// X座標を移動する
+	for (auto& option : m_options)
+	{
+		option.second.pos.x =
+			UserUtility::Lerp(option.second.pos.x, LAST_POS_X, 0.1f);
+	}
+
+	// 移動完了したらTrue
+	if (static_cast<int>(m_options[L"Next"].pos.x) == static_cast<int>(LAST_POS_X))
+	{
+		is_endMoving = true;
+
+		// 選択番号に応じて色を分ける
+		ChangeColor(m_select);
+	}
 }
 
 //==============================================================================
@@ -76,13 +91,15 @@ void UI_Clear::Draw()
 {
 	m_sprites->DrawTexture(L"Next", m_options[L"Next"].pos * GetScreenRate(),
 		m_options[L"Next"].color, SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
+		SimpleMath::Vector2::Zero, RECT_U(0, 0, 382, 128));
+
 	m_sprites->DrawTexture(L"ReStart", m_options[L"ReStart"].pos * GetScreenRate(),
 		m_options[L"ReStart"].color, SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
+		SimpleMath::Vector2::Zero, RECT_U(0, 0, 382, 128));
+
 	m_sprites->DrawTexture(L"Stages", m_options[L"Stages"].pos * GetScreenRate(),
 		m_options[L"Stages"].color, SimpleMath::Vector2::One * GetScreenRate(),
-		SimpleMath::Vector2(0.0f, 0.0f), RECT_U(0, 0, 382, 128));
+		SimpleMath::Vector2::Zero, RECT_U(0, 0, 382, 128));
 }
 
 //==============================================================================

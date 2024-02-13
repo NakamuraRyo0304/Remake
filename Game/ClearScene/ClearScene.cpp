@@ -75,8 +75,14 @@ void ClearScene::Update()
 		// モーメントキャンバスの更新
 		m_momentCanv->Update();
 
+		// モーメントキャンバスがまだ動いていたらUIの処理をしない
+		if (not m_momentCanv->IsEndMoving()) return;
+
 		// UIの更新
 		m_ui->Update();
+
+		// UIの移動がまだ終わっていなければ処理をしない
+		if (not m_ui->IsEndMoving()) return;
 
 		// 次の遷移を選択
 		auto _selection = m_ui->GetSelecion();

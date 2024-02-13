@@ -17,6 +17,8 @@ const SimpleMath::Vector4 UI_Select::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 
 const float UI_Select::COLOR_SPEED = 0.075f;	// 色の変更速度
 // ステージ画像の座標
 const SimpleMath::Vector2 UI_Select::STAGE_TEX_POS = SimpleMath::Vector2(475.0f, 200.0f);
+// ステージ画像の拡大率
+const float UI_Select::STAGE_TEX_RATE = 0.6f;
 
 //==============================================================================
 // コンストラクタ
@@ -59,10 +61,10 @@ void UI_Select::Initialize()
 
 	// 座標の設定
 	m_position.emplace(L"Editor", SimpleMath::Vector2(50.0f, 50.0f));
-	m_position.emplace(L"Num1", SimpleMath::Vector2(50.0f, 150.0f));
-	m_position.emplace(L"Num2", SimpleMath::Vector2(50.0f, 250.0f));
-	m_position.emplace(L"Num3", SimpleMath::Vector2(50.0f, 350.0f));
-	m_position.emplace(L"Num4", SimpleMath::Vector2(50.0f, 450.0f));
+	m_position.emplace(L"Num1", SimpleMath::Vector2(50.0f, 180.0f));
+	m_position.emplace(L"Num2", SimpleMath::Vector2(50.0f, 280.0f));
+	m_position.emplace(L"Num3", SimpleMath::Vector2(50.0f, 380.0f));
+	m_position.emplace(L"Num4", SimpleMath::Vector2(50.0f, 480.0f));
 
 	// 色の設定
 	m_color.emplace(L"Editor", BLACK_COLOR);
@@ -74,6 +76,7 @@ void UI_Select::Initialize()
 
 	// ステージ画像パス
 	m_stageAlpha = 0.75f;
+	m_sprites->AddTextureData(L"StageE", L"Resources/Textures/Stages/StageE.dds");
 	m_sprites->AddTextureData(L"Stage1", L"Resources/Textures/Stages/Stage1.dds");
 	m_sprites->AddTextureData(L"Stage2", L"Resources/Textures/Stages/Stage2.dds");
 	m_sprites->AddTextureData(L"Stage3", L"Resources/Textures/Stages/Stage3.dds");
@@ -142,31 +145,38 @@ void UI_Select::Draw()
 	// ステージ画像を描画
 	switch (m_stageSelection)
 	{
+	case 0:
+	{
+		m_sprites->DrawTexture(L"StageE", STAGE_TEX_POS * GetScreenRate(),
+			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * STAGE_TEX_RATE,
+			SimpleMath::Vector2::Zero);
+		return;
+	}
 	case 1:
 	{
 		m_sprites->DrawTexture(L"Stage1", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
+			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * STAGE_TEX_RATE,
 			SimpleMath::Vector2::Zero);
 		return;
 	}
 	case 2:
 	{
 		m_sprites->DrawTexture(L"Stage2", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
+			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * STAGE_TEX_RATE,
 			SimpleMath::Vector2::Zero);
 		return;
 	}
 	case 3:
 	{
 		m_sprites->DrawTexture(L"Stage3", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
+			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * STAGE_TEX_RATE,
 			SimpleMath::Vector2::Zero);
 		return;
 	}
 	case 4:
 	{
 		m_sprites->DrawTexture(L"Stage4", STAGE_TEX_POS * GetScreenRate(),
-			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * 0.6f,
+			{ 1.0f,1.0f,1.0f,m_stageAlpha }, GetScreenRate() * STAGE_TEX_RATE,
 			SimpleMath::Vector2::Zero);
 		return;
 	}

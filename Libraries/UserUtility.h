@@ -193,16 +193,22 @@ namespace UserUtility
 		return _average;
 	}
 
-	/// <summary>
-	/// ‹ß—ˆê’v”»’èŠÖ”
-	/// </summary>
-	/// <param name="number1">”’l1</param>
-	/// <param name="number2">”’l2</param>
-	/// <returns>‹ß—ˆê’v‚ÅTrue</returns>
-	template<typename T>
-	inline bool ClosedMatch(const T& number1, const T& number2)
+	// ‹ß—ˆê’v”»’èŠÖ”(float)
+	inline bool ClosedMatch(const float& number1, const float& number2)
 	{
-		return (fabsf(number1 - number2) < static_cast<T>(FLT_EPSILON));
+		return (std::fabsf(number1 - number2) < FLT_EPSILON);
+	}
+	// ‹ß—ˆê’v”»’èŠÖ”(SimpleMath::Vector2)
+	inline bool ClosedMatch(const DirectX::SimpleMath::Vector2& number1,
+		const DirectX::SimpleMath::Vector2& number2)
+	{
+		return DirectX::SimpleMath::Vector2::Distance(number1, number2) < 0.01f;
+	}
+	// ‹ß—ˆê’v”»’èŠÖ”(SimpleMath::Vector3)
+	inline bool ClosedMatch(const DirectX::SimpleMath::Vector3& number1,
+		const DirectX::SimpleMath::Vector3& number2)
+	{
+		return DirectX::SimpleMath::Vector3::Distance(number1, number2) < 0.01f;
 	}
 
 	/// <summary>

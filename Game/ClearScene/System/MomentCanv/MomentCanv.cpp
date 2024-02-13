@@ -23,6 +23,7 @@ const float MomentCanv::SPEED_TO_LAST = 0.1f;									// 速度
 MomentCanv::MomentCanv(SimpleMath::Vector2 screenRate)
 	: m_position{}					// 座標
 	, m_screenRate{ screenRate }	// 画面比率
+	, is_endMoving{ false }			// 動作終了フラグ
 {
 	// スプライト描画の作成
 	m_sprite = std::make_unique<DrawSprite>();
@@ -60,6 +61,12 @@ void MomentCanv::Update()
 	// 画像の回転
 	m_sprite->CreateRotation(L"PlayPic",
 		UserUtility::Lerp(m_sprite->GetRotate(L"PlayPic"), LAST_ROTATE, SPEED_TO_LAST));
+
+	// 動作が終了したらTrue
+	if (UserUtility::ClosedMatch(m_position, LAST_POSITION))
+	{
+		is_endMoving = true;
+	}
 }
 
 //==============================================================================
