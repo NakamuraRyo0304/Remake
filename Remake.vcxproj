@@ -373,10 +373,10 @@
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloudButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds" />
+    <Image Include="Resources\Textures\Editor\Buttons\FlozenButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
-    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
     <Image Include="Resources\Textures\ScreenShot\image.dds" />

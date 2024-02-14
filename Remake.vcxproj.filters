@@ -580,7 +580,7 @@
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds">
       <Filter>Resources\Textures\Button</Filter>
     </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds">
+    <Image Include="Resources\Textures\Editor\Buttons\FlozenButton.dds">
       <Filter>Resources\Textures\Button</Filter>
     </Image>
     <Image Include="Resources\Textures\ScreenShot\image.dds">

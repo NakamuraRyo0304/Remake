@@ -267,7 +267,7 @@ void Editor::UpdateCollisions(ID id)
 //==============================================================================
 void Editor::SetDrawObject()
 {
-	if (m_ui->IsClickButton(BN::Sand_bn))	m_selectionID = ID::Obj_Flozen;	// 砂
+	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 砂
 	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
 	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
 	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア

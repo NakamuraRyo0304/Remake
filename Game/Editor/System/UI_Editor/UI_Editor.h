@@ -22,7 +22,7 @@ public:
 	{
 		LoadFile,
 		WriteFile,
-		Sand_bn,
+		Flozen_bn,
 		Cloud_bn,
 		Coin_bn,
 		Air_bn,
