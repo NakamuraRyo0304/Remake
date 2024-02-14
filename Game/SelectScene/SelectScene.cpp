@@ -12,6 +12,8 @@
 #include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
+#include "Game/Common/Water/Water.h"
+#include "Game/SelectScene/Objects/BG_Select/BG_Select.h"
 #include "SelectScene.h"
 
 //==============================================================================
@@ -123,6 +125,12 @@ void SelectScene::Draw()
 		m_stage[i]->Draw(_context, *_states, _view, _projection);
 	}
 
+	// 水の描画
+	m_water->Draw(_view, _projection);
+
+	// 背景の描画
+	m_backGround->Draw();
+
 	// UIの描画
 	m_ui->Draw();
 
@@ -143,6 +151,8 @@ void SelectScene::Finalize()
 	m_ui.reset();
 	m_sky.reset();
 	m_stage->reset();
+	m_water.reset();
+	m_backGround.reset();
 }
 
 //==============================================================================
@@ -158,6 +168,12 @@ void SelectScene::CreateWDResources()
 
 	// スカイ球作成
 	m_sky = std::make_unique<Sky_Select>();
+
+	// 水作成
+	m_water = std::make_unique<Water>();
+
+	// 背景作成
+	m_backGround = std::make_unique<BG_Select>();
 
 	// ブロックマネージャ
 	m_stage[0] = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
@@ -177,6 +193,12 @@ void SelectScene::SetSceneValues()
 
 	// 選択中の番号を設定
 	m_ui->SetSelectionNum(m_stageSelection);
+
+	// 水の初期設定
+	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
+
+	// 背景の初期設定
+	m_backGround->Initialize();
 
 	// ブロックの初期設定
 	{

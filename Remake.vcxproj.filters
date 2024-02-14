@@ -288,6 +288,9 @@
     <ClCompile Include="Game\Common\Blocks\Flozen\Flozen.cpp">
       <Filter>GameObjects\Common\Blocks\Flozen</Filter>
     </ClCompile>
+    <ClCompile Include="Game\SelectScene\Objects\BG_Select\BG_Select.cpp">
+      <Filter>GameObjects\Select\BG_Select</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -551,6 +554,9 @@
     <ClInclude Include="Game\Common\Blocks\Flozen\Flozen.h">
       <Filter>GameObjects\Common\Blocks\Flozen</Filter>
     </ClInclude>
+    <ClInclude Include="Game\SelectScene\Objects\BG_Select\BG_Select.h">
+      <Filter>GameObjects\Select\BG_Select</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -673,6 +679,9 @@
     <Image Include="Resources\Textures\UI_Clear\tape2.dds">
       <Filter>Resources\Textures\UI_Clear</Filter>
     </Image>
+    <Image Include="Resources\Textures\BackGround\selectBG.dds">
+      <Filter>Resources\Textures\BackGround</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Models\Cloud.cmo">
@@ -700,9 +709,6 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\pHead.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\ShineSky.cmo">
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Spike.cmo">
@@ -746,6 +752,9 @@
     </None>
     <None Include="Resources\Stages\sample4.json">
       <Filter>Resources\Stages</Filter>
+    </None>
+    <None Include="Resources\Models\Sky.cmo">
+      <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1093,6 +1102,9 @@
     </Filter>
     <Filter Include="GameObjects\Common\Blocks\Flozen">
       <UniqueIdentifier>{6056ea33-2629-4dcb-b520-96254809c4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Select\BG_Select">
+      <UniqueIdentifier>{9a9e0caa-5f47-4a83-889b-2a8e958b6c30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

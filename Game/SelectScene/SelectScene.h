@@ -18,6 +18,8 @@ class AdminCamera;
 class BlockManager;
 class Sky_Select;
 class UI_Select;
+class Water;
+class BG_Select;
 class SelectScene final : public IScene
 {
 private:
@@ -41,6 +43,12 @@ private:
 
 	// ブロックマネージャ
 	std::unique_ptr<BlockManager> m_stage[MAX_SAMPLE_NUM];
+
+	// 水
+	std::unique_ptr<Water> m_water;
+
+	// 背景
+	std::unique_ptr<BG_Select> m_backGround;
 
 	// セレクト番号
 	int m_stageSelection;
