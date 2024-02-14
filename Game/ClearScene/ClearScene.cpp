@@ -84,7 +84,7 @@ void ClearScene::Update()
 		// モーメントキャンバスがまだ動いていたらUIの処理をしない
 		if (not m_momentCanv->IsEndMoving()) return;
 
-		// コインのスコアを更新する
+		// タイム・コインのスコアを更新する
 		m_direction->Start();
 		m_direction->Update(true);
 		if (m_direction->Alarm())

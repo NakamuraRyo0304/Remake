@@ -23,7 +23,7 @@
 //==============================================================================
 // ブロックのインクルード
 //==============================================================================
-#include "../Blocks/Sand/Sand.h"						// 砂ブロック
+#include "../Blocks/Flozen/Flozen.h"					// 氷ブロック
 #include "../Blocks/Cloud/Cloud.h"						// 雲ブロック
 #include "../Blocks/Coin/Coin.h"						// コインブロック
 #include "../../Editor/Objects/Air/Air.h"				// ステージエディタ用判定ブロック
@@ -71,7 +71,7 @@ private:
 private:
 
 	// ブロックオブジェクト
-	std::vector<std::unique_ptr<Sand>> m_sands;
+	std::vector<std::unique_ptr<Flozen>> m_flozens;
 	std::vector<std::unique_ptr<Cloud>> m_clouds;
 	std::vector<std::unique_ptr<Coin>> m_coins;
 	std::vector<std::unique_ptr<Air>> m_air;
@@ -194,7 +194,7 @@ private:
 public:
 
 	// 砂ブロックの配列を参照
-	std::vector<std::unique_ptr<Sand>>& GetSandBlock() { return m_sands; }
+	std::vector<std::unique_ptr<Flozen>>& GetFlozenBlock() { return m_flozens; }
 	// 雲ブロックの配列を参照
 	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
 	// コインブロックの配列を参照

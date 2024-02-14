@@ -24,7 +24,7 @@ const float Player::DEATH_ROTATE = 30.0f;	// 死亡時の回転
 // コンストラクタ
 //==============================================================================
 Player::Player()
-	: IGameObject(L"Resources/Models/Body.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/pBody.cmo", L"Resources/Models")
 	, m_velocity{}			// 移動量
 	, m_coinNum{ 0 }		// 取得済みコイン枚数
 	, is_fall{ true }		// 落下フラグ

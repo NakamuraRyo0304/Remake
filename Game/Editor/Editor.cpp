@@ -31,7 +31,7 @@ using BN = UI_Editor::BUTTON_NAME;						// ボタンの名前
 //==============================================================================
 Editor::Editor()
 	: IScene()						// 基底クラスのコンストラクタ
-	, m_selectionID{ ID::Obj_Sand }	// 初期は砂を設定
+	, m_selectionID{ ID::Obj_Flozen }	// 初期は砂を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
@@ -188,7 +188,7 @@ void Editor::SetSceneValues()
 	m_adminCamera->SetInterpolation(false);
 
 	// IDを砂に設定
-	m_selectionID = ID::Obj_Sand;
+	m_selectionID = ID::Obj_Flozen;
 
 	// ブロックの初期化
 	m_blockManager->Initialize();
@@ -236,7 +236,7 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetSandBlock())	// 砂ブロック
+	for (auto& obj : m_blockManager->GetFlozenBlock())	// 砂ブロック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -267,7 +267,7 @@ void Editor::UpdateCollisions(ID id)
 //==============================================================================
 void Editor::SetDrawObject()
 {
-	if (m_ui->IsClickButton(BN::Sand_bn))	m_selectionID = ID::Obj_Sand;	// 砂
+	if (m_ui->IsClickButton(BN::Sand_bn))	m_selectionID = ID::Obj_Flozen;	// 砂
 	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
 	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
 	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア

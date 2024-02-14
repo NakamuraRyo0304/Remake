@@ -209,8 +209,8 @@
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h" />
     <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h" />
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
+    <ClInclude Include="Game\Common\Blocks\Flozen\Flozen.h" />
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h" />
-    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h" />
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h" />
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h" />
@@ -298,8 +298,8 @@
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp" />
     <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp" />
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
+    <ClCompile Include="Game\Common\Blocks\Flozen\Flozen.cpp" />
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp" />
-    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp" />
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp" />
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
@@ -416,15 +416,15 @@
       <FileType>Document</FileType>
     </Font>
     <None Include="Resources\Fonts\SegoeUI_18.spritefont" />
-    <None Include="Resources\Models\Bird.cmo" />
-    <None Include="Resources\Models\Body.cmo" />
     <None Include="Resources\Models\Cloud.cmo" />
     <None Include="Resources\Models\Coin.cmo" />
     <None Include="Resources\Models\CursorObj.cmo" />
     <None Include="Resources\Models\Flag.cmo" />
+    <None Include="Resources\Models\Flozen.cmo" />
     <None Include="Resources\Models\Goal.cmo" />
-    <None Include="Resources\Models\Head.cmo" />
-    <None Include="Resources\Models\Sand.cmo" />
+    <None Include="Resources\Models\pAll.cmo" />
+    <None Include="Resources\Models\pBody.cmo" />
+    <None Include="Resources\Models\pHead.cmo" />
     <None Include="Resources\Models\ShineSky.cmo" />
     <None Include="Resources\Models\Spike.cmo" />
     <None Include="Resources\Models\TitleLogoVer2.cmo" />

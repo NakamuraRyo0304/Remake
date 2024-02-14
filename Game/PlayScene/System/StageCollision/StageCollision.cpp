@@ -52,13 +52,13 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
     SimpleMath::Vector3 _playerPos = player->GetPosition();
     SimpleMath::Vector3 _playerScale = player->GetScale() * 2;
 
-    // 砂ブロック
-    if (not blocks->GetSandBlock().empty())
+    // 氷ブロック
+    if (not blocks->GetFlozenBlock().empty())
     {
-        for (auto& sand : blocks->GetSandBlock())
+        for (auto& flozen : blocks->GetFlozenBlock())
         {
-            SimpleMath::Vector3 _pos = sand->GetPosition();
-            SimpleMath::Vector3 _scale = sand->GetScale();
+            SimpleMath::Vector3 _pos = flozen->GetPosition();
+            SimpleMath::Vector3 _scale = flozen->GetScale();
             if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
             auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
 
