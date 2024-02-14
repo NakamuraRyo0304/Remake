@@ -19,7 +19,7 @@ const std::vector<D3D11_INPUT_ELEMENT_DESC> Water::INPUT_LAYOUT =
 	{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT, 0, sizeof(SimpleMath::Vector3)+ sizeof(SimpleMath::Vector4), D3D11_INPUT_PER_VERTEX_DATA, 0 },
 };
 
-const float Water::WATER_SCALE = 20.0f;	// 画像のスケール
+const float Water::WATER_SCALE = 40.0f;	// 画像のスケール
 const UINT Water::VERTEX_NUM = 16;		// 頂点数
 
 //==============================================================================
