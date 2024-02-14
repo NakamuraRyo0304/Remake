@@ -198,7 +198,6 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.h" />
-    <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
     <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h" />
@@ -244,7 +243,6 @@
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
-    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h" />
     <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h" />
     <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h" />
     <ClInclude Include="Game\TitleScene\TitleScene.h" />
@@ -288,7 +286,6 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.cpp" />
-    <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp" />
@@ -333,7 +330,6 @@
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />
-    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp" />
     <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp" />
     <ClCompile Include="Game\TitleScene\TitleScene.cpp" />
@@ -430,7 +426,6 @@
     <None Include="Resources\Models\pHead.cmo" />
     <None Include="Resources\Models\Sky.cmo" />
     <None Include="Resources\Models\Spike.cmo" />
-    <None Include="Resources\Models\TitleLogoVer2.cmo" />
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli" />
     <None Include="Resources\Shaders\ParametersHeader.hlsli" />
     <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli" />

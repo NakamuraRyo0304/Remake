@@ -10,6 +10,7 @@
 #include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
 #include "Libraries/SystemDatas/Timer/Timer.h"
+#include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
 #include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
@@ -40,6 +41,10 @@ ClearScene::ClearScene(float time, int coins, int stage, int max)
 	, m_maxNumber{ max }			// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
+
+	// 表示限界値でクランプ
+	m_clearTime = UserUtility::Clamp(m_clearTime, 0.0f, 99.0f);
+	m_collectedCoin = UserUtility::Clamp(m_collectedCoin, 0, 99);
 }
 
 //==============================================================================

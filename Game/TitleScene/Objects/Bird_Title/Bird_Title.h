@@ -18,9 +18,6 @@ class Bird_Title : public IGameObject
 {
 private:
 
-	// 再スタートライン
-	static const float RESTART_LINE;
-
 	// 鳥のスケール
 	static const float BIRD_SCALE;
 
@@ -52,15 +49,6 @@ public:
 	/// <returns>なし</returns>
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
-
-private:
-
-	/// <summary>
-	/// ランダムでX座標を再抽選する
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void RandomXPosition();
 };
 
 #endif // STAGE_TITLE
