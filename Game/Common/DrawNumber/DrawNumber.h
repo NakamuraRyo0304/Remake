@@ -24,8 +24,8 @@ private:
 	// À•WE’†SˆÊ’u
 	DirectX::SimpleMath::Vector2 m_position, m_origin;
 
-	// Šg‘å—¦
-	DirectX::SimpleMath::Vector2 m_rate;
+	// •¶šŠg‘å—¦A‰æ–ÊŠg‘å—¦
+	DirectX::SimpleMath::Vector2 m_rate, m_screenRate;
 
 	// F
 	DirectX::SimpleMath::Vector4 m_color;
@@ -83,10 +83,12 @@ public:
 	const DirectX::SimpleMath::Vector2& GetPosition() { return m_position; }
 	// À•W‚ğİ’è‚·‚é
 	void SetPosition(const DirectX::SimpleMath::Vector2& pos) { m_position = pos; }
-	// Šg‘å—¦‚ğæ“¾‚·‚é
+	// •¶šŠg‘å—¦‚ğæ“¾‚·‚é
 	const DirectX::SimpleMath::Vector2& GetRate() { return m_rate; }
-	// Šg‘å—¦‚ğİ’è‚·‚é
+	// •¶šŠg‘å—¦‚ğİ’è‚·‚é
 	void SetRate(const DirectX::SimpleMath::Vector2& rate) { m_rate = rate; }
+	// ‰æ–ÊŠg‘å—¦‚ğİ’è‚·‚é
+	void SetScreenRate(const DirectX::SimpleMath::Vector2& rate) { m_screenRate = rate; }
 	// F‚ğæ“¾‚·‚é
 	const DirectX::SimpleMath::Vector4& GetColor() { return m_color; }
 	// F‚ğİ’è‚·‚é

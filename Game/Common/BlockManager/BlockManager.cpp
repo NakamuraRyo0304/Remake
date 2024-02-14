@@ -78,8 +78,8 @@ void BlockManager::Initialize()
 		float _z = static_cast<float>(_data[i]["Position"]["Z"]);
 		SimpleMath::Vector3 _position = SimpleMath::Vector3(_x, _y, _z);
 
-		// 砂ブロックを格納
-		if (_name == "Sand")	m_sands.push_back(std::make_unique<Sand>(_position));
+		// 氷ブロックを格納
+		if (_name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(_position));
 		// コインを格納
 		if (_name == "Coin")	m_coins.push_back(std::make_unique<Coin>(_position));
 		// 雲ブロックを格納
@@ -109,10 +109,10 @@ void BlockManager::Initialize()
 void BlockManager::Update()
 {
 	// オブジェクトの更新
-	for (auto& sand : m_sands)		// 砂ブロック
+	for (auto& flozen : m_flozens)	// 氷ブロック
 	{
-		if (UserUtility::IsNull(sand.get())) continue;
-		sand->Update();
+		if (UserUtility::IsNull(flozen.get())) continue;
+		flozen->Update();
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
@@ -160,10 +160,10 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// オブジェクトの描画
-	for (auto& sand : m_sands)		// 砂ブロック
+	for (auto& flozen : m_flozens)	// 氷ブロック
 	{
-		if (UserUtility::IsNull(sand.get())) continue;
-		sand->Draw(context, states, view, proj, wireframe, option);
+		if (UserUtility::IsNull(flozen.get())) continue;
+		flozen->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
@@ -202,7 +202,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 void BlockManager::SelectOffset(const SimpleMath::Vector3& offset)
 {
 	// オブジェクトの描画
-	for (auto& sand : m_sands)		// 砂ブロック
+	for (auto& sand : m_flozens)	// 氷ブロック
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
 		sand->SetPosition(sand->GetInitialPosition() + offset);
@@ -236,8 +236,8 @@ std::string BlockManager::GetBlockID(const ID& id)
 {
 	switch (id)
 	{
-	case ID::Obj_Sand:
-		return "Sand";
+	case ID::Obj_Flozen:
+		return "Flozen";
 	case ID::Obj_Coin:
 		return "Coin";
 	case ID::Obj_Cloud:
@@ -258,14 +258,14 @@ std::string BlockManager::GetBlockID(const ID& id)
 //==============================================================================
 void BlockManager::ReplaceBlock()
 {
-	for (auto& sand : m_sands)
+	for (auto& flozen : m_flozens)
 	{
-		if (UserUtility::IsNull(sand.get())) continue;
-		if (sand->GetID() == ID::Obj_Sand) continue;
+		if (UserUtility::IsNull(flozen.get())) continue;
+		if (flozen->GetID() == ID::Obj_Flozen) continue;
 
 		// 名前に対応したブロックに変更する
-		CreateBlock(sand->GetID(), sand->GetInitialPosition());
-		UserUtility::RemoveVec(m_sands, sand);
+		CreateBlock(flozen->GetID(), flozen->GetInitialPosition());
+		UserUtility::RemoveVec(m_flozens, flozen);
 	}
 	for (auto& cloud : m_clouds)
 	{
@@ -330,8 +330,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 {
 	// IDが一致したモノを追加する
 
-	if (id == ID::Obj_Sand)		// 砂ブロック
-		m_sands.push_back(std::make_unique<Sand>(pos));
+	if (id == ID::Obj_Flozen)		// 砂ブロック
+		m_flozens.push_back(std::make_unique<Flozen>(pos));
 	if (id == ID::Obj_Cloud)	// 雲ブロック
 		m_clouds.push_back(std::make_unique<Cloud>(pos));
 	if (id == ID::Obj_Coin)		// コイン
@@ -351,7 +351,7 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 //==============================================================================
 void BlockManager::ClearBlocks()
 {
-	m_sands.clear();
+	m_flozens.clear();
 	m_clouds.clear();
 	m_coins.clear();
 	m_air.clear();
@@ -504,7 +504,7 @@ void BlockManager::OutputStage()
 	// 追加するのはここから>>> 書き出し用配列にセット
 	//==============================================================================
 
-	AddWriteObjects(&_objects, m_sands);		// 砂
+	AddWriteObjects(&_objects, m_flozens);		// 氷
 	AddWriteObjects(&_objects, m_clouds);		// 雲
 	AddWriteObjects(&_objects, m_coins);		// コイン
 	AddWriteObjects(&_objects, m_chara);		// 操作キャラ

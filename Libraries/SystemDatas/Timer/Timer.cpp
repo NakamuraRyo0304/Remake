@@ -46,16 +46,19 @@ void Timer::Update(bool updown)
 	// fpsを取得
 	auto _fps = DX::StepTimer::GetInstance().GetFramesPerSecond();
 
-	// カウントアップ
-	if (updown == true)
+	// アラームがなっていなければ続ける
 	{
-		m_count += 1.0f / _fps;
-	}
+		// カウントアップ
+		if (updown == true && is_alarm == false)
+		{
+			m_count += 1.0f / _fps;
+		}
 
-	// カウントダウン
-	if (updown == false)
-	{
-		m_count -= 1.0f / _fps;
+		// カウントダウン
+		if (updown == false && is_alarm == false)
+		{
+			m_count -= 1.0f / _fps;
+		}
 	}
 
 	// 時間制限があるなら実行する
@@ -64,6 +67,7 @@ void Timer::Update(bool updown)
 		if (std::fabsf(m_count - m_limits) < 0.01f)
 		{
 			is_alarm = true;
+			is_do = false;
 		}
 	}
 }

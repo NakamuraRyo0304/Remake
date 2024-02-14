@@ -201,13 +201,16 @@
     <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h" />
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
-    <ClInclude Include="Game\ClearScene\System\MomentCanv\MomentCanv.h" />
+    <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h" />
+    <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h" />
+    <ClInclude Include="Game\ClearScene\Objects\Tape\Tape.h" />
+    <ClInclude Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.h" />
     <ClInclude Include="Game\ClearScene\System\UI_Clear\UI_Clear.h" />
     <ClInclude Include="Game\Common\BlockManager\BlockManager.h" />
     <ClInclude Include="Game\Common\Blocks\Cloud\Cloud.h" />
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
+    <ClInclude Include="Game\Common\Blocks\Flozen\Flozen.h" />
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h" />
-    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h" />
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h" />
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h" />
@@ -287,13 +290,16 @@
     <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp" />
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
-    <ClCompile Include="Game\ClearScene\System\MomentCanv\MomentCanv.cpp" />
+    <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp" />
+    <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp" />
+    <ClCompile Include="Game\ClearScene\Objects\Tape\Tape.cpp" />
+    <ClCompile Include="Game\ClearScene\System\ScoreBoard\ScoreBoard.cpp" />
     <ClCompile Include="Game\ClearScene\System\UI_Clear\UI_Clear.cpp" />
     <ClCompile Include="Game\Common\BlockManager\BlockManager.cpp" />
     <ClCompile Include="Game\Common\Blocks\Cloud\Cloud.cpp" />
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
+    <ClCompile Include="Game\Common\Blocks\Flozen\Flozen.cpp" />
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp" />
-    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp" />
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp" />
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
@@ -361,15 +367,16 @@
     <ResourceCompile Include="Resources\Icon\Icon.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Textures\BackGround\cork.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloudButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds" />
+    <Image Include="Resources\Textures\Editor\Buttons\FlozenButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
-    <Image Include="Resources\Textures\Editor\Buttons\SandButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
     <Image Include="Resources\Textures\ScreenShot\image.dds" />
@@ -396,6 +403,8 @@
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Rot.png" />
     <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png" />
+    <Image Include="Resources\Textures\UI_Clear\tape1.dds" />
+    <Image Include="Resources\Textures\UI_Clear\tape2.dds" />
     <Image Include="Resources\Textures\UI_Play\UI_Area.dds" />
   </ItemGroup>
   <ItemGroup>
@@ -407,15 +416,15 @@
       <FileType>Document</FileType>
     </Font>
     <None Include="Resources\Fonts\SegoeUI_18.spritefont" />
-    <None Include="Resources\Models\Bird.cmo" />
-    <None Include="Resources\Models\Body.cmo" />
     <None Include="Resources\Models\Cloud.cmo" />
     <None Include="Resources\Models\Coin.cmo" />
     <None Include="Resources\Models\CursorObj.cmo" />
     <None Include="Resources\Models\Flag.cmo" />
+    <None Include="Resources\Models\Flozen.cmo" />
     <None Include="Resources\Models\Goal.cmo" />
-    <None Include="Resources\Models\Head.cmo" />
-    <None Include="Resources\Models\Sand.cmo" />
+    <None Include="Resources\Models\pAll.cmo" />
+    <None Include="Resources\Models\pBody.cmo" />
+    <None Include="Resources\Models\pHead.cmo" />
     <None Include="Resources\Models\ShineSky.cmo" />
     <None Include="Resources\Models\Spike.cmo" />
     <None Include="Resources\Models\TitleLogoVer2.cmo" />

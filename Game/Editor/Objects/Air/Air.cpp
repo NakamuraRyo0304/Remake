@@ -12,7 +12,7 @@
 // コンストラクタ
 //==============================================================================
 Air::Air(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Sand.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/Flozen.cmo", L"Resources/Models")
 	, is_hit{ false }		// 衝突フラグ
 	, is_active{ true }		// アクティブフラグ
 {

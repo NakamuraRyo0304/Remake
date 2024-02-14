@@ -7,13 +7,19 @@
 
 #include "pch.h"
 // システム
-#include "Game/ClearScene/System/MomentCanv/MomentCanv.h"
+#include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
+#include "Libraries/SystemDatas/Timer/Timer.h"
+// オブジェクト
+#include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
+#include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
+#include "Game/ClearScene/Objects/Tape/Tape.h"
 #include "ClearScene.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
+const SimpleMath::Vector4 ClearScene::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
 
 //==============================================================================
 // エイリアス宣言
@@ -78,46 +84,28 @@ void ClearScene::Update()
 		// モーメントキャンバスがまだ動いていたらUIの処理をしない
 		if (not m_momentCanv->IsEndMoving()) return;
 
+		// タイム・コインのスコアを更新する
+		m_direction->Start();
+		m_direction->Update(true);
+		if (m_direction->Alarm())
+		{
+			m_coinBoard->SetNumber(m_collectedCoin);
+			m_timeBoard->SetNumber(static_cast<int>(m_clearTime));
+		}
+		else
+		{
+			m_coinBoard->SetNumber(static_cast<int>(UserUtility::Random(10.0, 60.0)));
+			m_timeBoard->SetNumber(static_cast<int>(UserUtility::Random(10.0, 60.0)));
+		}
+
 		// UIの更新
 		m_ui->Update();
 
 		// UIの移動がまだ終わっていなければ処理をしない
 		if (not m_ui->IsEndMoving()) return;
 
-		// 次の遷移を選択
-		auto _selection = m_ui->GetSelecion();
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
-			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
-		{
-			UserUtility::Increment(&_selection);	// インクリメント
-		}
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
-			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
-		{
-			UserUtility::Decrement(&_selection);	// デクリメント
-		}
-		_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
-		m_ui->SetSelection(_selection);
-
-		// 次の遷移を決定
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
-		{
-			switch (m_ui->GetSelecion())
-			{
-			case Selection::NEXT:
-				m_stageNumber++;
-				m_stageNumber = UserUtility::LoopClamp(m_stageNumber, 1, m_maxNumber);
-				ChangeScene(SCENE::PLAY);
-				break;
-			case Selection::RESTART:
-				ChangeScene(SCENE::PLAY);
-				break;
-			case Selection::STAGES:
-				ChangeScene(SCENE::SELECT);
-			default:
-				break;
-			}
-		}
+		// 次の遷移を選択する
+		SceneSelection();
 	}
 }
 
@@ -129,6 +117,9 @@ void ClearScene::Draw()
 	// レンダリング変数を取得
 	auto _states = GetSystemManager()->GetCommonStates();
 
+	// 背景の描画
+	m_backGround->Draw();
+
 	// モーメントキャンバスのレクトと拡大率、中心位置
 	RECT_U _rectMC =
 		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
@@ -137,6 +128,15 @@ void ClearScene::Draw()
 	// モーメントキャンバスの描画
 	m_momentCanv->Draw(SimpleMath::Vector4::One,
 		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
+
+	// スコアボードの描画
+	if (m_momentCanv->IsEndMoving())
+	{
+		m_tape[0]->Draw();
+		m_tape[1]->Draw();
+		m_coinBoard->Draw();
+		m_timeBoard->Draw();
+	}
 
 	// UIの描画
 	m_ui->Draw();
@@ -154,6 +154,12 @@ void ClearScene::Finalize()
 {
 	m_momentCanv.reset();
 	m_ui.reset();
+	m_direction.reset();
+	m_coinBoard.reset();
+	m_timeBoard.reset();
+	m_backGround.reset();
+	m_tape[0].reset();
+	m_tape[1].reset();
 }
 
 //==============================================================================
@@ -161,11 +167,25 @@ void ClearScene::Finalize()
 //==============================================================================
 void ClearScene::CreateWDResources()
 {
-	// モーメントキャンバスの作成
+	// モーメントキャンバス作成
 	m_momentCanv = std::make_unique<MomentCanv>(GetWindowSize() / GetFullHDSize());
 
-	// UIの作成
+	// UI作成
 	m_ui = std::make_unique<UI_Clear>(GetWindowSize(), GetFullHDSize());
+
+	// スコアボード作成
+	m_coinBoard = std::make_unique<ScoreBoard>();
+	m_timeBoard = std::make_unique<ScoreBoard>();
+
+	// ディレクトタイマー作成(3秒)
+	m_direction = std::make_unique<Timer>(Timer::Mode::limited, 3.0f);
+
+	// 背景作成
+	m_backGround = std::make_unique<BG_Clear>();
+
+	// テープ作成
+	m_tape[0] = std::make_unique<Tape>();
+	m_tape[1] = std::make_unique<Tape>();
 }
 
 //==============================================================================
@@ -175,6 +195,21 @@ void ClearScene::SetSceneValues()
 {
 	// モーメントキャンバスの初期化
 	m_momentCanv->Initialize();
+
+	// 背景の初期化
+	m_backGround->Initialize();
+
+	// スコアボードの初期化(1.5文字分間隔をあける)
+	m_coinBoard->Initialize({ 1500.0f,100.0f }, BLACK_COLOR,
+		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
+	m_timeBoard->Initialize({ 1500.0f,250.0f }, BLACK_COLOR,
+		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
+
+	// テープの初期化
+	m_tape[0]->Initialize({110.0f,460.0f}, SimpleMath::Vector2::One,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
+	m_tape[1]->Initialize({1150.0f,530.0f}, SimpleMath::Vector2::One,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
 }
 
 //==============================================================================
@@ -192,4 +227,48 @@ void ClearScene::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Time::%.2f",m_clearTime);
 	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"Coin::%.d",m_collectedCoin);
 	_string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"Stage::%.d", m_stageNumber);
+	_string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"Direc::%.2f", m_direction->GetCount());
+}
+
+//==============================================================================
+// シーン選択
+//==============================================================================
+void ClearScene::SceneSelection()
+{
+	auto _input = Input::GetInstance();
+
+	// シーンを選択する
+	auto _selection = m_ui->GetSelecion();
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+	{
+		UserUtility::Increment(&_selection);	// インクリメント
+	}
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
+		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+	{
+		UserUtility::Decrement(&_selection);	// デクリメント
+	}
+	_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
+	m_ui->SetSelection(_selection);
+
+	// 次の遷移を決定
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+	{
+		switch (m_ui->GetSelecion())
+		{
+		case Selection::NEXT:
+			m_stageNumber++;
+			m_stageNumber = UserUtility::LoopClamp(m_stageNumber, 1, m_maxNumber);
+			ChangeScene(SCENE::PLAY);
+			break;
+		case Selection::RESTART:
+			ChangeScene(SCENE::PLAY);
+			break;
+		case Selection::STAGES:
+			ChangeScene(SCENE::SELECT);
+		default:
+			break;
+		}
+	}
 }
