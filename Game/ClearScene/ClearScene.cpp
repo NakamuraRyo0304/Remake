@@ -207,7 +207,7 @@ void ClearScene::SetSceneValues()
 
 	// ƒe[ƒv‚Ì‰Šú‰»
 	m_tape[0]->Initialize({110.0f,460.0f}, SimpleMath::Vector2::One,
-		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
 	m_tape[1]->Initialize({1150.0f,530.0f}, SimpleMath::Vector2::One,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
 }
