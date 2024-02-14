@@ -44,6 +44,8 @@
       <Filter>Resources\Shaders\ShadowMap</Filter>
     </FxCompile>
   </ItemGroup>
+
+
   <ItemGroup>
     <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp">
       <Filter>Cameras\AdminCamera</Filter>
@@ -289,6 +291,8 @@
       <Filter>GameObjects\Clear\Tape</Filter>
     </ClCompile>
   </ItemGroup>
+
+
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
       <Filter>Cameras\AdminCamera</Filter>
@@ -552,6 +556,8 @@
       <Filter>GameObjects\Clear\Tape</Filter>
     </ClInclude>
   </ItemGroup>
+
+
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
       <Filter>Resources\Textures\Button</Filter>
@@ -674,13 +680,9 @@
       <Filter>Resources\Textures\UI_Clear</Filter>
     </Image>
   </ItemGroup>
+
+
   <ItemGroup>
-    <None Include="Resources\Models\Bird.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\Body.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
     <None Include="Resources\Models\Cloud.cmo">
       <Filter>Resources\Models</Filter>
     </None>
@@ -693,13 +695,19 @@
     <None Include="Resources\Models\Flag.cmo">
       <Filter>Resources\Models</Filter>
     </None>
+    <None Include="Resources\Models\Flozen.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
     <None Include="Resources\Models\Goal.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Models\Head.cmo">
+    <None Include="Resources\Models\pAll.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Models\Sand.cmo">
+    <None Include="Resources\Models\pBody.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\pHead.cmo">
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\ShineSky.cmo">
@@ -711,6 +719,8 @@
     <None Include="Resources\Models\TitleLogoVer2.cmo">
       <Filter>Resources\Models</Filter>
     </None>
+
+
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
       <Filter>Resources\Shaders\Display</Filter>
     </None>
