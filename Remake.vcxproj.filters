@@ -44,8 +44,6 @@
       <Filter>Resources\Shaders\ShadowMap</Filter>
     </FxCompile>
   </ItemGroup>
-
-
   <ItemGroup>
     <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp">
       <Filter>Cameras\AdminCamera</Filter>
@@ -206,9 +204,6 @@
     <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp">
       <Filter>GameObjects\Play\Player\Head</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Sand\Sand.cpp">
-      <Filter>GameObjects\Common\Blocks\Sand</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp">
       <Filter>Cameras\RotateCamera</Filter>
     </ClCompile>
@@ -290,9 +285,10 @@
     <ClCompile Include="Game\ClearScene\Objects\Tape\Tape.cpp">
       <Filter>GameObjects\Clear\Tape</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Flozen\Flozen.cpp">
+      <Filter>GameObjects\Common\Blocks\Flozen</Filter>
+    </ClCompile>
   </ItemGroup>
-
-
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
       <Filter>Cameras\AdminCamera</Filter>
@@ -459,9 +455,6 @@
     <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h">
       <Filter>GameObjects\Play\Player\Head</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Sand\Sand.h">
-      <Filter>GameObjects\Common\Blocks\Sand</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h">
       <Filter>Cameras\RotateCamera</Filter>
     </ClInclude>
@@ -555,9 +548,10 @@
     <ClInclude Include="Game\ClearScene\Objects\Tape\Tape.h">
       <Filter>GameObjects\Clear\Tape</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Flozen\Flozen.h">
+      <Filter>GameObjects\Common\Blocks\Flozen</Filter>
+    </ClInclude>
   </ItemGroup>
-
-
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
       <Filter>Resources\Textures\Button</Filter>
@@ -680,8 +674,6 @@
       <Filter>Resources\Textures\UI_Clear</Filter>
     </Image>
   </ItemGroup>
-
-
   <ItemGroup>
     <None Include="Resources\Models\Cloud.cmo">
       <Filter>Resources\Models</Filter>
@@ -719,8 +711,6 @@
     <None Include="Resources\Models\TitleLogoVer2.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-
-
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
       <Filter>Resources\Shaders\Display</Filter>
     </None>
@@ -1017,9 +1007,6 @@
     <Filter Include="GameObjects\Common\Blocks\Goal">
       <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Sand">
-      <UniqueIdentifier>{6056ea33-2629-4dcb-b520-96254809c4f4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Common\Blocks\Spike">
       <UniqueIdentifier>{d651b34b-8148-4010-9436-6f3c0eaa2634}</UniqueIdentifier>
     </Filter>
@@ -1103,6 +1090,9 @@
     </Filter>
     <Filter Include="Resources\Textures\UI_Clear">
       <UniqueIdentifier>{71f79a94-a230-41ba-a093-6275cb1c2979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Flozen">
+      <UniqueIdentifier>{6056ea33-2629-4dcb-b520-96254809c4f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
