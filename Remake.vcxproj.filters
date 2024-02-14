@@ -702,9 +702,6 @@
     <None Include="Resources\Models\pHead.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Models\ShineSky.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
     <None Include="Resources\Models\Spike.cmo">
       <Filter>Resources\Models</Filter>
     </None>
@@ -746,6 +743,9 @@
     </None>
     <None Include="Resources\Stages\sample4.json">
       <Filter>Resources\Stages</Filter>
+    </None>
+    <None Include="Resources\Models\Sky.cmo">
+      <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

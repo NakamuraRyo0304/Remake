@@ -425,7 +425,7 @@
     <None Include="Resources\Models\pAll.cmo" />
     <None Include="Resources\Models\pBody.cmo" />
     <None Include="Resources\Models\pHead.cmo" />
-    <None Include="Resources\Models\ShineSky.cmo" />
+    <None Include="Resources\Models\Sky.cmo" />
     <None Include="Resources\Models\Spike.cmo" />
     <None Include="Resources\Models\TitleLogoVer2.cmo" />
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli" />

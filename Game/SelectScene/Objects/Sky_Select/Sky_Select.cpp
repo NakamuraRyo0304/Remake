@@ -17,7 +17,7 @@ const float Sky_Select::ROTATE_SPEED = 0.5f;
 // コンストラクタ
 //==============================================================================
 Sky_Select::Sky_Select()
-	: IGameObject(L"Resources/Models/ShineSky.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Sky);

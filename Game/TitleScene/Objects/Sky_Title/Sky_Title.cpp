@@ -17,7 +17,7 @@ const float Sky_Title::ROTATE_SPEED = 3.0f;
 // コンストラクタ
 //==============================================================================
 Sky_Title::Sky_Title()
-	: IGameObject(L"Resources/Models/ShineSky.cmo", L"Resources/Models")
+	: IGameObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Sky);
@@ -54,11 +54,6 @@ Sky_Title::~Sky_Title()
 //==============================================================================
 void Sky_Title::Update()
 {
-	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
-
-	// 回転
-	SetRotate(SimpleMath::Vector3(_timer * ROTATE_SPEED, _timer * 0.5f, 0.0f));
-
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
