@@ -20,6 +20,7 @@ class ScoreBoard;
 class Timer;
 class UI_Clear;
 class Tape;
+class Seal;
 class ClearScene final : public IScene
 {
 private:
@@ -41,6 +42,9 @@ private:
 
 	// テープ
 	std::unique_ptr<Tape> m_tape[2];
+
+	// シール(0:コイン/1:時計)
+	std::unique_ptr<Seal> m_seal[2];
 
 	// クリア時間
 	float m_clearTime;

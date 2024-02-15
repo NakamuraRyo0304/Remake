@@ -15,6 +15,7 @@
 #include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
 #include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
 #include "Game/ClearScene/Objects/Tape/Tape.h"
+#include "Game/ClearScene/Objects/Seal/Seal.h"
 #include "ClearScene.h"
 
 //==============================================================================
@@ -134,11 +135,17 @@ void ClearScene::Draw()
 	m_momentCanv->Draw(SimpleMath::Vector4::One,
 		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
 
-	// スコアボードの描画
 	if (m_momentCanv->IsEndMoving())
 	{
+		// テープの描画
 		m_tape[0]->Draw();
 		m_tape[1]->Draw();
+
+		// シールの描画
+		m_seal[0]->Draw();
+		m_seal[1]->Draw();
+
+		// ボードの描画
 		m_coinBoard->Draw();
 		m_timeBoard->Draw();
 	}
@@ -163,8 +170,8 @@ void ClearScene::Finalize()
 	m_coinBoard.reset();
 	m_timeBoard.reset();
 	m_backGround.reset();
-	m_tape[0].reset();
-	m_tape[1].reset();
+	m_tape->reset();
+	m_seal->reset();
 }
 
 //==============================================================================
@@ -191,6 +198,10 @@ void ClearScene::CreateWDResources()
 	// テープ作成
 	m_tape[0] = std::make_unique<Tape>();
 	m_tape[1] = std::make_unique<Tape>();
+
+	// シール作成
+	m_seal[0] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/coinSeal.dds");
+	m_seal[1] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/clockSeal.dds");
 }
 
 //==============================================================================
@@ -211,10 +222,16 @@ void ClearScene::SetSceneValues()
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
 
 	// テープの初期化
-	m_tape[0]->Initialize({110.0f,460.0f}, SimpleMath::Vector2::One,
+	m_tape[0]->Initialize({ 110.0f,460.0f }, SimpleMath::Vector2::One,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
-	m_tape[1]->Initialize({1150.0f,530.0f}, SimpleMath::Vector2::One,
+	m_tape[1]->Initialize({ 1150.0f,530.0f }, SimpleMath::Vector2::One,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
+
+	// シールの初期化
+	m_seal[0]->Initialize({1400.0f, 160.0f}, SimpleMath::Vector2::One * 0.5f,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
+	m_seal[1]->Initialize({1420.0f, 312.0f}, SimpleMath::Vector2::One * 0.4f,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-53.0f));
 }
 
 //==============================================================================

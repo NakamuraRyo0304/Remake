@@ -285,6 +285,9 @@
     <ClCompile Include="Game\SelectScene\Objects\BG_Select\BG_Select.cpp">
       <Filter>GameObjects\Select\BG_Select</Filter>
     </ClCompile>
+    <ClCompile Include="Game\ClearScene\Objects\Seal\Seal.cpp">
+      <Filter>GameObjects\Clear\Seal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -545,6 +548,9 @@
     <ClInclude Include="Game\SelectScene\Objects\BG_Select\BG_Select.h">
       <Filter>GameObjects\Select\BG_Select</Filter>
     </ClInclude>
+    <ClInclude Include="Game\ClearScene\Objects\Seal\Seal.h">
+      <Filter>GameObjects\Clear\Seal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -669,6 +675,12 @@
     </Image>
     <Image Include="Resources\Textures\BackGround\selectBG.dds">
       <Filter>Resources\Textures\BackGround</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Clear\clockSeal.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Clear\coinSeal.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -1084,6 +1096,9 @@
     </Filter>
     <Filter Include="GameObjects\Select\BG_Select">
       <UniqueIdentifier>{9a9e0caa-5f47-4a83-889b-2a8e958b6c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\Seal">
+      <UniqueIdentifier>{1a2b072b-bee5-4231-9476-ea13e6369f39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
