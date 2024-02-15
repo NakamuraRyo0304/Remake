@@ -10,16 +10,18 @@
 #include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
 #include "Libraries/SystemDatas/Timer/Timer.h"
+#include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
 #include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
 #include "Game/ClearScene/Objects/Tape/Tape.h"
+#include "Game/ClearScene/Objects/Seal/Seal.h"
 #include "ClearScene.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 ClearScene::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
+const SimpleMath::Vector4 ClearScene::WHITE = SimpleMath::Vector4(1, 1, 1, 1);	// 白色
 
 //==============================================================================
 // エイリアス宣言
@@ -40,6 +42,10 @@ ClearScene::ClearScene(float time, int coins, int stage, int max)
 	, m_maxNumber{ max }			// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
+
+	// 表示限界値でクランプ
+	m_clearTime = UserUtility::Clamp(m_clearTime, 0.0f, 99.0f);
+	m_collectedCoin = UserUtility::Clamp(m_collectedCoin, 0, 99);
 }
 
 //==============================================================================
@@ -129,11 +135,17 @@ void ClearScene::Draw()
 	m_momentCanv->Draw(SimpleMath::Vector4::One,
 		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
 
-	// スコアボードの描画
 	if (m_momentCanv->IsEndMoving())
 	{
+		// テープの描画
 		m_tape[0]->Draw();
 		m_tape[1]->Draw();
+
+		// シールの描画
+		m_seal[Sticker::Coin]->Draw();
+		m_seal[Sticker::Clock]->Draw();
+
+		// ボードの描画
 		m_coinBoard->Draw();
 		m_timeBoard->Draw();
 	}
@@ -158,8 +170,8 @@ void ClearScene::Finalize()
 	m_coinBoard.reset();
 	m_timeBoard.reset();
 	m_backGround.reset();
-	m_tape[0].reset();
-	m_tape[1].reset();
+	m_tape->reset();
+	m_seal->reset();
 }
 
 //==============================================================================
@@ -186,6 +198,10 @@ void ClearScene::CreateWDResources()
 	// テープ作成
 	m_tape[0] = std::make_unique<Tape>();
 	m_tape[1] = std::make_unique<Tape>();
+
+	// シール作成
+	m_seal[Sticker::Coin] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/coinSeal.dds");
+	m_seal[Sticker::Clock] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/clockSeal.dds");
 }
 
 //==============================================================================
@@ -199,17 +215,23 @@ void ClearScene::SetSceneValues()
 	// 背景の初期化
 	m_backGround->Initialize();
 
-	// スコアボードの初期化(1.5文字分間隔をあける)
-	m_coinBoard->Initialize({ 1500.0f,100.0f }, BLACK_COLOR,
-		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
-	m_timeBoard->Initialize({ 1500.0f,250.0f }, BLACK_COLOR,
-		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
+	// スコアボードの初期化(1文字分間隔をあける)
+	m_coinBoard->Initialize({ 1500.0f,100.0f }, WHITE,
+		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
+	m_timeBoard->Initialize({ 1500.0f,250.0f }, WHITE,
+		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
 
 	// テープの初期化
-	m_tape[0]->Initialize({110.0f,460.0f}, SimpleMath::Vector2::One,
+	m_tape[0]->Initialize({ 110.0f,460.0f }, SimpleMath::Vector2::One,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
-	m_tape[1]->Initialize({1150.0f,530.0f}, SimpleMath::Vector2::One,
+	m_tape[1]->Initialize({ 1150.0f,530.0f }, SimpleMath::Vector2::One,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
+
+	// シールの初期化
+	m_seal[Sticker::Coin]->Initialize({ 1400.0f, 160.0f }, SimpleMath::Vector2::One * 0.5f,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
+	m_seal[Sticker::Clock]->Initialize({ 1420.0f, 312.0f }, SimpleMath::Vector2::One * 0.4f,
+		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-53.0f));
 }
 
 //==============================================================================

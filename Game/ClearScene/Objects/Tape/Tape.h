@@ -33,7 +33,10 @@ public:
 	/// <summary>
 	/// 初期化関数
 	/// </summary>
-	/// <param name="引数無し"></param>
+	/// <param name="pos">座標</param>
+	/// <param name="rate">スプライト拡大率</param>
+	/// <param name="scRate">スクリーン拡大率</param>
+	/// <param name="rotate">回転量</param>
 	/// <returns>なし</returns>
 	void Initialize(DirectX::SimpleMath::Vector2 pos, DirectX::SimpleMath::Vector2 rate,
 		DirectX::SimpleMath::Vector2 scRate, float rotate);

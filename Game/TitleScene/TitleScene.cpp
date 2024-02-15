@@ -11,14 +11,9 @@
 #include "Game/TitleScene/System/UI_Title/UI_Title.h"
 // オブジェクト
 #include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"
-#include "Game/TitleScene/Objects/Logo/Logo.h"
 #include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
+#include "Game/Common/Water/Water.h"
 #include "TitleScene.h"
-
-//==============================================================================
-// 定数の設定
-//==============================================================================
-
 
 //==============================================================================
 // エイリアス宣言
@@ -78,7 +73,6 @@ void TitleScene::Update()
 		// スペースを押したら遷移する
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
-			m_adminCamera->SetType(CameraType::Title_OverHead);
 			m_ui->GetSelection() == UI_Title::Start ? ChangeScene(SCENE::SELECT) : ChangeScene(SCENE::EXIT);
 		}
 	}
@@ -92,9 +86,6 @@ void TitleScene::Update()
 
 	// トリの更新
 	m_birdTitle->Update();
-
-	// ロゴの更新
-	m_logo->Update();
 }
 
 //==============================================================================
@@ -116,8 +107,8 @@ void TitleScene::Draw()
 	// トリの描画
 	m_birdTitle->Draw(_context, *_states, _view, _projection);
 
-	// ロゴの描画
-	m_logo->Draw(_context, *_states, _view, _projection);
+	// 水の描画
+	m_water->Draw(_view, _projection);
 
 	// UIの表示
 	m_ui->Draw();
@@ -138,9 +129,9 @@ void TitleScene::Finalize()
 {
 	m_adminCamera.reset();
 	m_sky.reset();
-	m_logo.reset();
 	m_ui.reset();
 	m_birdTitle.reset();
+	m_water.reset();
 }
 
 //==============================================================================
@@ -154,14 +145,15 @@ void TitleScene::CreateWDResources()
 	// スカイ球オブジェクト作成
 	m_sky = std::make_unique<Sky_Title>();
 
-	// ロゴオブジェクト作成
-	m_logo = std::make_unique<Logo>();
-
 	// UI作成
 	m_ui = std::make_unique<UI_Title>(GetWindowSize(), GetFullHDSize());
 
 	// トリオブジェクト作成
 	m_birdTitle = std::make_unique<Bird_Title>();
+
+	// 水作成
+	m_water = std::make_unique<Water>();
+
 }
 
 //==============================================================================
@@ -173,6 +165,8 @@ void TitleScene::SetSceneValues()
 	m_adminCamera->SetType(CameraType::Title_FixedPoint);
 	m_adminCamera->SetActive(true);
 
+	// 水の初期化
+	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
 }
 
 //==============================================================================

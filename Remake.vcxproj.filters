@@ -168,9 +168,6 @@
     <ClCompile Include="pch.cpp">
       <Filter>Main\pch</Filter>
     </ClCompile>
-    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
-      <Filter>GameObjects\Title\Logo</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
       <Filter>GameObjects\Editor\EditChara</Filter>
     </ClCompile>
@@ -182,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp">
       <Filter>GameObjects\Common\Blocks\Goal</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp">
-      <Filter>Cameras\OverHeadCamera</Filter>
     </ClCompile>
     <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp">
       <Filter>GameSystems\Play\ImageShot</Filter>
@@ -290,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="Game\SelectScene\Objects\BG_Select\BG_Select.cpp">
       <Filter>GameObjects\Select\BG_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ClearScene\Objects\Seal\Seal.cpp">
+      <Filter>GameObjects\Clear\Seal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,9 +419,6 @@
     <ClInclude Include="pch.h">
       <Filter>Main\pch</Filter>
     </ClInclude>
-    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
-      <Filter>GameObjects\Title\Logo</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
       <Filter>GameObjects\Editor\EditChara</Filter>
     </ClInclude>
@@ -436,9 +430,6 @@
     </ClInclude>
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h">
       <Filter>GameObjects\Common\Blocks\Goal</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h">
-      <Filter>Cameras\OverHeadCamera</Filter>
     </ClInclude>
     <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h">
       <Filter>GameSystems\Play\ImageShot</Filter>
@@ -556,6 +547,9 @@
     </ClInclude>
     <ClInclude Include="Game\SelectScene\Objects\BG_Select\BG_Select.h">
       <Filter>GameObjects\Select\BG_Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\Objects\Seal\Seal.h">
+      <Filter>GameObjects\Clear\Seal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -682,6 +676,15 @@
     <Image Include="Resources\Textures\BackGround\selectBG.dds">
       <Filter>Resources\Textures\BackGround</Filter>
     </Image>
+    <Image Include="Resources\Textures\UI_Clear\clockSeal.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Clear\coinSeal.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
+    </Image>
+    <Image Include="Resources\Textures\UI_Clear\thumbtack.dds">
+      <Filter>Resources\Textures\UI_Clear</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Models\Cloud.cmo">
@@ -712,9 +715,6 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Spike.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\TitleLogoVer2.cmo">
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
@@ -908,9 +908,6 @@
     <Filter Include="Main\pch">
       <UniqueIdentifier>{7ce8b178-bc69-4b35-94dc-a68f8b3f8764}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Cameras\OverHeadCamera">
-      <UniqueIdentifier>{2111bc67-0600-496c-b301-2355e4a22b35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameSystems">
       <UniqueIdentifier>{2051ee9e-f24d-4a14-a592-ac67f720453c}</UniqueIdentifier>
     </Filter>
@@ -1034,9 +1031,6 @@
     <Filter Include="GameObjects\Title\Bird_Title">
       <UniqueIdentifier>{de7b4021-0cad-455b-81ed-506b86fe5511}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Title\Logo">
-      <UniqueIdentifier>{0175345c-9e1d-4ebd-93b9-123d18efa4d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Title\Sky_Title">
       <UniqueIdentifier>{da5652a9-a5d4-458d-8e59-deb0fb0ce823}</UniqueIdentifier>
     </Filter>
@@ -1105,6 +1099,9 @@
     </Filter>
     <Filter Include="GameObjects\Select\BG_Select">
       <UniqueIdentifier>{9a9e0caa-5f47-4a83-889b-2a8e958b6c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\Seal">
+      <UniqueIdentifier>{1a2b072b-bee5-4231-9476-ea13e6369f39}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

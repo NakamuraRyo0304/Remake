@@ -16,9 +16,9 @@
 
 class AdminCamera;
 class Sky_Title;
-class Logo;
 class Bird_Title;
 class UI_Title;
+class Water;
 class TitleScene final : public IScene
 {
 private:
@@ -32,14 +32,14 @@ private:
 	// スカイ球
 	std::unique_ptr<Sky_Title> m_sky;
 
-	// ロゴ
-	std::unique_ptr<Logo> m_logo;
-
 	// トリ
 	std::unique_ptr<Bird_Title> m_birdTitle;
 
+	// 水
+	std::unique_ptr<Water> m_water;
 
 public:
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>

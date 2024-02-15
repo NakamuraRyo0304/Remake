@@ -20,6 +20,7 @@ class ScoreBoard;
 class Timer;
 class UI_Clear;
 class Tape;
+class Seal;
 class ClearScene final : public IScene
 {
 private:
@@ -42,6 +43,10 @@ private:
 	// テープ
 	std::unique_ptr<Tape> m_tape[2];
 
+	enum Sticker{ Coin, Clock, Length};
+	// シール
+	std::unique_ptr<Seal> m_seal[Sticker::Length];
+
 	// クリア時間
 	float m_clearTime;
 
@@ -50,8 +55,8 @@ private:
 
 private:
 
-	// 黒色
-	static const DirectX::SimpleMath::Vector4 BLACK_COLOR;
+	// 白色
+	static const DirectX::SimpleMath::Vector4 WHITE;
 
 public:
 
