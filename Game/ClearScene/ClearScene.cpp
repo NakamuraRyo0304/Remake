@@ -21,7 +21,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 ClearScene::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
+const SimpleMath::Vector4 ClearScene::WHITE = SimpleMath::Vector4(1, 1, 1, 1);	// 白色
 
 //==============================================================================
 // エイリアス宣言
@@ -216,9 +216,9 @@ void ClearScene::SetSceneValues()
 	m_backGround->Initialize();
 
 	// スコアボードの初期化(1.5文字分間隔をあける)
-	m_coinBoard->Initialize({ 1500.0f,100.0f }, BLACK_COLOR,
+	m_coinBoard->Initialize({ 1500.0f,100.0f }, WHITE,
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
-	m_timeBoard->Initialize({ 1500.0f,250.0f }, BLACK_COLOR,
+	m_timeBoard->Initialize({ 1500.0f,250.0f }, WHITE,
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
 
 	// テープの初期化

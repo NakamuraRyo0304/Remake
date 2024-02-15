@@ -54,8 +54,8 @@ private:
 
 private:
 
-	// •F
-	static const DirectX::SimpleMath::Vector4 BLACK_COLOR;
+	// ”’F
+	static const DirectX::SimpleMath::Vector4 WHITE;
 
 public:
 
