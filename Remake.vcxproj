@@ -408,6 +408,7 @@
     <Image Include="Resources\Textures\UI_Clear\coinSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\tape1.dds" />
     <Image Include="Resources\Textures\UI_Clear\tape2.dds" />
+    <Image Include="Resources\Textures\UI_Clear\thumbtack.dds" />
     <Image Include="Resources\Textures\UI_Play\UI_Area.dds" />
   </ItemGroup>
   <ItemGroup>

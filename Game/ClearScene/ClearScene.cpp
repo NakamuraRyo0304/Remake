@@ -142,8 +142,8 @@ void ClearScene::Draw()
 		m_tape[1]->Draw();
 
 		// シールの描画
-		m_seal[0]->Draw();
-		m_seal[1]->Draw();
+		m_seal[Sticker::Coin]->Draw();
+		m_seal[Sticker::Clock]->Draw();
 
 		// ボードの描画
 		m_coinBoard->Draw();
@@ -200,8 +200,8 @@ void ClearScene::CreateWDResources()
 	m_tape[1] = std::make_unique<Tape>();
 
 	// シール作成
-	m_seal[0] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/coinSeal.dds");
-	m_seal[1] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/clockSeal.dds");
+	m_seal[Sticker::Coin] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/coinSeal.dds");
+	m_seal[Sticker::Clock] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/clockSeal.dds");
 }
 
 //==============================================================================
@@ -215,11 +215,11 @@ void ClearScene::SetSceneValues()
 	// 背景の初期化
 	m_backGround->Initialize();
 
-	// スコアボードの初期化(1.5文字分間隔をあける)
+	// スコアボードの初期化(1文字分間隔をあける)
 	m_coinBoard->Initialize({ 1500.0f,100.0f }, WHITE,
-		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
+		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
 	m_timeBoard->Initialize({ 1500.0f,250.0f }, WHITE,
-		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.5);
+		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
 
 	// テープの初期化
 	m_tape[0]->Initialize({ 110.0f,460.0f }, SimpleMath::Vector2::One,
@@ -228,9 +228,9 @@ void ClearScene::SetSceneValues()
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
 
 	// シールの初期化
-	m_seal[0]->Initialize({1400.0f, 160.0f}, SimpleMath::Vector2::One * 0.5f,
+	m_seal[Sticker::Coin]->Initialize({ 1400.0f, 160.0f }, SimpleMath::Vector2::One * 0.5f,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
-	m_seal[1]->Initialize({1420.0f, 312.0f}, SimpleMath::Vector2::One * 0.4f,
+	m_seal[Sticker::Clock]->Initialize({ 1420.0f, 312.0f }, SimpleMath::Vector2::One * 0.4f,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-53.0f));
 }
 

@@ -43,8 +43,9 @@ private:
 	// テープ
 	std::unique_ptr<Tape> m_tape[2];
 
-	// シール(0:コイン/1:時計)
-	std::unique_ptr<Seal> m_seal[2];
+	enum Sticker{ Coin, Clock, Length};
+	// シール
+	std::unique_ptr<Seal> m_seal[Sticker::Length];
 
 	// クリア時間
 	float m_clearTime;
