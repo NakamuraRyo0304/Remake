@@ -57,12 +57,12 @@ void UI_Title::Initialize()
 	m_sprites->AddTextureData(L"Exit",  L"Resources/Textures/Text/Exit.dds");
 
 	// À•W‚ÌÝ’è
-	m_position.emplace(L"Start", SimpleMath::Vector2(1200.0f, 950.0f));
-	m_position.emplace(L"Exit", SimpleMath::Vector2(1600.0f, 950.0f));
+	m_position.emplace(L"Start", SimpleMath::Vector2(1500.0f, 800.0f));
+	m_position.emplace(L"Exit", SimpleMath::Vector2(1500.0f, 950.0f));
 
 	// F‚ÌÝ’è
-	m_color.emplace(L"Start", SimpleMath::Vector4(0, 0, 0, 1));
-	m_color.emplace(L"Exit", SimpleMath::Vector4(0, 0, 0, 1));
+	m_color.emplace(L"Start", SimpleMath::Vector4(1, 1, 1, 1));
+	m_color.emplace(L"Exit", SimpleMath::Vector4(1, 1, 1, 1));
 }
 
 //==============================================================================
@@ -73,8 +73,8 @@ void UI_Title::Update()
 	auto& _input = Input::GetInstance()->GetKeyTrack();
 
 	// ‚Ç‚¿‚ç‚©‚ð‰Ÿ‚µ‚½‚ç”½“]‚·‚é
-	if (_input->IsKeyPressed(KeyCode::Right)	|| _input->IsKeyPressed(KeyCode::Left) ||
-		_input->IsKeyPressed(KeyCode::D)		|| _input->IsKeyPressed(KeyCode::A))
+	if (_input->IsKeyPressed(KeyCode::Up)	|| _input->IsKeyPressed(KeyCode::Down) ||
+		_input->IsKeyPressed(KeyCode::W)	|| _input->IsKeyPressed(KeyCode::S))
 	{
 		m_selection = m_selection == Start ? Exit : Start;
 	}
@@ -83,12 +83,12 @@ void UI_Title::Update()
 	if (m_selection == TitleSelect::Start)
 	{
 		m_color[L"Start"] = UserUtility::Lerp(m_color[L"Start"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Exit"] = SimpleMath::Vector4(0, 0, 0, 1);
+		m_color[L"Exit"] = SimpleMath::Vector4(1, 1, 1, 1);
 	}
 	if (m_selection == TitleSelect::Exit)
 	{
 		m_color[L"Exit"] = UserUtility::Lerp(m_color[L"Exit"], RED_COLOR, COLOR_SPEED);
-		m_color[L"Start"] = SimpleMath::Vector4(0, 0, 0, 1);
+		m_color[L"Start"] = SimpleMath::Vector4(1, 1, 1, 1);
 	}
 }
 

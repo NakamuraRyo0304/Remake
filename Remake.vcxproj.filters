@@ -168,9 +168,6 @@
     <ClCompile Include="pch.cpp">
       <Filter>Main\pch</Filter>
     </ClCompile>
-    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
-      <Filter>GameObjects\Title\Logo</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\Objects\EditChara\EditChara.cpp">
       <Filter>GameObjects\Editor\EditChara</Filter>
     </ClCompile>
@@ -182,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp">
       <Filter>GameObjects\Common\Blocks\Goal</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Cameras\OverHeadCamera\OverHeadCamera.cpp">
-      <Filter>Cameras\OverHeadCamera</Filter>
     </ClCompile>
     <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp">
       <Filter>GameSystems\Play\ImageShot</Filter>
@@ -422,9 +416,6 @@
     <ClInclude Include="pch.h">
       <Filter>Main\pch</Filter>
     </ClInclude>
-    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
-      <Filter>GameObjects\Title\Logo</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Editor\Objects\EditChara\EditChara.h">
       <Filter>GameObjects\Editor\EditChara</Filter>
     </ClInclude>
@@ -436,9 +427,6 @@
     </ClInclude>
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h">
       <Filter>GameObjects\Common\Blocks\Goal</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\OverHeadCamera\OverHeadCamera.h">
-      <Filter>Cameras\OverHeadCamera</Filter>
     </ClInclude>
     <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h">
       <Filter>GameSystems\Play\ImageShot</Filter>
@@ -905,9 +893,6 @@
     <Filter Include="Main\pch">
       <UniqueIdentifier>{7ce8b178-bc69-4b35-94dc-a68f8b3f8764}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Cameras\OverHeadCamera">
-      <UniqueIdentifier>{2111bc67-0600-496c-b301-2355e4a22b35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameSystems">
       <UniqueIdentifier>{2051ee9e-f24d-4a14-a592-ac67f720453c}</UniqueIdentifier>
     </Filter>
@@ -1030,9 +1015,6 @@
     </Filter>
     <Filter Include="GameObjects\Title\Bird_Title">
       <UniqueIdentifier>{de7b4021-0cad-455b-81ed-506b86fe5511}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Title\Logo">
-      <UniqueIdentifier>{0175345c-9e1d-4ebd-93b9-123d18efa4d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObjects\Title\Sky_Title">
       <UniqueIdentifier>{da5652a9-a5d4-458d-8e59-deb0fb0ce823}</UniqueIdentifier>
