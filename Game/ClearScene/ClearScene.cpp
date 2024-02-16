@@ -78,8 +78,11 @@ void ClearScene::Update()
 {
 	auto _input = Input::GetInstance();
 
-	// ソフト終了
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
+	// セレクトに戻る
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	{
+		ChangeScene(SCENE::SELECT);
+	}
 
 	// シーン遷移
 	if (IsCanUpdate())
@@ -91,8 +94,7 @@ void ClearScene::Update()
 		if (not m_momentCanv->IsEndMoving()) return;
 
 		// タイム・コインのスコアを更新する
-		m_direction->Start();
-		m_direction->Update(true);
+		m_direction->Update();
 		if (m_direction->Alarm())
 		{
 			m_coinBoard->SetNumber(m_collectedCoin);
@@ -232,6 +234,9 @@ void ClearScene::SetSceneValues()
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
 	m_seal[Sticker::Clock]->Initialize({ 1420.0f, 312.0f }, SimpleMath::Vector2::One * 0.4f,
 		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-53.0f));
+
+	// タイマーを開始する
+	m_direction->Start();
 }
 
 //==============================================================================

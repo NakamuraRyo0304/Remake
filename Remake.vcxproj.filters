@@ -288,6 +288,9 @@
     <ClCompile Include="Game\ClearScene\Objects\Seal\Seal.cpp">
       <Filter>GameObjects\Clear\Seal</Filter>
     </ClCompile>
+    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
+      <Filter>GameObjects\Title\Logo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -551,6 +554,9 @@
     <ClInclude Include="Game\ClearScene\Objects\Seal\Seal.h">
       <Filter>GameObjects\Clear\Seal</Filter>
     </ClInclude>
+    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
+      <Filter>GameObjects\Title\Logo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -589,22 +595,7 @@
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds">
       <Filter>Resources\Textures\Button</Filter>
     </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Crystal.png">
-      <Filter>Resources\Textures\Rule</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Grids.png">
-      <Filter>Resources\Textures\Rule</Filter>
-    </Image>
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
-      <Filter>Resources\Textures\Rule</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_OldTV.png">
-      <Filter>Resources\Textures\Rule</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Rot.png">
-      <Filter>Resources\Textures\Rule</Filter>
-    </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png">
       <Filter>Resources\Textures\Rule</Filter>
     </Image>
     <Image Include="Resources\Textures\ShaderTex\water.png">
@@ -681,6 +672,9 @@
     </Image>
     <Image Include="Resources\Textures\UI_Clear\coinSeal.dds">
       <Filter>Resources\Textures\UI_Clear</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Logo\Logo.dds">
+      <Filter>Resources\Textures\Logo</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -1099,6 +1093,12 @@
     </Filter>
     <Filter Include="GameObjects\Clear\Seal">
       <UniqueIdentifier>{1a2b072b-bee5-4231-9476-ea13e6369f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Title\Logo">
+      <UniqueIdentifier>{a9c77db7-3a44-4b72-ba8e-b54190959361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Logo">
+      <UniqueIdentifier>{b2cc43bd-71ef-4d82-b8e2-26bae4e4fc2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -32,6 +32,7 @@ Timer::~Timer()
 //==============================================================================
 void Timer::Start()
 {
+	is_alarm = false;
 	is_do = true;
 }
 
@@ -43,21 +44,18 @@ void Timer::Update(bool updown)
 	// 実行がオフでスキップ
 	if (is_do == false) return;
 
-	// fpsを取得
-	auto _fps = DX::StepTimer::GetInstance().GetFramesPerSecond();
-
 	// アラームがなっていなければ続ける
 	{
 		// カウントアップ
 		if (updown == true && is_alarm == false)
 		{
-			m_count += 1.0f / _fps;
+			m_count += static_cast<float>(DX::StepTimer::GetInstance().GetElapsedSeconds());
 		}
 
 		// カウントダウン
 		if (updown == false && is_alarm == false)
 		{
-			m_count -= 1.0f / _fps;
+			m_count -= static_cast<float>(DX::StepTimer::GetInstance().GetElapsedSeconds());
 		}
 	}
 
@@ -78,4 +76,14 @@ void Timer::Update(bool updown)
 void Timer::Stop()
 {
 	is_do = false;
+}
+
+//==============================================================================
+// 再スタート
+//==============================================================================
+void Timer::ReStart()
+{
+	Stop();
+	Reset();
+	Start();
 }

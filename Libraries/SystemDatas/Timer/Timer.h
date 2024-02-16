@@ -9,7 +9,6 @@
 #ifndef TIMER
 #define TIMER
 
-#include <numeric>
 class Timer
 {
 public:
@@ -42,7 +41,7 @@ public:
 	/// <param name="mode">タイマーのモード</param>
 	/// <param name="limitedSeconds">制限時間(なければ不要)</param>
 	/// <returns>なし</returns>
-	Timer(Mode mode, float limitedSeconds = std::numeric_limits<float>::max());
+	Timer(Mode mode, float limitedSeconds = 0.0f);
 	~Timer();
 
 	/// <summary>
@@ -72,6 +71,13 @@ public:
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
 	void Reset() { m_count = 0.0f; }
+
+	/// <summary>
+	/// 再スタート
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void ReStart();
 
 public:
 

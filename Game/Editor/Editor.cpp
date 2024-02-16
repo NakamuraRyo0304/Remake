@@ -63,8 +63,11 @@ void Editor::Update()
 {
 	auto _input = Input::GetInstance();
 
-	// ソフト終了
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
+	// セレクトに戻る
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	{
+		ChangeScene(SCENE::SELECT);
+	}
 
 	// UIの更新
 	m_ui->Update();

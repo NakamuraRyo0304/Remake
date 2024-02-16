@@ -29,6 +29,7 @@ UI_Title::UI_Title(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	, m_selection{ TitleSelect::Start }		// スタート
 	, m_position{}							// 座標
 	, m_color{}								// 描画色
+	, is_anything{ false }					// 捜査状況監視フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -63,6 +64,8 @@ void UI_Title::Initialize()
 	// 色の設定
 	m_color.emplace(L"Start", SimpleMath::Vector4(1, 1, 1, 1));
 	m_color.emplace(L"Exit", SimpleMath::Vector4(1, 1, 1, 1));
+
+	is_anything = false;
 }
 
 //==============================================================================
@@ -77,6 +80,11 @@ void UI_Title::Update()
 		_input->IsKeyPressed(KeyCode::W)	|| _input->IsKeyPressed(KeyCode::S))
 	{
 		m_selection = m_selection == Start ? Exit : Start;
+		is_anything = true;
+	}
+	else
+	{
+		is_anything = false;
 	}
 
 	// 選択番号に応じて色を分ける
