@@ -682,9 +682,6 @@
     <Image Include="Resources\Textures\UI_Clear\coinSeal.dds">
       <Filter>Resources\Textures\UI_Clear</Filter>
     </Image>
-    <Image Include="Resources\Textures\UI_Clear\thumbtack.dds">
-      <Filter>Resources\Textures\UI_Clear</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Models\Cloud.cmo">

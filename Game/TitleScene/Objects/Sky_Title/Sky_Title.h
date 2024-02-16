@@ -16,11 +16,6 @@
 
 class Sky_Title : public IGameObject
 {
-private:
-
-	// ‰ñ“]‘¬“x
-	static const float ROTATE_SPEED;
-
 public:
 
 	/// <summary>

@@ -18,7 +18,7 @@ using KeyCode = Keyboard::Keys;			// キーコード
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 UI_Title::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
+const SimpleMath::Vector4 UI_Title::RED_COLOR = SimpleMath::Vector4(1, 0.5f, 0, 1);	// オレンジ色
 const float UI_Title::COLOR_SPEED = 0.075f;	// 色の変更速度
 
 //==============================================================================
