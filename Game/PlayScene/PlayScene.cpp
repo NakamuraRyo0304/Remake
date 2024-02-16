@@ -88,8 +88,11 @@ void PlayScene::Update()
 	auto _input = Input::GetInstance();
 	auto _key = Keyboard::Get().GetState();
 
-	// ソフト終了
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::SELECT); }
+	// セレクトに戻る
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	{
+		ChangeScene(SCENE::SELECT);
+	}
 
 	// シーン遷移
 	if (IsCanUpdate())

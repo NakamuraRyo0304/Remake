@@ -244,6 +244,7 @@
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
+    <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h" />
     <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h" />
     <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h" />
     <ClInclude Include="Game\TitleScene\TitleScene.h" />
@@ -332,6 +333,7 @@
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />
+    <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp" />
     <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp" />
     <ClCompile Include="Game\TitleScene\TitleScene.cpp" />
@@ -380,6 +382,7 @@
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
+    <Image Include="Resources\Textures\Logo\Logo.dds" />
     <Image Include="Resources\Textures\ScreenShot\image.dds" />
     <Image Include="Resources\Textures\ShaderTex\water.png" />
     <Image Include="Resources\Textures\Stages\Stage1.dds" />
@@ -398,12 +401,7 @@
     <Image Include="Resources\Textures\Text\Stage3tex.dds" />
     <Image Include="Resources\Textures\Text\Stage4tex.dds" />
     <Image Include="Resources\Textures\Text\Start.dds" />
-    <Image Include="Resources\Textures\Transitions\Rule_OldTV.png" />
-    <Image Include="Resources\Textures\Transitions\Rule_Crystal.png" />
-    <Image Include="Resources\Textures\Transitions\Rule_Grids.png" />
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png" />
-    <Image Include="Resources\Textures\Transitions\Rule_Rot.png" />
-    <Image Include="Resources\Textures\Transitions\Rule_UpperWipe.png" />
     <Image Include="Resources\Textures\UI_Clear\clockSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\coinSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\tape1.dds" />

@@ -19,6 +19,8 @@ class Sky_Title;
 class Bird_Title;
 class UI_Title;
 class Water;
+class Logo;
+class Timer;
 class TitleScene final : public IScene
 {
 private:
@@ -37,6 +39,20 @@ private:
 
 	// 水
 	std::unique_ptr<Water> m_water;
+
+	// タイトルロゴ
+	std::unique_ptr<Logo> m_logo;
+
+	// タイマー
+	std::unique_ptr<Timer> m_timer;
+
+private:
+
+	// ロゴのフェードイン速度
+	static const float LOGO_FADE_IN_SPEED;
+
+	// ロゴのフェードアウト速度
+	static const float LOGO_FADE_OUT_SPEED;
 
 public:
 

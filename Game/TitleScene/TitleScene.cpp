@@ -9,11 +9,19 @@
 // システム
 #include "Game/Cameras/AdminCamera/AdminCamera.h"
 #include "Game/TitleScene/System/UI_Title/UI_Title.h"
+#include "Libraries/SystemDatas/Timer/Timer.h"
 // オブジェクト
 #include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"
 #include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
 #include "Game/Common/Water/Water.h"
+#include "Game/TitleScene/Objects/Logo/Logo.h"
 #include "TitleScene.h"
+
+//==============================================================================
+// 定数の設定
+//==============================================================================
+const float TitleScene::LOGO_FADE_IN_SPEED = 0.025f;		// ロゴフェードイン速度
+const float TitleScene::LOGO_FADE_OUT_SPEED = 0.1f;			// ロゴフェードアウト速度
 
 //==============================================================================
 // エイリアス宣言
@@ -62,14 +70,42 @@ void TitleScene::Update()
 	auto _input = Input::GetInstance();
 
 	// ソフト終了
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape)) { ChangeScene(SCENE::EXIT); }
-
-	// UIの更新
-	m_ui->Update();
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	{
+		ChangeScene(SCENE::EXIT);
+	}
 
 	// シーン遷移
 	if (IsCanUpdate())
 	{
+		// タイマーの更新
+		m_timer->Update();
+
+		// UIの更新
+		m_ui->Update();
+
+		// 何か入力があればタイマーを再スタート
+		if (m_ui->IsAnything())
+		{
+			m_timer->ReStart();
+		}
+
+		// タイマーが指定時間に達したら実行する
+		if (m_timer->Alarm())
+		{
+			// ロゴをフェードアウトさせる
+			m_logo->SetColor(UserUtility::Lerp(
+				m_logo->GetColor(), SimpleMath::Vector4::Zero, LOGO_FADE_OUT_SPEED)
+			);
+		}
+		else
+		{
+			// ロゴをフェードインさせる
+			m_logo->SetColor(UserUtility::Lerp(
+				m_logo->GetColor(), SimpleMath::Vector4::One, LOGO_FADE_IN_SPEED)
+			);
+		}
+
 		// スペースを押したら遷移する
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
@@ -113,11 +149,14 @@ void TitleScene::Draw()
 	// UIの表示
 	m_ui->Draw();
 
+	// タイトルロゴの表示
+	m_logo->Draw();
+
 
 	// デバッグ描画
 #if _DEBUG
-	auto _grid = GetSystemManager()->GetGridFloor();
-	_grid->Draw(*_states, _view, _projection, Colors::Green);
+	//auto _grid = GetSystemManager()->GetGridFloor();
+	//_grid->Draw(*_states, _view, _projection, Colors::Green);
 	DebugDraw(*_states);
 #endif
 }
@@ -132,6 +171,8 @@ void TitleScene::Finalize()
 	m_ui.reset();
 	m_birdTitle.reset();
 	m_water.reset();
+	m_logo.reset();
+	m_timer.reset();
 }
 
 //==============================================================================
@@ -154,6 +195,11 @@ void TitleScene::CreateWDResources()
 	// 水作成
 	m_water = std::make_unique<Water>();
 
+	// ロゴ作成
+	m_logo = std::make_unique<Logo>(GetWindowSize() / GetFullHDSize());
+
+	// タイマー作成(10秒に設定)
+	m_timer = std::make_unique<Timer>(Timer::Mode::limited, 10.0f);
 }
 
 //==============================================================================
@@ -167,6 +213,12 @@ void TitleScene::SetSceneValues()
 
 	// 水の初期化
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
+
+	// ロゴの初期化
+	m_logo->Initialize({ 150.0f ,120.0f }, SimpleMath::Vector4::Zero, { 2,2 });
+
+	// タイマーを開始
+	m_timer->Start();
 }
 
 //==============================================================================
@@ -181,5 +233,5 @@ void TitleScene::DebugDraw(CommonStates& states)
 	_string.DrawFormatString(states, { 0,0 },  Colors::DarkGreen, L"TitleScene");
 	_string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
 	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", _time.GetTotalSeconds());
+	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", m_timer->GetCount());
 }

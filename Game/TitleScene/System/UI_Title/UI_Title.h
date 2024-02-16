@@ -35,6 +35,9 @@ private:
 	// 遷移先セレクト
 	int m_selection;
 
+	// 動作検知フラグ
+	bool is_anything;
+
 private:
 
 	// 選択色
@@ -79,6 +82,9 @@ public:
 
 	// セレクト番号を返す
 	const int& GetSelection() { return m_selection; }
+
+	// 動作を検知状況を返す
+	bool IsAnything() { return is_anything; }
 };
 
 #endif // UI_TITLE
