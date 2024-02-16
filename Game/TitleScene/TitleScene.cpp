@@ -13,6 +13,7 @@
 #include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"
 #include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
 #include "Game/Common/Water/Water.h"
+#include "Game/TitleScene/Objects/Logo/Logo.h"
 #include "TitleScene.h"
 
 //==============================================================================
@@ -132,6 +133,7 @@ void TitleScene::Finalize()
 	m_ui.reset();
 	m_birdTitle.reset();
 	m_water.reset();
+	m_logo.reset();
 }
 
 //==============================================================================
@@ -154,6 +156,8 @@ void TitleScene::CreateWDResources()
 	// êÖçÏê¨
 	m_water = std::make_unique<Water>();
 
+	// ÉçÉSçÏê¨
+	m_logo = std::make_unique<Logo>(GetWindowSize() / GetFullHDSize());
 }
 
 //==============================================================================
@@ -167,6 +171,9 @@ void TitleScene::SetSceneValues()
 
 	// êÖÇÃèâä˙âª
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
+
+	// ÉçÉSÇÃèâä˙âª
+	m_logo->Initialize();
 }
 
 //==============================================================================
