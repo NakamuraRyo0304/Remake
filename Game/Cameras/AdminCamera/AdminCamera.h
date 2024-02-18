@@ -23,7 +23,6 @@
 #include "../FloatingCameras/Stage2Camera/Stage2Camera.h"
 #include "../FloatingCameras/Stage3Camera/Stage3Camera.h"
 #include "../FloatingCameras/Stage4Camera/Stage4Camera.h"
-#include "../RotateCamera/RotateCamera.h"
 #include "../EditorCamera/EditorCamera.h"
 #include "../DeathCamera/DeathCamera.h"
 
