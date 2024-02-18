@@ -195,9 +195,6 @@
     <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp">
       <Filter>GameObjects\Play\Player\Head</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp">
-      <Filter>Cameras\RotateCamera</Filter>
-    </ClCompile>
     <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp">
       <Filter>GameObjects\Title\Sky_Title</Filter>
     </ClCompile>
@@ -448,9 +445,6 @@
     </ClInclude>
     <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h">
       <Filter>GameObjects\Play\Player\Head</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h">
-      <Filter>Cameras\RotateCamera</Filter>
     </ClInclude>
     <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h">
       <Filter>GameObjects\Title\Sky_Title</Filter>
@@ -925,9 +919,6 @@
     </Filter>
     <Filter Include="Resources\Textures\Rule">
       <UniqueIdentifier>{5fa845e5-d61c-45e7-b994-80724d236c41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cameras\RotateCamera">
-      <UniqueIdentifier>{cd0bfe37-9e72-4a6a-a371-7470a41bc050}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Stages">
       <UniqueIdentifier>{160a7611-043a-4161-8da3-32dc3cc53a7e}</UniqueIdentifier>

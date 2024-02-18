@@ -71,7 +71,6 @@ namespace Debug
 		* DrawFormatString(_states, { 0,100 }, Colors::Black, L"Time:%.2f", m_timer);
 		* 出力結果：スクリーン座標{0,100}に、黒色で「Time:10.00」と表示
 		*/
-
 		/// <summary>
 		/// 出力ウィンドウにログを出力
 		/// </summary>
@@ -79,10 +78,13 @@ namespace Debug
 		/// <returns>なし</returns>
 		inline void DebugLog(const wchar_t* wstr)
 		{
-			#ifdef _DEBUG
+#ifndef _DEBUG
+			UNREFERENCED_PARAMETER(wstr);
+#endif // RELEASE
+#ifdef _DEBUG
 			OutputDebugString(wstr);
 			OutputDebugString(L"\n");
-			#endif // _DEBUG
+#endif // _DEBUG
 		}
 	};
 }

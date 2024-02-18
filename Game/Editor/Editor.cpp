@@ -134,7 +134,7 @@ void Editor::Draw()
 #if _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
 	_grid->Draw(*_states, _view, _projection, Colors::Green);
-	DebugDraw(*_states);
+	//DebugDraw(*_states);
 #endif
 
 	// UIの描画(最前面に描画)
@@ -193,6 +193,7 @@ void Editor::SetSceneValues()
 	m_selectionID = ID::Obj_Flozen;
 
 	// ブロックの初期化
+	m_blockManager->SetPlay(false);
 	m_blockManager->Initialize();
 
 	// エディタモードにする
@@ -226,11 +227,25 @@ void Editor::DebugDraw(CommonStates& states)
 }
 
 //==============================================================================
+// オブジェクトをセットする
+//==============================================================================
+void Editor::SetDrawObject()
+{
+	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 氷床
+	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
+	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
+	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア
+	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
+	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
+	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
+}
+
+//==============================================================================
 // コリジョンの更新
 //==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
-	for (auto& obj : m_blockManager->GetAirBlock())	// エアオブジェクト
+	for (auto& obj : m_blockManager->GetAirs())		// エアー（判定用ブロック）
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -256,20 +271,7 @@ void Editor::UpdateCollisions(ID id)
 	}
 	for (auto& obj : m_blockManager->GetSpikes())	// 棘エネミー
 	{
+		if (UserUtility::IsNull(obj.get())) { break; }
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-}
-
-//==============================================================================
-// オブジェクトをセットする
-//==============================================================================
-void Editor::SetDrawObject()
-{
-	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 氷床
-	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
-	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
-	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア
-	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
-	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
-	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
 }
