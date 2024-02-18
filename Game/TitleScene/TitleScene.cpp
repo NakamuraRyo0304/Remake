@@ -96,7 +96,7 @@ void TitleScene::Update()
 		{
 			// ロゴをフェードアウトさせる
 			m_logo->SetColor(UserUtility::Lerp(
-				m_logo->GetColor(), SimpleMath::Vector4::Zero, LOGO_FADE_OUT_SPEED)
+				m_logo->GetColor(), SimpleMath::Vector4::One * QUARTER, LOGO_FADE_OUT_SPEED)
 			);
 		}
 		else

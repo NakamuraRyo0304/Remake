@@ -58,6 +58,9 @@ private:
 	// ロゴのフェードアウト速度
 	static const float LOGO_FADE_OUT_SPEED;
 
+	// ４分の１
+	const float QUARTER = 0.25f;
+
 public:
 
 	/// <summary>

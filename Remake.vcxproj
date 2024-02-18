@@ -198,7 +198,6 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.h" />
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.h" />
-    <ClInclude Include="Game\Cameras\RotateCamera\RotateCamera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
     <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h" />
     <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h" />
@@ -289,7 +288,6 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage2Camera\Stage2Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage3Camera\Stage3Camera.cpp" />
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.cpp" />
-    <ClCompile Include="Game\Cameras\RotateCamera\RotateCamera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp" />

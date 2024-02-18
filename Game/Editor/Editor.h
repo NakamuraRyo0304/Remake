@@ -109,18 +109,18 @@ private:
 private:
 
 	/// <summary>
-	/// コリジョン更新
-	/// </summary>
-	/// <param name="id">変更したいブロックのID</param>
-	/// <returns>なし</returns>
-	void UpdateCollisions(ID id);
-
-	/// <summary>
 	/// オブジェクトをセットする
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>なし</returns>
 	void SetDrawObject();
+
+	/// <summary>
+	/// コリジョン更新
+	/// </summary>
+	/// <param name="id">変更したいブロックのID</param>
+	/// <returns>なし</returns>
+	void UpdateCollisions(ID id);
 };
 
 #endif // Editor
