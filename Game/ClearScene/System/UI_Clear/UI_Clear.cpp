@@ -12,10 +12,10 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 UI_Clear::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
-const SimpleMath::Vector4 UI_Clear::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
+const SimpleMath::Vector4 UI_Clear::WHITE = SimpleMath::Vector4(1.0f, 1.0f, 1.0f, 1.0f);// 原色
+const SimpleMath::Vector4 UI_Clear::THINW = SimpleMath::Vector4(0.4f, 0.4f, 0.4f, 0.4f);// 薄色
 const float UI_Clear::COLOR_SPEED = 0.075f;	// 色の変更速度
-const float UI_Clear::LAST_POS_X = 1450.0f;	// 最終X座標
+const float UI_Clear::LAST_POS_X = 1550.0f;	// 最終X座標
 
 //==============================================================================
 // コンストラクタ
@@ -54,9 +54,9 @@ void UI_Clear::Initialize()
 
 	// 文字ごとの設定
 	Option _opt = {};
-	_opt.pos = { LAST_POS_X * 2,750.0f }; _opt.color = RED_COLOR;
+	_opt.pos = { LAST_POS_X * 2,750.0f }; _opt.color = WHITE;
 	m_options.emplace(L"Next", _opt);
-	_opt.pos.y += 100.0f; _opt.color = BLACK_COLOR;
+	_opt.pos.y += 100.0f; _opt.color = THINW;
 	m_options.emplace(L"ReStart", _opt);
 	_opt.pos.y += 100.0f;
 	m_options.emplace(L"Stages", _opt);
@@ -110,25 +110,25 @@ void UI_Clear::ChangeColor(const SELECT& select)
 	if (select == SELECT::NEXT)
 	{
 		m_options[L"Next"].color =
-			UserUtility::Lerp(m_options[L"Next"].color, RED_COLOR, COLOR_SPEED);
+			UserUtility::Lerp(m_options[L"Next"].color, WHITE, COLOR_SPEED);
 
-		m_options[L"ReStart"].color = BLACK_COLOR;
-		m_options[L"Stages"].color = BLACK_COLOR;
+		m_options[L"ReStart"].color = THINW;
+		m_options[L"Stages"].color = THINW;
 	}
 	if (select == SELECT::RESTART)
 	{
 		m_options[L"ReStart"].color =
-			UserUtility::Lerp(m_options[L"ReStart"].color, RED_COLOR, COLOR_SPEED);
+			UserUtility::Lerp(m_options[L"ReStart"].color, WHITE, COLOR_SPEED);
 
-		m_options[L"Stages"].color = BLACK_COLOR;
-		m_options[L"Next"].color = BLACK_COLOR;
+		m_options[L"Stages"].color = THINW;
+		m_options[L"Next"].color = THINW;
 	}
 	if (select == SELECT::STAGES)
 	{
 		m_options[L"Stages"].color =
-			UserUtility::Lerp(m_options[L"Stages"].color, RED_COLOR, COLOR_SPEED);
+			UserUtility::Lerp(m_options[L"Stages"].color, WHITE, COLOR_SPEED);
 
-		m_options[L"Next"].color = BLACK_COLOR;
-		m_options[L"ReStart"].color = BLACK_COLOR;
+		m_options[L"Next"].color = THINW;
+		m_options[L"ReStart"].color = THINW;
 	}
 }

@@ -74,10 +74,10 @@ void UI_Editor::Initialize()
 	m_buttons[BN::Flozen_bn]->Initialize(	{ _L, _Y + _OFF * 1}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Cloud_bn]->Initialize(	{ _R, _Y + _OFF * 1}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Coin_bn]->Initialize(		{ _L, _Y + _OFF * 2}, _bRate, _bRect, GetScreenRate());
-	m_buttons[BN::Air_bn]->Initialize(		{ _R, _Y + _OFF * 2}, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::Spike_bn]->Initialize(	{ _R, _Y + _OFF * 2}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Player_bn]->Initialize(	{ _L, _Y + _OFF * 3}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Goal_bn]->Initialize(		{ _R, _Y + _OFF * 3}, _bRate, _bRect, GetScreenRate());
-	m_buttons[BN::Spike_bn]->Initialize(	{ _L, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
+	m_buttons[BN::Air_bn]->Initialize(		{ _L, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 
 }
 

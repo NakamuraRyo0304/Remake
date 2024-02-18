@@ -202,27 +202,27 @@ void GameMain::DeleteScene()
 	// シーン間の値受け渡しは　　<<ここから
 	//==============================================================================
 
-	// 次のシーン：ゲームシーン 前のシーン：セレクトシーン
-	// 処理：選択されたステージ番号を取得
+	// セレクトシーン ----> プレイシーン
+	// 処理：選択されたステージ番号を送信
 	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::SELECT)
 	{
-		m_stageNumber = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
-		m_maxNumber = CastSceneType<SelectScene>(m_nowScene)->GetMaxNumber();
+		m_stageNumber   = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
+		m_maxNumber     = CastSceneType<SelectScene>(m_nowScene)->GetMaxNumber();
 	}
-	// 次のシーン：ゲームシーン 前のシーン：クリアシーン
-	// 処理：前回プレイしたステージの次のステージの番号を取得
+	// クリアシーン ----> プレイシーン
+	// 処理：次のステージ番号を送信（最大になったら１に戻す）
 	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::CLEAR)
 	{
-		m_stageNumber = CastSceneType<ClearScene>(m_nowScene)->GetStageNumber();
+		m_stageNumber   = CastSceneType<ClearScene>(m_nowScene)->GetStageNumber();
 	}
 
-	// 次のシーン：クリアシーン 前のシーン：プレイシーン
-	// 処理：ステージ番号、クリア時間、獲得コインを取得
+	// プレイシーン ----> クリアシーン
+	// 処理：ステージ番号、クリア時間、獲得コインを送信
 	if (m_nextScene == SCENE::CLEAR && m_prevScene == SCENE::PLAY)
 	{
-		m_clearTime = CastSceneType<PlayScene>(m_nowScene)->GetGameTimer();
+		m_clearTime     = CastSceneType<PlayScene>(m_nowScene)->GetGameTimer();
 		m_collectedCoin = CastSceneType<PlayScene>(m_nowScene)->GetCollectedCoin();
-		m_stageNumber = CastSceneType<PlayScene>(m_nowScene)->GetStageNumber();
+		m_stageNumber   = CastSceneType<PlayScene>(m_nowScene)->GetStageNumber();
 	}
 
 

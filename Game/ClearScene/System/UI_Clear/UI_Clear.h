@@ -47,8 +47,8 @@ private:
 private:
 
 	// 選択色
-	static const DirectX::SimpleMath::Vector4 RED_COLOR;
-	static const DirectX::SimpleMath::Vector4 BLACK_COLOR;
+	static const DirectX::SimpleMath::Vector4 WHITE;
+	static const DirectX::SimpleMath::Vector4 THINW;
 
 	// 色変更速度
 	static const float COLOR_SPEED;
