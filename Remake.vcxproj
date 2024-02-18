@@ -216,6 +216,7 @@
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
+    <ClInclude Include="Game\Common\Island\Island.h" />
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
     <ClInclude Include="Game\Common\Water\Water.h" />
     <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h" />
@@ -305,6 +306,7 @@
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
+    <ClCompile Include="Game\Common\Island\Island.cpp" />
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
     <ClCompile Include="Game\Common\Water\Water.cpp" />
     <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp" />

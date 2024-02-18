@@ -22,6 +22,7 @@ class Water;
 class Logo;
 class Timer;
 class Iceberg;
+class Island;
 class TitleScene final : public IScene
 {
 private:
@@ -49,6 +50,9 @@ private:
 
 	// •XŽR
 	std::unique_ptr<Iceberg> m_iceberg;
+
+	// ŒÇ“‡
+	std::unique_ptr<Island> m_island;
 
 private:
 

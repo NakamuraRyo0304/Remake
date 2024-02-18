@@ -291,6 +291,9 @@
     <ClCompile Include="Libraries\SystemDatas\DebugDraw\DebugDraw.cpp">
       <Filter>Libraries\DebugDraw</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\Island\Island.cpp">
+      <Filter>GameObjects\Common\Island</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -556,6 +559,9 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DebugDraw\DebugDraw.h">
       <Filter>Libraries\DebugDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Common\Island\Island.h">
+      <Filter>GameObjects\Common\Island</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1108,6 +1114,9 @@
     </Filter>
     <Filter Include="Libraries\DebugDraw">
       <UniqueIdentifier>{3a02202d-e096-4f80-a9bc-c8021a35c7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Island">
+      <UniqueIdentifier>{ef1de65f-18aa-4ad4-bbbd-f8cfdf4d4aa3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
