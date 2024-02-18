@@ -20,7 +20,7 @@ enum class ID
 	Obj_Player,		// プレイヤ
 	Obj_Flag,		// プレイヤが追跡する旗
 	Obj_Air,		// エディタ用判定ブロック
-	Obj_Flozen,		// 砂ブロック
+	Obj_Flozen,		// 氷床ブロック
 	Obj_Coin,		// コインブロック
 	Obj_Cloud,		// 雲ブロック
 	Obj_Goal,		// ゴールオブジェクト

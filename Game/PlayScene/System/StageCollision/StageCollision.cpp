@@ -53,9 +53,9 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
     SimpleMath::Vector3 _playerScale = player->GetScale() * 2;
 
     // 氷ブロック
-    if (not blocks->GetFlozenBlock().empty())
+    if (not blocks->GetFlozens().empty())
     {
-        for (auto& flozen : blocks->GetFlozenBlock())
+        for (auto& flozen : blocks->GetFlozens())
         {
             SimpleMath::Vector3 _pos = flozen->GetPosition();
             SimpleMath::Vector3 _scale = flozen->GetScale();
@@ -68,9 +68,9 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         }
     }
     // 雲ブロック
-    if (not blocks->GetCloudBlock().empty())
+    if (not blocks->GetClouds().empty())
     {
-        for (auto& cloud : blocks->GetCloudBlock())
+        for (auto& cloud : blocks->GetClouds())
         {
             SimpleMath::Vector3 _pos = cloud->GetPosition();
             SimpleMath::Vector3 _scale = cloud->GetScale();
@@ -88,9 +88,9 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         }
     }
     // コイン
-    if (not blocks->GetCoinBlock().empty())
+    if (not blocks->GetCoins().empty())
     {
-        for (auto& coin : blocks->GetCoinBlock())
+        for (auto& coin : blocks->GetCoins())
         {
             if (coin->IsActive() == false) continue;
             SimpleMath::Vector3 _pos = coin->GetPosition();
@@ -107,9 +107,9 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         }
     }
     // ゴールオブジェクト
-    if (not blocks->GetGoalObject().empty())
+    if (not blocks->GetGoals().empty())
     {
-        for (auto& goal : blocks->GetGoalObject())
+        for (auto& goal : blocks->GetGoals())
         {
             SimpleMath::Vector3 _pos = goal->GetPosition();
             SimpleMath::Vector3 _scale = goal->GetScale();
@@ -124,9 +124,9 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
         }
     }
     // 棘オブジェクト
-    if (not blocks->GetSpikeEnemy().empty())
+    if (not blocks->GetSpikes().empty())
     {
-        for (auto& spike : blocks->GetSpikeEnemy())
+        for (auto& spike : blocks->GetSpikes())
         {
             SimpleMath::Vector3 _pos = spike->GetPosition();
             SimpleMath::Vector3 _scale = spike->GetScale();

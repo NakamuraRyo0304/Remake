@@ -78,7 +78,7 @@ void BlockManager::Initialize()
 		float _z = static_cast<float>(_data[i]["Position"]["Z"]);
 		SimpleMath::Vector3 _position = SimpleMath::Vector3(_x, _y, _z);
 
-		// 氷ブロックを格納
+		// 氷床ブロックを格納
 		if (_name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(_position));
 		// コインを格納
 		if (_name == "Coin")	m_coins.push_back(std::make_unique<Coin>(_position));
@@ -109,7 +109,7 @@ void BlockManager::Initialize()
 void BlockManager::Update()
 {
 	// オブジェクトの更新
-	for (auto& flozen : m_flozens)	// 氷ブロック
+	for (auto& flozen : m_flozens)	// 氷床ブロック
 	{
 		if (UserUtility::IsNull(flozen.get())) continue;
 		flozen->Update();
@@ -160,7 +160,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// オブジェクトの描画
-	for (auto& flozen : m_flozens)	// 氷ブロック
+	for (auto& flozen : m_flozens)	// 氷床ブロック
 	{
 		if (UserUtility::IsNull(flozen.get())) continue;
 		flozen->Draw(context, states, view, proj, wireframe, option);
@@ -202,7 +202,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 void BlockManager::SelectOffset(const SimpleMath::Vector3& offset)
 {
 	// オブジェクトの描画
-	for (auto& sand : m_flozens)	// 氷ブロック
+	for (auto& sand : m_flozens)	// 氷床ブロック
 	{
 		if (UserUtility::IsNull(sand.get())) continue;
 		sand->SetPosition(sand->GetInitialPosition() + offset);
@@ -330,7 +330,7 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 {
 	// IDが一致したモノを追加する
 
-	if (id == ID::Obj_Flozen)		// 砂ブロック
+	if (id == ID::Obj_Flozen)	// 氷床ブロック
 		m_flozens.push_back(std::make_unique<Flozen>(pos));
 	if (id == ID::Obj_Cloud)	// 雲ブロック
 		m_clouds.push_back(std::make_unique<Cloud>(pos));

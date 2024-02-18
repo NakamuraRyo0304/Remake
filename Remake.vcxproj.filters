@@ -186,9 +186,6 @@
     <ClCompile Include="Game\Editor\System\EditorCollision\EditorCollision.cpp">
       <Filter>GameSystems\Editor\EditorCollision</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.cpp">
-      <Filter>GameSystems\Play\EnemyCollision</Filter>
-    </ClCompile>
     <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp">
       <Filter>GameSystems\Play\FlagManager</Filter>
     </ClCompile>
@@ -439,9 +436,6 @@
     </ClInclude>
     <ClInclude Include="Game\Editor\System\EditorCollision\EditorCollision.h">
       <Filter>GameSystems\Editor\EditorCollision</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\EnemyCollision\EnemyCollision.h">
-      <Filter>GameSystems\Play\EnemyCollision</Filter>
     </ClInclude>
     <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h">
       <Filter>GameSystems\Play\FlagManager</Filter>
@@ -913,9 +907,6 @@
     </Filter>
     <Filter Include="GameSystems\Editor\EditorCollision">
       <UniqueIdentifier>{f1072bf7-e1bd-4616-ace1-fc9df697e191}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameSystems\Play\EnemyCollision">
-      <UniqueIdentifier>{0a8cf271-a8c3-4797-80bf-dcaa33262ae1}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameSystems\Play\FlagManager">
       <UniqueIdentifier>{bfbc20d7-36a2-4461-8575-e49e1e1ff743}</UniqueIdentifier>
