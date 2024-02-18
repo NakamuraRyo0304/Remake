@@ -402,6 +402,7 @@
     <Image Include="Resources\Textures\Text\Stage4tex.dds" />
     <Image Include="Resources\Textures\Text\Start.dds" />
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png" />
+    <Image Include="Resources\Textures\Transitions\Rule_Wave.png" />
     <Image Include="Resources\Textures\UI_Clear\clockSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\coinSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\tape1.dds" />

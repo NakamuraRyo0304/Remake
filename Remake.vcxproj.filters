@@ -595,9 +595,6 @@
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds">
       <Filter>Resources\Textures\Button</Filter>
     </Image>
-    <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
-      <Filter>Resources\Textures\Rule</Filter>
-    </Image>
     <Image Include="Resources\Textures\ShaderTex\water.png">
       <Filter>Resources\Textures\Common</Filter>
     </Image>
@@ -675,6 +672,12 @@
     </Image>
     <Image Include="Resources\Textures\Logo\Logo.dds">
       <Filter>Resources\Textures\Logo</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_Wave.png">
+      <Filter>Resources\Textures\Rule</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
+      <Filter>Resources\Textures\Rule</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
