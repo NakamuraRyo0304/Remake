@@ -15,6 +15,7 @@
 #include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
 #include "Game/Common/Water/Water.h"
 #include "Game/TitleScene/Objects/Logo/Logo.h"
+#include "Game/PlayScene/Objects/Iceberg/Iceberg.h"
 #include "TitleScene.h"
 
 //==============================================================================
@@ -122,6 +123,9 @@ void TitleScene::Update()
 
 	// トリの更新
 	m_birdTitle->Update();
+
+	// 氷山の更新
+	m_iceberg->Update();
 }
 
 //==============================================================================
@@ -142,6 +146,9 @@ void TitleScene::Draw()
 
 	// トリの描画
 	m_birdTitle->Draw(_context, *_states, _view, _projection);
+
+	// 氷山の描画
+	m_iceberg->Draw(_context, *_states, _view, _projection);
 
 	// 水の描画
 	m_water->Draw(_view, _projection);
@@ -173,6 +180,7 @@ void TitleScene::Finalize()
 	m_water.reset();
 	m_logo.reset();
 	m_timer.reset();
+	m_iceberg.reset();
 }
 
 //==============================================================================
@@ -200,6 +208,9 @@ void TitleScene::CreateWDResources()
 
 	// タイマー作成(10秒に設定)
 	m_timer = std::make_unique<Timer>(Timer::Mode::limited, 10.0f);
+
+	// 氷山作成
+	m_iceberg = std::make_unique<Iceberg>(SimpleMath::Vector3(-20.0f, -25.0f, -50.0f), 10.0f, 0.0f);
 }
 
 //==============================================================================

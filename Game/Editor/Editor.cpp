@@ -239,15 +239,15 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetFlozenBlock())	// 砂ブロック
+	for (auto& obj : m_blockManager->GetFlozens())	// 砂ブロック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetCloudBlock())	// 雲ギミック
+	for (auto& obj : m_blockManager->GetClouds())	// 雲ギミック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetCoinBlock())	// コインオブジェクト
+	for (auto& obj : m_blockManager->GetCoins())	// コインオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -255,11 +255,11 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetGoalObject())	// ゴールポイント
+	for (auto& obj : m_blockManager->GetGoals())	// ゴールポイント
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetSpikeEnemy())	// 棘エネミー
+	for (auto& obj : m_blockManager->GetSpikes())	// 棘エネミー
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}

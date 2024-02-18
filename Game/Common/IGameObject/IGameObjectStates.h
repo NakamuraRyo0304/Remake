@@ -26,6 +26,7 @@ enum class ID
 	Obj_Goal,		// ゴールオブジェクト
 	Obj_Spike,		// 棘オブジェクト
 	CursorPos,		// カーソルの3D位置
+	Back_Iceberg,	// 氷山
 
 
 

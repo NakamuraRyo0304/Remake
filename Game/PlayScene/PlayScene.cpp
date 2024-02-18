@@ -21,6 +21,7 @@
 #include "Game/PlayScene/Objects/Player/Player.h"
 #include "Game/Common/CursorObject/CursorObject.h"
 #include "Game/Common/Water/Water.h"
+#include "Game/PlayScene/Objects/Iceberg/Iceberg.h"
 #include "PlayScene.h"
 
 //==============================================================================
@@ -191,6 +192,11 @@ void PlayScene::Update()
 	}
 	m_ui->SetCoinNum(_num);
 	m_ui->Update();
+
+	// 氷山の更新
+	m_iceberg->Update();
+	m_smallberg->Update();
+	m_bigberg->Update();
 }
 
 //==============================================================================
@@ -329,6 +335,11 @@ void PlayScene::Draw()
 	// 水面の描画
 	m_water->Draw(_view, _projection);
 
+	// 氷山の描画
+	m_iceberg->Draw(_context, *_states, _view, _projection);
+	m_smallberg->Draw(_context, *_states, _view, _projection);
+	m_bigberg->Draw(_context, *_states, _view, _projection);
+
 	// UIの描画
 	//m_ui->Draw();
 
@@ -357,6 +368,9 @@ void PlayScene::Finalize()
 	m_water.reset();
 	m_ui.reset();
 	m_timer.reset();
+	m_iceberg.reset();
+	m_smallberg.reset();
+	m_bigberg.reset();
 }
 
 //==============================================================================
@@ -400,6 +414,11 @@ void PlayScene::CreateWDResources()
 
 	// タイマー作成
 	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
+
+	// 氷山作成
+	m_iceberg = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -25.0f, -50.0f), 8.0f, -10.0f);
+	m_smallberg = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -30.0f, 25.0f), 5.0f, 0.0f);
+	m_bigberg = std::make_unique<Iceberg>(SimpleMath::Vector3(50.0f, -30.0f, 0.0f), 15.0f, -5.0f);
 
 	//==============================================================================
 	// シャドウマップ関連の作成

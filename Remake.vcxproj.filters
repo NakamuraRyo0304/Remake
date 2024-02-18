@@ -288,6 +288,9 @@
     <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp">
       <Filter>GameObjects\Title\Logo</Filter>
     </ClCompile>
+    <ClCompile Include="Game\PlayScene\Objects\Iceberg\Iceberg.cpp">
+      <Filter>GameObjects\Play\Iceberg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -551,6 +554,9 @@
     <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h">
       <Filter>GameObjects\Title\Logo</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Iceberg\Iceberg.h">
+      <Filter>GameObjects\Play\Iceberg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -739,6 +745,9 @@
       <Filter>Resources\Stages</Filter>
     </None>
     <None Include="Resources\Models\Sky.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Iceberg.cmo">
       <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
@@ -1090,6 +1099,9 @@
     </Filter>
     <Filter Include="Resources\Textures\Logo">
       <UniqueIdentifier>{b2cc43bd-71ef-4d82-b8e2-26bae4e4fc2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Play\Iceberg">
+      <UniqueIdentifier>{61416d8d-0dcd-4026-a4c9-cf1f997518c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
