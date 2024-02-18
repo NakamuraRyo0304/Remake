@@ -15,7 +15,6 @@
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
 #include "Game/Common/CursorObject/CursorObject.h"
-
 #include "Editor.h"
 
 //==============================================================================
@@ -30,8 +29,8 @@ using BN = UI_Editor::BUTTON_NAME;						// ボタンの名前
 // コンストラクタ
 //==============================================================================
 Editor::Editor()
-	: IScene()						// 基底クラスのコンストラクタ
-	, m_selectionID{ ID::Obj_Flozen }	// 初期は砂を設定
+	: IScene()							// 基底クラスのコンストラクタ
+	, m_selectionID{ ID::Obj_Flozen }	// 初期は氷床を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
@@ -190,7 +189,7 @@ void Editor::SetSceneValues()
 	m_adminCamera->SetActive(true);
 	m_adminCamera->SetInterpolation(false);
 
-	// IDを砂に設定
+	// IDの初期化
 	m_selectionID = ID::Obj_Flozen;
 
 	// ブロックの初期化
@@ -231,15 +230,11 @@ void Editor::DebugDraw(CommonStates& states)
 //==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
-	//////////////////////////////////////////
-	///            ※複文省略              ///
-	//////////////////////////////////////////
-
-	for (auto& obj : m_blockManager->GetAirBlock())		// エアオブジェクト
+	for (auto& obj : m_blockManager->GetAirBlock())	// エアオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetFlozens())	// 砂ブロック
+	for (auto& obj : m_blockManager->GetFlozens())	// 氷床ブロック
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -251,7 +246,7 @@ void Editor::UpdateCollisions(ID id)
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
-	for (auto& obj : m_blockManager->GetPlayerBlock())	// プレイヤオブジェクト
+	for (auto& obj : m_blockManager->GetPlayers())	// プレイヤオブジェクト
 	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
@@ -270,7 +265,7 @@ void Editor::UpdateCollisions(ID id)
 //==============================================================================
 void Editor::SetDrawObject()
 {
-	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 砂
+	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 氷床
 	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
 	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
 	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア

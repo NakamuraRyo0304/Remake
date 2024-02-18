@@ -25,15 +25,15 @@
 #include "PlayScene.h"
 
 //==============================================================================
-// 定数の設定
+// 定数の設定(シャドウマップ)
 //==============================================================================
-const int PlayScene::SHADOWMAP_SIZE = 912;		// シャドウマップのサイズ
-const float PlayScene::AMBIENT_COLOR = 0.3f;	// 環境光の色
-// ライトの位置・ライトの回転
-const SimpleMath::Vector3 PlayScene::LIGHT_POSITION = { 4.5f, 10.0f, 10.0f };
-const SimpleMath::Quaternion PlayScene::LIGHT_ROTATION = { 0.80f, 0.30f, -0.20f, 0.50f };
+const int PlayScene::SHADOWMAP_SIZE = 976;		// シャドウマップのサイズ
+const float PlayScene::AMBIENT_COLOR = 0.25f;	// 環境光の色
 const float PlayScene::LIGHT_THETA = 85.0f;		// ライトの範囲
-////////////////////////////////////////////////////////////////////////////////
+
+//==============================================================================
+// 定数の設定(フラグ追跡)
+//==============================================================================
 const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
 const float PlayScene::FLAG_START = 5.0f;		// 最高高度
 const float PlayScene::FLAG_CURSOR_RATE = 0.4f;	// フラグカーソルの拡大率

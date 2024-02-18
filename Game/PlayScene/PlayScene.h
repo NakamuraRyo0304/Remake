@@ -96,10 +96,18 @@ private:
 	// シャドウマップのサイズ
 	static const int SHADOWMAP_SIZE;
 
-	// ライトの位置/回転/範囲の角度/環境光の色
-	static const DirectX::SimpleMath::Vector3 LIGHT_POSITION;
-	static const DirectX::SimpleMath::Quaternion LIGHT_ROTATION;
+	// ライトの位置
+	const DirectX::SimpleMath::Vector3 LIGHT_POSITION =
+		DirectX::SimpleMath::Vector3(4.5f, 10.0f, 10.0f);
+
+	// ライトの回転
+	const DirectX::SimpleMath::Quaternion LIGHT_ROTATION =
+		DirectX::SimpleMath::Quaternion(0.80f, 0.30f, -0.20f, 0.50f);
+
+	// 範囲の角度
 	static const float LIGHT_THETA;
+
+	// 環境光の色
 	static const float AMBIENT_COLOR;
 
 	// ライトのニアクリップ・ファークリップ

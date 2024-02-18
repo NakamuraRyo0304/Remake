@@ -208,7 +208,7 @@ public:
 	// エアーブロックの配列を参照
 	std::vector<std::unique_ptr<Air>>& GetAirBlock() { return m_air; }
 	// プレイヤブロックの配列を参照
-	std::vector<std::unique_ptr<EditChara>>& GetPlayerBlock() { return m_chara; }
+	std::vector<std::unique_ptr<EditChara>>& GetPlayers() { return m_chara; }
 
 public:
 

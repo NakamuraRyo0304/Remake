@@ -123,7 +123,7 @@ void ClearScene::Update()
 void ClearScene::Draw()
 {
 	// ƒŒƒ“ƒ_ƒŠƒ“ƒO•Ï”‚ðŽæ“¾
-	auto _states = GetSystemManager()->GetCommonStates();
+	//auto _states = GetSystemManager()->GetCommonStates();
 
 	// ”wŒi‚Ì•`‰æ
 	m_backGround->Draw();
@@ -157,7 +157,7 @@ void ClearScene::Draw()
 
 	// ƒfƒoƒbƒO•`‰æ
 #ifdef _DEBUG
-	DebugDraw(*_states);
+	//DebugDraw(*_states);
 #endif
 }
 
