@@ -16,6 +16,7 @@
 #include "Game/Common/Water/Water.h"
 #include "Game/TitleScene/Objects/Logo/Logo.h"
 #include "Game/PlayScene/Objects/Iceberg/Iceberg.h"
+#include "Game/Common/Island/Island.h"
 #include "TitleScene.h"
 
 //==============================================================================
@@ -150,6 +151,9 @@ void TitleScene::Draw()
 	// 氷山の描画
 	m_iceberg->Draw(_context, *_states, _view, _projection);
 
+	// 孤島の描画
+	m_island->Draw(_context, *_states, _view, _projection);
+
 	// 水の描画
 	m_water->Draw(_view, _projection);
 
@@ -181,6 +185,7 @@ void TitleScene::Finalize()
 	m_logo.reset();
 	m_timer.reset();
 	m_iceberg.reset();
+	m_island.reset();
 }
 
 //==============================================================================
@@ -211,6 +216,9 @@ void TitleScene::CreateWDResources()
 
 	// 氷山作成
 	m_iceberg = std::make_unique<Iceberg>(SimpleMath::Vector3(-20.0f, -25.0f, -50.0f), 10.0f, 0.0f);
+
+	// 孤島作成
+	m_island = std::make_unique<Island>(SimpleMath::Vector3(5.0f, -6.0f, 10.0f), 4.0f, 0.0f);
 }
 
 //==============================================================================
@@ -230,6 +238,9 @@ void TitleScene::SetSceneValues()
 
 	// タイマーを開始
 	m_timer->Start();
+
+	// 孤島の行列を作成
+	m_island->CreateWorldMatrix();
 }
 
 //==============================================================================
