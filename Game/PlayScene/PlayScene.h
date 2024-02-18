@@ -20,6 +20,7 @@ class CursorObject;
 class DepthStencil;
 class FlagManager;
 class ImageShot;
+class Iceberg;
 class Sky_Play;
 class StageCollision;
 class Timer;
@@ -75,6 +76,9 @@ private:
 
 	// スクショ保存先
 	std::wstring m_stageTexPath;
+
+	// 氷山
+	std::unique_ptr<Iceberg> m_iceberg, m_smallberg, m_bigberg;
 
 private:
 

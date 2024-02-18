@@ -228,6 +228,7 @@
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\IScene\IScene.h" />
     <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h" />
+    <ClInclude Include="Game\PlayScene\Objects\Iceberg\Iceberg.h" />
     <ClInclude Include="Game\PlayScene\Objects\Player\Parts\Head.h" />
     <ClInclude Include="Game\PlayScene\Objects\Player\Player.h" />
     <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h" />
@@ -316,6 +317,7 @@
     <ClCompile Include="Game\GameMain.cpp" />
     <ClCompile Include="Game\IScene\IScene.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp" />
+    <ClCompile Include="Game\PlayScene\Objects\Iceberg\Iceberg.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Player\Player.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp" />
@@ -400,6 +402,7 @@
     <Image Include="Resources\Textures\Text\Stage4tex.dds" />
     <Image Include="Resources\Textures\Text\Start.dds" />
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png" />
+    <Image Include="Resources\Textures\Transitions\Rule_Wave.png" />
     <Image Include="Resources\Textures\UI_Clear\clockSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\coinSeal.dds" />
     <Image Include="Resources\Textures\UI_Clear\tape1.dds" />
@@ -421,6 +424,7 @@
     <None Include="Resources\Models\Flag.cmo" />
     <None Include="Resources\Models\Flozen.cmo" />
     <None Include="Resources\Models\Goal.cmo" />
+    <None Include="Resources\Models\Iceberg.cmo" />
     <None Include="Resources\Models\pAll.cmo" />
     <None Include="Resources\Models\pBody.cmo" />
     <None Include="Resources\Models\pHead.cmo" />

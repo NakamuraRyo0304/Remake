@@ -194,15 +194,15 @@ private:
 public:
 
 	// 砂ブロックの配列を参照
-	std::vector<std::unique_ptr<Flozen>>& GetFlozenBlock() { return m_flozens; }
+	std::vector<std::unique_ptr<Flozen>>& GetFlozens() { return m_flozens; }
 	// 雲ブロックの配列を参照
-	std::vector<std::unique_ptr<Cloud>>& GetCloudBlock() { return m_clouds; }
+	std::vector<std::unique_ptr<Cloud>>& GetClouds() { return m_clouds; }
 	// コインブロックの配列を参照
-	std::vector<std::unique_ptr<Coin>>& GetCoinBlock() { return m_coins; }
+	std::vector<std::unique_ptr<Coin>>& GetCoins() { return m_coins; }
 	// ゴールオブジェクトの配列を参照
-	std::vector<std::unique_ptr<Goal>>& GetGoalObject() { return m_goals; }
+	std::vector<std::unique_ptr<Goal>>& GetGoals() { return m_goals; }
 	// 棘オブジェクトの配列を参照
-	std::vector<std::unique_ptr<Spike>>& GetSpikeEnemy() { return m_spikes; }
+	std::vector<std::unique_ptr<Spike>>& GetSpikes() { return m_spikes; }
 
 
 	// エアーブロックの配列を参照

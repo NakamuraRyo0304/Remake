@@ -14,7 +14,7 @@
 // íËêîÇÃê›íË
 //==============================================================================
 const wchar_t* GameMain::FADE_TEXTURE_PATH = L"Resources/Textures/Transitions/Rule_Haze.png";
-const XMVECTORF32 GameMain::FADE_COLOR = Colors::White;
+const XMVECTORF32 GameMain::FADE_COLOR = Colors::LightSkyBlue;
 const float GameMain::PLAY_FADE_SPEED = 2.0f;
 
 //==============================================================================

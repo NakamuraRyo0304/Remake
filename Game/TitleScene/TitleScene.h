@@ -21,6 +21,7 @@ class UI_Title;
 class Water;
 class Logo;
 class Timer;
+class Iceberg;
 class TitleScene final : public IScene
 {
 private:
@@ -45,6 +46,9 @@ private:
 
 	// タイマー
 	std::unique_ptr<Timer> m_timer;
+
+	// 氷山
+	std::unique_ptr<Iceberg> m_iceberg;
 
 private:
 
