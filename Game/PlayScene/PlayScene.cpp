@@ -185,7 +185,7 @@ void PlayScene::Update()
 
 	// UIの更新
 	int _num = 0;
-	for (auto& coin : m_blockManager->GetCoinBlock())
+	for (auto& coin : m_blockManager->GetCoins())
 	{
 		if (coin->IsActive()) _num++;
 	}
@@ -530,7 +530,7 @@ void PlayScene::SetSceneValues()
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
 
 	// コインの枚数を設定
-	m_ui->SetCoinNum(static_cast<int>(m_blockManager->GetCoinBlock().size()));
+	m_ui->SetCoinNum(static_cast<int>(m_blockManager->GetCoins().size()));
 
 	// タイマースタート
 	m_timer->Start();
