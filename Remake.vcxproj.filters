@@ -294,6 +294,9 @@
     <ClCompile Include="Game\Common\Island\Island.cpp">
       <Filter>GameObjects\Common\Island</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp">
+      <Filter>GameObjects\Common\Blocks\Lift</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -563,6 +566,9 @@
     <ClInclude Include="Game\Common\Island\Island.h">
       <Filter>GameObjects\Common\Island</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Common\Blocks\Lift\Lift.h">
+      <Filter>GameObjects\Common\Blocks\Lift</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -685,6 +691,9 @@
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
       <Filter>Resources\Textures\Rule</Filter>
     </Image>
+    <Image Include="Resources\Textures\Editor\Buttons\LiftButton.dds">
+      <Filter>Resources\Textures\Button</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Models\Cloud.cmo">
@@ -760,6 +769,9 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Island.cmo">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="Resources\Models\Moving.cmo">
       <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
@@ -1117,6 +1129,9 @@
     </Filter>
     <Filter Include="GameObjects\Common\Island">
       <UniqueIdentifier>{ef1de65f-18aa-4ad4-bbbd-f8cfdf4d4aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Lift">
+      <UniqueIdentifier>{24cd1076-918e-4a64-a9b5-3adae9bd9598}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

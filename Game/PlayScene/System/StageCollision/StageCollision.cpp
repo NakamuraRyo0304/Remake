@@ -141,6 +141,24 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
             }
         }
     }
+    // リフトブロック
+    if (not blocks->GetLifts().empty())
+    {
+        for (auto& lift : blocks->GetLifts())
+        {
+            SimpleMath::Vector3 _pos = lift->GetPosition();
+            SimpleMath::Vector3 _scale = lift->GetScale();
+            if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
+            auto _side = IsCollision(&_playerPos, _pos, _playerScale, _scale);
+
+            // 固有処理：プレイヤー座標の押し戻し適用・落下の停止
+            if (_side != Side::Up)
+            {
+                player->SetFall(_side != Side::Up ? true : false);
+                player->SetPosition(_playerPos);
+            }
+        }
+    }
 }
 
 //==============================================================================

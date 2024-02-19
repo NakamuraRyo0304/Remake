@@ -238,6 +238,7 @@ void Editor::SetDrawObject()
 	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
 	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
 	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
+	if (m_ui->IsClickButton(BN::Lift_bn))	m_selectionID = ID::Obj_Lift;	// リフト
 }
 
 //==============================================================================
@@ -270,6 +271,11 @@ void Editor::UpdateCollisions(ID id)
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
 	}
 	for (auto& obj : m_blockManager->GetSpikes())	// 棘エネミー
+	{
+		if (UserUtility::IsNull(obj.get())) { break; }
+		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
+	}
+	for (auto& obj : m_blockManager->GetLifts())	// リフトブロック
 	{
 		if (UserUtility::IsNull(obj.get())) { break; }
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
