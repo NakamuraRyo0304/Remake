@@ -26,7 +26,7 @@ namespace UserUtility
 	inline T Lerp(
 		T a,
 		T b,
-		float t
+		float t = 0.1f
 	)
 	{
 		return a + t * (b - a);

@@ -7,13 +7,13 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
+#include "Libraries/SystemDatas/Timer/Timer.h"
 #include "Cloud.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const float Cloud::ROTATE_SPEED = 15.0f;        // 回転速度
-const float Cloud::FALL_LIMIT = 180.0f;			// 落下リミット
+const float Cloud::LIMIT = 3.5f;				// 動作時間
 
 //==============================================================================
 // コンストラクタ
@@ -21,9 +21,6 @@ const float Cloud::FALL_LIMIT = 180.0f;			// 落下リミット
 Cloud::Cloud(SimpleMath::Vector3 position)
 	: IGameObject(L"Resources/Models/Cloud.cmo", L"Resources/Models", position)
 	, is_hit{ false }			// 衝突フラグ
-	, is_arrive{ false }		// 到着フラグ
-    , m_arrivePosition{}    	// 到着座標
-    , m_fallTimer{}				// 落下タイマー
 {
 	CreateModel();
 	SetID(ID::Obj_Cloud);
@@ -35,11 +32,8 @@ Cloud::Cloud(SimpleMath::Vector3 position)
 	SetScale(SimpleMath::Vector3::One * 0.5f);
     SetInitialScale(GetScale());
 
-	// 到着座標
-	m_arrivePosition = GetInitialPosition() + SimpleMath::Vector3::UnitY;
-
 	// 落下時間
-	m_fallTimer = 0.0f;
+	m_timer = std::make_unique<Timer>(Timer::Mode::limited, LIMIT);
 }
 
 //==============================================================================
@@ -55,29 +49,31 @@ Cloud::~Cloud()
 //==============================================================================
 void Cloud::Update()
 {
-    float timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
-
     // 回転行列
-    SetRotate(SimpleMath::Vector3(0.0f, XMConvertToRadians(timer * ROTATE_SPEED), 0.0f));
+    SetRotate(SimpleMath::Vector3(0.0f, XMConvertToRadians(m_timer->GetCount()), 0.0f));
 
     if (is_hit)
     {
-        // 上昇させる
-        SetPosition(UserUtility::Lerp(GetPosition(), m_arrivePosition, 0.1f));
-		m_fallTimer++;
+		// 1度だけ更新する
+		if (m_timer->GetCount() == 0.0f)
+		{
+			m_timer->Start();
+		}
+
+		// 上下させる
+        SetPosition(UserUtility::Lerp(GetPosition(),
+			GetInitialPosition() + sinf(m_timer->GetCount()) * SimpleMath::Vector3::UnitY));
+
+		// タイマーを更新する
+		m_timer->Update();
     }
 
-	// 落下タイマーがリミットを越えたら元に戻す
-	if (m_fallTimer > FALL_LIMIT)
+	// アラームが鳴ったら戻す
+	if (m_timer->Alarm())
 	{
-		SetPosition(GetInitialPosition());
-
-		// 元の位置に戻ったらタイマーをリセットする
-		if (GetPosition() == GetInitialPosition())
-		{
-			m_fallTimer = 0.0f;
-			is_hit = false;
-		}
+		SetPosition(UserUtility::Lerp(GetPosition(), GetInitialPosition()));
+		m_timer->Reset();
+		is_hit = false;
 	}
 
     // マトリクスを作成

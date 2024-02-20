@@ -13,8 +13,7 @@
 // コンストラクタ
 //==============================================================================
 Lift::Lift(SimpleMath::Vector3 position)
-//	: IGameObject(L"Resources/Models/Moving.cmo", L"Resources/Models", position)
-	: IGameObject(L"Resources/Models/Flozen.cmo", L"Resources/Models", position)
+	: IGameObject(L"Resources/Models/Moving.cmo", L"Resources/Models", position)
 	, m_offset{ 0.0f }			// オフセット
 {
 	CreateModel();

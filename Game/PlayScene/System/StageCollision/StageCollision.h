@@ -59,7 +59,7 @@ private:
 	/// <param name="playerScale">プレイヤースケール</param>
 	/// <param name="blockScale">ブロックスケール</param>
 	/// <returns>衝突面</returns>
-	Side IsCollision(DirectX::SimpleMath::Vector3* playerPos, const DirectX::SimpleMath::Vector3& blockPos,
+	Side IsCube(DirectX::SimpleMath::Vector3* playerPos, const DirectX::SimpleMath::Vector3& blockPos,
 		const DirectX::SimpleMath::Vector3& playerScale, const DirectX::SimpleMath::Vector3& blockScale);
 };
 

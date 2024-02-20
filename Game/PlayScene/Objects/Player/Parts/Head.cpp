@@ -9,6 +9,11 @@
 #include "Head.h"
 
 //==============================================================================
+// 定数の設定
+//==============================================================================
+const float Head::SCALE = 0.5f;			// モデルのスケール
+
+//==============================================================================
 // コンストラクタ
 //==============================================================================
 Head::Head()
@@ -48,6 +53,6 @@ void Head::Update()
 void Head::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
+	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(SCALE);
 	GetModel()->Draw(context, states, _scale * GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

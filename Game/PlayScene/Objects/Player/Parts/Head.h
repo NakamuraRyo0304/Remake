@@ -18,6 +18,8 @@ class Head : public IGameObject
 {
 private:
 
+	// モデルのスケール
+	static const float SCALE;
 
 public:
 
