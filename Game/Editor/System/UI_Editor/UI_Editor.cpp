@@ -7,6 +7,7 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
+#include "Game/Common/DrawKeys/DrawKeys.h"
 #include "UI_Editor.h"
 
 //==============================================================================
@@ -20,9 +21,11 @@ using BN = UI_Editor::BUTTON_NAME;		// ボタンの名前
 UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)		// 基底クラス
 	, m_buttons{}					// ボタン
+	, m_keyOffset{}					// キーオフセット
 	, is_clicks{}					// クリック判定
 	, is_blindFlag{}				// ボタンかくしフラグ
 {
+	// ボタン作成
 	m_buttons.push_back(std::make_unique<Button>(L"Load", L"Resources/Textures/Editor/Buttons/LoadButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Write", L"Resources/Textures/Editor/Buttons/WriteButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Flozen", L"Resources/Textures/Editor/Buttons/FlozenButton.dds"));
@@ -36,6 +39,19 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	m_buttons.push_back(std::make_unique<Button>(L"Spike", L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Lift", L"Resources/Textures/Editor/Buttons/LiftButton.dds"));
 
+	// キーオフセットを設定
+	m_keyOffset = SimpleMath::Vector2(128.0f, 896.0f);
+
+	// キー作成
+	m_keys[KEY_NAME::WKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/WKey.dds",
+		SimpleMath::Vector2(64.0f, 0.0f) + m_keyOffset, GetScreenRate());
+	m_keys[KEY_NAME::SKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/SKey.dds",
+		SimpleMath::Vector2(64.0f, 128.0f) + m_keyOffset, GetScreenRate());
+	m_keys[KEY_NAME::AKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/AKey.dds",
+		SimpleMath::Vector2(0.0f, 64.0f) + m_keyOffset, GetScreenRate());
+	m_keys[KEY_NAME::DKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/DKey.dds",
+		SimpleMath::Vector2(128.0f, 64.0f) + m_keyOffset, GetScreenRate());
+
 	// 初期化処理
 	Initialize();
 }
@@ -45,6 +61,7 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 //==============================================================================
 UI_Editor::~UI_Editor()
 {
+	m_keys.clear();
 	m_buttons.clear();
 }
 
@@ -81,6 +98,12 @@ void UI_Editor::Initialize()
 	m_buttons[BN::Air_bn]->Initialize(		{ _L, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Lift_bn]->Initialize(		{ _R, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 
+	// キーの拡大率を設定
+	m_keys[KEY_NAME::WKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
+	m_keys[KEY_NAME::SKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
+	m_keys[KEY_NAME::AKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
+	m_keys[KEY_NAME::DKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
+
 }
 
 //==============================================================================
@@ -88,7 +111,7 @@ void UI_Editor::Initialize()
 //==============================================================================
 void UI_Editor::Update()
 {
-	for (int i = 0; i < BN::Length; i++)
+	for (int i = 0; i < BN::Length_bn; i++)
 	{
 		m_buttons[i]->Update();
 
@@ -109,7 +132,16 @@ void UI_Editor::Update()
 		}
 	}
 
+	// ボタン位置の更新
 	MoveButtonPosition();
+
+	// キーの更新
+	auto _key = Keyboard::Get().GetState();
+
+	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
 }
 
 //==============================================================================
@@ -134,6 +166,12 @@ void UI_Editor::Draw()
 	{
 		m_buttons[BN::OC2_bn]->Draw();
 	}
+
+	// キーを描画
+	m_keys[KEY_NAME::WKEY]->Draw();
+	m_keys[KEY_NAME::SKEY]->Draw();
+	m_keys[KEY_NAME::AKEY]->Draw();
+	m_keys[KEY_NAME::DKEY]->Draw();
 }
 
 //==============================================================================
@@ -163,7 +201,7 @@ void UI_Editor::MoveButtonPosition()
 	}
 
 	// 状態に応じてボタンを動かす
-	for (int i = 0; i < BN::Length; i++)
+	for (int i = 0; i < BN::Length_bn; i++)
 	{
 		SimpleMath::Vector2 _now = m_buttons[i]->GetAdderPosition();
 		float _x = UserUtility::EasedLerp(_now.x, is_blindFlag ? 288.0f : 0.0f, 0.4f);

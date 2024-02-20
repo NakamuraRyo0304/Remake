@@ -300,7 +300,9 @@
     <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.cpp">
       <Filter>GameSystems\Editor\EditorGrids</Filter>
     </ClCompile>
-
+    <ClCompile Include="Game\Common\DrawKeys\DrawKeys.cpp">
+      <Filter>GameSystems\Common\DrawKeys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -573,10 +575,12 @@
     <ClInclude Include="Game\Common\Blocks\Lift\Lift.h">
       <Filter>GameObjects\Common\Blocks\Lift</Filter>
     </ClInclude>
-    <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.h">
+    <ClInclude Include="Game\Editor\System\EditorGrids\EditorGrids.h">
       <Filter>GameSystems\Editor\EditorGrids</Filter>
-    </ClCompile>
-
+    </ClInclude>
+    <ClInclude Include="Game\Common\DrawKeys\DrawKeys.h">
+      <Filter>GameSystems\Common\DrawKeys</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -701,6 +705,21 @@
     </Image>
     <Image Include="Resources\Textures\Editor\Buttons\LiftButton.dds">
       <Filter>Resources\Textures\Button</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Keys\AKey.dds">
+      <Filter>Resources\Textures\Keys</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Keys\DKey.dds">
+      <Filter>Resources\Textures\Keys</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Keys\KeyCork.dds">
+      <Filter>Resources\Textures\Keys</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Keys\SKey.dds">
+      <Filter>Resources\Textures\Keys</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Keys\WKey.dds">
+      <Filter>Resources\Textures\Keys</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -1140,6 +1159,15 @@
     </Filter>
     <Filter Include="GameObjects\Common\Blocks\Lift">
       <UniqueIdentifier>{24cd1076-918e-4a64-a9b5-3adae9bd9598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Editor\EditorGrids">
+      <UniqueIdentifier>{6650e738-f2b7-4d6e-88fd-e5b4dc5ca152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Keys">
+      <UniqueIdentifier>{203d69b3-03b6-4bc7-aab6-7748073e8fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Common\DrawKeys">
+      <UniqueIdentifier>{c0c9f355-302d-4d65-a525-0bdfb9e07ae3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

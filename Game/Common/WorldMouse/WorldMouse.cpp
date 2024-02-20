@@ -74,7 +74,7 @@ void WorldMouse::Update()
         }
 
         // クランプ処理
-        m_height = UserUtility::Clamp(m_height, 0, 5);
+        m_height = UserUtility::Clamp(m_height, 0, 4);
 
         // 座標を設定(線形補間移動)
         m_position = m_ray->GetConvertedPosition();

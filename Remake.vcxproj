@@ -213,6 +213,7 @@
     <ClInclude Include="Game\Common\Blocks\Lift\Lift.h" />
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h" />
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
+    <ClInclude Include="Game\Common\DrawKeys\DrawKeys.h" />
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h" />
     <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
@@ -306,6 +307,7 @@
     <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp" />
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp" />
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
+    <ClCompile Include="Game\Common\DrawKeys\DrawKeys.cpp" />
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
     <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
@@ -389,6 +391,11 @@
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\WriteButton.dds" />
+    <Image Include="Resources\Textures\Keys\AKey.dds" />
+    <Image Include="Resources\Textures\Keys\DKey.dds" />
+    <Image Include="Resources\Textures\Keys\KeyCork.dds" />
+    <Image Include="Resources\Textures\Keys\SKey.dds" />
+    <Image Include="Resources\Textures\Keys\WKey.dds" />
     <Image Include="Resources\Textures\Logo\Logo.dds" />
     <Image Include="Resources\Textures\ScreenShot\image.dds" />
     <Image Include="Resources\Textures\ShaderTex\water.png" />
