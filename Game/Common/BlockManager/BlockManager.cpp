@@ -211,7 +211,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 //==============================================================================
 // オフセットを加算(セレクトシーンで主に呼び出す)
 //==============================================================================
-void BlockManager::SelectOffset(const SimpleMath::Vector3& offset)
+void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 {
 	// オブジェクトの描画
 	for (auto& sand : m_flozens)	// 氷床ブロック

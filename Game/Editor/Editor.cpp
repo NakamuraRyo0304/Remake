@@ -82,6 +82,7 @@ void Editor::Update()
 		if (m_ui->IsClickButton(BN::WriteFile))
 		{
 			m_blockManager->OutputStage();
+			m_blockManager->ReLoad(m_blockManager->GetStagePath());
 		}
 	}
 
@@ -131,10 +132,10 @@ void Editor::Draw()
 	m_cursorObject->Draw(_context, *_states, _view, _projection);
 
 	// デバッグ描画
-#if _DEBUG
 	auto _grid = GetSystemManager()->GetGridFloor();
 	_grid->Draw(*_states, _view, _projection, Colors::Green);
-	//DebugDraw(*_states);
+#if _DEBUG
+	DebugDraw(*_states);
 #endif
 
 	// UIの描画(最前面に描画)
@@ -163,7 +164,7 @@ void Editor::CreateWDResources()
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
 	// ブロックマネージャ作成
-	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/sample1.json");
+	m_blockManager = std::make_unique<BlockManager>(L"Resources/Stages/flat.json");
 	m_blockManager->SetPlay(false);
 
 	// UI作成

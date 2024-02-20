@@ -213,9 +213,9 @@ void SelectScene::SetSceneValues()
 		}
 
 		// オフセットを設定
-		m_stage[1]->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, 0.0f));
-		m_stage[2]->SelectOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
-		m_stage[3]->SelectOffset(SimpleMath::Vector3(0.0f, 0.0f, -10.5f));
+		m_stage[1]->SetOffset(SimpleMath::Vector3(10.5f, 0.0f, 0.0f));
+		m_stage[2]->SetOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
+		m_stage[3]->SetOffset(SimpleMath::Vector3(0.0f, 0.0f, -10.5f));
 
 		// 行列計算
 		for (int i = 0; i < MAX_SAMPLE_NUM; i++)

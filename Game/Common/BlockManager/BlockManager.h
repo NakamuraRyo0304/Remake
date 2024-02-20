@@ -132,6 +132,8 @@ public:
 
 public:
 
+	// ステージパスを取得
+	const wchar_t* GetStagePath() { return m_stagePath.c_str(); }
 	// ステージパスを設定
 	void SetStagePath(const wchar_t* path) { m_stagePath = path; }
 
@@ -139,7 +141,7 @@ public:
 	void SetPlay(bool play) { is_playing = play; }
 
 	// オフセット
-	void SelectOffset(const DirectX::SimpleMath::Vector3& offset);
+	void SetOffset(const DirectX::SimpleMath::Vector3& offset);
 
 public:
 
