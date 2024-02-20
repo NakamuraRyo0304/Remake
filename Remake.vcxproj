@@ -210,6 +210,7 @@
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
     <ClInclude Include="Game\Common\Blocks\Flozen\Flozen.h" />
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h" />
+    <ClInclude Include="Game\Common\Blocks\Lift\Lift.h" />
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h" />
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h" />
@@ -301,6 +302,7 @@
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
     <ClCompile Include="Game\Common\Blocks\Flozen\Flozen.cpp" />
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp" />
+    <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp" />
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp" />
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
@@ -380,6 +382,7 @@
     <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\FlozenButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds" />
+    <Image Include="Resources\Textures\Editor\Buttons\LiftButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
@@ -428,6 +431,7 @@
     <None Include="Resources\Models\Goal.cmo" />
     <None Include="Resources\Models\Iceberg.cmo" />
     <None Include="Resources\Models\Island.cmo" />
+    <None Include="Resources\Models\Moving.cmo" />
     <None Include="Resources\Models\pAll.cmo" />
     <None Include="Resources\Models\pBody.cmo" />
     <None Include="Resources\Models\pHead.cmo" />

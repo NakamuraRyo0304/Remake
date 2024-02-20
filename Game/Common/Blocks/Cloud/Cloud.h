@@ -14,29 +14,21 @@
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
+class Timer;
 class Cloud : public IGameObject
 {
 private:
 
-	// 到着座標
-	DirectX::SimpleMath::Vector3 m_arrivePosition;
+	// タイマー
+	std::unique_ptr<Timer> m_timer;
 
 	// 衝突フラグ
 	bool is_hit;
 
-	// 到着フラグ
-	bool is_arrive;
-
-	// 落下タイマー
-	float m_fallTimer;
-
 private:
 
-	// 回転速度
-	static const float ROTATE_SPEED;
-
-	// 落下リミット
-	static const float FALL_LIMIT;
+	// 動作時間
+	static const float LIMIT;
 
 public:
 

@@ -90,6 +90,8 @@ void BlockManager::Initialize()
 		if (_name == "Goal")	m_goals.push_back(std::make_unique<Goal>(_position));
 		// 棘オブジェクトを格納
 		if (_name == "Spike")	m_spikes.push_back(std::make_unique<Spike>(_position));
+		// リフトブロックを格納
+		if (_name == "Lift")	m_lifts.push_back(std::make_unique<Lift>(_position));
 
 		// プレイモードはスキップ(処理の意味がないため)
 		if (is_playing == true) continue;
@@ -133,6 +135,11 @@ void BlockManager::Update()
 	{
 		if (UserUtility::IsNull(spike.get())) continue;
 		spike->Update();
+	}
+	for (auto& lift : m_lifts)	// リフトブロック
+	{
+		if (UserUtility::IsNull(lift.get())) continue;
+		lift->Update();
 	}
 
 	// プレイモードはスキップ
@@ -185,6 +192,11 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 		if (UserUtility::IsNull(spike.get())) continue;
 		spike->Draw(context, states, view, proj, wireframe, option);
 	}
+	for (auto& lift : m_lifts)		// リフトブロック
+	{
+		if (UserUtility::IsNull(lift.get())) continue;
+		lift->Draw(context, states, view, proj, wireframe, option);
+	}
 
 	// プレイモードはスキップ
 	if (is_playing == true) return;
@@ -227,6 +239,11 @@ void BlockManager::SelectOffset(const SimpleMath::Vector3& offset)
 		if (UserUtility::IsNull(spike.get())) continue;
 		spike->SetPosition(spike->GetInitialPosition() + offset);
 	}
+	for (auto& lift : m_lifts)		// リフトブロック
+	{
+		if (UserUtility::IsNull(lift.get())) continue;
+		lift->SetPosition(lift->GetInitialPosition() + offset);
+	}
 }
 
 //==============================================================================
@@ -248,6 +265,8 @@ std::string BlockManager::GetBlockID(const ID& id)
 		return "Goal";
 	case ID::Obj_Spike:
 		return "Spike";
+	case ID::Obj_Lift:
+		return "Lift";
 	default:
 		return "";
 	}
@@ -258,12 +277,12 @@ std::string BlockManager::GetBlockID(const ID& id)
 //==============================================================================
 void BlockManager::ReplaceBlock()
 {
+	// 名前に対応したブロックに変更する
+
 	for (auto& flozen : m_flozens)
 	{
 		if (UserUtility::IsNull(flozen.get())) continue;
 		if (flozen->GetID() == ID::Obj_Flozen) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(flozen->GetID(), flozen->GetInitialPosition());
 		UserUtility::RemoveVec(m_flozens, flozen);
 	}
@@ -271,8 +290,6 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(cloud.get())) continue;
 		if (cloud->GetID() == ID::Obj_Cloud) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(cloud->GetID(), cloud->GetInitialPosition());
 		UserUtility::RemoveVec(m_clouds, cloud);
 	}
@@ -280,8 +297,6 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(coin.get())) continue;
 		if (coin->GetID() == ID::Obj_Coin) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(coin->GetID(), coin->GetInitialPosition());
 		UserUtility::RemoveVec(m_coins, coin);
 	}
@@ -289,8 +304,6 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(air.get())) continue;
 		if (air->GetID() == ID::Obj_Air) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(air->GetID(), air->GetInitialPosition());
 		UserUtility::RemoveVec(m_air, air);
 	}
@@ -298,8 +311,6 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(chara.get())) continue;
 		if (chara->GetID() == ID::Obj_Player) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(chara->GetID(), chara->GetInitialPosition());
 		UserUtility::RemoveVec(m_chara, chara);
 	}
@@ -307,8 +318,6 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(goal.get())) continue;
 		if (goal->GetID() == ID::Obj_Goal) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(goal->GetID(), goal->GetInitialPosition());
 		UserUtility::RemoveVec(m_goals, goal);
 	}
@@ -316,10 +325,15 @@ void BlockManager::ReplaceBlock()
 	{
 		if (UserUtility::IsNull(spike.get())) continue;
 		if (spike->GetID() == ID::Obj_Spike) continue;
-
-		// 名前に対応したブロックに変更する
 		CreateBlock(spike->GetID(), spike->GetInitialPosition());
 		UserUtility::RemoveVec(m_spikes, spike);
+	}
+	for (auto& lift : m_lifts)
+	{
+		if (UserUtility::IsNull(lift.get())) continue;
+		if (lift->GetID() == ID::Obj_Lift) continue;
+		CreateBlock(lift->GetID(), lift->GetInitialPosition());
+		UserUtility::RemoveVec(m_lifts, lift);
 	}
 }
 
@@ -344,6 +358,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 		m_goals.push_back(std::make_unique<Goal>(pos));
 	if (id == ID::Obj_Spike)	// 棘オブジェクト
 		m_spikes.push_back(std::make_unique<Spike>(pos));
+	if (id == ID::Obj_Lift)		// リフトブロック
+		m_lifts.push_back(std::make_unique<Lift>(pos));
 }
 
 //==============================================================================
@@ -358,6 +374,7 @@ void BlockManager::ClearBlocks()
 	m_chara.clear();
 	m_goals.clear();
 	m_spikes.clear();
+	m_lifts.clear();
 }
 
 //==============================================================================
@@ -510,6 +527,7 @@ void BlockManager::OutputStage()
 	AddWriteObjects(&_objects, m_chara);		// 操作キャラ
 	AddWriteObjects(&_objects, m_goals);		// ゴール
 	AddWriteObjects(&_objects, m_spikes);		// 棘エネミー
+	AddWriteObjects(&_objects, m_lifts);		// リフト
 
 
 	//==============================================================================

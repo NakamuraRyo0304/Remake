@@ -60,11 +60,20 @@ private:
 	// 目的地到着の諦め時間
 	static const float GIVEUP_TIME;
 
+	// 旋回速度
+	static const float ROTATE_SPEED;
+
+	// 重力
+	static const float GRAVITY;
+
 	// 死亡ライン
 	static const float DEATH_LINE;
 
 	// 死亡時の回転
 	static const float DEATH_ROTATE;
+
+	// モデルのスケール
+	static const float SCALE;
 
 public:
 

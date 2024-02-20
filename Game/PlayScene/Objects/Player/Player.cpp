@@ -19,6 +19,9 @@ const float Player::ARRIVE_RADIUS = 0.1f;	// 到着みなし半径
 const float Player::GIVEUP_TIME = 120.0f;	// 移動諦めタイムリミット
 const float Player::DEATH_LINE = -5.0f;		// 死亡ライン
 const float Player::DEATH_ROTATE = 30.0f;	// 死亡時の回転
+const float Player::ROTATE_SPEED = 0.5f;	// 旋回速度
+const float Player::SCALE = 0.5f;			// モデルのスケール
+const float Player::GRAVITY = -0.05f;		// 重力
 
 //==============================================================================
 // コンストラクタ
@@ -37,7 +40,7 @@ Player::Player()
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
-	SetScale(SimpleMath::Vector3::One * 0.5f);
+	SetScale(SimpleMath::Vector3::One * SCALE);
 	SetInitialScale(GetScale());
 
 	// パーツの作成
@@ -80,13 +83,13 @@ void Player::Update()
 
 		// 移動速度を調整
 		SimpleMath::Vector3 _velocity = _dir * _speed;
-		SimpleMath::Vector3 _newPosition = UserUtility::Lerp(GetPosition(), GetPosition() + _velocity, 0.1f);
+		SimpleMath::Vector3 _newPosition = UserUtility::Lerp(GetPosition(), GetPosition() + _velocity);
 		SetPosition(_newPosition);
 
 		// 進行方向に合わせて回転
 		float _angle = std::atan2(-_dir.x, -_dir.z);
 		SimpleMath::Vector3 _rotation(0.0f, _angle, 0.0f);
-		SetRotate(UserUtility::Lerp(GetRotate(), _rotation, 0.1f));
+		SetRotate(UserUtility::Lerp(GetRotate(), _rotation, ROTATE_SPEED));
 
 		// 現在地からゴールまでの距離
 		float _hereToGoalDistance = SimpleMath::Vector3::Distance(GetPosition(), m_goalPoints[0]);
@@ -106,7 +109,7 @@ void Player::Update()
 	// 落下フラグがONの場合、重力をかける
 	if (is_fall)
 	{
-		SetPosition(GetPosition() + SimpleMath::Vector3(0.0f, -0.05f, 0.0f));
+		SetPosition(GetPosition() + SimpleMath::Vector3::UnitY * GRAVITY);
 	}
 
 	// マトリクスを計算
@@ -122,7 +125,7 @@ void Player::Update()
 		float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
 
 		// 回転しながら落ちていく
-		SetRotate(GetRotate() + SimpleMath::Vector3(0.0f, XMConvertToRadians(_timer * DEATH_ROTATE), 0.0f));
+		SetRotate(GetRotate() + SimpleMath::Vector3::UnitY * XMConvertToRadians(_timer * DEATH_ROTATE));
 	}
 
 	// パーツの更新
@@ -138,7 +141,7 @@ void Player::Update()
 void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(0.5f);
+	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(SCALE);
 	GetModel()->Draw(context, states, _scale * GetWorldMatrix(), view, proj, wireframe, option);
 
 	// これ以降、子パーツの描画を行う

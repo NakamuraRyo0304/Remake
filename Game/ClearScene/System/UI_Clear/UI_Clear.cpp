@@ -71,7 +71,7 @@ void UI_Clear::Update()
 	for (auto& option : m_options)
 	{
 		option.second.pos.x =
-			UserUtility::Lerp(option.second.pos.x, LAST_POS_X, 0.1f);
+			UserUtility::Lerp(option.second.pos.x, LAST_POS_X);
 	}
 
 	// ˆÚ“®Š®—¹‚µ‚½‚çTrue
