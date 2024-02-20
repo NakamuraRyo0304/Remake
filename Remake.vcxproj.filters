@@ -297,6 +297,9 @@
     <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp">
       <Filter>GameObjects\Common\Blocks\Lift</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.cpp">
+      <Filter>GameSystems\Editor\EditorGrids</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -569,6 +572,9 @@
     <ClInclude Include="Game\Common\Blocks\Lift\Lift.h">
       <Filter>GameObjects\Common\Blocks\Lift</Filter>
     </ClInclude>
+    <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.h">
+      <Filter>GameSystems\Editor\EditorGrids</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
