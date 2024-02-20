@@ -23,6 +23,7 @@ class AdminCamera;
 class BlockManager;
 class CursorObject;
 class EditorCollision;
+class EditorGrids;
 class UI_Editor;
 class WorldMouse;
 class Editor final : public IScene
@@ -46,6 +47,9 @@ private:
 
 	// カーソルオブジェクト
 	std::unique_ptr<CursorObject> m_cursorObject;
+
+	// エディタ用グリッド
+	std::unique_ptr<EditorGrids> m_editorGrids;
 
 	// 描画するオブジェクトID
 	ID m_selectionID;
