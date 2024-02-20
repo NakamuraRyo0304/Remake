@@ -11,6 +11,7 @@
 #include "Game/Editor/System/UI_Editor/UI_Editor.h"
 #include "Game/Editor/System/EditorCollision/EditorCollision.h"
 #include "Game/Common/WorldMouse/WorldMouse.h"
+#include "Game/Editor/System/EditorGrids/EditorGrids.h"
 #include "Libraries/UserUtility.h"
 // オブジェクト
 #include "Game/Common/BlockManager/BlockManager.h"
@@ -131,9 +132,15 @@ void Editor::Draw()
 	// カーソルオブジェクトの描画
 	m_cursorObject->Draw(_context, *_states, _view, _projection);
 
-	// デバッグ描画
-	auto _grid = GetSystemManager()->GetGridFloor();
-	_grid->Draw(*_states, _view, _projection, Colors::Green);
+	// グリッドの描画
+	for (int y = 0; y < 5; y++)
+	{
+		m_editorGrids->Draw(*_states, SimpleMath::Matrix::Identity, _view, _projection, Colors::LightBlue,
+			{ 4.5f, static_cast<float>(y) - 0.5f,4.5f });
+	}
+	m_editorGrids->Draw(*_states, SimpleMath::Matrix::Identity, _view, _projection, Colors::Red,
+		{ 4.5f, m_worldMouse->GetPosition().y - 0.5f,4.5f });
+
 #if _DEBUG
 	DebugDraw(*_states);
 #endif
@@ -153,6 +160,7 @@ void Editor::Finalize()
 	m_editorCollision.reset();
 	m_worldMouse.reset();
 	m_cursorObject.reset();
+	m_editorGrids.reset();
 }
 
 //==============================================================================
@@ -178,6 +186,9 @@ void Editor::CreateWDResources()
 
 	// カーソルオブジェクト作成
 	m_cursorObject = std::make_unique<CursorObject>();
+
+	// グリッド作成
+	m_editorGrids = std::make_unique<EditorGrids>(10, 10);
 }
 
 //==============================================================================
