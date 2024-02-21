@@ -107,6 +107,12 @@ void SelectScene::Update()
 	// スカイ球の更新
 	m_sky->Update();
 	m_sky->SetPosition(m_adminCamera->GetPosition());
+
+	// ステージの更新
+	for (int i = 0; i < MAX_SAMPLE_NUM; i++)
+	{
+		m_stage[i]->Update();
+	}
 }
 
 //==============================================================================
@@ -219,12 +225,6 @@ void SelectScene::SetSceneValues()
 		m_stage[1]->SetOffset(SimpleMath::Vector3(10.5f, 0.0f, 0.0f));
 		m_stage[2]->SetOffset(SimpleMath::Vector3(10.5f, 0.0f, -10.5f));
 		m_stage[3]->SetOffset(SimpleMath::Vector3(0.0f, 0.0f, -10.5f));
-
-		// 行列計算
-		for (int i = 0; i < MAX_SAMPLE_NUM; i++)
-		{
-			m_stage[i]->Update();
-		}
 	}
 }
 
