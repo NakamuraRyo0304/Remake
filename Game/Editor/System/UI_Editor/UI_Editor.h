@@ -14,6 +14,7 @@
 //==============================================================================
 #include "Game/Common/IUserInterface/IUserInterface.h"
 
+class DrawKeys;
 class UI_Editor final : public IUserInterface
 {
 public:
@@ -33,23 +34,37 @@ public:
 		Spike_bn,
 		Lift_bn,
 
-		Length
+		Length_bn
 	};
 
+	enum KEY_NAME
+	{
+		WKEY,
+		SKEY,
+		AKEY,
+		DKEY,
+
+		Length__key
+	};
 
 private:
 
-	// フラグ
-	bool is_clicks[BUTTON_NAME::Length];
 
 	// ボタン
 	std::vector<std::unique_ptr<Button>> m_buttons;
+
+	// キー
+	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
+
+	// フラグ
+	bool is_clicks[BUTTON_NAME::Length_bn];
 
 	// ボタンを画面外に隠すフラグ
 	bool is_blindFlag;
 
 
 public:
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>

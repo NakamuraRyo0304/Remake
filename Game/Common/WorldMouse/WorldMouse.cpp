@@ -26,9 +26,9 @@ using MOUSE_BUTTON = Mouse::ButtonStateTracker;
 // コンストラクタ
 //==============================================================================
 WorldMouse::WorldMouse()
-    : m_position{}              // 座標
-    , m_height{}                // Y座標の高さ
-    , is_playing{ false }       // デフォルトはエディタモード
+    : m_position{}                                  // 座標
+    , m_height{}                                    // Y座標の高さ
+    , is_playing{ false }                           // デフォルトはエディタモード
 {
     m_ray = std::make_unique<RayCast>();
 }
@@ -74,7 +74,7 @@ void WorldMouse::Update()
         }
 
         // クランプ処理
-        m_height = UserUtility::Clamp(m_height, 0, 5);
+        m_height = UserUtility::Clamp(m_height, 0, 4);
 
         // 座標を設定(線形補間移動)
         m_position = m_ray->GetConvertedPosition();

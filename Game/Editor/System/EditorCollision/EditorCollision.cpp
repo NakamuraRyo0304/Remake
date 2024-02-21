@@ -18,7 +18,7 @@ const float EditorCollision::HIT_RADIUS = 0.5f;		// 当たり判定の半径
 // コンストラクタ
 //==============================================================================
 EditorCollision::EditorCollision()
-	: m_position{}		// 座標
+	: m_position{}									// 座標
 {
 }
 

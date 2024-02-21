@@ -5,55 +5,56 @@
  *  @Author NakamuraRyo
  */
 
-#include "pch.h"
-// システム
-#include "Game/Cameras/AdminCamera/AdminCamera.h"
-#include "Game/Common/WorldMouse/WorldMouse.h"
-#include "Game/Common/BlockManager/BlockManager.h"
-#include "Game/PlayScene/System/StageCollision/StageCollision.h"
-#include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"
-#include "Game/PlayScene/System/FlagManager/FlagManager.h"
-#include "Game/PlayScene/System/ImageShot/ImageShot.h"
-#include "Game/PlayScene/System/UI_Play/UI_Play.h"
-#include "Libraries/SystemDatas/Timer/Timer.h"
-// オブジェクト
-#include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"
-#include "Game/PlayScene/Objects/Player/Player.h"
-#include "Game/Common/CursorObject/CursorObject.h"
-#include "Game/Common/Water/Water.h"
-#include "Game/PlayScene/Objects/Iceberg/Iceberg.h"
-#include "PlayScene.h"
+#include "pch.h"													// プリコンパイル済みヘッダー
+#include "Game/Cameras/AdminCamera/AdminCamera.h"					// 統合カメラ
+#include "Game/PlayScene/System/UI_Play/UI_Play.h"					// ユーザインターフェース
+#include "Libraries/SystemDatas/Timer/Timer.h"						// タイマー
+
+#include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"				// スカイドーム
+#include "Game/PlayScene/System/ImageShot/ImageShot.h"				// スクリーンショット作成クラス
+#include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"		// デプスステンシル（シャドウマップ用）
+
+#include "Game/Common/BlockManager/BlockManager.h"					// ブロック管理クラス
+#include "Game/PlayScene/System/StageCollision/StageCollision.h"	// ステージ当たり判定
+#include "Game/PlayScene/System/FlagManager/FlagManager.h"			// フラグ管理クラス
+#include "Game/PlayScene/Objects/Player/Player.h"					// プレイヤー（ペンギン）
+#include "Game/Common/WorldMouse/WorldMouse.h"						// ３Ｄ変換後のマウスシステム
+#include "Game/Common/CursorObject/CursorObject.h"					// ３Ｄ変換後のマウスオブジェクト
+#include "Game/Common/Water/Water.h"								// 海
+#include "Game/PlayScene/Objects/Iceberg/Iceberg.h"					// 氷山
+
+#include "PlayScene.h"												// プレイシーン
 
 //==============================================================================
 // 定数の設定(シャドウマップ)
 //==============================================================================
-const int PlayScene::SHADOWMAP_SIZE = 976;		// シャドウマップのサイズ
-const float PlayScene::AMBIENT_COLOR = 0.25f;	// 環境光の色
-const float PlayScene::LIGHT_THETA = 85.0f;		// ライトの範囲
+const int PlayScene::SHADOWMAP_SIZE = 976;							// シャドウマップのサイズ
+const float PlayScene::AMBIENT_COLOR = 0.25f;						// 環境光の色
+const float PlayScene::LIGHT_THETA = 85.0f;							// ライトの範囲
 
 //==============================================================================
 // 定数の設定(フラグ追跡)
 //==============================================================================
-const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
-const float PlayScene::FLAG_START = 5.0f;		// 最高高度
-const float PlayScene::FLAG_CURSOR_RATE = 0.4f;	// フラグカーソルの拡大率
+const int PlayScene::MAX_FOLLOW = 3;								// 最大追跡パス数
+const float PlayScene::FLAG_START = 5.0f;							// 最高高度
+const float PlayScene::FLAG_CURSOR_RATE = 0.4f;						// フラグカーソルの拡大率
 
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
-using KeyCode = Keyboard::Keys;							// キーコード
-using CameraType = AdminCamera::Type;					// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
+using KeyCode = Keyboard::Keys;										// キーコード
+using CameraType = AdminCamera::Type;								// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;							// サウンドのタイプ
+using MouseClick = Mouse::ButtonStateTracker;						// マウスのクリック
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 PlayScene::PlayScene(const int& number)
-	: IScene()					// 基底クラスのコンストラクタ
-	, m_stageNumber{ number }	// ステージ番号
-	, m_gameTimer{ 0.0f }		// ゲームタイマー
-	, m_collectedCoin{ 0 }		// 集めたコイン数
+	: IScene()														// 基底クラスのコンストラクタ
+	, m_stageNumber{ number }										// ステージ番号
+	, m_gameTimer{ 0.0f }											// ゲームタイマー
+	, m_collectedCoin{ 0 }											// 集めたコイン数
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
 }
@@ -63,6 +64,8 @@ PlayScene::PlayScene(const int& number)
 //==============================================================================
 PlayScene::~PlayScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================
@@ -341,7 +344,7 @@ void PlayScene::Draw()
 	m_bigberg->Draw(_context, *_states, _view, _projection);
 
 	// UIの描画
-	//m_ui->Draw();
+	m_ui->Draw();
 
 	// デバッグ描画
 #ifdef _DEBUG

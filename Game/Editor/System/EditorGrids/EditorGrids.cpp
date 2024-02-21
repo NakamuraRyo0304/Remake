@@ -17,8 +17,8 @@ using VPC = DirectX::VertexPositionColor;		// プリミティブバッチオプ�
 // コンストラクタ
 //==============================================================================
 EditorGrids::EditorGrids(const int splitX, const int splitZ)
-	: m_splitX(splitX)
-	, m_splitZ(splitZ)
+	: m_splitX{ splitX }
+	, m_splitZ{ splitZ }
 {
 	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 	auto _device = DX::DeviceResources::GetInstance()->GetD3DDevice();

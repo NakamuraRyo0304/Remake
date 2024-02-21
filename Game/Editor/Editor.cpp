@@ -1,37 +1,37 @@
 /*
  *	@File	Editor.cpp
  *	@Brief	エディタ。
- *	@Date	2023-01-26
+ *	@Date	2024-01-26
  *  @Author NakamuraRyo
  */
 
-#include "pch.h"
-// システム
-#include "Game/Cameras/AdminCamera/AdminCamera.h"
-#include "Game/Editor/System/UI_Editor/UI_Editor.h"
-#include "Game/Editor/System/EditorCollision/EditorCollision.h"
-#include "Game/Common/WorldMouse/WorldMouse.h"
-#include "Game/Editor/System/EditorGrids/EditorGrids.h"
-#include "Libraries/UserUtility.h"
-// オブジェクト
-#include "Game/Common/BlockManager/BlockManager.h"
-#include "Game/Common/CursorObject/CursorObject.h"
-#include "Editor.h"
+#include "pch.h"													// プリコンパイル済みヘッダー
+#include "Libraries/UserUtility.h"									// ユーティリティ
+#include "Game/Cameras/AdminCamera/AdminCamera.h"					// 統合カメラ
+#include "Game/Editor/System/UI_Editor/UI_Editor.h"					// ユーザインターフェース
+
+#include "Game/Common/BlockManager/BlockManager.h"					// ブロック管理クラス
+#include "Game/Editor/System/EditorCollision/EditorCollision.h"		// エディタ当たり判定
+#include "Game/Common/WorldMouse/WorldMouse.h"						// ３Ｄ変換後のマウスシステム
+#include "Game/Common/CursorObject/CursorObject.h"					// ３Ｄ変換後のマウスオブジェクト
+#include "Game/Editor/System/EditorGrids/EditorGrids.h"				// エディタ用グリッド線
+
+#include "Editor.h"													// エディタシーン
 
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
-using KeyCode = Keyboard::Keys;							// キーコード
-using CameraType = AdminCamera::Type;					// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using BN = UI_Editor::BUTTON_NAME;						// ボタンの名前
+using KeyCode = Keyboard::Keys;										// キーコード
+using CameraType = AdminCamera::Type;								// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;							// サウンドのタイプ
+using BN = UI_Editor::BUTTON_NAME;									// ボタンの名前
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 Editor::Editor()
-	: IScene()							// 基底クラスのコンストラクタ
-	, m_selectionID{ ID::Obj_Flozen }	// 初期は氷床を設定
+	: IScene()														// 基底クラスのコンストラクタ
+	, m_selectionID{ ID::Obj_Flozen }								// 初期は氷床を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
@@ -41,6 +41,7 @@ Editor::Editor()
 //==============================================================================
 Editor::~Editor()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"Editorのデストラクタが呼ばれました。\n");
 	Finalize();
 }
 

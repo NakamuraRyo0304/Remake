@@ -21,9 +21,9 @@ const float MomentCanv::SPEED_TO_LAST = 0.1f;									// 速度
 // コンストラクタ
 //==============================================================================
 MomentCanv::MomentCanv(SimpleMath::Vector2 screenRate)
-	: m_position{}					// 座標
-	, m_screenRate{ screenRate }	// 画面比率
-	, is_endMoving{ false }			// 動作終了フラグ
+	: m_position{}					                                            // 座標
+	, m_screenRate{ screenRate }	                                            // 画面比率
+	, is_endMoving{ false }			                                            // 動作終了フラグ
 {
 	// スプライト描画の作成
 	m_sprite = std::make_unique<DrawSprite>();

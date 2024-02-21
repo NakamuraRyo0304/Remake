@@ -5,41 +5,41 @@
  *  @Author NakamuraRyo
  */
 
-#include "pch.h"
-// システム
-#include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"
-#include "Game/ClearScene/System/UI_Clear/UI_Clear.h"
-#include "Libraries/SystemDatas/Timer/Timer.h"
-#include "Libraries/UserUtility.h"
-// オブジェクト
-#include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"
-#include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"
-#include "Game/ClearScene/Objects/Tape/Tape.h"
-#include "Game/ClearScene/Objects/Seal/Seal.h"
-#include "ClearScene.h"
+#include "pch.h"															// プリコンパイル済みヘッダー
+#include "Libraries/UserUtility.h"											// ユーティリティ
+#include "Game/ClearScene/System/UI_Clear/UI_Clear.h"						// ユーザインターフェース
+#include "Libraries/SystemDatas/Timer/Timer.h"								// タイマー
+
+#include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"					// スコアボード
+#include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"					// プレイシーンのスクショ表示
+#include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"						// 背景
+#include "Game/ClearScene/Objects/Tape/Tape.h"								// テープオブジェクト
+#include "Game/ClearScene/Objects/Seal/Seal.h"								// シールオブジェクト
+
+#include "ClearScene.h"														// クリアシーン
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 ClearScene::WHITE = SimpleMath::Vector4(1, 1, 1, 1);	// 白色
+const SimpleMath::Vector4 ClearScene::WHITE = SimpleMath::Vector4::One;		// 白色
 
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
-using KeyCode = Keyboard::Keys;							// キーコード
-using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
-using MouseClick = Mouse::ButtonStateTracker;			// マウスのクリック
-using Selection = UI_Clear::SELECT;						// 次の選択
+using KeyCode = Keyboard::Keys;												// キーコード
+using RepeatType = SoundManager::SE_MODE;									// サウンドのタイプ
+using MouseClick = Mouse::ButtonStateTracker;								// マウスのクリック
+using Selection = UI_Clear::SELECT;											// 次の選択
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 ClearScene::ClearScene(float time, int coins, int stage, int max)
-	: IScene()						// 基底クラスのコンストラクタ
-	, m_clearTime{ time }			// クリアタイム
-	, m_collectedCoin{ coins }		// 集めたコイン数
-	, m_stageNumber{ stage }		// ステージ番号
-	, m_maxNumber{ max }			// 最大ステージ番号
+	: IScene()																// 基底クラスのコンストラクタ
+	, m_clearTime{ time }													// クリアタイム
+	, m_collectedCoin{ coins }												// 集めたコイン数
+	, m_stageNumber{ stage }												// ステージ番号
+	, m_maxNumber{ max }													// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 
@@ -53,6 +53,8 @@ ClearScene::ClearScene(float time, int coins, int stage, int max)
 //==============================================================================
 ClearScene::~ClearScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================

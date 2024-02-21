@@ -20,7 +20,7 @@ const float Cloud::LIMIT = 3.5f;				// 動作時間
 //==============================================================================
 Cloud::Cloud(SimpleMath::Vector3 position)
 	: IGameObject(L"Resources/Models/Cloud.cmo", L"Resources/Models", position)
-	, is_hit{ false }			// 衝突フラグ
+	, is_hit{ false }			                // 衝突フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Cloud);

@@ -17,12 +17,12 @@ const UINT DrawNumber::SIZE = 128;		// １数字分のサイズ
 // コンストラクタ
 //==============================================================================
 DrawNumber::DrawNumber()
-	: m_position{}		// 座標
-	, m_origin{}		// 中心座標
-	, m_rate{}			// 文字拡大率
-	, m_screenRate{}	// 画面拡大率
-	, m_rect{}			// 切り取り位置
-	, m_color{}			// 色
+	: m_position{}						// 座標
+	, m_origin{}						// 中心座標
+	, m_rate{}							// 文字拡大率
+	, m_screenRate{}					// 画面拡大率
+	, m_rect{}							// 切り取り位置
+	, m_color{}							// 色
 {
 	m_sprite = std::make_unique<DrawSprite>();
 	m_sprite->MakeSpriteBatch();

@@ -7,34 +7,50 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
+#include "Game/Common/DrawKeys/DrawKeys.h"
 #include "UI_Editor.h"
 
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
 using BN = UI_Editor::BUTTON_NAME;		// ボタンの名前
+using BS = Button::State;				// ボタンの状態
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)		// 基底クラス
-	, m_buttons{}					// ボタン
-	, is_clicks{}					// クリック判定
-	, is_blindFlag{}				// ボタンかくしフラグ
+	: IUserInterface(scS, mscs)		    // 基底クラス
+	, m_buttons{}					    // ボタン
+	, is_clicks{}					    // クリック判定
+	, is_blindFlag{}				    // ボタンかくしフラグ
 {
-	m_buttons.push_back(std::make_unique<Button>(L"Load", L"Resources/Textures/Editor/Buttons/LoadButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Write", L"Resources/Textures/Editor/Buttons/WriteButton.dds"));
+	// ボタン作成
+	m_buttons.push_back(std::make_unique<Button>(L"Load"  , L"Resources/Textures/Editor/Buttons/LoadButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Write" , L"Resources/Textures/Editor/Buttons/WriteButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Flozen", L"Resources/Textures/Editor/Buttons/FlozenButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Cloud", L"Resources/Textures/Editor/Buttons/CloudButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Coin", L"Resources/Textures/Editor/Buttons/CoinButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Air", L"Resources/Textures/Editor/Buttons/AirButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Chara", L"Resources/Textures/Editor/Buttons/CharaButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Goal", L"Resources/Textures/Editor/Buttons/GoalButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Open", L"Resources/Textures/Editor/Buttons/OpenBar.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Close", L"Resources/Textures/Editor/Buttons/CloseBar.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Spike", L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Lift", L"Resources/Textures/Editor/Buttons/LiftButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Cloud" , L"Resources/Textures/Editor/Buttons/CloudButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Coin"  , L"Resources/Textures/Editor/Buttons/CoinButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Air"   , L"Resources/Textures/Editor/Buttons/AirButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Chara" , L"Resources/Textures/Editor/Buttons/CharaButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Goal"  , L"Resources/Textures/Editor/Buttons/GoalButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Open"  , L"Resources/Textures/Editor/Buttons/OpenBar.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Close" , L"Resources/Textures/Editor/Buttons/CloseBar.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Spike" , L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Lift"  , L"Resources/Textures/Editor/Buttons/LiftButton.dds"));
+
+	// キーオフセットを設定
+	auto _offset = SimpleMath::Vector2(128.0f, 896.0f);
+
+	// キー作成
+	m_keys[KEY_NAME::WKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/WKey.dds",
+		SimpleMath::Vector2(64.0f, 0.0f)   + _offset, GetScreenRate());
+	m_keys[KEY_NAME::SKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/SKey.dds",
+		SimpleMath::Vector2(64.0f, 128.0f) + _offset, GetScreenRate());
+	m_keys[KEY_NAME::AKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/AKey.dds",
+		SimpleMath::Vector2(0.0f, 64.0f)   + _offset, GetScreenRate());
+	m_keys[KEY_NAME::DKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/DKey.dds",
+		SimpleMath::Vector2(128.0f, 64.0f) + _offset, GetScreenRate());
 
 	// 初期化処理
 	Initialize();
@@ -45,6 +61,7 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 //==============================================================================
 UI_Editor::~UI_Editor()
 {
+	m_keys.clear();
 	m_buttons.clear();
 }
 
@@ -81,6 +98,11 @@ void UI_Editor::Initialize()
 	m_buttons[BN::Air_bn]->Initialize(		{ _L, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Lift_bn]->Initialize(		{ _R, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 
+	// キーの初期設定
+	for (auto& key : m_keys)
+	{
+		key.second->SetRate(SimpleMath::Vector2::One * 0.25f);
+	}
 }
 
 //==============================================================================
@@ -88,15 +110,15 @@ void UI_Editor::Initialize()
 //==============================================================================
 void UI_Editor::Update()
 {
-	for (int i = 0; i < BN::Length; i++)
+	for (int i = 0; i < BN::Length_bn; i++)
 	{
 		m_buttons[i]->Update();
 
 		// ボタンがクリックされたらTrueを入れる
-		is_clicks[i] = m_buttons[i]->GetState() == Button::State::Push;
+		is_clicks[i] = m_buttons[i]->GetState() == BS::Push;
 
 		// ホバーされたら暗めにする
-		bool _hover = m_buttons[i]->GetState() == Button::State::Hover;
+		bool _hover = m_buttons[i]->GetState() == BS::Hover;
 
 		// ボタンの色の更新
 		{
@@ -109,7 +131,16 @@ void UI_Editor::Update()
 		}
 	}
 
+	// ボタン位置の更新
 	MoveButtonPosition();
+
+	// キーの更新
+	auto _key = Keyboard::Get().GetState();
+
+	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
 }
 
 //==============================================================================
@@ -133,6 +164,12 @@ void UI_Editor::Draw()
 	else
 	{
 		m_buttons[BN::OC2_bn]->Draw();
+	}
+
+	// キーを描画
+	for (auto& key : m_keys)
+	{
+		key.second->Draw();
 	}
 }
 
@@ -163,7 +200,7 @@ void UI_Editor::MoveButtonPosition()
 	}
 
 	// 状態に応じてボタンを動かす
-	for (int i = 0; i < BN::Length; i++)
+	for (int i = 0; i < BN::Length_bn; i++)
 	{
 		SimpleMath::Vector2 _now = m_buttons[i]->GetAdderPosition();
 		float _x = UserUtility::EasedLerp(_now.x, is_blindFlag ? 288.0f : 0.0f, 0.4f);

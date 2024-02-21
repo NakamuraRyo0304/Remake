@@ -1,7 +1,7 @@
 /*
  *	@File	SelectScene.h
  *	@Brief	セレクトシーン。
- *	@Date	2023-01-26
+ *	@Date	2024-01-26
  *  @Author NakamuraRyo
  */
 

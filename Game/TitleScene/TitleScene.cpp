@@ -5,19 +5,20 @@
  *  @Author NakamuraRyo
  */
 
-#include "pch.h"
-// システム
-#include "Game/Cameras/AdminCamera/AdminCamera.h"
-#include "Game/TitleScene/System/UI_Title/UI_Title.h"
-#include "Libraries/SystemDatas/Timer/Timer.h"
-// オブジェクト
-#include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"
-#include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"
-#include "Game/Common/Water/Water.h"
-#include "Game/TitleScene/Objects/Logo/Logo.h"
-#include "Game/PlayScene/Objects/Iceberg/Iceberg.h"
-#include "Game/Common/Island/Island.h"
-#include "TitleScene.h"
+#include "pch.h"											// プリコンパイル済みヘッダー
+#include "Game/Cameras/AdminCamera/AdminCamera.h"			// 統合カメラ
+#include "Game/TitleScene/System/UI_Title/UI_Title.h"		// ユーザインターフェース
+#include "Libraries/SystemDatas/Timer/Timer.h"				// タイマー
+
+#include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"	// スカイドーム
+#include "Game/TitleScene/Objects/Logo/Logo.h"				// タイトルロゴ
+
+#include "Game/TitleScene/Objects/Bird_Title/Bird_Title.h"	// ペンギン
+#include "Game/Common/Water/Water.h"						// 海
+#include "Game/PlayScene/Objects/Iceberg/Iceberg.h"			// 氷山
+#include "Game/Common/Island/Island.h"						// 孤島
+
+#include "TitleScene.h"										// タイトルシーン
 
 //==============================================================================
 // 定数の設定
@@ -28,15 +29,15 @@ const float TitleScene::LOGO_FADE_OUT_SPEED = 0.1f;			// ロゴフェードアウト速度
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
-using KeyCode = Keyboard::Keys;							// キーコード
-using CameraType = AdminCamera::Type;					// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
+using KeyCode = Keyboard::Keys;								// キーコード
+using CameraType = AdminCamera::Type;						// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;					// サウンドのタイプ
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 TitleScene::TitleScene()
-	: IScene()				// 基底クラスのコンストラクタ
+	: IScene()												// 基底クラスのコンストラクタ
 {
 	Debug::DrawString::GetInstance().DebugLog(L"TitleSceneのコンストラクタが呼ばれました。\n");
 }
@@ -46,6 +47,8 @@ TitleScene::TitleScene()
 //==============================================================================
 TitleScene::~TitleScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"TitleSceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================

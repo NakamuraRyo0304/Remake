@@ -9,9 +9,9 @@
 #include "Libraries/UserUtility.h"
 #include "Flag.h"
 
- //==============================================================================
- // 定数の設定
- //==============================================================================
+//==============================================================================
+// 定数の設定
+//==============================================================================
 const float Flag::FALL_SPEED = 0.05f;		// 落下速度
 const float Flag::CLOSED_MATCH = 0.1f;		// 近似一致
 
@@ -20,8 +20,8 @@ const float Flag::CLOSED_MATCH = 0.1f;		// 近似一致
 //==============================================================================
 Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
 	: IGameObject(L"Resources/Models/Flag.cmo", L"Resources/Models")
-	, m_droppedPosition{}		// 落下位置
-	, is_arrive{ false }		// 到着フラグ
+	, m_droppedPosition{}		            // 落下位置
+	, is_arrive{ false }		            // 到着フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Flag);
