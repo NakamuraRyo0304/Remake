@@ -676,6 +676,12 @@
     <Image Include="Resources\Textures\Text\ReTrytex.dds">
       <Filter>Resources\Textures\Text</Filter>
     </Image>
+    <Image Include="Resources\Textures\Text\RemainingCoins.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Text\Cameratex.dds">
+      <Filter>Resources\Textures\Text</Filter>
+    </Image>
     <Image Include="Resources\Textures\BackGround\cork.dds">
       <Filter>Resources\Textures\BackGround</Filter>
     </Image>
