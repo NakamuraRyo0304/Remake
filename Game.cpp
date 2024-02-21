@@ -9,7 +9,7 @@
 #include "Game.h"
 
 // TODO: ウィンドウタイトルの設定
-const wchar_t* Game::TITLE = L"SkyFallRemake";
+const wchar_t* Game::TITLE = L"アデリー探検記";
 const int Game::SCREEN_W = 1280;
 const int Game::SCREEN_H = 720;
 const XMVECTORF32 SCREEN_COLOR = Colors::CornflowerBlue;

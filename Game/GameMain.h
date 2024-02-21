@@ -26,6 +26,10 @@ enum class SCENE : int
     EXIT,       // 終了
 };
 
+#ifdef _DEBUG
+class Timer;
+#endif
+
 class GameMain
 {
 private:
@@ -41,6 +45,11 @@ private:
 
     // フェードオブジェクト
     std::unique_ptr<Fade> m_fade;
+
+#ifdef _DEBUG
+    // タイマー
+    std::unique_ptr<Timer> m_timer;
+#endif
 
 private:
 

@@ -9,6 +9,10 @@
 #include "GameMain.h"
 #include "Libraries/SystemDatas/ScreenEffects/Fade/Fade.h"
 #include "Libraries/UserUtility.h"
+#ifdef _DEBUG
+#include "Libraries/SystemDatas/DrawString/DrawString.h"
+#include "Libraries/SystemDatas/Timer/Timer.h"
+#endif
 
 //==============================================================================
 // 定数の設定
@@ -39,6 +43,13 @@ GameMain::GameMain()
 	, m_collectedCoin{ 0 }				// 集めたコイン数
 	, m_maxNumber{ 999 }				// 最大ステージ番号
 {
+	// タイマー計測開始
+#ifdef _DEBUG
+	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
+	m_timer->Start();
+	Debug::DrawString::GetInstance().DebugLog(L"タイマー計測開始！\n");
+#endif
+
 }
 
 //==============================================================================
@@ -66,6 +77,11 @@ void GameMain::Initialize()
 //==============================================================================
 void GameMain::Update()
 {
+	// タイマー更新
+#ifdef _DEBUG
+	m_timer->Update();
+#endif
+
 	// フェードの更新
 	m_fade->Update(FADE_COLOR);
 
@@ -121,6 +137,16 @@ void GameMain::Finalize()
 {
 	m_nowScene.reset();
 	m_fade.reset();
+
+	// タイマー計測ストップ
+#ifdef _DEBUG
+	m_timer->Stop();
+	Debug::DrawString::GetInstance().DebugLog(L"タイマー計測終了！\n");
+	int _minite = static_cast<int>(m_timer->GetCount() / 60.0f);
+	int _second = static_cast<int>(m_timer->GetCount()) % 60;
+	std::wstring _output = L"起動時間は" + std::to_wstring(_minite) + L"分" + std::to_wstring(_second) + L"秒\n";
+	Debug::DrawString::GetInstance().DebugLog(_output.c_str());
+#endif
 }
 
 //==============================================================================
