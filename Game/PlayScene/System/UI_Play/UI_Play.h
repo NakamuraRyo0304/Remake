@@ -44,7 +44,7 @@ private:
 
 	// ‰æ‘œ•`‰æ
 	std::unique_ptr<DrawSprite> m_sprite;
-	DirectX::SimpleMath::Vector2 m_coinTexPos;
+	DirectX::SimpleMath::Vector2 m_coinTexPos, m_cameraTexPos;
 
 	// ƒRƒCƒ“”
 	int m_coinNum;
