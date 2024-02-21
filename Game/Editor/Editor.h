@@ -1,7 +1,7 @@
 /*
  *	@File	Editor.h
  *	@Brief	エディタ。
- *	@Date	2023-01-26
+ *	@Date	2024-01-26
  *  @Author NakamuraRyo
  */
 

@@ -1,34 +1,35 @@
 /*
  *	@File	SelectScene.cpp
  *	@Brief	セレクトシーン。
- *	@Date	2023-01-26
+ *	@Date	2024-01-26
  *  @Author NakamuraRyo
  */
 
-#include "pch.h"
-// システム
-#include "Game/Cameras/AdminCamera/AdminCamera.h"
-#include "Game/SelectScene/System/UI_Select/UI_Select.h"
-#include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"
-// オブジェクト
-#include "Game/Common/BlockManager/BlockManager.h"
-#include "Game/Common/Water/Water.h"
-#include "Game/SelectScene/Objects/BG_Select/BG_Select.h"
-#include "SelectScene.h"
+#include "pch.h"											// プリコンパイル済みヘッダー
+#include "Game/Cameras/AdminCamera/AdminCamera.h"			// 統合カメラ
+#include "Game/SelectScene/System/UI_Select/UI_Select.h"	// ユーザインターフェース
+
+#include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"	// スカイドーム
+#include "Game/SelectScene/Objects/BG_Select/BG_Select.h"	// 背景
+
+#include "Game/Common/BlockManager/BlockManager.h"			// ブロック管理クラス
+#include "Game/Common/Water/Water.h"						// 海
+
+#include "SelectScene.h"									// セレクトシーン
 
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
-using KeyCode = Keyboard::Keys;							// キーコード
-using CameraType = AdminCamera::Type;					// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;				// サウンドのタイプ
+using KeyCode = Keyboard::Keys;								// キーコード
+using CameraType = AdminCamera::Type;						// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;					// サウンドのタイプ
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 SelectScene::SelectScene(const int& selection)
-	: IScene()						// 基底クラスのコンストラクタ
-	, m_stageSelection{ selection }	// 選択番号
+	: IScene()												// 基底クラスのコンストラクタ
+	, m_stageSelection{ selection }							// 選択番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのコンストラクタが呼ばれました。\n");
 }
