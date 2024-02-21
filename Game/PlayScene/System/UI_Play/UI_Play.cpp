@@ -26,6 +26,7 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	: IUserInterface(scS, mscs)				                                // 基底クラス
 	, m_coinNum{}							                                // コイン枚数
 	, m_coinTexPos{}														// 残りコイン枚数テキスト
+	, m_cameraTexPos{}														// カメラテキスト
 {
 	// エリア作成
 	m_area = std::make_unique<UI_PlayArea>();
@@ -34,7 +35,7 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	m_coins = std::make_unique<UI_CoinNum>();
 
 	// キーオフセットを設定
-	auto _offset = SimpleMath::Vector2(1728.0f, 896.0f);
+	auto _offset = SimpleMath::Vector2(1728.0f, 384.0f);
 
 	// キー作成
 	m_keys[KEY_NAME::WKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/WKey.dds",
@@ -88,6 +89,8 @@ void UI_Play::Initialize()
 	// スプライトを登録
 	m_sprite->AddTextureData(L"CoinTex", L"Resources/Textures/Text/RemainingCoins.dds");
 	m_coinTexPos = (m_area->GetPosition() + SimpleMath::Vector2(32.0f, 64.0f)) * GetScreenRate();
+	m_sprite->AddTextureData(L"CameraTex", L"Resources/Textures/Text/Cameratex.dds");
+	m_cameraTexPos = (m_area->GetPosition() + SimpleMath::Vector2(32.0f, 256.0f)) * GetScreenRate();
 }
 
 //==============================================================================
@@ -120,6 +123,8 @@ void UI_Play::Draw()
 	m_coins->Draw();
 
 	// キーを描画
+	m_sprite->DrawTexture(L"CameraTex", m_cameraTexPos,
+		WHITE, GetScreenRate() * 0.5f, { 0.0f, 0.0f }, { 0, 0, 256, 128 });
 	for (auto& key : m_keys)
 	{
 		key.second->Draw();
