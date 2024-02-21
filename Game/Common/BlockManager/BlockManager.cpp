@@ -118,27 +118,27 @@ void BlockManager::Update()
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
-		if (UserUtility::IsNull(cloud.get())) continue;
+		if (UserUtility::IsNull(cloud.get()))  continue;
 		cloud->Update();
 	}
 	for (auto& coin : m_coins)		// コイン
 	{
-		if (UserUtility::IsNull(coin.get())) continue;
+		if (UserUtility::IsNull(coin.get()))   continue;
 		coin->Update();
 	}
 	for (auto& goal : m_goals)		// ゴールオブジェクト
 	{
-		if (UserUtility::IsNull(goal.get())) continue;
+		if (UserUtility::IsNull(goal.get()))   continue;
 		goal->Update();
 	}
 	for (auto& spike : m_spikes)	// 棘オブジェクト
 	{
-		if (UserUtility::IsNull(spike.get())) continue;
+		if (UserUtility::IsNull(spike.get()))  continue;
 		spike->Update();
 	}
-	for (auto& lift : m_lifts)	// リフトブロック
+	for (auto& lift : m_lifts)		// リフトブロック
 	{
-		if (UserUtility::IsNull(lift.get())) continue;
+		if (UserUtility::IsNull(lift.get()))   continue;
 		lift->Update();
 	}
 
@@ -147,12 +147,12 @@ void BlockManager::Update()
 
 	for (auto& chara : m_chara)		// キャラオブジェクト
 	{
-		if (UserUtility::IsNull(chara.get())) continue;
+		if (UserUtility::IsNull(chara.get()))  continue;
 		chara->Update();
 	}
 	for (auto& air : m_air)			// エアー
 	{
-		if (UserUtility::IsNull(air.get())) continue;
+		if (UserUtility::IsNull(air.get()))    continue;
 		air->Update();
 	}
 
@@ -174,27 +174,27 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
 	{
-		if (UserUtility::IsNull(cloud.get())) continue;
+		if (UserUtility::IsNull(cloud.get()))  continue;
 		cloud->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& coin : m_coins)		// コイン
 	{
-		if (UserUtility::IsNull(coin.get())) continue;
+		if (UserUtility::IsNull(coin.get()))   continue;
 		coin->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& goal : m_goals)		// ゴールオブジェクト
 	{
-		if (UserUtility::IsNull(goal.get())) continue;
+		if (UserUtility::IsNull(goal.get()))   continue;
 		goal->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& spike : m_spikes)	// 棘オブジェクト
 	{
-		if (UserUtility::IsNull(spike.get())) continue;
+		if (UserUtility::IsNull(spike.get()))  continue;
 		spike->Draw(context, states, view, proj, wireframe, option);
 	}
 	for (auto& lift : m_lifts)		// リフトブロック
 	{
-		if (UserUtility::IsNull(lift.get())) continue;
+		if (UserUtility::IsNull(lift.get()))   continue;
 		lift->Draw(context, states, view, proj, wireframe, option);
 	}
 
@@ -203,7 +203,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 
 	for (auto& chara : m_chara)		// キャラオブジェクト
 	{
-		if (UserUtility::IsNull(chara.get())) continue;
+		if (UserUtility::IsNull(chara.get()))  continue;
 		chara->Draw(context, states, view, proj, wireframe, option);
 	}
 }
@@ -216,7 +216,7 @@ void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 	// オブジェクトの描画
 	for (auto& sand : m_flozens)	// 氷床ブロック
 	{
-		if (UserUtility::IsNull(sand.get())) continue;
+		if (UserUtility::IsNull(sand.get()))  continue;
 		sand->SetPosition(sand->GetInitialPosition() + offset);
 	}
 	for (auto& cloud : m_clouds)	// 雲ブロック
@@ -226,12 +226,12 @@ void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 	}
 	for (auto& coin : m_coins)		// コイン
 	{
-		if (UserUtility::IsNull(coin.get())) continue;
+		if (UserUtility::IsNull(coin.get()))  continue;
 		coin->SetPosition(coin->GetInitialPosition() + offset);
 	}
 	for (auto& goal : m_goals)		// ゴールオブジェクト
 	{
-		if (UserUtility::IsNull(goal.get())) continue;
+		if (UserUtility::IsNull(goal.get()))  continue;
 		goal->SetPosition(goal->GetInitialPosition() + offset);
 	}
 	for (auto& spike : m_spikes)	// 棘オブジェクト
@@ -241,7 +241,7 @@ void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 	}
 	for (auto& lift : m_lifts)		// リフトブロック
 	{
-		if (UserUtility::IsNull(lift.get())) continue;
+		if (UserUtility::IsNull(lift.get()))  continue;
 		lift->SetPosition(lift->GetInitialPosition() + offset);
 	}
 }
@@ -288,50 +288,50 @@ void BlockManager::ReplaceBlock()
 	}
 	for (auto& cloud : m_clouds)
 	{
-		if (UserUtility::IsNull(cloud.get())) continue;
-		if (cloud->GetID() == ID::Obj_Cloud) continue;
+		if (UserUtility::IsNull(cloud.get()))  continue;
+		if (cloud->GetID() == ID::Obj_Cloud)   continue;
 		CreateBlock(cloud->GetID(), cloud->GetInitialPosition());
 		UserUtility::RemoveVec(m_clouds, cloud);
 	}
 	for (auto& coin : m_coins)
 	{
-		if (UserUtility::IsNull(coin.get())) continue;
-		if (coin->GetID() == ID::Obj_Coin) continue;
+		if (UserUtility::IsNull(coin.get()))   continue;
+		if (coin->GetID() == ID::Obj_Coin)     continue;
 		CreateBlock(coin->GetID(), coin->GetInitialPosition());
 		UserUtility::RemoveVec(m_coins, coin);
 	}
 	for (auto& air : m_air)
 	{
-		if (UserUtility::IsNull(air.get())) continue;
-		if (air->GetID() == ID::Obj_Air) continue;
+		if (UserUtility::IsNull(air.get()))    continue;
+		if (air->GetID() == ID::Obj_Air)       continue;
 		CreateBlock(air->GetID(), air->GetInitialPosition());
 		UserUtility::RemoveVec(m_air, air);
 	}
 	for (auto& chara : m_chara)
 	{
-		if (UserUtility::IsNull(chara.get())) continue;
-		if (chara->GetID() == ID::Obj_Player) continue;
+		if (UserUtility::IsNull(chara.get()))  continue;
+		if (chara->GetID() == ID::Obj_Player)  continue;
 		CreateBlock(chara->GetID(), chara->GetInitialPosition());
 		UserUtility::RemoveVec(m_chara, chara);
 	}
 	for (auto& goal : m_goals)
 	{
-		if (UserUtility::IsNull(goal.get())) continue;
-		if (goal->GetID() == ID::Obj_Goal) continue;
+		if (UserUtility::IsNull(goal.get()))   continue;
+		if (goal->GetID() == ID::Obj_Goal)     continue;
 		CreateBlock(goal->GetID(), goal->GetInitialPosition());
 		UserUtility::RemoveVec(m_goals, goal);
 	}
 	for (auto& spike : m_spikes)
 	{
-		if (UserUtility::IsNull(spike.get())) continue;
-		if (spike->GetID() == ID::Obj_Spike) continue;
+		if (UserUtility::IsNull(spike.get()))  continue;
+		if (spike->GetID() == ID::Obj_Spike)   continue;
 		CreateBlock(spike->GetID(), spike->GetInitialPosition());
 		UserUtility::RemoveVec(m_spikes, spike);
 	}
 	for (auto& lift : m_lifts)
 	{
-		if (UserUtility::IsNull(lift.get())) continue;
-		if (lift->GetID() == ID::Obj_Lift) continue;
+		if (UserUtility::IsNull(lift.get()))   continue;
+		if (lift->GetID() == ID::Obj_Lift)     continue;
 		CreateBlock(lift->GetID(), lift->GetInitialPosition());
 		UserUtility::RemoveVec(m_lifts, lift);
 	}

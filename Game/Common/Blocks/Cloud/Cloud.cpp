@@ -62,7 +62,7 @@ void Cloud::Update()
 
 		// 上下させる
         SetPosition(UserUtility::Lerp(GetPosition(),
-			GetInitialPosition() + sinf(m_timer->GetCount()) * SimpleMath::Vector3::UnitY));
+			GetInitialPosition() + sinf(m_timer->GetCount()) * SimpleMath::Vector3::UnitY * 1.1f));
 
 		// タイマーを更新する
 		m_timer->Update();

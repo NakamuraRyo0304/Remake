@@ -17,6 +17,7 @@
 class UI_CoinNum;
 class UI_PlayArea;
 class DrawKeys;
+class DrawSprite;
 class UI_Play final : public IUserInterface
 {
 public:
@@ -41,12 +42,17 @@ private:
 	// キー描画
 	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
 
+	// 画像描画
+	std::unique_ptr<DrawSprite> m_sprite;
+	DirectX::SimpleMath::Vector2 m_coinTexPos;
+
 	// コイン数
 	int m_coinNum;
 
 private:
 
 	static const DirectX::SimpleMath::Vector4 WHITE;
+	static const DirectX::SimpleMath::Vector4 RED;
 
 public:
 

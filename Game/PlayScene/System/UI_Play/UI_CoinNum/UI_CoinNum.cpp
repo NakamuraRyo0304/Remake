@@ -45,8 +45,11 @@ UI_CoinNum::~UI_CoinNum()
 // ‰Šú‰»ŠÖ”
 //==============================================================================
 void UI_CoinNum::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
-	SimpleMath::Vector2 rate)
+	SimpleMath::Vector2 rate, SimpleMath::Vector2 scRate)
 {
+	// À•W‚ÌÝ’è
+	m_position = pos;
+
 	// ”Žš‚ÌÝ’è
 	m_nums[0]->SetPosition(pos);
 	m_nums[0]->SetColor(color);
@@ -55,7 +58,8 @@ void UI_CoinNum::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
 
 	for (int i = 0; i < 2; i++)
 	{
-		m_nums[i]->SetScreenRate(rate);
+		m_nums[i]->SetRate(rate);
+		m_nums[i]->SetScreenRate(scRate);
 	}
 }
 

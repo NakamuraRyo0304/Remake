@@ -1,5 +1,13 @@
 [
   {
+    "Path": "Lift",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 7.0
+    }
+  },
+  {
     "Path": "Goal",
     "Position": {
       "X": 6.0,
@@ -8,6 +16,30 @@
     }
   },
   {
+    "Path": "Coin",
+    "Position": {
+      "X": 5.0,
+      "Y": 1.0,
+      "Z": 5.0
+    }
+  },
+  {
+    "Path": "Cloud",
+    "Position": {
+      "X": 6.0,
+      "Y": 0.0,
+      "Z": 7.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 3.0,
+      "Y": 0.0,
+      "Z": 7.0
+    }
+  },
+  {
     "Path": "Flozen",
     "Position": {
       "X": 2.0,
@@ -221,14 +253,6 @@
       "X": 6.0,
       "Y": 0.0,
       "Z": 6.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 6.0,
-      "Y": 0.0,
-      "Z": 7.0
     }
   },
   {

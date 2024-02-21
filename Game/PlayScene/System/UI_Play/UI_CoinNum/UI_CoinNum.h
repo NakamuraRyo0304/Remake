@@ -47,9 +47,10 @@ public:
 	/// <param name="pos">À•W</param>
 	/// <param name="color">•¶šF</param>
 	/// <param name="rate">Šg‘å—¦</param>
+	/// <param name="scRate">‰æ–ÊŠg‘å—¦</param>
 	/// <returns>‚È‚µ</returns>
 	void Initialize(DirectX::SimpleMath::Vector2 pos,
-		DirectX::SimpleMath::Vector4 color, DirectX::SimpleMath::Vector2 rate);
+		DirectX::SimpleMath::Vector4 color, DirectX::SimpleMath::Vector2 rate, DirectX::SimpleMath::Vector2 scRate);
 
 	/// <summary>
 	/// •`‰æŠÖ”
