@@ -13,23 +13,23 @@
 //==============================================================================
 // エイリアス宣言
 //==============================================================================
-using KeyCode = Keyboard::Keys;			// キーコード
+using KeyCode = Keyboard::Keys;															// キーコード
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 UI_Title::RED_COLOR = SimpleMath::Vector4(1, 0.5f, 0, 1);	// オレンジ色
-const float UI_Title::COLOR_SPEED = 0.075f;	// 色の変更速度
+const SimpleMath::Vector4 UI_Title::ORANGE_COLOR = SimpleMath::Vector4(1, 0.5f, 0, 1);	// オレンジ色
+const float UI_Title::COLOR_SPEED = 0.075f;												// 色の変更速度
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Title::UI_Title(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)				// 基底クラス
-	, m_selection{ TitleSelect::Start }		// スタート
-	, m_position{}							// 座標
-	, m_color{}								// 描画色
-	, is_anything{ false }					// 捜査状況監視フラグ
+	: IUserInterface(scS, mscs)															// 基底クラス
+	, m_selection{ TitleSelect::Start }													// スタート
+	, m_position{}																		// 座標
+	, m_color{}																			// 描画色
+	, is_anything{ false }																// 捜査状況監視フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -90,12 +90,12 @@ void UI_Title::Update()
 	// 選択番号に応じて色を分ける
 	if (m_selection == TitleSelect::Start)
 	{
-		m_color[L"Start"] = UserUtility::Lerp(m_color[L"Start"], RED_COLOR, COLOR_SPEED);
+		m_color[L"Start"] = UserUtility::Lerp(m_color[L"Start"], ORANGE_COLOR, COLOR_SPEED);
 		m_color[L"Exit"] = SimpleMath::Vector4(1, 1, 1, 1);
 	}
 	if (m_selection == TitleSelect::Exit)
 	{
-		m_color[L"Exit"] = UserUtility::Lerp(m_color[L"Exit"], RED_COLOR, COLOR_SPEED);
+		m_color[L"Exit"] = UserUtility::Lerp(m_color[L"Exit"], ORANGE_COLOR, COLOR_SPEED);
 		m_color[L"Start"] = SimpleMath::Vector4(1, 1, 1, 1);
 	}
 }

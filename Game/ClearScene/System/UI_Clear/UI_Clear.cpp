@@ -14,17 +14,17 @@
 //==============================================================================
 const SimpleMath::Vector4 UI_Clear::WHITE = SimpleMath::Vector4(1.0f, 1.0f, 1.0f, 1.0f);// 原色
 const SimpleMath::Vector4 UI_Clear::THINW = SimpleMath::Vector4(0.4f, 0.4f, 0.4f, 0.4f);// 薄色
-const float UI_Clear::COLOR_SPEED = 0.05f;	// 色の変更速度
-const float UI_Clear::LAST_POS_X = 1550.0f;	// 最終X座標
+const float UI_Clear::COLOR_SPEED = 0.05f;												// 色の変更速度
+const float UI_Clear::LAST_POS_X = 1550.0f;												// 最終X座標
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Clear::UI_Clear(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)		// 基底クラス
-	, m_select{ SELECT::NEXT }		// セレクト
-	, m_options{}					// オプション
-	, is_endMoving{ false }			// 動作終了フラグ
+	: IUserInterface(scS, mscs)															// 基底クラス
+	, m_select{ SELECT::NEXT }															// セレクト
+	, m_options{}																		// オプション
+	, is_endMoving{ false }																// 動作終了フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();

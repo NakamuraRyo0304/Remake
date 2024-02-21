@@ -19,38 +19,37 @@ using BN = UI_Editor::BUTTON_NAME;		// ボタンの名前
 // コンストラクタ
 //==============================================================================
 UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)		// 基底クラス
-	, m_buttons{}					// ボタン
-	, m_keyOffset{}					// キーオフセット
-	, is_clicks{}					// クリック判定
-	, is_blindFlag{}				// ボタンかくしフラグ
+	: IUserInterface(scS, mscs)		    // 基底クラス
+	, m_buttons{}					    // ボタン
+	, is_clicks{}					    // クリック判定
+	, is_blindFlag{}				    // ボタンかくしフラグ
 {
 	// ボタン作成
-	m_buttons.push_back(std::make_unique<Button>(L"Load", L"Resources/Textures/Editor/Buttons/LoadButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Write", L"Resources/Textures/Editor/Buttons/WriteButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Load"  , L"Resources/Textures/Editor/Buttons/LoadButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Write" , L"Resources/Textures/Editor/Buttons/WriteButton.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Flozen", L"Resources/Textures/Editor/Buttons/FlozenButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Cloud", L"Resources/Textures/Editor/Buttons/CloudButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Coin", L"Resources/Textures/Editor/Buttons/CoinButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Air", L"Resources/Textures/Editor/Buttons/AirButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Chara", L"Resources/Textures/Editor/Buttons/CharaButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Goal", L"Resources/Textures/Editor/Buttons/GoalButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Open", L"Resources/Textures/Editor/Buttons/OpenBar.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Close", L"Resources/Textures/Editor/Buttons/CloseBar.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Spike", L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Lift", L"Resources/Textures/Editor/Buttons/LiftButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Cloud" , L"Resources/Textures/Editor/Buttons/CloudButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Coin"  , L"Resources/Textures/Editor/Buttons/CoinButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Air"   , L"Resources/Textures/Editor/Buttons/AirButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Chara" , L"Resources/Textures/Editor/Buttons/CharaButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Goal"  , L"Resources/Textures/Editor/Buttons/GoalButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Open"  , L"Resources/Textures/Editor/Buttons/OpenBar.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Close" , L"Resources/Textures/Editor/Buttons/CloseBar.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Spike" , L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
+	m_buttons.push_back(std::make_unique<Button>(L"Lift"  , L"Resources/Textures/Editor/Buttons/LiftButton.dds"));
 
 	// キーオフセットを設定
-	m_keyOffset = SimpleMath::Vector2(128.0f, 896.0f);
+	auto _offset = SimpleMath::Vector2(128.0f, 896.0f);
 
 	// キー作成
 	m_keys[KEY_NAME::WKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/WKey.dds",
-		SimpleMath::Vector2(64.0f, 0.0f) + m_keyOffset, GetScreenRate());
+		SimpleMath::Vector2(64.0f, 0.0f)   + _offset, GetScreenRate());
 	m_keys[KEY_NAME::SKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/SKey.dds",
-		SimpleMath::Vector2(64.0f, 128.0f) + m_keyOffset, GetScreenRate());
+		SimpleMath::Vector2(64.0f, 128.0f) + _offset, GetScreenRate());
 	m_keys[KEY_NAME::AKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/AKey.dds",
-		SimpleMath::Vector2(0.0f, 64.0f) + m_keyOffset, GetScreenRate());
+		SimpleMath::Vector2(0.0f, 64.0f)   + _offset, GetScreenRate());
 	m_keys[KEY_NAME::DKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/DKey.dds",
-		SimpleMath::Vector2(128.0f, 64.0f) + m_keyOffset, GetScreenRate());
+		SimpleMath::Vector2(128.0f, 64.0f) + _offset, GetScreenRate());
 
 	// 初期化処理
 	Initialize();

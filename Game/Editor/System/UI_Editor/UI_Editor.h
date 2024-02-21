@@ -56,9 +56,6 @@ private:
 	// キー
 	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
 
-	// キーのオフセット
-	DirectX::SimpleMath::Vector2 m_keyOffset;
-
 	// フラグ
 	bool is_clicks[BUTTON_NAME::Length_bn];
 

@@ -26,9 +26,9 @@ using MOUSE_BUTTON = Mouse::ButtonStateTracker;
 // コンストラクタ
 //==============================================================================
 WorldMouse::WorldMouse()
-    : m_position{}              // 座標
-    , m_height{}                // Y座標の高さ
-    , is_playing{ false }       // デフォルトはエディタモード
+    : m_position{}                                  // 座標
+    , m_height{}                                    // Y座標の高さ
+    , is_playing{ false }                           // デフォルトはエディタモード
 {
     m_ray = std::make_unique<RayCast>();
 }

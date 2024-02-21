@@ -14,7 +14,7 @@
 //==============================================================================
 const SimpleMath::Vector4 UI_Select::RED_COLOR = SimpleMath::Vector4(1, 0, 0, 1);	// 赤色
 const SimpleMath::Vector4 UI_Select::BLACK_COLOR = SimpleMath::Vector4(0, 0, 0, 1);	// 黒色
-const float UI_Select::COLOR_SPEED = 0.075f;	// 色の変更速度
+const float UI_Select::COLOR_SPEED = 0.075f;	                                    // 色の変更速度
 // ステージ画像の座標
 const SimpleMath::Vector2 UI_Select::STAGE_TEX_POS = SimpleMath::Vector2(475.0f, 200.0f);
 // ステージ画像の拡大率
@@ -24,11 +24,11 @@ const float UI_Select::STAGE_TEX_RATE = 0.6f;
 // コンストラクタ
 //==============================================================================
 UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)		// 基底クラス
-	, m_stageSelection{ 1 }			// ステージ１からスタート
-	, m_position{}					// 座標
-	, m_color{}						// 描画色
-	, m_stageAlpha{}				// ステージアルファ値
+	: IUserInterface(scS, mscs)														// 基底クラス
+	, m_stageSelection{ 1 }															// ステージ１からスタート
+	, m_position{}																	// 座標
+	, m_color{}																		// 描画色
+	, m_stageAlpha{}																// ステージアルファ値
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();

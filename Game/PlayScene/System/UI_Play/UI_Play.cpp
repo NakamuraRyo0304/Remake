@@ -21,8 +21,8 @@ const SimpleMath::Vector4 UI_Play::WHITE = SimpleMath::Vector4(1, 1, 1, 1);	// ”
 // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 //==============================================================================
 UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)				// Šî’êƒNƒ‰ƒX
-	, m_coinNum{}							// ƒRƒCƒ“–‡”
+	: IUserInterface(scS, mscs)				                                // Šî’êƒNƒ‰ƒX
+	, m_coinNum{}							                                // ƒRƒCƒ“–‡”
 {
 	// ƒGƒŠƒAì¬
 	m_area = std::make_unique<UI_PlayArea>();
