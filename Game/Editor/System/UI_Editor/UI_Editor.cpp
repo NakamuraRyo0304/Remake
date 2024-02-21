@@ -14,6 +14,7 @@
 // エイリアス宣言
 //==============================================================================
 using BN = UI_Editor::BUTTON_NAME;		// ボタンの名前
+using BS = Button::State;				// ボタンの状態
 
 //==============================================================================
 // コンストラクタ
@@ -97,12 +98,11 @@ void UI_Editor::Initialize()
 	m_buttons[BN::Air_bn]->Initialize(		{ _L, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 	m_buttons[BN::Lift_bn]->Initialize(		{ _R, _Y + _OFF * 4}, _bRate, _bRect, GetScreenRate());
 
-	// キーの拡大率を設定
-	m_keys[KEY_NAME::WKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
-	m_keys[KEY_NAME::SKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
-	m_keys[KEY_NAME::AKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
-	m_keys[KEY_NAME::DKEY]->SetRate(SimpleMath::Vector2::One * 0.25f);
-
+	// キーの初期設定
+	for (auto& key : m_keys)
+	{
+		key.second->SetRate(SimpleMath::Vector2::One * 0.25f);
+	}
 }
 
 //==============================================================================
@@ -115,10 +115,10 @@ void UI_Editor::Update()
 		m_buttons[i]->Update();
 
 		// ボタンがクリックされたらTrueを入れる
-		is_clicks[i] = m_buttons[i]->GetState() == Button::State::Push;
+		is_clicks[i] = m_buttons[i]->GetState() == BS::Push;
 
 		// ホバーされたら暗めにする
-		bool _hover = m_buttons[i]->GetState() == Button::State::Hover;
+		bool _hover = m_buttons[i]->GetState() == BS::Hover;
 
 		// ボタンの色の更新
 		{
@@ -167,10 +167,10 @@ void UI_Editor::Draw()
 	}
 
 	// キーを描画
-	m_keys[KEY_NAME::WKEY]->Draw();
-	m_keys[KEY_NAME::SKEY]->Draw();
-	m_keys[KEY_NAME::AKEY]->Draw();
-	m_keys[KEY_NAME::DKEY]->Draw();
+	for (auto& key : m_keys)
+	{
+		key.second->Draw();
+	}
 }
 
 //==============================================================================

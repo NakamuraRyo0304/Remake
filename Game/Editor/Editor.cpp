@@ -41,6 +41,7 @@ Editor::Editor()
 //==============================================================================
 Editor::~Editor()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"Editorのデストラクタが呼ばれました。\n");
 	Finalize();
 }
 

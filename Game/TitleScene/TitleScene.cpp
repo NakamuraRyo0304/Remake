@@ -47,6 +47,8 @@ TitleScene::TitleScene()
 //==============================================================================
 TitleScene::~TitleScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"TitleSceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================

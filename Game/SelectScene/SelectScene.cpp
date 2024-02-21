@@ -39,6 +39,8 @@ SelectScene::SelectScene(const int& selection)
 //==============================================================================
 SelectScene::~SelectScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================

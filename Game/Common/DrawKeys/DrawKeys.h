@@ -47,7 +47,7 @@ public:
 
 public:
 
-	// F‚ğİ’è‚·‚é
+	// F‚Ìİ’è
 	void SetColor(const DirectX::SimpleMath::Vector4& color){ m_color = color; }
 
 	// Šg‘å—¦‚Ìæ“¾

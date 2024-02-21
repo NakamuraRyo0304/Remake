@@ -53,6 +53,8 @@ ClearScene::ClearScene(float time, int coins, int stage, int max)
 //==============================================================================
 ClearScene::~ClearScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================

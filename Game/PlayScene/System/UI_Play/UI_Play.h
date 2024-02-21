@@ -16,8 +16,20 @@
 
 class UI_CoinNum;
 class UI_PlayArea;
+class DrawKeys;
 class UI_Play final : public IUserInterface
 {
+public:
+
+	enum KEY_NAME
+	{
+		WKEY,
+		SKEY,
+		AKEY,
+		DKEY,
+
+		Length__key
+	};
 private:
 
 	// UIエリア
@@ -26,12 +38,14 @@ private:
 	// コイン数
 	std::unique_ptr<UI_CoinNum> m_coins;
 
+	// キー描画
+	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
+
 	// コイン数
 	int m_coinNum;
 
 private:
 
-	static const DirectX::SimpleMath::Vector4 BLACK;
 	static const DirectX::SimpleMath::Vector4 WHITE;
 
 public:

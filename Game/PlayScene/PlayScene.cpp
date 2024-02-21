@@ -64,6 +64,8 @@ PlayScene::PlayScene(const int& number)
 //==============================================================================
 PlayScene::~PlayScene()
 {
+	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのデストラクタが呼ばれました。\n");
+	Finalize();
 }
 
 //==============================================================================
@@ -342,7 +344,7 @@ void PlayScene::Draw()
 	m_bigberg->Draw(_context, *_states, _view, _projection);
 
 	// UIの描画
-	//m_ui->Draw();
+	m_ui->Draw();
 
 	// デバッグ描画
 #ifdef _DEBUG
