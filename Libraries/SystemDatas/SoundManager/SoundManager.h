@@ -35,7 +35,11 @@ private:
 
 private:
 
-    // シングルトン
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="引数無し"></param>
+    /// <returns>なし</returns>
     SoundManager();
 
 public:
@@ -62,29 +66,39 @@ public:
     /// <summary>
     /// サウンドを鳴らす
     /// </summary>
-    /// <param name="WAVEBANKXACT_WAVEBANK_AUDIOPACK_TYPE_NAME">ならしたい音のID</param>
+    /// <param name="WAVEBANKXACT_WAVEBANK_AUDIOPACK_TYPE_NAME">鳴らしたい音のID</param>
     /// <param name="playType">ループか単発か(trueでループ、falseで単発)</param>
     /// <returns>なし</returns>
     void PlaySound(const XACT_WAVEBANK_AUDIOPACK& WAVEBANKXACT_WAVEBANK_SKBX_TYPE_NAME, SE_MODE playType);
+
     /// <summary>
-    /// 指定した音の音量調整
+    /// サウンドを停止する
     /// </summary>
+    /// <param name="XACT_WAVEBANK_AUDIOPACK_TYPE_NAME">止めたい音のID</param>
+    /// <returns>なし</returns>
+    void StopSound(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME);
+
+    /// <summary>
+    /// 音量を取得する
+    /// </summary>
+    /// <param name="XACT_WAVEBANK_AUDIOPACK_TYPE_NAME">取得したい音量のID</param>
+    /// <returns>音量</returns>
+    const float& GetVolume(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME);
+
+    /// <summary>
+    /// 音量を調整する
+    /// </summary>
+    /// <param name="XACT_WAVEBANK_AUDIOPACK_TYPE_NAME">調整したい音のID</param>
     /// <param name="volume">音量</param>
-    /// <param name="WAVEBANKXACT_WAVEBANK_AUDIOPACK_ENTRY_COUNT_TYPE_NAME">音のID</param>
     /// <returns>なし</returns>
-    void SetVolume(const float& volume, const XACT_WAVEBANK_AUDIOPACK& WAVEBANKXACT_WAVEBANK_SKBX_TYPE_NAME);
+    void SetVolume(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME, float volume);
+
     /// <summary>
-    /// 指定した音の音量を取得
+    /// 全ての音の設定を初期化する
     /// </summary>
-    /// <param name="WAVEBANKXACT_WAVEBANK_SKBX_TYPE_NAME">取得したい音のID</param>
-    /// <returns>指定した音の音量</returns>
-    const float& GetVolume(const XACT_WAVEBANK_AUDIOPACK& WAVEBANKXACT_WAVEBANK_SKBX_TYPE_NAME) { return m_volumes[WAVEBANKXACT_WAVEBANK_SKBX_TYPE_NAME]; }
-    /// <summary>
-    /// 音をフェードさせる
-    /// </summary>
-    /// <param name="speed">速度</param>
+    /// <param name="volume">音量（デフォルトは0.5f）</param>
     /// <returns>なし</returns>
-    void FadeVolume(const float& speed);
+    void InitAllSounds(const float& volume = 0.5f);
 
 private:
     /// <summary>

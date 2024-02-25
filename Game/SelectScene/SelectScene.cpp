@@ -9,7 +9,6 @@
 #include "Game/Cameras/AdminCamera/AdminCamera.h"			// 統合カメラ
 #include "Game/SelectScene/System/UI_Select/UI_Select.h"	// ユーザインターフェース
 
-#include "Game/SelectScene/Objects/Sky_Select/Sky_Select.h"	// スカイドーム
 #include "Game/SelectScene/Objects/BG_Select/BG_Select.h"	// 背景
 
 #include "Game/Common/BlockManager/BlockManager.h"			// ブロック管理クラス
@@ -55,8 +54,15 @@ void SelectScene::Initialize()
 	SetSceneValues();
 
 	// BGMを鳴らす
-	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
+	auto _se = SoundManager::GetInstance();
+
+	// ボリューム設定
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  0.7f);
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, 0.7f);
+
+	// 音量再生開始(BGM・環境音)
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  RepeatType::LOOP);
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -65,10 +71,12 @@ void SelectScene::Initialize()
 void SelectScene::Update()
 {
 	auto _input = Input::GetInstance();
+	auto _se = SoundManager::GetInstance();
 
 	// タイトルに戻る
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		ChangeScene(SCENE::TITLE);
 	}
 
@@ -82,11 +90,13 @@ void SelectScene::Update()
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
 			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
 		{
+			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 			m_stageSelection++;
 		}
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
 			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
 		{
+			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 			m_stageSelection--;
 		}
 
@@ -103,10 +113,6 @@ void SelectScene::Update()
 
 	// カメラの更新
 	m_adminCamera->Update();
-
-	// スカイ球の更新
-	m_sky->Update();
-	m_sky->SetPosition(m_adminCamera->GetPosition());
 
 	// ステージの更新
 	for (int i = 0; i < MAX_SAMPLE_NUM; i++)
@@ -127,9 +133,6 @@ void SelectScene::Draw()
 	// カメラのマトリクスを取得
 	SimpleMath::Matrix _view = m_adminCamera->GetView();
 	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
-
-	// ステージオブジェクトの描画
-	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// ブロックの描画
 	for (int i = 0; i < MAX_SAMPLE_NUM; i++)
@@ -161,7 +164,6 @@ void SelectScene::Finalize()
 {
 	m_adminCamera.reset();
 	m_ui.reset();
-	m_sky.reset();
 	m_stage->reset();
 	m_water.reset();
 	m_backGround.reset();
@@ -177,9 +179,6 @@ void SelectScene::CreateWDResources()
 
 	// UI作成
 	m_ui = std::make_unique<UI_Select>(GetWindowSize(), GetFullHDSize());
-
-	// スカイ球作成
-	m_sky = std::make_unique<Sky_Select>();
 
 	// 水作成
 	m_water = std::make_unique<Water>();
@@ -267,9 +266,12 @@ void SelectScene::ChangeAdminCamera()
 void SelectScene::SelectNext()
 {
 	auto _input = Input::GetInstance();
+	auto _se = SoundManager::GetInstance();
 
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
+
 		// ステージを作る
 		if (m_stageSelection == EDITOR_NUM)
 			ChangeScene(SCENE::EDIT);

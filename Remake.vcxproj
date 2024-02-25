@@ -243,7 +243,6 @@
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h" />
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h" />
     <ClInclude Include="Game\SelectScene\Objects\BG_Select\BG_Select.h" />
-    <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h" />
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
@@ -336,7 +335,6 @@
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp" />
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp" />
     <ClCompile Include="Game\SelectScene\Objects\BG_Select\BG_Select.cpp" />
-    <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp" />
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />

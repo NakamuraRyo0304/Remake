@@ -80,8 +80,14 @@ void PlayScene::Initialize()
 	SetSceneValues();
 
 	// BGMを鳴らす
-	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
+	auto _se = SoundManager::GetInstance();
+
+	// ボリューム設定
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, 0.25f);
+
+	// 音量再生開始(BGM・環境音)
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, RepeatType::LOOP);
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE, RepeatType::LOOP);
 }
 
 //==============================================================================

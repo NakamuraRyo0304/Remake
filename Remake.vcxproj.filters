@@ -201,9 +201,6 @@
     <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp">
       <Filter>GameObjects\Play\Sky_Play</Filter>
     </ClCompile>
-    <ClCompile Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.cpp">
-      <Filter>GameObjects\Select\Sky_Select</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp">
       <Filter>GameObjects\Common\Blocks\Spike</Filter>
     </ClCompile>
@@ -466,9 +463,6 @@
     </ClInclude>
     <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h">
       <Filter>GameObjects\Play\Sky_Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\SelectScene\Objects\Sky_Select\Sky_Select.h">
-      <Filter>GameObjects\Select\Sky_Select</Filter>
     </ClInclude>
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h">
       <Filter>GameObjects\Common\Blocks\Spike</Filter>
@@ -1096,9 +1090,6 @@
     </Filter>
     <Filter Include="GameObjects\Select">
       <UniqueIdentifier>{9143f698-53f8-4747-8974-4b0641b38f4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Select\Sky_Select">
-      <UniqueIdentifier>{e4ae6031-f09d-48fe-a194-7a51d2e9dfcb}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObjects\Editor">
       <UniqueIdentifier>{0f96f914-6949-4a16-8b13-c59e88519e4b}</UniqueIdentifier>

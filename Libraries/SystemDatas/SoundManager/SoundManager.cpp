@@ -44,6 +44,14 @@ void SoundManager::PlaySound(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOP
 }
 
 //==============================================================================
+// 音を止める
+//==============================================================================
+void SoundManager::StopSound(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME)
+{
+	m_soundEffectInstances[XACT_WAVEBANK_AUDIOPACK_TYPE_NAME]->Stop();
+}
+
+//==============================================================================
 // オーディオエンジンの更新
 //==============================================================================
 void SoundManager::Update()
@@ -51,7 +59,6 @@ void SoundManager::Update()
 	// オーディオエンジンの更新
 	if (!m_audioEngine->Update())
 	{
-		// No audio device is active
 		if (m_audioEngine->IsCriticalError())
 		{
 			OutputDebugString(L"AudioEngine Error!\n");
@@ -60,29 +67,27 @@ void SoundManager::Update()
 }
 
 //==============================================================================
-// 音量設定
+// 音量を取得する
 //==============================================================================
-void SoundManager::SetVolume(const float& volume, const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME)
+const float& SoundManager::GetVolume(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME)
 {
+	return m_volumes[XACT_WAVEBANK_AUDIOPACK_TYPE_NAME];
+}
+
+//==============================================================================
+// 音量を設定する
+//==============================================================================
+void SoundManager::SetVolume(const XACT_WAVEBANK_AUDIOPACK& XACT_WAVEBANK_AUDIOPACK_TYPE_NAME, float volume)
+{
+	// 音量を設定する（範囲は0.0から1.0）
+	m_soundEffectInstances[XACT_WAVEBANK_AUDIOPACK_TYPE_NAME]->SetVolume(volume);
+
+	// ボリュームを保持
 	m_volumes[XACT_WAVEBANK_AUDIOPACK_TYPE_NAME] = volume;
-	m_soundEffectInstances[XACT_WAVEBANK_AUDIOPACK_TYPE_NAME]->SetVolume(
-		m_volumes[XACT_WAVEBANK_AUDIOPACK_TYPE_NAME]);
 }
 
 //==============================================================================
-// 音の減衰
-//==============================================================================
-void SoundManager::FadeVolume(const float& speed)
-{
-	for (int i = 0; i < XACT_WAVEBANK_AUDIOPACK_ENTRY_COUNT; ++i)
-	{
-		m_volumes[i] -= speed;
-		m_soundEffectInstances[i]->SetVolume(m_volumes[i]);
-	}
-}
-
-//==============================================================================
-// サウンドエフェクトインスタンスの正絵師
+// サウンドエフェクトインスタンスの作成
 //==============================================================================
 void SoundManager::Create()
 {
@@ -91,5 +96,23 @@ void SoundManager::Create()
 		// サウンドエフェクトインスタンスを作成する
 		m_soundEffectInstances[i] = m_waveBank->CreateInstance(i);
 		m_volumes[i] = 1.0f;
+	}
+}
+
+//==============================================================================
+// 初期設定
+//==============================================================================
+void SoundManager::InitAllSounds(const float& volume)
+{
+	// 音量を初期化する
+	for (unsigned int i = 0; i < XACT_WAVEBANK_AUDIOPACK_ENTRY_COUNT; ++i)
+	{
+		SetVolume(static_cast<XACT_WAVEBANK_AUDIOPACK>(i), volume);
+	}
+
+	// 全ての音を停止する
+	for (unsigned int i = 0; i < XACT_WAVEBANK_AUDIOPACK_ENTRY_COUNT; ++i)
+	{
+		StopSound(static_cast<XACT_WAVEBANK_AUDIOPACK>(i));
 	}
 }

@@ -16,7 +16,6 @@
 
 class AdminCamera;
 class BlockManager;
-class Sky_Select;
 class UI_Select;
 class Water;
 class BG_Select;
@@ -37,9 +36,6 @@ private:
 
 	// UI
 	std::unique_ptr<UI_Select> m_ui;
-
-	// スカイ球
-	std::unique_ptr<Sky_Select> m_sky;
 
 	// ブロックマネージャ
 	std::unique_ptr<BlockManager> m_stage[MAX_SAMPLE_NUM];

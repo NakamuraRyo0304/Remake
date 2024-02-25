@@ -160,6 +160,12 @@ public:
 	/// <returns>プロジェクション行列</returns>
 	DirectX::SimpleMath::Matrix& GetProjection() { return m_projection; }
 	/// <summary>
+	/// プロジェクション行列を作成
+	/// </summary>
+	/// <param name="proj">プロジェクション行列</param>
+	/// <returns>なし</returns>
+	void SetProjection(const DirectX::SimpleMath::Matrix& proj);
+	/// <summary>
 	/// イージングの使用設定
 	/// </summary>
 	/// <param name="flag">ONで線形補完</param>

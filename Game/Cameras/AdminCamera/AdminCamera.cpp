@@ -123,3 +123,14 @@ void AdminCamera::SetTarget(SimpleMath::Vector3 target)
 	// ターゲットを設定
 	m_gameCamera->SetTarget(target);
 }
+
+//==============================================================================
+// プロジェクション行列を作成する
+//==============================================================================
+void AdminCamera::SetProjection(const DirectX::SimpleMath::Matrix& proj)
+{
+	if (UserUtility::IsNull(m_gameCamera.get())) return;
+
+	// ターゲットを設定
+	m_gameCamera->SetProjection(proj);
+}

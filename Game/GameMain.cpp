@@ -8,7 +8,6 @@
 #include "pch.h"
 #include "GameMain.h"
 #include "Libraries/SystemDatas/ScreenEffects/Fade/Fade.h"
-#include "Libraries/UserUtility.h"
 #ifdef _DEBUG
 #include "Libraries/SystemDatas/DrawString/DrawString.h"
 #include "Libraries/SystemDatas/Timer/Timer.h"
@@ -204,6 +203,9 @@ void GameMain::CreateScene()
 		default:
 			break;
 	}
+
+	// ‰¹‚ð‰ŠúÝ’è‚É–ß‚·
+	SoundManager::GetInstance()->InitAllSounds();
 
 	// ì¬‚µ‚½ƒV[ƒ“‚ð‰Šú‰»
 	m_nowScene->SetWindowSize(m_screenSize);

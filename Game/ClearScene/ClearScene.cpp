@@ -69,8 +69,13 @@ void ClearScene::Initialize()
 	SetSceneValues();
 
 	// BGMを鳴らす
-	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
+	auto _se = SoundManager::GetInstance();
+
+	// ボリューム設定
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, 0.5f);
+
+	// 音量再生開始(BGM・環境音)
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -79,10 +84,12 @@ void ClearScene::Initialize()
 void ClearScene::Update()
 {
 	auto _input = Input::GetInstance();
+	auto _se = SoundManager::GetInstance();
 
 	// セレクトに戻る
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		ChangeScene(SCENE::SELECT);
 	}
 
@@ -265,17 +272,20 @@ void ClearScene::DebugDraw(CommonStates& states)
 void ClearScene::SceneSelection()
 {
 	auto _input = Input::GetInstance();
+	auto _se = SoundManager::GetInstance();
 
 	// シーンを選択する
 	auto _selection = m_ui->GetSelecion();
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
 		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 		UserUtility::Increment(&_selection);	// インクリメント
 	}
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
 		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 		UserUtility::Decrement(&_selection);	// デクリメント
 	}
 	_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
@@ -284,6 +294,7 @@ void ClearScene::SceneSelection()
 	// 次の遷移を決定
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		switch (m_ui->GetSelecion())
 		{
 		case Selection::NEXT:

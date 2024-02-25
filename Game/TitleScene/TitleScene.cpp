@@ -63,8 +63,14 @@ void TitleScene::Initialize()
 	SetSceneValues();
 
 	// BGMを鳴らす
-	//auto _se = SoundManager::GetInstance();
-	//_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_TEST, RepeatType::LOOP);
+	auto _se = SoundManager::GetInstance();
+
+	// ボリューム設定
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, 0.25f);
+
+	// 音量再生開始(BGM・環境音)
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, RepeatType::LOOP);
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,     RepeatType::LOOP);
 }
 
 //==============================================================================
@@ -73,10 +79,12 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 	auto _input = Input::GetInstance();
+	auto _se = SoundManager::GetInstance();
 
 	// ソフト終了
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		ChangeScene(SCENE::EXIT);
 	}
 
@@ -111,10 +119,17 @@ void TitleScene::Update()
 			);
 		}
 
+		// 選択音を鳴らす
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W)  || _input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up) || _input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+		{
+			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		}
 		// スペースを押したら遷移する
 		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
 		{
 			m_ui->GetSelection() == UI_Title::Start ? ChangeScene(SCENE::SELECT) : ChangeScene(SCENE::EXIT);
+			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		}
 	}
 

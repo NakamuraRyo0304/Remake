@@ -63,6 +63,8 @@ public:
 	void SetView(const DirectX::SimpleMath::Matrix& view) { m_view = view; }
 	// プロジェクション行列を取得
 	const DirectX::SimpleMath::Matrix& GetProjection() { return m_projection; }
+	// プロジェクション行列を設定
+	void SetProjection(const DirectX::SimpleMath::Matrix& proj) { m_projection = proj; }
 	// 座標を取得
 	const DirectX::SimpleMath::Vector3& GetPosition() { return m_position; }
 	// 座標を設定
