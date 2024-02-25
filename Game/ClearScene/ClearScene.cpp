@@ -68,13 +68,9 @@ void ClearScene::Initialize()
 	// 変数の初期化
 	SetSceneValues();
 
-	// BGMを鳴らす
+	// ボリューム設定・音量再生開始(BGM・環境音)
 	auto _se = SoundManager::GetInstance();
-
-	// ボリューム設定
 	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, 0.5f);
-
-	// 音量再生開始(BGM・環境音)
 	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, RepeatType::LOOP);
 }
 
@@ -292,7 +288,7 @@ void ClearScene::SceneSelection()
 	m_ui->SetSelection(_selection);
 
 	// 次の遷移を決定
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || _input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 	{
 		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		switch (m_ui->GetSelecion())

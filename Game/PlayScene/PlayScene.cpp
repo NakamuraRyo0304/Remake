@@ -79,15 +79,13 @@ void PlayScene::Initialize()
 	// 変数の初期化
 	SetSceneValues();
 
-	// BGMを鳴らす
+	// ボリューム設定・音量再生開始(BGM・環境音)
 	auto _se = SoundManager::GetInstance();
-
-	// ボリューム設定
 	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, 0.25f);
-
-	// 音量再生開始(BGM・環境音)
 	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, RepeatType::LOOP);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE, RepeatType::LOOP);
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,     RepeatType::LOOP);
+	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2,    RepeatType::LOOP);
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_SLIDE, 0.7f);
 }
 
 //==============================================================================
@@ -97,6 +95,7 @@ void PlayScene::Update()
 {
 	auto _input = Input::GetInstance();
 	auto _key = Keyboard::Get().GetState();
+	auto _se = SoundManager::GetInstance();
 
 	// セレクトに戻る
 	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
@@ -128,6 +127,9 @@ void PlayScene::Update()
 		// ゴールしたらクリアへ
 		if (m_blockManager->IsArrived())
 		{
+			// シャッター音を鳴らす
+			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SLIDE, RepeatType::ONCE);
+
 			// ゲームタイマー/集めたコイン数を取得
 			m_timer->Stop();
 			m_gameTimer = m_timer->GetCount();

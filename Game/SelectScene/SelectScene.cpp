@@ -53,15 +53,11 @@ void SelectScene::Initialize()
 	// 変数の初期化
 	SetSceneValues();
 
-	// BGMを鳴らす
+	// ボリューム設定・音量再生開始(BGM・環境音)
 	auto _se = SoundManager::GetInstance();
-
-	// ボリューム設定
 	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  0.7f);
-	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, 0.7f);
-
-	// 音量再生開始(BGM・環境音)
 	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  RepeatType::LOOP);
+	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, 0.7f);
 	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, RepeatType::LOOP);
 }
 
@@ -86,30 +82,12 @@ void SelectScene::Update()
 	// シーン遷移
 	if (IsCanUpdate())
 	{
-		// ステージの選択
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
-			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
-		{
-			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
-			m_stageSelection++;
-		}
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
-			_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
-		{
-			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
-			m_stageSelection--;
-		}
+		// カメラの切り替え処理
+		ChangeAdminCamera();
 
-		// ループクランプ
-		m_stageSelection = UserUtility::LoopClamp(m_stageSelection, EDITOR_NUM, MAX_SAMPLE_NUM);
-		m_ui->SetSelectionNum(m_stageSelection);
+		// シーンセレクト
+		SelectNext();
 	}
-
-	// カメラの切り替え処理
-	ChangeAdminCamera();
-
-	// シーンセレクト
-	SelectNext();
 
 	// カメラの更新
 	m_adminCamera->Update();
@@ -268,7 +246,24 @@ void SelectScene::SelectNext()
 	auto _input = Input::GetInstance();
 	auto _se = SoundManager::GetInstance();
 
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+	// ステージの選択
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		m_stageSelection++;
+	}
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
+		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+	{
+		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		m_stageSelection--;
+	}
+
+	// ループクランプ
+	m_stageSelection = UserUtility::LoopClamp(m_stageSelection, EDITOR_NUM, MAX_SAMPLE_NUM);
+	m_ui->SetSelectionNum(m_stageSelection);
+	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || _input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 	{
 		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 

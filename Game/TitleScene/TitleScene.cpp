@@ -62,13 +62,9 @@ void TitleScene::Initialize()
 	// 変数の初期化
 	SetSceneValues();
 
-	// BGMを鳴らす
+	// ボリューム設定・音量再生開始(BGM・環境音)
 	auto _se = SoundManager::GetInstance();
-
-	// ボリューム設定
 	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, 0.25f);
-
-	// 音量再生開始(BGM・環境音)
 	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, RepeatType::LOOP);
 	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,     RepeatType::LOOP);
 }
@@ -126,7 +122,7 @@ void TitleScene::Update()
 			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 		}
 		// スペースを押したら遷移する
-		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space))
+		if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || _input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 		{
 			m_ui->GetSelection() == UI_Title::Start ? ChangeScene(SCENE::SELECT) : ChangeScene(SCENE::EXIT);
 			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
