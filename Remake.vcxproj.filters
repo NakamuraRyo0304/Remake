@@ -300,6 +300,9 @@
     <ClCompile Include="Game\Common\DrawKeys\DrawKeys.cpp">
       <Filter>GameSystems\Common\DrawKeys</Filter>
     </ClCompile>
+    <ClCompile Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.cpp">
+      <Filter>GameSystems\Title\MoveMonitor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -574,6 +577,9 @@
     </ClInclude>
     <ClInclude Include="Game\Common\DrawKeys\DrawKeys.h">
       <Filter>GameSystems\Common\DrawKeys</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.h">
+      <Filter>GameSystems\Title\MoveMonitor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1165,6 +1171,9 @@
     </Filter>
     <Filter Include="GameSystems\Common\DrawKeys">
       <UniqueIdentifier>{c0c9f355-302d-4d65-a525-0bdfb9e07ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Title\MoveMonitor">
+      <UniqueIdentifier>{10c770b4-cce4-425b-8fda-c9ca974a7de0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

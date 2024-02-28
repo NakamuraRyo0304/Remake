@@ -248,6 +248,7 @@
     <ClInclude Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.h" />
     <ClInclude Include="Game\TitleScene\Objects\Logo\Logo.h" />
     <ClInclude Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.h" />
+    <ClInclude Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.h" />
     <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h" />
     <ClInclude Include="Game\TitleScene\TitleScene.h" />
     <ClInclude Include="Libraries\Factories\GeometricFactory.h" />
@@ -340,6 +341,7 @@
     <ClCompile Include="Game\TitleScene\Objects\Bird_Title\Bird_Title.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Logo\Logo.cpp" />
     <ClCompile Include="Game\TitleScene\Objects\Sky_Title\Sky_Title.cpp" />
+    <ClCompile Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.cpp" />
     <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp" />
     <ClCompile Include="Game\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Libraries\Factories\GeometricFactory.cpp" />

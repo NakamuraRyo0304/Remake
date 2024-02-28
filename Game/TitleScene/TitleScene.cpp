@@ -9,6 +9,7 @@
 #include "Game/Cameras/AdminCamera/AdminCamera.h"			// 統合カメラ
 #include "Game/TitleScene/System/UI_Title/UI_Title.h"		// ユーザインターフェース
 #include "Libraries/SystemDatas/Timer/Timer.h"				// タイマー
+#include "Game/TitleScene/System/MoveMonitor/MoveMonitor.h"	// モニター監視者
 
 #include "Game/TitleScene/Objects/Sky_Title/Sky_Title.h"	// スカイドーム
 #include "Game/TitleScene/Objects/Logo/Logo.h"				// タイトルロゴ
@@ -90,11 +91,14 @@ void TitleScene::Update()
 		// タイマーの更新
 		m_timer->Update();
 
+		// モニター監視者の更新
+		m_moveMonitor->Update();
+
 		// UIの更新
 		m_ui->Update();
 
 		// 何か入力があればタイマーを再スタート
-		if (m_ui->IsAnything())
+		if (m_ui->IsAnything() || m_moveMonitor->IsMove())
 		{
 			m_timer->ReStart();
 		}
@@ -200,6 +204,7 @@ void TitleScene::Finalize()
 	m_timer.reset();
 	m_iceberg.reset();
 	m_island.reset();
+	m_moveMonitor.reset();
 }
 
 //==============================================================================
@@ -233,6 +238,9 @@ void TitleScene::CreateWDResources()
 
 	// 孤島作成
 	m_island = std::make_unique<Island>(SimpleMath::Vector3(5.0f, -6.0f, 10.0f), 4.0f, 0.0f);
+
+	// モニター監視者作成
+	m_moveMonitor = std::make_unique<MoveMonitor>();
 }
 
 //==============================================================================

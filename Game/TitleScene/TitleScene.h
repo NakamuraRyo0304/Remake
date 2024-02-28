@@ -23,6 +23,7 @@ class Logo;
 class Timer;
 class Iceberg;
 class Island;
+class MoveMonitor;
 class TitleScene final : public IScene
 {
 private:
@@ -53,6 +54,9 @@ private:
 
 	// ŒÇ“‡
 	std::unique_ptr<Island> m_island;
+
+	// ƒ‚ƒjƒ^[ŠÄ‹Ò
+	std::unique_ptr<MoveMonitor> m_moveMonitor;
 
 private:
 
