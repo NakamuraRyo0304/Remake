@@ -12,7 +12,7 @@
 //==============================================================================
 // 定数の設定
 //==============================================================================
-
+const float Coin::ROTATE_SPEED = 30.0f;
 
 //==============================================================================
 // コンストラクタ
@@ -50,7 +50,27 @@ void Coin::Update()
 	if (not is_active) return;
 
 	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
-	SetRotate(SimpleMath::Vector3::UnitY * XMConvertToRadians(_timer * 30));
+
+	// 衝突したら獲得演出
+	if (is_hit)
+	{
+		// 回転しながら小さくなりながら上に上がる（最終的に消える）
+		SetPosition(UserUtility::Lerp(GetPosition(), GetInitialPosition() + SimpleMath::Vector3::UnitY * 0.5f));
+		SetScale(UserUtility::Lerp(GetScale(), SimpleMath::Vector3::Zero, 0.05f));
+		SetRotate(UserUtility::Lerp(GetRotate(),
+			SimpleMath::Vector3::UnitY * XMConvertToRadians(_timer * ROTATE_SPEED * 2)));
+
+		// スケールが0になったら描画を切る
+		if (GetScale().LengthSquared() < 0.01f)
+		{
+			is_active = false;
+		}
+	}
+	else
+	{
+		SetRotate(UserUtility::Lerp(GetRotate(),
+			SimpleMath::Vector3::UnitY * XMConvertToRadians(_timer * ROTATE_SPEED)));
+	}
 
 	// マトリクスを作成
 	CreateWorldMatrix();

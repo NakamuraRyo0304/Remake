@@ -24,6 +24,11 @@ private:
 	// アクティブフラグ
 	bool is_active;
 
+private:
+
+	// 回転速度
+	static const float ROTATE_SPEED;
+
 public:
 
 	/// <summary>
@@ -57,10 +62,12 @@ public:
 
 	// アクティブフラグを取得
 	bool IsActive() { return is_active; }
-	// アクティブフラグを切り替える
+	// アクティブフラグを設定
 	void SetActive(const bool flag) { is_active = flag; }
 
-	// 衝突通知
+	// 衝突通知を取得
+	bool IsHit() { return is_hit; }
+	// 衝突通知を設定
 	void SetHitFlag(bool isHit) { is_hit = isHit; }
 
 };

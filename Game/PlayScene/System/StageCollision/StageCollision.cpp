@@ -92,7 +92,8 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
     {
         for (auto& coin : blocks->GetCoins())
         {
-            if (coin->IsActive() == false) continue;
+            if (coin->IsHit()) continue;
+
             SimpleMath::Vector3 _pos = coin->GetPosition();
             SimpleMath::Vector3 _scale = coin->GetScale();
             if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
@@ -102,7 +103,7 @@ void StageCollision::Update(Player* player, BlockManager* blocks)
             if (_side != Side::None)
             {
                 player->CountUpCoins();
-                coin->SetActive(false);
+                coin->SetHitFlag(true);
             }
         }
     }
