@@ -14,6 +14,7 @@
 // コンストラクタ
 //==============================================================================
 FlagManager::FlagManager()
+	: m_firstPosition{}		// 先頭座標
 {
 }
 
@@ -31,6 +32,9 @@ FlagManager::~FlagManager()
 void FlagManager::Update()
 {
 	if (m_flags.empty()) return;
+
+	// 先頭座標を保存
+	m_firstPosition = m_flags[0]->GetPosition();
 
 	for (int i = 0; i < m_flags.size(); i++)
 	{
@@ -95,5 +99,5 @@ const SimpleMath::Vector3& FlagManager::GetFirstPath()
 {
 	if (m_flags.empty()) return SimpleMath::Vector3::Zero;
 
-	return m_flags[0]->GetPosition();
+	return m_firstPosition;
 }

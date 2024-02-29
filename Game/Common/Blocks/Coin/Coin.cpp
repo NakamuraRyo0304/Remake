@@ -20,7 +20,6 @@ const float Coin::ROTATE_SPEED = 30.0f;
 Coin::Coin(SimpleMath::Vector3 position)
 	: IGameObject(L"Resources/Models/Coin.cmo", L"Resources/Models", position)
 	, is_hit{ false }		// 衝突フラグ
-	, is_active{ true }		// アクティブフラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Coin);
@@ -47,7 +46,7 @@ Coin::~Coin()
 void Coin::Update()
 {
 	// 非アクティブは処理しない
-	if (not is_active) return;
+	if (not IsActive()) return;
 
 	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
 
@@ -63,7 +62,7 @@ void Coin::Update()
 		// スケールが0になったら描画を切る
 		if (GetScale().LengthSquared() < 0.01f)
 		{
-			is_active = false;
+			SetActive(false);
 		}
 	}
 	else
@@ -83,7 +82,7 @@ void Coin::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// 非アクティブは処理しない
-	if (not is_active) return;
+	if (not IsActive()) return;
 
 	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

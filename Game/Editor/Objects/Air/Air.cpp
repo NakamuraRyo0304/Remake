@@ -14,7 +14,6 @@
 Air::Air(SimpleMath::Vector3 position)
 	: IGameObject(L"Resources/Models/Flozen.cmo", L"Resources/Models")
 	, is_hit{ false }		// 衝突フラグ
-	, is_active{ true }		// アクティブフラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Air);
@@ -39,11 +38,7 @@ Air::~Air()
 //==============================================================================
 void Air::Update()
 {
-	// 非アクティブは処理しない
-	if (not is_active) return;
 
-	// マトリクスを作成
-	//CreateWorldMatrix();
 }
 
 //==============================================================================

@@ -24,11 +24,13 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath, SimpleMath::
 	, m_directoryPath{ dpath }		// ディレクトリパス
 	, m_id{ ID::Default }			// オブジェクトID
 	, m_weight{}					// オブジェクトの重さ
+	, is_active{ true }				// アクティブ状況
 {
 	m_world = SimpleMath::Matrix::Identity;
 	m_parentMatrix = SimpleMath::Matrix::Identity;
 	m_id = ID::Default;
 	m_weight = NON_WEIGHT;
+	is_active = true;
 	CreateWorldMatrix();
 }
 

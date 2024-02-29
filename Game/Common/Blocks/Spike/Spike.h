@@ -20,10 +20,6 @@ private:
 
 	// 衝突フラグ
 	bool is_hit;
-
-	// アクティブフラグ
-	bool is_active;
-
 private:
 
 	// 捕食回転速度
@@ -60,13 +56,8 @@ public:
 
 public:
 
-	// アクティブフラグを取得
-	bool IsActive() { return is_active; }
-	// アクティブフラグを切り替える
-	void SetActive(const bool flag) { is_active = flag; }
-
 	// 衝突通知を取得
-	bool IsHitFlag() { return is_hit; }
+	bool IsHitFlag() const { return is_hit; }
 	// 衝突通知
 	void SetHitFlag(bool isHit) { is_hit = isHit; }
 

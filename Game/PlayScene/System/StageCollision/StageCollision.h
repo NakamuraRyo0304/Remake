@@ -25,11 +25,14 @@ private:
 		None, Left, Right, Up, Down, Front, Behind
 	};
 
+	// 判定オブジェクト配列
+	std::vector<IGameObject*> m_objects;
+
 	// 境界球半径
 	static const float RADIUS;
 
-	// 棘エネミー固有の半径
-	static const float SPIKE_RADIUS;
+	// 分割数
+	static const int NUM_DIVISIONS = 8;
 
 public:
 
@@ -42,14 +45,30 @@ public:
 	~StageCollision();
 
 	/// <summary>
+	/// 初期化関数
+	/// </summary>
+	/// <param name="blocks">ブロックマネージャポインタ</param>
+	/// <returns>なし</returns>
+	void Initialize(BlockManager* blocks);
+
+	/// <summary>
 	/// 当たり判定の更新
 	/// </summary>
 	/// <param name="player">プレイヤーポインタ</param>
-	/// <param name="blocks">ブロックマネージャポインタ</param>
 	/// <returns>なし</returns>
-	void Update(Player* player, BlockManager* blocks);
+	void Update(Player* player);
 
 private:
+
+	/// <summary>
+	/// 固有処理
+	/// </summary>
+	/// <param name="player">プレイヤー</param>
+	/// <param name="block">ブロック</param>
+	/// <param name="newPos">変更後の座標</param>
+	/// <param name="side">当たった面</param>
+	/// <returns>なし</returns>
+	void PerformEngenProc(Player* player, IGameObject* block, DirectX::SimpleMath::Vector3 newPos, Side side);
 
 	/// <summary>
 	/// 当たり判定処理

@@ -209,13 +209,13 @@ private:
 public:
 
 	// ゲームタイマーを取得する
-	const float& GetGameTimer() { return m_gameTimer; }
+	float GetGameTimer()   const { return m_gameTimer; }
 
 	// 集めたコイン数を取得する
-	const int& GetCollectedCoin() { return m_collectedCoin; }
+	int GetCollectedCoin() const { return m_collectedCoin; }
 
 	// ステージ番号を取得する
-	const int& GetStageNumber() { return m_stageNumber; }
+	int GetStageNumber()   const { return m_stageNumber; }
 
 private:
 

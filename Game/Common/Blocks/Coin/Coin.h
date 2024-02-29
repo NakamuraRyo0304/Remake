@@ -21,9 +21,6 @@ private:
 	// 衝突フラグ
 	bool is_hit;
 
-	// アクティブフラグ
-	bool is_active;
-
 private:
 
 	// 回転速度
@@ -58,15 +55,8 @@ public:
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
 
-public:
-
-	// アクティブフラグを取得
-	bool IsActive() { return is_active; }
-	// アクティブフラグを設定
-	void SetActive(const bool flag) { is_active = flag; }
-
 	// 衝突通知を取得
-	bool IsHit() { return is_hit; }
+	bool IsHit() const { return is_hit; }
 	// 衝突通知を設定
 	void SetHitFlag(bool isHit) { is_hit = isHit; }
 

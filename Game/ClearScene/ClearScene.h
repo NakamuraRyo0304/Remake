@@ -120,7 +120,7 @@ private:
 public:
 
 	// ステージ番号を取得する
-	const int& GetStageNumber() { return m_stageNumber; }
+	int GetStageNumber() const { return m_stageNumber; }
 
 private:
 

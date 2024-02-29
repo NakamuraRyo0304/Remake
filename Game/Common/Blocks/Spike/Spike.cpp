@@ -20,7 +20,6 @@ const float Spike::EATING_SPEED = XMConvertToRadians(15.0f);	// 捕食時の回転速度
 Spike::Spike(SimpleMath::Vector3 position)
 	: IGameObject(L"Resources/Models/Spike.cmo", L"Resources/Models", position)
 	, is_hit{ false }				                            // 衝突フラグ
-	, is_active{ true }				                            // アクティブフラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Spike);
@@ -47,7 +46,7 @@ Spike::~Spike()
 void Spike::Update()
 {
 	// 非アクティブは処理しない
-	if (not is_active) return;
+	if (not IsActive()) return;
 
 	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
 	float _12Sin = (sinf(_timer) + 1) * 0.5f + 1;
@@ -78,7 +77,7 @@ void Spike::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// 非アクティブは処理しない
-	if (not is_active) return;
+	if (not IsActive()) return;
 
 	GetModel()->Draw(context, states, GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

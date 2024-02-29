@@ -13,7 +13,6 @@
 // 定数の設定
 //==============================================================================
 const float StageCollision::RADIUS = 1.0f;          // 当たり判定を行う半径
-const float StageCollision::SPIKE_RADIUS = 0.5f;    // 棘エネミーの半径
 
 //==============================================================================
 // コンストラクタ
@@ -27,135 +26,98 @@ StageCollision::StageCollision()
 //==============================================================================
 StageCollision::~StageCollision()
 {
+    m_objects.clear();
+}
+
+//==============================================================================
+// 初期化関数
+//==============================================================================
+void StageCollision::Initialize(BlockManager* blocks)
+{
+    // オブジェクトの追加
+    for (auto& obj : blocks->GetFlozens()) m_objects.push_back(obj.get());
+    for (auto& obj : blocks->GetClouds())  m_objects.push_back(obj.get());
+    for (auto& obj : blocks->GetCoins())   m_objects.push_back(obj.get());
+    for (auto& obj : blocks->GetGoals())   m_objects.push_back(obj.get());
+    for (auto& obj : blocks->GetSpikes())  m_objects.push_back(obj.get());
+    for (auto& obj : blocks->GetLifts())   m_objects.push_back(obj.get());
 }
 
 //==============================================================================
 // 当たり判定を行う
 //==============================================================================
-void StageCollision::Update(Player* player, BlockManager* blocks)
+void StageCollision::Update(Player* player)
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    //// 【記述ルール】                                                                     ////
-    ////  ①判定を行うブロックが空ではないかを確認する                                      ////
-    ////                                                                                    ////
-    ////  ②境界球による当たり判定のカリングを行う                                          ////
-    ////  関数：UserUtility::CheckPointInSphere(プレイヤ座標, 範囲, オブジェ座標)           ////
-    ////                                                                                    ////
-    ////  ③当たり判定の実行を行う                                                          ////
-    ////  関数：IsCollision(プレイヤ座標,オブジェ座標,プレイヤサイズ,オブジェサイズ)        ////
-    ////                                                                                    ////
-    ////  ④固有処理を行う                                                                  ////
-    ////  押し戻しの適用やオブジェクトごとの処理                                            ////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-
     // 操作用プレイヤ座標を保存
     SimpleMath::Vector3 _playerPos = player->GetPosition();
     SimpleMath::Vector3 _playerScale = player->GetScale() * 2;
 
-    // 氷ブロック
-    if (not blocks->GetFlozens().empty())
+    // オブジェクトの判定
+    for (auto& obj : m_objects)
     {
-        for (auto& flozen : blocks->GetFlozens())
-        {
-            SimpleMath::Vector3 _pos = flozen->GetPosition();
-            SimpleMath::Vector3 _scale = flozen->GetScale();
-            if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-            auto _side = IsCube(&_playerPos, _pos, _playerScale, _scale);
+        // 非アクティブのオブジェクトはスキップ
+        if (not obj->IsActive()) continue;
 
-            // 固有処理：プレイヤー座標の押し戻し適用・落下の停止
-            player->SetFall(_side != Side::Up ? true : false);
-            player->SetPosition(_playerPos);
-        }
+        if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, obj->GetPosition())) continue;
+        auto _side = IsCube(&_playerPos, obj->GetPosition(), _playerScale, obj->GetScale());
+
+        // 固有処理を行う
+        PerformEngenProc(player, obj, _playerPos, _side);
     }
-    // 雲ブロック
-    if (not blocks->GetClouds().empty())
-    {
-        for (auto& cloud : blocks->GetClouds())
-        {
-            SimpleMath::Vector3 _pos = cloud->GetPosition();
-            SimpleMath::Vector3 _scale = cloud->GetScale();
-            if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-            auto _side = IsCube(&_playerPos, _pos, _playerScale, _scale);
+}
 
-            // 固有処理：雲の移動・プレイヤーの押し出し
-            player->SetFall(_side != Side::Up ? true : false);
-            if (_side != Side::None)
-            {
-                cloud->SetHitFlag(true);
-                IsCube(&_playerPos, cloud->GetPosition(), _playerScale, _scale);
-                player->SetPosition(_playerPos);
-            }
+//==============================================================================
+// 固有処理
+//==============================================================================
+void StageCollision::PerformEngenProc(Player* player, IGameObject* block, SimpleMath::Vector3 newPos, Side side)
+{
+    // 衝突がなければ処理をしない
+    if (side == Side::None) return;
+
+    switch (block->GetID())
+    {
+        case ID::Obj_Flozen:    // 氷床ブロック
+        case ID::Obj_Lift:      // リフトブロック
+        {
+            // 着地処理を行う
+            player->SetFall(side != Side::Up ? true : false);
+            player->SetPosition(newPos);
+            break;
         }
-    }
-    // コイン
-    if (not blocks->GetCoins().empty())
-    {
-        for (auto& coin : blocks->GetCoins())
+        case ID::Obj_Cloud:     // 雲ブロック
         {
-            if (coin->IsHit()) continue;
-
-            SimpleMath::Vector3 _pos = coin->GetPosition();
-            SimpleMath::Vector3 _scale = coin->GetScale();
-            if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-            auto _side = IsCube(&_playerPos, _pos, _playerScale, _scale);
-
-            // 固有処理：コインのカウントアップ
-            if (_side != Side::None)
+            // 着地処理を行い、雲を動かす
+            player->SetFall(side != Side::Up ? true : false);
+            dynamic_cast<Cloud*>(block)->SetHitFlag(true);
+            IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
+            player->SetPosition(newPos);
+            break;
+        }
+        case ID::Obj_Coin:      // コイン
+        {
+            // 獲得していなければ獲得処理を行う
+            if (not dynamic_cast<Coin*>(block)->IsHit())
             {
                 player->CountUpCoins();
-                coin->SetHitFlag(true);
             }
+            dynamic_cast<Coin*>(block)->SetHitFlag(true);
+            break;
         }
-    }
-    // ゴールオブジェクト
-    if (not blocks->GetGoals().empty())
-    {
-        for (auto& goal : blocks->GetGoals())
+        case ID::Obj_Goal:      // ゴール
         {
-            SimpleMath::Vector3 _pos = goal->GetPosition();
-            SimpleMath::Vector3 _scale = goal->GetScale();
-            if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-            auto _side = IsCube(&_playerPos, _pos, _playerScale, _scale);
-
-            // 固有処理：ゴール判定をON
-            if (_side != Side::None)
-            {
-                goal->OnHitFlag();
-            }
+            // ゴール処理を行う
+            dynamic_cast<Goal*>(block)->OnHitFlag();
+            break;
         }
-    }
-    // 棘オブジェクト
-    if (not blocks->GetSpikes().empty())
-    {
-        for (auto& spike : blocks->GetSpikes())
+        case ID::Obj_Spike:     // スパイク
         {
-            SimpleMath::Vector3 _pos = spike->GetPosition();
-            SimpleMath::Vector3 _scale = spike->GetScale();
-            if (not UserUtility::CheckPointInSphere(_playerPos, SPIKE_RADIUS, _pos)) continue;
-            auto _side = IsCube(&_playerPos, _pos, _playerScale, _scale);
-
-            // 固有処理：スパイクに衝突通知を送る・プレイヤを殺す
-            if (_side != Side::None)
-            {
-                spike->SetHitFlag(true);
-                player->SetDeath(true);
-            }
+            // スパイクに当たれば死亡させる
+            dynamic_cast<Spike*>(block)->SetHitFlag(true);
+            player->SetDeath(true);
+            break;
         }
-    }
-    // リフトブロック
-    if (not blocks->GetLifts().empty())
-    {
-        for (auto& lift : blocks->GetLifts())
-        {
-            SimpleMath::Vector3 _pos = lift->GetPosition();
-            SimpleMath::Vector3 _scale = lift->GetScale();
-            if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, _pos)) continue;
-            auto _side = IsCube(&_playerPos, _pos, _playerScale, _scale);
-
-            // 固有処理：落下防止
-            player->SetFall(_side != Side::Up ? true : false);
-            player->SetPosition(_playerPos);
-        }
+        default:
+            break;
     }
 }
 
@@ -169,13 +131,13 @@ StageCollision::Side StageCollision::IsCube(SimpleMath::Vector3* playerPos, cons
     Side _side = Side::None;
 
     // オブジェクトの半径を計算
-    float _playerRadius = std::max({ playerScale.x, playerScale.y, playerScale.z }) * 0.5f;
-    float _blockRadius = std::max({ blockScale.x, blockScale.y, blockScale.z }) * 0.5f;
+    float _pRadius = std::max({ playerScale.x, playerScale.y, playerScale.z }) * 0.5f;
+    float _bRadius = std::max({ blockScale.x, blockScale.y, blockScale.z }) * 0.5f;
 
     // 中心座標の距離を計算
     SimpleMath::Vector3 _diff = *playerPos - blockPos;
     SimpleMath::Vector3 _diffAbs = UserUtility::AbsVector3(_diff);
-    float _sumRadius = _playerRadius + _blockRadius;
+    float _sumRadius = _pRadius + _bRadius;
 
     // 距離が半径より小さければ衝突とみなす
     if (_diffAbs.x < _sumRadius && _diffAbs.y < _sumRadius && _diffAbs.z < _sumRadius)

@@ -109,10 +109,10 @@ private:
 public:
 
 	// ステージ番号を取得
-	const int& GetSelectedNumber() { return m_stageSelection; }
+	int GetSelectedNumber() const { return m_stageSelection; }
 
 	// 最大ステージ番号を取得
-	const int& GetMaxNumber() { return MAX_SAMPLE_NUM; }
+	int GetMaxNumber()      const { return MAX_SAMPLE_NUM; }
 
 private:
 

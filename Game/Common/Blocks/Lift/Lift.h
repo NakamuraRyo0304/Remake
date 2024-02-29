@@ -53,7 +53,7 @@ public:
 public:
 
 	// オフセットを取得
-	const float& GetOffset() { return m_offset; }
+	float GetOffset() const { return m_offset; }
 
 };
 

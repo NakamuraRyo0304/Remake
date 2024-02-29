@@ -46,6 +46,9 @@ private:
 	// ---オブジェクトの重さ---
 	double m_weight;
 
+	// ---アクティブフラグ---
+	bool is_active;
+
 public:
 	/// <summary>
 	/// コンストラクタ
@@ -86,61 +89,56 @@ public:
 		bool wireframe = false, ShaderLambda option = nullptr) = 0;
 
 public:
+
 	// 座標を取得
-	const DirectX::SimpleMath::Vector3& GetPosition() const { return m_position; }
-	// 座標を設定 param:: pos | 指定座標
-	void SetPosition(const DirectX::SimpleMath::Vector3& pos) { m_position = pos; }
+	DirectX::SimpleMath::Vector3 GetPosition()        const { return m_position; }
 	// 初期座標を取得
-	const DirectX::SimpleMath::Vector3& GetInitialPosition() { return m_initialPosition; }
-	// 初期座標を設定 param:: pos | 指定座標
-	void SetInitialPosition(const DirectX::SimpleMath::Vector3& pos) { m_initialPosition = pos; }
-
+	DirectX::SimpleMath::Vector3 GetInitialPosition() const { return m_initialPosition; }
 	// スケールを取得
-	const DirectX::SimpleMath::Vector3& GetScale() const { return m_scale; }
-	// スケールを設定 param:: scale | 指定スケール
-	void SetScale(const DirectX::SimpleMath::Vector3& scale) { m_scale = scale; }
+	DirectX::SimpleMath::Vector3 GetScale()           const { return m_scale; }
 	// 初期スケールを取得
-	const DirectX::SimpleMath::Vector3& GetInitialScale() { return m_initialScale; }
-	// 初期スケールを設定 param:: scale | 指定スケール
-	void SetInitialScale(const DirectX::SimpleMath::Vector3& scale) { m_initialScale = scale; }
-
+	DirectX::SimpleMath::Vector3 GetInitialScale()    const { return m_initialScale; }
 	// 回転を取得
-	const DirectX::SimpleMath::Vector3& GetRotate() const { return m_rotate; }
-	// 回転を設定 param:: rotate | 指定回転
-	void SetRotate(const DirectX::SimpleMath::Vector3& rotate) { m_rotate = rotate; }
-
-	// ワールドマトリクスを作成
-	void CreateWorldMatrix();
+	DirectX::SimpleMath::Vector3 GetRotate()          const { return m_rotate; }
 	// ワールドマトリクスを取得
-	const DirectX::SimpleMath::Matrix& GetWorldMatrix() const { return m_world; }
+	DirectX::SimpleMath::Matrix GetWorldMatrix()      const { return m_world; }
 	// 親のマトリクスを取得
-	const DirectX::SimpleMath::Matrix& GetParentMatrix() { return m_parentMatrix; }
-	// 親のマトリクスを設定
-	void SetParentMatrix(const DirectX::SimpleMath::Matrix& matrix) { m_parentMatrix = matrix; }
-
+	DirectX::SimpleMath::Matrix GetParentMatrix()     const { return m_parentMatrix; }
 	// IDを取得
-	const ID& GetID() const { return m_id; }
-	// IDを設定
-	void SetID(const ID& id) { m_id = id; }
-
+	ID GetID()                                        const { return m_id; }
 	// 重さを取得
-	const double& GetWeight() { return m_weight; }
-	// 重さを設定
-	void SetWeight(const double& weight) { m_weight = weight; }
-
-	// バウンディングボックスを取得
-	DirectX::BoundingBox GetBoundingBox() const
-	{
-		SimpleMath::Vector3 _min = m_position - m_scale * 0.5f;
-		SimpleMath::Vector3 _max = m_position + m_scale * 0.5f;
-		return DirectX::BoundingBox(_min, _max);
-	}
+	double GetWeight()                                const { return m_weight; }
+	// アクティブ状況を取得
+	bool IsActive()									  const { return is_active; }
+	// モデルを参照する
+	std::unique_ptr<DirectX::Model>& GetModel()				{ return m_model; }
 
 public:
+
+	// 座標を設定
+	void SetPosition(const DirectX::SimpleMath::Vector3& pos)        { m_position = pos; }
+	// 初期座標を設定
+	void SetInitialPosition(const DirectX::SimpleMath::Vector3& pos) { m_initialPosition = pos; }
+	// スケールを設定
+	void SetScale(const DirectX::SimpleMath::Vector3& scale)         { m_scale = scale; }
+	// 初期スケールを設定
+	void SetInitialScale(const DirectX::SimpleMath::Vector3& scale)  { m_initialScale = scale; }
+	// 回転を設定
+	void SetRotate(const DirectX::SimpleMath::Vector3& rotate)       { m_rotate = rotate; }
+	// 親のマトリクスを設定
+	void SetParentMatrix(const DirectX::SimpleMath::Matrix& matrix)  { m_parentMatrix = matrix; }
+	// IDを設定
+	void SetID(const ID& id)                                         { m_id = id; }
+	// 重さを設定
+	void SetWeight(const double& weight)                             { m_weight = weight; }
+	// アクティブ状況を設定
+	void SetActive(const bool& flag)								 { is_active = flag; }
+
+public:
+	// ワールドマトリクスを作成
+	void CreateWorldMatrix();
 	// モデルを作成する
 	void CreateModel();
-	// モデルを参照する
-	std::unique_ptr<DirectX::Model>& GetModel() { return m_model; }
 	// モデルをリリースする
 	void ReleaseModel();
 	// モデルを変更する

@@ -190,7 +190,7 @@ void PlayScene::Update()
 	m_player->Update();
 
 	// 当たり判定の更新
-	m_stageCollision->Update(m_player.get(), m_blockManager.get());
+	m_stageCollision->Update(m_player.get());
 
 	// フラグマネージャの更新
 	m_flagManager->Update();
@@ -543,6 +543,9 @@ void PlayScene::SetSceneValues()
 	// ブロックの初期設定
 	m_blockManager->SetPlay(true);
 	m_blockManager->Initialize();
+
+	// コリジョンの設定
+	m_stageCollision->Initialize(m_blockManager.get());
 
 	// プレイヤーの座標を返す
 	m_player->SetPosition(m_blockManager->GetPlayerPosition());

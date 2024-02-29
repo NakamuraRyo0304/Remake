@@ -17,6 +17,9 @@ private:
 	// Šø‚Ì•`‰æˆÊ’u
 	std::vector<std::unique_ptr<Flag>> m_flags;
 
+	// æ“ªÀ•W
+	DirectX::SimpleMath::Vector3 m_firstPosition;
+
 public:
 
 	/// <summary>

@@ -21,9 +21,6 @@ private:
 	// 衝突フラグ
 	bool is_hit;
 
-	// アクティブフラグ
-	bool is_active;
-
 public:
 
 	/// <summary>
@@ -57,9 +54,6 @@ public:
 
 	// 衝突を通知する
 	void NotificateHit(const bool& is) { is_hit = is; }
-
-	// アクティブフラグを切り替える
-	void SetActive(const bool flag) { is_active = flag; }
 
 };
 
