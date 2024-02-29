@@ -88,7 +88,7 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
         {
             // 着地処理を行い、雲を動かす
             player->SetFall(side != Side::Up ? true : false);
-            dynamic_cast<Cloud*>(block)->SetHitFlag(true);
+            static_cast<Cloud*>(block)->SetHitFlag(true);
             IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
             player->SetPosition(newPos);
             break;
@@ -96,23 +96,23 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
         case ID::Obj_Coin:      // コイン
         {
             // 獲得していなければ獲得処理を行う
-            if (not dynamic_cast<Coin*>(block)->IsHit())
+            if (not static_cast<Coin*>(block)->IsHit())
             {
                 player->CountUpCoins();
             }
-            dynamic_cast<Coin*>(block)->SetHitFlag(true);
+            static_cast<Coin*>(block)->SetHitFlag(true);
             break;
         }
         case ID::Obj_Goal:      // ゴール
         {
             // ゴール処理を行う
-            dynamic_cast<Goal*>(block)->OnHitFlag();
+            static_cast<Goal*>(block)->OnHitFlag();
             break;
         }
         case ID::Obj_Spike:     // スパイク
         {
             // スパイクに当たれば死亡させる
-            dynamic_cast<Spike*>(block)->SetHitFlag(true);
+            static_cast<Spike*>(block)->SetHitFlag(true);
             player->SetDeath(true);
             break;
         }
