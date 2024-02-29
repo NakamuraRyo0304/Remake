@@ -6,18 +6,22 @@
  */
 
 #include "pch.h"
+#include "Libraries/UserUtility.h"
+#include "Libraries/SystemDatas/Timer/Timer.h"
 #include "Head.h"
 
 //==============================================================================
 // 定数の設定
 //==============================================================================
 const float Head::SCALE = 0.5f;			// モデルのスケール
+const float Head::ROT_POWER = 15.0f;	// 首振りの強さ
 
 //==============================================================================
 // コンストラクタ
 //==============================================================================
 Head::Head()
 	: IGameObject(L"Resources/Models/pHead.cmo", L"Resources/Models")
+	, m_states{ MoveStates::Idling }		// アイドル状態
 {
 	CreateModel();
 	SetID(ID::Obj_Player);
@@ -28,6 +32,10 @@ Head::Head()
 	SetRotate(SimpleMath::Vector3::Zero);
 	SetScale(SimpleMath::Vector3::One);
 	SetInitialScale(GetScale());
+
+	// タイマー作成
+	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
+	m_timer->Start();
 }
 
 //==============================================================================
@@ -36,6 +44,7 @@ Head::Head()
 Head::~Head()
 {
 	ReleaseModel();
+	m_timer.reset();
 }
 
 //==============================================================================
@@ -43,6 +52,19 @@ Head::~Head()
 //==============================================================================
 void Head::Update()
 {
+	m_timer->Update();
+
+	// アイドル状態はきょろきょろする
+	if (m_states == MoveStates::Idling)
+	{
+		float _value = XMConvertToRadians(sinf(m_timer->GetCount()) * ROT_POWER);
+		SetRotate(UserUtility::Lerp(GetRotate(), SimpleMath::Vector3::UnitY * _value));
+	}
+	else if(m_states == MoveStates::Walking)
+	{
+		SetRotate(UserUtility::Lerp(GetRotate(), SimpleMath::Vector3::Zero));
+	}
+
 	// マトリクスを作成
 	CreateWorldMatrix();
 }

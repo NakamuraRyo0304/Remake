@@ -30,6 +30,7 @@ Player::Player()
 	: IGameObject(L"Resources/Models/pBody.cmo", L"Resources/Models")
 	, m_velocity{}			                // 移動量
 	, m_coinNum{ 0 }		                // 取得済みコイン枚数
+	, m_giveUpTime{}						// 諦めタイム
 	, is_fall{ true }		                // 落下フラグ
 	, is_death{ false }		                // 死亡フラグ
 {
@@ -100,10 +101,16 @@ void Player::Update()
 			UserUtility::RemoveVec(m_goalPoints, m_goalPoints[0]);
 			m_giveUpTime = GIVEUP_TIME;
 		}
+
+		// 歩行ステートに変更
+		m_head->SetStatus(MoveStates::Walking);
 	}
 	else
 	{
 		m_giveUpTime = GIVEUP_TIME;
+
+		// アイドルステートに変更
+		m_head->SetStatus(MoveStates::Idling);
 	}
 
 	// 落下フラグがONの場合、重力をかける

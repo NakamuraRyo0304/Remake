@@ -14,12 +14,29 @@
 //==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
+//==============================================================================
+// プレイヤーステート
+//==============================================================================
+#include "../MoveStates.h"
+
+class Timer;
 class Head : public IGameObject
 {
 private:
 
+	// プレイヤーステート
+	MoveStates m_states;
+
+	// タイマー
+	std::unique_ptr<Timer> m_timer;
+
+private:
+
 	// モデルのスケール
 	static const float SCALE;
+
+	// 首振りの強さ
+	static const float ROT_POWER;
 
 public:
 
@@ -49,6 +66,11 @@ public:
 	/// <returns>なし</returns>
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
+
+public:
+
+	// ステートを設定する
+	void SetStatus(const MoveStates& status) { m_states = status; }
 
 };
 

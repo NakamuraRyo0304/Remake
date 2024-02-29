@@ -15,6 +15,11 @@
 #include "Game/Common/IGameObject/IGameObject.h"
 
 //==============================================================================
+// プレイヤーステート
+//==============================================================================
+#include "MoveStates.h"
+
+//==============================================================================
 // プレイヤーのパーツ
 //==============================================================================
 #include "Parts/Head.h"
@@ -115,17 +120,17 @@ public:
 	void ResetGoalPosition() { m_goalPoints.clear(); }
 
 	// コイン枚数を取得
-	const int& GetCoinNum() { return m_coinNum; }
+	int GetCoinNum() const { return m_coinNum; }
 	// コイン枚数をカウントアップ
 	void CountUpCoins() { m_coinNum++; }
 
 	// 落下フラグを取得
-	const bool& IsFall() { return is_fall; }
+	bool IsFall() const { return is_fall; }
 	// 落下フラグを設定
 	void SetFall(const bool& isFall) { is_fall = isFall; }
 
 	// 死亡フラグを取得
-	const bool& IsDeath() { return is_death; }
+	bool IsDeath() const { return is_death; }
 	// 死亡フラグを設定
 	void SetDeath(const bool& isDeath) { is_death = isDeath; }
 };

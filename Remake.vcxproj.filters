@@ -581,6 +581,9 @@
     <ClInclude Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.h">
       <Filter>GameSystems\Title\MoveMonitor</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h">
+      <Filter>GameObjects\Play\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
