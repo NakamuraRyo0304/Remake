@@ -129,7 +129,7 @@ void Player::Update()
 	}
 	if (GetPosition().y < DEATH_LINE / 2)
 	{
-		float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+		float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetElapsedSeconds());
 
 		// ‰ñ“]‚µ‚È‚ª‚ç—Ž‚¿‚Ä‚¢‚­
 		SetRotate(GetRotate() + SimpleMath::Vector3::UnitY * XMConvertToRadians(_timer * DEATH_ROTATE));

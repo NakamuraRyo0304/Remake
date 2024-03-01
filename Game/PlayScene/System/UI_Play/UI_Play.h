@@ -18,6 +18,7 @@ class UI_CoinNum;
 class UI_PlayArea;
 class DrawKeys;
 class DrawSprite;
+class Button;
 class UI_Play final : public IUserInterface
 {
 public:
@@ -38,6 +39,10 @@ private:
 
 	// コイン数
 	std::unique_ptr<UI_CoinNum> m_coins;
+
+	// リトライボタン
+	std::unique_ptr<Button> m_retryButton;
+	bool is_retryPush;
 
 	// キー描画
 	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
@@ -88,6 +93,9 @@ public:
 
 	// コインの枚数を設定
 	void SetCoinNum(const int& num) { m_coinNum = num; }
+
+	// リトライボタンの状況取得
+	bool IsPushRetry() const { return is_retryPush; }
 };
 
 #endif // UI_PLAY

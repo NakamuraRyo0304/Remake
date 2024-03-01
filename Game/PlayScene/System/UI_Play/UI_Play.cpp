@@ -7,6 +7,7 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
+#include "Libraries/SystemDatas/Button/Button.h"
 #include "Game/PlayScene/System/UI_Play/UI_CoinNum/UI_CoinNum.h"
 #include "Game/PlayScene/System/UI_Play/UI_PlayArea/UI_PlayArea.h"
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
@@ -27,12 +28,16 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	, m_coinNum{}							                                // コイン枚数
 	, m_coinTexPos{}														// 残りコイン枚数テキスト
 	, m_cameraTexPos{}														// カメラテキスト
+	, is_retryPush{ false }													// リトライボタンフラグ
 {
 	// エリア作成
 	m_area = std::make_unique<UI_PlayArea>();
 
 	// 数字作成
 	m_coins = std::make_unique<UI_CoinNum>();
+
+	// ボタンを作成
+	m_retryButton = std::make_unique<Button>(L"RetryButton", L"Resources/Textures/UI_Play/RetryButton.dds");
 
 	// キーオフセットを設定
 	auto _offset = SimpleMath::Vector2(1728.0f, 384.0f);
@@ -64,6 +69,7 @@ UI_Play::~UI_Play()
 	m_coins.reset();
 	m_keys.clear();
 	m_sprite.reset();
+	m_retryButton.reset();
 }
 
 //==============================================================================
@@ -73,6 +79,10 @@ void UI_Play::Initialize()
 {
 	// エリアの設定
 	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), WHITE * 0.5f, GetScreenRate());
+
+	// リセットボタンの設定
+	m_retryButton->Initialize(SimpleMath::Vector2(1856.0f, 0.0f), SimpleMath::Vector2::One * 0.25f,
+		{ 0,0,256,256 }, GetScreenRate());
 
 	// コイン数の設定
 	m_coins->Initialize(
@@ -99,6 +109,10 @@ void UI_Play::Initialize()
 void UI_Play::Update()
 {
 	m_coins->SetCoinNum(m_coinNum);
+
+	// リセットボタンの更新
+	m_retryButton->Update();
+	is_retryPush = m_retryButton->GetState() == Button::State::Push;
 
 	// キーの更新
 	auto _key = Keyboard::Get().GetState();
@@ -129,4 +143,7 @@ void UI_Play::Draw()
 	{
 		key.second->Draw();
 	}
+
+	// リセットボタンを描画
+	m_retryButton->Draw();
 }

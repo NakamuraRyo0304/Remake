@@ -149,8 +149,8 @@ void PlayScene::Update()
 			ChangeScene(SCENE::CLEAR);
 		}
 
-		// 死んだら再読み込み
-		if (m_player->IsDeath())
+		// 死亡またはボタンクリックで再読み込み
+		if (m_player->IsDeath() || m_ui->IsPushRetry())
 		{
 			m_adminCamera->SetInterpolation(true);// 補間モードにする
 			if (m_adminCamera->GetType() != CameraType::Death_Following)

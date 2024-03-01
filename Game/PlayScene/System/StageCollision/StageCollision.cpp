@@ -117,6 +117,7 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
             break;
         }
         default:
+            player->SetFall(true);
             break;
     }
 }
