@@ -87,9 +87,9 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
         case ID::Obj_Cloud:     // 雲ブロック
         {
             // 着地処理を行い、雲を動かす
-            player->SetFall(side != Side::Up ? true : false);
-            static_cast<Cloud*>(block)->SetHitFlag(true);
-            IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
+            static_cast<Cloud*>(block)->SetHitFlag(side != Side::Up ? true : false);
+            auto _side = IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
+            player->SetFall(_side != Side::Up ? true : false);
             player->SetPosition(newPos);
             break;
         }

@@ -28,74 +28,66 @@ float2 random(float2 st)
     return -1.0f + 2.0f * frac(sin(st) * 43758.5453f);
 }
 
-// パーリンノイズ
+// パーリンノイズを生成する関数
 float perlinNoise(float2 uv)
 {
+    // uv座標を整数部と小数部に分割
     float2 p = floor(uv);
     float2 f = frac(uv);
+
+    // fの補間関数を計算
     float2 u = f * f * (3.0 - 2.0 * f);
 
+    // 隣接する4つの整数座標に対してランダム値を取得
     float2 v00 = random(p + float2(0, 0));
     float2 v10 = random(p + float2(1, 0));
     float2 v01 = random(p + float2(0, 1));
     float2 v11 = random(p + float2(1, 1));
 
+    // 補間と線形補間を使用してパーリンノイズ値を計算
     return lerp(lerp(dot(v00, f - float2(0, 0)), dot(v10, f - float2(1, 0)), u.x),
-         lerp(dot(v01, f - float2(0, 1)), dot(v11, f - float2(1, 1)), u.x), u.y);
+                lerp(dot(v01, f - float2(0, 1)), dot(v11, f - float2(1, 1)), u.x), u.y);
 }
 
 // フラクタルノイズを生成する関数
 float fractalNoise(float2 uv)
 {
-    float noise = 0.0;
-    float amplitude = 1.0;
-    float frequency = 1.0;
+    float output = 0.0;
+    float amplitude = 1.0;// 振幅
+    float frequency = 1.0;// 頻度
 
     // 複数のオクターブでノイズを生成し、合成する
     for (float i = 0; i < FN_OCTAVES; ++i)
     {
-        noise += perlinNoise(uv * frequency) * amplitude;
+        output += perlinNoise(uv * frequency) * amplitude;
         amplitude *= FN_PERSISTENCE;
         frequency *= 2.0; // 周波数を倍にすることで次のオクターブに移る
     }
 
-    return noise;
+    return output;
 }
 
-// ランダムなオフセットを生成する
-float2 randomOffset(float2 uv)
+// 波打ち関数
+void waveUV(inout float2 uv)
 {
-    float2 randomOffset = float2(
-        frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453),
-        frac(cos(dot(uv, float2(12.9898, 78.233))) * 43758.5453));
-    return randomOffset * RANDOM_OFFSET;
+    uv.x += Time * FLOW_VELOCITY;       // 横移動
+    uv.y += cos(Time) * SWING_SPEED;    // 縦揺れ
 }
 
 float4 main(PS_INPUT input) : SV_TARGET
 {
-    float2 uv = input.Tex;
-
     // ランダムなオフセットを生成
+    float2 uv = input.Tex;
     float2 offset = perlinNoise(uv);
-
-    // UV値にオフセットを加える
     uv += offset;
 
     // フルクタルノイズで揺らす
     float p = fractalNoise(uv * FN_UV_POWER);
-
-    // UV値を不規則に揺らす
     uv += float2(p * FN_UV_PATH1 * cos(Time), p * FN_UV_PATH2 * sin(Time));
 
-    // UVX値を時間に応じて滑らかに移動させる
-    uv.x += Time * FLOW_VELOCITY;
+    // UV値を時間に応じて滑らかに移動させる
+    waveUV(uv);
 
-    // UVY値を左右に振る
-    uv.y += cos(Time) * SWING_SPEED;
-
-    // 出力変数に入れる
-    float4 output = tex.Sample(samLinear, uv);
-
-    // 出力する
-    return output;
+    // 最終出力
+    return tex.Sample(samLinear, uv);
 }

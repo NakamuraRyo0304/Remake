@@ -238,10 +238,7 @@ void PlayScene::Draw()
 
 	// ビュー行列
 	SimpleMath::Matrix _view = SimpleMath::Matrix::CreateLookAt(
-		LIGHT_POSITION,
-		LIGHT_POSITION + _lightDirection,
-		SimpleMath::Vector3::UnitY
-	);
+		LIGHT_POSITION, LIGHT_POSITION + _lightDirection, SimpleMath::Vector3::UnitY);
 
 	// プロジェクション行列
 	SimpleMath::Matrix _projection = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
@@ -427,9 +424,9 @@ void PlayScene::CreateWDResources()
 	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
 
 	// 氷山作成
-	m_iceberg = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -25.0f, -50.0f), 8.0f, -10.0f);
+	m_iceberg   = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -25.0f, -50.0f), 8.0f, -10.0f);
 	m_smallberg = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -30.0f, 25.0f), 5.0f, 0.0f);
-	m_bigberg = std::make_unique<Iceberg>(SimpleMath::Vector3(50.0f, -30.0f, 0.0f), 15.0f, -5.0f);
+	m_bigberg   = std::make_unique<Iceberg>(SimpleMath::Vector3(50.0f, -30.0f, 0.0f), 15.0f, -5.0f);
 
 	//==============================================================================
 	// シャドウマップ関連の作成
