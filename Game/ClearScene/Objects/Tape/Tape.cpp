@@ -61,6 +61,6 @@ void Tape::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector2 rate,
 //==============================================================================
 void Tape::Draw()
 {
-	m_sprite->DrawTexture(L"tape", m_position * m_scRate, SimpleMath::Vector4::One,
+	m_sprite->DrawTexture(L"tape", m_position * m_scRate, UserUtility::ColorsVector::WHITE,
 		m_rate * m_scRate, SimpleMath::Vector2(160.0f, 64.0f), {0U,0U,320U,128U});
 }

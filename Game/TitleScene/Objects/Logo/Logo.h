@@ -64,7 +64,7 @@ public:
 public:
 
 	// F‚ğæ“¾‚·‚é
-	const DirectX::SimpleMath::Vector4& GetColor() { return m_color; }
+	DirectX::SimpleMath::Vector4 GetColor() const { return m_color; }
 	// F‚ğİ’è‚·‚é
 	void SetColor(const DirectX::SimpleMath::Vector4& color) { m_color = color; }
 };

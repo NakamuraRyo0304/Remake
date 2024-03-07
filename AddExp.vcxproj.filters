@@ -1058,9 +1058,6 @@
     <Filter Include="GameObjects\Common\Blocks\Cloud">
       <UniqueIdentifier>{6368c934-f301-485a-90e1-7905191c2387}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Goal">
-      <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Common\Blocks\Spike">
       <UniqueIdentifier>{d651b34b-8148-4010-9436-6f3c0eaa2634}</UniqueIdentifier>
     </Filter>
@@ -1177,6 +1174,9 @@
     </Filter>
     <Filter Include="GameSystems\Title\MoveMonitor">
       <UniqueIdentifier>{10c770b4-cce4-425b-8fda-c9ca974a7de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Common\Blocks\Goal">
+      <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

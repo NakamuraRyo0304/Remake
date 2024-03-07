@@ -19,11 +19,6 @@
 #include "ClearScene.h"														// クリアシーン
 
 //==============================================================================
-// 定数の設定
-//==============================================================================
-const SimpleMath::Vector4 ClearScene::WHITE = SimpleMath::Vector4::One;		// 白色
-
-//==============================================================================
 // エイリアス宣言
 //==============================================================================
 using KeyCode = Keyboard::Keys;												// キーコード
@@ -223,9 +218,9 @@ void ClearScene::SetSceneValues()
 	m_backGround->Initialize();
 
 	// スコアボードの初期化(1文字分間隔をあける)
-	m_coinBoard->Initialize({ 1500.0f,100.0f }, WHITE,
+	m_coinBoard->Initialize({ 1500.0f,100.0f }, UserUtility::ColorsVector::WHITE,
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
-	m_timeBoard->Initialize({ 1500.0f,250.0f }, WHITE,
+	m_timeBoard->Initialize({ 1500.0f,250.0f }, UserUtility::ColorsVector::WHITE,
 		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
 
 	// テープの初期化

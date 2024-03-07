@@ -33,6 +33,7 @@ Player::Player()
 	, m_giveUpTime{}						// 諦めタイム
 	, is_fall{ true }		                // 落下フラグ
 	, is_death{ false }		                // 死亡フラグ
+	, is_coinHit{ false }		            // コイン衝突フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Player);

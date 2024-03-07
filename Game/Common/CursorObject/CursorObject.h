@@ -55,7 +55,7 @@ public:
 public:
 
 	// カーソル座標を取得
-	const DirectX::SimpleMath::Vector3& GetCursorPosition() { return m_cursorPosition; }
+	DirectX::SimpleMath::Vector3 GetCursorPosition() const { return m_cursorPosition; }
 	// カーソル座標を設定
 	void SetCursorPosition(const DirectX::SimpleMath::Vector3& pos) { m_cursorPosition = pos; }
 

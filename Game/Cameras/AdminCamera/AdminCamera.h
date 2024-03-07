@@ -103,7 +103,7 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>アクティブ状況</returns>
-	const bool& IsActive() { return is_active; }
+	bool IsActive() const { return is_active; }
 	/// <summary>
 	/// アクティブ状態を設定
 	/// </summary>
@@ -115,7 +115,7 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>カメラタイプ</returns>
-	const Type& GetType() { return m_type; }
+	Type GetType() const { return m_type; }
 	/// <summary>
 	/// カメラタイプを設定
 	/// </summary>
@@ -128,7 +128,7 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>目線の座標</returns>
-	DirectX::SimpleMath::Vector3 GetPosition() { return m_position; }
+	const DirectX::SimpleMath::Vector3& GetPosition() { return m_position; }
 	/// <summary>
 	/// 座標を設定
 	/// </summary>
@@ -140,7 +140,7 @@ public:
 	/// </summary>
 	/// <param name="引数無し"></param>
 	/// <returns>注視点</returns>
-	DirectX::SimpleMath::Vector3 GetTarget() { return m_target; }
+	const DirectX::SimpleMath::Vector3& GetTarget() { return m_target; }
 	/// <summary>
 	/// 注視点を設定
 	/// </summary>

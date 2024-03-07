@@ -63,7 +63,7 @@ public:
 		bool wireframe = false, ShaderLambda option = nullptr) override;
 
 	// “’…ó‹µ‚ğæ“¾(“’…‚µ‚½‚çTrue)
-	bool IsArrive() { return is_arrive; }
+	bool IsArrive() const { return is_arrive; }
 };
 
 #endif // FLAG

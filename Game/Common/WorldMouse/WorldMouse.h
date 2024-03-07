@@ -60,7 +60,7 @@ public:
 	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 
 	// ワールドマウスの座標を取得
-	const DirectX::SimpleMath::Vector3& GetPosition() { return m_position; }
+	DirectX::SimpleMath::Vector3 GetPosition() const { return m_position; }
 
 	// プレイモードにする
 	void ToPlayMode() { is_playing = true; }

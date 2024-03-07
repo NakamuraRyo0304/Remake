@@ -54,11 +54,6 @@ private:
 	// ƒRƒCƒ“”
 	int m_coinNum;
 
-private:
-
-	static const DirectX::SimpleMath::Vector4 WHITE;
-	static const DirectX::SimpleMath::Vector4 RED;
-
 public:
 
 	/// <summary>

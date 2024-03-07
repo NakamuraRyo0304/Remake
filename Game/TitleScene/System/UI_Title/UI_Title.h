@@ -40,9 +40,6 @@ private:
 
 private:
 
-	// 選択色
-	static const DirectX::SimpleMath::Vector4 ORANGE_COLOR;
-
 	// 色変更速度
 	static const float COLOR_SPEED;
 
@@ -81,10 +78,10 @@ public:
 public:
 
 	// セレクト番号を返す
-	const int& GetSelection() { return m_selection; }
+	int GetSelection() const { return m_selection; }
 
 	// 動作を検知状況を返す
-	bool IsAnything() { return is_anything; }
+	bool IsAnything() const { return is_anything; }
 };
 
 #endif // UI_TITLE

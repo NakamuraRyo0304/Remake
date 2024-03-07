@@ -397,7 +397,7 @@ void BlockManager::FillAir()
 //==============================================================================
 // プレイヤーの座標を取得する
 //==============================================================================
-SimpleMath::Vector3 BlockManager::GetPlayerPosition()
+SimpleMath::Vector3 BlockManager::GetPlayerPosition() const
 {
 	SimpleMath::Vector3 _playerPosition;
 
@@ -425,7 +425,7 @@ SimpleMath::Vector3 BlockManager::GetPlayerPosition()
 //==============================================================================
 // ゴール判定取得
 //==============================================================================
-bool BlockManager::IsArrived()
+bool BlockManager::IsArrived() const
 {
 	if (m_goals.empty()) return false;
 
@@ -442,7 +442,7 @@ bool BlockManager::IsArrived()
 //==============================================================================
 // 棘の衝突取得
 //==============================================================================
-bool BlockManager::IsHitSpike()
+bool BlockManager::IsHitSpike() const
 {
 	if (m_spikes.empty()) return false;
 

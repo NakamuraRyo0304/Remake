@@ -26,9 +26,6 @@ private:
 	// サンプルステージ番号
 	static const int MAX_SAMPLE_NUM = 4;
 
-	// ０番はエディタの番号
-	const int EDITOR_NUM = 0;
-
 private:
 
 	// アドミンカメラ
@@ -49,6 +46,10 @@ private:
 	// セレクト番号
 	int m_stageSelection;
 
+private:
+
+	// ０番はエディタの番号
+	const int EDITOR_NUM = 0;
 
 public:
 

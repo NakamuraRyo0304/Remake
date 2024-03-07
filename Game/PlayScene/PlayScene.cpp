@@ -124,6 +124,13 @@ void PlayScene::Update()
 			m_flagManager->AddFlag(_flagPos, _playerPos, MAX_FOLLOW);
 		}
 
+		// コインが当たったら音を鳴らす
+		if (m_player->IsCoinHit())
+		{
+			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_COIN, RepeatType::ONCE);
+			m_player->SetCoinHit(false);
+		}
+
 		// ゴールしたらクリアへ
 		if (m_blockManager->IsArrived())
 		{

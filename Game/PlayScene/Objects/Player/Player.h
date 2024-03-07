@@ -46,6 +46,9 @@ private:
 	// 死亡フラグ
 	bool is_death;
 
+	// コイン衝突フラグ
+	bool is_coinHit;
+
 private:
 
 	// 頭
@@ -115,7 +118,7 @@ public:
 	void AddFollowPath(DirectX::SimpleMath::Vector3 path, const int& max);
 
 	// 現在格納しているパスを取得
-	const std::vector<DirectX::SimpleMath::Vector3>& GetFollowPath() { return m_goalPoints; }
+	std::vector<DirectX::SimpleMath::Vector3> GetFollowPath() const { return m_goalPoints; }
 	// 格納しているパスを全削除
 	void ResetGoalPosition() { m_goalPoints.clear(); }
 
@@ -123,6 +126,10 @@ public:
 	int GetCoinNum() const { return m_coinNum; }
 	// コイン枚数をカウントアップ
 	void CountUpCoins() { m_coinNum++; }
+
+	// コイン衝突フラグを取得
+	bool IsCoinHit() const { return is_coinHit; }
+	void SetCoinHit(const bool& isHit) { is_coinHit = isHit; }
 
 	// 落下フラグを取得
 	bool IsFall() const { return is_fall; }

@@ -41,7 +41,7 @@ public:
 	/// </summary>
 	/// <param name="ˆø”–³‚µ"></param>
 	/// <returns>“®‚¢‚½‚çTrue</returns>
-	bool IsMove() { return is_moveMouse; }
+	bool IsMove() const { return is_moveMouse; }
 };
 
 #endif // MOVEMONITOR

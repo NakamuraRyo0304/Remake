@@ -232,21 +232,21 @@ void GameMain::DeleteScene()
 
 	// セレクトシーン ----> プレイシーン
 	// 処理：選択されたステージ番号を送信
-	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::SELECT)
+	if (m_prevScene == SCENE::SELECT && m_nextScene == SCENE::PLAY)
 	{
 		m_stageNumber   = CastSceneType<SelectScene>(m_nowScene)->GetSelectedNumber();
 		m_maxNumber     = CastSceneType<SelectScene>(m_nowScene)->GetMaxNumber();
 	}
 	// クリアシーン ----> プレイシーン
 	// 処理：次のステージ番号を送信（最大になったら１に戻す）
-	if (m_nextScene == SCENE::PLAY && m_prevScene == SCENE::CLEAR)
+	if (m_prevScene == SCENE::CLEAR && m_nextScene == SCENE::PLAY)
 	{
 		m_stageNumber   = CastSceneType<ClearScene>(m_nowScene)->GetStageNumber();
 	}
 
 	// プレイシーン ----> クリアシーン
 	// 処理：ステージ番号、クリア時間、獲得コインを送信
-	if (m_nextScene == SCENE::CLEAR && m_prevScene == SCENE::PLAY)
+	if (m_prevScene == SCENE::PLAY && m_nextScene == SCENE::CLEAR)
 	{
 		m_clearTime     = CastSceneType<PlayScene>(m_nowScene)->GetGameTimer();
 		m_collectedCoin = CastSceneType<PlayScene>(m_nowScene)->GetCollectedCoin();

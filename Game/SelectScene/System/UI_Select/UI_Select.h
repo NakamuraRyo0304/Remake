@@ -35,12 +35,11 @@ private:
 
 private:
 
-	// 選択色
-	static const DirectX::SimpleMath::Vector4 RED_COLOR;
-	static const DirectX::SimpleMath::Vector4 BLACK_COLOR;
-
 	// 色変更速度
 	static const float COLOR_SPEED;
+
+	// ステージ番号の間隔
+	static const float STAGE_TEX_SPAN;
 
 	// 画像の座標
 	static const DirectX::SimpleMath::Vector2 STAGE_TEX_POS;

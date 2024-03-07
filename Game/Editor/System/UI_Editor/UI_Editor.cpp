@@ -123,11 +123,11 @@ void UI_Editor::Update()
 		// ボタンの色の更新
 		{
 			if (is_clicks[i])
-				m_buttons[i]->SetColor(SimpleMath::Color(0, 0, 0, 1));		// 黒くする
+				m_buttons[i]->SetColor(UserUtility::Colors::BLACK);			// 黒くする
 			else if (_hover)
-				m_buttons[i]->SetColor(SimpleMath::Color(1, 1, 1, 0.5f));	// 薄くする
+				m_buttons[i]->SetColor(UserUtility::Colors::WHITE * 0.5f);	// 薄くする
 			else
-				m_buttons[i]->SetColor(SimpleMath::Color(1, 1, 1, 1));		// 白くする（元の色）
+				m_buttons[i]->SetColor(UserUtility::Colors::WHITE);			// 白くする（元の色）
 		}
 	}
 
@@ -137,10 +137,10 @@ void UI_Editor::Update()
 	// キーの更新
 	auto _key = Keyboard::Get().GetState();
 
-	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
-	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
-	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
-	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? SimpleMath::Vector4(1, 0, 0, 1) : SimpleMath::Vector4::One);
+	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 }
 
 //==============================================================================

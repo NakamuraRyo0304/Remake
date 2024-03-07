@@ -46,10 +46,6 @@ private:
 
 private:
 
-	// 選択色
-	static const DirectX::SimpleMath::Vector4 WHITE;
-	static const DirectX::SimpleMath::Vector4 THINW;
-
 	// 色変更速度
 	static const float COLOR_SPEED;
 
@@ -99,13 +95,13 @@ private:
 public:
 
 	// 次の操作を取得
-	const SELECT& GetSelecion() { return m_select; }
+	SELECT GetSelecion() const { return m_select; }
 
 	// 次の操作を設定
 	void SetSelection(const SELECT& selection) { m_select = selection; }
 
 	// 動作の終了状況を取得する
-	const bool& IsEndMoving() { return is_endMoving; }
+	bool IsEndMoving() const { return is_endMoving; }
 };
 
 #endif // UI_CLEAR

@@ -99,6 +99,7 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
             if (not static_cast<Coin*>(block)->IsHit())
             {
                 player->CountUpCoins();
+                player->SetCoinHit(true);
             }
             static_cast<Coin*>(block)->SetHitFlag(true);
             break;

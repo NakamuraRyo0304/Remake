@@ -82,7 +82,7 @@ public:
 public:
 
 	// “®ì‚ÌI—¹ó‹µ‚ğæ“¾‚·‚é
-	const bool& IsEndMoving() { return is_endMoving; }
+	bool IsEndMoving() const { return is_endMoving; }
 };
 
 #endif // MOMENTCANV

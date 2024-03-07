@@ -15,12 +15,6 @@
 #include "UI_Play.h"
 
 //==============================================================================
-// 定数の設定
-//==============================================================================
-const SimpleMath::Vector4 UI_Play::WHITE = SimpleMath::Vector4::One;		// 白
-const SimpleMath::Vector4 UI_Play::RED = SimpleMath::Vector4(1, 0, 0, 1);	// 赤
-
-//==============================================================================
 // コンストラクタ
 //==============================================================================
 UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
@@ -78,7 +72,7 @@ UI_Play::~UI_Play()
 void UI_Play::Initialize()
 {
 	// エリアの設定
-	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), WHITE * 0.5f, GetScreenRate());
+	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), UserUtility::Colors::WHITE * 0.5f, GetScreenRate());
 
 	// リセットボタンの設定
 	m_retryButton->Initialize(SimpleMath::Vector2(1856.0f, 0.0f), SimpleMath::Vector2::One * 0.25f,
@@ -86,7 +80,7 @@ void UI_Play::Initialize()
 
 	// コイン数の設定
 	m_coins->Initialize(
-		m_area->GetPosition() + SimpleMath::Vector2(64.0f, 128.0f), WHITE, { 0.5f,0.5f }, GetScreenRate());
+		m_area->GetPosition() + SimpleMath::Vector2(64.0f, 128.0f), UserUtility::Colors::WHITE, { 0.5f,0.5f }, GetScreenRate());
 	m_coins->SetCoinNum(m_coinNum);
 	m_coins->SetCoinMaxNum(m_coinNum);
 
@@ -117,10 +111,10 @@ void UI_Play::Update()
 	// キーの更新
 	auto _key = Keyboard::Get().GetState();
 
-	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? RED : WHITE);
-	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? RED : WHITE);
-	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? RED : WHITE);
-	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? RED : WHITE);
+	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 }
 
 //==============================================================================
@@ -133,12 +127,12 @@ void UI_Play::Draw()
 
 	// コイン数を描画
 	m_sprite->DrawTexture(L"CoinTex", m_coinTexPos,
-		WHITE, GetScreenRate() * 0.5f, { 0.0f, 0.0f }, { 0, 0, 256, 128 });
+		UserUtility::Colors::WHITE, GetScreenRate() * 0.5f, { 0.0f, 0.0f }, { 0, 0, 256, 128 });
 	m_coins->Draw();
 
 	// キーを描画
 	m_sprite->DrawTexture(L"CameraTex", m_cameraTexPos,
-		WHITE, GetScreenRate() * 0.5f, { 0.0f, 0.0f }, { 0, 0, 256, 128 });
+		UserUtility::Colors::WHITE, GetScreenRate() * 0.5f, { 0.0f, 0.0f }, { 0, 0, 256, 128 });
 	for (auto& key : m_keys)
 	{
 		key.second->Draw();

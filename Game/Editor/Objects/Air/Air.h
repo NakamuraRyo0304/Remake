@@ -49,12 +49,6 @@ public:
 	/// <returns>Ç»Çµ</returns>
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
-
-public:
-
-	// è’ìÀÇí ímÇ∑ÇÈ
-	void NotificateHit(const bool& is) { is_hit = is; }
-
 };
 
 #endif // AIR

@@ -18,7 +18,6 @@ using KeyCode = Keyboard::Keys;															// キーコード
 //==============================================================================
 // 定数の設定
 //==============================================================================
-const SimpleMath::Vector4 UI_Title::ORANGE_COLOR = SimpleMath::Vector4(1, 0.5f, 0, 1);	// オレンジ色
 const float UI_Title::COLOR_SPEED = 0.075f;												// 色の変更速度
 
 //==============================================================================
@@ -90,13 +89,13 @@ void UI_Title::Update()
 	// 選択番号に応じて色を分ける
 	if (m_selection == TitleSelect::Start)
 	{
-		m_color[L"Start"] = UserUtility::Lerp(m_color[L"Start"], ORANGE_COLOR, COLOR_SPEED);
-		m_color[L"Exit"] = SimpleMath::Vector4(1, 1, 1, 1);
+		m_color[L"Start"] = UserUtility::Lerp(m_color[L"Start"], UserUtility::ColorsVector::ORANGE, COLOR_SPEED);
+		m_color[L"Exit"] = UserUtility::Colors::WHITE;
 	}
 	if (m_selection == TitleSelect::Exit)
 	{
-		m_color[L"Exit"] = UserUtility::Lerp(m_color[L"Exit"], ORANGE_COLOR, COLOR_SPEED);
-		m_color[L"Start"] = SimpleMath::Vector4(1, 1, 1, 1);
+		m_color[L"Exit"] = UserUtility::Lerp(m_color[L"Exit"], UserUtility::ColorsVector::ORANGE, COLOR_SPEED);
+		m_color[L"Start"] = UserUtility::Colors::WHITE;
 	}
 }
 

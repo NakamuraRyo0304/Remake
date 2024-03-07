@@ -6,6 +6,7 @@
  */
 
 #include "pch.h"
+#include "Libraries/UserUtility.h"
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "Seal.h"
 

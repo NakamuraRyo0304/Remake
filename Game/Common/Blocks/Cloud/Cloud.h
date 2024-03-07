@@ -62,7 +62,7 @@ public:
 public:
 
 	// �Փ˒ʒm
-	void SetHitFlag(bool isHit) { is_hit = isHit; }
+	void SetHitFlag(const bool& isHit) { is_hit = isHit; }
 
 };
 

@@ -15,6 +15,35 @@
 
 namespace UserUtility
 {
+	// 色の宣言
+	namespace Colors
+	{
+		// 赤色
+		static const DirectX::SimpleMath::Color RED = { 1, 0, 0, 1 };
+		// 黒色
+		static const DirectX::SimpleMath::Color BLACK = { 0, 0, 0, 1 };
+		// 白色
+		static const DirectX::SimpleMath::Color WHITE = { 1, 1, 1, 1 };
+		// 薄白色（オール0.5f）
+		static const DirectX::SimpleMath::Color WHITE_A = { 0.5f, 0.5f, 0.5f, 0.5f };
+		// 橙色
+		static const DirectX::SimpleMath::Color ORANGE = { 1, 0.5f, 0, 1 };
+	}
+	// 色の宣言（Vector4版）
+	namespace ColorsVector
+	{
+		// 赤色
+		static const DirectX::SimpleMath::Vector4 RED = { 1, 0, 0, 1 };
+		// 黒色
+		static const DirectX::SimpleMath::Vector4 BLACK = { 0, 0, 0, 1 };
+		// 白色
+		static const DirectX::SimpleMath::Vector4 WHITE = { 1, 1, 1, 1 };
+		// 薄白色（オール0.5f）
+		static const DirectX::SimpleMath::Vector4 WHITE_A = { 0.5f, 0.5f, 0.5f, 0.5f };
+		// 橙色
+		static const DirectX::SimpleMath::Vector4 ORANGE = { 1, 0.5f, 0, 1 };
+	}
+
 	/// <summary>
 	/// 線形補間する関数
 	/// </summary>

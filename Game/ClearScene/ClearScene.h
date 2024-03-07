@@ -53,11 +53,6 @@ private:
 	// 集めたコイン数/ステージ番号/最大ステージ番号
 	int m_collectedCoin, m_stageNumber, m_maxNumber;
 
-private:
-
-	// 白色
-	static const DirectX::SimpleMath::Vector4 WHITE;
-
 public:
 
 	/// <summary>
