@@ -12,12 +12,7 @@
 #include "BlockManager.h"
 
 // 検索用メモ //
-///////////////////////////////////////////
-// ブロックを追加したら更新する関数      //
-// Initialize Update Draw                //
-// SelectOffset GetBlockID ReplaceBlock  //
-// ClearBlocks CreateBlock OutputStage   //
-///////////////////////////////////////////
+// --書き換え対象-- //
 
 //==============================================================================
 // コンストラクタ
@@ -78,6 +73,8 @@ void BlockManager::Initialize()
 		float _z = static_cast<float>(_data[i]["Position"]["Z"]);
 		SimpleMath::Vector3 _position = SimpleMath::Vector3(_x, _y, _z);
 
+		// --書き換え対象-- //
+
 		// 氷床ブロックを格納
 		if (_name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(_position));
 		// コインを格納
@@ -110,49 +107,25 @@ void BlockManager::Initialize()
 //==============================================================================
 void BlockManager::Update()
 {
+	std::vector<IGameObject*> _objects;
+
+	// --書き換え対象-- //
+
+	if (is_playing == false)
+	{
+		for (auto& obj : m_chara)   _objects.push_back(obj.get());
+		for (auto& obj : m_air)	    _objects.push_back(obj.get());
+	}
+	for(auto& obj : m_flozens)	    _objects.push_back(obj.get());
+	for(auto& obj : m_clouds)		_objects.push_back(obj.get());
+	for(auto& obj : m_coins)		_objects.push_back(obj.get());
+	for(auto& obj : m_goals)		_objects.push_back(obj.get());
+	for(auto& obj : m_spikes)		_objects.push_back(obj.get());
+	for(auto& obj : m_lifts)		_objects.push_back(obj.get());
+
 	// オブジェクトの更新
-	for (auto& obj : m_flozens)	// 氷床ブロック
+	for (auto& obj : _objects)
 	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-	for (auto& obj : m_clouds)	// 雲ブロック
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-	for (auto& obj : m_coins)	// コイン
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-	for (auto& obj : m_goals)	// ゴールオブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-	for (auto& obj : m_spikes)	// 棘オブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-	for (auto& obj : m_lifts)	// リフトブロック
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-
-	// プレイモードはスキップ
-	if (is_playing == true) return;
-
-	for (auto& obj : m_chara)	// キャラオブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
-		obj->Update();
-	}
-	for (auto& obj : m_air)		// エアー
-	{
-		if (UserUtility::IsNull(obj.get()))    continue;
 		obj->Update();
 	}
 
@@ -166,46 +139,22 @@ void BlockManager::Update()
 void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
+	std::vector<IGameObject*> _objects;
+
+	// --書き換え対象-- //
+
+	if (is_playing == false)
+		for (auto& obj : m_chara)   _objects.push_back(obj.get());
+	for (auto& obj : m_flozens)	    _objects.push_back(obj.get());
+	for (auto& obj : m_clouds)		_objects.push_back(obj.get());
+	for (auto& obj : m_coins)		_objects.push_back(obj.get());
+	for (auto& obj : m_goals)		_objects.push_back(obj.get());
+	for (auto& obj : m_spikes)		_objects.push_back(obj.get());
+	for (auto& obj : m_lifts)		_objects.push_back(obj.get());
+
 	// オブジェクトの描画
-	for (auto& obj : m_flozens)	// 氷床ブロック
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
+	for (auto& obj : _objects)
 		obj->Draw(context, states, view, proj, wireframe, option);
-	}
-	for (auto& obj : m_clouds)	// 雲ブロック
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
-		obj->Draw(context, states, view, proj, wireframe, option);
-	}
-	for (auto& obj : m_coins)	// コイン
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
-		obj->Draw(context, states, view, proj, wireframe, option);
-	}
-	for (auto& obj : m_goals)	// ゴールオブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
-		obj->Draw(context, states, view, proj, wireframe, option);
-	}
-	for (auto& obj : m_spikes)	// 棘オブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
-		obj->Draw(context, states, view, proj, wireframe, option);
-	}
-	for (auto& obj : m_lifts)	// リフトブロック
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
-		obj->Draw(context, states, view, proj, wireframe, option);
-	}
-
-	// プレイモードはスキップ
-	if (is_playing == true) return;
-
-	for (auto& obj : m_chara)	// キャラオブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
-		obj->Draw(context, states, view, proj, wireframe, option);
-	}
 }
 
 //==============================================================================
@@ -213,36 +162,20 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 //==============================================================================
 void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 {
+	// --書き換え対象-- //
+
 	for (auto& obj : m_flozens)	// 氷床ブロック
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
 		obj->SetPosition(obj->GetInitialPosition() + offset);
-	}
 	for (auto& obj : m_clouds)	// 雲ブロック
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
 		obj->SetPosition(obj->GetInitialPosition() + offset);
-	}
 	for (auto& obj : m_coins)	// コイン
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
 		obj->SetPosition(obj->GetInitialPosition() + offset);
-	}
 	for (auto& obj : m_goals)	// ゴールオブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
 		obj->SetPosition(obj->GetInitialPosition() + offset);
-	}
 	for (auto& obj : m_spikes)	// 棘オブジェクト
-	{
-		if (UserUtility::IsNull(obj.get()))   continue;
 		obj->SetPosition(obj->GetInitialPosition() + offset);
-	}
 	for (auto& obj : m_lifts)	// リフトブロック
-	{	// 初期位置を元に動くため初期位置を変更
-		if (UserUtility::IsNull(obj.get()))   continue;
 		obj->SetInitialPosition(obj->GetInitialPosition() + offset);
-	}
 }
 
 //==============================================================================
@@ -250,24 +183,18 @@ void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 //==============================================================================
 std::string BlockManager::GetBlockID(const ID& id)
 {
+	// --書き換え対象-- //
+
 	switch (id)
 	{
-	case ID::Obj_Flozen:
-		return "Flozen";
-	case ID::Obj_Coin:
-		return "Coin";
-	case ID::Obj_Cloud:
-		return "Cloud";
-	case ID::Obj_Player:
-		return "Player";
-	case ID::Obj_Goal:
-		return "Goal";
-	case ID::Obj_Spike:
-		return "Spike";
-	case ID::Obj_Lift:
-		return "Lift";
-	default:
-		return "";
+	case ID::Obj_Flozen:	    return "Flozen";
+	case ID::Obj_Coin:	        return "Coin";
+	case ID::Obj_Cloud:		    return "Cloud";
+	case ID::Obj_Player:		return "Player";
+	case ID::Obj_Goal:		    return "Goal";
+	case ID::Obj_Spike:		    return "Spike";
+	case ID::Obj_Lift:		    return "Lift";
+	default:		            return "";
 	}
 }
 
@@ -276,7 +203,7 @@ std::string BlockManager::GetBlockID(const ID& id)
 //==============================================================================
 void BlockManager::ReplaceBlock()
 {
-	// 名前に対応したブロックに変更する
+	// --書き換え対象-- //
 
 	for (auto& obj : m_flozens)		// 氷床ブロック
 	{
@@ -341,6 +268,8 @@ void BlockManager::ReplaceBlock()
 //==============================================================================
 void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 {
+	// --書き換え対象-- //
+
 	// IDが一致したモノを追加する
 
 	if (id == ID::Obj_Flozen)	// 氷床ブロック
@@ -366,6 +295,8 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 //==============================================================================
 void BlockManager::ClearBlocks()
 {
+	// --書き換え対象-- //
+
 	m_flozens.clear();
 	m_clouds.clear();
 	m_coins.clear();
@@ -471,7 +402,7 @@ void BlockManager::ReLoad(const wchar_t* path)
 	ClearBlocks();
 
 	// パスがなかったらダイアログから開く
-	if (path == nullptr)
+	if (UserUtility::IsNull(path))
 	{
 		auto _path = m_dialog->GetExpFilePath();
 		if (not UserUtility::IsNull(_path))
@@ -519,6 +450,8 @@ void BlockManager::OutputStage()
 	//==============================================================================
 	// 追加するのはここから>>> 書き出し用配列にセット
 	//==============================================================================
+
+	// --書き換え対象-- //
 
 	AddWriteObjects(&_objects, m_flozens);		// 氷
 	AddWriteObjects(&_objects, m_clouds);		// 雲

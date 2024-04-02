@@ -241,7 +241,7 @@ void PlayScene::Draw()
 	// ライトの設定
 	//==============================================================================
 	SimpleMath::Vector3 _lightDirection =
-		SimpleMath::Vector3::Transform(SimpleMath::Vector3(0.0f, 0.0f, 1.0f), LIGHT_ROTATION);
+		SimpleMath::Vector3::Transform(SimpleMath::Vector3::UnitZ, LIGHT_ROTATION);
 
 	// ビュー行列
 	SimpleMath::Matrix _view = SimpleMath::Matrix::CreateLookAt(
@@ -257,19 +257,19 @@ void PlayScene::Draw()
 	D3D11_MAPPED_SUBRESOURCE _resource;
 	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_resource);
 
-	ShadowBuffer _shadowBuff = {};
-	_shadowBuff.lightViewProj = XMMatrixTranspose(_view * _projection);
-	_shadowBuff.lightPosition = LIGHT_POSITION;
-	_shadowBuff.lightDirection = _lightDirection;
-	_shadowBuff.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
-	*static_cast<ShadowBuffer*>(_resource.pData) = _shadowBuff;
+	ShadowBuffer _buffer = {};
+	_buffer.lightViewProj = XMMatrixTranspose(_view * _projection);
+	_buffer.lightPosition = LIGHT_POSITION;
+	_buffer.lightDirection = _lightDirection;
+	_buffer.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
+	*static_cast<ShadowBuffer*>(_resource.pData) = _buffer;
 
 	_context->Unmap(m_shadowConstant.Get(), 0);
 
 	//==============================================================================
 	// デプスラムダの作成
 	//==============================================================================
-	ShaderLambda _shader = [&]() {
+	ShaderLambda _option = [&]() {
 		_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
 		_context->PSSetShader(m_psDep.Get(), nullptr, 0); };
 
@@ -278,16 +278,16 @@ void PlayScene::Draw()
 	//==============================================================================
 
 	// カーソルの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _option);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_blockManager->Draw(_context, *_states, _view, _projection, false, _option);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_player->Draw(_context, *_states, _view, _projection, false, _option);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_flagManager->Draw(_context, *_states, _view, _projection, false, _option);
 
 	//==============================================================================
 	// レンダーターゲットをデフォルトに戻す
@@ -304,7 +304,7 @@ void PlayScene::Draw()
 	//==============================================================================
 	// シャドウラムダの作成
 	//==============================================================================
-	_shader = [&]() {
+	_option = [&]() {
 		// バッファ/リソースの設定
 		ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
 		_context->VSSetConstantBuffers(1, 1, _buffer);
@@ -329,16 +329,16 @@ void PlayScene::Draw()
 	m_sky->Draw(_context, *_states, _view, _projection);
 
 	// カーソルオブジェクトの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _option);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_blockManager->Draw(_context, *_states, _view, _projection, false, _option);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_player->Draw(_context, *_states, _view, _projection, false, _option);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _view, _projection, false, _shader);
+	m_flagManager->Draw(_context, *_states, _view, _projection, false, _option);
 
 
 	//==============================================================================
