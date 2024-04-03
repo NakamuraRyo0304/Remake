@@ -319,7 +319,8 @@ void BlockManager::FillAir()
 		{
 			for (int z = 0; z < 10; z++)
 			{
-				auto _pos = SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
+				SimpleMath::Vector3 _pos =
+					SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
 				m_air.push_back(std::make_unique<Air>(_pos));
 			}
 		}
@@ -344,11 +345,11 @@ SimpleMath::Vector3 BlockManager::GetPlayerPosition() const
 		// 乱数生成器のセットアップ
 		std::random_device _rd;
 		std::mt19937 _gen(_rd());
-		std::uniform_int_distribution<size_t> _distribution(0, m_chara.size() - 1);
+		std::uniform_int_distribution<size_t> _dist(0, m_chara.size() - 1);
 
 		// ランダムに1人のプレイヤーを選び、その座標を返す
-		size_t _randomIndex = _distribution(_gen);
-		_playerPosition = m_chara[_randomIndex]->GetInitialPosition();
+		size_t _idx = _dist(_gen);
+		_playerPosition = m_chara[_idx]->GetInitialPosition();
 	}
 
 	return _playerPosition;
