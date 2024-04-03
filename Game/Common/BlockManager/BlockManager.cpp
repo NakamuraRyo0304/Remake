@@ -90,14 +90,15 @@ void BlockManager::Initialize()
 		// リフトブロックを格納
 		if (_name == "Lift")	m_lifts.push_back(std::make_unique<Lift>(_position));
 
-		// プレイモードはスキップ(処理の意味がないため)
-		if (is_playing == true) continue;
-
-		// 同じ場所にエアーがあったらその場所のエアーを消す
-		if (UserUtility::IsNull(m_air[i].get())) continue;
-		if (m_air[i]->GetPosition() == _position)
+		// エディタ時のみ実行
+		if (not is_playing)
 		{
-			m_air[i].reset();
+			// 同じ場所にエアーがあったらその場所のエアーを消す
+			if (not UserUtility::IsNull(m_air[i].get()) &&
+				m_air[i]->GetPosition() == _position)
+			{
+				m_air[i].reset();
+			}
 		}
 	}
 }
@@ -467,7 +468,7 @@ void BlockManager::OutputStage()
 	//==============================================================================
 
 	// 重複しているデータを単一データにする
-	std::unordered_map<std::string, Json> _uEntry;
+	std::unordered_map<std::string, Json> _uniqueEntry;
 	for (auto& obj : _objects)
 	{
 		std::string _id = GetBlockID(obj->GetID());
@@ -479,18 +480,18 @@ void BlockManager::OutputStage()
 			+ std::to_string(_pos.y) + "_" + std::to_string(_pos.z);
 
 		// キーが存在しない場合、エントリにデータを追加
-		if (_uEntry.find(_uKey) == _uEntry.end())
+		if (_uniqueEntry.find(_uKey) == _uniqueEntry.end())
 		{
-			_uEntry[_uKey]["Path"] = _id;
-			_uEntry[_uKey]["Position"]["X"] = _pos.x;
-			_uEntry[_uKey]["Position"]["Y"] = _pos.y;
-			_uEntry[_uKey]["Position"]["Z"] = _pos.z;
+			_uniqueEntry[_uKey]["Path"] = _id;
+			_uniqueEntry[_uKey]["Position"]["X"] = _pos.x;
+			_uniqueEntry[_uKey]["Position"]["Y"] = _pos.y;
+			_uniqueEntry[_uKey]["Position"]["Z"] = _pos.z;
 		}
 	}
 
 	// ユニークエントリをソートして最終出力に登録する
 	std::vector<Json> _sortedEntries;
-	for (const auto& entry : _uEntry)
+	for (const auto& entry : _uniqueEntry)
 	{
 		_sortedEntries.push_back(entry.second);
 	}
@@ -498,12 +499,11 @@ void BlockManager::OutputStage()
 	// 文字列が多い・XZ昇順・Y昇順の優先度でソート
 	std::sort(_sortedEntries.begin(), _sortedEntries.end(), SortPriority());
 
-	// 最終出力配列
+	// 最終出力処理
 	Json _output;
-	// 並び替えたJsonデータを最終出力配列に格納
 	for (const auto& sortedEntry : _sortedEntries)
 	{
-		_output.push_back(sortedEntry);    // second = Json型データ
+		_output.push_back(sortedEntry);
 	}
 
 	// インデントをそろえて書き出し
