@@ -313,11 +313,11 @@ void BlockManager::ClearBlocks()
 //==============================================================================
 void BlockManager::FillAir()
 {
-	for (int y = 0; y < 5; y++)
+	for (int y = 0; y < MAP_SIZE_Y; y++)
 	{
-		for (int x = 0; x < 10; x++)
+		for (int x = 0; x < MAP_SIZE_X; x++)
 		{
-			for (int z = 0; z < 10; z++)
+			for (int z = 0; z < MAP_SIZE_Z; z++)
 			{
 				SimpleMath::Vector3 _pos =
 					SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
@@ -342,13 +342,13 @@ SimpleMath::Vector3 BlockManager::GetPlayerPosition() const
 	}
 	else
 	{
-		// 乱数生成器のセットアップ
+		// 乱数を生成する
 		std::random_device _rd;
 		std::mt19937 _gen(_rd());
-		std::uniform_int_distribution<size_t> _dist(0, m_chara.size() - 1);
+		std::uniform_int_distribution<int> _dist(0, static_cast<int>(m_chara.size()) - 1);
 
 		// ランダムに1人のプレイヤーを選び、その座標を返す
-		size_t _idx = _dist(_gen);
+		int _idx = _dist(_gen);
 		_playerPosition = m_chara[_idx]->GetInitialPosition();
 	}
 
@@ -455,7 +455,7 @@ void BlockManager::OutputStage()
 
 	// --書き換え対象-- //
 
-	AddWriteObjects(&_objects, m_flozens);		// 氷
+	AddWriteObjects(&_objects, m_flozens);		// 氷床
 	AddWriteObjects(&_objects, m_clouds);		// 雲
 	AddWriteObjects(&_objects, m_coins);		// コイン
 	AddWriteObjects(&_objects, m_chara);		// 操作キャラ
@@ -476,7 +476,7 @@ void BlockManager::OutputStage()
 		SimpleMath::Vector3 _pos = obj->GetInitialPosition();
 
 		// ブロックの種類と初期位置から一意なキーを生成
-		// ID_X_Y_Zという単一キーを作成する(例：Sand_1_2_1,Cloud_3_3_7)
+		// ID_X_Y_Zという単一キーを作成する(例：Flozen_1_2_1,Cloud_3_3_7)
 		std::string _uKey = _id + "_" + std::to_string(_pos.x) + "_"
 			+ std::to_string(_pos.y) + "_" + std::to_string(_pos.z);
 

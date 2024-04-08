@@ -71,6 +71,13 @@ private:
 
 private:
 
+	// マップのサイズ
+	static const int MAP_SIZE_X = 10;
+	static const int MAP_SIZE_Y = 5;
+	static const int MAP_SIZE_Z = 10;
+
+private:
+
 	// ブロックオブジェクト
 	std::vector<std::unique_ptr<Flozen>>    m_flozens;
 	std::vector<std::unique_ptr<Cloud>>     m_clouds;
