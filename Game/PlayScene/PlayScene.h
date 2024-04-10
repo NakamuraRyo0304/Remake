@@ -18,6 +18,7 @@ class AdminCamera;
 class BlockManager;
 class CursorObject;
 class DepthStencil;
+class DrawPath;
 class FlagManager;
 class ImageShot;
 class Iceberg;
@@ -79,6 +80,9 @@ private:
 
 	// •XŽR
 	std::unique_ptr<Iceberg> m_iceberg, m_smallberg, m_bigberg;
+
+	// ƒpƒX•`‰æ
+	std::unique_ptr<DrawPath> m_drawPath;
 
 private:
 

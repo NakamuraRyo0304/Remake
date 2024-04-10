@@ -13,6 +13,7 @@
 #include "Game/PlayScene/Objects/Sky_Play/Sky_Play.h"				// スカイドーム
 #include "Game/PlayScene/System/ImageShot/ImageShot.h"				// スクリーンショット作成クラス
 #include "Libraries/SystemDatas/DepthStencil/DepthStencil.h"		// デプスステンシル（シャドウマップ用）
+#include "Game/PlayScene/System/DrawPath/DrawPath.h"				// パス描画クラス
 
 #include "Game/Common/BlockManager/BlockManager.h"					// ブロック管理クラス
 #include "Game/PlayScene/System/StageCollision/StageCollision.h"	// ステージ当たり判定
@@ -340,6 +341,9 @@ void PlayScene::Draw()
 	// フラグの描画
 	m_flagManager->Draw(_context, *_states, _view, _projection, false, _option);
 
+	// パスの描画
+	m_drawPath->Draw(_context, *_states, _view, _projection);
+
 
 	//==============================================================================
 	// リソースの割り当てを解除する
@@ -386,6 +390,7 @@ void PlayScene::Finalize()
 	m_iceberg.reset();
 	m_smallberg.reset();
 	m_bigberg.reset();
+	m_drawPath.reset();
 }
 
 //==============================================================================
@@ -429,6 +434,9 @@ void PlayScene::CreateWDResources()
 
 	// タイマー作成
 	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
+
+	// パス描画クラス
+	m_drawPath = std::make_unique<DrawPath>(5.0f);
 
 	// 氷山作成
 	m_iceberg   = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -25.0f, -50.0f), 8.0f, -10.0f);

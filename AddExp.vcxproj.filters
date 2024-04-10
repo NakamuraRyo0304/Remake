@@ -303,6 +303,9 @@
     <ClCompile Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.cpp">
       <Filter>GameSystems\Title\MoveMonitor</Filter>
     </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\DrawPath\DrawPath.cpp">
+      <Filter>GameSystems\Play\DrawPath</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -583,6 +586,9 @@
     </ClInclude>
     <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h">
       <Filter>GameObjects\Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\DrawPath\DrawPath.h">
+      <Filter>GameSystems\Play\DrawPath</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1177,6 +1183,9 @@
     </Filter>
     <Filter Include="GameObjects\Common\Blocks\Goal">
       <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\DrawPath">
+      <UniqueIdentifier>{477459d5-15f1-4283-8054-34cf18d6cf13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
