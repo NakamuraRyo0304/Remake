@@ -1,42 +1,10 @@
 [
   {
-    "Path": "Lift",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
     "Path": "Goal",
     "Position": {
-      "X": 6.0,
-      "Y": 1.0,
-      "Z": 5.0
-    }
-  },
-  {
-    "Path": "Coin",
-    "Position": {
       "X": 5.0,
       "Y": 1.0,
-      "Z": 5.0
-    }
-  },
-  {
-    "Path": "Cloud",
-    "Position": {
-      "X": 6.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
-    "Path": "Spike",
-    "Position": {
-      "X": 3.0,
-      "Y": 0.0,
-      "Z": 7.0
+      "Z": 3.0
     }
   },
   {
@@ -162,14 +130,6 @@
   {
     "Path": "Flozen",
     "Position": {
-      "X": 4.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
       "X": 5.0,
       "Y": 0.0,
       "Z": 2.0
@@ -210,14 +170,6 @@
   {
     "Path": "Flozen",
     "Position": {
-      "X": 5.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
       "X": 6.0,
       "Y": 0.0,
       "Z": 2.0
@@ -253,94 +205,14 @@
       "X": 6.0,
       "Y": 0.0,
       "Z": 6.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 2.0
     }
   },
   {
     "Path": "Player",
     "Position": {
-      "X": 3.0,
+      "X": 4.0,
       "Y": 1.0,
-      "Z": 3.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 1.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 2.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 3.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 4.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 3.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 4.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
       "Z": 5.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 6.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 7.0
     }
   }
 ]
