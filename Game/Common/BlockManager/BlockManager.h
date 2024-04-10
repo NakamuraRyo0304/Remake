@@ -166,6 +166,45 @@ public:
 	// ステージを書き出す
 	void OutputStage();
 
+private:
+
+	/// <summary>
+	/// 要素除外用関数
+	/// </summary>
+	/// <param name="vec">配列</param>
+	/// <param name="val">要素</param>
+	/// <returns>なし</returns>
+	template<typename T>
+	inline void RemoveVec(std::vector<T>& vec, const T& val)
+	{
+		for (auto it = vec.begin(); it != vec.end(); ++it)
+		{
+			if (*it == val)
+			{
+				it = vec.erase(it);
+				if (it == vec.end()) break;
+			}
+		}
+	}
+
+	/// <summary>
+	/// オブジェクト置き換え関数
+	/// </summary>
+	/// <param name="id">オブジェクトID</param>
+	/// <param name="オブジェクト配列">objects</param>
+	/// <returns>なし</returns>
+	template<typename T>
+	void ReplaceObjects(const ID& id, std::vector<T>& objects)
+	{
+		for (auto& obj : objects)
+		{
+			if (obj.get() == nullptr) continue;
+			if (obj->GetID() == id) continue;
+			CreateBlock(obj->GetID(), obj->GetInitialPosition());
+			RemoveVec(objects, obj);
+		}
+	}
+
 	/// <summary>
 	/// 書き出し用オブジェクト追加関数
 	/// </summary>
@@ -183,6 +222,19 @@ public:
 		{
 			objects->push_back(obj.get());
 		}
+	}
+
+	/// <summary>
+	/// クリア関数
+	/// </summary>
+	/// <param name="objects">クリアしたいオブジェクト</param>
+	/// <returns>配列が空ならTrue</returns>
+	template <typename T>
+	bool ClearObjects(std::vector<T>* objects)
+	{
+		objects->clear();
+
+		return objects->empty();
 	}
 
 private:
