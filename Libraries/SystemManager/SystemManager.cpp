@@ -13,7 +13,6 @@
 //==============================================================================
 SystemManager::SystemManager()
 	: m_states{nullptr}
-	, m_camera{nullptr}
 	, m_sprite{nullptr}
 	, m_raycast{nullptr}
 	, m_gridFloor{nullptr}
@@ -26,7 +25,6 @@ SystemManager::SystemManager()
 SystemManager::~SystemManager()
 {
 	delete m_states;
-	delete m_camera;
 	delete m_sprite;
 	delete m_raycast;
 	delete m_gridFloor;
@@ -42,18 +40,6 @@ CommonStates* SystemManager::GetCommonStates()
 		m_states = new CommonStates(DX::DeviceResources::GetInstance()->GetD3DDevice());
 	}
 	return m_states;
-}
-
-//==============================================================================
-// ƒm[ƒ}ƒ‹ƒJƒƒ‰
-//==============================================================================
-Camera* SystemManager::GetCamera()
-{
-	if (not m_camera)
-	{
-		m_camera = new Camera();
-	}
-	return m_camera;
 }
 
 //==============================================================================
@@ -99,9 +85,6 @@ void SystemManager::CreateResources()
 {
 	// •`‰æİ’è
 	GetCommonStates();
-
-	// ƒJƒƒ‰‚Ì‰Šú‰»
-	GetCamera();
 
 	// ‰æ‘œ‚Ì•`‰æ
 	GetDrawSprite();

@@ -13,7 +13,6 @@
 
 //-------------------------------------------------------------------------------------//
 // システムのインクルード
-#include "../SystemDatas/Camera/Camera.h"
 #include "../SystemDatas/GridFloor/GridFloor.h"
 #include "../SystemDatas/RayCast/RayCast.h"
 #include "../SystemDatas/DrawSprite/DrawSprite.h"
@@ -24,8 +23,6 @@ class SystemManager
 private:
 	// コモンステート
 	DirectX::CommonStates*			m_states;
-	// カメラ
-	Camera*							m_camera;
 	// ドロースプライト
 	DrawSprite*						m_sprite;
 	// グリッド床
@@ -39,9 +36,6 @@ public:
 
 	// コモンステートの取得
 	DirectX::CommonStates* GetCommonStates();
-
-	// カメラの取得
-	Camera* GetCamera();
 
 	// ドロースプライトの取得
 	DrawSprite* GetDrawSprite();

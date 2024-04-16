@@ -14,7 +14,7 @@
 // ’è”‚Ìİ’è
 //==============================================================================
 const float Player::MAX_SPEED = 0.78f;		// Å‚‘¬“x
-const float Player::MS_RADIUS = 0.6f;		// Å‚‘¬‚Å‘–‚é”¼Œa
+const float Player::RANGE = 0.6f;			// Å‚‘¬‚Å‘–‚é”¼Œa
 const float Player::ARRIVE_RADIUS = 0.1f;	// “’…‚İ‚È‚µ”¼Œa
 const float Player::GIVEUP_TIME = 120.0f;	// ˆÚ“®’ú‚ßƒ^ƒCƒ€ƒŠƒ~ƒbƒg
 const float Player::DEATH_LINE = -5.0f;		// €–Sƒ‰ƒCƒ“
@@ -81,7 +81,7 @@ void Player::Update()
 
 		// ‘¬“x‚Ìİ’è(ƒS[ƒ‹ü•Ó—Ìˆæ“à‚È‚çÅ‚‘¬“x‚Å‘–‚é)
 		float _speed = 0.0f;
-		_speed = _distanceToGoal > MS_RADIUS ? MAX_SPEED : MAX_SPEED * (_distanceToGoal / MS_RADIUS);
+		_speed = _distanceToGoal > RANGE ? MAX_SPEED : MAX_SPEED * (_distanceToGoal / RANGE);
 
 		// ˆÚ“®‘¬“x‚ğ’²®
 		SimpleMath::Vector3 _velocity = _dir * _speed;
@@ -159,7 +159,7 @@ void Player::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 //==============================================================================
 // ’ÇÕƒpƒX‚ğ’Ç‰Á‚·‚é
 //==============================================================================
-void Player::AddFollowPath(SimpleMath::Vector3 path, const int& max)
+void Player::AddFollowPath(const SimpleMath::Vector3& path, const int& max)
 {
 	// Å‘å”‚ğ‰z‚¦‚½‚ç’Ç‰Á‚µ‚È‚¢
 	if (m_goalPoints.size() >= max) return;

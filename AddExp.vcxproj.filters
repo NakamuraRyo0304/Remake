@@ -48,9 +48,6 @@
     <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp">
       <Filter>Cameras\AdminCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\Camera\Camera.cpp">
-      <Filter>Cameras\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp">
       <Filter>Cameras\EditorCamera</Filter>
     </ClCompile>
@@ -310,9 +307,6 @@
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
       <Filter>Cameras\AdminCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h">
-      <Filter>Cameras\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h">
       <Filter>Cameras\EditorCamera</Filter>
@@ -816,6 +810,7 @@
     <None Include="Resources\Models\Moving.cmo">
       <Filter>Resources\Models</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Cameras">
@@ -823,9 +818,6 @@
     </Filter>
     <Filter Include="Cameras\AdminCamera">
       <UniqueIdentifier>{82100e63-67fa-4d58-93ef-1dd5ae3ec9d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cameras\Camera">
-      <UniqueIdentifier>{4dd4b96c-db12-4eed-8d23-e3a3eb0ba21d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Cameras\EditorCamera">
       <UniqueIdentifier>{cdb17fcf-25ab-4e94-8621-13bf25c09423}</UniqueIdentifier>

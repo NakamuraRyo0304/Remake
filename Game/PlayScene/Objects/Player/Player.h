@@ -58,28 +58,20 @@ private:
 
 	// 最高速度
 	static const float MAX_SPEED;
-
 	// 最高速で移動する範囲
-	static const float MS_RADIUS;
-
+	static const float RANGE;
 	// 到着範囲
 	static const float ARRIVE_RADIUS;
-
 	// 目的地到着の諦め時間
 	static const float GIVEUP_TIME;
-
 	// 旋回速度
 	static const float ROTATE_SPEED;
-
 	// 重力
 	static const float GRAVITY;
-
 	// 死亡ライン
 	static const float DEATH_LINE;
-
 	// 死亡時の回転
 	static const float DEATH_ROTATE;
-
 	// モデルのスケール
 	static const float SCALE;
 
@@ -115,10 +107,10 @@ public:
 public:
 
 	// フォローパスを設定
-	void AddFollowPath(DirectX::SimpleMath::Vector3 path, const int& max);
+	void AddFollowPath(const DirectX::SimpleMath::Vector3& path, const int& max);
 
 	// 現在格納しているパスを取得
-	std::vector<DirectX::SimpleMath::Vector3> GetFollowPath() const { return m_goalPoints; }
+	std::vector<DirectX::SimpleMath::Vector3>& GetFollowPath() { return m_goalPoints; }
 	// 格納しているパスを全削除
 	void ResetGoalPosition() { m_goalPoints.clear(); }
 
