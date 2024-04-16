@@ -10,22 +10,18 @@
 #include "Libraries/SystemDatas/Timer/Timer.h"
 #include "Cloud.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float Cloud::LIMIT = 3.5f;				// 動作時間
+const float Cloud::LIMIT = 3.5f;		// 動作時間
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Cloud::Cloud(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Cloud.cmo", L"Resources/Models", position)
-	, is_hit{ false }			                // 衝突フラグ
+	:
+	IGameObject(L"Resources/Models/Cloud.cmo", L"Resources/Models", position),
+	is_hit(false)						// 衝突フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Cloud);
 	SetWeight(1.0f);
-
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -36,17 +32,13 @@ Cloud::Cloud(SimpleMath::Vector3 position)
 	m_timer = std::make_unique<Timer>(Timer::Mode::limited, LIMIT);
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Cloud::~Cloud()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Cloud::Update()
 {
     // 回転行列
@@ -80,10 +72,7 @@ void Cloud::Update()
     CreateWorldMatrix();
 }
 
-
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Cloud::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {

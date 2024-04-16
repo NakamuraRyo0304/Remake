@@ -14,16 +14,14 @@
 // 検索用メモ //
 // --書き換え対象-- //
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 BlockManager::BlockManager(const wchar_t* stagePath)
-	: m_stagePath{ stagePath }		// ステージパスを格納
-	, is_playing{ false }			// プレイフラグ
+	:
+	m_stagePath(stagePath),		// ステージパスを格納
+	is_playing(false)			// プレイフラグ
 {
 	// Json読み込みシステム作成
 	m_jsonHelper = std::make_unique<JsonHelper>();
-
 	// ダイアログアクセサ作成
 	m_dialog = std::make_unique<DiaLog>();
 
@@ -31,9 +29,7 @@ BlockManager::BlockManager(const wchar_t* stagePath)
 	ClearBlocks();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 BlockManager::~BlockManager()
 {
 	m_jsonHelper.reset();
@@ -42,9 +38,7 @@ BlockManager::~BlockManager()
 	ClearBlocks();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void BlockManager::Initialize()
 {
 	// 一度データを削除
@@ -103,9 +97,7 @@ void BlockManager::Initialize()
 	}
 }
 
-//==============================================================================
 // 更新処理
-//==============================================================================
 void BlockManager::Update()
 {
 	std::vector<IGameObject*> _objects;
@@ -134,9 +126,7 @@ void BlockManager::Update()
 	ReplaceBlock();
 }
 
-//==============================================================================
 // 描画処理
-//==============================================================================
 void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
@@ -158,9 +148,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 		obj->Draw(context, states, view, proj, wireframe, option);
 }
 
-//==============================================================================
 // オフセットを加算(セレクトシーンで主に呼び出す)
-//==============================================================================
 void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 {
 	// --書き換え対象-- //
@@ -179,9 +167,7 @@ void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 		obj->SetInitialPosition(obj->GetPosition() + offset);
 }
 
-//==============================================================================
 // ブロックの種類から書き出し用文字列を返す
-//==============================================================================
 std::string BlockManager::GetBlockID(const ID& id)
 {
 	// --書き換え対象-- //
@@ -199,9 +185,7 @@ std::string BlockManager::GetBlockID(const ID& id)
 	}
 }
 
-//==============================================================================
 // ブロック置き換え処理
-//==============================================================================
 void BlockManager::ReplaceBlock()
 {
 	// --書き換え対象-- //
@@ -216,9 +200,7 @@ void BlockManager::ReplaceBlock()
 	ReplaceObjects(ID::Obj_Lift,   m_lifts);	// リフト
 }
 
-//==============================================================================
 // ブロック作成
-//==============================================================================
 void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 {
 	// --書き換え対象-- //
@@ -233,9 +215,7 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 	if (id == ID::Obj_Lift)		m_lifts.push_back(std::make_unique<Lift>(pos));		 // リフト
 }
 
-//==============================================================================
 // ブロック配列をリセットする
-//==============================================================================
 void BlockManager::ClearBlocks()
 {
 	// --書き換え対象-- //
@@ -250,9 +230,7 @@ void BlockManager::ClearBlocks()
 	ClearObjects(&m_lifts);			// リフト
 }
 
-//==============================================================================
 // ステージを書き出す
-//==============================================================================
 void BlockManager::OutputStage()
 {
 	// パスを設定
@@ -329,9 +307,7 @@ void BlockManager::OutputStage()
 	m_jsonHelper->Write(_str);
 }
 
-//==============================================================================
 // エアーで埋める
-//==============================================================================
 void BlockManager::FillAir()
 {
 	for (int y = 0; y < MAP_SIZE_Y; y++)
@@ -348,9 +324,7 @@ void BlockManager::FillAir()
 	}
 }
 
-//==============================================================================
 // プレイヤーの座標を取得する
-//==============================================================================
 SimpleMath::Vector3 BlockManager::GetPlayerPosition() const
 {
 	SimpleMath::Vector3 _pos;
@@ -376,9 +350,7 @@ SimpleMath::Vector3 BlockManager::GetPlayerPosition() const
 	return _pos;
 }
 
-//==============================================================================
 // ゴール判定取得
-//==============================================================================
 bool BlockManager::IsArrived() const
 {
 	if (m_goals.empty()) return false;
@@ -393,9 +365,7 @@ bool BlockManager::IsArrived() const
 	return false;
 }
 
-//==============================================================================
 // 棘の衝突取得
-//==============================================================================
 bool BlockManager::IsHitSpike() const
 {
 	if (m_spikes.empty()) return false;
@@ -410,9 +380,7 @@ bool BlockManager::IsHitSpike() const
 	return false;
 }
 
-//==============================================================================
 // エクスプローラーからパスを取得する
-//==============================================================================
 void BlockManager::ReLoad(const wchar_t* path)
 {
 	// 開けなかったときのために一時保存する

@@ -9,17 +9,15 @@
 #include "Libraries/UserUtility.h"
 #include "Goal.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Goal::Goal(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Goal.cmo", L"Resources/Models", position)
-	, is_hit{ false }	// 衝突フラグ
+	:
+	IGameObject(L"Resources/Models/Goal.cmo", L"Resources/Models", position),
+	is_hit(false)	// 衝突フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Goal);
 	SetWeight(1.0f);
-
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -30,26 +28,20 @@ Goal::Goal(SimpleMath::Vector3 position)
 	is_hit = false;
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Goal::~Goal()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Goal::Update()
 {
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Goal::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
