@@ -9,17 +9,13 @@
 #include "Libraries/UserUtility.h"
 #include "MomentCanv.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
 const SimpleMath::Vector2 MomentCanv::LAST_POSITION = { 640.0f,460.0f };		// 最終座標
 const SimpleMath::Vector2 MomentCanv::OUT_POSITION = { -2000.0f, -1500.0f };	// 画面外座標
 const float MomentCanv::LAST_ROTATE = XMConvertToRadians(-385.0f);				// 最終回転
 const float MomentCanv::SPEED_TO_LAST = 0.1f;									// 速度
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 MomentCanv::MomentCanv(SimpleMath::Vector2 screenRate)
 	: m_position{}					                                            // 座標
 	, m_screenRate{ screenRate }	                                            // 画面比率
@@ -30,17 +26,13 @@ MomentCanv::MomentCanv(SimpleMath::Vector2 screenRate)
 	m_sprite->MakeSpriteBatch();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 MomentCanv::~MomentCanv()
 {
 	m_sprite.reset();
 }
 
-//==============================================================================
-// 初期化関数
-//==============================================================================
+// 初期化
 void MomentCanv::Initialize()
 {
 	// スプライトの設定
@@ -50,9 +42,7 @@ void MomentCanv::Initialize()
 	m_position = OUT_POSITION * m_screenRate;
 }
 
-//==============================================================================
 // 更新処理
-//==============================================================================
 void MomentCanv::Update()
 {
 	// 座標の移動
@@ -69,9 +59,7 @@ void MomentCanv::Update()
 	}
 }
 
-//==============================================================================
 // 描画関数
-//==============================================================================
 void MomentCanv::Draw(SimpleMath::Vector4 color, SimpleMath::Vector2 rate,
 	SimpleMath::Vector2 origin, RECT_U rect)
 {

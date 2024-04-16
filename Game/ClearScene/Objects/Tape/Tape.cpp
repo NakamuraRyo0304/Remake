@@ -10,37 +10,32 @@
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "Tape.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Tape::Tape()
-	: m_position{}	// 座標
-	, m_scRate{}	// 画面拡大率
-	, m_rate{}		// 画像拡大率
+	:
+	m_position(),	// 座標
+	m_scRate(),		// 画面拡大率
+	m_rate()		// 画像拡大率
 {
 	m_sprite = std::make_unique <DrawSprite>();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Tape::~Tape()
 {
 	m_sprite.reset();
 }
 
-//==============================================================================
-// 初期化関数
-//==============================================================================
+// 初期化
 void Tape::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector2 rate,
 	SimpleMath::Vector2 scRate, float rotate)
 {
 	m_sprite->MakeSpriteBatch();
 
 	// 乱数を取得
-	int _rand = static_cast<int>(UserUtility::Random(1, 4));
+	int rand = static_cast<int>(UserUtility::Random(1, 4));
 
-	if (_rand == 1 || _rand == 2)
+	if (rand == 1 || rand == 2)
 	{
 		m_sprite->AddTextureData(L"tape", L"Resources/Textures/UI_Clear/tape1.dds");
 	}
@@ -56,9 +51,7 @@ void Tape::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector2 rate,
 	m_scRate = scRate;
 }
 
-//==============================================================================
-// 描画関数
-//==============================================================================
+// 描画
 void Tape::Draw()
 {
 	m_sprite->DrawTexture(L"tape", m_position * m_scRate, UserUtility::ColorsVector::WHITE,
