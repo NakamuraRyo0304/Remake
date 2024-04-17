@@ -27,11 +27,11 @@ using Selection = UI_Clear::SELECT;				// 次の選択
 // コンストラクタ
 ClearScene::ClearScene(float time, int coins, int stage, int max)
 	:
-	IScene(),						// 基底クラスのコンストラクタ
-	m_clearTime(time),				// クリアタイム
-	m_collectedCoin(coins),			// 集めたコイン数
-	m_stageNumber(stage),			// ステージ番号
-	m_maxNumber(max)				// 最大ステージ番号
+	IScene(),					// 基底クラスのコンストラクタ
+	m_clearTime(time),			// クリアタイム
+	m_collectedCoin(coins),		// 集めたコイン数
+	m_stageNumber(stage),		// ステージ番号
+	m_maxNumber(max)			// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 

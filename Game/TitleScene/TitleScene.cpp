@@ -33,7 +33,7 @@ using RepeatType = SoundManager::SE_MODE;	// サウンドのタイプ
 // コンストラクタ
 TitleScene::TitleScene()
 	:
-	IScene()												// 基底クラスのコンストラクタ
+	IScene()	// 基底クラスのコンストラクタ
 {
 	Debug::DrawString::GetInstance().DebugLog(L"TitleSceneのコンストラクタが呼ばれました。\n");
 }
