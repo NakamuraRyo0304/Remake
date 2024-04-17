@@ -11,37 +11,25 @@
 
 class MoveMonitor
 {
+public:
+
+	// 動作状態を取得
+	bool IsMove() const { return is_moveMouse; }
+
+	// コンストラクタ
+	MoveMonitor();
+	// デストラクタ
+	~MoveMonitor();
+	// 更新
+	void Update();
+
 private:
 
 	// マウス動作通知
 	bool is_moveMouse;
-
 	// 長さ
 	float m_length;
 
-public:
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	MoveMonitor();
-	~MoveMonitor();
-
-	/// <summary>
-	/// 更新関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Update();
-
-	/// <summary>
-	/// 動作通知
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>動いたらTrue</returns>
-	bool IsMove() const { return is_moveMouse; }
 };
 
 #endif // MOVEMONITOR
