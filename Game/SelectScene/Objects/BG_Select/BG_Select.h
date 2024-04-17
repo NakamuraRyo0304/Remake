@@ -12,39 +12,27 @@
 class DrawSprite;
 class BG_Select
 {
-private:
+public:
 
-	// スプライト
-	std::unique_ptr<DrawSprite> m_sprite;
+	// コンストラクタ
+	BG_Select();
+	// デストラクタ
+	~BG_Select();
+	// 初期化
+	void Initialize();
+	// 描画
+	void Draw();
 
 private:
 
 	// アルファ値
 	static const float ALPHA;
 
-public:
+private:
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	BG_Select();
-	~BG_Select();
+	// スプライト
+	std::unique_ptr<DrawSprite> m_sprite;
 
-	/// <summary>
-	/// 初期化関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Initialize();
-
-	/// <summary>
-	/// 描画関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Draw();
 };
 
 #endif // BG_SELECT
