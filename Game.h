@@ -13,7 +13,6 @@
 #include "StepTimer.h"
 #include "Libraries/SystemDatas/Input/Input.h"
 #include "Libraries/SystemDatas/SoundManager/SoundManager.h"
-#include "Libraries/SystemDatas/XController/XController.h"
 #include "Game/GameMain.h"
 
 class Game final : public DX::IDeviceNotify
@@ -50,7 +49,7 @@ public:
 
 private:
 
-    void Update(Input* input, SoundManager* sound, XController* xcon);
+    void Update(Input* input, SoundManager* sound);
     void Draw();
 
     void Clear();

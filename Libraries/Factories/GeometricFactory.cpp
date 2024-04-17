@@ -9,9 +9,7 @@
 #include "ModelFactory.h"
 #include "GeometricFactory.h"
 
-//==============================================================================
 // キューブを作成
-//==============================================================================
 std::unique_ptr<Model> GeometricFactory::CreateCube()
 {
 	return std::move(ModelFactory::CreateModel(
@@ -20,9 +18,7 @@ std::unique_ptr<Model> GeometricFactory::CreateCube()
 	);
 }
 
-//==============================================================================
 // シリンダーを作成
-//==============================================================================
 std::unique_ptr<Model> GeometricFactory::CreateCylinder()
 {
 	return std::move(ModelFactory::CreateModel(
@@ -31,9 +27,7 @@ std::unique_ptr<Model> GeometricFactory::CreateCylinder()
 	);
 }
 
-//==============================================================================
 // スフィアを作成
-//==============================================================================
 std::unique_ptr<Model> GeometricFactory::CreateSphere()
 {
 	return std::move(ModelFactory::CreateModel(
@@ -42,9 +36,7 @@ std::unique_ptr<Model> GeometricFactory::CreateSphere()
 	);
 }
 
-//==============================================================================
 // スザンヌを作成
-//==============================================================================
 std::unique_ptr<Model> GeometricFactory::CreateSusanne()
 {
 	return std::move(ModelFactory::CreateModel(
@@ -53,9 +45,7 @@ std::unique_ptr<Model> GeometricFactory::CreateSusanne()
 	);
 }
 
-//==============================================================================
 // コーンを作成
-//==============================================================================
 std::unique_ptr<Model> GeometricFactory::CreateCone()
 {
 	return std::move(ModelFactory::CreateModel(
@@ -64,9 +54,7 @@ std::unique_ptr<Model> GeometricFactory::CreateCone()
 	);
 }
 
-//==============================================================================
 // フロアを作成
-//==============================================================================
 std::unique_ptr<Model> GeometricFactory::CreateFloor()
 {
 	return std::move(ModelFactory::CreateModel(

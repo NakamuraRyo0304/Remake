@@ -13,50 +13,33 @@
 class ModelFactory;
 class GeometricFactory
 {
+public:
+
+	// キューブを作成
+	static std::unique_ptr<DirectX::Model> CreateCube();
+	// シリンダーを作成
+	static std::unique_ptr<DirectX::Model> CreateCylinder();
+	// スフィアを作成
+	static std::unique_ptr<DirectX::Model> CreateSphere();
+	// スザンヌを作成
+	static std::unique_ptr<DirectX::Model> CreateSusanne();
+	// コーンを作成
+	static std::unique_ptr<DirectX::Model> CreateCone();
+	// フロアを作成
+	static std::unique_ptr<DirectX::Model> CreateFloor();
+
 private:
+
+	// ディレクトリ
 	const wchar_t* DIRECTORY = L"Resources/DebugModels";
 
 private:
+
+	// コンストラクタ
 	GeometricFactory() = default;
+	// デストラクタ
 	~GeometricFactory() = default;
 
-public:
-	/// <summary>
-	/// キューブを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>キューブのモデルデータ</returns>
-	static std::unique_ptr<DirectX::Model> CreateCube();
-	/// <summary>
-	/// シリンダーを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>シリンダーのモデルデータ</returns>
-	static std::unique_ptr<DirectX::Model> CreateCylinder();
-	/// <summary>
-	/// スフィアを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>スフィアのモデルデータ</returns>
-	static std::unique_ptr<DirectX::Model> CreateSphere();
-	/// <summary>
-	/// スザンヌを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>スザンヌのモデルデータ</returns>
-	static std::unique_ptr<DirectX::Model> CreateSusanne();
-	/// <summary>
-	/// コーンを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>コーンのモデルデータ</returns>
-	static std::unique_ptr<DirectX::Model> CreateCone();
-	/// <summary>
-	/// フロアを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>フロアのモデルデータ</returns>
-	static std::unique_ptr<DirectX::Model> CreateFloor();
 };
 
 #endif // GEOMETRICFACTORY

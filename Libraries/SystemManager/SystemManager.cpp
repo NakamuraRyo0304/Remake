@@ -8,20 +8,17 @@
 #include "pch.h"
 #include "SystemManager.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 SystemManager::SystemManager()
-	: m_states{nullptr}
-	, m_sprite{nullptr}
-	, m_raycast{nullptr}
-	, m_gridFloor{nullptr}
+	:
+	m_states(nullptr),
+	m_sprite(nullptr),
+	m_raycast(nullptr),
+	m_gridFloor(nullptr)
 {
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 SystemManager::~SystemManager()
 {
 	delete m_states;
@@ -30,9 +27,7 @@ SystemManager::~SystemManager()
 	delete m_gridFloor;
 }
 
-//==============================================================================
 // コモンステート
-//==============================================================================
 CommonStates* SystemManager::GetCommonStates()
 {
 	if (not m_states)
@@ -42,9 +37,7 @@ CommonStates* SystemManager::GetCommonStates()
 	return m_states;
 }
 
-//==============================================================================
 // スプライト
-//==============================================================================
 DrawSprite* SystemManager::GetDrawSprite()
 {
 	if (not m_sprite)
@@ -54,9 +47,7 @@ DrawSprite* SystemManager::GetDrawSprite()
 	return m_sprite;
 }
 
-//==============================================================================
 // レイキャスト
-//==============================================================================
 RayCast* SystemManager::GetRayCast()
 {
 	if (not m_raycast)
@@ -66,9 +57,7 @@ RayCast* SystemManager::GetRayCast()
 	return m_raycast;
 }
 
-//==============================================================================
 // グリッドフロア
-//==============================================================================
 Debug::GridFloor* SystemManager::GetGridFloor()
 {
 	if (not m_gridFloor)
@@ -76,22 +65,4 @@ Debug::GridFloor* SystemManager::GetGridFloor()
 		m_gridFloor = new Debug::GridFloor(50, 50);
 	}
 	return m_gridFloor;
-}
-
-//==============================================================================
-// 総合作成関数
-//==============================================================================
-void SystemManager::CreateResources()
-{
-	// 描画設定
-	GetCommonStates();
-
-	// 画像の描画
-	GetDrawSprite();
-
-	// レイを飛ばす
-	GetRayCast();
-
-	// グリッドフロア
-	GetGridFloor();
 }

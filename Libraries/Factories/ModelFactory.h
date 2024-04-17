@@ -11,19 +11,18 @@
 
 class ModelFactory
 {
-private:
-	ModelFactory() = default;
-	~ModelFactory() = default;
-
 public:
-	/// <summary>
-	/// モデルを作成し、返却する
-	/// </summary>
-	/// <param name="filename">ファイルパス　拡張子は「.cmo」</param>
-	/// <param name="directory">ディレクトリを設定(規定値：L"Resources/Models")</param>
-	/// <returns>作成したモデルデータ</returns>
+
+	// モデルを作成し、返却する
 	static std::unique_ptr<DirectX::Model> CreateModel(const wchar_t* filename,
 		const wchar_t* directory = L"Resources/Models");
+
+private:
+
+	// コンストラクタ
+	ModelFactory() = default;
+	// デストラクタ
+	~ModelFactory() = default;
 };
 
 #endif // MODELFACTORY

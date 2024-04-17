@@ -77,7 +77,7 @@ void Fade::Draw()
 	if (is_endFlag) return;
 
 	// 描画関数
-	m_transition->Render((m_fadeValue * SPEED) / MAX_NUM);
+	m_transition->Draw((m_fadeValue * SPEED) / MAX_NUM);
 }
 
 // フェードインを開始
