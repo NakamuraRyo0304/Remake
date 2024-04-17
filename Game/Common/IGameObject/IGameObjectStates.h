@@ -7,10 +7,7 @@
 
 #pragma once
 
-/// <summary>
 /// オブジェクトID
-/// オブジェクトの判定を可能にする
-/// </summary>
 enum class ID
 {
 	Default,		// 設定なし
@@ -43,5 +40,3 @@ enum class ID
 	Length,			// 全ID数
 };
 
-// 重さ無し
-constexpr double NON_WEIGHT = -1.0;

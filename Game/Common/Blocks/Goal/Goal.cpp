@@ -17,7 +17,6 @@ Goal::Goal(SimpleMath::Vector3 position)
 {
 	CreateModel();
 	SetID(ID::Obj_Goal);
-	SetWeight(1.0f);
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

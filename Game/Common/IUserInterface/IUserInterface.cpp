@@ -8,12 +8,11 @@
 #include "pch.h"
 #include "IUserInterface.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 IUserInterface::IUserInterface(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: m_maxScreenSize{ mscs }		// 最大サイズ
-	, m_screenSize{ scS }			// 画面サイズ
-	, m_screenRate{ scS / mscs }	// 画面拡大率
+	:
+	m_maxScreenSize(mscs),		// 最大サイズ
+	m_screenSize(scS),			// 画面サイズ
+	m_screenRate(scS / mscs)	// 画面拡大率
 {
 }

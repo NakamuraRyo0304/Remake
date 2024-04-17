@@ -18,7 +18,6 @@ Sky_Play::Sky_Play()
 {
 	CreateModel();
 	SetID(ID::Back_Sky);
-	SetWeight(NON_WEIGHT);
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

@@ -11,52 +11,8 @@
 
 class IGameCamera
 {
-private:
-
-	// カメラ行列
-	DirectX::SimpleMath::Matrix m_view;
-	DirectX::SimpleMath::Matrix m_projection;
-
-	// 描画用座標系
-	DirectX::SimpleMath::Vector3 m_position;
-	DirectX::SimpleMath::Vector3 m_target;
-	DirectX::SimpleMath::Vector3 m_up;
-
-	// 初期位置
-	DirectX::SimpleMath::Vector3 m_initialPosition, m_initialTarget;
-
-	// スクリーンサイズ
-	DirectX::SimpleMath::Vector2 m_screenSize;
-
-private:
-
-	// カメラの最近距離
-	const float NEAR_PLANE = 0.1f;
-
-	// カメラの最遠距離
-	const float FAR_PLANE = 220.0f;
-
-	// カメラアングル
-	const float ANGLE = 45.0f;
-
-
 public:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="screenSize">スクリーンサイズ</param>
-	/// <returns>なし</returns>
-	IGameCamera(const DirectX::SimpleMath::Vector2& screenSize);
-	virtual ~IGameCamera() = default;
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	virtual void Update() = 0;
-
-public:
 	// ビュー行列を取得
 	const DirectX::SimpleMath::Matrix& GetView() { return m_view; }
 	// ビュー行列を設定
@@ -86,14 +42,43 @@ public:
 	// ウィンドウサイズを取得
 	const DirectX::SimpleMath::Vector2& GetWindowSize() { return m_screenSize; }
 
+	// コンストラクタ
+	IGameCamera(const DirectX::SimpleMath::Vector2& screenSize);
+	// デストラクタ
+	virtual ~IGameCamera() = default;
+	// 更新
+	virtual void Update() = 0;
+
 private:
 
-	/// <summary>
-	/// プロジェクションを作成
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
+	// プロジェクションを作成
 	void CreateProjection();
+
+private:
+
+	// カメラの最近距離
+	const float NEAR_PLANE = 0.1f;
+	// カメラの最遠距離
+	const float FAR_PLANE = 220.0f;
+	// カメラアングル
+	const float ANGLE = 45.0f;
+
+private:
+
+	// カメラ行列
+	DirectX::SimpleMath::Matrix m_view;
+	DirectX::SimpleMath::Matrix m_projection;
+
+	// 描画用座標系
+	DirectX::SimpleMath::Vector3 m_position;
+	DirectX::SimpleMath::Vector3 m_target;
+	DirectX::SimpleMath::Vector3 m_up;
+
+	// 初期位置
+	DirectX::SimpleMath::Vector3 m_initialPosition, m_initialTarget;
+
+	// スクリーンサイズ
+	DirectX::SimpleMath::Vector2 m_screenSize;
 
 };
 
