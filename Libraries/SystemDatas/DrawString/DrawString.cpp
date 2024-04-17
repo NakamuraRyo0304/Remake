@@ -6,12 +6,9 @@
  */
 
 #include "pch.h"
-
 #include "DrawString.h"
 
- //==============================================================================
  // コンストラクタ
- //==============================================================================
 Debug::DrawString::DrawString(ID3D11Device1* device, ID3D11DeviceContext1* context)
 {
 	// フォントパス
@@ -22,9 +19,7 @@ Debug::DrawString::DrawString(ID3D11Device1* device, ID3D11DeviceContext1* conte
 	m_spriteBatch = std::make_unique<SpriteBatch>(context);
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Debug::DrawString::~DrawString()
 {
 	m_spriteBatch.reset();
