@@ -8,16 +8,14 @@
 #include "pch.h"
 #include "Sky_Title.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Sky_Title::Sky_Title()
-	: IGameObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
+	:
+	IGameObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Sky);
 	SetWeight(NON_WEIGHT);
-
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -36,26 +34,20 @@ Sky_Title::Sky_Title()
 	);
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Sky_Title::~Sky_Title()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Sky_Title::Update()
 {
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Sky_Title::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {

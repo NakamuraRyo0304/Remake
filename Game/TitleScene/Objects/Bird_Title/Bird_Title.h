@@ -9,46 +9,28 @@
 #ifndef BIRD_TITLE
 #define BIRD_TITLE
 
-//==============================================================================
 // 親オブジェクトクラス
-//==============================================================================
 #include "Game/Common/IGameObject/IGameObject.h"
 
 class Bird_Title : public IGameObject
 {
-private:
-
-	// 鳥のスケール
-	static const float BIRD_SCALE;
-
 public:
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
+	// コンストラクタ
 	Bird_Title();
+	// デストラクタ
 	~Bird_Title();
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
+	// 更新
 	void Update() override;
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="context">コンテキスト</param>
-	/// <param name="states">コモンステート</param>
-	/// <param name="view">ビュー行列</param>
-	/// <param name="proj">プロジェクション行列</param>
-	/// <param name="wireframe">ワイヤーフレーム</param>
-	/// <param name="option">シェーダー等ラムダ式</param>
-	/// <returns>なし</returns>
+	// 描画
 	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
 		bool wireframe = false, ShaderLambda option = nullptr) override;
+
+private:
+
+	// スケール
+	static const float BIRD_SCALE;
+
 };
 
 #endif // STAGE_TITLE
