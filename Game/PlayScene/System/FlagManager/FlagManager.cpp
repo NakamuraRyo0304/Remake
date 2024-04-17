@@ -10,25 +10,20 @@
 #include  "Libraries/UserUtility.h"
 #include "FlagManager.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 FlagManager::FlagManager()
-	: m_firstPosition{}		// 先頭座標
+	:
+	m_firstPosition()		// 先頭座標
 {
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 FlagManager::~FlagManager()
 {
 	m_flags.clear();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void FlagManager::Update()
 {
 	if (m_flags.empty()) return;
@@ -42,9 +37,7 @@ void FlagManager::Update()
 	}
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void FlagManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
@@ -56,9 +49,7 @@ void FlagManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	}
 }
 
-//==============================================================================
 // フラグを追加
-//==============================================================================
 void FlagManager::AddFlag(SimpleMath::Vector3 start, SimpleMath::Vector3 dropped, const int& max)
 {
 	// 最大数を越えたら追加しない
@@ -67,17 +58,13 @@ void FlagManager::AddFlag(SimpleMath::Vector3 start, SimpleMath::Vector3 dropped
 	m_flags.push_back(std::make_unique<Flag>(start, dropped));
 }
 
-//==============================================================================
 // フラグを削除
-//==============================================================================
 void FlagManager::PickFlag()
 {
 	UserUtility::RemoveVec(m_flags, m_flags[0]);
 }
 
-//==============================================================================
 // 先頭のフラグが生えきったらTRUE
-//==============================================================================
 bool FlagManager::IsFirstArrived()
 {
 	if (m_flags.empty()) return false;
@@ -92,9 +79,7 @@ bool FlagManager::IsFirstArrived()
 	}
 }
 
-//==============================================================================
 // 先頭の座標を取得
-//==============================================================================
 const SimpleMath::Vector3& FlagManager::GetFirstPath()
 {
 	if (m_flags.empty()) return SimpleMath::Vector3::Zero;

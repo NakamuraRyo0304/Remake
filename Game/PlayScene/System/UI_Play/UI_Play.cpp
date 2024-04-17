@@ -14,37 +14,32 @@
 #include "Game/Common/DrawKeys/DrawKeys.h"
 #include "UI_Play.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)				                                // 基底クラス
-	, m_coinNum{}							                                // コイン枚数
-	, m_coinTexPos{}														// 残りコイン枚数テキスト
-	, m_cameraTexPos{}														// カメラテキスト
-	, is_retryPush{ false }													// リトライボタンフラグ
+	:
+	IUserInterface(scS, mscs),	                    // 基底クラス
+	m_coinNum(),				                    // コイン枚数
+	m_coinTexPos(),									// 残りコイン枚数テキスト
+	m_cameraTexPos(),								// カメラテキスト
+	is_retryPush(false)								// リトライボタンフラグ
 {
 	// エリア作成
 	m_area = std::make_unique<UI_PlayArea>();
-
 	// 数字作成
 	m_coins = std::make_unique<UI_CoinNum>();
-
-	// ボタンを作成
+	// ボタン作成
 	m_retryButton = std::make_unique<Button>(L"RetryButton", L"Resources/Textures/UI_Play/RetryButton.dds");
 
-	// キーオフセットを設定
-	auto _offset = SimpleMath::Vector2(1728.0f, 384.0f);
-
-	// キー作成
+	// キー作成・設定
+	auto offset = SimpleMath::Vector2(1728.0f, 384.0f);
 	m_keys[KEY_NAME::WKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/WKey.dds",
-		SimpleMath::Vector2(64.0f, 0.0f)   + _offset, GetScreenRate());
+		SimpleMath::Vector2(64.0f, 0.0f)   + offset, GetScreenRate());
 	m_keys[KEY_NAME::SKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/SKey.dds",
-		SimpleMath::Vector2(64.0f, 128.0f) + _offset, GetScreenRate());
+		SimpleMath::Vector2(64.0f, 128.0f) + offset, GetScreenRate());
 	m_keys[KEY_NAME::AKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/AKey.dds",
-		SimpleMath::Vector2(0.0f, 64.0f)   + _offset, GetScreenRate());
+		SimpleMath::Vector2(0.0f, 64.0f)   + offset, GetScreenRate());
 	m_keys[KEY_NAME::DKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/DKey.dds",
-		SimpleMath::Vector2(128.0f, 64.0f) + _offset, GetScreenRate());
+		SimpleMath::Vector2(128.0f, 64.0f) + offset, GetScreenRate());
 
 	// 画像描画作成
 	m_sprite = std::make_unique<DrawSprite>();
@@ -54,9 +49,7 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	Initialize();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 UI_Play::~UI_Play()
 {
 	m_area.reset();
@@ -66,9 +59,7 @@ UI_Play::~UI_Play()
 	m_retryButton.reset();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void UI_Play::Initialize()
 {
 	// エリアの設定
@@ -97,9 +88,7 @@ void UI_Play::Initialize()
 	m_cameraTexPos = (m_area->GetPosition() + SimpleMath::Vector2(32.0f, 256.0f)) * GetScreenRate();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void UI_Play::Update()
 {
 	m_coins->SetCoinNum(m_coinNum);
@@ -109,12 +98,11 @@ void UI_Play::Update()
 	is_retryPush = m_retryButton->GetState() == Button::State::Push;
 
 	// キーの更新
-	auto _key = Keyboard::Get().GetState();
-
-	m_keys[KEY_NAME::WKEY]->SetColor(_key.W ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
-	m_keys[KEY_NAME::SKEY]->SetColor(_key.S ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
-	m_keys[KEY_NAME::AKEY]->SetColor(_key.A ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
-	m_keys[KEY_NAME::DKEY]->SetColor(_key.D ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	auto key = Keyboard::Get().GetState();
+	m_keys[KEY_NAME::WKEY]->SetColor(key.W ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::SKEY]->SetColor(key.S ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::AKEY]->SetColor(key.A ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+	m_keys[KEY_NAME::DKEY]->SetColor(key.D ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 }
 
 //==============================================================================
