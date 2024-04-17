@@ -5,36 +5,33 @@
  *  @Author NakamuraRyo
  */
 
-#include "pch.h"															// プリコンパイル済みヘッダー
-#include "Libraries/UserUtility.h"											// ユーティリティ
-#include "Game/ClearScene/System/UI_Clear/UI_Clear.h"						// ユーザインターフェース
-#include "Libraries/SystemDatas/Timer/Timer.h"								// タイマー
+#include "pch.h"											// プリコンパイル済みヘッダー
+#include "Libraries/UserUtility.h"							// ユーティリティ
+#include "Game/ClearScene/System/UI_Clear/UI_Clear.h"		// ユーザインターフェース
+#include "Libraries/SystemDatas/Timer/Timer.h"				// タイマー
 
-#include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"					// スコアボード
-#include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"					// プレイシーンのスクショ表示
-#include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"						// 背景
-#include "Game/ClearScene/Objects/Tape/Tape.h"								// テープオブジェクト
-#include "Game/ClearScene/Objects/Seal/Seal.h"								// シールオブジェクト
+#include "Game/ClearScene/System/ScoreBoard/ScoreBoard.h"	// スコアボード
+#include "Game/ClearScene/Objects/MomentCanv/MomentCanv.h"	// プレイシーンのスクショ表示
+#include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"		// 背景
+#include "Game/ClearScene/Objects/Tape/Tape.h"				// テープオブジェクト
+#include "Game/ClearScene/Objects/Seal/Seal.h"				// シールオブジェクト
 
-#include "ClearScene.h"														// クリアシーン
+#include "ClearScene.h"										// クリアシーン
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
-using KeyCode = Keyboard::Keys;												// キーコード
-using RepeatType = SoundManager::SE_MODE;									// サウンドのタイプ
-using MouseClick = Mouse::ButtonStateTracker;								// マウスのクリック
-using Selection = UI_Clear::SELECT;											// 次の選択
+using KeyCode = Keyboard::Keys;					// キーコード
+using RepeatType = SoundManager::SE_MODE;		// サウンドのタイプ
+using MouseClick = Mouse::ButtonStateTracker;	// マウスのクリック
+using Selection = UI_Clear::SELECT;				// 次の選択
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 ClearScene::ClearScene(float time, int coins, int stage, int max)
-	: IScene()																// 基底クラスのコンストラクタ
-	, m_clearTime{ time }													// クリアタイム
-	, m_collectedCoin{ coins }												// 集めたコイン数
-	, m_stageNumber{ stage }												// ステージ番号
-	, m_maxNumber{ max }													// 最大ステージ番号
+	:
+	IScene(),						// 基底クラスのコンストラクタ
+	m_clearTime(time),				// クリアタイム
+	m_collectedCoin(coins),			// 集めたコイン数
+	m_stageNumber(stage),			// ステージ番号
+	m_maxNumber(max)				// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 
@@ -43,18 +40,14 @@ ClearScene::ClearScene(float time, int coins, int stage, int max)
 	m_collectedCoin = UserUtility::Clamp(m_collectedCoin, 0, 99);
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 ClearScene::~ClearScene()
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのデストラクタが呼ばれました。\n");
 	Finalize();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void ClearScene::Initialize()
 {
 	// 画面依存の初期化
@@ -64,23 +57,21 @@ void ClearScene::Initialize()
 	SetSceneValues();
 
 	// ボリューム設定・音量再生開始(BGM・環境音)
-	auto _se = SoundManager::GetInstance();
-	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, 0.5f);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, RepeatType::LOOP);
+	auto sound = SoundManager::GetInstance();
+	sound->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, 0.5f);
+	sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_CLEAR, RepeatType::LOOP);
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void ClearScene::Update()
 {
-	auto _input = Input::GetInstance();
-	auto _se = SoundManager::GetInstance();
+	auto input = Input::GetInstance();
+	auto sound = SoundManager::GetInstance();
 
 	// セレクトに戻る
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		ChangeScene(SCENE::SELECT);
 	}
 
@@ -117,25 +108,20 @@ void ClearScene::Update()
 	}
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void ClearScene::Draw()
 {
-	// レンダリング変数を取得
-	//auto _states = GetSystemManager()->GetCommonStates();
-
 	// 背景の描画
 	m_backGround->Draw();
 
 	// モーメントキャンバスのレクトと拡大率、中心位置
-	RECT_U _rectMC =
+	RECT_U rect =
 		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
-	SimpleMath::Vector2 _originMC = GetFullHDSize() * 0.5f;
+	SimpleMath::Vector2 origin = GetFullHDSize() * 0.5f;
 
 	// モーメントキャンバスの描画
 	m_momentCanv->Draw(SimpleMath::Vector4::One,
-		SimpleMath::Vector2::One * 0.5f, _originMC, _rectMC);
+		SimpleMath::Vector2::One * 0.5f, origin, rect);
 
 	if (m_momentCanv->IsEndMoving())
 	{
@@ -161,9 +147,7 @@ void ClearScene::Draw()
 #endif
 }
 
-//==============================================================================
-// 終了処理
-//==============================================================================
+// 終了
 void ClearScene::Finalize()
 {
 	m_momentCanv.reset();
@@ -176,9 +160,7 @@ void ClearScene::Finalize()
 	m_seal->reset();
 }
 
-//==============================================================================
 // 画面、デバイス依存の初期化
-//==============================================================================
 void ClearScene::CreateWDResources()
 {
 	// モーメントキャンバス作成
@@ -206,9 +188,7 @@ void ClearScene::CreateWDResources()
 	m_seal[Sticker::Clock] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/clockSeal.dds");
 }
 
-//==============================================================================
 // シーン内の変数初期化関数
-//==============================================================================
 void ClearScene::SetSceneValues()
 {
 	// モーメントキャンバスの初期化
@@ -239,53 +219,49 @@ void ClearScene::SetSceneValues()
 	m_direction->Start();
 }
 
-//==============================================================================
 // デバッグ描画
-//==============================================================================
 void ClearScene::DebugDraw(CommonStates& states)
 {
-	auto& _string = Debug::DrawString::GetInstance();
-	auto& _time = DX::StepTimer::GetInstance();
+	auto& string = Debug::DrawString::GetInstance();
+	auto& timer = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 }, Colors::DarkGreen, L"ClearScene");
-	_string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Time::%.2f",m_clearTime);
-	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"Coin::%.d",m_collectedCoin);
-	_string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"Stage::%.d", m_stageNumber);
-	_string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"Direc::%.2f", m_direction->GetCount());
+	string.DrawFormatString(states, { 0,0 }, Colors::DarkGreen, L"ClearScene");
+	string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", timer.GetFramesPerSecond());
+	string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Time::%.2f",m_clearTime);
+	string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"Coin::%.d",m_collectedCoin);
+	string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"Stage::%.d", m_stageNumber);
+	string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"Direc::%.2f", m_direction->GetCount());
 }
 
-//==============================================================================
 // シーン選択
-//==============================================================================
 void ClearScene::SceneSelection()
 {
-	auto _input = Input::GetInstance();
-	auto _se = SoundManager::GetInstance();
+	auto input = Input::GetInstance();
+	auto sound = SoundManager::GetInstance();
 
 	// シーンを選択する
-	auto _selection = m_ui->GetSelecion();
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
-		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+	auto selection = m_ui->GetSelecion();
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+		input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
-		UserUtility::Increment(&_selection);	// インクリメント
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		UserUtility::Increment(&selection);	// インクリメント
 	}
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
-		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
+		input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
-		UserUtility::Decrement(&_selection);	// デクリメント
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		UserUtility::Decrement(&selection);	// デクリメント
 	}
-	_selection = UserUtility::LoopClamp(_selection, Selection::NEXT, Selection::STAGES);
-	m_ui->SetSelection(_selection);
+	selection = UserUtility::LoopClamp(selection, Selection::NEXT, Selection::STAGES);
+	m_ui->SetSelection(selection);
 
 	// 次の遷移を決定
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || _input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		switch (m_ui->GetSelecion())
 		{
 		case Selection::NEXT:

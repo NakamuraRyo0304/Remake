@@ -18,36 +18,29 @@
 
 #include "Editor.h"													// エディタシーン
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
-using KeyCode = Keyboard::Keys;										// キーコード
-using CameraType = AdminCamera::Type;								// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;							// サウンドのタイプ
-using BN = UI_Editor::BUTTON_NAME;									// ボタンの名前
+using KeyCode = Keyboard::Keys;				// キーコード
+using CameraType = AdminCamera::Type;		// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;	// サウンドのタイプ
+using BN = UI_Editor::BUTTON_NAME;			// ボタンの名前
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Editor::Editor()
-	: IScene()														// 基底クラスのコンストラクタ
-	, m_selectionID{ ID::Obj_Flozen }								// 初期は氷床を設定
+	:
+	IScene(),						// 基底クラスのコンストラクタ
+	m_selectionID(ID::Obj_Flozen)	// 初期は氷床を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Editor::~Editor()
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのデストラクタが呼ばれました。\n");
 	Finalize();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void Editor::Initialize()
 {
 	// 画面依存の初期化
@@ -57,15 +50,13 @@ void Editor::Initialize()
 	SetSceneValues();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Editor::Update()
 {
-	auto _input = Input::GetInstance();
+	auto input = Input::GetInstance();
 
 	// セレクトに戻る
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
 		ChangeScene(SCENE::SELECT);
 	}
@@ -111,48 +102,44 @@ void Editor::Update()
 	UpdateCollisions(m_selectionID);
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Editor::Draw()
 {
 	// レンダリング変数を取得
-	auto _states = GetSystemManager()->GetCommonStates();
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
+	auto states = GetSystemManager()->GetCommonStates();
+	auto context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
-	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
+	SimpleMath::Matrix view = m_adminCamera->GetView();
+	SimpleMath::Matrix projection = m_adminCamera->GetProjection();
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection);
+	m_blockManager->Draw(context, *states, view, projection);
 
 	// ワールドマウスの描画関連を更新
-	m_worldMouse->Draw(_view, _projection);
+	m_worldMouse->Draw(view, projection);
 
 	// カーソルオブジェクトの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection);
+	m_cursorObject->Draw(context, *states, view, projection);
 
 	// グリッドの描画
 	for (int y = 0; y < 5; y++)
 	{
-		m_editorGrids->Draw(*_states, SimpleMath::Matrix::Identity, _view, _projection, Colors::LightBlue,
+		m_editorGrids->Draw(*states, SimpleMath::Matrix::Identity, view, projection, Colors::LightBlue,
 			{ 4.5f, static_cast<float>(y) - 0.5f,4.5f });
 	}
-	m_editorGrids->Draw(*_states, SimpleMath::Matrix::Identity, _view, _projection, Colors::Red,
+	m_editorGrids->Draw(*states, SimpleMath::Matrix::Identity, view, projection, Colors::Red,
 		{ 4.5f, m_worldMouse->GetPosition().y - 0.5f,4.5f });
 
 #if _DEBUG
-	DebugDraw(*_states);
+	DebugDraw(*states);
 #endif
 
 	// UIの描画(最前面に描画)
 	m_ui->Draw();
 }
 
-//==============================================================================
 // 終了処理
-//==============================================================================
 void Editor::Finalize()
 {
 	m_adminCamera.reset();
@@ -164,9 +151,7 @@ void Editor::Finalize()
 	m_editorGrids.reset();
 }
 
-//==============================================================================
 // 画面、デバイス依存の初期化
-//==============================================================================
 void Editor::CreateWDResources()
 {
 	// ゲームカメラ作成
@@ -192,9 +177,7 @@ void Editor::CreateWDResources()
 	m_editorGrids = std::make_unique<EditorGrids>(10, 10);
 }
 
-//==============================================================================
 // シーン内の変数初期化関数
-//==============================================================================
 void Editor::SetSceneValues()
 {
 	// カメラの初期設定-自動
@@ -216,32 +199,28 @@ void Editor::SetSceneValues()
 	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
 }
 
-//==============================================================================
 // デバッグ描画
-//==============================================================================
 void Editor::DebugDraw(CommonStates& states)
 {
-	auto& _string = Debug::DrawString::GetInstance();
-	auto& _time = DX::StepTimer::GetInstance();
+	auto& string = Debug::DrawString::GetInstance();
+	auto& timer = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 },  Colors::Black, L"Editor");
-	_string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", _time.GetTotalSeconds());
-	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
+	string.DrawFormatString(states, { 0,0 },  Colors::Black, L"Editor");
+	string.DrawFormatString(states, { 0,25 }, Colors::Black, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	string.DrawFormatString(states, { 0,50 }, Colors::Black, L"FPS::%d", timer.GetFramesPerSecond());
+	string.DrawFormatString(states, { 0,75 }, Colors::Black, L"Timer::%.2f", timer.GetTotalSeconds());
+	string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
-	_string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
+	string.DrawFormatString(states, { 0,100 }, Colors::Black, L"Forward::%.2f,%.2f,%.2f",
 		m_adminCamera->GetView().Forward().x, m_adminCamera->GetView().Forward().y, m_adminCamera->GetView().Forward().z);
-	_string.DrawFormatString(states, { 0,125 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
+	string.DrawFormatString(states, { 0,125 }, Colors::Black, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_editorCollision->GetPosition().x, m_editorCollision->GetPosition().y, m_editorCollision->GetPosition().z);
-	_string.DrawFormatString(states, { 0,150 }, Colors::Black, L"AddPosition::%.2f,%.2f",
+	string.DrawFormatString(states, { 0,150 }, Colors::Black, L"AddPosition::%.2f,%.2f",
 		m_ui->GetAddPosition().x, m_ui->GetAddPosition().y);
 }
 
-//==============================================================================
 // オブジェクトをセットする
-//==============================================================================
 void Editor::SetDrawObject()
 {
 	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 氷床
@@ -254,43 +233,23 @@ void Editor::SetDrawObject()
 	if (m_ui->IsClickButton(BN::Lift_bn))	m_selectionID = ID::Obj_Lift;	// リフト
 }
 
-//==============================================================================
 // コリジョンの更新
-//==============================================================================
 void Editor::UpdateCollisions(ID id)
 {
 	for (auto& obj : m_blockManager->GetAirs())		// エアー（判定用ブロック）
-	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetFlozens())	// 氷床ブロック
-	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetClouds())	// 雲ギミック
-	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetCoins())	// コインオブジェクト
-	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetPlayers())	// プレイヤオブジェクト
-	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetGoals())	// ゴールポイント
-	{
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetSpikes())	// 棘エネミー
-	{
-		if (UserUtility::IsNull(obj.get())) { break; }
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 	for (auto& obj : m_blockManager->GetLifts())	// リフトブロック
-	{
-		if (UserUtility::IsNull(obj.get())) { break; }
 		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	}
 }
