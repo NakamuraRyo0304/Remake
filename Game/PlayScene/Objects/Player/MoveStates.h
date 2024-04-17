@@ -14,7 +14,7 @@ enum MoveStates
 	Idling,		// アイドル時
 	Walking,	// 歩行時
 
-	length,
+	Length,
 };
 
 #endif // MOVESTATES

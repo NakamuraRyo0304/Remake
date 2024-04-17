@@ -9,24 +9,20 @@
 #include "Libraries/UserUtility.h"
 #include "Flag.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
 const float Flag::FALL_SPEED = 0.05f;		// 落下速度
 const float Flag::CLOSED_MATCH = 0.1f;		// 近似一致
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
-	: IGameObject(L"Resources/Models/Flag.cmo", L"Resources/Models")
-	, m_droppedPosition{}		            // 落下位置
-	, is_arrive{ false }		            // 到着フラグ
+	:
+	IGameObject(L"Resources/Models/Flag.cmo", L"Resources/Models"),
+	m_droppedPosition(),		            // 落下位置
+	is_arrive(false)			            // 到着フラグ
 {
 	CreateModel();
 	SetID(ID::Obj_Flag);
 	SetWeight(NON_WEIGHT);
-
 	SetPosition(start);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -37,17 +33,13 @@ Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
 	m_droppedPosition = dropped;
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Flag::~Flag()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Flag::Update()
 {
 	// 落下していく
@@ -63,9 +55,7 @@ void Flag::Update()
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Flag::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
