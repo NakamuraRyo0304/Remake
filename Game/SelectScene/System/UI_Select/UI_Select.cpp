@@ -9,25 +9,20 @@
 #include "Libraries/UserUtility.h"
 #include "UI_Select.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float UI_Select::COLOR_SPEED = 0.075f;	                                    // 色の変更速度
-// ステージ画像の座標
-const SimpleMath::Vector2 UI_Select::STAGE_TEX_POS = SimpleMath::Vector2(475.0f, 200.0f);
-// ステージ画像の拡大率
-const float UI_Select::STAGE_TEX_RATE = 0.6f;
-const float UI_Select::STAGE_TEX_SPAN = 185.0f;	// ステージ番号の間隔
+const float UI_Select::COLOR_SPEED = 0.075f; // 色の変更速度
+const SimpleMath::Vector2 UI_Select::STAGE_TEX_POS = SimpleMath::Vector2(475.0f, 200.0f); // ステージ画像の座標
+const float UI_Select::STAGE_TEX_RATE = 0.6f; // ステージ画像の拡大率
+const float UI_Select::STAGE_TEX_SPAN = 185.0f; // ステージ番号の間隔
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)														// 基底クラス
-	, m_stageSelection{ 1 }															// ステージ１からスタート
-	, m_position{}																	// 座標
-	, m_color{}																		// 描画色
-	, m_stageAlpha{}																// ステージアルファ値
+	:
+	IUserInterface(scS, mscs),		// 基底クラス
+	m_stageSelection(1),			// ステージ１からスタート
+	m_position(),					// 座標
+	m_color(),						// 描画色
+	m_stageAlpha()					// ステージアルファ値
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -36,9 +31,7 @@ UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	Initialize();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 UI_Select::~UI_Select()
 {
 	m_sprites.reset();
@@ -46,9 +39,7 @@ UI_Select::~UI_Select()
 	m_color.clear();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void UI_Select::Initialize()
 {
 	// 文字の設定(文字パス)
@@ -65,17 +56,17 @@ void UI_Select::Initialize()
 	m_position.emplace(L"Num3",   SimpleMath::Vector2(50.0f, 180.0f));
 	m_position.emplace(L"Num4",   SimpleMath::Vector2(50.0f, 180.0f));
 
-	float _y = 0.0f;
-	std::wstring _first = L"Editor";
-	std::wstring _second = L"Num1";
+	float spanY = 0.0f;
+	std::wstring first = L"Editor";
+	std::wstring second = L"Num1";
 	for (auto& pos : m_position)
 	{
 		// 最初のステージ１までは飛ばす
-		if (pos.first == _first || pos.first == _second) continue;
+		if (pos.first == first || pos.first == second) continue;
 
 		// 以降は均等に配置する
-		_y += STAGE_TEX_SPAN;
-		pos.second.y += _y;
+		spanY += STAGE_TEX_SPAN;
+		pos.second.y += spanY;
 	}
 
 	// 色の設定
