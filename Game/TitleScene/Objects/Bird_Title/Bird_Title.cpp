@@ -9,21 +9,17 @@
 #include "Libraries/UserUtility.h"
 #include "Bird_Title.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float Bird_Title::BIRD_SCALE = 2.0f;
+const float Bird_Title::BIRD_SCALE = 2.0f; // スケール
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Bird_Title::Bird_Title()
-	: IGameObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
+	:
+	IGameObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Bird);
 	SetWeight(NON_WEIGHT);
-
 	SetPosition(SimpleMath::Vector3(5.0f, 0.0f, 10.0f));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -31,31 +27,24 @@ Bird_Title::Bird_Title()
 	SetInitialScale(GetScale());
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Bird_Title::~Bird_Title()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Bird_Title::Update()
 {
-	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
-
 	// 回転
-	SetRotate(SimpleMath::Vector3::UnitY * (XMConvertToRadians(90.0f) + sinf(_timer) * 0.5f));
+	float timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+	SetRotate(SimpleMath::Vector3::UnitY * (XMConvertToRadians(90.0f) + sinf(timer) * 0.5f));
 
 	// マトリクスを作成
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Bird_Title::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {

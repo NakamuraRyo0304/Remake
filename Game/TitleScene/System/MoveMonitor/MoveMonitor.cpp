@@ -8,35 +8,30 @@
 #include "pch.h"
 #include "MoveMonitor.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 MoveMonitor::MoveMonitor()
-	: is_moveMouse{ false }		// 動作通知フラグ（動いたらTrue）
-	, m_length{}			    // 最終長さ
+	:
+	m_length(),			// 最終長さ
+    is_moveMouse(false) // 動作通知フラグ（動いたらTrue）
 {
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 MoveMonitor::~MoveMonitor()
 {
 }
 
-//==============================================================================
-// 更新関数
-//==============================================================================
+// 更新
 void MoveMonitor::Update()
 {
-    auto _ms = Mouse::Get().GetState();
-    auto _msp = SimpleMath::Vector2(static_cast<float>(_ms.x), static_cast<float>(_ms.y));
+    auto ms = Mouse::Get().GetState();
+    auto msPosition = SimpleMath::Vector2(static_cast<float>(ms.x), static_cast<float>(ms.y));
 
     // 現在のマウス座標と0:0の距離を計算
-    float _length = SimpleMath::Vector2::Distance(SimpleMath::Vector2::Zero, _msp);
+    float length = SimpleMath::Vector2::Distance(SimpleMath::Vector2::Zero, msPosition);
 
     // 一定以上の距離が動いた場合に通知フラグを立てる
-    if (_length != m_length)
+    if (length != m_length)
     {
         is_moveMouse = true;
     }
@@ -46,5 +41,5 @@ void MoveMonitor::Update()
     }
 
     // 座標からの距離を更新
-    m_length = _length;
+    m_length = length;
 }

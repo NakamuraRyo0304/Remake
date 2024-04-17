@@ -9,17 +9,15 @@
 #include "Libraries/UserUtility.h"
 #include "Lift.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Lift::Lift(SimpleMath::Vector3 position)
-	: IGameObject(L"Resources/Models/Moving.cmo", L"Resources/Models", position)
-	, m_offset{ 0.0f }			// オフセット
+	:
+	IGameObject(L"Resources/Models/Moving.cmo", L"Resources/Models", position),
+	m_offset()			// オフセット
 {
 	CreateModel();
 	SetID(ID::Obj_Lift);
 	SetWeight(1.0f);
-
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -27,23 +25,19 @@ Lift::Lift(SimpleMath::Vector3 position)
 	SetInitialScale(GetScale());
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Lift::~Lift()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Lift::Update()
 {
 	// 前後一マスを移動
-	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds()) * 2;
+	float timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds()) * 2;
 
-	m_offset += sinf(_timer) * 0.01f;
+	m_offset += sinf(timer) * 0.01f;
 
 	// 前後移動
 	SetPosition(GetInitialPosition() + SimpleMath::Vector3(0.0f, 0.0f, m_offset));
@@ -52,9 +46,7 @@ void Lift::Update()
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Lift::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {

@@ -11,39 +11,30 @@
 #include "Libraries/UserUtility.h"
 #include "WorldMouse.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float WorldMouse::MAX_HEIGHT = 5.0f;          // 最高高度
-const float WorldMouse::PLAY_HEIGHT = 1.0f;         // プレイ時の高度
+const float WorldMouse::MAX_HEIGHT = 5.0f;      // 最高高度
+const float WorldMouse::PLAY_HEIGHT = 1.0f;     // プレイ時の高度
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
 using MOUSE_BUTTON = Mouse::ButtonStateTracker;
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 WorldMouse::WorldMouse()
-    : m_position{}                                  // 座標
-    , m_height{}                                    // Y座標の高さ
-    , is_playing{ false }                           // デフォルトはエディタモード
+    :
+    m_position(),                               // 座標
+    m_height(),                                 // Y座標の高さ
+    is_playing(false)                           // デフォルトはエディタモード
 {
     m_ray = std::make_unique<RayCast>();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 WorldMouse::~WorldMouse()
 {
     m_ray.reset();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void WorldMouse::Update()
 {
     // レイの更新
@@ -59,16 +50,16 @@ void WorldMouse::Update()
     else
     {
         // キーボード・マウスの取得
-        auto _key = Keyboard::Get().GetState();
-        auto& _mt = Input::GetInstance()->GetMouseTrack();
+        auto key = Keyboard::Get().GetState();
+        auto& mt = Input::GetInstance()->GetMouseTrack();
 
         // 右クリック＋左シフトで降下する
-        if (_mt->rightButton == MOUSE_BUTTON::PRESSED && _key.LeftShift)
+        if (mt->rightButton == MOUSE_BUTTON::PRESSED && key.LeftShift)
         {
             m_height--;
         }
         // 右クリックで上昇
-        else if (_mt->rightButton == MOUSE_BUTTON::PRESSED)
+        else if (mt->rightButton == MOUSE_BUTTON::PRESSED)
         {
             m_height++;
         }
@@ -82,9 +73,7 @@ void WorldMouse::Update()
     }
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void WorldMouse::Draw(SimpleMath::Matrix view, SimpleMath::Matrix proj)
 {
     m_ray->SetMatrix(view, proj);

@@ -9,9 +9,7 @@
 #ifndef UI_EDITOR
 #define UI_EDITOR
 
-//==============================================================================
 // 親シーンクラス
-//==============================================================================
 #include "Game/Common/IUserInterface/IUserInterface.h"
 
 class DrawKeys;
@@ -19,6 +17,7 @@ class UI_Editor final : public IUserInterface
 {
 public:
 
+	// ボタンの名前
 	enum BUTTON_NAME
 	{
 		LoadFile,
@@ -37,6 +36,7 @@ public:
 		Length_bn
 	};
 
+	// キーの名前
 	enum KEY_NAME
 	{
 		WKEY,
@@ -47,66 +47,39 @@ public:
 		Length__key
 	};
 
-private:
-
-
-	// ボタン
-	std::vector<std::unique_ptr<Button>> m_buttons;
-
-	// キー
-	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
-
-	// フラグ
-	bool is_clicks[BUTTON_NAME::Length_bn];
-
-	// ボタンを画面外に隠すフラグ
-	bool is_blindFlag;
-
-
-public:
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="scS">画面サイズ</param>
-	/// <param name="mscS">最大サイズ</param>
-	/// <returns>なし</returns>
-	UI_Editor(DirectX::SimpleMath::Vector2 scS, DirectX::SimpleMath::Vector2 mscs);
-	~UI_Editor();
-
-	/// <summary>
-	/// 初期化関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Initialize() override;
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Update() override;
-
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Draw() override;
-
 public:
 
 	// ボタンのクリック状況を取得
-	const bool& IsClickButton(BUTTON_NAME name) { return is_clicks[name]; }
-
+	bool IsClickButton(BUTTON_NAME name) const { return is_clicks[name]; }
 	// ボタンの加算座標を返す
 	const DirectX::SimpleMath::Vector2& GetAddPosition();
+
+	// コンストラクタ
+	UI_Editor(DirectX::SimpleMath::Vector2 scS, DirectX::SimpleMath::Vector2 mscs);
+	// デストラクタ
+	~UI_Editor();
+	// 初期化
+	void Initialize() override;
+	// 更新
+	void Update() override;
+	// 描画
+	void Draw() override;
 
 private:
 
 	// ボタンの位置調整
 	void MoveButtonPosition();
+
+private:
+
+	// ボタン
+	std::vector<std::unique_ptr<Button>> m_buttons;
+	// キー
+	std::map<KEY_NAME, std::unique_ptr<DrawKeys>> m_keys;
+	// クリックフラグ
+	bool is_clicks[BUTTON_NAME::Length_bn];
+	// ボタンを画面外に隠すフラグ
+	bool is_blindFlag;
 
 };
 

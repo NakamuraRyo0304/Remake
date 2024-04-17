@@ -10,25 +10,20 @@
 #include "Libraries/SystemDatas/Input/Input.h"
 #include "EditorCamera.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float EditorCamera::MOVE_SPEED = 0.1f;
-const float EditorCamera::MAX_HEIGHT = 35.0f;
+const float EditorCamera::MOVE_SPEED = 0.1f;	// 移動速度
+const float EditorCamera::MAX_HEIGHT = 35.0f;	// 最大高度
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
-using KeyCode = Keyboard::Keys;			// キーコード
+using KeyCode = Keyboard::Keys;					// キーコード
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 EditorCamera::EditorCamera(const SimpleMath::Vector2& screenSize)
-	: IGameCamera(screenSize)
-    , m_viewPoint{ ViewPoint::PointFront }      // デフォルトは前方位置
-	, m_viewPosition{}							// 目的位置
-	, m_viewTarget{}							// 目的注視点
+	:
+	IGameCamera(screenSize),					// 基底クラス
+    m_viewPoint(ViewPoint::PointFront),		    // デフォルトは前方位置
+	m_viewPosition(),							// 目的位置
+	m_viewTarget()								// 目的注視点
 {
 	// 座標と注視点をセット
 	SetPosition(SimpleMath::Vector3(4.5f, 12.0f, 10.0f));
@@ -36,40 +31,34 @@ EditorCamera::EditorCamera(const SimpleMath::Vector2& screenSize)
 	// 初期状態を保持
 	SetInitialPosition(GetPosition());
 	SetInitialTarget(GetTarget());
-
 	// 初期位置を設定
 	m_viewPosition = GetInitialPosition();
 	m_viewTarget = GetInitialTarget();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 EditorCamera::~EditorCamera()
 {
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void EditorCamera::Update()
 {
-	auto _input = Input::GetInstance();
-	auto _key = Keyboard::Get().GetState();
+	auto input = Input::GetInstance();
+	auto key = Keyboard::Get().GetState();
 
 	// カメラ切り替え
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::D))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::D))
 		UserUtility::Increment(&m_viewPoint);
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::A))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::A))
 		UserUtility::Decrement(&m_viewPoint);
-	if (_key.W)
+	if (key.W)
 		m_viewPosition.y += MOVE_SPEED;
-	if (_key.S)
+	if (key.S)
 		m_viewPosition.y -= MOVE_SPEED;
 
 	// ループクランプする
 	m_viewPoint = UserUtility::LoopClamp(m_viewPoint, ViewPoint::PointFront, ViewPoint::PointLeft);
-
 	// 高度をクランプする
 	m_viewPosition.y = UserUtility::Clamp(m_viewPosition.y, m_viewPosition.y, MAX_HEIGHT);
 
@@ -78,17 +67,13 @@ void EditorCamera::Update()
 
 	// 座標を設定
 	SetPosition(UserUtility::Lerp(GetPosition(), m_viewPosition, MOVE_SPEED));
-
 	// 注視点を設定
 	SetTarget(UserUtility::Lerp(GetTarget(), m_viewTarget, MOVE_SPEED));
-
     // ビュー行列をセット
     SetView(SimpleMath::Matrix::CreateLookAt(GetPosition(), GetTarget(), GetUp()));
 }
 
-//==============================================================================
-// ビューの位置を更新する
-//==============================================================================
+// ビューの位置を更新
 void EditorCamera::UpdateViewPoint()
 {
 	switch(m_viewPoint)

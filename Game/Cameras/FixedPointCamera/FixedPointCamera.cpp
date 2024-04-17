@@ -8,11 +8,10 @@
 #include "pch.h"
 #include "FixedPointCamera.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 FixedPointCamera::FixedPointCamera(const SimpleMath::Vector2& screenSize)
-	: IGameCamera(screenSize)
+	:
+	IGameCamera(screenSize)			//基底クラス
 {
 	// 座標と注視点をセット
 	SetPosition(SimpleMath::Vector3(0.0f, 2.0f, 24.0f));
@@ -22,16 +21,12 @@ FixedPointCamera::FixedPointCamera(const SimpleMath::Vector2& screenSize)
 	SetInitialTarget(GetTarget());
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 FixedPointCamera::~FixedPointCamera()
 {
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void FixedPointCamera::Update()
 {
 	// ビュー行列をセット

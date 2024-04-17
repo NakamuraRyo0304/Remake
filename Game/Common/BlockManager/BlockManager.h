@@ -9,20 +9,9 @@
 #ifndef BLOCKMANAGER
 #define BLOCKMANAGER
 
-//==============================================================================
-// オブジェクトクラス
-//==============================================================================
-#include "Game/Common/IGameObject/IGameObject.h"
-
-//==============================================================================
-// Json変換クラス
-//==============================================================================
-#include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"
-#include "Libraries/SystemDatas/DiaLog/DiaLog.h"
-
-//==============================================================================
-// ブロックのインクルード
-//==============================================================================
+#include "Game/Common/IGameObject/IGameObject.h"		// オブジェクト
+#include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"// JSON関連
+#include "Libraries/SystemDatas/DiaLog/DiaLog.h"		// ダイアログ
 #include "../Blocks/Flozen/Flozen.h"					// 氷ブロック
 #include "../Blocks/Cloud/Cloud.h"						// 雲ブロック
 #include "../Blocks/Coin/Coin.h"						// コインブロック
@@ -34,13 +23,62 @@
 
 class BlockManager
 {
+public:
+
+	// ファイルをリロードする
+	void ReLoad(const wchar_t* path = nullptr);
+	// ステージを書き出す
+	void OutputStage();
+
+	// 氷床ブロックの配列を参照
+	std::vector<std::unique_ptr<Flozen>>&    GetFlozens() { return m_flozens; }
+	// 雲ブロックの配列を参照
+	std::vector<std::unique_ptr<Cloud>>&     GetClouds() { return m_clouds; }
+	// コインブロックの配列を参照
+	std::vector<std::unique_ptr<Coin>>&      GetCoins() { return m_coins; }
+	// ゴールオブジェクトの配列を参照
+	std::vector<std::unique_ptr<Goal>>&      GetGoals() { return m_goals; }
+	// 棘オブジェクトの配列を参照
+	std::vector<std::unique_ptr<Spike>>&     GetSpikes() { return m_spikes; }
+	// エアーブロックの配列を参照
+	std::vector<std::unique_ptr<Air>>&       GetAirs() { return m_air; }
+	// プレイヤブロックの配列を参照
+	std::vector<std::unique_ptr<EditChara>>& GetPlayers() { return m_chara; }
+	// リフトブロックの配列を参照
+	std::vector<std::unique_ptr<Lift>>&      GetLifts() { return m_lifts; }
+	// ステージパスを取得
+	const wchar_t* GetStagePath() { return m_stagePath.c_str(); }
+	// ステージパスを設定
+	void SetStagePath(const wchar_t* path) { m_stagePath = path; }
+	// プレイモードを設定
+	void SetPlay(bool play) { is_playing = play; }
+	// オフセット
+	void SetOffset(const DirectX::SimpleMath::Vector3& offset);
+	// プレイヤの座標を取得する
+	DirectX::SimpleMath::Vector3 GetPlayerPosition() const;
+	// ゴール判定の取得
+	bool IsArrived() const;
+	// 棘の衝突を取得
+	bool IsHitSpike() const;
+
+public:
+
+	// コンストラクタ
+	BlockManager(const wchar_t* stagePath);
+	// デストラクタ
+	~BlockManager();
+	// 初期化
+	void Initialize();
+	// 更新
+	void Update();
+	/// 描画
+	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
+		bool wireframe = false, ShaderLambda option = nullptr);
+
 private:
 
-	/// <summary>
-	/// ファンクタ
-	/// ソートの優先順位
-	/// </summary>
-	/// <returns>条件に応じたソートプロパティ</returns>
+	// ファンクタ
+	// アウトプット時のソート条件
 	struct SortPriority
 	{
 		bool operator()(const Json& a, const Json& b) const
@@ -69,8 +107,6 @@ private:
 		}
 	};
 
-private:
-
 	// マップのサイズ
 	static const int MAP_SIZE_X = 10;
 	static const int MAP_SIZE_Y = 5;
@@ -78,102 +114,7 @@ private:
 
 private:
 
-	// ブロックオブジェクト
-	std::vector<std::unique_ptr<Flozen>>    m_flozens;
-	std::vector<std::unique_ptr<Cloud>>     m_clouds;
-	std::vector<std::unique_ptr<Coin>>      m_coins;
-	std::vector<std::unique_ptr<Air>>       m_air;
-	std::vector<std::unique_ptr<EditChara>> m_chara;
-	std::vector<std::unique_ptr<Goal>>      m_goals;
-	std::vector<std::unique_ptr<Spike>>     m_spikes;
-	std::vector<std::unique_ptr<Lift>>      m_lifts;
-
-	// Json読み込み
-	std::unique_ptr<JsonHelper> m_jsonHelper;
-
-	// ダイアログ操作
-	std::unique_ptr<DiaLog> m_dialog;
-
-	// パス保存
-	std::wstring m_stagePath;
-
-	// プレイ時のフラグ（Trueでエディタ用描画を切る）
-	bool is_playing;
-
-public:
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="stagePath">読み込みステージパス</param>
-	/// <returns>なし</returns>
-	BlockManager(const wchar_t* stagePath);
-	~BlockManager();
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Initialize();
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Update();
-
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="context">コンテキスト</param>
-	/// <param name="states">コモンステート</param>
-	/// <param name="view">ビュー行列</param>
-	/// <param name="proj">プロジェクション行列</param>
-	/// <param name="wireframe">ワイヤーフレーム</param>
-	/// <param name="option">シェーダー等ラムダ式</param>
-	/// <returns>なし</returns>
-	void Draw(ID3D11DeviceContext1* context, DirectX::CommonStates& states, DirectX::SimpleMath::Matrix& view, DirectX::SimpleMath::Matrix& proj,
-		bool wireframe = false, ShaderLambda option = nullptr);
-
-public:
-
-	// ステージパスを取得
-	const wchar_t* GetStagePath() { return m_stagePath.c_str(); }
-	// ステージパスを設定
-	void SetStagePath(const wchar_t* path) { m_stagePath = path; }
-
-	// ゲームプレイするときはONにする
-	void SetPlay(bool play) { is_playing = play; }
-
-	// オフセット
-	void SetOffset(const DirectX::SimpleMath::Vector3& offset);
-
-public:
-
-	//==============================================================================
-	// エディタ使用時に呼び出す関数
-	//==============================================================================
-
-	/// <summary>
-	/// ファイルをリロードする
-	/// </summary>
-	/// <param name="path">特定のパスを指定（エクスプローラーから開く場合はなにも入れない）</param>
-	/// <returns>なし</returns>
-	void ReLoad(const wchar_t* path = nullptr);
-
-	// ステージを書き出す
-	void OutputStage();
-
-private:
-
-	/// <summary>
-	/// 要素除外用関数
-	/// </summary>
-	/// <param name="vec">配列</param>
-	/// <param name="val">要素</param>
-	/// <returns>なし</returns>
+	// 要素除外用関数
 	template<typename T>
 	inline void RemoveVec(std::vector<T>& vec, const T& val)
 	{
@@ -186,13 +127,7 @@ private:
 			}
 		}
 	}
-
-	/// <summary>
-	/// オブジェクト置き換え関数
-	/// </summary>
-	/// <param name="id">オブジェクトID</param>
-	/// <param name="オブジェクト配列">objects</param>
-	/// <returns>なし</returns>
+	// オブジェクト置き換え関数
 	template<typename T>
 	void ReplaceObjects(const ID& id, std::vector<T>& objects)
 	{
@@ -204,13 +139,7 @@ private:
 			RemoveVec(objects, obj);
 		}
 	}
-
-	/// <summary>
-	/// 書き出し用オブジェクト追加関数
-	/// </summary>
-	/// <param name="objects">書き出しに使用する配列</param>
-	/// <param name="wish">任意のオブジェクトベクター配列</param>
-	/// <returns>なし</returns>
+	// 書き出し用オブジェクト追加関数
 	template <typename T>
 	void AddWriteObjects(std::vector<IGameObject*>* objects, std::vector<T>& wish)
 	{
@@ -223,12 +152,7 @@ private:
 			objects->push_back(obj.get());
 		}
 	}
-
-	/// <summary>
-	/// クリア関数
-	/// </summary>
-	/// <param name="objects">クリアしたいオブジェクト</param>
-	/// <returns>配列が空ならTrue</returns>
+	// クリア関数
 	template <typename T>
 	bool ClearObjects(std::vector<T>* objects)
 	{
@@ -241,48 +165,34 @@ private:
 
 	// ブロックのIDから文字列を返す(書き出し用)
 	std::string GetBlockID(const ID& id);
-
 	// ブロックの種類を変更する
 	void ReplaceBlock();
-
 	// ブロック作成
 	void CreateBlock(ID id, DirectX::SimpleMath::Vector3 pos);
-
 	// 配列をリセットする
 	void ClearBlocks();
-
 	// 空気で埋める
 	void FillAir();
 
-public:
+private:
 
-	// 氷床ブロックの配列を参照
-	std::vector<std::unique_ptr<Flozen>>&    GetFlozens() { return m_flozens; }
-	// 雲ブロックの配列を参照
-	std::vector<std::unique_ptr<Cloud>>&     GetClouds()  { return m_clouds; }
-	// コインブロックの配列を参照
-	std::vector<std::unique_ptr<Coin>>&      GetCoins()   { return m_coins; }
-	// ゴールオブジェクトの配列を参照
-	std::vector<std::unique_ptr<Goal>>&      GetGoals()   { return m_goals; }
-	// 棘オブジェクトの配列を参照
-	std::vector<std::unique_ptr<Spike>>&     GetSpikes()  { return m_spikes; }
-	// エアーブロックの配列を参照
-	std::vector<std::unique_ptr<Air>>&       GetAirs()    { return m_air; }
-	// プレイヤブロックの配列を参照
-	std::vector<std::unique_ptr<EditChara>>& GetPlayers() { return m_chara; }
-	// リフトブロックの配列を参照
-	std::vector<std::unique_ptr<Lift>>&		 GetLifts()   { return m_lifts; }
-
-public:
-
-	// プレイヤの座標を取得する
-	DirectX::SimpleMath::Vector3 GetPlayerPosition() const;
-
-	// ゴール判定の取得
-	bool IsArrived() const;
-
-	// 棘の衝突を取得
-	bool IsHitSpike() const;
+	// ブロックオブジェクト
+	std::vector<std::unique_ptr<Flozen>>    m_flozens;	// 氷床
+	std::vector<std::unique_ptr<Cloud>>     m_clouds;	// 雲
+	std::vector<std::unique_ptr<Coin>>      m_coins;	// コイン
+	std::vector<std::unique_ptr<Air>>       m_air;		// 判定用エアー
+	std::vector<std::unique_ptr<EditChara>> m_chara;	// キャラ
+	std::vector<std::unique_ptr<Goal>>      m_goals;	// ゴール
+	std::vector<std::unique_ptr<Spike>>     m_spikes;	// スパイク
+	std::vector<std::unique_ptr<Lift>>      m_lifts;	// リフト
+	// Json読み込み
+	std::unique_ptr<JsonHelper> m_jsonHelper;
+	// ダイアログ操作
+	std::unique_ptr<DiaLog> m_dialog;
+	// パス保存
+	std::wstring m_stagePath;
+	// プレイ時のフラグ（Trueでエディタ用描画を切る）
+	bool is_playing;
 
 };
 

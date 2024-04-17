@@ -10,23 +10,19 @@
 #include "Libraries/SystemDatas/Timer/Timer.h"
 #include "Head.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
 const float Head::SCALE = 0.5f;			// モデルのスケール
 const float Head::ROT_POWER = 15.0f;	// 首振りの強さ
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Head::Head()
-	: IGameObject(L"Resources/Models/pHead.cmo", L"Resources/Models")
-	, m_states{ MoveStates::Idling }		// アイドル状態
+	:
+	IGameObject(L"Resources/Models/pHead.cmo", L"Resources/Models"),
+	m_states(MoveStates::Idling)		// アイドル状態
 {
 	CreateModel();
 	SetID(ID::Obj_Player);
 	SetWeight(2.0f);
-
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -38,18 +34,14 @@ Head::Head()
 	m_timer->Start();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Head::~Head()
 {
 	ReleaseModel();
 	m_timer.reset();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Head::Update()
 {
 	m_timer->Update();
@@ -57,8 +49,8 @@ void Head::Update()
 	// アイドル状態はきょろきょろする
 	if (m_states == MoveStates::Idling)
 	{
-		float _value = XMConvertToRadians(sinf(m_timer->GetCount()) * ROT_POWER);
-		SetRotate(UserUtility::Lerp(GetRotate(), SimpleMath::Vector3::UnitY * _value));
+		float rotation = XMConvertToRadians(sinf(m_timer->GetCount()) * ROT_POWER);
+		SetRotate(UserUtility::Lerp(GetRotate(), SimpleMath::Vector3::UnitY * rotation));
 	}
 	else if(m_states == MoveStates::Walking)
 	{
@@ -69,12 +61,10 @@ void Head::Update()
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void Head::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	SimpleMath::Matrix _scale = SimpleMath::Matrix::CreateScale(SCALE);
-	GetModel()->Draw(context, states, _scale * GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
+	SimpleMath::Matrix scale = SimpleMath::Matrix::CreateScale(SCALE);
+	GetModel()->Draw(context, states, scale * GetWorldMatrix() * GetParentMatrix(), view, proj, wireframe, option);
 }

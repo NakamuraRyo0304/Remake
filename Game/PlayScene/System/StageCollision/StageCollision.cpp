@@ -9,29 +9,21 @@
 #include "Libraries/UserUtility.h"
 #include "StageCollision.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
 const float StageCollision::RADIUS = 1.0f;          // 当たり判定を行う半径
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 StageCollision::StageCollision()
 {
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 StageCollision::~StageCollision()
 {
     m_objects.clear();
 }
 
-//==============================================================================
-// 初期化関数
-//==============================================================================
+// 初期化
 void StageCollision::Initialize(BlockManager* blocks)
 {
     // オブジェクトの追加
@@ -43,14 +35,12 @@ void StageCollision::Initialize(BlockManager* blocks)
     for (auto& obj : blocks->GetLifts())   m_objects.push_back(obj.get());
 }
 
-//==============================================================================
-// 当たり判定を行う
-//==============================================================================
+// 更新
 void StageCollision::Update(Player* player)
 {
     // 操作用プレイヤ座標を保存
-    SimpleMath::Vector3 _playerPos = player->GetPosition();
-    SimpleMath::Vector3 _playerScale = player->GetScale() * 2;
+    SimpleMath::Vector3 playerPos = player->GetPosition();
+    SimpleMath::Vector3 playerScale = player->GetScale() * 2;
 
     // オブジェクトの判定
     for (auto& obj : m_objects)
@@ -58,17 +48,15 @@ void StageCollision::Update(Player* player)
         // 非アクティブのオブジェクトはスキップ
         if (not obj->IsActive()) continue;
 
-        if (not UserUtility::CheckPointInSphere(_playerPos, RADIUS, obj->GetPosition())) continue;
-        auto _side = IsCube(&_playerPos, obj->GetPosition(), _playerScale, obj->GetScale());
+        if (not UserUtility::CheckPointInSphere(playerPos, RADIUS, obj->GetPosition())) continue;
+        auto side = IsCube(&playerPos, obj->GetPosition(), playerScale, obj->GetScale());
 
         // 固有処理を行う
-        PerformEngenProc(player, obj, _playerPos, _side);
+        PerformEngenProc(player, obj, playerPos, side);
     }
 }
 
-//==============================================================================
 // 固有処理
-//==============================================================================
 void StageCollision::PerformEngenProc(Player* player, IGameObject* block, SimpleMath::Vector3 newPos, Side side)
 {
     // 衝突がなければ処理をしない
@@ -88,8 +76,8 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
         {
             // 着地処理を行い、雲を動かす
             static_cast<Cloud*>(block)->SetHitFlag(side != Side::Up ? true : false);
-            auto _side = IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
-            player->SetFall(_side != Side::Up ? true : false);
+            auto newSide = IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
+            player->SetFall(newSide != Side::Up ? true : false);
             player->SetPosition(newPos);
             break;
         }
@@ -130,41 +118,41 @@ StageCollision::Side StageCollision::IsCube(SimpleMath::Vector3* playerPos, cons
     const SimpleMath::Vector3& playerScale, const SimpleMath::Vector3& blockScale)
 {
     // 衝突面を初期化
-    Side _side = Side::None;
+    Side side = Side::None;
 
     // オブジェクトの半径を計算
-    float _pRadius = std::max({ playerScale.x, playerScale.y, playerScale.z }) * 0.5f;
-    float _bRadius = std::max({ blockScale.x, blockScale.y, blockScale.z }) * 0.5f;
+    float playerRad = std::max({ playerScale.x, playerScale.y, playerScale.z }) * 0.5f;
+    float blockRad = std::max({ blockScale.x, blockScale.y, blockScale.z }) * 0.5f;
 
     // 中心座標の距離を計算
-    SimpleMath::Vector3 _diff = *playerPos - blockPos;
-    SimpleMath::Vector3 _diffAbs = UserUtility::AbsVector3(_diff);
-    float _sumRadius = _pRadius + _bRadius;
+    SimpleMath::Vector3 dist = *playerPos - blockPos;
+    SimpleMath::Vector3 distabs = UserUtility::AbsVector3(dist);
+    float sumRad = playerRad + blockRad;
 
     // 距離が半径より小さければ衝突とみなす
-    if (_diffAbs.x < _sumRadius && _diffAbs.y < _sumRadius && _diffAbs.z < _sumRadius)
+    if (distabs.x < sumRad && distabs.y < sumRad && distabs.z < sumRad)
     {
         // どの面に当たったか判定
-        SimpleMath::Vector3 _overlap = static_cast<SimpleMath::Vector3>(_sumRadius) - _diffAbs;
+        SimpleMath::Vector3 overlap = static_cast<SimpleMath::Vector3>(sumRad) - distabs;
 
         // 当たっている面を判定して押し戻す
-        if (std::min({ _overlap.x, _overlap.y, _overlap.z }) == _overlap.x)
+        if (std::min({ overlap.x, overlap.y, overlap.z }) == overlap.x)
         {
-            _side = _diff.x > 0 ? Side::Left : Side::Right;
-            playerPos->x += _diff.x > 0 ? _overlap.x : -_overlap.x;
+            side = dist.x > 0 ? Side::Left : Side::Right;
+            playerPos->x += dist.x > 0 ? overlap.x : -overlap.x;
         }
-        else if (std::min({ _overlap.x, _overlap.y, _overlap.z }) == _overlap.y)
+        else if (std::min({ overlap.x, overlap.y, overlap.z }) == overlap.y)
         {
-            _side = _diff.y > 0 ? Side::Down : Side::Up;
-            playerPos->y += _diff.y > 0 ? _overlap.y : -_overlap.y;
+            side = dist.y > 0 ? Side::Down : Side::Up;
+            playerPos->y += dist.y > 0 ? overlap.y : -overlap.y;
         }
         else
         {
-            _side = _diff.z > 0 ? Side::Behind : Side::Front;
-            playerPos->z += _diff.z > 0 ? _overlap.z : -_overlap.z;
+            side = dist.z > 0 ? Side::Behind : Side::Front;
+            playerPos->z += dist.z > 0 ? overlap.z : -overlap.z;
         }
 
-        return _side;
+        return side;
     }
     else
     {

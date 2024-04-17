@@ -9,36 +9,11 @@
 #ifndef DRAWNUMBER
 #define DRAWNUMBER
 
-//==============================================================================
 // スプライト描画
-//==============================================================================
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 
 class DrawNumber
 {
-private:
-
-	// スプライト
-	std::unique_ptr<DrawSprite> m_sprite;
-
-	// 座標・中心位置
-	DirectX::SimpleMath::Vector2 m_position, m_origin;
-
-	// 文字拡大率、画面拡大率
-	DirectX::SimpleMath::Vector2 m_rate, m_screenRate;
-
-	// 色
-	DirectX::SimpleMath::Vector4 m_color;
-
-	// レクト
-	RECT_U m_rect;
-
-
-private:
-
-	// スプライトのサイズ(１ブロック)
-	static const UINT SIZE;
-
 public:
 
 	// ディジット
@@ -49,33 +24,6 @@ public:
 
 		Length
 	};
-
-public:
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	DrawNumber();
-	~DrawNumber();
-
-	/// <summary>
-	/// 数字を描画する
-	/// </summary>
-	/// <param name="num">数字</param>
-	/// <param name="digits">桁数</param>
-	/// <returns>なし</returns>
-	void Draw(UINT num, Digits digits);
-
-private:
-
-	/// <summary>
-	/// 数字を切り取る
-	/// </summary>
-	/// <param name="num">数字</param>
-	/// <returns>レクト</returns>
-	RECT_U Cut(UINT num);
 
 public:
 
@@ -93,6 +41,40 @@ public:
 	const DirectX::SimpleMath::Vector4& GetColor() { return m_color; }
 	// 色を設定する
 	void SetColor(const DirectX::SimpleMath::Vector4& color) { m_color = color; }
+
+	// コンストラクタ
+	DrawNumber();
+	// デストラクタ
+	~DrawNumber();
+	// 描画
+	void Draw(UINT num, Digits digits);
+
+private:
+
+	// スプライトのサイズ(１ブロック)
+	static const UINT SIZE;
+
+private:
+
+	// 数字を切り取る
+	RECT_U Cut(UINT num);
+
+private:
+
+	// スプライト
+	std::unique_ptr<DrawSprite> m_sprite;
+	// 座標
+	DirectX::SimpleMath::Vector2 m_position;
+	// 中心座標
+	DirectX::SimpleMath::Vector2 m_origin;
+	// 文字拡大率
+	DirectX::SimpleMath::Vector2 m_rate;
+	// 画面拡大率
+	DirectX::SimpleMath::Vector2 m_screenRate;
+	// 色
+	DirectX::SimpleMath::Vector4 m_color;
+	// レクト
+	RECT_U m_rect;
 
 };
 

@@ -9,13 +9,12 @@
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "DrawKeys.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 DrawKeys::DrawKeys(const wchar_t* path, const SimpleMath::Vector2& pos, const SimpleMath::Vector2& screenRate)
-	: m_position{ pos }				// 座標
-	, m_scRate{ screenRate }		// 画面拡大率
-	, m_rate{}						// 拡大率
+	:
+	m_position(pos),			// 座標
+	m_scRate(screenRate),		// 画面拡大率
+	m_rate()					// 拡大率
 {
 	m_sprite = std::make_unique<DrawSprite>();
 	m_sprite->MakeSpriteBatch();
@@ -24,17 +23,13 @@ DrawKeys::DrawKeys(const wchar_t* path, const SimpleMath::Vector2& pos, const Si
 	m_sprite->AddTextureData(L"key", path);
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 DrawKeys::~DrawKeys()
 {
 	m_sprite.reset();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void DrawKeys::Draw()
 {
 	// コルクの描画

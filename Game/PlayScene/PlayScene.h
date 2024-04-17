@@ -30,6 +30,57 @@ class WorldMouse;
 class Water;
 class PlayScene final : public IScene
 {
+public:
+
+	// ゲームタイマーを取得する
+	float GetGameTimer()   const { return m_gameTimer; }
+
+	// 集めたコイン数を取得する
+	int GetCollectedCoin() const { return m_collectedCoin; }
+
+	// ステージ番号を取得する
+	int GetStageNumber()   const { return m_stageNumber; }
+
+public:
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="number">ステージ番号</param>
+	/// <returns>なし</returns>
+	PlayScene(const int& number);
+	~PlayScene();
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Initialize()                             override;
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Update()                                 override;
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Draw()                                   override;
+	/// <summary>
+	/// 終了処理
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void Finalize()                               override;
+	/// <summary>
+	/// 画面依存、デバイス依存の初期化
+	/// </summary>
+	/// <param name="引数無し"></param>
+	/// <returns>なし</returns>
+	void CreateWDResources()                      override;
+
 private:
 
 	// ステージ番号・集めたコイン数
@@ -114,8 +165,6 @@ private:
 	const float LIGHT_NEAR = 0.1f;
 	const float LIGHT_FAR = 250.0f;
 
-private:
-
 	// レンダーテクスチャ
 	std::unique_ptr<DX::RenderTexture> m_renderTexture;
 
@@ -151,46 +200,6 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_shadowConstant, m_lightConstant;
 
 
-public:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="number">ステージ番号</param>
-	/// <returns>なし</returns>
-	PlayScene(const int& number);
-	~PlayScene();
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Initialize()                             override;
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Update()                                 override;
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Draw()                                   override;
-	/// <summary>
-	/// 終了処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Finalize()                               override;
-	/// <summary>
-	/// 画面依存、デバイス依存の初期化
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void CreateWDResources()                      override;
-
 private:
 
 	/// <summary>
@@ -205,19 +214,6 @@ private:
 	/// <param name="states">コモンステート</param>
 	/// <returns>なし</returns>
 	void DebugDraw(DirectX::CommonStates& states) override;
-
-public:
-
-	// ゲームタイマーを取得する
-	float GetGameTimer()   const { return m_gameTimer; }
-
-	// 集めたコイン数を取得する
-	int GetCollectedCoin() const { return m_collectedCoin; }
-
-	// ステージ番号を取得する
-	int GetStageNumber()   const { return m_stageNumber; }
-
-private:
 
 	// ステージ番号に応じてパスを返す
 	const wchar_t* GetStagePath();

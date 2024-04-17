@@ -8,16 +8,14 @@
 #include "pch.h"
 #include "CursorObject.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 CursorObject::CursorObject(const wchar_t* path, SimpleMath::Vector3 scale)
-	: IGameObject(path, L"Resources/Models")
+	:
+	IGameObject(path, L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::CursorPos);
 	SetWeight(1.0f);
-
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);
@@ -25,17 +23,13 @@ CursorObject::CursorObject(const wchar_t* path, SimpleMath::Vector3 scale)
 	SetInitialScale(GetScale());
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 CursorObject::~CursorObject()
 {
 	ReleaseModel();
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void CursorObject::Update()
 {
 	// 座標を設定する
@@ -45,9 +39,7 @@ void CursorObject::Update()
 	CreateWorldMatrix();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void CursorObject::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {

@@ -8,11 +8,10 @@
 #include "pch.h"
 #include "Stage4Camera.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Stage4Camera::Stage4Camera(const SimpleMath::Vector2& screenSize)
-	: IGameCamera(screenSize)
+	:
+	IGameCamera(screenSize)		// 基底クラス
 {
 	// 座標と注視点をセット
 	SetPosition(SimpleMath::Vector3(3.5f, 10.0f, 5.5f));
@@ -22,21 +21,17 @@ Stage4Camera::Stage4Camera(const SimpleMath::Vector2& screenSize)
 	SetInitialTarget(GetTarget());
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 Stage4Camera::~Stage4Camera()
 {
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void Stage4Camera::Update()
 {
 	// 浮遊している風の動き
-	float _timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
-	SetPosition(GetInitialPosition() + SimpleMath::Vector3::UnitY * sinf(_timer));
+	float timer = static_cast<float>(DX::StepTimer::GetInstance().GetTotalSeconds());
+	SetPosition(GetInitialPosition() + SimpleMath::Vector3::UnitY * sinf(timer));
 
 	// ビュー行列をセット
 	SetView(SimpleMath::Matrix::CreateLookAt(GetPosition(), GetTarget(), GetUp()));

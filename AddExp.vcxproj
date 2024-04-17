@@ -255,7 +255,6 @@
     <ClInclude Include="Libraries\Factories\GeometricFactory.h" />
     <ClInclude Include="Libraries\Factories\ModelFactory.h" />
     <ClInclude Include="Libraries\SystemDatas\Button\Button.h" />
-    <ClInclude Include="Libraries\SystemDatas\Camera\Camera.h" />
     <ClInclude Include="Libraries\SystemDatas\DebugDraw\DebugDraw.h" />
     <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h" />
     <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h" />
@@ -348,7 +347,6 @@
     <ClCompile Include="Libraries\Factories\GeometricFactory.cpp" />
     <ClCompile Include="Libraries\Factories\ModelFactory.cpp" />
     <ClCompile Include="Libraries\SystemDatas\Button\Button.cpp" />
-    <ClCompile Include="Libraries\SystemDatas\Camera\Camera.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DebugDraw\DebugDraw.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp" />
@@ -430,6 +428,7 @@
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
     <Font Include="Resources\Fonts\myfile.spritefont">
       <FileType>Document</FileType>

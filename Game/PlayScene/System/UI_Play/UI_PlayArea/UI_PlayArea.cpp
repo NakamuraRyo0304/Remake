@@ -9,12 +9,11 @@
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "UI_PlayArea.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 UI_PlayArea::UI_PlayArea()
-	: m_position{}							// 座標
-	, m_color{}								// 描画色
+	:
+	m_position(),							// 座標
+	m_color()								// 描画色
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -23,17 +22,13 @@ UI_PlayArea::UI_PlayArea()
 	m_sprites->AddTextureData(L"Area", L"Resources/Textures/UI_Play/UI_Area.dds");
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 UI_PlayArea::~UI_PlayArea()
 {
 	m_sprites.reset();
 }
 
-//==============================================================================
-// 初期化関数
-//==============================================================================
+// 初期化
 void UI_PlayArea::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
 	SimpleMath::Vector2 rate)
 {
@@ -42,9 +37,7 @@ void UI_PlayArea::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
 	m_color = color;
 }
 
-//==============================================================================
-// 描画関数
-//==============================================================================
+// 描画
 void UI_PlayArea::Draw()
 {
 	m_sprites->DrawTexture(L"Area",

@@ -10,36 +10,29 @@
 #include "Libraries/UserUtility.h"
 #include "UI_Title.h"
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
-using KeyCode = Keyboard::Keys;															// キーコード
+using KeyCode = Keyboard::Keys; // キーコード
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float UI_Title::COLOR_SPEED = 0.075f;												// 色の変更速度
+const float UI_Title::COLOR_SPEED = 0.075f; // 色の変更速度
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 UI_Title::UI_Title(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)															// 基底クラス
-	, m_selection{ TitleSelect::Start }													// スタート
-	, m_position{}																		// 座標
-	, m_color{}																			// 描画色
-	, is_anything{ false }																// 捜査状況監視フラグ
+	:
+	IUserInterface(scS, mscs),					// 基底クラス
+	m_selection(TitleSelect::Start),			// スタート
+	m_position(),								// 座標
+	m_color(),									// 描画色
+	is_anything(false)							// 捜査状況監視フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
 
-	// 初期化処理
+	// 初期化
 	Initialize();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 UI_Title::~UI_Title()
 {
 	m_sprites.reset();
@@ -47,9 +40,7 @@ UI_Title::~UI_Title()
 	m_color.clear();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void UI_Title::Initialize()
 {
 	// スプライトの登録
@@ -67,16 +58,14 @@ void UI_Title::Initialize()
 	is_anything = false;
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void UI_Title::Update()
 {
-	auto& _input = Input::GetInstance()->GetKeyTrack();
+	auto& input = Input::GetInstance()->GetKeyTrack();
 
 	// どちらかを押したら反転する
-	if (_input->IsKeyPressed(KeyCode::Up)	|| _input->IsKeyPressed(KeyCode::Down) ||
-		_input->IsKeyPressed(KeyCode::W)	|| _input->IsKeyPressed(KeyCode::S))
+	if (input->IsKeyPressed(KeyCode::Up) || input->IsKeyPressed(KeyCode::Down) ||
+		input->IsKeyPressed(KeyCode::W)	|| input->IsKeyPressed(KeyCode::S))
 	{
 		m_selection = m_selection == Start ? Exit : Start;
 		is_anything = true;
@@ -99,9 +88,7 @@ void UI_Title::Update()
 	}
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void UI_Title::Draw()
 {
 	m_sprites->DrawTexture(L"Start", m_position[L"Start"] * GetScreenRate(),

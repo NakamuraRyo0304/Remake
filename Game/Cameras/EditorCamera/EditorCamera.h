@@ -9,13 +9,20 @@
 #ifndef EDITORCAMERA
 #define EDITORCAMERA
 
-//==============================================================================
 // 親カメラクラス
-//==============================================================================
 #include "Game/Common/IGameCamera/IGameCamera.h"
 
 class EditorCamera : public IGameCamera
 {
+public:
+
+	// コンストラクタ
+	EditorCamera(const DirectX::SimpleMath::Vector2& screenSize);
+	// デストラクタ
+	~EditorCamera();
+	// 更新
+	void Update() override;
+
 private:
 
 	// 視点番号
@@ -29,47 +36,25 @@ private:
 		Length,			// 全要素数
 	};
 
-	// ビューポイントを格納する変数
-	ViewPoint m_viewPoint;
-
-	// 目的ポイント
-	DirectX::SimpleMath::Vector3 m_viewPosition;
-
-	// 注視点ポイント
-	DirectX::SimpleMath::Vector3 m_viewTarget;
-
-private:
-
 	// 移動速度
 	static const float MOVE_SPEED;
-
 	// 最高高度
 	static const float MAX_HEIGHT;
 
-public:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="screenSize">スクリーンサイズ</param>
-	/// <returns>なし</returns>
-	EditorCamera(const DirectX::SimpleMath::Vector2& screenSize);
-	~EditorCamera();
+private:
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Update() override;
+	// カメラの位置を更新
+	void UpdateViewPoint();
 
 private:
 
-	/// <summary>
-	/// カメラの位置を更新
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void UpdateViewPoint();
+	// ビューポイントを格納する変数
+	ViewPoint m_viewPoint;
+	// 目的ポイント
+	DirectX::SimpleMath::Vector3 m_viewPosition;
+	// 注視点ポイント
+	DirectX::SimpleMath::Vector3 m_viewTarget;
+
 };
 
 #endif // EDITORCAMERA

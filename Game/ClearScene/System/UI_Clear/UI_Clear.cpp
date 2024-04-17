@@ -9,20 +9,17 @@
 #include "Libraries/UserUtility.h"
 #include "UI_Clear.h"
 
-//==============================================================================
 // 定数の設定
-//==============================================================================
-const float UI_Clear::COLOR_SPEED = 0.05f;												// 色の変更速度
-const float UI_Clear::LAST_POS_X = 1550.0f;												// 最終X座標
+const float UI_Clear::COLOR_SPEED = 0.05f;					// 色の変更速度
+const float UI_Clear::LAST_POS_X = 1550.0f;					// 最終X座標
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 UI_Clear::UI_Clear(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
-	: IUserInterface(scS, mscs)															// 基底クラス
-	, m_select{ SELECT::NEXT }															// セレクト
-	, m_options{}																		// オプション
-	, is_endMoving{ false }																// 動作終了フラグ
+	:
+	IUserInterface(scS, mscs),								// 基底クラス
+	m_select(SELECT::NEXT),									// セレクト
+	m_options(),											// オプション
+	is_endMoving(false)										// 動作終了フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();
@@ -31,18 +28,14 @@ UI_Clear::UI_Clear(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	Initialize();
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 UI_Clear::~UI_Clear()
 {
 	m_sprites.reset();
 	m_options.clear();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void UI_Clear::Initialize()
 {
 	// 文字の設定(文字パス)
@@ -51,18 +44,21 @@ void UI_Clear::Initialize()
 	m_sprites->AddTextureData(L"Stages", L"Resources/Textures/Text/Selecttex.dds");
 
 	// 文字ごとの設定
-	Option _opt = {};
-	_opt.pos = { LAST_POS_X * 2,750.0f }; _opt.color = UserUtility::Colors::WHITE;
-	m_options.emplace(L"Next", _opt);
-	_opt.pos.y += 100.0f; _opt.color = UserUtility::Colors::WHITE_A;
-	m_options.emplace(L"ReStart", _opt);
-	_opt.pos.y += 100.0f;
-	m_options.emplace(L"Stages", _opt);
+	Option option = {};
+
+	option.pos = { LAST_POS_X * 2,750.0f };
+	option.color = UserUtility::Colors::WHITE;
+	m_options.emplace(L"Next", option);
+
+	option.pos.y += 100.0f;
+	option.color = UserUtility::Colors::WHITE_A;
+	m_options.emplace(L"ReStart", option);
+
+	option.pos.y += 100.0f;
+	m_options.emplace(L"Stages", option);
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void UI_Clear::Update()
 {
 	// X座標を移動する
@@ -82,9 +78,7 @@ void UI_Clear::Update()
 	}
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void UI_Clear::Draw()
 {
 	m_sprites->DrawTexture(L"Next", m_options[L"Next"].pos * GetScreenRate(),
@@ -100,9 +94,7 @@ void UI_Clear::Draw()
 		SimpleMath::Vector2::Zero, RECT_U(0, 0, 382, 128));
 }
 
-//==============================================================================
-// 色変更
-//==============================================================================
+// 色を変更
 void UI_Clear::ChangeColor(const SELECT& select)
 {
 	if (select == SELECT::NEXT)

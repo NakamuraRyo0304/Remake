@@ -5,9 +5,7 @@
  *  @Author NakamuraRyo
  */
 
-//==============================================================================
 // 親カメラクラス
-//==============================================================================
 #include "Game/Common/IGameCamera/IGameCamera.h"
 
 #ifndef STAGE0CAMERA
@@ -15,22 +13,13 @@
 
 class Stage0Camera : public IGameCamera
 {
-private:
-
 public:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="screenSize">スクリーンサイズ</param>
-	/// <returns>なし</returns>
-	Stage0Camera(const DirectX::SimpleMath::Vector2& screenSize);
-	~Stage0Camera();
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
+	// コンストラクタ
+	Stage0Camera(const DirectX::SimpleMath::Vector2& screenSize);
+	// デストラクタ
+	~Stage0Camera();
+	// 更新処理
 	void Update() override;
 };
 
