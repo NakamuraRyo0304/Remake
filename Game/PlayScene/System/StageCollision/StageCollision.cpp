@@ -76,8 +76,8 @@ void StageCollision::PerformEngenProc(Player* player, IGameObject* block, Simple
         {
             // ’…’nˆ—‚ğs‚¢A‰_‚ğ“®‚©‚·
             static_cast<Cloud*>(block)->SetHitFlag(side != Side::Up ? true : false);
-            auto side = IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
-            player->SetFall(side != Side::Up ? true : false);
+            auto newSide = IsCube(&newPos, block->GetPosition(), player->GetScale(), block->GetScale());
+            player->SetFall(newSide != Side::Up ? true : false);
             player->SetPosition(newPos);
             break;
         }

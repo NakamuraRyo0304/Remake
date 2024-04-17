@@ -237,7 +237,6 @@
     <ClInclude Include="Game\PlayScene\Objects\Player\Player.h" />
     <ClInclude Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.h" />
     <ClInclude Include="Game\PlayScene\PlayScene.h" />
-    <ClInclude Include="Game\PlayScene\System\DrawPath\DrawPath.h" />
     <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
     <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h" />
     <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h" />
@@ -330,7 +329,6 @@
     <ClCompile Include="Game\PlayScene\Objects\Player\Player.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Sky_Play\Sky_Play.cpp" />
     <ClCompile Include="Game\PlayScene\PlayScene.cpp" />
-    <ClCompile Include="Game\PlayScene\System\DrawPath\DrawPath.cpp" />
     <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp" />
     <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp" />
