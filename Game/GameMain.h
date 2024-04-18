@@ -9,22 +9,11 @@
 #ifndef GAMEMAIN
 #define GAMEMAIN
 
+// 親シーンのインクルード
+#include "Game/BaseScene/BaseScene.h"
+
  // 前方宣言
-class IScene;
 class Fade;
-
-// TODO: シーン１：シーンIDの追加
-enum class SCENE : int
-{
-    NONE,       // ID無し
-
-    TITLE,      // タイトルシーン
-    SELECT,     // セレクトシーン
-    PLAY,       // ゲームシーン
-    EDIT,       // 制作シーン
-    CLEAR,      // クリアシーン
-    EXIT,       // 終了
-};
 
 #ifdef _DEBUG
 class Timer;
@@ -56,7 +45,7 @@ public:
     inline void ExitApp() { PostQuitMessage(0); }
     // シーンキャスタ    // CastSceneType<変換したいシーン型>(シーン)
     template<typename T>
-    T* CastSceneType(std::unique_ptr<IScene>& scene)
+    T* CastSceneType(std::unique_ptr<BaseScene>& scene)
     {
         return dynamic_cast<T*>(scene.get());
     }
@@ -77,7 +66,7 @@ private:
     // フェードオブジェクト
     std::unique_ptr<Fade> m_fade;
     // 現在処理するシーン
-    std::unique_ptr<IScene> m_nowScene;
+    std::unique_ptr<BaseScene> m_nowScene;
     // 未来のシーン、過去のシーン
     SCENE m_nextScene, m_prevScene;
     // スクリーンサイズ

@@ -6,7 +6,6 @@
  */
 
 #include "pch.h"													// プリコンパイル済みヘッダー
-#include "Libraries/UserUtility.h"									// ユーティリティ
 #include "Game/Cameras/AdminCamera/AdminCamera.h"					// 統合カメラ
 #include "Game/Editor/System/UI_Editor/UI_Editor.h"					// ユーザインターフェース
 
@@ -27,8 +26,8 @@ using BN = UI_Editor::BUTTON_NAME;			// ボタンの名前
 // コンストラクタ
 Editor::Editor()
 	:
-	IScene(),						// 基底クラスのコンストラクタ
-	m_selectionID(ID::Obj_Flozen)	// 初期は氷床を設定
+	BaseScene(),						// 基底クラスのコンストラクタ
+	m_selectionID(ID::Obj_Flozen)		// 初期は氷床を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 }

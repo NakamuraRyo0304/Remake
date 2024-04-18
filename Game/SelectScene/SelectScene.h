@@ -10,14 +10,14 @@
 #define SELECTSCENE
 
 // 親シーンクラス
-#include "Game/IScene/IScene.h"
+#include "Game/BaseScene/BaseScene.h"
 
 class AdminCamera;
 class BlockManager;
 class UI_Select;
 class Water;
 class BG_Select;
-class SelectScene final : public IScene
+class SelectScene final : public BaseScene
 {
 public:
 
@@ -43,7 +43,7 @@ public:
 
 private:
 
-	// シーン内の変数初期化関数
+	// シーン内の変数初期化
 	void SetSceneValues() override;
 	// デバッグ描画
 	void DebugDraw(DirectX::CommonStates& states) override;

@@ -10,7 +10,7 @@
 #define	PLAYSCENE
 
 // 親シーンクラス
-#include "Game/IScene/IScene.h"
+#include "Game/BaseScene/BaseScene.h"
 
 class AdminCamera;
 class BlockManager;
@@ -26,16 +26,14 @@ class Player;
 class UI_Play;
 class WorldMouse;
 class Water;
-class PlayScene final : public IScene
+class PlayScene final : public BaseScene
 {
 public:
 
 	// ゲームタイマーを取得する
 	float GetGameTimer() const { return m_gameTimer; }
-
 	// 集めたコイン数を取得する
 	int GetCollectedCoin() const { return m_collectedCoin; }
-
 	// ステージ番号を取得する
 	int GetStageNumber() const { return m_stageNumber; }
 
@@ -82,7 +80,7 @@ private:
 
 private:
 
-	// シーン内の変数初期化関数
+	// シーン内の変数初期化
 	void SetSceneValues() override;
 	// デバッグ描画
 	void DebugDraw(DirectX::CommonStates& states) override;

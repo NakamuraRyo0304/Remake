@@ -10,7 +10,7 @@
 #define EDITOR
 
 // 親シーンクラス
-#include "Game/IScene/IScene.h"
+#include "Game/BaseScene/BaseScene.h"
 
 // オブジェクトステータス
 #include "Game/Common/IGameObject/IGameObjectStates.h"
@@ -22,7 +22,7 @@ class EditorCollision;
 class EditorGrids;
 class UI_Editor;
 class WorldMouse;
-class Editor final : public IScene
+class Editor final : public BaseScene
 {
 public:
 
@@ -43,7 +43,7 @@ public:
 
 private:
 
-	// シーン内の変数初期化関数
+	// シーン内の変数初期化
 	void SetSceneValues() override;
 	// デバッグ描画
 	void DebugDraw(DirectX::CommonStates& states) override;

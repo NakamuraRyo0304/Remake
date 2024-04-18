@@ -60,9 +60,6 @@
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
       <Filter>Interfaces\IGameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Game\IScene\IScene.cpp">
-      <Filter>Interfaces\IScene</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
       <Filter>Interfaces\IUserInterface</Filter>
     </ClCompile>
@@ -95,9 +92,6 @@
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
       <Filter>Libraries\DiaLog</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp">
-      <Filter>Libraries\DisplayEffect</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DrawSprite\DrawSprite.cpp">
       <Filter>Libraries\DrawSprite</Filter>
@@ -134,9 +128,6 @@
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp">
       <Filter>Libraries\Transition</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\XController\XController.cpp">
-      <Filter>Libraries\XContoller</Filter>
     </ClCompile>
     <ClCompile Include="Game\SelectScene\SelectScene.cpp">
       <Filter>Scenes\SelectScene</Filter>
@@ -300,6 +291,9 @@
     <ClCompile Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.cpp">
       <Filter>GameSystems\Title\MoveMonitor</Filter>
     </ClCompile>
+    <ClCompile Include="Game\BaseScene\BaseScene.cpp">
+      <Filter>Scenes\BaseScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -319,9 +313,6 @@
     </ClInclude>
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h">
       <Filter>Interfaces\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\IScene\IScene.h">
-      <Filter>Interfaces\IScene</Filter>
     </ClInclude>
     <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
       <Filter>Interfaces\IUserInterface</Filter>
@@ -355,9 +346,6 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
       <Filter>Libraries\DiaLog</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h">
-      <Filter>Libraries\DisplayEffect</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DrawSprite\DrawSprite.h">
       <Filter>Libraries\DrawSprite</Filter>
@@ -400,9 +388,6 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h">
       <Filter>Libraries\Transition</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\XController\XController.h">
-      <Filter>Libraries\XContoller</Filter>
     </ClInclude>
     <ClInclude Include="Game\SelectScene\SelectScene.h">
       <Filter>Scenes\SelectScene</Filter>
@@ -577,6 +562,12 @@
     </ClInclude>
     <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h">
       <Filter>GameObjects\Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\BaseScene\BaseScene.h">
+      <Filter>Scenes\BaseScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\IScene.h">
+      <Filter>Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -827,9 +818,6 @@
     </Filter>
     <Filter Include="Interfaces\IGameObject">
       <UniqueIdentifier>{21cc561c-c77d-4e7c-a9de-c7abf01a0d79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IScene">
-      <UniqueIdentifier>{0b9324fe-c29c-42bf-b298-07373acdaf2a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Interfaces\IUserInterface">
       <UniqueIdentifier>{91acd816-9024-4985-bf64-43b5e063431e}</UniqueIdentifier>
@@ -1169,6 +1157,9 @@
     </Filter>
     <Filter Include="GameObjects\Common\Blocks\Goal">
       <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\BaseScene">
+      <UniqueIdentifier>{9af100d6-0adf-4175-a912-f8858bf17929}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
