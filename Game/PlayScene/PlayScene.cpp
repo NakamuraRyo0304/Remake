@@ -25,52 +25,40 @@
 
 #include "PlayScene.h"												// プレイシーン
 
-//==============================================================================
 // 定数の設定(シャドウマップ)
-//==============================================================================
-const int PlayScene::SHADOWMAP_SIZE = 976;							// シャドウマップのサイズ
-const float PlayScene::AMBIENT_COLOR = 0.25f;						// 環境光の色
-const float PlayScene::LIGHT_THETA = 85.0f;							// ライトの範囲
-
-//==============================================================================
+const int PlayScene::SHADOWMAP_SIZE = 976;		// シャドウマップのサイズ
+const float PlayScene::AMBIENT_COLOR = 0.25f;	// 環境光の色
+const float PlayScene::LIGHT_THETA = 85.0f;		// ライトの範囲
 // 定数の設定(フラグ追跡)
-//==============================================================================
-const int PlayScene::MAX_FOLLOW = 3;								// 最大追跡パス数
-const float PlayScene::FLAG_START = 5.0f;							// 最高高度
-const float PlayScene::FLAG_CURSOR_RATE = 0.4f;						// フラグカーソルの拡大率
+const int PlayScene::MAX_FOLLOW = 3;			// 最大追跡パス数
+const float PlayScene::FLAG_START = 5.0f;		// 最高高度
+const float PlayScene::FLAG_CURSOR_RATE = 0.4f;	// フラグカーソルの拡大率
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
-using KeyCode = Keyboard::Keys;										// キーコード
-using CameraType = AdminCamera::Type;								// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;							// サウンドのタイプ
-using MouseClick = Mouse::ButtonStateTracker;						// マウスのクリック
+using KeyCode = Keyboard::Keys;					// キーコード
+using CameraType = AdminCamera::Type;			// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;		// サウンドのタイプ
+using MouseClick = Mouse::ButtonStateTracker;	// マウスのクリック
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 PlayScene::PlayScene(const int& number)
-	: IScene()														// 基底クラスのコンストラクタ
-	, m_stageNumber{ number }										// ステージ番号
-	, m_gameTimer{ 0.0f }											// ゲームタイマー
-	, m_collectedCoin{ 0 }											// 集めたコイン数
+	:
+	IScene(),				// 基底クラスのコンストラクタ
+	m_stageNumber(number),	// ステージ番号
+	m_gameTimer(0.0f),		// ゲームタイマー
+	m_collectedCoin(0)		// 集めたコイン数
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 PlayScene::~PlayScene()
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのデストラクタが呼ばれました。\n");
 	Finalize();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void PlayScene::Initialize()
 {
 	// 画面依存の初期化
@@ -80,25 +68,23 @@ void PlayScene::Initialize()
 	SetSceneValues();
 
 	// ボリューム設定・音量再生開始(BGM・環境音)
-	auto _se = SoundManager::GetInstance();
-	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, 0.25f);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, RepeatType::LOOP);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,     RepeatType::LOOP);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2,    RepeatType::LOOP);
-	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_SLIDE, 0.7f);
+	auto sound = SoundManager::GetInstance();
+	sound->SetVolume(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, 0.25f);
+	sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_BGM_DEFAULT, RepeatType::LOOP);
+	sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,     RepeatType::LOOP);
+	sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2,    RepeatType::LOOP);
+	sound->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_SLIDE, 0.7f);
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void PlayScene::Update()
 {
-	auto _input = Input::GetInstance();
-	auto _key = Keyboard::Get().GetState();
-	auto _se = SoundManager::GetInstance();
+	auto input = Input::GetInstance();
+	auto key = Keyboard::Get().GetState();
+	auto sound = SoundManager::GetInstance();
 
 	// セレクトに戻る
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
 		ChangeScene(SCENE::SELECT);
 	}
@@ -110,24 +96,24 @@ void PlayScene::Update()
 		m_timer->Update(true);
 
 		// 追跡パスを追加
-		if (_input->GetMouseTrack()->leftButton == MouseClick::PRESSED)
+		if (input->GetMouseTrack()->leftButton == MouseClick::PRESSED)
 		{
 			// プレイヤーの座標
-			SimpleMath::Vector3 _playerPos = m_worldMouse->GetPosition();
-			_playerPos.y = m_player->GetPosition().y;
+			SimpleMath::Vector3 playerPosition = m_worldMouse->GetPosition();
+			playerPosition.y = m_player->GetPosition().y;
 
 			// 旗の開始座標
-			SimpleMath::Vector3 _flagPos = m_worldMouse->GetPosition();
-			_flagPos.y = FLAG_START;
+			SimpleMath::Vector3 flagPosition = m_worldMouse->GetPosition();
+			flagPosition.y = FLAG_START;
 
-			m_player->AddFollowPath(_playerPos, MAX_FOLLOW);
-			m_flagManager->AddFlag(_flagPos, _playerPos, MAX_FOLLOW);
+			m_player->AddFollowPath(playerPosition, MAX_FOLLOW);
+			m_flagManager->AddFlag(flagPosition, playerPosition, MAX_FOLLOW);
 		}
 
 		// コインが当たったら音を鳴らす
 		if (m_player->IsCoinHit())
 		{
-			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_COIN, RepeatType::ONCE);
+			sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_COIN, RepeatType::ONCE);
 			m_player->SetCoinHit(false);
 		}
 
@@ -135,7 +121,7 @@ void PlayScene::Update()
 		if (m_blockManager->IsArrived())
 		{
 			// シャッター音を鳴らす
-			_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SLIDE, RepeatType::ONCE);
+			sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SLIDE, RepeatType::ONCE);
 
 			// ゲームタイマー/集めたコイン数を取得
 			m_timer->Stop();
@@ -203,12 +189,12 @@ void PlayScene::Update()
 	m_flagManager->Update();
 
 	// UIの更新
-	int _num = 0;
+	int number = 0;
 	for (auto& coin : m_blockManager->GetCoins())
 	{
-		if (coin->IsActive()) _num++;
+		if (coin->IsActive()) number++;
 	}
-	m_ui->SetCoinNum(_num);
+	m_ui->SetCoinNum(number);
 	m_ui->Update();
 
 	// 氷山の更新
@@ -217,142 +203,124 @@ void PlayScene::Update()
 	m_bigberg->Update();
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void PlayScene::Draw()
 {
 	// レンダリング変数を取得
-	auto _states = GetSystemManager()->GetCommonStates();
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
+	auto states = GetSystemManager()->GetCommonStates();
+	auto context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
-	//==============================================================================
 	// レンダーターゲットをシャドウマップ用に変更
-	//==============================================================================
-	auto _rtv = m_renderTexture->GetRenderTargetView();
-	auto _dsv = m_depthStencil->GetDepthStencilView();
-	_context->ClearRenderTargetView(_rtv, Colors::CornflowerBlue);
-	_context->ClearDepthStencilView(_dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
-	_context->OMSetRenderTargets(1, &_rtv, _dsv);
-	D3D11_VIEWPORT _vp = { 0.0f, 0.0f, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0.0f, 1.0f };
-	_context->RSSetViewports(1, &_vp);
+	auto rtv = m_renderTexture->GetRenderTargetView();
+	auto dsv = m_depthStencil->GetDepthStencilView();
+	context->ClearRenderTargetView(rtv, Colors::CornflowerBlue);
+	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	context->OMSetRenderTargets(1, &rtv, dsv);
+	D3D11_VIEWPORT vp = { 0.0f, 0.0f, SHADOWMAP_SIZE, SHADOWMAP_SIZE, 0.0f, 1.0f };
+	context->RSSetViewports(1, &vp);
 
-	//==============================================================================
 	// ライトの設定
-	//==============================================================================
-	SimpleMath::Vector3 _lightDirection =
+	SimpleMath::Vector3 lightDir =
 		SimpleMath::Vector3::Transform(SimpleMath::Vector3::UnitZ, LIGHT_ROTATION);
 
 	// ビュー行列
-	SimpleMath::Matrix _view = SimpleMath::Matrix::CreateLookAt(
-		LIGHT_POSITION, LIGHT_POSITION + _lightDirection, SimpleMath::Vector3::UnitY);
+	SimpleMath::Matrix view = SimpleMath::Matrix::CreateLookAt(
+		LIGHT_POSITION, LIGHT_POSITION + lightDir, SimpleMath::Vector3::UnitY);
 
 	// プロジェクション行列
-	SimpleMath::Matrix _projection = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
+	SimpleMath::Matrix projection = SimpleMath::Matrix::CreatePerspectiveFieldOfView(
 		XMConvertToRadians(LIGHT_THETA), 1.0f, LIGHT_NEAR, LIGHT_FAR);
 
-	//==============================================================================
 	// シャドウバッファを作成 ロック->変換->アンロック
-	//==============================================================================
-	D3D11_MAPPED_SUBRESOURCE _resource;
-	_context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &_resource);
+	D3D11_MAPPED_SUBRESOURCE resource;
+	context->Map(m_shadowConstant.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &resource);
 
-	ShadowBuffer _buffer = {};
-	_buffer.lightViewProj = XMMatrixTranspose(_view * _projection);
-	_buffer.lightPosition = LIGHT_POSITION;
-	_buffer.lightDirection = _lightDirection;
-	_buffer.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
-	*static_cast<ShadowBuffer*>(_resource.pData) = _buffer;
+	ShadowBuffer buffer = {};
+	buffer.lightViewProj = XMMatrixTranspose(view * projection);
+	buffer.lightPosition = LIGHT_POSITION;
+	buffer.lightDirection = lightDir;
+	buffer.lightAmbient = SimpleMath::Color(AMBIENT_COLOR, AMBIENT_COLOR, AMBIENT_COLOR);
+	*static_cast<ShadowBuffer*>(resource.pData) = buffer;
 
-	_context->Unmap(m_shadowConstant.Get(), 0);
+	context->Unmap(m_shadowConstant.Get(), 0);
 
-	//==============================================================================
 	// デプスラムダの作成
-	//==============================================================================
-	ShaderLambda _option = [&]() {
-		_context->VSSetShader(m_vsDep.Get(), nullptr, 0);
-		_context->PSSetShader(m_psDep.Get(), nullptr, 0); };
+	ShaderLambda option = [&]() {
+		context->VSSetShader(m_vsDep.Get(), nullptr, 0);
+		context->PSSetShader(m_psDep.Get(), nullptr, 0); };
 
-	//==============================================================================
 	// 影オブジェクトを描画する
-	//==============================================================================
 
 	// カーソルの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _option);
+	m_cursorObject->Draw(context, *states, view, projection, false, option);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection, false, _option);
+	m_blockManager->Draw(context, *states, view, projection, false, option);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _view, _projection, false, _option);
+	m_player->Draw(context, *states, view, projection, false, option);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _view, _projection, false, _option);
+	m_flagManager->Draw(context, *states, view, projection, false, option);
 
-	//==============================================================================
 	// レンダーターゲットをデフォルトに戻す
-	//==============================================================================
-	auto _srv = m_renderTexture->GetShaderResourceView();
-	_rtv = DX::DeviceResources::GetInstance()->GetRenderTargetView();
-	_dsv = DX::DeviceResources::GetInstance()->GetDepthStencilView();
-	_context->ClearRenderTargetView(_rtv, Colors::CornflowerBlue);
-	_context->ClearDepthStencilView(_dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	_context->OMSetRenderTargets(1, &_rtv, _dsv);
-	_vp = DX::DeviceResources::GetInstance()->GetScreenViewport();
-	_context->RSSetViewports(1, &_vp);
+	auto srv = m_renderTexture->GetShaderResourceView();
+	rtv = DX::DeviceResources::GetInstance()->GetRenderTargetView();
+	dsv = DX::DeviceResources::GetInstance()->GetDepthStencilView();
+	context->ClearRenderTargetView(rtv, Colors::CornflowerBlue);
+	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	context->OMSetRenderTargets(1, &rtv, dsv);
+	vp = DX::DeviceResources::GetInstance()->GetScreenViewport();
+	context->RSSetViewports(1, &vp);
 
-	//==============================================================================
 	// シャドウラムダの作成
-	//==============================================================================
-	_option = [&]() {
+	option = [&]() {
 		// バッファ/リソースの設定
-		ID3D11Buffer* _buffer[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
-		_context->VSSetConstantBuffers(1, 1, _buffer);
-		_context->PSSetConstantBuffers(1, 2, _buffer);
-		_context->PSSetShaderResources(1, 1, &_srv);
+		ID3D11Buffer* buff[] = { m_shadowConstant.Get(), m_lightConstant.Get() };
+		context->VSSetConstantBuffers(1, 1, buff);
+		context->PSSetConstantBuffers(1, 2, buff);
+		context->PSSetShaderResources(1, 1, &srv);
 
 		// サンプラー/シェーダーの設定
-		ID3D11SamplerState* _samplers[] = { _states->LinearWrap(), m_sampler.Get() };
-		_context->PSSetSamplers(0, 2, _samplers);
-		_context->VSSetShader(m_vs.Get(), nullptr, 0);
-		_context->PSSetShader(m_ps.Get(), nullptr, 0); };
+		ID3D11SamplerState* samplers[] = { states->LinearWrap(), m_sampler.Get() };
+		context->PSSetSamplers(0, 2, samplers);
+		context->VSSetShader(m_vs.Get(), nullptr, 0);
+		context->PSSetShader(m_ps.Get(), nullptr, 0); };
 
 
 	// カメラのマトリクスを取得
-	_view = m_adminCamera->GetView();
-	_projection = m_adminCamera->GetProjection();
+	view = m_adminCamera->GetView();
+	projection = m_adminCamera->GetProjection();
 
 	// ワールドマウスの描画
-	m_worldMouse->Draw(_view, _projection);
+	m_worldMouse->Draw(view, projection);
 
 	// 空の描画
-	m_sky->Draw(_context, *_states, _view, _projection);
+	m_sky->Draw(context, *states, view, projection);
 
 	// カーソルオブジェクトの描画
-	m_cursorObject->Draw(_context, *_states, _view, _projection, false, _option);
+	m_cursorObject->Draw(context, *states, view, projection, false, option);
 
 	// ブロックの描画
-	m_blockManager->Draw(_context, *_states, _view, _projection, false, _option);
+	m_blockManager->Draw(context, *states, view, projection, false, option);
 
 	// プレイヤーの描画
-	m_player->Draw(_context, *_states, _view, _projection, false, _option);
+	m_player->Draw(context, *states, view, projection, false, option);
 
 	// フラグの描画
-	m_flagManager->Draw(_context, *_states, _view, _projection, false, _option);
+	m_flagManager->Draw(context, *states, view, projection, false, option);
 
-	//==============================================================================
 	// リソースの割り当てを解除する
-	//==============================================================================
-	ID3D11ShaderResourceView* _nullsrv[] = { nullptr };
-	_context->PSSetShaderResources(1, 1, _nullsrv);
+	ID3D11ShaderResourceView* nullsrv[] = { nullptr };
+	context->PSSetShaderResources(1, 1, nullsrv);
 
 	// 水面の描画
-	m_water->Draw(_view, _projection);
+	m_water->Draw(view, projection);
 
 	// 氷山の描画
-	m_iceberg->Draw(_context, *_states, _view, _projection);
-	m_smallberg->Draw(_context, *_states, _view, _projection);
-	m_bigberg->Draw(_context, *_states, _view, _projection);
+	m_iceberg->Draw(context, *states, view, projection);
+	m_smallberg->Draw(context, *states, view, projection);
+	m_bigberg->Draw(context, *states, view, projection);
 
 	// UIの描画
 	m_ui->Draw();
@@ -365,9 +333,7 @@ void PlayScene::Draw()
 #endif
 }
 
-//==============================================================================
-// 終了処理
-//==============================================================================
+// 終了
 void PlayScene::Finalize()
 {
 	m_adminCamera.reset();
@@ -387,9 +353,7 @@ void PlayScene::Finalize()
 	m_bigberg.reset();
 }
 
-//==============================================================================
 // 画面、デバイス依存の初期化
-//==============================================================================
 void PlayScene::CreateWDResources()
 {
 	// ゲームカメラ作成
@@ -424,7 +388,7 @@ void PlayScene::CreateWDResources()
 	m_water = std::make_unique<Water>();
 
 	// UI作成
-	m_ui = std::make_unique<UI_Play>(GetWindowSize(), GetFullHDSize());
+	m_ui = std::make_unique<UI_Play>(GetWindowSize(), FULL_HD);
 
 	// タイマー作成
 	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
@@ -434,57 +398,55 @@ void PlayScene::CreateWDResources()
 	m_smallberg = std::make_unique<Iceberg>(SimpleMath::Vector3(0.0f, -30.0f, 25.0f), 5.0f, 0.0f);
 	m_bigberg   = std::make_unique<Iceberg>(SimpleMath::Vector3(50.0f, -30.0f, 0.0f), 15.0f, -5.0f);
 
-	//==============================================================================
 	// シャドウマップ関連の作成
-	//==============================================================================
-	RECT _rect = { 0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE };
-	auto _device = DX::DeviceResources::GetInstance()->GetD3DDevice();
+	RECT rect = { 0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE };
+	auto device = DX::DeviceResources::GetInstance()->GetD3DDevice();
 
 	// レンダーテクスチャの作成
 	{
 		m_renderTexture = std::make_unique<DX::RenderTexture>(DXGI_FORMAT_R32_FLOAT);
-		m_renderTexture->SetDevice(_device);
-		m_renderTexture->SetWindow(_rect);
+		m_renderTexture->SetDevice(device);
+		m_renderTexture->SetWindow(rect);
 	}
 
 	// デプスステンシルの作成
 	{
 		m_depthStencil = std::make_unique<DepthStencil>(DXGI_FORMAT_D32_FLOAT);
-		m_depthStencil->SetDevice(_device);
-		m_depthStencil->SetWindow(_rect);
+		m_depthStencil->SetDevice(device);
+		m_depthStencil->SetWindow(rect);
 	}
 
 	// デプスシェーダーの作成
 	{
 		// 頂点シェーダー
-		std::vector<uint8_t> _shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS_Depth.cso");
+		std::vector<uint8_t> shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS_Depth.cso");
 		DX::ThrowIfFailed(
-			_device->CreateVertexShader(
-				_shader.data(), _shader.size(), nullptr, m_vsDep.ReleaseAndGetAddressOf()
+			device->CreateVertexShader(
+				shader.data(), shader.size(), nullptr, m_vsDep.ReleaseAndGetAddressOf()
 			)
 		);
 		// ピクセルシェーダー
-		_shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS_Depth.cso");
+		shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS_Depth.cso");
 		DX::ThrowIfFailed(
-			_device->CreatePixelShader(
-				_shader.data(), _shader.size(), nullptr, m_psDep.ReleaseAndGetAddressOf()
+			device->CreatePixelShader(
+				shader.data(), shader.size(), nullptr, m_psDep.ReleaseAndGetAddressOf()
 			)
 		);
 	}
 	// シャドウシェーダーの作成
 	{
 		// 頂点シェーダー
-		std::vector<uint8_t> _shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS.cso");
+		std::vector<uint8_t> shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_VS.cso");
 		DX::ThrowIfFailed(
-			_device->CreateVertexShader(
-				_shader.data(), _shader.size(), nullptr, m_vs.ReleaseAndGetAddressOf()
+			device->CreateVertexShader(
+				shader.data(), shader.size(), nullptr, m_vs.ReleaseAndGetAddressOf()
 			)
 		);
 		// ピクセルシェーダー
-		_shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS.cso");
+		shader = DX::ReadData(L"Resources/Shaders/ShadowMap/SM_PS.cso");
 		DX::ThrowIfFailed(
-			_device->CreatePixelShader(
-				_shader.data(), _shader.size(), nullptr, m_ps.ReleaseAndGetAddressOf()
+			device->CreatePixelShader(
+				shader.data(), shader.size(), nullptr, m_ps.ReleaseAndGetAddressOf()
 			)
 		);
 	}
@@ -500,39 +462,37 @@ void PlayScene::CreateWDResources()
 	// コンスタントバッファの作成
 	{
 		// シャドウ
-		D3D11_BUFFER_DESC _desc = {};
-		_desc.ByteWidth = static_cast<UINT>(sizeof(ShadowBuffer));
-		_desc.Usage = D3D11_USAGE_DYNAMIC;
-		_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		D3D11_BUFFER_DESC desc = {};
+		desc.ByteWidth = static_cast<UINT>(sizeof(ShadowBuffer));
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		DX::ThrowIfFailed(
-			_device->CreateBuffer(&_desc, nullptr, m_shadowConstant.ReleaseAndGetAddressOf())
+			device->CreateBuffer(&desc, nullptr, m_shadowConstant.ReleaseAndGetAddressOf())
 		);
 		// ライト
-		_desc.ByteWidth = static_cast<UINT>(sizeof(LightFovBuffer));
-		_desc.Usage = D3D11_USAGE_DEFAULT;
-		_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		_desc.CPUAccessFlags = 0;
+		desc.ByteWidth = static_cast<UINT>(sizeof(LightFovBuffer));
+		desc.Usage = D3D11_USAGE_DEFAULT;
+		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		desc.CPUAccessFlags = 0;
 		DX::ThrowIfFailed(
-			_device->CreateBuffer(&_desc, nullptr, m_lightConstant.ReleaseAndGetAddressOf())
+			device->CreateBuffer(&desc, nullptr, m_lightConstant.ReleaseAndGetAddressOf())
 		);
 	}
 
 	// サンプラーの作成
 	{
-		D3D11_SAMPLER_DESC _desc = CD3D11_SAMPLER_DESC(D3D11_DEFAULT);
-		_desc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
-		_desc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
-		_desc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
-		_desc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
-		_desc.ComparisonFunc = D3D11_COMPARISON_LESS;
-		_device->CreateSamplerState(&_desc, m_sampler.ReleaseAndGetAddressOf());
+		D3D11_SAMPLER_DESC desc = CD3D11_SAMPLER_DESC(D3D11_DEFAULT);
+		desc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
+		desc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+		desc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+		desc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+		desc.ComparisonFunc = D3D11_COMPARISON_LESS;
+		device->CreateSamplerState(&desc, m_sampler.ReleaseAndGetAddressOf());
 	}
 }
 
-//==============================================================================
 // シーン内の変数初期化関数
-//==============================================================================
 void PlayScene::SetSceneValues()
 {
 	// カメラの初期設定-自動
@@ -557,10 +517,10 @@ void PlayScene::SetSceneValues()
 	m_cursorObject->SetCursorPosition(m_worldMouse->GetPosition());
 
 	// ライトバッファの更新
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
-	LightFovBuffer _lightBuff = {};
-	_lightBuff.fCosTheta = cosf(XMConvertToRadians(LIGHT_THETA / 2.0f));
-	_context->UpdateSubresource(m_lightConstant.Get(), 0, nullptr, &_lightBuff, 0, 0);
+	auto context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
+	LightFovBuffer buff = {};
+	buff.fCosTheta = cosf(XMConvertToRadians(LIGHT_THETA / 2.0f));
+	context->UpdateSubresource(m_lightConstant.Get(), 0, nullptr, &buff, 0, 0);
 
 	// 水面の画像を読み込む
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
@@ -572,33 +532,29 @@ void PlayScene::SetSceneValues()
 	m_timer->Start();
 }
 
-//==============================================================================
 // デバッグ描画
-//==============================================================================
 void PlayScene::DebugDraw(CommonStates& states)
 {
-	auto& _string = Debug::DrawString::GetInstance();
-	auto& _time = DX::StepTimer::GetInstance();
+	auto& string = Debug::DrawString::GetInstance();
+	auto& timer = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 },  Colors::DarkGreen, L"PlayScene");
-	_string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", _time.GetTotalSeconds());
-	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%.d", m_stageNumber);
-	_string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f",
+	string.DrawFormatString(states, { 0,0 },  Colors::DarkGreen, L"PlayScene");
+	string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", timer.GetFramesPerSecond());
+	string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", timer.GetTotalSeconds());
+	string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%.d", m_stageNumber);
+	string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f",
 		m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
-	_string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f",
+	string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f",
 		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
-	_string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
-	_string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
-	_string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f",
+	string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
+	string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
+	string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f",
 		m_adminCamera->GetPosition().x, m_adminCamera->GetPosition().y, m_adminCamera->GetPosition().z);
 }
 
-//==============================================================================
 // ステージのパスを取得する
-//==============================================================================
 const wchar_t* PlayScene::GetStagePath()
 {
 	// スクショ保存先パスを指定

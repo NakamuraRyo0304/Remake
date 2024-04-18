@@ -19,7 +19,6 @@ Bird_Title::Bird_Title()
 {
 	CreateModel();
 	SetID(ID::Back_Bird);
-	SetWeight(NON_WEIGHT);
 	SetPosition(SimpleMath::Vector3(5.0f, 0.0f, 10.0f));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

@@ -16,35 +16,28 @@
 
 #include "SelectScene.h"									// セレクトシーン
 
-//==============================================================================
 // エイリアス宣言
-//==============================================================================
-using KeyCode = Keyboard::Keys;								// キーコード
-using CameraType = AdminCamera::Type;						// カメラのタイプ
-using RepeatType = SoundManager::SE_MODE;					// サウンドのタイプ
+using KeyCode = Keyboard::Keys;				// キーコード
+using CameraType = AdminCamera::Type;		// カメラのタイプ
+using RepeatType = SoundManager::SE_MODE;	// サウンドのタイプ
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 SelectScene::SelectScene(const int& selection)
-	: IScene()												// 基底クラスのコンストラクタ
-	, m_stageSelection{ selection }							// 選択番号
+	:
+	IScene(),						// 基底クラスのコンストラクタ
+	m_stageSelection(selection)		// 選択番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのコンストラクタが呼ばれました。\n");
 }
 
-//==============================================================================
 // デストラクタ
-//==============================================================================
 SelectScene::~SelectScene()
 {
 	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのデストラクタが呼ばれました。\n");
 	Finalize();
 }
 
-//==============================================================================
-// 初期化処理
-//==============================================================================
+// 初期化
 void SelectScene::Initialize()
 {
 	// 画面依存の初期化
@@ -54,25 +47,23 @@ void SelectScene::Initialize()
 	SetSceneValues();
 
 	// ボリューム設定・音量再生開始(BGM・環境音)
-	auto _se = SoundManager::GetInstance();
-	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  0.7f);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  RepeatType::LOOP);
-	_se->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, 0.7f);
-	_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, RepeatType::LOOP);
+	auto sound = SoundManager::GetInstance();
+	sound->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  0.7f);
+	sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE,  RepeatType::LOOP);
+	sound->SetVolume(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, 0.7f);
+	sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_WAVE2, RepeatType::LOOP);
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void SelectScene::Update()
 {
-	auto _input = Input::GetInstance();
-	auto _se = SoundManager::GetInstance();
+	auto input = Input::GetInstance();
+	auto sound = SoundManager::GetInstance();
 
 	// タイトルに戻る
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Escape))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		ChangeScene(SCENE::TITLE);
 	}
 
@@ -99,27 +90,25 @@ void SelectScene::Update()
 	}
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void SelectScene::Draw()
 {
 	// レンダリング変数を取得
-	auto _states = GetSystemManager()->GetCommonStates();
-	auto _context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
+	auto states = GetSystemManager()->GetCommonStates();
+	auto context = DX::DeviceResources::GetInstance()->GetD3DDeviceContext();
 
 	// カメラのマトリクスを取得
-	SimpleMath::Matrix _view = m_adminCamera->GetView();
-	SimpleMath::Matrix _projection = m_adminCamera->GetProjection();
+	SimpleMath::Matrix view = m_adminCamera->GetView();
+	SimpleMath::Matrix projection = m_adminCamera->GetProjection();
 
 	// ブロックの描画
 	for (int i = 0; i < MAX_SAMPLE_NUM; i++)
 	{
-		m_stage[i]->Draw(_context, *_states, _view, _projection);
+		m_stage[i]->Draw(context, *states, view, projection);
 	}
 
 	// 水の描画
-	m_water->Draw(_view, _projection);
+	m_water->Draw(view, projection);
 
 	// 背景の描画
 	m_backGround->Draw();
@@ -135,9 +124,7 @@ void SelectScene::Draw()
 #endif
 }
 
-//==============================================================================
-// 終了処理
-//==============================================================================
+// 終了
 void SelectScene::Finalize()
 {
 	m_adminCamera.reset();
@@ -147,16 +134,14 @@ void SelectScene::Finalize()
 	m_backGround.reset();
 }
 
-//==============================================================================
 // 画面、デバイス依存の初期化
-//==============================================================================
 void SelectScene::CreateWDResources()
 {
 	// ゲームカメラ作成
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
 	// UI作成
-	m_ui = std::make_unique<UI_Select>(GetWindowSize(), GetFullHDSize());
+	m_ui = std::make_unique<UI_Select>(GetWindowSize(), FULL_HD);
 
 	// 水作成
 	m_water = std::make_unique<Water>();
@@ -171,9 +156,7 @@ void SelectScene::CreateWDResources()
 	m_stage[3] = std::make_unique<BlockManager>(L"Resources/Stages/sample4.json");
 }
 
-//==============================================================================
 // シーン内の変数初期化関数
-//==============================================================================
 void SelectScene::SetSceneValues()
 {
 	// カメラの初期設定-自動
@@ -205,25 +188,21 @@ void SelectScene::SetSceneValues()
 	}
 }
 
-//==============================================================================
 // デバッグ描画
-//==============================================================================
 void SelectScene::DebugDraw(CommonStates& states)
 {
-	auto& _string = Debug::DrawString::GetInstance();
-	auto& _time = DX::StepTimer::GetInstance();
+	auto& string = Debug::DrawString::GetInstance();
+	auto& timer = DX::StepTimer::GetInstance();
 
 	// 文字の描画
-	_string.DrawFormatString(states, { 0,0 },	Colors::DarkGreen, L"SelectScene");
-	_string.DrawFormatString(states, { 0,25 },	Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	_string.DrawFormatString(states, { 0,50 },	Colors::DarkGreen, L"FPS::%d", _time.GetFramesPerSecond());
-	_string.DrawFormatString(states, { 0,75 },	Colors::DarkGreen, L"Timer::%.2f", _time.GetTotalSeconds());
-	_string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%d", m_stageSelection);
+	string.DrawFormatString(states, { 0,0 },	Colors::DarkGreen, L"SelectScene");
+	string.DrawFormatString(states, { 0,25 },	Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
+	string.DrawFormatString(states, { 0,50 },	Colors::DarkGreen, L"FPS::%d", timer.GetFramesPerSecond());
+	string.DrawFormatString(states, { 0,75 },	Colors::DarkGreen, L"Timer::%.2f", timer.GetTotalSeconds());
+	string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%d", m_stageSelection);
 }
 
-//==============================================================================
 // カメラの切り替え処理
-//==============================================================================
 void SelectScene::ChangeAdminCamera()
 {
 	if(m_stageSelection == EDITOR_NUM)
@@ -238,34 +217,32 @@ void SelectScene::ChangeAdminCamera()
 		m_adminCamera->SetType(CameraType::Select4_Floating);
 }
 
-//==============================================================================
 // シーンを選択する
-//==============================================================================
 void SelectScene::SelectNext()
 {
-	auto _input = Input::GetInstance();
-	auto _se = SoundManager::GetInstance();
+	auto input = Input::GetInstance();
+	auto sound = SoundManager::GetInstance();
 
 	// ステージの選択
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
-		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::S) ||
+		input->GetKeyTrack()->IsKeyPressed(KeyCode::Down))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 		m_stageSelection++;
 	}
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
-		_input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::W) ||
+		input->GetKeyTrack()->IsKeyPressed(KeyCode::Up))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_SELECT, RepeatType::ONCE);
 		m_stageSelection--;
 	}
 
 	// ループクランプ
 	m_stageSelection = UserUtility::LoopClamp(m_stageSelection, EDITOR_NUM, MAX_SAMPLE_NUM);
 	m_ui->SetSelectionNum(m_stageSelection);
-	if (_input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || _input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 	{
-		_se->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
+		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 
 		// ステージを作る
 		if (m_stageSelection == EDITOR_NUM)

@@ -13,20 +13,13 @@ class DiaLog
 {
 public:
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
+	// コンストラクタ
 	DiaLog();
+	// デストラクタ
 	~DiaLog();
-
-	/// <summary>
-	/// ファイルパスをエクスプローラーから取得する
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>開いたファイルパス</returns>
+	// ファイルパスをエクスプローラーから取得
 	const wchar_t* GetExpFilePath();
+
 };
 
 #endif // DIALOG

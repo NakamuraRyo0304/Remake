@@ -22,7 +22,6 @@ Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
 {
 	CreateModel();
 	SetID(ID::Obj_Flag);
-	SetWeight(NON_WEIGHT);
 	SetPosition(start);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

@@ -15,7 +15,6 @@ CursorObject::CursorObject(const wchar_t* path, SimpleMath::Vector3 scale)
 {
 	CreateModel();
 	SetID(ID::CursorPos);
-	SetWeight(1.0f);
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

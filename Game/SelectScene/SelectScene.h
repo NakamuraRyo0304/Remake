@@ -9,9 +9,7 @@
 #ifndef SELECTSCENE
 #define SELECTSCENE
 
-//==============================================================================
 // 親シーンクラス
-//==============================================================================
 #include "Game/IScene/IScene.h"
 
 class AdminCamera;
@@ -21,115 +19,61 @@ class Water;
 class BG_Select;
 class SelectScene final : public IScene
 {
+public:
+
+	// ステージ番号を取得
+	int GetSelectedNumber() const { return m_stageSelection; }
+	// 最大ステージ番号を取得
+	int GetMaxNumber() const { return MAX_SAMPLE_NUM; }
+
+	// コンストラクタ
+	SelectScene(const int& selection);
+	// デストラクタ
+	~SelectScene();
+	// 初期化
+	void Initialize() override;
+	// 更新
+	void Update() override;
+	// 描画
+	void Draw() override;
+	// 終了
+	void Finalize() override;
+	// 画面依存、デバイス依存の初期化
+	void CreateWDResources() override;
+
+private:
+
+	// シーン内の変数初期化関数
+	void SetSceneValues() override;
+	// デバッグ描画
+	void DebugDraw(DirectX::CommonStates& states) override;
+	// カメラの切り替え処理
+	void ChangeAdminCamera();
+	// シーン選択
+	void SelectNext();
+
 private:
 
 	// サンプルステージ番号
 	static const int MAX_SAMPLE_NUM = 4;
+	// ０番はエディタの番号
+	const int EDITOR_NUM = 0;
 
 private:
 
 	// アドミンカメラ
 	std::unique_ptr<AdminCamera> m_adminCamera;
-
 	// UI
 	std::unique_ptr<UI_Select> m_ui;
-
 	// ブロックマネージャ
 	std::unique_ptr<BlockManager> m_stage[MAX_SAMPLE_NUM];
-
 	// 水
 	std::unique_ptr<Water> m_water;
-
 	// 背景
 	std::unique_ptr<BG_Select> m_backGround;
-
 	// セレクト番号
 	int m_stageSelection;
 
-private:
-
-	// ０番はエディタの番号
-	const int EDITOR_NUM = 0;
-
-public:
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="selection">選択ステージ</param>
-	/// <returns>なし</returns>
-	SelectScene(const int& selection);
-	~SelectScene();
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Initialize()                             override;
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Update()                                 override;
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Draw()                                   override;
-	/// <summary>
-	/// 終了処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Finalize()                               override;
-	/// <summary>
-	/// 画面依存、デバイス依存の初期化
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void CreateWDResources()                      override;
-
-private:
-
-	/// <summary>
-	/// シーン内の変数初期化関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void SetSceneValues()                         override;
-	/// <summary>
-	/// デバッグ描画
-	/// </summary>
-	/// <param name="states">コモンステート</param>
-	/// <returns>なし</returns>
-	void DebugDraw(DirectX::CommonStates& states) override;
-
-public:
-
-	// ステージ番号を取得
-	int GetSelectedNumber() const { return m_stageSelection; }
-
-	// 最大ステージ番号を取得
-	int GetMaxNumber()      const { return MAX_SAMPLE_NUM; }
-
-private:
-
-	/// <summary>
-	/// カメラの切り替え処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void ChangeAdminCamera();
-
-	/// <summary>
-	/// シーン選択
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void SelectNext();
 };
 
 #endif // SELECTSCENE

@@ -8,19 +8,16 @@
 #include "pch.h"
 #include "DepthStencil.h"
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 DepthStencil::DepthStencil(DXGI_FORMAT format) noexcept
-    : m_format(format)      // フォーマット
-    , m_width(0)            // 横幅
-    , m_height(0)           // 縦幅
+    :
+    m_format(format),     // フォーマット
+    m_width(0),           // 横幅
+    m_height(0)           // 縦幅
 {
 }
 
-//==============================================================================
-// デバイスを設定する
-//==============================================================================
+// デバイスを設定
 void DepthStencil::SetDevice(_In_ ID3D11Device* device)
 {
     // 設定されていたら処理しない
@@ -45,9 +42,7 @@ void DepthStencil::SetDevice(_In_ ID3D11Device* device)
     m_device = device;
 }
 
-//==============================================================================
-// リソース（幅と高さ）のサイズを設定する
-//==============================================================================
+// リソース（幅と高さ）のサイズを設定
 void DepthStencil::SizeResources(size_t width, size_t height)
 {
     if (width == m_width && height == m_height) return;
@@ -81,9 +76,7 @@ void DepthStencil::SizeResources(size_t width, size_t height)
     m_height = height;
 }
 
-//==============================================================================
-// Direct3Dデバイスおよび関連するリソースを解放する
-//==============================================================================
+// Direct3Dデバイスおよび関連するリソースを解放
 void DepthStencil::ReleaseDevice() noexcept
 {
     m_depthStencilView.Reset();
@@ -92,15 +85,13 @@ void DepthStencil::ReleaseDevice() noexcept
     m_width = m_height = 0;
 }
 
-//==============================================================================
-// 指定されたRECT構造に基づいてウィンドウのサイズを設定する
-//==============================================================================
+// 指定されたRECT構造に基づいてウィンドウのサイズを設定
 void DepthStencil::SetWindow(const RECT& output)
 {
-    // ピクセル単位でレンダリングターゲットサイズを決定する
+    // ピクセル単位でレンダリングターゲットサイズを決定
     auto const width = size_t(std::max<LONG>(output.right - output.left, 1));
     auto const height = size_t(std::max<LONG>(output.bottom - output.top, 1));
 
-    // ウィンドウサイズに基づいてリソースのサイズを設定する
+    // ウィンドウサイズに基づいてリソースのサイズを設定
     SizeResources(width, height);
 }

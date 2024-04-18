@@ -258,7 +258,6 @@
     <ClInclude Include="Libraries\SystemDatas\DebugDraw\DebugDraw.h" />
     <ClInclude Include="Libraries\SystemDatas\DepthStencil\DepthStencil.h" />
     <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h" />
-    <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h" />
     <ClInclude Include="Libraries\SystemDatas\DrawSprite\DrawSprite.h" />
     <ClInclude Include="Libraries\SystemDatas\DrawString\DrawString.h" />
     <ClInclude Include="Libraries\SystemDatas\GridFloor\GridFloor.h" />
@@ -270,7 +269,6 @@
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h" />
     <ClInclude Include="Libraries\SystemDatas\SoundManager\SoundManager.h" />
     <ClInclude Include="Libraries\SystemDatas\Timer\Timer.h" />
-    <ClInclude Include="Libraries\SystemDatas\XController\XController.h" />
     <ClInclude Include="Libraries\SystemManager\SystemManager.h" />
     <ClInclude Include="Libraries\UserUtility.h" />
     <ClInclude Include="pch.h" />
@@ -350,7 +348,6 @@
     <ClCompile Include="Libraries\SystemDatas\DebugDraw\DebugDraw.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DepthStencil\DepthStencil.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp" />
-    <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DrawSprite\DrawSprite.cpp" />
     <ClCompile Include="Libraries\SystemDatas\DrawString\DrawString.cpp" />
     <ClCompile Include="Libraries\SystemDatas\GridFloor\GridFloor.cpp" />
@@ -361,7 +358,6 @@
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp" />
     <ClCompile Include="Libraries\SystemDatas\SoundManager\SoundManager.cpp" />
     <ClCompile Include="Libraries\SystemDatas\Timer\Timer.cpp" />
-    <ClCompile Include="Libraries\SystemDatas\XController\XController.cpp" />
     <ClCompile Include="Libraries\SystemManager\SystemManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">

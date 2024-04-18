@@ -16,35 +16,31 @@ const XMVECTORF32 SCREEN_COLOR = Colors::CornflowerBlue;
 
 using Microsoft::WRL::ComPtr;
 
-//==============================================================================
 // コンストラクタ
-//==============================================================================
 Game::Game() noexcept(false)
 {
     // リソースを作成
     CreateDeviceDependentResources();
 }
 
-//==============================================================================
 // 初期化
-//==============================================================================
 void Game::Initialize(HWND window, int width, int height)
 {
-    DX::DeviceResources* _pDR = DX::DeviceResources::GetInstance();
+    DX::DeviceResources* pDR = DX::DeviceResources::GetInstance();
 
-    _pDR->SetWindow(window, width, height);
+    pDR->SetWindow(window, width, height);
 
-    _pDR->CreateDeviceResources();
+    pDR->CreateDeviceResources();
     CreateDeviceDependentResources();
 
-    _pDR->CreateWindowSizeDependentResources();
+    pDR->CreateWindowSizeDependentResources();
     CreateWindowSizeDependentResources();
 
     // タイマーの更新
-    DX::StepTimer& _stepTimer = DX::StepTimer::GetInstance();
-    _stepTimer.ResetElapsedTime();
-    _stepTimer.SetFixedTimeStep(true);
-    _stepTimer.SetTargetElapsedSeconds(1.0 / 60.0);
+    DX::StepTimer& timer = DX::StepTimer::GetInstance();
+    timer.ResetElapsedTime();
+    timer.SetFixedTimeStep(true);
+    timer.SetTargetElapsedSeconds(1.0 / 60.0);
 
     // シーンの作成
     m_gameMain = std::make_unique<GameMain>();
@@ -52,80 +48,69 @@ void Game::Initialize(HWND window, int width, int height)
     m_gameMain->Initialize();
 }
 
-//==============================================================================
 // 毎フレームの更新
-//==============================================================================
 void Game::Tick()
 {
     // インスタンスの取得
-    DX::StepTimer& _stepTimer = DX::StepTimer::GetInstance();
-    auto _input = Input::GetInstance();
-    auto _sound = SoundManager::GetInstance();
-    auto _xCon = XController::GetInstance();
+    DX::StepTimer& timer = DX::StepTimer::GetInstance();
+    auto input = Input::GetInstance();
+    auto sound = SoundManager::GetInstance();
 
     // システムの更新
-    _stepTimer.Tick([&]() { Update(_input, _sound, _xCon); });
+    timer.Tick([&]() { Update(input, sound); });
 
     // 描画処理
     Draw();
 }
 
-//==============================================================================
+
 // システムの更新
-//==============================================================================
-void Game::Update(Input* input, SoundManager* sound, XController* xcon)
+void Game::Update(Input* input, SoundManager* sound)
 {
     input->Update();
     sound->Update();
-
-    if (xcon != nullptr)
-    {
-        xcon->Update();
-    }
     m_gameMain->Update();
 }
 
-//==============================================================================
+
 // 描画
-//==============================================================================
 void Game::Draw()
 {
-    DX::StepTimer& _stepTimer = DX::StepTimer::GetInstance();
+    DX::StepTimer& timer = DX::StepTimer::GetInstance();
 
     // 最初のUpdateの前に何かをレンダリングしようとしない
-    if (_stepTimer.GetFrameCount() == 0) return;
+    if (timer.GetFrameCount() == 0) return;
 
     Clear();
 
-    DX::DeviceResources* _pDR = DX::DeviceResources::GetInstance();
+    DX::DeviceResources* pDR = DX::DeviceResources::GetInstance();
 
     // ゲームの描画
     m_gameMain->Draw();
 
     // フレーム確認
-    _pDR->Present();
+    pDR->Present();
 }
 
-//==============================================================================
+
 // バックバッファをリセット
-//==============================================================================
 void Game::Clear()
 {
-    DX::DeviceResources* _pDR = DX::DeviceResources::GetInstance();
+    DX::DeviceResources* pDR = DX::DeviceResources::GetInstance();
 
     // ビューの初期化
-    auto _context = _pDR->GetD3DDeviceContext();
-    auto _rtv = _pDR->GetRenderTargetView();
-    auto _dsv = _pDR->GetDepthStencilView();
+    auto context = pDR->GetD3DDeviceContext();
+    auto rtv = pDR->GetRenderTargetView();
+    auto dsv = pDR->GetDepthStencilView();
 
     // 色の変更・奥行のリセット・描画先の設定
-    _context->ClearRenderTargetView(_rtv, SCREEN_COLOR);
-    _context->ClearDepthStencilView(_dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0U);
-    _context->OMSetRenderTargets(1, &_rtv, _dsv);
+    context->ClearRenderTargetView(rtv, SCREEN_COLOR);
+    context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0U);
+    context->OMSetRenderTargets(1, &rtv, dsv);
 
     // ビューポートの設定
-    auto _viewport = _pDR->GetScreenViewport();
-    _context->RSSetViewports(1, &_viewport);
+    auto vp = pDR->GetScreenViewport();
+    context->RSSetViewports(1, &vp);
 }
 
 #pragma region Message Handlers
@@ -146,31 +131,30 @@ void Game::OnSuspending()
 
 void Game::OnResuming()
 {
-    DX::StepTimer& _stepTimer = DX::StepTimer::GetInstance();
-    _stepTimer.ResetElapsedTime();
+    DX::StepTimer& timer = DX::StepTimer::GetInstance();
+    timer.ResetElapsedTime();
 }
 
 void Game::OnWindowMoved()
 {
-    DX::DeviceResources* _pDR = DX::DeviceResources::GetInstance();
+    DX::DeviceResources* pDR = DX::DeviceResources::GetInstance();
 
-    auto _rect = _pDR->GetOutputSize();
-    _pDR->WindowSizeChanged(_rect.right, _rect.bottom);
+    auto rect = pDR->GetOutputSize();
+    pDR->WindowSizeChanged(rect.right, rect.bottom);
 }
 
 void Game::OnWindowSizeChanged(int width, int height)
 {
-    DX::DeviceResources* _pDR = DX::DeviceResources::GetInstance();
+    DX::DeviceResources* pDR = DX::DeviceResources::GetInstance();
 
-    if (not _pDR->WindowSizeChanged(width, height)) return;
+    if (not pDR->WindowSizeChanged(width, height)) return;
 
     CreateWindowSizeDependentResources();
 
 }
 
-//==============================================================================
+
 // 画面サイズを設定
-//==============================================================================
 void Game::GetDefaultSize(int& width, int& height) const
 {
     width  = Game::SCREEN_W;
@@ -179,9 +163,8 @@ void Game::GetDefaultSize(int& width, int& height) const
 #pragma endregion
 
 #pragma region Direct3D Resources
-//==============================================================================
+
 // デバイス依存のリソースの初期化
-//==============================================================================
 void Game::CreateDeviceDependentResources()
 {
     DX::DeviceResources::GetInstance();
@@ -189,24 +172,19 @@ void Game::CreateDeviceDependentResources()
     Input::GetInstance();
 }
 
-//==============================================================================
+
 // 画面依存のリソースの初期化
-//==============================================================================
 void Game::CreateWindowSizeDependentResources()
 {
 }
 
-//==============================================================================
 // デバイスが壊れた時の特殊処理
-//==============================================================================
 void Game::OnDeviceLost()
 {
     m_gameMain.reset();
 }
 
-//==============================================================================
 // デバイスが初期状態になった時全てを初期化
-//==============================================================================
 void Game::OnDeviceRestored()
 {
     CreateDeviceDependentResources();

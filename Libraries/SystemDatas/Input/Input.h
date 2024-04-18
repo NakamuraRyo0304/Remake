@@ -11,57 +11,40 @@
 
 class Input
 {
-private:
-	// キーボード
-	std::unique_ptr<DirectX::Keyboard>							m_keyboard;
-	// マウス
-	std::unique_ptr<DirectX::Mouse>								m_mouse;
-	// 押された瞬間を検知する
-	std::unique_ptr<DirectX::Keyboard::KeyboardStateTracker>	m_keyboardStateTracker;
-	// 押された瞬間を検知する
-	std::unique_ptr<DirectX::Mouse::ButtonStateTracker>			m_mouseStateTracker;
-
-private:
-
-	// シングルトン
-	Input();
-
 public:
 
-	/// <summary>
-	/// インプットを参照
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>インプットシングルトン</returns>
+	// キーボードトラッカーを取得
+	const std::unique_ptr<DirectX::Keyboard::KeyboardStateTracker>& GetKeyTrack();
+	// マウストラッカーを取得
+	const std::unique_ptr<DirectX::Mouse::ButtonStateTracker>& GetMouseTrack();
+
+	// インスタンスを取得
 	static Input* GetInstance()
 	{
-		static Input in;
-
-		return &in;
+		static Input instance;
+		return &instance;
 	}
-
+	// デストラクタ
 	~Input() = default;
-
-	/// <summary>
-	/// インプットシステムの更新
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
+	// 更新
 	void Update();
 
-	/// <summary>
-	/// キーボードトラッカーを取得
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>キーボードトラッカー</returns>
-	const std::unique_ptr<DirectX::Keyboard::KeyboardStateTracker>& GetKeyTrack();
+private:
 
-	/// <summary>
-	/// マウストラッカーを取得
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>マウストラッカー</returns>
-	const std::unique_ptr<DirectX::Mouse::ButtonStateTracker>& GetMouseTrack();
+	// コンストラクタ
+	Input();
+
+private:
+
+	// キーボード
+	std::unique_ptr<DirectX::Keyboard> m_keyboard;
+	// マウス
+	std::unique_ptr<DirectX::Mouse> m_mouse;
+	// キーが押された瞬間を検知する
+	std::unique_ptr<DirectX::Keyboard::KeyboardStateTracker> m_keyboardStateTracker;
+	// マウスが押された瞬間を検知する
+	std::unique_ptr<DirectX::Mouse::ButtonStateTracker> m_mouseStateTracker;
+
 };
 
 #endif // INPUT

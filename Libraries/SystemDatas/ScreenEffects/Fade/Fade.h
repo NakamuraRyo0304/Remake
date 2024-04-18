@@ -12,29 +12,35 @@
 class Transition;
 class Fade
 {
-private:
-	// トランジション
-	std::unique_ptr<Transition> m_transition;
+public:
 
-	// ルール画像のパス
-	const wchar_t* m_filePath;
+	// フェードの最大値の取得
+	float GetMaxValue() const { return MAX_NUM; }
+	// フェード終了を判定する関数
+	bool GetEndFlag() const { return is_endFlag; }
+	// フェードの値取得
+	float GetFadeValue() const { return m_fadeValue; }
+	// フェードの速度設定
+	void SetFadeSpeed(const float& speed) { m_fadeSpeed = speed; }
+	// ルール画像の変更
+	void SetRuleTexture(const wchar_t* path = L"Resources/Textures/Transitions/Rule_Rot.png") { m_filePath = path; }
 
-private:
-
-	// フェードインを開始するフラグ
-	bool is_fadeInFlag;
-
-	// フェードアウトを開始するフラグ
-	bool is_fadeOutFlag;
-
-	// フェード速度
-	float m_fadeSpeed;
-
-	// フェード終了判定フラグ
-	bool is_endFlag;
-
-	// フェードの数値0-255
-	float m_fadeValue;
+	// コンストラクタ
+	Fade(float speed);
+	// デストラクタ
+	~Fade();
+	// 初期化
+	void Initialize();
+	// 更新
+	void Update(DirectX::XMVECTORF32 color);
+	// 描画
+	void Draw();
+	// フェードインを開始
+	void SetFadeIn();
+	// フェードアウトを開始
+	void SetFadeOut();
+	// リセット
+	void Reset();
 
 private:
 
@@ -43,82 +49,23 @@ private:
 	const float MIN_NUM = 0.0f;
 	const float SPEED = 1.5f;
 
-public:
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="speed">フェードの速度</param>
-	/// <returns>なし</returns>
-	Fade(float speed);
-	~Fade();
+private:
 
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Initialize();
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	/// <param name="color">色情報</param>
-	/// <returns>なし</returns>
-	void Update(DirectX::XMVECTORF32 color);
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Draw();
-	/// <summary>
-	/// フェードインを開始する関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void SetFadeIn();
-	/// <summary>
-	/// フェードアウトを開始する関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void SetFadeOut();
-	/// <summary>
-	/// フェード処理を行う前に呼び出す関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Reset();
+	// トランジション
+	std::unique_ptr<Transition> m_transition;
+	// ルール画像のパス
+	const wchar_t* m_filePath;
+	// フェード速度
+	float m_fadeSpeed;
+	// フェードの数値0-255
+	float m_fadeValue;
+	// フェードインを開始するフラグ
+	bool is_fadeInFlag;
+	// フェードアウトを開始するフラグ
+	bool is_fadeOutFlag;
+	// フェード終了判定フラグ
+	bool is_endFlag;
 
-	/// <summary>
-	/// フェードの最大値の取得
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>フェードの最大値</returns>
-	const float& GetMaxValue() { return MAX_NUM; }
-	/// <summary>
-	/// フェード終了を判定する関数
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>フェード終了でTrue</returns>
-	const bool& GetEndFlag() { return is_endFlag; }
-	/// <summary>
-	/// フェードの値取得
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>フェードの値</returns>
-	const float& GetFadeValue() { return m_fadeValue; }
-	/// <summary>
-	/// フェードの速度設定
-	/// </summary>
-	/// <param name="speed">フェード速度</param>
-	/// <returns>なし</returns>
-	void SetFadeSpeed(const float& speed) { m_fadeSpeed = speed; }
-	/// <summary>
-	/// ルール画像の変更
-	/// </summary>
-	/// <param name="path">画像パス</param>
-	/// <returns>なし</returns>
-	void SetRuleTexture(const wchar_t* path = L"Resources/Textures/Transitions/Rule_Rot.png") { m_filePath = path; }
 };
 
 #endif // FADE

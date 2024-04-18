@@ -22,70 +22,37 @@ public:
 		length,
 	};
 
+public:
+
+	// アラーム状況を取得
+	bool Alarm() const { return is_alarm; }
+	// カウントを取得
+	float GetCount() const { return m_count; }
+
+	// コンストラクタ
+	Timer(Mode mode, float limitedSeconds = 0.0f);
+	// デストラクタ
+	~Timer();
+	// タイマースタート
+	void Start();
+	// 更新
+	void Update(bool updown = true);
+	// タイマーストップ
+	void Stop();
+	// タイマーリセット
+	void Reset() { m_count = 0.0f; }
+	// 再スタート
+	void ReStart();
+
 private:
 
 	// カウント/制限時間
 	float m_count, m_limits;
-
 	// 実行フラグ/アラーム
 	bool is_do, is_alarm;
-
 	// モード
 	Mode m_mode;
 
-public:
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	/// <param name="mode">タイマーのモード</param>
-	/// <param name="limitedSeconds">制限時間(なければ不要)</param>
-	/// <returns>なし</returns>
-	Timer(Mode mode, float limitedSeconds = 0.0f);
-	~Timer();
-
-	/// <summary>
-	/// タイマースタート
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Start();
-
-	/// <summary>
-	/// 更新関数
-	/// </summary>
-	/// <param name="updown">True:カウントアップ/Down:カウントダウン(デフォルトはTrue)</param>
-	/// <returns>なし</returns>
-	void Update(bool updown = true);
-
-	/// <summary>
-	/// タイマーストップ
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Stop();
-
-	/// <summary>
-	/// タイマーリセット
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void Reset() { m_count = 0.0f; }
-
-	/// <summary>
-	/// 再スタート
-	/// </summary>
-	/// <param name="引数無し"></param>
-	/// <returns>なし</returns>
-	void ReStart();
-
-public:
-
-	// リミットに達したらアラームを通知
-	const bool& Alarm() { return is_alarm; }
-
-	// カウントを取得
-	const float& GetCount() { return m_count; }
 };
 
 #endif // TIMER
