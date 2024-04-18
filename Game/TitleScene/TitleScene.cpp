@@ -202,7 +202,7 @@ void TitleScene::CreateWDResources()
 	m_sky = std::make_unique<Sky_Title>();
 
 	// UI作成
-	m_ui = std::make_unique<UI_Title>(GetWindowSize(), GetFullHDSize());
+	m_ui = std::make_unique<UI_Title>(GetWindowSize(), FULL_HD);
 
 	// トリオブジェクト作成
 	m_birdTitle = std::make_unique<Bird_Title>();
@@ -211,7 +211,7 @@ void TitleScene::CreateWDResources()
 	m_water = std::make_unique<Water>();
 
 	// ロゴ作成
-	m_logo = std::make_unique<Logo>(GetWindowSize() / GetFullHDSize());
+	m_logo = std::make_unique<Logo>(GetWindowSize() / FULL_HD);
 
 	// タイマー作成(10秒に設定)
 	m_timer = std::make_unique<Timer>(Timer::Mode::limited, 10.0f);

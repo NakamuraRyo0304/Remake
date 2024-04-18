@@ -388,7 +388,7 @@ void PlayScene::CreateWDResources()
 	m_water = std::make_unique<Water>();
 
 	// UI作成
-	m_ui = std::make_unique<UI_Play>(GetWindowSize(), GetFullHDSize());
+	m_ui = std::make_unique<UI_Play>(GetWindowSize(), FULL_HD);
 
 	// タイマー作成
 	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);

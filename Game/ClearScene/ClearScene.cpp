@@ -117,7 +117,7 @@ void ClearScene::Draw()
 	// モーメントキャンバスのレクトと拡大率、中心位置
 	RECT_U rect =
 		RECT_U(0, 0, static_cast<LONG>(GetWindowSize().x), static_cast<LONG>(GetWindowSize().y));
-	SimpleMath::Vector2 origin = GetFullHDSize() * 0.5f;
+	SimpleMath::Vector2 origin = FULL_HD * 0.5f;
 
 	// モーメントキャンバスの描画
 	m_momentCanv->Draw(SimpleMath::Vector4::One,
@@ -164,10 +164,10 @@ void ClearScene::Finalize()
 void ClearScene::CreateWDResources()
 {
 	// モーメントキャンバス作成
-	m_momentCanv = std::make_unique<MomentCanv>(GetWindowSize() / GetFullHDSize());
+	m_momentCanv = std::make_unique<MomentCanv>(GetWindowSize() / FULL_HD);
 
 	// UI作成
-	m_ui = std::make_unique<UI_Clear>(GetWindowSize(), GetFullHDSize());
+	m_ui = std::make_unique<UI_Clear>(GetWindowSize(), FULL_HD);
 
 	// スコアボード作成
 	m_coinBoard = std::make_unique<ScoreBoard>();
@@ -199,21 +199,21 @@ void ClearScene::SetSceneValues()
 
 	// スコアボードの初期化(1文字分間隔をあける)
 	m_coinBoard->Initialize({ 1500.0f,100.0f }, UserUtility::ColorsVector::WHITE,
-		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
+		SimpleMath::Vector2::One, GetWindowSize() / FULL_HD, 1.0);
 	m_timeBoard->Initialize({ 1500.0f,250.0f }, UserUtility::ColorsVector::WHITE,
-		SimpleMath::Vector2::One, GetWindowSize() / GetFullHDSize(), 1.0);
+		SimpleMath::Vector2::One, GetWindowSize() / FULL_HD, 1.0);
 
 	// テープの初期化
 	m_tape[0]->Initialize({ 110.0f,460.0f }, SimpleMath::Vector2::One,
-		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
+		GetWindowSize() / FULL_HD, XMConvertToRadians(-55.0f));
 	m_tape[1]->Initialize({ 1150.0f,530.0f }, SimpleMath::Vector2::One,
-		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-60.0f));
+		GetWindowSize() / FULL_HD, XMConvertToRadians(-60.0f));
 
 	// シールの初期化
 	m_seal[Sticker::Coin]->Initialize({ 1400.0f, 160.0f }, SimpleMath::Vector2::One * 0.5f,
-		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-55.0f));
+		GetWindowSize() / FULL_HD, XMConvertToRadians(-55.0f));
 	m_seal[Sticker::Clock]->Initialize({ 1420.0f, 312.0f }, SimpleMath::Vector2::One * 0.4f,
-		GetWindowSize() / GetFullHDSize(), XMConvertToRadians(-53.0f));
+		GetWindowSize() / FULL_HD, XMConvertToRadians(-53.0f));
 
 	// タイマーを開始する
 	m_direction->Start();

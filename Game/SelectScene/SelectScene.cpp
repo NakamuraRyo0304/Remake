@@ -141,7 +141,7 @@ void SelectScene::CreateWDResources()
 	m_adminCamera = std::make_unique<AdminCamera>(GetWindowSize());
 
 	// UIì¬
-	m_ui = std::make_unique<UI_Select>(GetWindowSize(), GetFullHDSize());
+	m_ui = std::make_unique<UI_Select>(GetWindowSize(), FULL_HD);
 
 	// …ì¬
 	m_water = std::make_unique<Water>();

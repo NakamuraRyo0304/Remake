@@ -31,20 +31,20 @@ public:
 	// デストラクタ
 	~ClearScene();
 	// 初期化
-	void Initialize()                             override;
+	void Initialize() override;
 	// 更新
-	void Update()                                 override;
+	void Update() override;
 	// 描画
-	void Draw()                                   override;
+	void Draw() override;
 	// 終了
-	void Finalize()                               override;
+	void Finalize() override;
 	// 画面依存、デバイス依存の初期化
-	void CreateWDResources()                      override;
+	void CreateWDResources() override;
 
 private:
 
 	// シーン内の変数初期化関数
-	void SetSceneValues()                         override;
+	void SetSceneValues() override;
 	// デバッグ描画
 	void DebugDraw(DirectX::CommonStates& states) override;
 	// シーン選択

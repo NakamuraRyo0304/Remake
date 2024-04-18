@@ -162,7 +162,7 @@ void Editor::CreateWDResources()
 	m_blockManager->SetPlay(false);
 
 	// UI作成
-	m_ui = std::make_unique<UI_Editor>(GetWindowSize(),GetFullHDSize());
+	m_ui = std::make_unique<UI_Editor>(GetWindowSize(), FULL_HD);
 
 	// エディタコリジョン作成
 	m_editorCollision = std::make_unique<EditorCollision>();

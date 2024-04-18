@@ -41,12 +41,8 @@ public:
 	void SetFadeValue(const float& value) { m_fadeValue = value; }
 	// システムマネージャを取得
 	const std::shared_ptr<SystemManager>& GetSystemManager() { return m_system; }
-	// カメラのデフォルトアングルを取得（45.0f）
-	const float& GetDefaultCameraAngle() { return DEFAULT_CAMERA_ANGLE; }
 	// 画面のサイズを取得
 	const DirectX::SimpleMath::Vector2& GetWindowSize() { return m_windowSize; }
-	// フルスクリーンサイズを取得
-	const DirectX::SimpleMath::Vector2& GetFullHDSize() { return FULL_HD; }
 	// フェードが終わって完全に実行可能ならTrueを返す
 	bool IsCanUpdate() { is_fadeEnd = static_cast<int>(GetFadeValue()) == 0; return is_fadeEnd; }
 	// 遷移先のシーン設定
@@ -67,7 +63,7 @@ public:
 	// 画面依存の初期化
 	virtual void CreateWDResources() = 0;
 
-private:
+public:
 
 	const float DEFAULT_CAMERA_ANGLE = 45.0f;							// デフォルトのカメラアングル
 	const DirectX::SimpleMath::Vector2 FULL_HD = { 1920.0f,1080.0f };	// フルスクリーンサイズ
