@@ -11,7 +11,7 @@
 // コンストラクタ
 Stage3Camera::Stage3Camera(const SimpleMath::Vector2& screenSize)
 	:
-	IGameCamera(screenSize)		// 基底クラス
+	BaseCamera(screenSize)		// 基底クラスのコンストラクタ
 {
 	// 座標と注視点をセット
 	SetPosition(SimpleMath::Vector3(15.5f, 10.0f, 5.5f));

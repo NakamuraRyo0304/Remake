@@ -54,9 +54,6 @@
     <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp">
       <Filter>Cameras\DeathCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp">
-      <Filter>Interfaces\IGameCamera</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
       <Filter>Interfaces\IGameObject</Filter>
     </ClCompile>
@@ -294,6 +291,9 @@
     <ClCompile Include="Game\Bases\BaseUI.cpp">
       <Filter>Bases\BaseUI</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Bases\BaseCamera.cpp">
+      <Filter>Bases\BaseCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -304,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h">
       <Filter>Cameras\DeathCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h">
-      <Filter>Interfaces\IGameCamera</Filter>
     </ClInclude>
     <ClInclude Include="Game\Common\IGameObject\IGameObject.h">
       <Filter>Interfaces\IGameObject</Filter>
@@ -572,6 +569,12 @@
     <ClInclude Include="Game\Bases\BaseUI.h">
       <Filter>Bases\BaseUI</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Interfaces\IGameCamera.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseCamera.h">
+      <Filter>Bases\BaseCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -815,9 +818,6 @@
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{d9150a4d-91ae-4f88-89ee-9f469d00937b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IGameCamera">
-      <UniqueIdentifier>{3f829e01-4cbd-4434-b4ae-fbc9acf228dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Interfaces\IGameObject">
       <UniqueIdentifier>{21cc561c-c77d-4e7c-a9de-c7abf01a0d79}</UniqueIdentifier>
@@ -1166,6 +1166,9 @@
     </Filter>
     <Filter Include="Bases\BaseUI">
       <UniqueIdentifier>{12ad7632-77a2-4559-83ca-adca2b4dcf4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseCamera">
+      <UniqueIdentifier>{42896825-0dca-4979-adc3-4802405fcfad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

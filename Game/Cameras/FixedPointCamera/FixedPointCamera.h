@@ -10,9 +10,9 @@
 #define FIXEDPOINTCAMERA
 
 // 親カメラクラス
-#include "Game/Common/IGameCamera/IGameCamera.h"
+#include "Game/Bases/BaseCamera.h"
 
-class FixedPointCamera : public IGameCamera
+class FixedPointCamera : public BaseCamera
 {
 public:
 

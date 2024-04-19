@@ -6,12 +6,12 @@
  */
 
 // 親カメラクラス
-#include "Game/Common/IGameCamera/IGameCamera.h"
+#include "Game/Bases/BaseCamera.h"
 
 #ifndef STAGE0CAMERA
 #define STAGE0CAMERA
 
-class Stage0Camera : public IGameCamera
+class Stage0Camera : public BaseCamera
 {
 public:
 

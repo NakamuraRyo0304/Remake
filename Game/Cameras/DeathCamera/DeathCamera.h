@@ -10,9 +10,9 @@
 #define DEATHCAMERA
 
 // 親カメラクラス
-#include "Game/Common/IGameCamera/IGameCamera.h"
+#include "Game/Bases/BaseCamera.h"
 
-class DeathCamera : public IGameCamera
+class DeathCamera : public BaseCamera
 {
 public:
 
