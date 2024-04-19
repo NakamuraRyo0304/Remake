@@ -855,9 +855,6 @@
     <Filter Include="Libraries\DiaLog">
       <UniqueIdentifier>{178a5624-923a-45f3-af1c-1012b9c44676}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\DisplayEffect">
-      <UniqueIdentifier>{268effdd-52b4-4bbd-a572-35226d8444c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Libraries\DrawSprite">
       <UniqueIdentifier>{a3ada18c-769a-468c-84cd-16be20e4dee0}</UniqueIdentifier>
     </Filter>
@@ -893,9 +890,6 @@
     </Filter>
     <Filter Include="Libraries\Transition">
       <UniqueIdentifier>{c2449553-c227-4efc-91cf-5f1c42fe5b0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\XContoller">
-      <UniqueIdentifier>{181cdb3d-7ee6-4f04-bf0d-9d179861bd7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{691a665d-8d45-4df5-ae88-c14fcc0033ab}</UniqueIdentifier>
