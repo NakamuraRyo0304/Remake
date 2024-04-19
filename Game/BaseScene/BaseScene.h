@@ -37,26 +37,30 @@ class BaseScene : public IScene
 {
 public:
 
-	// フェード用遷移阻止関数
-	void StopNextScene() { m_nextScene = SCENE::NONE; is_changeFlag = false; }
-	// 画面サイズを設定
-	void SetWindowSize(const DirectX::SimpleMath::Vector2& size) { m_windowSize = size; }
+	// システムマネージャを取得
+	const std::shared_ptr<SystemManager>& GetSystemManager() { return m_system; }
 	// 次のシーンを取得
 	SCENE GetNextScene() const { return m_nextScene; }
 	// シーンフラグを取得
 	bool IsChangeSceneFlag() const { return is_changeFlag; }
+	// 実行可能状態を取得
+	bool IsCanUpdate() { is_fadeEnd = static_cast<int>(GetFadeValue()) == 0; return is_fadeEnd; }
+
+	// フェード用遷移阻止関数
+	void StopNextScene() { m_nextScene = SCENE::NONE; is_changeFlag = false; }
+	// 画面のサイズを取得
+	const DirectX::SimpleMath::Vector2& GetWindowSize() { return m_windowSize; }
+	// 画面サイズを設定
+	void SetWindowSize(const DirectX::SimpleMath::Vector2& size) { m_windowSize = size; }
+
 	// フェード速度アクセサ
 	float GetFadeSpeed() const { return m_fadeSpeed; }
 	void SetFadeSpeed(const float& speed) { m_fadeSpeed = speed; }
+
 	// フェード値アクセサ
 	float GetFadeValue() const { return m_fadeValue; }
 	void SetFadeValue(const float& value) { m_fadeValue = value; }
-	// システムマネージャを取得
-	const std::shared_ptr<SystemManager>& GetSystemManager() { return m_system; }
-	// 画面のサイズを取得
-	const DirectX::SimpleMath::Vector2& GetWindowSize() { return m_windowSize; }
-	// フェードが終わって完全に実行可能ならTrueを返す
-	bool IsCanUpdate() { is_fadeEnd = static_cast<int>(GetFadeValue()) == 0; return is_fadeEnd; }
+
 	// 遷移先のシーン設定
 	void ChangeScene(const SCENE& nextScene) { m_nextScene = nextScene; is_changeFlag = true; }
 
