@@ -1,16 +1,16 @@
 /*
- *	@File	IGameObject.cpp
- *	@Brief	ゲームオブジェクト。
- *	@Date	2023-11-14
+ *  @File   BaseObject.cpp
+ *  @Brief  オブジェクトの基底クラス。
+ *  @Date   2024-04-19
  *  @Author NakamuraRyo
  */
 
 #include "pch.h"
 #include "Libraries/Factories/ModelFactory.h"
-#include "IGameObject.h"
+#include "BaseObject.h"
 
 // コンストラクタ
-IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath, SimpleMath::Vector3 pos)
+BaseObject::BaseObject(const wchar_t* path, const wchar_t* dpath, SimpleMath::Vector3 pos)
 	:
 	m_world(),					// ワールド行列
 	m_parentMatrix(),			// 親ワールド行列
@@ -27,8 +27,14 @@ IGameObject::IGameObject(const wchar_t* path, const wchar_t* dpath, SimpleMath::
 	CreateWorldMatrix();
 }
 
-// ワールドマトリクスを作成
-void IGameObject::CreateWorldMatrix()
+// デストラクタ
+BaseObject::~BaseObject()
+{
+	ReleaseModel();
+}
+
+// ワールド行列を作成
+void BaseObject::CreateWorldMatrix()
 {
 	// スケールを変更
 	SimpleMath::Matrix scale =
@@ -44,20 +50,20 @@ void IGameObject::CreateWorldMatrix()
 	m_world = scale * rotate * trans;
 }
 
-// モデルを作成する
-void IGameObject::CreateModel()
+// モデルを作成
+void BaseObject::CreateModel()
 {
 	m_model = ModelFactory::CreateModel(m_filePath, m_directoryPath);
 }
 
-// モデルを破棄する
-void IGameObject::ReleaseModel()
+// モデルを解放
+void BaseObject::ReleaseModel()
 {
 	m_model.reset();
 }
 
-// モデルを変更する
-void IGameObject::ChangeModel(const wchar_t* path)
+// モデルを変更
+void BaseObject::ChangeModel(const wchar_t* path)
 {
 	m_filePath = path;
 	CreateModel();

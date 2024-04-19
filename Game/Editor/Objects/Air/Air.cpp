@@ -11,7 +11,7 @@
 // コンストラクタ
 Air::Air(SimpleMath::Vector3 position)
 	:
-	IGameObject(L"Resources/Models/Flozen.cmo", L"Resources/Models"),
+	BaseObject(L"Resources/Models/Flozen.cmo", L"Resources/Models"),
 	is_hit(false)		// 衝突フラグ
 {
 	CreateModel();

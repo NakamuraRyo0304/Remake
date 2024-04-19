@@ -11,7 +11,7 @@
 // コンストラクタ
 Island::Island(SimpleMath::Vector3 position, float rate, float speed)
 	:
-	IGameObject(L"Resources/Models/Island.cmo", L"Resources/Models"),
+	BaseObject(L"Resources/Models/Island.cmo", L"Resources/Models"),
 	m_rotation(0.0f)			// 回転量
 {
 	CreateModel();

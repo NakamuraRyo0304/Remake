@@ -15,7 +15,7 @@ const float Bird_Title::BIRD_SCALE = 2.0f; // スケール
 // コンストラクタ
 Bird_Title::Bird_Title()
 	:
-	IGameObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
+	BaseObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Bird);

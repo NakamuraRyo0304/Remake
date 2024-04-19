@@ -11,7 +11,7 @@
 // コンストラクタ
 Iceberg::Iceberg(SimpleMath::Vector3 position, float rate, float speed)
 	:
-	IGameObject(L"Resources/Models/Iceberg.cmo", L"Resources/Models"),
+	BaseObject(L"Resources/Models/Iceberg.cmo", L"Resources/Models"),
 	m_rotation(0.0f)			// 回転量
 {
 	CreateModel();

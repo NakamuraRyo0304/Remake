@@ -13,7 +13,7 @@
 #include "Game/Bases/BaseScene.h"
 
 // オブジェクトステータス
-#include "Game/Common/IGameObject/IGameObjectStates.h"
+#include "Game/Interfaces/StatesList.h"
 
 class AdminCamera;
 class BlockManager;

@@ -10,10 +10,10 @@
 #define CLOUD
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
 class Timer;
-class Cloud : public IGameObject
+class Cloud : public BaseObject
 {
 public:
 

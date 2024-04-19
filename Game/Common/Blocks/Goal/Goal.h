@@ -10,9 +10,9 @@
 #define GOAL
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Goal : public IGameObject
+class Goal : public BaseObject
 {
 public:
 

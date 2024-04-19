@@ -54,9 +54,6 @@
     <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp">
       <Filter>Cameras\DeathCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
-      <Filter>Interfaces\IGameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
       <Filter>GameObjects\Common\Blocks\Air</Filter>
     </ClCompile>
@@ -294,6 +291,9 @@
     <ClCompile Include="Game\Bases\BaseCamera.cpp">
       <Filter>Bases\BaseCamera</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Bases\BaseObject.cpp">
+      <Filter>Bases\BaseObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -304,12 +304,6 @@
     </ClInclude>
     <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h">
       <Filter>Cameras\DeathCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameObject\IGameObject.h">
-      <Filter>Interfaces\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h">
-      <Filter>Interfaces\IGameObject</Filter>
     </ClInclude>
     <ClInclude Include="Game\Editor\Objects\Air\Air.h">
       <Filter>GameObjects\Common\Blocks\Air</Filter>
@@ -575,6 +569,15 @@
     <ClInclude Include="Game\Bases\BaseCamera.h">
       <Filter>Bases\BaseCamera</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Interfaces\IGameObject.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\StatesList.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseObject.h">
+      <Filter>Bases\BaseObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds">
@@ -818,9 +821,6 @@
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{d9150a4d-91ae-4f88-89ee-9f469d00937b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IGameObject">
-      <UniqueIdentifier>{21cc561c-c77d-4e7c-a9de-c7abf01a0d79}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{0c3f85ce-e792-45cf-bd28-566ea722938e}</UniqueIdentifier>
@@ -1169,6 +1169,9 @@
     </Filter>
     <Filter Include="Bases\BaseCamera">
       <UniqueIdentifier>{42896825-0dca-4979-adc3-4802405fcfad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseObject">
+      <UniqueIdentifier>{4f0d2039-852d-4d43-b4a9-8be23c8eb456}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

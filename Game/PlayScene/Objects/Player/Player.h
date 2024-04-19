@@ -10,13 +10,13 @@
 #define PLAYER
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 // プレイヤーステート
 #include "MoveStates.h"
 // プレイヤーのパーツ
 #include "Parts/Head.h"
 
-class Player : public IGameObject
+class Player : public BaseObject
 {
 public:
 

@@ -11,7 +11,7 @@
 // コンストラクタ
 EditChara::EditChara(SimpleMath::Vector3 position)
 	:
-	IGameObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
+	BaseObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Obj_Player);

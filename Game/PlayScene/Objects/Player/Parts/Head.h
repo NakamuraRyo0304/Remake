@@ -10,12 +10,12 @@
 #define HEAD
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 // プレイヤーステート
 #include "../MoveStates.h"
 
 class Timer;
-class Head : public IGameObject
+class Head : public BaseObject
 {
 public:
 

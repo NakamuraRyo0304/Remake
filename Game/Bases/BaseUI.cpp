@@ -1,8 +1,8 @@
 /*
- *  @File   FileName.h
- *  @Brief  処理内容。
- *  @Date   2024-00-00
- *  @Author NakamuraRyo
+ * @File   BaseUI.cpp
+ * @Brief  UIの基底クラス。
+ * @Date   2024-04-19
+ * @Author NakamuraRyo
  */
 
 #include "pch.h"

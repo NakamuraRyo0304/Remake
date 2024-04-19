@@ -12,7 +12,7 @@
 // コンストラクタ
 Goal::Goal(SimpleMath::Vector3 position)
 	:
-	IGameObject(L"Resources/Models/Goal.cmo", L"Resources/Models", position),
+	BaseObject(L"Resources/Models/Goal.cmo", L"Resources/Models", position),
 	is_hit(false)	// 衝突フラグ
 {
 	CreateModel();

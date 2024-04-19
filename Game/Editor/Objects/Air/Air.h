@@ -10,9 +10,9 @@
 #define AIR
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Air : public IGameObject
+class Air : public BaseObject
 {
 public:
 

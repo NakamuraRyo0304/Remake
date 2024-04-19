@@ -190,6 +190,7 @@
     <ClInclude Include="DeviceResources.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game\Bases\BaseCamera.h" />
+    <ClInclude Include="Game\Bases\BaseObject.h" />
     <ClInclude Include="Game\Bases\BaseScene.h" />
     <ClInclude Include="Game\Bases\BaseUI.h" />
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h" />
@@ -218,8 +219,6 @@
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\DrawKeys\DrawKeys.h" />
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h" />
-    <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
-    <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\Common\Island\Island.h" />
     <ClInclude Include="Game\Common\Water\Water.h" />
     <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h" />
@@ -231,8 +230,10 @@
     <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h" />
     <ClInclude Include="Game\GameMain.h" />
     <ClInclude Include="Game\Interfaces\IGameCamera.h" />
+    <ClInclude Include="Game\Interfaces\IGameObject.h" />
     <ClInclude Include="Game\Interfaces\IScene.h" />
     <ClInclude Include="Game\Interfaces\IUserInterface.h" />
+    <ClInclude Include="Game\Interfaces\StatesList.h" />
     <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h" />
     <ClInclude Include="Game\PlayScene\Objects\Iceberg\Iceberg.h" />
     <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h" />
@@ -285,6 +286,7 @@
     <ClCompile Include="DeviceResources.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game\Bases\BaseCamera.cpp" />
+    <ClCompile Include="Game\Bases\BaseObject.cpp" />
     <ClCompile Include="Game\Bases\BaseScene.cpp" />
     <ClCompile Include="Game\Bases\BaseUI.cpp" />
     <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp" />
@@ -313,7 +315,6 @@
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\DrawKeys\DrawKeys.cpp" />
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
-    <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\Island\Island.cpp" />
     <ClCompile Include="Game\Common\Water\Water.cpp" />
     <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp" />

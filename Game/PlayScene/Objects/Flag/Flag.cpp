@@ -16,7 +16,7 @@ const float Flag::CLOSED_MATCH = 0.1f;		// 近似一致
 // コンストラクタ
 Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
 	:
-	IGameObject(L"Resources/Models/Flag.cmo", L"Resources/Models"),
+	BaseObject(L"Resources/Models/Flag.cmo", L"Resources/Models"),
 	m_droppedPosition(),		            // 落下位置
 	is_arrive(false)			            // 到着フラグ
 {

@@ -9,7 +9,7 @@
 #ifndef BLOCKMANAGER
 #define BLOCKMANAGER
 
-#include "Game/Common/IGameObject/IGameObject.h"		// オブジェクト
+#include "Game/Bases/BaseObject.h"						// オブジェクトの基底クラス
 #include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"// JSON関連
 #include "Libraries/SystemDatas/DiaLog/DiaLog.h"		// ダイアログ
 #include "../Blocks/Flozen/Flozen.h"					// 氷ブロック
@@ -79,7 +79,7 @@ private:
 
 	// ファンクタ
 	// アウトプット時のソート条件
-	struct SortPriority
+	struct OutputSort
 	{
 		bool operator()(const Json& a, const Json& b) const
 		{
@@ -141,7 +141,7 @@ private:
 	}
 	// 書き出し用オブジェクト追加関数
 	template <typename T>
-	void AddWriteObjects(std::vector<IGameObject*>* objects, std::vector<T>& wish)
+	void AddWriteObjects(std::vector<BaseObject*>* objects, std::vector<T>& wish)
 	{
 		// 空なら処理しない
 		if (wish.empty()) return;

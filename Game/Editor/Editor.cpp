@@ -31,6 +31,8 @@ Editor::Editor()
 	m_selectionID(ID::Obj_Flozen)		// 初期は氷床を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
+	// エディタ時のみカーソルを表示
+	ShowCursor(true);
 }
 
 // デストラクタ
@@ -38,6 +40,7 @@ Editor::~Editor()
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのデストラクタが呼ばれました。\n");
 	Finalize();
+	ShowCursor(false);
 }
 
 // 初期化
@@ -236,20 +239,19 @@ void Editor::SetDrawObject()
 // コリジョンの更新
 void Editor::UpdateCollisions(ID id)
 {
-	for (auto& obj : m_blockManager->GetAirs())		// エアー（判定用ブロック）
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetFlozens())	// 氷床ブロック
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetClouds())	// 雲ギミック
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetCoins())	// コインオブジェクト
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetPlayers())	// プレイヤオブジェクト
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetGoals())	// ゴールポイント
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetSpikes())	// 棘エネミー
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
-	for (auto& obj : m_blockManager->GetLifts())	// リフトブロック
-		m_editorCollision->Update(UserUtility::UniqueCast<IGameObject>(obj), id);
+	std::vector<BaseObject*> updateObj;
+
+	for (auto& obj : m_blockManager->GetFlozens())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetClouds())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetCoins())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetPlayers())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetGoals())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetSpikes())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetLifts())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+	for (auto& obj : m_blockManager->GetAirs())		{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
+
+	for(auto& obj : updateObj)
+	{
+		m_editorCollision->Update(obj, id);
+	}
 }

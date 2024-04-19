@@ -10,9 +10,9 @@
 #define FLOZEN
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Flozen : public IGameObject
+class Flozen : public BaseObject
 {
 public:
 

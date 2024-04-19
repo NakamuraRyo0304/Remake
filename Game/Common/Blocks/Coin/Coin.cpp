@@ -15,7 +15,7 @@ const float Coin::ROTATE_SPEED = 30.0f;
 // コンストラクタ
 Coin::Coin(SimpleMath::Vector3 position)
 	:
-	IGameObject(L"Resources/Models/Coin.cmo", L"Resources/Models", position),
+	BaseObject(L"Resources/Models/Coin.cmo", L"Resources/Models", position),
 	is_hit(false)		// 衝突フラグ
 {
 	CreateModel();

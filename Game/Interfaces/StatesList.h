@@ -1,13 +1,13 @@
 /*
- *	@File	IGameObjectStates.h
- *	@Brief	ゲームオブジェクトのステータス宣言。
+ *	@File	StatesList.h
+ *	@Brief	ゲームオブジェクトのステータスリスト。
  *	@Date	2024-01-25
  *  @Author NakamuraRyo
  */
 
 #pragma once
 
-/// オブジェクトID
+// オブジェクトID
 enum class ID
 {
 	Default,		// 設定なし
@@ -23,14 +23,9 @@ enum class ID
 	Obj_Goal,		// ゴールオブジェクト
 	Obj_Spike,		// 棘オブジェクト
 	Obj_Lift,		// リフトブロック
-
-
 	CursorPos,		// カーソルの3D位置
 	Back_Iceberg,	// 氷山
 	Back_Island,	// 孤島
-
-
-
 
 	////////////////
 	//// 特殊ID ////

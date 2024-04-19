@@ -24,7 +24,7 @@ const float Player::GRAVITY = -0.05f;		// 重力
 // コンストラクタ
 Player::Player()
 	:
-	IGameObject(L"Resources/Models/pBody.cmo", L"Resources/Models"),
+	BaseObject(L"Resources/Models/pBody.cmo", L"Resources/Models"),
 	m_velocity(),			                // 移動量
 	m_coinNum(9),						    // 取得済みコイン枚数
 	m_giveUpTime(),							// 諦めタイム
