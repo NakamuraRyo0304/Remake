@@ -10,7 +10,7 @@
 #define CLEARSCENE
 
 // 親シーンクラス
-#include "Game/BaseScene/BaseScene.h"
+#include "Game/Bases/BaseScene.h"
 
 class BG_Clear;
 class MomentCanv;

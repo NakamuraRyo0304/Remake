@@ -10,7 +10,7 @@
 #define GAMEMAIN
 
 // 親シーンのインクルード
-#include "Game/BaseScene/BaseScene.h"
+#include "Game/Bases/BaseScene.h"
 
  // 前方宣言
 class Fade;

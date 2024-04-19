@@ -60,9 +60,6 @@
     <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
       <Filter>Interfaces\IGameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
-      <Filter>Interfaces\IUserInterface</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
       <Filter>GameObjects\Common\Blocks\Air</Filter>
     </ClCompile>
@@ -291,8 +288,11 @@
     <ClCompile Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.cpp">
       <Filter>GameSystems\Title\MoveMonitor</Filter>
     </ClCompile>
-    <ClCompile Include="Game\BaseScene\BaseScene.cpp">
-      <Filter>Scenes\BaseScene</Filter>
+    <ClCompile Include="Game\Bases\BaseScene.cpp">
+      <Filter>Bases\BaseScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Bases\BaseUI.cpp">
+      <Filter>Bases\BaseUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,9 +313,6 @@
     </ClInclude>
     <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h">
       <Filter>Interfaces\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
-      <Filter>Interfaces\IUserInterface</Filter>
     </ClInclude>
     <ClInclude Include="Game\Editor\Objects\Air\Air.h">
       <Filter>GameObjects\Common\Blocks\Air</Filter>
@@ -563,11 +560,17 @@
     <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h">
       <Filter>GameObjects\Play\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Game\BaseScene\BaseScene.h">
-      <Filter>Scenes\BaseScene</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Interfaces\IScene.h">
       <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\IUserInterface.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseScene.h">
+      <Filter>Bases\BaseScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseUI.h">
+      <Filter>Bases\BaseUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -818,9 +821,6 @@
     </Filter>
     <Filter Include="Interfaces\IGameObject">
       <UniqueIdentifier>{21cc561c-c77d-4e7c-a9de-c7abf01a0d79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IUserInterface">
-      <UniqueIdentifier>{91acd816-9024-4985-bf64-43b5e063431e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{0c3f85ce-e792-45cf-bd28-566ea722938e}</UniqueIdentifier>
@@ -1158,8 +1158,14 @@
     <Filter Include="GameObjects\Common\Blocks\Goal">
       <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\BaseScene">
-      <UniqueIdentifier>{9af100d6-0adf-4175-a912-f8858bf17929}</UniqueIdentifier>
+    <Filter Include="Bases">
+      <UniqueIdentifier>{fe1b487d-0453-4301-b582-ba0cc48a604f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseScene">
+      <UniqueIdentifier>{80a34924-750d-4d1e-8f0e-5764719e75c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseUI">
+      <UniqueIdentifier>{12ad7632-77a2-4559-83ca-adca2b4dcf4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

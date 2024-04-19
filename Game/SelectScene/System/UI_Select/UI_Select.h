@@ -10,9 +10,9 @@
 #define UI_SELECT
 
 // 親シーンクラス
-#include "Game/Common/IUserInterface/IUserInterface.h"
+#include "Game/Bases/BaseUI.h"
 
-class UI_Select final : public IUserInterface
+class UI_Select final : public BaseUI
 {
 public:
 

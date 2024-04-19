@@ -10,7 +10,7 @@
 #define EDITOR
 
 // 親シーンクラス
-#include "Game/BaseScene/BaseScene.h"
+#include "Game/Bases/BaseScene.h"
 
 // オブジェクトステータス
 #include "Game/Common/IGameObject/IGameObjectStates.h"

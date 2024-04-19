@@ -10,7 +10,7 @@
 #define	TITLESCENE
 
 // 親シーンクラス
-#include "Game/BaseScene/BaseScene.h"
+#include "Game/Bases/BaseScene.h"
 
 class AdminCamera;
 class Sky_Title;

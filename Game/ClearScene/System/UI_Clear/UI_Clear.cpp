@@ -16,10 +16,10 @@ const float UI_Clear::LAST_POS_X = 1550.0f;					// 最終X座標
 // コンストラクタ
 UI_Clear::UI_Clear(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	:
-	IUserInterface(scS, mscs),								// 基底クラス
-	m_select(SELECT::NEXT),									// セレクト
-	m_options(),											// オプション
-	is_endMoving(false)										// 動作終了フラグ
+	BaseUI(scS, mscs),		// 基底クラス
+	m_select(SELECT::NEXT),	// セレクト
+	m_options(),			// オプション
+	is_endMoving(false)		// 動作終了フラグ
 {
 	m_sprites = std::make_unique<DrawSprite>();
 	m_sprites->MakeSpriteBatch();

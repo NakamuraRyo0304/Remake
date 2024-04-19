@@ -7,21 +7,19 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-#include "Libraries/SystemDatas/Button/Button.h"
 #include "Game/PlayScene/System/UI_Play/UI_CoinNum/UI_CoinNum.h"
 #include "Game/PlayScene/System/UI_Play/UI_PlayArea/UI_PlayArea.h"
-#include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "Game/Common/DrawKeys/DrawKeys.h"
 #include "UI_Play.h"
 
 // コンストラクタ
 UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	:
-	IUserInterface(scS, mscs),	                    // 基底クラス
-	m_coinNum(),				                    // コイン枚数
-	m_coinTexPos(),									// 残りコイン枚数テキスト
-	m_cameraTexPos(),								// カメラテキスト
-	is_retryPush(false)								// リトライボタンフラグ
+	BaseUI(scS, mscs),			// 基底クラス
+	m_coinNum(),				// コイン枚数
+	m_coinTexPos(),				// 残りコイン枚数テキスト
+	m_cameraTexPos(),			// カメラテキスト
+	is_retryPush(false)			// リトライボタンフラグ
 {
 	// エリア作成
 	m_area = std::make_unique<UI_PlayArea>();

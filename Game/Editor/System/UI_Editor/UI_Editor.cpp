@@ -17,10 +17,10 @@ using BS = Button::State;				// ボタンの状態
 // コンストラクタ
 UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	:
-	IUserInterface(scS, mscs),	    // 基底クラス
-	m_buttons{},				    // ボタン
-	is_clicks{ false },			    // クリック判定
-	is_blindFlag(false)			    // ボタンかくしフラグ
+	BaseUI(scS, mscs),	    // 基底クラス
+	m_buttons{},			// ボタン
+	is_clicks{ false },		// クリック判定
+	is_blindFlag(false)		// ボタンかくしフラグ
 {
 	// ボタン作成
 	m_buttons.push_back(std::make_unique<Button>(L"Load"  , L"Resources/Textures/Editor/Buttons/LoadButton.dds"));

@@ -19,7 +19,7 @@ const float UI_Title::COLOR_SPEED = 0.075f; // 色の変更速度
 // コンストラクタ
 UI_Title::UI_Title(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	:
-	IUserInterface(scS, mscs),					// 基底クラス
+	BaseUI(scS, mscs),							// 基底クラス
 	m_selection(TitleSelect::Start),			// スタート
 	m_position(),								// 座標
 	m_color(),									// 描画色

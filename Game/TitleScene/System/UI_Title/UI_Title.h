@@ -10,9 +10,9 @@
 #define UI_TITLE
 
  // 親シーンクラス
-#include "Game/Common/IUserInterface/IUserInterface.h"
+#include "Game/Bases/BaseUI.h"
 
-class UI_Title final : public IUserInterface
+class UI_Title final : public BaseUI
 {
 public:
 

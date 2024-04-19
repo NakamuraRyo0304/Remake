@@ -6,6 +6,7 @@
  */
 
 #include "pch.h"											// プリコンパイル済みヘッダー
+#include "Libraries/UserUtility.h"							// ユーザー関数
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"		// ユーザインターフェース
 #include "Libraries/SystemDatas/Timer/Timer.h"				// タイマー
 

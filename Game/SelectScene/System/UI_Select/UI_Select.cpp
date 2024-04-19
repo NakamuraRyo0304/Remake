@@ -18,7 +18,7 @@ const float UI_Select::STAGE_TEX_SPAN = 185.0f; // ステージ番号の間隔
 // コンストラクタ
 UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	:
-	IUserInterface(scS, mscs),		// 基底クラス
+	BaseUI(scS, mscs),				// 基底クラス
 	m_stageSelection(1),			// ステージ１からスタート
 	m_position(),					// 座標
 	m_color(),						// 描画色

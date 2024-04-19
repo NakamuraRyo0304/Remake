@@ -13,8 +13,6 @@ class IScene
 {
 public:
 
-	// コンストラクタ
-	IScene() = default;
 	// デストラクタ
 	virtual ~IScene() = default;
 	// 初期化
