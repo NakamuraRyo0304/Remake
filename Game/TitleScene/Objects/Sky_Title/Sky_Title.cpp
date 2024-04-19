@@ -11,7 +11,7 @@
 // コンストラクタ
 Sky_Title::Sky_Title()
 	:
-	IGameObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
+	BaseObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Sky);

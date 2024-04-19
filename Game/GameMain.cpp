@@ -36,6 +36,9 @@ GameMain::GameMain()
 	m_collectedCoin(0),				// 集めたコイン数
 	m_maxNumber(999)				// 最大ステージ番号
 {
+	// カーソルを非表示
+	ShowCursor(false);
+
 	// タイマー計測開始
 #ifdef _DEBUG
 	m_timer = std::make_unique<Timer>(Timer::Mode::infinited);
@@ -49,6 +52,9 @@ GameMain::GameMain()
 GameMain::~GameMain()
 {
 	Finalize();
+
+	// カーソルを表示
+	ShowCursor(true);
 }
 
 // 初期化

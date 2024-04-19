@@ -10,9 +10,9 @@
 #define ISLAND
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Island : public IGameObject
+class Island : public BaseObject
 {
 public:
 

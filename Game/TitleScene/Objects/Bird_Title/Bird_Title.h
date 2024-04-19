@@ -10,9 +10,9 @@
 #define BIRD_TITLE
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Bird_Title : public IGameObject
+class Bird_Title : public BaseObject
 {
 public:
 

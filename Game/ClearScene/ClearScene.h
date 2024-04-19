@@ -10,7 +10,7 @@
 #define CLEARSCENE
 
 // 親シーンクラス
-#include "Game/IScene/IScene.h"
+#include "Game/Bases/BaseScene.h"
 
 class BG_Clear;
 class MomentCanv;
@@ -19,7 +19,7 @@ class Timer;
 class UI_Clear;
 class Tape;
 class Seal;
-class ClearScene final : public IScene
+class ClearScene final : public BaseScene
 {
 public:
 
@@ -43,7 +43,7 @@ public:
 
 private:
 
-	// シーン内の変数初期化関数
+	// シーン内の変数初期化
 	void SetSceneValues() override;
 	// デバッグ描画
 	void DebugDraw(DirectX::CommonStates& states) override;

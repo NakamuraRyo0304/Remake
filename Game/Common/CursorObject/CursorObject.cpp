@@ -11,7 +11,7 @@
 // コンストラクタ
 CursorObject::CursorObject(const wchar_t* path, SimpleMath::Vector3 scale)
 	:
-	IGameObject(path, L"Resources/Models")
+	BaseObject(path, L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::CursorPos);

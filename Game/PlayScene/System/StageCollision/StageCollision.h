@@ -42,7 +42,7 @@ private:
 private:
 
 	// 固有処理
-	void PerformEngenProc(Player* player, IGameObject* block, DirectX::SimpleMath::Vector3 newPos, Side side);
+	void PerformEngenProc(Player* player, BaseObject* block, DirectX::SimpleMath::Vector3 newPos, Side side);
 
 	// 当たり判定処理
 	Side IsCube(DirectX::SimpleMath::Vector3* playerPos, const DirectX::SimpleMath::Vector3& blockPos,
@@ -51,7 +51,7 @@ private:
 private:
 
 	// 判定オブジェクト配列
-	std::vector<IGameObject*> m_objects;
+	std::vector<BaseObject*> m_objects;
 
 };
 

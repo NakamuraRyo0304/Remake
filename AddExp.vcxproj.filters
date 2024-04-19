@@ -54,18 +54,6 @@
     <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp">
       <Filter>Cameras\DeathCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp">
-      <Filter>Interfaces\IGameCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp">
-      <Filter>Interfaces\IGameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\IScene\IScene.cpp">
-      <Filter>Interfaces\IScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp">
-      <Filter>Interfaces\IUserInterface</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\Objects\Air\Air.cpp">
       <Filter>GameObjects\Common\Blocks\Air</Filter>
     </ClCompile>
@@ -95,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DiaLog\DiaLog.cpp">
       <Filter>Libraries\DiaLog</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.cpp">
-      <Filter>Libraries\DisplayEffect</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\DrawSprite\DrawSprite.cpp">
       <Filter>Libraries\DrawSprite</Filter>
@@ -134,9 +119,6 @@
     </ClCompile>
     <ClCompile Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.cpp">
       <Filter>Libraries\Transition</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\SystemDatas\XController\XController.cpp">
-      <Filter>Libraries\XContoller</Filter>
     </ClCompile>
     <ClCompile Include="Game\SelectScene\SelectScene.cpp">
       <Filter>Scenes\SelectScene</Filter>
@@ -300,6 +282,18 @@
     <ClCompile Include="Game\TitleScene\System\MoveMonitor\MoveMonitor.cpp">
       <Filter>GameSystems\Title\MoveMonitor</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Bases\BaseScene.cpp">
+      <Filter>Bases\BaseScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Bases\BaseUI.cpp">
+      <Filter>Bases\BaseUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Bases\BaseCamera.cpp">
+      <Filter>Bases\BaseCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Bases\BaseObject.cpp">
+      <Filter>Bases\BaseObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h">
@@ -310,21 +304,6 @@
     </ClInclude>
     <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h">
       <Filter>Cameras\DeathCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h">
-      <Filter>Interfaces\IGameCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameObject\IGameObject.h">
-      <Filter>Interfaces\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h">
-      <Filter>Interfaces\IGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\IScene\IScene.h">
-      <Filter>Interfaces\IScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h">
-      <Filter>Interfaces\IUserInterface</Filter>
     </ClInclude>
     <ClInclude Include="Game\Editor\Objects\Air\Air.h">
       <Filter>GameObjects\Common\Blocks\Air</Filter>
@@ -355,9 +334,6 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DiaLog\DiaLog.h">
       <Filter>Libraries\DiaLog</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\DisplayEffect\DisplayEffect.h">
-      <Filter>Libraries\DisplayEffect</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\DrawSprite\DrawSprite.h">
       <Filter>Libraries\DrawSprite</Filter>
@@ -400,9 +376,6 @@
     </ClInclude>
     <ClInclude Include="Libraries\SystemDatas\ScreenEffects\Transition\Transition.h">
       <Filter>Libraries\Transition</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\SystemDatas\XController\XController.h">
-      <Filter>Libraries\XContoller</Filter>
     </ClInclude>
     <ClInclude Include="Game\SelectScene\SelectScene.h">
       <Filter>Scenes\SelectScene</Filter>
@@ -577,6 +550,33 @@
     </ClInclude>
     <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h">
       <Filter>GameObjects\Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\IScene.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\IUserInterface.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseScene.h">
+      <Filter>Bases\BaseScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseUI.h">
+      <Filter>Bases\BaseUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\IGameCamera.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseCamera.h">
+      <Filter>Bases\BaseCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\IGameObject.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Interfaces\StatesList.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Bases\BaseObject.h">
+      <Filter>Bases\BaseObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -822,18 +822,6 @@
     <Filter Include="Interfaces">
       <UniqueIdentifier>{d9150a4d-91ae-4f88-89ee-9f469d00937b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interfaces\IGameCamera">
-      <UniqueIdentifier>{3f829e01-4cbd-4434-b4ae-fbc9acf228dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IGameObject">
-      <UniqueIdentifier>{21cc561c-c77d-4e7c-a9de-c7abf01a0d79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IScene">
-      <UniqueIdentifier>{0b9324fe-c29c-42bf-b298-07373acdaf2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces\IUserInterface">
-      <UniqueIdentifier>{91acd816-9024-4985-bf64-43b5e063431e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{0c3f85ce-e792-45cf-bd28-566ea722938e}</UniqueIdentifier>
     </Filter>
@@ -866,9 +854,6 @@
     </Filter>
     <Filter Include="Libraries\DiaLog">
       <UniqueIdentifier>{178a5624-923a-45f3-af1c-1012b9c44676}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\DisplayEffect">
-      <UniqueIdentifier>{268effdd-52b4-4bbd-a572-35226d8444c2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Libraries\DrawSprite">
       <UniqueIdentifier>{a3ada18c-769a-468c-84cd-16be20e4dee0}</UniqueIdentifier>
@@ -905,9 +890,6 @@
     </Filter>
     <Filter Include="Libraries\Transition">
       <UniqueIdentifier>{c2449553-c227-4efc-91cf-5f1c42fe5b0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries\XContoller">
-      <UniqueIdentifier>{181cdb3d-7ee6-4f04-bf0d-9d179861bd7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{691a665d-8d45-4df5-ae88-c14fcc0033ab}</UniqueIdentifier>
@@ -1169,6 +1151,21 @@
     </Filter>
     <Filter Include="GameObjects\Common\Blocks\Goal">
       <UniqueIdentifier>{b9da240b-7bf9-46df-82e1-2a4a8b2ff80b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases">
+      <UniqueIdentifier>{fe1b487d-0453-4301-b582-ba0cc48a604f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseScene">
+      <UniqueIdentifier>{80a34924-750d-4d1e-8f0e-5764719e75c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseUI">
+      <UniqueIdentifier>{12ad7632-77a2-4559-83ca-adca2b4dcf4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseCamera">
+      <UniqueIdentifier>{42896825-0dca-4979-adc3-4802405fcfad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bases\BaseObject">
+      <UniqueIdentifier>{4f0d2039-852d-4d43-b4a9-8be23c8eb456}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

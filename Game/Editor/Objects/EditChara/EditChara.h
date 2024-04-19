@@ -10,9 +10,9 @@
 #define EDITCHARA
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class EditChara : public IGameObject
+class EditChara : public BaseObject
 {
 public:
 

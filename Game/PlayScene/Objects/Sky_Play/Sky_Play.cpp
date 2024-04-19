@@ -14,7 +14,7 @@ const float Sky_Play::ROTATE_SPEED = 0.5f;		// 回転速度
 // コンストラクタ
 Sky_Play::Sky_Play()
 	:
-	IGameObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
+	BaseObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
 {
 	CreateModel();
 	SetID(ID::Back_Sky);

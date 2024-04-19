@@ -12,7 +12,7 @@
 // コンストラクタ
 Flozen::Flozen(SimpleMath::Vector3 position)
 	:
-	IGameObject(L"Resources/Models/Flozen.cmo", L"Resources/Models", position)
+	BaseObject(L"Resources/Models/Flozen.cmo", L"Resources/Models", position)
 {
 	CreateModel();
 	SetID(ID::Obj_Flozen);

@@ -10,9 +10,9 @@
 #define COIN
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Coin : public IGameObject
+class Coin : public BaseObject
 {
 public:
 

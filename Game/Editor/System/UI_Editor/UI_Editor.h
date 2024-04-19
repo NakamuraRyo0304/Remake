@@ -10,10 +10,10 @@
 #define UI_EDITOR
 
 // 親シーンクラス
-#include "Game/Common/IUserInterface/IUserInterface.h"
+#include "Game/Bases/BaseUI.h"
 
 class DrawKeys;
-class UI_Editor final : public IUserInterface
+class UI_Editor final : public BaseUI
 {
 public:
 

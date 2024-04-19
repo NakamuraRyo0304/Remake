@@ -16,7 +16,7 @@ const float AdminCamera::FOLLOW_TARGET_SPEED = 0.05f;
 // コンストラクタ
 AdminCamera::AdminCamera(const SimpleMath::Vector2& screenSize)
 	:
-	m_screenSize(screenSize),	// スクリーンサイズ
+	m_screenSize(screenSize),	// 基底クラスのコンストラクタ
 	m_type(),					// カメラタイプ
 	is_active(true),			// アクティブフラグ
 	is_interpolation(true)		// カメラの補間フラグ

@@ -10,9 +10,9 @@
 #define FLAG
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Flag : public IGameObject
+class Flag : public BaseObject
 {
 public:
 

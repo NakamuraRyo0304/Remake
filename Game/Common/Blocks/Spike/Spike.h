@@ -10,9 +10,9 @@
 #define SPIKE
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Spike : public IGameObject
+class Spike : public BaseObject
 {
 public:
 

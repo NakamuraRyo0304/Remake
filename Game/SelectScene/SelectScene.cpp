@@ -6,6 +6,7 @@
  */
 
 #include "pch.h"											// プリコンパイル済みヘッダー
+#include "Libraries/UserUtility.h"							// ユーザー関数
 #include "Game/Cameras/AdminCamera/AdminCamera.h"			// 統合カメラ
 #include "Game/SelectScene/System/UI_Select/UI_Select.h"	// ユーザインターフェース
 
@@ -24,8 +25,8 @@ using RepeatType = SoundManager::SE_MODE;	// サウンドのタイプ
 // コンストラクタ
 SelectScene::SelectScene(const int& selection)
 	:
-	IScene(),						// 基底クラスのコンストラクタ
-	m_stageSelection(selection)		// 選択番号
+	BaseScene(),						// 基底クラスのコンストラクタ
+	m_stageSelection(selection)			// 選択番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"SelectSceneのコンストラクタが呼ばれました。\n");
 }

@@ -15,7 +15,7 @@ const float Spike::EATING_SPEED = XMConvertToRadians(15.0f);	// 捕食時の回転速度
 // コンストラクタ
 Spike::Spike(SimpleMath::Vector3 position)
 	:
-	IGameObject(L"Resources/Models/Spike.cmo", L"Resources/Models", position),
+	BaseObject(L"Resources/Models/Spike.cmo", L"Resources/Models", position),
 	is_hit(false)				                            // 衝突フラグ
 {
 	CreateModel();

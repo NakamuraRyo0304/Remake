@@ -10,9 +10,9 @@
 #define ICEBERG
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Iceberg : public IGameObject
+class Iceberg : public BaseObject
 {
 public:
 

@@ -17,7 +17,7 @@ const float Head::ROT_POWER = 15.0f;	// 首振りの強さ
 // コンストラクタ
 Head::Head()
 	:
-	IGameObject(L"Resources/Models/pHead.cmo", L"Resources/Models"),
+	BaseObject(L"Resources/Models/pHead.cmo", L"Resources/Models"),
 	m_states(MoveStates::Idling)		// アイドル状態
 {
 	CreateModel();

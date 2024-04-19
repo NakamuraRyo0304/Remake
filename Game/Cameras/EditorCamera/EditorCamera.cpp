@@ -20,7 +20,7 @@ using KeyCode = Keyboard::Keys;					// キーコード
 // コンストラクタ
 EditorCamera::EditorCamera(const SimpleMath::Vector2& screenSize)
 	:
-	IGameCamera(screenSize),					// 基底クラス
+	BaseCamera(screenSize),						// 基底クラスのコンストラクタ
     m_viewPoint(ViewPoint::PointFront),		    // デフォルトは前方位置
 	m_viewPosition(),							// 目的位置
 	m_viewTarget()								// 目的注視点

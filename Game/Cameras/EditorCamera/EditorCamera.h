@@ -10,9 +10,9 @@
 #define EDITORCAMERA
 
 // 親カメラクラス
-#include "Game/Common/IGameCamera/IGameCamera.h"
+#include "Game/Bases/BaseCamera.h"
 
-class EditorCamera : public IGameCamera
+class EditorCamera : public BaseCamera
 {
 public:
 

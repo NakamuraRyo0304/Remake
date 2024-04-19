@@ -189,6 +189,10 @@
   <ItemGroup>
     <ClInclude Include="DeviceResources.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Game\Bases\BaseCamera.h" />
+    <ClInclude Include="Game\Bases\BaseObject.h" />
+    <ClInclude Include="Game\Bases\BaseScene.h" />
+    <ClInclude Include="Game\Bases\BaseUI.h" />
     <ClInclude Include="Game\Cameras\AdminCamera\AdminCamera.h" />
     <ClInclude Include="Game\Cameras\DeathCamera\DeathCamera.h" />
     <ClInclude Include="Game\Cameras\EditorCamera\EditorCamera.h" />
@@ -215,11 +219,7 @@
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\DrawKeys\DrawKeys.h" />
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h" />
-    <ClInclude Include="Game\Common\IGameCamera\IGameCamera.h" />
-    <ClInclude Include="Game\Common\IGameObject\IGameObject.h" />
-    <ClInclude Include="Game\Common\IGameObject\IGameObjectStates.h" />
     <ClInclude Include="Game\Common\Island\Island.h" />
-    <ClInclude Include="Game\Common\IUserInterface\IUserInterface.h" />
     <ClInclude Include="Game\Common\Water\Water.h" />
     <ClInclude Include="Game\Common\WorldMouse\WorldMouse.h" />
     <ClInclude Include="Game\Editor\Editor.h" />
@@ -229,7 +229,11 @@
     <ClInclude Include="Game\Editor\System\EditorGrids\EditorGrids.h" />
     <ClInclude Include="Game\Editor\System\UI_Editor\UI_Editor.h" />
     <ClInclude Include="Game\GameMain.h" />
-    <ClInclude Include="Game\IScene\IScene.h" />
+    <ClInclude Include="Game\Interfaces\IGameCamera.h" />
+    <ClInclude Include="Game\Interfaces\IGameObject.h" />
+    <ClInclude Include="Game\Interfaces\IScene.h" />
+    <ClInclude Include="Game\Interfaces\IUserInterface.h" />
+    <ClInclude Include="Game\Interfaces\StatesList.h" />
     <ClInclude Include="Game\PlayScene\Objects\Flag\Flag.h" />
     <ClInclude Include="Game\PlayScene\Objects\Iceberg\Iceberg.h" />
     <ClInclude Include="Game\PlayScene\Objects\Player\MoveStates.h" />
@@ -281,6 +285,10 @@
   <ItemGroup>
     <ClCompile Include="DeviceResources.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Game\Bases\BaseCamera.cpp" />
+    <ClCompile Include="Game\Bases\BaseObject.cpp" />
+    <ClCompile Include="Game\Bases\BaseScene.cpp" />
+    <ClCompile Include="Game\Bases\BaseUI.cpp" />
     <ClCompile Include="Game\Cameras\AdminCamera\AdminCamera.cpp" />
     <ClCompile Include="Game\Cameras\DeathCamera\DeathCamera.cpp" />
     <ClCompile Include="Game\Cameras\EditorCamera\EditorCamera.cpp" />
@@ -307,10 +315,7 @@
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\DrawKeys\DrawKeys.cpp" />
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp" />
-    <ClCompile Include="Game\Common\IGameCamera\IGameCamera.cpp" />
-    <ClCompile Include="Game\Common\IGameObject\IGameObject.cpp" />
     <ClCompile Include="Game\Common\Island\Island.cpp" />
-    <ClCompile Include="Game\Common\IUserInterface\IUserInterface.cpp" />
     <ClCompile Include="Game\Common\Water\Water.cpp" />
     <ClCompile Include="Game\Common\WorldMouse\WorldMouse.cpp" />
     <ClCompile Include="Game\Editor\Editor.cpp" />
@@ -320,7 +325,6 @@
     <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.cpp" />
     <ClCompile Include="Game\Editor\System\UI_Editor\UI_Editor.cpp" />
     <ClCompile Include="Game\GameMain.cpp" />
-    <ClCompile Include="Game\IScene\IScene.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Flag\Flag.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Iceberg\Iceberg.cpp" />
     <ClCompile Include="Game\PlayScene\Objects\Player\Parts\Head.cpp" />

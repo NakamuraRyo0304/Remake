@@ -10,9 +10,9 @@
 #define LIFT
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Lift : public IGameObject
+class Lift : public BaseObject
 {
 public:
 

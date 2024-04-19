@@ -10,9 +10,9 @@
 #define CURSOROBJECT
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class CursorObject : public IGameObject
+class CursorObject : public BaseObject
 {
 public:
 

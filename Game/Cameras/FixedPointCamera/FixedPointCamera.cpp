@@ -11,7 +11,7 @@
 // コンストラクタ
 FixedPointCamera::FixedPointCamera(const SimpleMath::Vector2& screenSize)
 	:
-	IGameCamera(screenSize)			//基底クラス
+	BaseCamera(screenSize)			// 基底クラスのコンストラクタ
 {
 	// 座標と注視点をセット
 	SetPosition(SimpleMath::Vector3(0.0f, 2.0f, 24.0f));

@@ -10,14 +10,12 @@
 #define UI_PLAY
 
 // 親シーンクラス
-#include "Game/Common/IUserInterface/IUserInterface.h"
+#include "Game/Bases/BaseUI.h"
 
 class UI_CoinNum;
 class UI_PlayArea;
 class DrawKeys;
-class DrawSprite;
-class Button;
-class UI_Play final : public IUserInterface
+class UI_Play final : public BaseUI
 {
 public:
 

@@ -18,7 +18,7 @@ const float UI_Select::STAGE_TEX_SPAN = 185.0f; // ステージ番号の間隔
 // コンストラクタ
 UI_Select::UI_Select(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	:
-	IUserInterface(scS, mscs),		// 基底クラス
+	BaseUI(scS, mscs),				// 基底クラス
 	m_stageSelection(1),			// ステージ１からスタート
 	m_position(),					// 座標
 	m_color(),						// 描画色
@@ -86,9 +86,7 @@ void UI_Select::Initialize()
 	m_sprites->AddTextureData(L"Stage4", L"Resources/Textures/Stages/Stage4.dds");
 }
 
-//==============================================================================
-// 更新処理
-//==============================================================================
+// 更新
 void UI_Select::Update()
 {
 	// 選択番号に応じて色を分ける
@@ -124,9 +122,7 @@ void UI_Select::Update()
 	}
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void UI_Select::Draw()
 {
 	m_sprites->DrawTexture(L"Editor", m_position[L"Editor"] * GetScreenRate(),

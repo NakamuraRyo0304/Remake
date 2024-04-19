@@ -130,7 +130,7 @@ void BlockManager::Update()
 void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	std::vector<IGameObject*> _objects;
+	std::vector<BaseObject*> _objects;
 
 	// --書き換え対象-- //
 
@@ -234,15 +234,15 @@ void BlockManager::ClearBlocks()
 void BlockManager::OutputStage()
 {
 	// パスを設定
-	auto _path = m_dialog->GetExpFilePath();
-	if (UserUtility::IsNull(_path))	return;
-	else m_stagePath = _path;
+	auto path = m_dialog->GetExpFilePath();
+	if (UserUtility::IsNull(path))	return;
+	else m_stagePath = path;
 
 	// パスを設定
 	m_jsonHelper->SetPath(m_stagePath.c_str());
 
 	// オブジェクト配列
-	std::vector<IGameObject*> _objects;
+	std::vector<BaseObject*> object;
 
 	//==============================================================================
 	// 追加するのはここから>>> 書き出し用配列にセット
@@ -250,13 +250,13 @@ void BlockManager::OutputStage()
 
 	// --書き換え対象-- //
 
-	AddWriteObjects(&_objects, m_flozens);		// 氷床
-	AddWriteObjects(&_objects, m_clouds);		// 雲
-	AddWriteObjects(&_objects, m_coins);		// コイン
-	AddWriteObjects(&_objects, m_chara);		// キャラ
-	AddWriteObjects(&_objects, m_goals);		// ゴール
-	AddWriteObjects(&_objects, m_spikes);		// 棘
-	AddWriteObjects(&_objects, m_lifts);		// リフト
+	AddWriteObjects(&object, m_flozens);	// 氷床
+	AddWriteObjects(&object, m_clouds);		// 雲
+	AddWriteObjects(&object, m_coins);		// コイン
+	AddWriteObjects(&object, m_chara);		// キャラ
+	AddWriteObjects(&object, m_goals);		// ゴール
+	AddWriteObjects(&object, m_spikes);		// 棘
+	AddWriteObjects(&object, m_lifts);		// リフト
 
 
 	//==============================================================================
@@ -264,47 +264,47 @@ void BlockManager::OutputStage()
 	//==============================================================================
 
 	// 重複しているデータを単一データにする
-	std::unordered_map<std::string, Json> _uniqueEntry;
-	for (auto& obj : _objects)
+	std::unordered_map<std::string, Json> unique;
+	for (auto& obj : object)
 	{
-		std::string _id = GetBlockID(obj->GetID());
-		SimpleMath::Vector3 _pos = obj->GetInitialPosition();
+		std::string id = GetBlockID(obj->GetID());
+		SimpleMath::Vector3 position = obj->GetInitialPosition();
 
 		// ブロックの種類と初期位置から一意なキーを生成
 		// ID_X_Y_Zという単一キーを作成する(例：Flozen_1_2_1,Cloud_3_3_7)
-		std::string _uKey = _id + "_" + std::to_string(_pos.x) + "_"
-			+ std::to_string(_pos.y) + "_" + std::to_string(_pos.z);
+		std::string uniqueKey = id + "_" + std::to_string(position.x) + "_"
+			+ std::to_string(position.y) + "_" + std::to_string(position.z);
 
 		// キーが存在しない場合、エントリにデータを追加
-		if (_uniqueEntry.find(_uKey) == _uniqueEntry.end())
+		if (unique.find(uniqueKey) == unique.end())
 		{
-			_uniqueEntry[_uKey]["Path"] = _id;
-			_uniqueEntry[_uKey]["Position"]["X"] = _pos.x;
-			_uniqueEntry[_uKey]["Position"]["Y"] = _pos.y;
-			_uniqueEntry[_uKey]["Position"]["Z"] = _pos.z;
+			unique[uniqueKey]["Path"] = id;
+			unique[uniqueKey]["Position"]["X"] = position.x;
+			unique[uniqueKey]["Position"]["Y"] = position.y;
+			unique[uniqueKey]["Position"]["Z"] = position.z;
 		}
 	}
 
 	// ユニークエントリをソートして最終出力に登録する
-	std::vector<Json> _sortedEntries;
-	for (const auto& entry : _uniqueEntry)
+	std::vector<Json> sortedEntries;
+	for (const auto& entry : unique)
 	{
-		_sortedEntries.push_back(entry.second);
+		sortedEntries.push_back(entry.second);
 	}
 
 	// 文字列が多い・XZ昇順・Y昇順の優先度でソート
-	std::sort(_sortedEntries.begin(), _sortedEntries.end(), SortPriority());
+	std::sort(sortedEntries.begin(), sortedEntries.end(), OutputSort());
 
 	// 最終出力処理
-	Json _output;
-	for (const auto& sortedEntry : _sortedEntries)
+	Json output;
+	for (const auto& sortedEntry : sortedEntries)
 	{
-		_output.push_back(sortedEntry);
+		output.push_back(sortedEntry);
 	}
 
 	// インデントをそろえて書き出し
-	std::string _str = _output.dump(2);
-	m_jsonHelper->Write(_str);
+	std::string str = output.dump(2);
+	m_jsonHelper->Write(str);
 }
 
 // エアーで埋める
@@ -316,9 +316,11 @@ void BlockManager::FillAir()
 		{
 			for (int z = 0; z < MAP_SIZE_Z; z++)
 			{
-				SimpleMath::Vector3 _pos =
-					SimpleMath::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
-				m_air.push_back(std::make_unique<Air>(_pos));
+				float fx = static_cast<float>(x);
+				float fy = static_cast<float>(y);
+				float fz = static_cast<float>(z);
+				SimpleMath::Vector3 pos = SimpleMath::Vector3(fx, fy, fz);
+				m_air.push_back(std::make_unique<Air>(pos));
 			}
 		}
 	}
@@ -327,27 +329,27 @@ void BlockManager::FillAir()
 // プレイヤーの座標を取得する
 SimpleMath::Vector3 BlockManager::GetPlayerPosition() const
 {
-	SimpleMath::Vector3 _pos;
+	SimpleMath::Vector3 pos;
 
 	// プレイヤーが１つしかない場合はその座標を返す
 	// プレイヤーが２つ以上ある場合はランダムで返す
 	if (m_chara.size() == 1)
 	{
-		_pos = m_chara[0]->GetInitialPosition();
+		pos = m_chara[0]->GetInitialPosition();
 	}
 	else
 	{
 		// 乱数を生成する
-		std::random_device _rd;
-		std::mt19937 _gen(_rd());
-		std::uniform_int_distribution<int> _dist(0, static_cast<int>(m_chara.size()) - 1);
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int> dist(0, static_cast<int>(m_chara.size()) - 1);
 
 		// ランダムに1人のプレイヤーを選び、その座標を返す
-		int _idx = _dist(_gen);
-		_pos = m_chara[_idx]->GetInitialPosition();
+		int idx = dist(gen);
+		pos = m_chara[idx]->GetInitialPosition();
 	}
 
-	return _pos;
+	return pos;
 }
 
 // ゴール判定取得
@@ -384,7 +386,7 @@ bool BlockManager::IsHitSpike() const
 void BlockManager::ReLoad(const wchar_t* path)
 {
 	// 開けなかったときのために一時保存する
-	std::wstring _tmp = m_stagePath;
+	std::wstring tmp = m_stagePath;
 
 	// ダイアログが作られていなければ文字列を返さない
 	if (UserUtility::IsNull(m_dialog.get())) return;
@@ -395,10 +397,10 @@ void BlockManager::ReLoad(const wchar_t* path)
 	// パスがなかったらダイアログから開く
 	if (UserUtility::IsNull(path))
 	{
-		auto _path = m_dialog->GetExpFilePath();
-		if (not UserUtility::IsNull(_path))
+		auto p = m_dialog->GetExpFilePath();
+		if (not UserUtility::IsNull(p))
 		{
-			m_stagePath = _path;
+			m_stagePath = p;
 		}
 	}
 	else
@@ -409,7 +411,7 @@ void BlockManager::ReLoad(const wchar_t* path)
 	// ファイルの内容チェック(中身が空なら最初のパスを再代入)
 	if (m_stagePath.empty())
 	{
-		m_stagePath = _tmp;
+		m_stagePath = tmp;
 	}
 
 	// 初期化する

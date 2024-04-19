@@ -10,9 +10,9 @@
 #define UI_CLEAR
 
 // 親シーンクラス
-#include "Game/Common/IUserInterface/IUserInterface.h"
+#include "Game/Bases/BaseUI.h"
 
-class UI_Clear final : public IUserInterface
+class UI_Clear final : public BaseUI
 {
 public:
 

@@ -10,7 +10,7 @@
 #define ADMINCAMERA
 
 // 親カメラクラス
-#include "Game/Common/IGameCamera/IGameCamera.h"
+#include "Game/Bases/BaseCamera.h"
 
 // 子カメラのインクルード
 #include "../FixedPointCamera/FixedPointCamera.h"
@@ -95,7 +95,7 @@ private:
 	// カメラタイプ
 	Type m_type;
 	// ゲームカメラ
-	std::unique_ptr<IGameCamera> m_gameCamera;
+	std::unique_ptr<BaseCamera> m_gameCamera;
 	// アクティブフラグ
 	bool is_active;
 	// ウィンドウサイズ

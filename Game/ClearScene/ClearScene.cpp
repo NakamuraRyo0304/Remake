@@ -6,7 +6,7 @@
  */
 
 #include "pch.h"											// プリコンパイル済みヘッダー
-#include "Libraries/UserUtility.h"							// ユーティリティ
+#include "Libraries/UserUtility.h"							// ユーザー関数
 #include "Game/ClearScene/System/UI_Clear/UI_Clear.h"		// ユーザインターフェース
 #include "Libraries/SystemDatas/Timer/Timer.h"				// タイマー
 
@@ -27,11 +27,11 @@ using Selection = UI_Clear::SELECT;				// 次の選択
 // コンストラクタ
 ClearScene::ClearScene(float time, int coins, int stage, int max)
 	:
-	IScene(),					// 基底クラスのコンストラクタ
-	m_clearTime(time),			// クリアタイム
-	m_collectedCoin(coins),		// 集めたコイン数
-	m_stageNumber(stage),		// ステージ番号
-	m_maxNumber(max)			// 最大ステージ番号
+	BaseScene(),					// 基底クラスのコンストラクタ
+	m_clearTime(time),				// クリアタイム
+	m_collectedCoin(coins),			// 集めたコイン数
+	m_stageNumber(stage),			// ステージ番号
+	m_maxNumber(max)				// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 

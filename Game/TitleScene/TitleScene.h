@@ -10,7 +10,7 @@
 #define	TITLESCENE
 
 // 親シーンクラス
-#include "Game/IScene/IScene.h"
+#include "Game/Bases/BaseScene.h"
 
 class AdminCamera;
 class Sky_Title;
@@ -22,7 +22,7 @@ class Timer;
 class Iceberg;
 class Island;
 class MoveMonitor;
-class TitleScene final : public IScene
+class TitleScene final : public BaseScene
 {
 public:
 
@@ -52,7 +52,7 @@ private:
 
 private:
 
-	// シーン内の変数初期化関数
+	// シーン内の変数初期化
 	void SetSceneValues() override;
 	// デバッグ描画
 	void DebugDraw(DirectX::CommonStates& states) override;

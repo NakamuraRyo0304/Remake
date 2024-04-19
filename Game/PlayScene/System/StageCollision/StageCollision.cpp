@@ -57,7 +57,7 @@ void StageCollision::Update(Player* player)
 }
 
 // ŒÅ—Lˆ—
-void StageCollision::PerformEngenProc(Player* player, IGameObject* block, SimpleMath::Vector3 newPos, Side side)
+void StageCollision::PerformEngenProc(Player* player, BaseObject* block, SimpleMath::Vector3 newPos, Side side)
 {
     // Õ“Ë‚ª‚È‚¯‚ê‚Îˆ—‚ğ‚µ‚È‚¢
     if (side == Side::None) return;

@@ -43,10 +43,10 @@ using MouseClick = Mouse::ButtonStateTracker;	// マウスのクリック
 // コンストラクタ
 PlayScene::PlayScene(const int& number)
 	:
-	IScene(),				// 基底クラスのコンストラクタ
-	m_stageNumber(number),	// ステージ番号
-	m_gameTimer(0.0f),		// ゲームタイマー
-	m_collectedCoin(0)		// 集めたコイン数
+	BaseScene(),				// 基底クラスのコンストラクタ
+	m_stageNumber(number),		// ステージ番号
+	m_gameTimer(0.0f),			// ゲームタイマー
+	m_collectedCoin(0)			// 集めたコイン数
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
 }

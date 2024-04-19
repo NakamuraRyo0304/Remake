@@ -10,9 +10,9 @@
 #define SKY_PLAY
 
 // 親オブジェクトクラス
-#include "Game/Common/IGameObject/IGameObject.h"
+#include "Game/Bases/BaseObject.h"
 
-class Sky_Play : public IGameObject
+class Sky_Play : public BaseObject
 {
 public:
 

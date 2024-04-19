@@ -27,7 +27,7 @@ public:
 	// デストラクタ
 	~EditorCollision();
 	// 更新
-	void Update(IGameObject* object, ID setting);
+	void Update(BaseObject* object, ID setting);
 
 private:
 
