@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayGS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayVS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Brown\BrownPS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Monochrome\MonochroPS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shaders\Water\WaterGS.hlsl">
       <Filter>Resources\Shaders\Water</Filter>
     </FxCompile>
@@ -756,9 +744,6 @@
     <None Include="Resources\Models\Spike.cmo">
       <Filter>Resources\Models</Filter>
     </None>
-    <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
-      <Filter>Resources\Shaders\Display</Filter>
-    </None>
     <None Include="Resources\Shaders\Water\Water.hlsli">
       <Filter>Resources\Shaders\Water</Filter>
     </None>
@@ -893,9 +878,6 @@
     </Filter>
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{691a665d-8d45-4df5-ae88-c14fcc0033ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resources\Shaders\Display">
-      <UniqueIdentifier>{be7a6b1e-9be1-4a08-a0ba-361bba6eb5a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\Shaders\Water">
       <UniqueIdentifier>{2018b959-d427-4051-b765-0411e4415d6a}</UniqueIdentifier>
