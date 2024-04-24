@@ -54,42 +54,42 @@ void BlockManager::Initialize()
 	m_jsonHelper->Load(m_stagePath.c_str());
 
 	// データを取得
-	Json _data = m_jsonHelper->GetData();
+	Json data = m_jsonHelper->GetData();
 
-	for (int i = 0; i < _data.size(); i++)
+	for (int i = 0; i < data.size(); i++)
 	{
 		// 名前を格納
-		auto& _name = _data[i]["Path"];
+		auto& name = data[i]["Path"];
 
 		// 座標の変換
-		float _x = static_cast<float>(_data[i]["Position"]["X"]);
-		float _y = static_cast<float>(_data[i]["Position"]["Y"]);
-		float _z = static_cast<float>(_data[i]["Position"]["Z"]);
-		SimpleMath::Vector3 _position = SimpleMath::Vector3(_x, _y, _z);
+		float fx = static_cast<float>(data[i]["Position"]["X"]);
+		float fy = static_cast<float>(data[i]["Position"]["Y"]);
+		float fz = static_cast<float>(data[i]["Position"]["Z"]);
+		SimpleMath::Vector3 pos = SimpleMath::Vector3(fx, fy, fz);
 
 		// --書き換え対象-- //
 
 		// 氷床
-		if (_name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(_position));
+		if (name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(pos));
 		// 雲
-		if (_name == "Cloud")	m_clouds.push_back(std::make_unique<Cloud>(_position));
+		if (name == "Cloud")	m_clouds.push_back(std::make_unique<Cloud>(pos));
 		// コイン
-		if (_name == "Coin")	m_coins.push_back(std::make_unique<Coin>(_position));
+		if (name == "Coin")	    m_coins.push_back(std::make_unique<Coin>(pos));
 		// プレイヤ
-		if (_name == "Player")	m_chara.push_back(std::make_unique<EditChara>(_position));
+		if (name == "Player")	m_chara.push_back(std::make_unique<EditChara>(pos));
 		// ゴール
-		if (_name == "Goal")	m_goals.push_back(std::make_unique<Goal>(_position));
+		if (name == "Goal")	    m_goals.push_back(std::make_unique<Goal>(pos));
 		// 棘
-		if (_name == "Spike")	m_spikes.push_back(std::make_unique<Spike>(_position));
+		if (name == "Spike")	m_spikes.push_back(std::make_unique<Spike>(pos));
 		// リフト
-		if (_name == "Lift")	m_lifts.push_back(std::make_unique<Lift>(_position));
+		if (name == "Lift")	    m_lifts.push_back(std::make_unique<Lift>(pos));
 
 		// エディタ時のみ実行
 		if (not is_playing)
 		{
 			// 同じ場所にエアーがあったらその場所のエアーを消す
 			if (not UserUtility::IsNull(m_air[i].get()) &&
-				m_air[i]->GetPosition() == _position)
+				m_air[i]->GetPosition() == pos)
 			{
 				m_air[i].reset();
 			}
@@ -100,24 +100,24 @@ void BlockManager::Initialize()
 // 更新処理
 void BlockManager::Update()
 {
-	std::vector<IGameObject*> _objects;
+	std::vector<IGameObject*> objects;
 
 	// --書き換え対象-- //
 
 	if (is_playing == false)
 	{
-		for (auto& obj : m_chara)   _objects.push_back(obj.get());	// キャラ
-		for (auto& obj : m_air)	    _objects.push_back(obj.get());	// エアー
+		for (auto& obj : m_chara)   objects.push_back(obj.get());	// キャラ
+		for (auto& obj : m_air)	    objects.push_back(obj.get());	// エアー
 	}
-	for(auto& obj : m_flozens)	    _objects.push_back(obj.get());	// 氷床
-	for(auto& obj : m_clouds)		_objects.push_back(obj.get());	// 雲
-	for(auto& obj : m_coins)		_objects.push_back(obj.get());	// コイン
-	for(auto& obj : m_goals)		_objects.push_back(obj.get());	// ゴール
-	for(auto& obj : m_spikes)		_objects.push_back(obj.get());	// 棘
-	for(auto& obj : m_lifts)		_objects.push_back(obj.get());	// リフト
+	for(auto& obj : m_flozens)	    objects.push_back(obj.get());	// 氷床
+	for(auto& obj : m_clouds)		objects.push_back(obj.get());	// 雲
+	for(auto& obj : m_coins)		objects.push_back(obj.get());	// コイン
+	for(auto& obj : m_goals)		objects.push_back(obj.get());	// ゴール
+	for(auto& obj : m_spikes)		objects.push_back(obj.get());	// 棘
+	for(auto& obj : m_lifts)		objects.push_back(obj.get());	// リフト
 
 	// オブジェクトの更新
-	for (auto& obj : _objects)
+	for (auto& obj : objects)
 	{
 		obj->Update();
 	}
