@@ -22,7 +22,7 @@
     <Position X="4.527" Y="18.102" Height="0.342" Width="1.247" />
   </Comment>
   <Comment CommentText="ID">
-    <Position X="15.25" Y="13.942" Height="0.291" Width="0.7" />
+    <Position X="13.753" Y="14.938" Height="0.291" Width="0.7" />
   </Comment>
   <Comment CommentText="画像切り取り位置&#xD;&#xA;（RECT継承）">
     <Position X="18.5" Y="13.75" Height="0.467" Width="1.222" />
@@ -69,7 +69,7 @@
   <Class Name="BaseUI" Collapsed="true">
     <Position X="5.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAQAAABAAoAAACAgAAQAAIAAAKAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAoAAAAAgAAQAAIAAAKAAA=</HashCode>
       <FileName>Game\Bases\BaseUI.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -347,7 +347,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ScoreBoard" Collapsed="true">
-    <Position X="22" Y="7.75" Width="1.5" />
+    <Position X="25.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAwAAAABAAACAAgCAAgCAAAgAAAgAAwA=</HashCode>
       <FileName>Game\ClearScene\System\ScoreBoard\ScoreBoard.h</FileName>
@@ -407,20 +407,6 @@
     <TypeIdentifier>
       <HashCode>ACQAAAAAAAAAEQQgAAACACAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Game\PlayScene\System\StageCollision\StageCollision.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="UI_CoinNum" Collapsed="true">
-    <Position X="22" Y="6.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AABAAAAAACAAAwAAAAAAAQAAAEAgAgCAAIgAAIgAAwA=</HashCode>
-      <FileName>Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="UI_PlayArea" Collapsed="true">
-    <Position X="22" Y="7" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAwAAEIAAAAAgAAAAAgCAAAgAAAgAAAA=</HashCode>
-      <FileName>Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UI_Play" Collapsed="true">
@@ -529,7 +515,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="JsonHelper" Collapsed="true">
-    <Position X="12" Y="15" Width="1.5" />
+    <Position X="12" Y="15.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAEAAAAAAAAIACAAAAAAAAIAAQAAAACAEAAAA=</HashCode>
       <FileName>Libraries\SystemDatas\JsonHelper\JsonHelper.h</FileName>
@@ -662,6 +648,20 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="PlayArea" Collapsed="true">
+    <Position X="22" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAA0AAAIAAAAAoAAAAAgCAAAgAAAgAAAA=</HashCode>
+      <FileName>Game\PlayScene\System\UI_Play\PlayArea\PlayArea.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoinNum" Collapsed="true">
+    <Position X="22" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQBAAAAAACAAAwAAAAAAAIAAAEAgAgCAAAgAAIgAAwA=</HashCode>
+      <FileName>Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Struct Name="RECT_U" Collapsed="true">
     <Position X="18.5" Y="14.25" Width="1.5" />
     <TypeIdentifier>
@@ -691,7 +691,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="XACT_WAVEBANK_AUDIOPACK" Collapsed="true">
-    <Position X="15.25" Y="14.25" Width="1.5" />
+    <Position X="13.75" Y="15.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>EAAAESAgAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>SoundList.h</FileName>

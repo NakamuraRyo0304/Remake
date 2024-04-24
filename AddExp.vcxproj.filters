@@ -207,12 +207,6 @@
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp">
-      <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.cpp">
-      <Filter>GameSystems\Play\UI_Play\UI_CoinNum</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.cpp">
       <Filter>Cameras\StageCamera</Filter>
     </ClCompile>
@@ -281,6 +275,12 @@
     </ClCompile>
     <ClCompile Include="Game\Bases\BaseObject.cpp">
       <Filter>Bases\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.cpp">
+      <Filter>GameSystems\Play\UI_Play\PlayArea</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.cpp">
+      <Filter>GameSystems\Play\UI_Play\CoinNum</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -476,12 +476,6 @@
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h">
-      <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h">
-      <Filter>GameSystems\Play\UI_Play\UI_CoinNum</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.h">
       <Filter>Cameras\StageCamera</Filter>
     </ClInclude>
@@ -565,6 +559,12 @@
     </ClInclude>
     <ClInclude Include="Game\Bases\BaseObject.h">
       <Filter>Bases\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.h">
+      <Filter>GameSystems\Play\UI_Play\PlayArea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h">
+      <Filter>GameSystems\Play\UI_Play\CoinNum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -984,12 +984,6 @@
     <Filter Include="GameSystems\Common\DrawNumber">
       <UniqueIdentifier>{74a05f20-7dec-4ee3-aea3-179775d9af7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameSystems\Play\UI_Play\UI_PlayArea">
-      <UniqueIdentifier>{8ffb86e8-fa8f-4e71-9fee-fd9460200d2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameSystems\Play\UI_Play\UI_CoinNum">
-      <UniqueIdentifier>{b00d738f-e46c-479b-8a6c-f0bfe958ed5d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{961ae1a8-4cc9-49b8-93ef-179696fc263e}</UniqueIdentifier>
     </Filter>
@@ -1148,6 +1142,12 @@
     </Filter>
     <Filter Include="GameSystems\Editor\EditorCollision">
       <UniqueIdentifier>{f1072bf7-e1bd-4616-ace1-fc9df697e191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play\PlayArea">
+      <UniqueIdentifier>{8ffb86e8-fa8f-4e71-9fee-fd9460200d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play\CoinNum">
+      <UniqueIdentifier>{b00d738f-e46c-479b-8a6c-f0bfe958ed5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

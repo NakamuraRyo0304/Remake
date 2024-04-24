@@ -7,8 +7,8 @@
 
 #include "pch.h"
 #include "Libraries/UserUtility.h"
-#include "Game/PlayScene/System/UI_Play/UI_CoinNum/UI_CoinNum.h"
-#include "Game/PlayScene/System/UI_Play/UI_PlayArea/UI_PlayArea.h"
+#include "Game/PlayScene/System/UI_Play/CoinNum/CoinNum.h"
+#include "Game/PlayScene/System/UI_Play/PlayArea/PlayArea.h"
 #include "Game/Common/DrawKeys/DrawKeys.h"
 #include "UI_Play.h"
 
@@ -22,9 +22,9 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	is_retryPush(false)			// リトライボタンフラグ
 {
 	// エリア作成
-	m_area = std::make_unique<UI_PlayArea>();
+	m_area = std::make_unique<PlayArea>();
 	// 数字作成
-	m_coins = std::make_unique<UI_CoinNum>();
+	m_coins = std::make_unique<CoinNum>();
 	// ボタン作成
 	m_retryButton = std::make_unique<Button>(L"RetryButton", L"Resources/Textures/UI_Play/RetryButton.dds");
 
@@ -103,9 +103,7 @@ void UI_Play::Update()
 	m_keys[KEY_NAME::DKEY]->SetColor(key.D ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 }
 
-//==============================================================================
-// 描画処理
-//==============================================================================
+// 描画
 void UI_Play::Draw()
 {
 	// エリアを描画

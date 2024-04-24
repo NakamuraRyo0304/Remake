@@ -26,9 +26,9 @@ class DrawSprite
 public:
 
 	// ‰ñ“]—Ê‚ğİ’è
-	void CreateRotation(const wchar_t* key, const float& rotate);
+	void CreateRotation(std::wstring key, const float& rotate);
 	// ‰ñ“]—Ê‚ğæ“¾‚·‚é
-	const float GetRotate(const wchar_t* key) { auto it = m_rotate.find(key); return it->second; }
+	const float GetRotate(std::wstring key) { auto it = m_rotate.find(key); return it->second; }
 
 	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 	DrawSprite();
@@ -41,22 +41,22 @@ public:
 	void Clear();
 
 	// ‰æ‘œ‚ğ“o˜^‚·‚éŠÖ”
-	void AddTextureData(const wchar_t* key, const wchar_t* path);
+	void AddTextureData(std::wstring key, std::wstring path);
 	// •`‰æˆ—
-	void DrawTexture(const wchar_t* key, DirectX::SimpleMath::Vector2 pos,
+	void DrawTexture(std::wstring key, DirectX::SimpleMath::Vector2 pos,
 		DirectX::SimpleMath::Vector4 color, DirectX::SimpleMath::Vector2 rate,
 		DirectX::SimpleMath::Vector2 origin, RECT_U rect = RECT_U());
 
 private:
 
 	// ‰æ‘œ‚ÌŠi”[”z—ñ
-	std::map<const wchar_t*, const wchar_t*> m_textures;
+	std::map<std::wstring, std::wstring> m_textures;
 	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 	// ‰æ‘œ‚ğ•`‰æ‚·‚é•Ï”
 	std::map<std::wstring, Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>> m_SRV;
 	// ‰ñ“]—¦
-	std::map <const wchar_t*, float> m_rotate;
+	std::map <std::wstring, float> m_rotate;
 
 };
 

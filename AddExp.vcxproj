@@ -244,9 +244,9 @@
     <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
     <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h" />
     <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h" />
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h" />
+    <ClInclude Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h" />
+    <ClInclude Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.h" />
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h" />
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h" />
     <ClInclude Include="Game\SelectScene\Objects\BG_Select\BG_Select.h" />
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
@@ -334,9 +334,9 @@
     <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp" />
     <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp" />
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.cpp" />
+    <ClCompile Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.cpp" />
+    <ClCompile Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.cpp" />
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp" />
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp" />
     <ClCompile Include="Game\SelectScene\Objects\BG_Select\BG_Select.cpp" />
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />

@@ -1,6 +1,6 @@
 /*
  *	@File	IGameObject.h
- *	@Brief	ゲームオブジェクト。
+ *	@Brief	ゲームオブジェクトのインターフェース。
  *	@Date	2023-11-14
  *  @Author NakamuraRyo
  */

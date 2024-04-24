@@ -12,8 +12,8 @@
 // 親シーンクラス
 #include "Game/Bases/BaseUI.h"
 
-class UI_CoinNum;
-class UI_PlayArea;
+class CoinNum;
+class PlayArea;
 class DrawKeys;
 class UI_Play final : public BaseUI
 {
@@ -51,9 +51,9 @@ public:
 private:
 
 	// UIエリア
-	std::unique_ptr<UI_PlayArea> m_area;
+	std::unique_ptr<PlayArea> m_area;
 	// コイン数
-	std::unique_ptr<UI_CoinNum> m_coins;
+	std::unique_ptr<CoinNum> m_coins;
 	// リトライボタン
 	std::unique_ptr<Button> m_retryButton;
 	// 判定フラグ

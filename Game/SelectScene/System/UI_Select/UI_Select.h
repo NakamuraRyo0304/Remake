@@ -17,7 +17,7 @@ class UI_Select final : public BaseUI
 public:
 
 	// 選択中のステージ番号を設定
-	void SetSelectionNum(const int& num) { m_stageSelection = num; }
+	void SetSelectionNum(const int& num) { m_selection = num; }
 
 	// コンストラクタ
 	UI_Select(DirectX::SimpleMath::Vector2 scS, DirectX::SimpleMath::Vector2 mscs);
@@ -40,17 +40,28 @@ private:
 	static const DirectX::SimpleMath::Vector2 STAGE_TEX_POS;
 	// 画像の拡大率
 	static const float STAGE_TEX_RATE;
+	// エディタ文字切り取り位置
+	const RECT_U RECT_EDIT = RECT_U(0, 0, 768, 128);
+	// ステージ文字切り取り位置
+	const RECT_U RECT_GAME = RECT_U(0, 0, 382, 128);
+
+private:
+
+	// 色リセット関数
+	void ResetColors();
+
+	//
 
 private:
 
 	// スプライト
 	std::unique_ptr<DrawSprite> m_sprites;
 	// 座標
-	std::map<const wchar_t*, DirectX::SimpleMath::Vector2> m_position;
+	std::map<std::wstring, DirectX::SimpleMath::Vector2> m_position;
 	// 色
-	std::map<const wchar_t*, DirectX::SimpleMath::Vector4> m_color;
+	std::map<std::wstring, DirectX::SimpleMath::Vector4> m_color;
 	// 選択ステージ番号
-	int m_stageSelection;
+	int m_selection;
 	// ステージ画像アルファ値
 	float m_stageAlpha;
 
