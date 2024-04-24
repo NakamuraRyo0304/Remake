@@ -329,7 +329,7 @@ void PlayScene::Draw()
 #ifdef _DEBUG
 	//auto _grid = GetSystemManager()->GetGridFloor();
 	//_grid->Draw(*_states, _view, _projection, Colors::Green);
-	//DebugDraw(*_states);
+	//DebugDraw(*states);
 #endif
 }
 
@@ -544,14 +544,12 @@ void PlayScene::DebugDraw(CommonStates& states)
 	string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", timer.GetFramesPerSecond());
 	string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Timer::%.2f", timer.GetTotalSeconds());
 	string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"StageNum::%.d", m_stageNumber);
-	string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f",
-		m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
-	string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f",
-		m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
+	string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f", m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
+	string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f", m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
 	string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
-	string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f",
-		m_adminCamera->GetPosition().x, m_adminCamera->GetPosition().y, m_adminCamera->GetPosition().z);
+	string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f", m_adminCamera->GetPosition().x, m_adminCamera->GetPosition().y, m_adminCamera->GetPosition().z);
+
 }
 
 // ステージのパスを取得する

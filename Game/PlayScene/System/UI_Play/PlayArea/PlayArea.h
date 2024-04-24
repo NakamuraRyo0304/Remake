@@ -9,7 +9,8 @@
 #ifndef PLAYAREA
 #define PLAYAREA
 
-class DrawSprite;
+#include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
+
 class PlayArea
 {
 public:
@@ -32,6 +33,11 @@ public:
 		DirectX::SimpleMath::Vector2 rate);
 	// 描画
 	void Draw();
+
+private:
+
+	// ボードの切り取り位置
+	static const RECT_U RECT_BOARD;
 
 private:
 

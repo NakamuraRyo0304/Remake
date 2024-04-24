@@ -44,6 +44,7 @@ public:
 		SKEY,
 		AKEY,
 		DKEY,
+		RKEY,
 
 		Length__key
 	};
@@ -54,8 +55,6 @@ private:
 	std::unique_ptr<PlayArea> m_area;
 	// コイン数
 	std::unique_ptr<CoinNum> m_coins;
-	// リトライボタン
-	std::unique_ptr<Button> m_retryButton;
 	// 判定フラグ
 	bool is_retryPush;
 	// キー描画

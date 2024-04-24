@@ -25,8 +25,6 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	m_area = std::make_unique<PlayArea>();
 	// 数字作成
 	m_coins = std::make_unique<CoinNum>();
-	// ボタン作成
-	m_retryButton = std::make_unique<Button>(L"RetryButton", L"Resources/Textures/UI_Play/RetryButton.dds");
 
 	// キー作成・設定
 	auto offset = SimpleMath::Vector2(1728.0f, 384.0f);
@@ -38,6 +36,8 @@ UI_Play::UI_Play(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 		SimpleMath::Vector2(0.0f, 64.0f)   + offset, GetScreenRate());
 	m_keys[KEY_NAME::DKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/Keys/DKey.dds",
 		SimpleMath::Vector2(128.0f, 64.0f) + offset, GetScreenRate());
+	m_keys[KEY_NAME::RKEY] = std::make_unique<DrawKeys>(L"Resources/Textures/UI_Play/RetryButton.dds",
+		SimpleMath::Vector2(1888.0f, 32.0f), GetScreenRate());
 
 	// 画像描画作成
 	m_sprite = std::make_unique<DrawSprite>();
@@ -54,18 +54,13 @@ UI_Play::~UI_Play()
 	m_coins.reset();
 	m_keys.clear();
 	m_sprite.reset();
-	m_retryButton.reset();
 }
 
 // 初期化
 void UI_Play::Initialize()
 {
 	// エリアの設定
-	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), UserUtility::Colors::WHITE * 0.5f, GetScreenRate());
-
-	// リセットボタンの設定
-	m_retryButton->Initialize(SimpleMath::Vector2(1856.0f, 0.0f), SimpleMath::Vector2::One * 0.25f,
-		{ 0,0,256,256 }, GetScreenRate());
+	m_area->Initialize(SimpleMath::Vector2(1665.0f, 0.0f), UserUtility::Colors::WHITE, GetScreenRate());
 
 	// コイン数の設定
 	m_coins->Initialize(
@@ -84,6 +79,9 @@ void UI_Play::Initialize()
 	m_coinTexPos = (m_area->GetPosition() + SimpleMath::Vector2(32.0f, 64.0f)) * GetScreenRate();
 	m_sprite->AddTextureData(L"CameraTex", L"Resources/Textures/Text/Cameratex.dds");
 	m_cameraTexPos = (m_area->GetPosition() + SimpleMath::Vector2(32.0f, 256.0f)) * GetScreenRate();
+
+	// リトライボタンの色を初期化
+	m_keys[KEY_NAME::RKEY]->SetColor(UserUtility::Colors::WHITE);
 }
 
 // 更新
@@ -91,16 +89,18 @@ void UI_Play::Update()
 {
 	m_coins->SetCoinNum(m_coinNum);
 
-	// リセットボタンの更新
-	m_retryButton->Update();
-	is_retryPush = m_retryButton->GetState() == Button::State::Push;
-
 	// キーの更新
 	auto key = Keyboard::Get().GetState();
 	m_keys[KEY_NAME::WKEY]->SetColor(key.W ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 	m_keys[KEY_NAME::SKEY]->SetColor(key.S ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 	m_keys[KEY_NAME::AKEY]->SetColor(key.A ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
 	m_keys[KEY_NAME::DKEY]->SetColor(key.D ? UserUtility::Colors::RED : UserUtility::Colors::WHITE);
+
+	if (key.R)
+	{
+		m_keys[KEY_NAME::RKEY]->SetColor(UserUtility::Colors::RED);
+		is_retryPush = true;
+	}
 }
 
 // 描画
@@ -121,7 +121,4 @@ void UI_Play::Draw()
 	{
 		key.second->Draw();
 	}
-
-	// リセットボタンを描画
-	m_retryButton->Draw();
 }

@@ -6,8 +6,10 @@
  */
 
 #include "pch.h"
-#include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 #include "PlayArea.h"
+
+// 定数の設定
+const RECT_U PlayArea::RECT_BOARD = RECT_U(0, 0, 256, 572);	// ボードの切り取り位置
 
 // コンストラクタ
 PlayArea::PlayArea()
@@ -41,5 +43,5 @@ void PlayArea::Initialize(SimpleMath::Vector2 pos, SimpleMath::Vector4 color,
 void PlayArea::Draw()
 {
 	m_sprites->DrawTexture(L"Area",
-		m_position * m_rate, m_color, m_rate, SimpleMath::Vector2::Zero);
+		m_position * m_rate, m_color, m_rate, SimpleMath::Vector2::Zero, RECT_BOARD);
 }
