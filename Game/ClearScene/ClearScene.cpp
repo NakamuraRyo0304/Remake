@@ -15,6 +15,7 @@
 #include "Game/ClearScene/Objects/BG_Clear/BG_Clear.h"		// 背景
 #include "Game/ClearScene/Objects/Tape/Tape.h"				// テープオブジェクト
 #include "Game/ClearScene/Objects/Seal/Seal.h"				// シールオブジェクト
+#include "Game/ClearScene/Objects/Diary/Diary.h"			// 日記
 
 #include "ClearScene.h"										// クリアシーン
 
@@ -25,13 +26,14 @@ using MouseClick = Mouse::ButtonStateTracker;	// マウスのクリック
 using Selection = UI_Clear::SELECT;				// 次の選択
 
 // コンストラクタ
-ClearScene::ClearScene(float time, int coins, int stage, int max)
+ClearScene::ClearScene(float time, int coins, int maxCoin, int stage, int maxStage)
 	:
 	BaseScene(),					// 基底クラスのコンストラクタ
 	m_clearTime(time),				// クリアタイム
 	m_collectedCoin(coins),			// 集めたコイン数
+	m_maxCoin(maxCoin),				// 最大コイン数
 	m_stageNumber(stage),			// ステージ番号
-	m_maxNumber(max)				// 最大ステージ番号
+	m_maxNumber(maxStage)			// 最大ステージ番号
 {
 	Debug::DrawString::GetInstance().DebugLog(L"ClearSceneのコンストラクタが呼ばれました。\n");
 
@@ -103,6 +105,9 @@ void ClearScene::Update()
 		// UIの移動がまだ終わっていなければ処理をしない
 		if (not m_ui->IsEndMoving()) return;
 
+		// 日記の更新
+		m_diary->Update();
+
 		// 次の遷移を選択する
 		SceneSelection();
 	}
@@ -138,12 +143,16 @@ void ClearScene::Draw()
 		m_timeBoard->Draw();
 	}
 
+	// 日記の描画
+	m_diary->Draw();
+
 	// UIの描画
 	m_ui->Draw();
 
 	// デバッグ描画
 #ifdef _DEBUG
-	//DebugDraw(*_states);
+	//auto states = GetSystemManager()->GetCommonStates();
+	//DebugDraw(*states);
 #endif
 }
 
@@ -158,6 +167,7 @@ void ClearScene::Finalize()
 	m_backGround.reset();
 	m_tape->reset();
 	m_seal->reset();
+	m_diary.reset();
 }
 
 // 画面、デバイス依存の初期化
@@ -186,6 +196,9 @@ void ClearScene::CreateWDResources()
 	// シール作成
 	m_seal[Sticker::Coin] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/coinSeal.dds");
 	m_seal[Sticker::Clock] = std::make_unique<Seal>(L"Resources/Textures/UI_Clear/clockSeal.dds");
+
+	// 日記作成
+	m_diary = std::make_unique<Diary>();
 }
 
 // シーン内の変数初期化関数
@@ -215,6 +228,9 @@ void ClearScene::SetSceneValues()
 	m_seal[Sticker::Clock]->Initialize({ 1420.0f, 312.0f }, SimpleMath::Vector2::One * 0.4f,
 		GetWindowSize() / FULL_HD, XMConvertToRadians(-53.0f));
 
+	// 日記に数値を設定
+	m_diary->Initialize(m_clearTime, m_collectedCoin, m_maxCoin);
+
 	// タイマーを開始する
 	m_direction->Start();
 }
@@ -223,16 +239,10 @@ void ClearScene::SetSceneValues()
 void ClearScene::DebugDraw(CommonStates& states)
 {
 	auto& string = Debug::DrawString::GetInstance();
-	auto& timer = DX::StepTimer::GetInstance();
 
 	// 文字の描画
 	string.DrawFormatString(states, { 0,0 }, Colors::DarkGreen, L"ClearScene");
-	string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"ScreenSize::%.2f | %.2f", GetWindowSize().x, GetWindowSize().y);
-	string.DrawFormatString(states, { 0,50 }, Colors::DarkGreen, L"FPS::%d", timer.GetFramesPerSecond());
-	string.DrawFormatString(states, { 0,75 }, Colors::DarkGreen, L"Time::%.2f",m_clearTime);
-	string.DrawFormatString(states, { 0,100 }, Colors::DarkGreen, L"Coin::%.d",m_collectedCoin);
-	string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"Stage::%.d", m_stageNumber);
-	string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"Direc::%.2f", m_direction->GetCount());
+	string.DrawFormatString(states, { 0,25 }, Colors::DarkGreen, L"Coin::%.d / %.d", m_collectedCoin, m_maxCoin);
 }
 
 // シーン選択
@@ -259,7 +269,8 @@ void ClearScene::SceneSelection()
 	m_ui->SetSelection(selection);
 
 	// 次の遷移を決定
-	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) || input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
+	if (input->GetKeyTrack()->IsKeyPressed(KeyCode::Space) ||
+		input->GetKeyTrack()->IsKeyPressed(KeyCode::Z))
 	{
 		sound->PlaySound(XACT_WAVEBANK_AUDIOPACK_SE_CLICK, RepeatType::ONCE);
 		switch (m_ui->GetSelecion())

@@ -1,6 +1,6 @@
 /*
  *	@File	IUserInterface.h
- *	@Brief	UIクラス。
+ *	@Brief	UIのインターフェース。
  *	@Date	2023-01-26
  *  @Author NakamuraRyo
  */

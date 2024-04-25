@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayGS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayVS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Brown\BrownPS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Monochrome\MonochroPS.hlsl">
-      <Filter>Resources\Shaders\Display</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shaders\Water\WaterGS.hlsl">
       <Filter>Resources\Shaders\Water</Filter>
     </FxCompile>
@@ -219,12 +207,6 @@
     <ClCompile Include="Game\Common\DrawNumber\DrawNumber.cpp">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp">
-      <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.cpp">
-      <Filter>GameSystems\Play\UI_Play\UI_CoinNum</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.cpp">
       <Filter>Cameras\StageCamera</Filter>
     </ClCompile>
@@ -270,9 +252,6 @@
     <ClCompile Include="Game\Common\Island\Island.cpp">
       <Filter>GameObjects\Common\Island</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp">
-      <Filter>GameObjects\Common\Blocks\Lift</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.cpp">
       <Filter>GameSystems\Editor\EditorGrids</Filter>
     </ClCompile>
@@ -293,6 +272,15 @@
     </ClCompile>
     <ClCompile Include="Game\Bases\BaseObject.cpp">
       <Filter>Bases\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.cpp">
+      <Filter>GameSystems\Play\UI_Play\PlayArea</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.cpp">
+      <Filter>GameSystems\Play\UI_Play\CoinNum</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ClearScene\Objects\Diary\Diary.cpp">
+      <Filter>GameObjects\Clear\Diary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -488,12 +476,6 @@
     <ClInclude Include="Game\Common\DrawNumber\DrawNumber.h">
       <Filter>GameSystems\Common\DrawNumber</Filter>
     </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h">
-      <Filter>GameSystems\Play\UI_Play\UI_PlayArea</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h">
-      <Filter>GameSystems\Play\UI_Play\UI_CoinNum</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage0Camera\Stage0Camera.h">
       <Filter>Cameras\StageCamera</Filter>
     </ClInclude>
@@ -536,9 +518,6 @@
     <ClInclude Include="Game\Common\Island\Island.h">
       <Filter>GameObjects\Common\Island</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Lift\Lift.h">
-      <Filter>GameObjects\Common\Blocks\Lift</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Editor\System\EditorGrids\EditorGrids.h">
       <Filter>GameSystems\Editor\EditorGrids</Filter>
     </ClInclude>
@@ -577,6 +556,15 @@
     </ClInclude>
     <ClInclude Include="Game\Bases\BaseObject.h">
       <Filter>Bases\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.h">
+      <Filter>GameSystems\Play\UI_Play\PlayArea</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h">
+      <Filter>GameSystems\Play\UI_Play\CoinNum</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\Objects\Diary\Diary.h">
+      <Filter>GameObjects\Clear\Diary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -706,9 +694,6 @@
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
       <Filter>Resources\Textures\Rule</Filter>
     </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\LiftButton.dds">
-      <Filter>Resources\Textures\Button</Filter>
-    </Image>
     <Image Include="Resources\Textures\Keys\AKey.dds">
       <Filter>Resources\Textures\Keys</Filter>
     </Image>
@@ -723,6 +708,27 @@
     </Image>
     <Image Include="Resources\Textures\Keys\WKey.dds">
       <Filter>Resources\Textures\Keys</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextCoinMax.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextCoinMid.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextCoinMin.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextTimeMax.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextTimeMid.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextTimeMin.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\Note.dds">
+      <Filter>Resources\Textures\Diary</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -755,9 +761,6 @@
     </None>
     <None Include="Resources\Models\Spike.cmo">
       <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Shaders\DisplayEffects\Display.hlsli">
-      <Filter>Resources\Shaders\Display</Filter>
     </None>
     <None Include="Resources\Shaders\Water\Water.hlsli">
       <Filter>Resources\Shaders\Water</Filter>
@@ -799,9 +802,6 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Island.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\Moving.cmo">
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
@@ -894,9 +894,6 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{691a665d-8d45-4df5-ae88-c14fcc0033ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Shaders\Display">
-      <UniqueIdentifier>{be7a6b1e-9be1-4a08-a0ba-361bba6eb5a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Shaders\Water">
       <UniqueIdentifier>{2018b959-d427-4051-b765-0411e4415d6a}</UniqueIdentifier>
     </Filter>
@@ -947,9 +944,6 @@
     </Filter>
     <Filter Include="GameSystems\Editor">
       <UniqueIdentifier>{31eb4ccd-54fb-44f6-b0ab-75a266c715fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameSystems\Editor\EditorCollision">
-      <UniqueIdentifier>{f1072bf7-e1bd-4616-ace1-fc9df697e191}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameSystems\Play\FlagManager">
       <UniqueIdentifier>{bfbc20d7-36a2-4461-8575-e49e1e1ff743}</UniqueIdentifier>
@@ -1004,12 +998,6 @@
     </Filter>
     <Filter Include="GameSystems\Common\DrawNumber">
       <UniqueIdentifier>{74a05f20-7dec-4ee3-aea3-179775d9af7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameSystems\Play\UI_Play\UI_PlayArea">
-      <UniqueIdentifier>{8ffb86e8-fa8f-4e71-9fee-fd9460200d2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameSystems\Play\UI_Play\UI_CoinNum">
-      <UniqueIdentifier>{b00d738f-e46c-479b-8a6c-f0bfe958ed5d}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{961ae1a8-4cc9-49b8-93ef-179696fc263e}</UniqueIdentifier>
@@ -1134,9 +1122,6 @@
     <Filter Include="GameObjects\Common\Island">
       <UniqueIdentifier>{ef1de65f-18aa-4ad4-bbbd-f8cfdf4d4aa3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Lift">
-      <UniqueIdentifier>{24cd1076-918e-4a64-a9b5-3adae9bd9598}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameSystems\Editor\EditorGrids">
       <UniqueIdentifier>{6650e738-f2b7-4d6e-88fd-e5b4dc5ca152}</UniqueIdentifier>
     </Filter>
@@ -1166,6 +1151,21 @@
     </Filter>
     <Filter Include="Bases\BaseObject">
       <UniqueIdentifier>{4f0d2039-852d-4d43-b4a9-8be23c8eb456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Editor\EditorCollision">
+      <UniqueIdentifier>{f1072bf7-e1bd-4616-ace1-fc9df697e191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play\PlayArea">
+      <UniqueIdentifier>{8ffb86e8-fa8f-4e71-9fee-fd9460200d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystems\Play\UI_Play\CoinNum">
+      <UniqueIdentifier>{b00d738f-e46c-479b-8a6c-f0bfe958ed5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\Diary">
+      <UniqueIdentifier>{912b16a4-0821-4dcb-8c8d-e92496272ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Diary">
+      <UniqueIdentifier>{11d3dd0d-d0e8-4093-a8ec-742e23489b1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

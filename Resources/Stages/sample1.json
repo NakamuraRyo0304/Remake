@@ -1,26 +1,34 @@
 [
   {
-    "Path": "Lift",
+    "Path": "Coin",
     "Position": {
-      "X": 4.0,
-      "Y": 0.0,
-      "Z": 2.0
+      "X": 1.0,
+      "Y": 1.0,
+      "Z": 5.0
     }
   },
   {
-    "Path": "Lift",
+    "Path": "Coin",
     "Position": {
-      "X": 5.0,
-      "Y": 0.0,
-      "Z": 2.0
+      "X": 2.0,
+      "Y": 1.0,
+      "Z": 8.0
     }
   },
   {
-    "Path": "Lift",
+    "Path": "Coin",
     "Position": {
-      "X": 6.0,
-      "Y": 0.0,
-      "Z": 2.0
+      "X": 9.0,
+      "Y": 1.0,
+      "Z": 4.0
+    }
+  },
+  {
+    "Path": "Coin",
+    "Position": {
+      "X": 9.0,
+      "Y": 1.0,
+      "Z": 8.0
     }
   },
   {
@@ -32,38 +40,6 @@
     }
   },
   {
-    "Path": "Coin",
-    "Position": {
-      "X": 1.0,
-      "Y": 1.0,
-      "Z": 5.0
-    }
-  },
-  {
-    "Path": "Coin",
-    "Position": {
-      "X": 2.0,
-      "Y": 1.0,
-      "Z": 8.0
-    }
-  },
-  {
-    "Path": "Coin",
-    "Position": {
-      "X": 9.0,
-      "Y": 1.0,
-      "Z": 4.0
-    }
-  },
-  {
-    "Path": "Coin",
-    "Position": {
-      "X": 9.0,
-      "Y": 1.0,
-      "Z": 8.0
-    }
-  },
-  {
     "Path": "Cloud",
     "Position": {
       "X": 4.0,
@@ -426,6 +402,102 @@
   {
     "Path": "Flozen",
     "Position": {
+      "X": 5.0,
+      "Y": 1.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 5.0,
+      "Y": 1.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 6.0,
+      "Y": 1.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 6.0,
+      "Y": 1.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 0.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 1.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 2.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 3.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 4.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 5.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 6.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 7.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
       "X": 7.0,
       "Y": 0.0,
       "Z": 8.0
@@ -435,6 +507,166 @@
     "Path": "Flozen",
     "Position": {
       "X": 7.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 0.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 1.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 2.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 3.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 4.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 5.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 6.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 7.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 0.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 1.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 2.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 3.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 4.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 5.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 6.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 7.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Flozen",
+    "Position": {
+      "X": 9.0,
       "Y": 0.0,
       "Z": 9.0
     }
@@ -445,262 +677,6 @@
       "X": 2.0,
       "Y": 1.0,
       "Z": 1.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 5.0,
-      "Y": 1.0,
-      "Z": 8.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 5.0,
-      "Y": 1.0,
-      "Z": 9.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 6.0,
-      "Y": 1.0,
-      "Z": 8.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 6.0,
-      "Y": 1.0,
-      "Z": 9.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 0.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 1.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 3.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 4.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 5.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 6.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 7.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 0.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 1.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 3.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 4.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 5.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 6.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 8.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 8.0,
-      "Y": 0.0,
-      "Z": 9.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 0.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 1.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 2.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 3.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 4.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 5.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 6.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 7.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 8.0
-    }
-  },
-  {
-    "Path": "Flozen",
-    "Position": {
-      "X": 9.0,
-      "Y": 0.0,
-      "Z": 9.0
     }
   }
 ]

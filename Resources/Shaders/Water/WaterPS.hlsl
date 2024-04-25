@@ -12,8 +12,8 @@ SamplerState samLinear : register(s0);
 
 #define FLOW_VELOCITY 0.1f      // 流れる力
 #define SWING_SPEED 0.01f       // 左右に振れる力
-#define FN_UV_PATH1 0.05f       // フラクタルノイズの結果に乗算する値
-#define FN_UV_PATH2 0.06f       // フラクタルノイズの結果に乗算する値
+#define FN_UV_PATH1 0.05f       // ノイズの結果に乗算する値
+#define FN_UV_PATH2 0.06f       // ノイズの結果に乗算する値
 #define FN_UV_POWER 25          // uvのサイズ
 #define FN_OCTAVES 10.0f        // オクターブ
 #define FN_PERSISTENCE 0.6f     // 持続度
@@ -36,7 +36,7 @@ float perlinNoise(float2 uv)
     float2 f = frac(uv);
 
     // fの補間関数を計算
-    float2 u = f * f * (3.0 - 2.0 * f);
+    float2 u = f * f * (3.0f - 2.0f * f);
 
     // 隣接する4つの整数座標に対してランダム値を取得
     float2 v00 = random(p + float2(0, 0));
@@ -49,19 +49,19 @@ float perlinNoise(float2 uv)
                 lerp(dot(v01, f - float2(0, 1)), dot(v11, f - float2(1, 1)), u.x), u.y);
 }
 
-// フラクタルノイズを生成する関数
-float fractalNoise(float2 uv)
+// オリジナルノイズを生成する関数
+float originalNoise(float2 uv)
 {
-    float output = 0.0;
-    float amplitude = 1.0;// 振幅
-    float frequency = 1.0;// 頻度
+    float output = 0.0f;
+    float amplitude = 1.0f;// 振幅
+    float frequency = 1.0f;// 頻度
 
     // 複数のオクターブでノイズを生成し、合成する
     for (float i = 0; i < FN_OCTAVES; ++i)
     {
         output += perlinNoise(uv * frequency) * amplitude;
         amplitude *= FN_PERSISTENCE;
-        frequency *= 2.0; // 周波数を倍にすることで次のオクターブに移る
+        frequency *= 2.0f; // 周波数を倍にすることで次のオクターブに移る
     }
 
     return output;
@@ -81,8 +81,8 @@ float4 main(PS_INPUT input) : SV_TARGET
     float2 offset = perlinNoise(uv);
     uv += offset;
 
-    // フルクタルノイズで揺らす
-    float p = fractalNoise(uv * FN_UV_POWER);
+    // オリジナルノイズで揺らす
+    float p = originalNoise(uv * FN_UV_POWER);
     uv += float2(p * FN_UV_PATH1 * cos(Time), p * FN_UV_PATH2 * sin(Time));
 
     // UV値を時間に応じて滑らかに移動させる

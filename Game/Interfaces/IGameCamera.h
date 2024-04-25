@@ -1,6 +1,6 @@
 /*
  *	@File	IGameCamera.h
- *	@Brief	カメラの基礎部分。
+ *	@Brief	カメラのインターフェース。
  *	@Date	2023-11-12
  *  @Author NakamuraRyo
  */

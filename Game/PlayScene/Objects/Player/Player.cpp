@@ -26,7 +26,7 @@ Player::Player()
 	:
 	BaseObject(L"Resources/Models/pBody.cmo", L"Resources/Models"),
 	m_velocity(),			                // 移動量
-	m_coinNum(9),						    // 取得済みコイン枚数
+	m_coinNum(0),						    // 取得済みコイン枚数
 	m_giveUpTime(),							// 諦めタイム
 	is_fall(true),						    // 落下フラグ
 	is_death(false),		                // 死亡フラグ

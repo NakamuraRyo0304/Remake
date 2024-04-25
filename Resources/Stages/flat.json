@@ -1,14 +1,54 @@
 [
   {
-    "Path": "Lift",
+    "Path": "Coin",
     "Position": {
-      "X": 5.0,
+      "X": 0.0,
       "Y": 0.0,
       "Z": 8.0
     }
   },
   {
-    "Path": "Lift",
+    "Path": "Coin",
+    "Position": {
+      "X": 1.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Coin",
+    "Position": {
+      "X": 2.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Coin",
+    "Position": {
+      "X": 3.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Coin",
+    "Position": {
+      "X": 4.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Coin",
+    "Position": {
+      "X": 5.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Coin",
     "Position": {
       "X": 6.0,
       "Y": 0.0,
@@ -16,15 +56,15 @@
     }
   },
   {
-    "Path": "Lift",
+    "Path": "Coin",
     "Position": {
       "X": 7.0,
       "Y": 0.0,
-      "Z": 8.0
+      "Z": 9.0
     }
   },
   {
-    "Path": "Lift",
+    "Path": "Coin",
     "Position": {
       "X": 8.0,
       "Y": 0.0,
@@ -44,6 +84,78 @@
     "Position": {
       "X": 9.0,
       "Y": 1.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 1.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 2.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 3.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 4.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 5.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 6.0,
+      "Y": 0.0,
+      "Z": 9.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 7.0,
+      "Y": 0.0,
+      "Z": 8.0
+    }
+  },
+  {
+    "Path": "Spike",
+    "Position": {
+      "X": 8.0,
+      "Y": 0.0,
       "Z": 9.0
     }
   },

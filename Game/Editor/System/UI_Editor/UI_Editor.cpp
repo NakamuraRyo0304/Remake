@@ -34,7 +34,6 @@ UI_Editor::UI_Editor(SimpleMath::Vector2 scS, SimpleMath::Vector2 mscs)
 	m_buttons.push_back(std::make_unique<Button>(L"Open"  , L"Resources/Textures/Editor/Buttons/OpenBar.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Close" , L"Resources/Textures/Editor/Buttons/CloseBar.dds"));
 	m_buttons.push_back(std::make_unique<Button>(L"Spike" , L"Resources/Textures/Editor/Buttons/SpikeButton.dds"));
-	m_buttons.push_back(std::make_unique<Button>(L"Lift"  , L"Resources/Textures/Editor/Buttons/LiftButton.dds"));
 
 	// キーオフセットを設定
 	auto offset = SimpleMath::Vector2(128.0f, 896.0f);
@@ -94,7 +93,6 @@ void UI_Editor::Initialize()
 	m_buttons[BN::Player_bn]->Initialize(	{ l, y + offset * 3}, bRate, bRec, GetScreenRate());
 	m_buttons[BN::Goal_bn]->Initialize(		{ r, y + offset * 3}, bRate, bRec, GetScreenRate());
 	m_buttons[BN::Air_bn]->Initialize(		{ l, y + offset * 4}, bRate, bRec, GetScreenRate());
-	m_buttons[BN::Lift_bn]->Initialize(		{ r, y + offset * 4}, bRate, bRec, GetScreenRate());
 
 	// キーの初期設定
 	for (auto& key : m_keys)

@@ -204,6 +204,7 @@
     <ClInclude Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.h" />
     <ClInclude Include="Game\ClearScene\ClearScene.h" />
     <ClInclude Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.h" />
+    <ClInclude Include="Game\ClearScene\Objects\Diary\Diary.h" />
     <ClInclude Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.h" />
     <ClInclude Include="Game\ClearScene\Objects\Seal\Seal.h" />
     <ClInclude Include="Game\ClearScene\Objects\Tape\Tape.h" />
@@ -214,7 +215,6 @@
     <ClInclude Include="Game\Common\Blocks\Coin\Coin.h" />
     <ClInclude Include="Game\Common\Blocks\Flozen\Flozen.h" />
     <ClInclude Include="Game\Common\Blocks\Goal\Goal.h" />
-    <ClInclude Include="Game\Common\Blocks\Lift\Lift.h" />
     <ClInclude Include="Game\Common\Blocks\Spike\Spike.h" />
     <ClInclude Include="Game\Common\CursorObject\CursorObject.h" />
     <ClInclude Include="Game\Common\DrawKeys\DrawKeys.h" />
@@ -244,9 +244,9 @@
     <ClInclude Include="Game\PlayScene\System\FlagManager\FlagManager.h" />
     <ClInclude Include="Game\PlayScene\System\ImageShot\ImageShot.h" />
     <ClInclude Include="Game\PlayScene\System\StageCollision\StageCollision.h" />
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.h" />
+    <ClInclude Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h" />
+    <ClInclude Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.h" />
     <ClInclude Include="Game\PlayScene\System\UI_Play\UI_Play.h" />
-    <ClInclude Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.h" />
     <ClInclude Include="Game\SelectScene\Objects\BG_Select\BG_Select.h" />
     <ClInclude Include="Game\SelectScene\SelectScene.h" />
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h" />
@@ -300,6 +300,7 @@
     <ClCompile Include="Game\Cameras\FloatingCameras\Stage4Camera\Stage4Camera.cpp" />
     <ClCompile Include="Game\ClearScene\ClearScene.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\BG_Clear\BG_Clear.cpp" />
+    <ClCompile Include="Game\ClearScene\Objects\Diary\Diary.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\MomentCanv\MomentCanv.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\Seal\Seal.cpp" />
     <ClCompile Include="Game\ClearScene\Objects\Tape\Tape.cpp" />
@@ -310,7 +311,6 @@
     <ClCompile Include="Game\Common\Blocks\Coin\Coin.cpp" />
     <ClCompile Include="Game\Common\Blocks\Flozen\Flozen.cpp" />
     <ClCompile Include="Game\Common\Blocks\Goal\Goal.cpp" />
-    <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp" />
     <ClCompile Include="Game\Common\Blocks\Spike\Spike.cpp" />
     <ClCompile Include="Game\Common\CursorObject\CursorObject.cpp" />
     <ClCompile Include="Game\Common\DrawKeys\DrawKeys.cpp" />
@@ -334,9 +334,9 @@
     <ClCompile Include="Game\PlayScene\System\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Game\PlayScene\System\ImageShot\ImageShot.cpp" />
     <ClCompile Include="Game\PlayScene\System\StageCollision\StageCollision.cpp" />
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_CoinNum\UI_CoinNum.cpp" />
+    <ClCompile Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.cpp" />
+    <ClCompile Include="Game\PlayScene\System\UI_Play\PlayArea\PlayArea.cpp" />
     <ClCompile Include="Game\PlayScene\System\UI_Play\UI_Play.cpp" />
-    <ClCompile Include="Game\PlayScene\System\UI_Play\UI_PlayArea\UI_PlayArea.cpp" />
     <ClCompile Include="Game\SelectScene\Objects\BG_Select\BG_Select.cpp" />
     <ClCompile Include="Game\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp" />
@@ -378,6 +378,13 @@
   <ItemGroup>
     <Image Include="Resources\Textures\BackGround\cork.dds" />
     <Image Include="Resources\Textures\BackGround\selectBG.dds" />
+    <Image Include="Resources\Textures\Diary\Note.dds" />
+    <Image Include="Resources\Textures\Diary\TextCoinMax.dds" />
+    <Image Include="Resources\Textures\Diary\TextCoinMid.dds" />
+    <Image Include="Resources\Textures\Diary\TextCoinMin.dds" />
+    <Image Include="Resources\Textures\Diary\TextTimeMax.dds" />
+    <Image Include="Resources\Textures\Diary\TextTimeMid.dds" />
+    <Image Include="Resources\Textures\Diary\TextTimeMin.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\AirButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CharaButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\CloseBar.dds" />
@@ -385,7 +392,6 @@
     <Image Include="Resources\Textures\Editor\Buttons\CoinButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\FlozenButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\GoalButton.dds" />
-    <Image Include="Resources\Textures\Editor\Buttons\LiftButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\LoadButton.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\OpenBar.dds" />
     <Image Include="Resources\Textures\Editor\Buttons\SpikeButton.dds" />
@@ -442,13 +448,11 @@
     <None Include="Resources\Models\Goal.cmo" />
     <None Include="Resources\Models\Iceberg.cmo" />
     <None Include="Resources\Models\Island.cmo" />
-    <None Include="Resources\Models\Moving.cmo" />
     <None Include="Resources\Models\pAll.cmo" />
     <None Include="Resources\Models\pBody.cmo" />
     <None Include="Resources\Models\pHead.cmo" />
     <None Include="Resources\Models\Sky.cmo" />
     <None Include="Resources\Models\Spike.cmo" />
-    <None Include="Resources\Shaders\DisplayEffects\Display.hlsli" />
     <None Include="Resources\Shaders\ParametersHeader.hlsli" />
     <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli" />
     <None Include="Resources\Shaders\Transition\Transition.hlsli" />
@@ -459,38 +463,6 @@
     <None Include="Resources\Stages\sample4.json" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Brown\BrownPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\DisplayEffects\Brown\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\DisplayEffects\Brown\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\Monochrome\MonochroPS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\DisplayEffects\Monochrome\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\DisplayEffects\Monochrome\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayGS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\DisplayEffects\VGS\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\DisplayEffects\VGS\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\DisplayEffects\VGS\DisplayVS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources\Shaders\DisplayEffects\VGS\%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resources\Shaders\DisplayEffects\VGS\%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
     <FxCompile Include="Resources\Shaders\ShadowMap\SM_PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>

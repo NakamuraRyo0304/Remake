@@ -6,7 +6,7 @@
  */
 
 #include "pch.h"													// プリコンパイル済みヘッダー
-#include "Libraries/UserUtility.h"							// ユーザー関数
+#include "Libraries/UserUtility.h"									// ユーザー関数
 #include "Game/Cameras/AdminCamera/AdminCamera.h"					// 統合カメラ
 #include "Game/Editor/System/UI_Editor/UI_Editor.h"					// ユーザインターフェース
 
@@ -233,7 +233,6 @@ void Editor::SetDrawObject()
 	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
 	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
 	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
-	if (m_ui->IsClickButton(BN::Lift_bn))	m_selectionID = ID::Obj_Lift;	// リフト
 }
 
 // コリジョンの更新
@@ -247,7 +246,6 @@ void Editor::UpdateCollisions(ID id)
 	for (auto& obj : m_blockManager->GetPlayers())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
 	for (auto& obj : m_blockManager->GetGoals())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
 	for (auto& obj : m_blockManager->GetSpikes())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
-	for (auto& obj : m_blockManager->GetLifts())	{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
 	for (auto& obj : m_blockManager->GetAirs())		{ updateObj.push_back(UserUtility::UniqueCast<BaseObject>(obj)); }
 
 	for(auto& obj : updateObj)

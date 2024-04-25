@@ -6,7 +6,6 @@
  */
 
 #include "pch.h"
-
 #include "DrawSprite.h"
 
 // コンストラクタ
@@ -33,18 +32,18 @@ void DrawSprite::MakeSpriteBatch()
 }
 
 // テクスチャの追加
-void DrawSprite::AddTextureData(const wchar_t* key, const wchar_t* path)
+void DrawSprite::AddTextureData(std::wstring key, std::wstring path)
 {
 	// 画像の追加
 	m_textures.emplace(key, path);
 
-	for (std::map<const wchar_t*, const wchar_t*>::const_iterator it =
+	for (std::map<std::wstring, std::wstring>::const_iterator it =
 		m_textures.begin(); it != m_textures.end(); ++it)
 	{
 		// 画像の登録
 		CreateDDSTextureFromFile(
 			DX::DeviceResources::GetInstance()->GetD3DDevice(),	// デバイスポインタ
-			it->second,										// テクスチャのパス
+			it->second.c_str(),									// テクスチャのパス
 			nullptr,											// 特性は識別しない
 			m_SRV[it->first].ReleaseAndGetAddressOf()			// 対応するキー番号に登録
 		);
@@ -55,13 +54,13 @@ void DrawSprite::AddTextureData(const wchar_t* key, const wchar_t* path)
 }
 
 // テクスチャの描画
-void DrawSprite::DrawTexture(const wchar_t* key, SimpleMath::Vector2 pos,
+void DrawSprite::DrawTexture(std::wstring key, SimpleMath::Vector2 pos,
 	SimpleMath::Vector4 color, SimpleMath::Vector2 rate, SimpleMath::Vector2 origin, RECT_U rect)
 {
 
 	// 描画したいキー番号に対応するマップをイテレータに格納
-	std::map<const wchar_t*, const wchar_t*>::const_iterator it = m_textures.find(key);
-	std::map<const wchar_t*, float>::const_iterator rt = m_rotate.find(key);
+	std::map<std::wstring, std::wstring>::const_iterator it = m_textures.find(key);
+	std::map<std::wstring, float>::const_iterator rt = m_rotate.find(key);
 
 	m_spriteBatch->Begin();
 	m_spriteBatch->Draw(
@@ -79,10 +78,10 @@ void DrawSprite::DrawTexture(const wchar_t* key, SimpleMath::Vector2 pos,
 }
 
 // 回転を作成する
-void DrawSprite::CreateRotation(const wchar_t* key, const float& rotate)
+void DrawSprite::CreateRotation(std::wstring key, const float& rotate)
 {
 	// 回転量を格納
-	std::map<const wchar_t*, float>::iterator it = m_rotate.find(key);
+	std::map<std::wstring, float>::iterator it = m_rotate.find(key);
 	it->second = rotate;
 }
 

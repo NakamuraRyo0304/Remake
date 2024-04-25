@@ -16,24 +16,16 @@
 #include "Libraries/SystemDatas/Button/Button.h"
 #include "Libraries/SystemDatas/DrawSprite/DrawSprite.h"
 
-class Button;
-class DrawSprite;
 class BaseUI : public IUserInterface
 {
 public:
 
 	// 画面拡大率を取得
 	const DirectX::SimpleMath::Vector2& GetScreenRate() { return m_screenRate; }
-	// 画面拡大率を設定
-	void SetScreenRate(const DirectX::SimpleMath::Vector2& rate) { m_screenRate = rate; }
 	// 画面サイズを取得
 	const DirectX::SimpleMath::Vector2& GetScreenSize() { return m_screenSize; }
-	// 画面サイズを設定
-	void SetScreenSize(const DirectX::SimpleMath::Vector2& size) { m_screenSize = size; }
 	// 最大画面サイズを取得
 	const DirectX::SimpleMath::Vector2& GetMaxScreenSize() { return m_maxScreenSize; }
-	// 最大画面サイズを設定
-	void SetMaxScreenSize(const DirectX::SimpleMath::Vector2& size) { m_maxScreenSize = size; }
 
 
 	// コンストラクタ
