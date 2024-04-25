@@ -13,6 +13,7 @@
 #include "Game/Bases/BaseScene.h"
 
 class BG_Clear;
+class Diary;
 class MomentCanv;
 class ScoreBoard;
 class Timer;
@@ -27,7 +28,7 @@ public:
 	int GetStageNumber() const { return m_stageNumber; }
 
 	// コンストラクタ
-	ClearScene(float time, int coins, int stage, int max);
+	ClearScene(float time, int coins, int maxCoin, int stage, int maxStage);
 	// デストラクタ
 	~ClearScene();
 	// 初期化
@@ -67,10 +68,12 @@ private:
 	enum Sticker { Coin, Clock, Length };
 	// シール
 	std::unique_ptr<Seal> m_seal[Sticker::Length];
+	// 日記
+	std::unique_ptr<Diary> m_diary;
 	// クリア時間
 	float m_clearTime;
-	// 集めたコイン数/ステージ番号/最大ステージ番号
-	int m_collectedCoin, m_stageNumber, m_maxNumber;
+	// 集めたコイン数/最大コイン数/ステージ番号/最大ステージ番号
+	int m_collectedCoin, m_maxCoin, m_stageNumber, m_maxNumber;
 
 };
 

@@ -252,9 +252,6 @@
     <ClCompile Include="Game\Common\Island\Island.cpp">
       <Filter>GameObjects\Common\Island</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Common\Blocks\Lift\Lift.cpp">
-      <Filter>GameObjects\Common\Blocks\Lift</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Editor\System\EditorGrids\EditorGrids.cpp">
       <Filter>GameSystems\Editor\EditorGrids</Filter>
     </ClCompile>
@@ -281,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.cpp">
       <Filter>GameSystems\Play\UI_Play\CoinNum</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\ClearScene\Objects\Diary\Diary.cpp">
+      <Filter>GameObjects\Clear\Diary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,9 +518,6 @@
     <ClInclude Include="Game\Common\Island\Island.h">
       <Filter>GameObjects\Common\Island</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Common\Blocks\Lift\Lift.h">
-      <Filter>GameObjects\Common\Blocks\Lift</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Editor\System\EditorGrids\EditorGrids.h">
       <Filter>GameSystems\Editor\EditorGrids</Filter>
     </ClInclude>
@@ -565,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h">
       <Filter>GameSystems\Play\UI_Play\CoinNum</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\ClearScene\Objects\Diary\Diary.h">
+      <Filter>GameObjects\Clear\Diary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -694,9 +694,6 @@
     <Image Include="Resources\Textures\Transitions\Rule_Haze.png">
       <Filter>Resources\Textures\Rule</Filter>
     </Image>
-    <Image Include="Resources\Textures\Editor\Buttons\LiftButton.dds">
-      <Filter>Resources\Textures\Button</Filter>
-    </Image>
     <Image Include="Resources\Textures\Keys\AKey.dds">
       <Filter>Resources\Textures\Keys</Filter>
     </Image>
@@ -711,6 +708,27 @@
     </Image>
     <Image Include="Resources\Textures\Keys\WKey.dds">
       <Filter>Resources\Textures\Keys</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextCoinMax.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextCoinMid.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextCoinMin.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextTimeMax.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextTimeMid.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\TextTimeMin.dds">
+      <Filter>Resources\Textures\Diary</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Diary\Note.dds">
+      <Filter>Resources\Textures\Diary</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -784,9 +802,6 @@
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="Resources\Models\Island.cmo">
-      <Filter>Resources\Models</Filter>
-    </None>
-    <None Include="Resources\Models\Moving.cmo">
       <Filter>Resources\Models</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
@@ -1107,9 +1122,6 @@
     <Filter Include="GameObjects\Common\Island">
       <UniqueIdentifier>{ef1de65f-18aa-4ad4-bbbd-f8cfdf4d4aa3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\Common\Blocks\Lift">
-      <UniqueIdentifier>{24cd1076-918e-4a64-a9b5-3adae9bd9598}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameSystems\Editor\EditorGrids">
       <UniqueIdentifier>{6650e738-f2b7-4d6e-88fd-e5b4dc5ca152}</UniqueIdentifier>
     </Filter>
@@ -1148,6 +1160,12 @@
     </Filter>
     <Filter Include="GameSystems\Play\UI_Play\CoinNum">
       <UniqueIdentifier>{b00d738f-e46c-479b-8a6c-f0bfe958ed5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Clear\Diary">
+      <UniqueIdentifier>{912b16a4-0821-4dcb-8c8d-e92496272ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures\Diary">
+      <UniqueIdentifier>{11d3dd0d-d0e8-4093-a8ec-742e23489b1d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -34,6 +34,8 @@ public:
 	float GetGameTimer() const { return m_gameTimer; }
 	// 集めたコイン数を取得する
 	int GetCollectedCoin() const { return m_collectedCoin; }
+	// 最大コイン数を取得する
+	int GetMaxCoin() const { return m_maxCoin; }
 	// ステージ番号を取得する
 	int GetStageNumber() const { return m_stageNumber; }
 
@@ -89,8 +91,8 @@ private:
 
 private:
 
-	// ステージ番号・集めたコイン数
-	int m_stageNumber, m_collectedCoin;
+	// ステージ番号・集めたコイン数・最大コイン数
+	int m_stageNumber, m_collectedCoin, m_maxCoin;
 	// ゲームタイマー
 	float m_gameTimer;
 	// アドミンカメラ

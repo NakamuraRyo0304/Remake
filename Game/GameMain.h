@@ -71,8 +71,8 @@ private:
     SCENE m_nextScene, m_prevScene;
     // スクリーンサイズ
     DirectX::SimpleMath::Vector2 m_screenSize;
-    // ステージ番号/最大ステージ番号/コイン数
-    int m_stageNumber, m_maxNumber, m_collectedCoin;
+    // ステージ番号/最大ステージ番号/コイン数/最大コイン数
+    int m_stageNumber, m_maxNumber, m_collectedCoin, m_maxCoin;
     // クリア時間
     float m_clearTime;
 

@@ -34,7 +34,8 @@ GameMain::GameMain()
 	m_stageNumber(1),				// ステージ番号
 	m_clearTime(0.0f),				// クリア時間
 	m_collectedCoin(0),				// 集めたコイン数
-	m_maxNumber(999)				// 最大ステージ番号
+	m_maxNumber(999),				// 最大ステージ番号
+	m_maxCoin(0)					// 最大コイン数
 {
 	// カーソルを非表示
 	ShowCursor(false);
@@ -178,7 +179,7 @@ void GameMain::CreateScene()
 		case SCENE::CLEAR:		// クリアシーン
 		{
 			m_nowScene = std::make_unique<ClearScene>(
-				m_clearTime, m_collectedCoin, m_stageNumber, m_maxNumber);
+				m_clearTime, m_collectedCoin, m_maxCoin, m_stageNumber, m_maxNumber);
 
 			m_fade->SetFadeSpeed(DEFAULT_FADE_SPEED);
 			break;
@@ -235,6 +236,7 @@ void GameMain::DeleteScene()
 		m_clearTime     = CastSceneType<PlayScene>(m_nowScene)->GetGameTimer();
 		m_collectedCoin = CastSceneType<PlayScene>(m_nowScene)->GetCollectedCoin();
 		m_stageNumber   = CastSceneType<PlayScene>(m_nowScene)->GetStageNumber();
+		m_maxCoin		= CastSceneType<PlayScene>(m_nowScene)->GetMaxCoin();
 	}
 
 	// シーン間の値受け渡しは　　<<ここまで

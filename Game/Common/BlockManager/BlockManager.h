@@ -19,7 +19,6 @@
 #include "../../Editor/Objects/EditChara/EditChara.h"	// ステージエディタ用プレイヤ
 #include "../Blocks/Goal/Goal.h"						// ゴールオブジェクト
 #include "../Blocks/Spike/Spike.h"						// 棘オブジェクト
-#include "../Blocks/Lift/Lift.h"						// リフトブロック
 
 class BlockManager
 {
@@ -44,8 +43,6 @@ public:
 	std::vector<std::unique_ptr<Air>>&       GetAirs() { return m_air; }
 	// プレイヤブロックの配列を参照
 	std::vector<std::unique_ptr<EditChara>>& GetPlayers() { return m_chara; }
-	// リフトブロックの配列を参照
-	std::vector<std::unique_ptr<Lift>>&      GetLifts() { return m_lifts; }
 	// ステージパスを取得
 	const wchar_t* GetStagePath() { return m_stagePath.c_str(); }
 	// ステージパスを設定
@@ -184,7 +181,6 @@ private:
 	std::vector<std::unique_ptr<EditChara>> m_chara;	// キャラ
 	std::vector<std::unique_ptr<Goal>>      m_goals;	// ゴール
 	std::vector<std::unique_ptr<Spike>>     m_spikes;	// スパイク
-	std::vector<std::unique_ptr<Lift>>      m_lifts;	// リフト
 	// Json読み込み
 	std::unique_ptr<JsonHelper> m_jsonHelper;
 	// ダイアログ操作

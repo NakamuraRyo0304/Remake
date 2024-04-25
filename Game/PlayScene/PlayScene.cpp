@@ -46,7 +46,8 @@ PlayScene::PlayScene(const int& number)
 	BaseScene(),				// 基底クラスのコンストラクタ
 	m_stageNumber(number),		// ステージ番号
 	m_gameTimer(0.0f),			// ゲームタイマー
-	m_collectedCoin(0)			// 集めたコイン数
+	m_collectedCoin(0),			// 集めたコイン数
+	m_maxCoin(0)				// 最大コイン数
 {
 	Debug::DrawString::GetInstance().DebugLog(L"PlaySceneのコンストラクタが呼ばれました。\n");
 }
@@ -526,7 +527,11 @@ void PlayScene::SetSceneValues()
 	m_water->Create(L"Resources/Textures/ShaderTex/water.png");
 
 	// コインの枚数を設定
+	m_collectedCoin = 0;
 	m_ui->SetCoinNum(static_cast<int>(m_blockManager->GetCoins().size()));
+
+	// 最大コイン数を保存
+	m_maxCoin = static_cast<int>(m_blockManager->GetCoins().size());
 
 	// タイマースタート
 	m_timer->Start();
@@ -547,7 +552,7 @@ void PlayScene::DebugDraw(CommonStates& states)
 	string.DrawFormatString(states, { 0,125 }, Colors::DarkGreen, L"PlayerPos::%.2f,%.2f,%.2f", m_player->GetPosition().x, m_player->GetPosition().y, m_player->GetPosition().z);
 	string.DrawFormatString(states, { 0,150 }, Colors::DarkGreen, L"WorldMouse::%.2f,%.2f,%.2f", m_worldMouse->GetPosition().x, m_worldMouse->GetPosition().y, m_worldMouse->GetPosition().z);
 	string.DrawFormatString(states, { 0,175 }, Colors::DarkGreen, L"SettingPath::%d", m_player->GetFollowPath().size());
-	string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"HaveCoinNum::%d", m_player->GetCoinNum());
+	string.DrawFormatString(states, { 0,200 }, Colors::DarkGreen, L"CollectedCoinNum::%d", m_player->GetCoinNum());
 	string.DrawFormatString(states, { 0,225 }, Colors::DarkGreen, L"CameraPos::%.2f,%.2f,%.2f", m_adminCamera->GetPosition().x, m_adminCamera->GetPosition().y, m_adminCamera->GetPosition().z);
 
 }

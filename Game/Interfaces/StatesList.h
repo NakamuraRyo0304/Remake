@@ -22,7 +22,6 @@ enum class ID
 	Obj_Cloud,		// 雲ブロック
 	Obj_Goal,		// ゴールオブジェクト
 	Obj_Spike,		// 棘オブジェクト
-	Obj_Lift,		// リフトブロック
 	CursorPos,		// カーソルの3D位置
 	Back_Iceberg,	// 氷山
 	Back_Island,	// 孤島

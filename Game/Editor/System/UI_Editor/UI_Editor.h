@@ -31,7 +31,6 @@ public:
 		OC1_bn,
 		OC2_bn,
 		Spike_bn,
-		Lift_bn,
 
 		Length_bn
 	};

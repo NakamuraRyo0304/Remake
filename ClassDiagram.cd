@@ -13,7 +13,7 @@
     <Position X="13.819" Y="10.26" Height="0.366" Width="0.9" />
   </Comment>
   <Comment CommentText="画像描画">
-    <Position X="16.999" Y="13.856" Height="0.366" Width="0.9" />
+    <Position X="17.249" Y="13.856" Height="0.366" Width="0.9" />
   </Comment>
   <Comment CommentText="カメラ管理クラス">
     <Position X="12.025" Y="2.18" Height="0.291" Width="1.104" />
@@ -25,7 +25,7 @@
     <Position X="13.753" Y="14.938" Height="0.291" Width="0.7" />
   </Comment>
   <Comment CommentText="画像切り取り位置&#xD;&#xA;（RECT継承）">
-    <Position X="18.5" Y="13.75" Height="0.467" Width="1.222" />
+    <Position X="18.75" Y="13.75" Height="0.467" Width="1.222" />
   </Comment>
   <Comment CommentText="プレイヤーのステート">
     <Position X="3.75" Y="10.185" Height="0.293" Width="1.28" />
@@ -34,7 +34,7 @@
     <Position X="3.754" Y="9.163" Height="0.293" Width="1.372" />
   </Comment>
   <Comment CommentText="座標変換２D-＞３D">
-    <Position X="20.306" Y="13.865" Height="0.366" Width="1.371" />
+    <Position X="17.306" Y="16.615" Height="0.366" Width="1.371" />
   </Comment>
   <Comment CommentText="サウンド管理クラス">
     <Position X="13.793" Y="13.928" Height="0.291" Width="1.157" />
@@ -263,7 +263,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WorldMouse" Collapsed="true">
-    <Position X="20.25" Y="14.25" Width="1.5" />
+    <Position X="17.25" Y="17" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AASACSAAACAAAgABAAEAAAIAAAAAAAAAAgAAAIAAAAA=</HashCode>
       <FileName>Game\Common\WorldMouse\WorldMouse.h</FileName>
@@ -396,7 +396,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ImageShot" Collapsed="true">
-    <Position X="17" Y="15.75" Width="1.5" />
+    <Position X="17.25" Y="15.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAgAAAAAABCAgCAAAAQAAAAABAAAAAAA=</HashCode>
       <FileName>Game\PlayScene\System\ImageShot\ImageShot.h</FileName>
@@ -412,14 +412,14 @@
   <Class Name="UI_Play" Collapsed="true">
     <Position X="5.5" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AARAEAAAAABAAwAAAAAAAAAgAAAhBAgAAAgAQoAAAEA=</HashCode>
+      <HashCode>AARAEAAAAAAAAwAAAAAAAAAgAAAhBAgAAAgAQoAAAEA=</HashCode>
       <FileName>Game\PlayScene\System\UI_Play\UI_Play.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UI_Select" Collapsed="true">
     <Position X="3.5" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAACAAAwAAAEAACAAgACEAAggAQAAAAAgAEAA=</HashCode>
+      <HashCode>AAQgAAAAACAAAwAAAEAACBAgACEAAggEQAAAAAgAECA=</HashCode>
       <FileName>Game\SelectScene\System\UI_Select\UI_Select.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -466,7 +466,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Button" Collapsed="true">
-    <Position X="17" Y="14.25" Width="1.5" />
+    <Position X="17.25" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EEQAAEAAADACAwAgAIAQBAAgAAAAAACAQAgCAAsCAIA=</HashCode>
       <FileName>Libraries\SystemDatas\Button\Button.h</FileName>
@@ -487,7 +487,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrawSprite" Collapsed="true">
-    <Position X="17" Y="15" Width="1.5" />
+    <Position X="17.25" Y="15" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAEQEAAAABAAAAAAAAGAAIAAAAAAAAAAABBAAg=</HashCode>
       <FileName>Libraries\SystemDatas\DrawSprite\DrawSprite.h</FileName>
@@ -529,7 +529,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="RayCast" Collapsed="true">
-    <Position X="20.25" Y="15" Width="1.5" />
+    <Position X="17.25" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAACAAAAAAAgAACCAAACAAAAABAAAAAAIABIAAAI=</HashCode>
       <FileName>Libraries\SystemDatas\RayCast\RayCast.h</FileName>
@@ -601,7 +601,7 @@
   <Class Name="ClearScene" Collapsed="true">
     <Position X="9.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AARAACKABCAAAwACAACAAAABEAIAgBAwABAQAAEAAAQ=</HashCode>
+      <HashCode>AARAACKABCAAAwAiAACAAAABEIIAgBAwABAQAAEAAAQ=</HashCode>
       <FileName>Game\ClearScene\ClearScene.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -614,8 +614,20 @@
   </Class>
   <Class Name="PlayScene" Collapsed="true">
     <Position X="5.5" Y="4" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="PlayScene::ShadowBuffer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Game\PlayScene\PlayScene.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="PlayScene::LightFovBuffer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Game\PlayScene\PlayScene.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>EAakICACFyAAAwASCIEUAAIADwAIwBA0gABQiJUBEoQ=</HashCode>
+      <HashCode>EAakICACFyAAAwAyCIEUAAIBDwAIwBA0gABQiJUBEoQ=</HashCode>
       <FileName>Game\PlayScene\PlayScene.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -636,7 +648,7 @@
   <Class Name="GameMain" Collapsed="true">
     <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AARBAAIIBCQAA4oCAAAAAgAAAAAQgAiAAAQIEAEAAAQ=</HashCode>
+      <HashCode>AARBAAIIBCQAA4oiAAAAAgAAAAAQgAiAAAQIEAEAAAQ=</HashCode>
       <FileName>Game\GameMain.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -651,7 +663,7 @@
   <Class Name="PlayArea" Collapsed="true">
     <Position X="22" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAA0AAAIAAAAAoAAAAAgCAAAgAAAgAAAA=</HashCode>
+      <HashCode>BAAAAAAAACAAA0AAAIAAAAAoAAAAAgCAAAgAAAgAAAA=</HashCode>
       <FileName>Game\PlayScene\System\UI_Play\PlayArea\PlayArea.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -662,8 +674,15 @@
       <FileName>Game\PlayScene\System\UI_Play\CoinNum\CoinNum.h</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Diary" Collapsed="true">
+    <Position X="25.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAEACAAwEQAAAAAAAgAQAgAIAAAAAEAQAAAAA=</HashCode>
+      <FileName>Game\ClearScene\Objects\Diary\Diary.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Struct Name="RECT_U" Collapsed="true">
-    <Position X="18.5" Y="14.25" Width="1.5" />
+    <Position X="18.75" Y="14.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>Libraries\SystemDatas\DrawSprite\DrawSprite.h</FileName>

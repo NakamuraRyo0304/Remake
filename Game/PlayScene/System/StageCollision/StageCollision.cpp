@@ -32,7 +32,6 @@ void StageCollision::Initialize(BlockManager* blocks)
     for (auto& obj : blocks->GetCoins())   m_objects.push_back(obj.get());
     for (auto& obj : blocks->GetGoals())   m_objects.push_back(obj.get());
     for (auto& obj : blocks->GetSpikes())  m_objects.push_back(obj.get());
-    for (auto& obj : blocks->GetLifts())   m_objects.push_back(obj.get());
 }
 
 // 更新
@@ -65,7 +64,6 @@ void StageCollision::PerformEngenProc(Player* player, BaseObject* block, SimpleM
     switch (block->GetID())
     {
         case ID::Obj_Flozen:    // 氷床ブロック
-        case ID::Obj_Lift:      // リフトブロック
         {
             // 着地処理を行う
             player->SetFall(side != Side::Up ? true : false);
@@ -111,9 +109,7 @@ void StageCollision::PerformEngenProc(Player* player, BaseObject* block, SimpleM
     }
 }
 
-//==============================================================================
 // 立方体の当たり判定
-//==============================================================================
 StageCollision::Side StageCollision::IsCube(SimpleMath::Vector3* playerPos, const SimpleMath::Vector3& blockPos,
     const SimpleMath::Vector3& playerScale, const SimpleMath::Vector3& blockScale)
 {
