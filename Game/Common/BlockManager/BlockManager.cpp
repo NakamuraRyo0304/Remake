@@ -127,7 +127,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
 	// --書き換え対象-- //
-	std::vector<BaseObject*> objects;
+	std::vector<BaseObject*> objects = {};
 	if (is_playing == false)
 		for (auto& obj : m_chara)   objects.push_back(obj.get());	// キャラ
 	for (auto& obj : m_flozens)	    objects.push_back(obj.get());	// 氷床
@@ -148,7 +148,7 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 {
 	// --書き換え対象-- //
-	std::vector<BaseObject*> objects;
+	std::vector<BaseObject*> objects = {};
 	for (auto& obj : m_flozens)	    objects.push_back(obj.get());	// 氷床
 	for (auto& obj : m_clouds)		objects.push_back(obj.get());	// 雲
 	for (auto& obj : m_coins)		objects.push_back(obj.get());	// コイン
@@ -238,7 +238,7 @@ void BlockManager::OutputStage()
 	//==============================================================================
 
 	// --書き換え対象-- //
-	std::vector<BaseObject*> object;
+	std::vector<BaseObject*> object = {};
 
 	AddWriteObjects(&object, m_flozens);	// 氷床
 	AddWriteObjects(&object, m_clouds);		// 雲
@@ -388,10 +388,10 @@ void BlockManager::ReLoad(const wchar_t* path)
 	// パスがなかったらダイアログから開く
 	if (UserUtility::IsNull(path))
 	{
-		auto p = m_dialog->GetExpFilePath();
-		if (not UserUtility::IsNull(p))
+		auto dialogPath = m_dialog->GetExpFilePath();
+		if (not UserUtility::IsNull(dialogPath))
 		{
-			m_stagePath = p;
+			m_stagePath = dialogPath;
 		}
 	}
 	else

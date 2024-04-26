@@ -189,9 +189,6 @@
     <ClCompile Include="Game\SelectScene\System\UI_Select\UI_Select.cpp">
       <Filter>GameSystems\Select\UI_Select</Filter>
     </ClCompile>
-    <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp">
-      <Filter>GameSystems\Title\UI_Title</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Common\Water\Water.cpp">
       <Filter>GameObjects\Common\Water</Filter>
     </ClCompile>
@@ -281,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="Game\ClearScene\Objects\Diary\Diary.cpp">
       <Filter>GameObjects\Clear\Diary</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\TitleScene\System\UI_Title\UI_Title.cpp">
+      <Filter>GameSystems\Title\UI_Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +449,6 @@
     <ClInclude Include="Game\SelectScene\System\UI_Select\UI_Select.h">
       <Filter>GameSystems\Select\UI_Select</Filter>
     </ClInclude>
-    <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h">
-      <Filter>GameSystems\Title\UI_Title</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Common\Water\Water.h">
       <Filter>GameObjects\Common\Water</Filter>
     </ClInclude>
@@ -565,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="Game\ClearScene\Objects\Diary\Diary.h">
       <Filter>GameObjects\Clear\Diary</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\TitleScene\System\UI_Title\UI_Title.h">
+      <Filter>GameSystems\Title\UI_Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
