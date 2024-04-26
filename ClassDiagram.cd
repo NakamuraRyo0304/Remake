@@ -19,7 +19,7 @@
     <Position X="12.025" Y="2.18" Height="0.291" Width="1.104" />
   </Comment>
   <Comment CommentText="ブロック管理クラス">
-    <Position X="4.527" Y="18.102" Height="0.342" Width="1.247" />
+    <Position X="4.527" Y="16.852" Height="0.342" Width="1.247" />
   </Comment>
   <Comment CommentText="ID">
     <Position X="13.753" Y="14.938" Height="0.291" Width="0.7" />
@@ -186,9 +186,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BlockManager" Collapsed="true">
-    <Position X="4.5" Y="18.5" Width="1.5" />
+    <Position X="4.5" Y="17.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BDYAYDAOAQAggwAQhCAAAEDBEiGoAQiUGgACCABABCQ=</HashCode>
+      <HashCode>ADYAYDAOAQAggwAQhCAAAEDBEiGoAQiEGgACCABABCQ=</HashCode>
       <FileName>Game\Common\BlockManager\BlockManager.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -227,15 +227,8 @@
       <FileName>Game\Common\Blocks\Goal\Goal.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Lift" Collapsed="true">
-    <Position X="4.5" Y="16" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgwAAAAAAAAAAAAAIAAAAAAAAAAAAAI=</HashCode>
-      <FileName>Game\Common\Blocks\Lift\Lift.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Spike" Collapsed="true">
-    <Position X="4.5" Y="17" Width="1.5" />
+    <Position X="4.5" Y="16" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAgAAEAAgAAAAAAAAgAAAAAAACBAAAAAAIAAAA=</HashCode>
       <FileName>Game\Common\Blocks\Spike\Spike.h</FileName>
@@ -614,18 +607,6 @@
   </Class>
   <Class Name="PlayScene" Collapsed="true">
     <Position X="5.5" Y="4" Width="1.5" />
-    <NestedTypes>
-      <Struct Name="PlayScene::ShadowBuffer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Game\PlayScene\PlayScene.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-      <Struct Name="PlayScene::LightFovBuffer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Game\PlayScene\PlayScene.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>EAakICACFyAAAwAyCIEUAAIBDwAIwBA0gABQiJUBEoQ=</HashCode>
       <FileName>Game\PlayScene\PlayScene.h</FileName>
@@ -677,7 +658,7 @@
   <Class Name="Diary" Collapsed="true">
     <Position X="25.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQBAAAAEACAAwEQAAAAAAAgAQAgAIAAAAAEAQAAAAA=</HashCode>
+      <HashCode>AAQBAAAAAACAAwEQAAAAAAAgAAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>Game\ClearScene\Objects\Diary\Diary.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -705,7 +686,7 @@
   <Enum Name="ID" Collapsed="true">
     <Position X="3.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACCQAAAAwgEIAEAAMABAAAAAAAQAAAAkBACAAAA=</HashCode>
+      <HashCode>AAAAACCQAAAAggEIAEAAMABAAAAAAAQAAAAkBACAAAA=</HashCode>
       <FileName>Game\Interfaces\StatesList.h</FileName>
     </TypeIdentifier>
   </Enum>
