@@ -32,7 +32,7 @@ AdminCamera::~AdminCamera()
 // 更新
 void AdminCamera::Update()
 {
-	if (m_gameCamera == nullptr) return;
+	if (UserUtility::IsNull(m_gameCamera.get())) return;
 
 	// 更新してセットする
 	m_gameCamera->Update();
@@ -113,7 +113,7 @@ void AdminCamera::SetTarget(SimpleMath::Vector3 target)
 }
 
 // プロジェクション行列を作成する
-void AdminCamera::SetProjection(const DirectX::SimpleMath::Matrix& proj)
+void AdminCamera::SetProjection(const SimpleMath::Matrix& proj)
 {
 	if (UserUtility::IsNull(m_gameCamera.get())) return;
 
