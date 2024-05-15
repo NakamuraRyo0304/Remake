@@ -28,6 +28,8 @@ public:
 	void ReLoad(const wchar_t* path = nullptr);
 	// ステージを書き出す
 	void OutputStage();
+	// ユニークなデータを書き出す
+	void OutputUniqueData(std::vector<BaseObject*>& data);
 
 	// 氷床ブロックの配列を参照
 	std::vector<std::unique_ptr<Flozen>>&    GetFlozens() { return m_flozens; }

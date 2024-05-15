@@ -12,7 +12,7 @@
 #include "BlockManager.h"
 
 // 検索用メモ //
-// --書き換え対象-- //
+// --オブジェクト追記箇所-- //
 
 // コンストラクタ
 BlockManager::BlockManager(const wchar_t* stagePath)
@@ -67,20 +67,14 @@ void BlockManager::Initialize()
 		float fz = static_cast<float>(data[i]["Position"]["Z"]);
 		SimpleMath::Vector3 pos = SimpleMath::Vector3(fx, fy, fz);
 
-		// --書き換え対象-- //
+		if (name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(pos));		// 氷床
+		if (name == "Cloud")	m_clouds.push_back(std::make_unique<Cloud>(pos));		// 雲
+		if (name == "Coin")	    m_coins.push_back(std::make_unique<Coin>(pos));			// コイン
+		if (name == "Player")	m_chara.push_back(std::make_unique<EditChara>(pos));	// キャラ
+		if (name == "Goal")	    m_goals.push_back(std::make_unique<Goal>(pos));			// ゴール
+		if (name == "Spike")	m_spikes.push_back(std::make_unique<Spike>(pos));		// 棘
 
-		// 氷床
-		if (name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(pos));
-		// 雲
-		if (name == "Cloud")	m_clouds.push_back(std::make_unique<Cloud>(pos));
-		// コイン
-		if (name == "Coin")	    m_coins.push_back(std::make_unique<Coin>(pos));
-		// プレイヤ
-		if (name == "Player")	m_chara.push_back(std::make_unique<EditChara>(pos));
-		// ゴール
-		if (name == "Goal")	    m_goals.push_back(std::make_unique<Goal>(pos));
-		// 棘
-		if (name == "Spike")	m_spikes.push_back(std::make_unique<Spike>(pos));
+		// --オブジェクト追記箇所-- // 
 
 		// エディタ時のみ実行
 		if (not is_playing)
@@ -98,7 +92,6 @@ void BlockManager::Initialize()
 // 更新処理
 void BlockManager::Update()
 {
-	// --書き換え対象-- //
 	std::vector<BaseObject*> objects;
 	if (is_playing == false)
 	{
@@ -110,6 +103,8 @@ void BlockManager::Update()
 	for(auto& obj : m_coins)		objects.push_back(obj.get());	// コイン
 	for(auto& obj : m_goals)		objects.push_back(obj.get());	// ゴール
 	for(auto& obj : m_spikes)		objects.push_back(obj.get());	// 棘
+
+	// --オブジェクト追記箇所-- // 
 
 	// オブジェクトの更新
 	for (auto& obj : objects)
@@ -126,7 +121,6 @@ void BlockManager::Update()
 void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	SimpleMath::Matrix& view, SimpleMath::Matrix& proj, bool wireframe, ShaderLambda option)
 {
-	// --書き換え対象-- //
 	std::vector<BaseObject*> objects = {};
 	if (is_playing == false)
 		for (auto& obj : m_chara)   objects.push_back(obj.get());	// キャラ
@@ -135,6 +129,8 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 	for (auto& obj : m_coins)		objects.push_back(obj.get());	// コイン
 	for (auto& obj : m_goals)		objects.push_back(obj.get());	// ゴール
 	for (auto& obj : m_spikes)		objects.push_back(obj.get());	// 棘
+
+	// --オブジェクト追記箇所-- // 
 
 	// オブジェクトの描画
 	for (auto& obj : objects)
@@ -147,13 +143,14 @@ void BlockManager::Draw(ID3D11DeviceContext1* context, CommonStates& states,
 // オフセットを加算(セレクトシーンで主に呼び出す)
 void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 {
-	// --書き換え対象-- //
 	std::vector<BaseObject*> objects = {};
 	for (auto& obj : m_flozens)	    objects.push_back(obj.get());	// 氷床
 	for (auto& obj : m_clouds)		objects.push_back(obj.get());	// 雲
 	for (auto& obj : m_coins)		objects.push_back(obj.get());	// コイン
 	for (auto& obj : m_goals)		objects.push_back(obj.get());	// ゴール
 	for (auto& obj : m_spikes)		objects.push_back(obj.get());	// 棘
+
+	// --オブジェクト追記箇所-- // 
 
 	// オフセットの設定
 	for (auto& obj : objects)
@@ -166,8 +163,6 @@ void BlockManager::SetOffset(const SimpleMath::Vector3& offset)
 // ブロックの種類から書き出し用文字列を返す
 std::string BlockManager::GetBlockID(const ID& id)
 {
-	// --書き換え対象-- //
-
 	switch (id)
 	{
 	case ID::Obj_Flozen:	return "Flozen";// 氷床
@@ -178,13 +173,13 @@ std::string BlockManager::GetBlockID(const ID& id)
 	case ID::Obj_Spike:		return "Spike";	// 棘
 	default:		        return "";
 	}
+
+	// --オブジェクト追記箇所-- // 
 }
 
 // ブロック置き換え処理
 void BlockManager::ReplaceBlock()
 {
-	// --書き換え対象-- //
-
 	ReplaceObjects(ID::Obj_Flozen, m_flozens);	// 氷床
 	ReplaceObjects(ID::Obj_Cloud,  m_clouds);	// 雲
 	ReplaceObjects(ID::Obj_Coin,   m_coins);	// コイン
@@ -192,13 +187,13 @@ void BlockManager::ReplaceBlock()
 	ReplaceObjects(ID::Obj_Player, m_chara);	// キャラ
 	ReplaceObjects(ID::Obj_Goal,   m_goals);	// ゴール
 	ReplaceObjects(ID::Obj_Spike,  m_spikes);	// 棘
+
+	// --オブジェクト追記箇所-- // 
 }
 
 // ブロック作成
 void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 {
-	// --書き換え対象-- //
-
 	if (id == ID::Obj_Flozen)   m_flozens.push_back(std::make_unique<Flozen>(pos));	 // 氷床
 	if (id == ID::Obj_Cloud)	m_clouds.push_back(std::make_unique<Cloud>(pos));	 // 雲
 	if (id == ID::Obj_Coin)		m_coins.push_back(std::make_unique<Coin>(pos));		 // コイン
@@ -206,13 +201,13 @@ void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 	if (id == ID::Obj_Player)	m_chara.push_back(std::make_unique<EditChara>(pos)); // キャラ
 	if (id == ID::Obj_Goal)		m_goals.push_back(std::make_unique<Goal>(pos));		 // ゴール
 	if (id == ID::Obj_Spike)	m_spikes.push_back(std::make_unique<Spike>(pos));	 // 棘
+
+	// --オブジェクト追記箇所-- // 
 }
 
 // ブロック配列をリセットする
 void BlockManager::ClearBlocks()
 {
-	// --書き換え対象-- //
-
 	ClearObjects(&m_flozens);		// 氷床
 	ClearObjects(&m_clouds);		// 雲
 	ClearObjects(&m_coins);			// コイン
@@ -220,6 +215,8 @@ void BlockManager::ClearBlocks()
 	ClearObjects(&m_chara);			// キャラ
 	ClearObjects(&m_goals);			// ゴール
 	ClearObjects(&m_spikes);		// 棘
+
+	// --オブジェクト追記箇所-- // 
 }
 
 // ステージを書き出す
@@ -233,13 +230,8 @@ void BlockManager::OutputStage()
 	// パスを設定
 	m_jsonHelper->SetPath(m_stagePath.c_str());
 
-	//==============================================================================
-	// 追加するのはここから>>> 書き出し用配列にセット
-	//==============================================================================
-
-	// --書き換え対象-- //
+	// オブジェクト追加
 	std::vector<BaseObject*> object = {};
-
 	AddWriteObjects(&object, m_flozens);	// 氷床
 	AddWriteObjects(&object, m_clouds);		// 雲
 	AddWriteObjects(&object, m_coins);		// コイン
@@ -247,14 +239,18 @@ void BlockManager::OutputStage()
 	AddWriteObjects(&object, m_goals);		// ゴール
 	AddWriteObjects(&object, m_spikes);		// 棘
 
+	// --オブジェクト追記箇所-- // 
 
-	//==============================================================================
-	// <<<追加するのはここまで
-	//==============================================================================
+	// データ書き出し
+	OutputUniqueData(object);
+}
 
+// ユニークなデータを書き出す
+void BlockManager::OutputUniqueData(std::vector<BaseObject*>& data)
+{
 	// 重複しているデータを単一データにする
-	std::unordered_map<std::string, Json> unique;
-	for (auto& obj : object)
+	std::unordered_map<std::string, Json> unique = {};
+	for (auto& obj : data)
 	{
 		if (UserUtility::IsNull(obj)) { continue; }
 
@@ -277,7 +273,7 @@ void BlockManager::OutputStage()
 	}
 
 	// ユニークエントリをソートして最終出力に登録する
-	std::vector<Json> sortedEntries;
+	std::vector<Json> sortedEntries = {};
 	for (const auto& entry : unique)
 	{
 		sortedEntries.push_back(entry.second);
@@ -294,8 +290,7 @@ void BlockManager::OutputStage()
 	}
 
 	// インデントをそろえて書き出し
-	std::string str = output.dump(2);
-	m_jsonHelper->Write(str);
+	m_jsonHelper->Write(output.dump(2));
 }
 
 // エアーで埋める

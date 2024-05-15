@@ -43,8 +43,10 @@ void AdminCamera::Update()
 	// 補間しながら移動する
 	if (is_interpolation)
 	{
-		m_position = SimpleMath::Vector3::Lerp(m_position, m_gameCamera->GetPosition(), MOVE_POS_SPEED);
-		m_target = SimpleMath::Vector3::Lerp(m_target, m_gameCamera->GetTarget(), FOLLOW_TARGET_SPEED);
+		m_position =
+			SimpleMath::Vector3::Lerp(m_position, m_gameCamera->GetPosition(), MOVE_POS_SPEED);
+		m_target =
+			SimpleMath::Vector3::Lerp(m_target, m_gameCamera->GetTarget(), FOLLOW_TARGET_SPEED);
 	}
 	// 直接、瞬間的に移動する
 	else
@@ -103,7 +105,7 @@ void AdminCamera::SetPosition(SimpleMath::Vector3 pos)
 	m_gameCamera->SetPosition(pos);
 }
 
-// 注視点を設定
+// ターゲットを設定
 void AdminCamera::SetTarget(SimpleMath::Vector3 target)
 {
 	if(UserUtility::IsNull(m_gameCamera.get())) return;
@@ -117,6 +119,6 @@ void AdminCamera::SetProjection(const SimpleMath::Matrix& proj)
 {
 	if (UserUtility::IsNull(m_gameCamera.get())) return;
 
-	// ターゲットを設定
+	// プロジェクションを設定
 	m_gameCamera->SetProjection(proj);
 }
