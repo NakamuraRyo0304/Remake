@@ -14,7 +14,7 @@ CursorObject::CursorObject(const wchar_t* path, SimpleMath::Vector3 scale)
 	BaseObject(path, L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::CursorPos);
+	SetID(ID::PE_Cursor_Object);
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

@@ -15,7 +15,7 @@ Flozen::Flozen(SimpleMath::Vector3 position)
 	BaseObject(L"Resources/Models/Flozen.cmo", L"Resources/Models", position)
 {
 	CreateModel();
-	SetID(ID::Obj_Flozen);
+	SetID(ID::PE_Flozen);
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

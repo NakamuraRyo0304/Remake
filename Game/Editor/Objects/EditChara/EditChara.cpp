@@ -14,7 +14,7 @@ EditChara::EditChara(SimpleMath::Vector3 position)
 	BaseObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Obj_Player);
+	SetID(ID::PE_Player);
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

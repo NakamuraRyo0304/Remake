@@ -33,7 +33,7 @@ Player::Player()
 	is_coinHit(false)						// コイン衝突フラグ
 {
 	CreateModel();
-	SetID(ID::Obj_Player);
+	SetID(ID::PE_Player);
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

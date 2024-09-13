@@ -18,7 +18,7 @@ Bird_Title::Bird_Title()
 	BaseObject(L"Resources/Models/pAll.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Back_Bird);
+	SetID(ID::T_Bird);
 	SetPosition(SimpleMath::Vector3(5.0f, 0.0f, 10.0f));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

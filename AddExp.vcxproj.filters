@@ -780,9 +780,6 @@
     <None Include="Resources\Stages\sample3.json">
       <Filter>Resources\Stages</Filter>
     </None>
-    <None Include="Resources\Shaders\ShadowMap\SM_Common.hlsli">
-      <Filter>Resources\Shaders\ShadowMap</Filter>
-    </None>
     <None Include="packages.config">
       <Filter>Assets</Filter>
     </None>

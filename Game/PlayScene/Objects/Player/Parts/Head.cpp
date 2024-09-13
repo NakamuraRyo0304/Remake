@@ -21,7 +21,7 @@ Head::Head()
 	m_states(MoveStates::Idling)		// ƒAƒCƒhƒ‹ó‘Ô
 {
 	CreateModel();
-	SetID(ID::Obj_Player);
+	SetID(ID::PE_Player);
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

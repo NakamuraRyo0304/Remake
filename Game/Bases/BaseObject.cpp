@@ -37,14 +37,11 @@ BaseObject::~BaseObject()
 void BaseObject::CreateWorldMatrix()
 {
 	// スケールを変更
-	SimpleMath::Matrix scale =
-		SimpleMath::Matrix::CreateScale(GetScale());
+	SimpleMath::Matrix scale = SimpleMath::Matrix::CreateScale(GetScale());
 	// 回転を変更
-	SimpleMath::Matrix rotate =
-		SimpleMath::Matrix::CreateFromYawPitchRoll(GetRotate());
+	SimpleMath::Matrix rotate = SimpleMath::Matrix::CreateFromYawPitchRoll(GetRotate());
 	// 座標を変更
-	SimpleMath::Matrix trans =
-		SimpleMath::Matrix::CreateTranslation(GetPosition());
+	SimpleMath::Matrix trans = SimpleMath::Matrix::CreateTranslation(GetPosition());
 
 	// 変更したデータを反映
 	m_world = scale * rotate * trans;

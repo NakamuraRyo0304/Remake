@@ -21,7 +21,7 @@ Flag::Flag(const SimpleMath::Vector3& start, const SimpleMath::Vector3& dropped)
 	is_arrive(false)			            // “ž’…ƒtƒ‰ƒO
 {
 	CreateModel();
-	SetID(ID::Obj_Flag);
+	SetID(ID::P_Flag);
 	SetPosition(start);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

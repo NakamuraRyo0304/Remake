@@ -28,7 +28,7 @@ using BN = UI_Editor::BUTTON_NAME;			// ボタンの名前
 Editor::Editor()
 	:
 	BaseScene(),						// 基底クラスのコンストラクタ
-	m_selectionID(ID::Obj_Flozen)		// 初期は氷床を設定
+	m_selectionID(ID::PE_Flozen)		// 初期は氷床を設定
 {
 	Debug::DrawString::GetInstance().DebugLog(L"Editorのコンストラクタが呼ばれました。\n");
 	// エディタ時のみカーソルを表示
@@ -189,7 +189,7 @@ void Editor::SetSceneValues()
 	m_adminCamera->SetInterpolation(false);
 
 	// IDの初期化
-	m_selectionID = ID::Obj_Flozen;
+	m_selectionID = ID::PE_Flozen;
 
 	// ブロックの初期化
 	m_blockManager->SetPlay(false);
@@ -226,13 +226,13 @@ void Editor::DebugDraw(CommonStates& states)
 // オブジェクトをセットする
 void Editor::SetDrawObject()
 {
-	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::Obj_Flozen;	// 氷床
-	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::Obj_Cloud;	// 雲
-	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::Obj_Coin;	// コイン
-	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::Obj_Air;	// エア
-	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::Obj_Player;	// プレイヤ
-	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::Obj_Goal;	// ゴール
-	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::Obj_Spike;	// 棘
+	if (m_ui->IsClickButton(BN::Flozen_bn))	m_selectionID = ID::PE_Flozen;	// 氷床
+	if (m_ui->IsClickButton(BN::Cloud_bn))	m_selectionID = ID::PE_Cloud;	// 雲
+	if (m_ui->IsClickButton(BN::Coin_bn))	m_selectionID = ID::PE_Coin;	// コイン
+	if (m_ui->IsClickButton(BN::Air_bn))	m_selectionID = ID::PE_Air;	// エア
+	if (m_ui->IsClickButton(BN::Player_bn))	m_selectionID = ID::PE_Player;	// プレイヤ
+	if (m_ui->IsClickButton(BN::Goal_bn))	m_selectionID = ID::PE_Goal;	// ゴール
+	if (m_ui->IsClickButton(BN::Spike_bn))	m_selectionID = ID::PE_Spike;	// 棘
 }
 
 // コリジョンの更新

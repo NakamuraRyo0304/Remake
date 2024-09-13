@@ -15,7 +15,7 @@ Island::Island(SimpleMath::Vector3 position, float rate, float speed)
 	m_rotation(0.0f)			// ‰ñ“]—Ê
 {
 	CreateModel();
-	SetID(ID::Back_Island);
+	SetID(ID::P_Island);
 	SetPosition(position);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

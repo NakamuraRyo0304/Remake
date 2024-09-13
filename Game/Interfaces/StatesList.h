@@ -10,27 +10,27 @@
 // オブジェクトID
 enum class ID
 {
-	Default,		// 設定なし
-	Back_Bird,		// タイトルの鳥
-	Back_Logo,		// ロゴ
-	Back_Sky,		// スカイドーム
-	Obj_Player,		// プレイヤ
-	Obj_Flag,		// プレイヤが追跡する旗
-	Obj_Air,		// エディタ用判定ブロック
-	Obj_Flozen,		// 氷床ブロック
-	Obj_Coin,		// コインブロック
-	Obj_Cloud,		// 雲ブロック
-	Obj_Goal,		// ゴールオブジェクト
-	Obj_Spike,		// 棘オブジェクト
-	CursorPos,		// カーソルの3D位置
-	Back_Iceberg,	// 氷山
-	Back_Island,	// 孤島
+	Default,			// 設定なし
+	T_Bird,				// タイトルの鳥
+	T_Logo,				// ロゴ
+	A_Skydome,			// スカイドーム
+	PE_Player,			// プレイヤ
+	P_Flag,				// プレイヤが追跡する旗
+	PE_Air,				// エディタ用判定ブロック
+	PE_Flozen,			// 氷床ブロック
+	PE_Coin,			// コインブロック
+	PE_Cloud,			// 雲ブロック
+	PE_Goal,			// ゴールオブジェクト
+	PE_Spike,			// 棘オブジェクト
+	PE_Cursor_Object,	// カーソルの3D位置
+	P_Iceberg,			// 氷山
+	P_Island,			// 孤島
 
 	////////////////
 	//// 特殊ID ////
 	////////////////
 
-	Deleted,		// 削除済み
-	Length,			// 全ID数
+	Deleted,			// 削除済み
+	Length,				// 全ID数
 };
 

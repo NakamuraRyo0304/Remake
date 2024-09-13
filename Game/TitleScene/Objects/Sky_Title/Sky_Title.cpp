@@ -14,7 +14,7 @@ Sky_Title::Sky_Title()
 	BaseObject(L"Resources/Models/Sky.cmo", L"Resources/Models")
 {
 	CreateModel();
-	SetID(ID::Back_Sky);
+	SetID(ID::A_Skydome);
 	SetPosition(SimpleMath::Vector3::Zero);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

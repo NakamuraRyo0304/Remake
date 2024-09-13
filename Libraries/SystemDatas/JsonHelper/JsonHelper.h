@@ -28,7 +28,7 @@ class JsonHelper
 public:
 
 	// データの取得
-	Json GetData() { return m_json; }
+	Json GetData() const { return m_json; }
 	// パスの設定(主に開いたデータを他のファイルに書き出したいときに使う)
 	void SetPath(const wchar_t* path) { m_path = path; }
 

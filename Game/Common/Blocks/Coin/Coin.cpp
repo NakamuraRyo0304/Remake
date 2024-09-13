@@ -19,7 +19,7 @@ Coin::Coin(SimpleMath::Vector3 position)
 	is_hit(false)		// Õ“Ëƒtƒ‰ƒO
 {
 	CreateModel();
-	SetID(ID::Obj_Coin);
+	SetID(ID::PE_Coin);
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

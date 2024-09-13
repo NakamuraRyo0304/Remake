@@ -10,7 +10,7 @@
 #define BLOCKMANAGER
 
 #include "Game/Bases/BaseObject.h"						// オブジェクトの基底クラス
-#include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"// JSON関連
+#include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"// JSON書き出し
 #include "Libraries/SystemDatas/DiaLog/DiaLog.h"		// ダイアログ
 #include "../Blocks/Flozen/Flozen.h"					// 氷ブロック
 #include "../Blocks/Cloud/Cloud.h"						// 雲ブロック

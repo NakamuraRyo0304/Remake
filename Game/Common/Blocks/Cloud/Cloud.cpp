@@ -20,7 +20,7 @@ Cloud::Cloud(SimpleMath::Vector3 position)
 	is_hit(false)						// Õ“Ëƒtƒ‰ƒO
 {
 	CreateModel();
-	SetID(ID::Obj_Cloud);
+	SetID(ID::PE_Cloud);
 	SetPosition(SimpleMath::Vector3(position));
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

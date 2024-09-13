@@ -15,7 +15,7 @@ Iceberg::Iceberg(SimpleMath::Vector3 position, float rate, float speed)
 	m_rotation(0.0f)			// ‰ñ“]—Ê
 {
 	CreateModel();
-	SetID(ID::Back_Iceberg);
+	SetID(ID::P_Iceberg);
 	SetPosition(position);
 	SetInitialPosition(GetPosition());
 	SetRotate(SimpleMath::Vector3::Zero);

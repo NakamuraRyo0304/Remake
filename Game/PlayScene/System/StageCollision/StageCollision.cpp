@@ -63,14 +63,14 @@ void StageCollision::PerformEngenProc(Player* player, BaseObject* block, SimpleM
 
     switch (block->GetID())
     {
-        case ID::Obj_Flozen:    // 氷床ブロック
+        case ID::PE_Flozen:    // 氷床ブロック
         {
             // 着地処理を行う
             player->SetFall(side != Side::Up ? true : false);
             player->SetPosition(newPos);
             break;
         }
-        case ID::Obj_Cloud:     // 雲ブロック
+        case ID::PE_Cloud:     // 雲ブロック
         {
             // 着地処理を行い、雲を動かす
             static_cast<Cloud*>(block)->SetHitFlag(side != Side::Up ? true : false);
@@ -79,7 +79,7 @@ void StageCollision::PerformEngenProc(Player* player, BaseObject* block, SimpleM
             player->SetPosition(newPos);
             break;
         }
-        case ID::Obj_Coin:      // コイン
+        case ID::PE_Coin:      // コイン
         {
             // 獲得していなければ獲得処理を行う
             if (not static_cast<Coin*>(block)->IsHit())
@@ -90,13 +90,13 @@ void StageCollision::PerformEngenProc(Player* player, BaseObject* block, SimpleM
             static_cast<Coin*>(block)->SetHitFlag(true);
             break;
         }
-        case ID::Obj_Goal:      // ゴール
+        case ID::PE_Goal:      // ゴール
         {
             // ゴール処理を行う
             static_cast<Goal*>(block)->OnHitFlag();
             break;
         }
-        case ID::Obj_Spike:     // スパイク
+        case ID::PE_Spike:     // スパイク
         {
             // スパイクに当たれば死亡させる
             static_cast<Spike*>(block)->SetHitFlag(true);

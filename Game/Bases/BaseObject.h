@@ -16,8 +16,6 @@ class BaseObject : public IGameObject
 {
 public:
 
-public:
-
 	// À•W‚ğæ“¾
 	DirectX::SimpleMath::Vector3 GetPosition() const { return m_position; }
 	// À•W‚ğİ’è

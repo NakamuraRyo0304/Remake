@@ -6,7 +6,6 @@
  */
 
 #include "pch.h"
-#include "Libraries/SystemDatas/JsonHelper/JsonHelper.h"
 #include "Libraries/UserUtility.h"
 #include <random>
 #include "BlockManager.h"
@@ -24,9 +23,6 @@ BlockManager::BlockManager(const wchar_t* stagePath)
 	m_jsonHelper = std::make_unique<JsonHelper>();
 	// ダイアログアクセサ作成
 	m_dialog = std::make_unique<DiaLog>();
-
-	// ブロックをクリア
-	ClearBlocks();
 }
 
 // デストラクタ
@@ -44,28 +40,24 @@ void BlockManager::Initialize()
 	// 一度データを削除
 	ClearBlocks();
 
-	// エディタモードの時、判定用エアーで埋める
-	if (is_playing == false)
-	{
-		FillAir();
-	}
+	// 判定用エアーで埋める
+	if (not is_playing) FillAir();
 
 	// データを読み込む
 	m_jsonHelper->Load(m_stagePath.c_str());
 
 	// データを取得
 	Json data = m_jsonHelper->GetData();
-
 	for (int i = 0; i < data.size(); i++)
 	{
 		// 名前を格納
 		auto& name = data[i]["Path"];
 
 		// 座標の変換
-		float fx = static_cast<float>(data[i]["Position"]["X"]);
-		float fy = static_cast<float>(data[i]["Position"]["Y"]);
-		float fz = static_cast<float>(data[i]["Position"]["Z"]);
-		SimpleMath::Vector3 pos = SimpleMath::Vector3(fx, fy, fz);
+		SimpleMath::Vector3 pos(
+			static_cast<float>(data[i]["Position"]["X"]),
+			static_cast<float>(data[i]["Position"]["Y"]),
+			static_cast<float>(data[i]["Position"]["Z"]));
 
 		if (name == "Flozen")	m_flozens.push_back(std::make_unique<Flozen>(pos));		// 氷床
 		if (name == "Cloud")	m_clouds.push_back(std::make_unique<Cloud>(pos));		// 雲
@@ -92,7 +84,7 @@ void BlockManager::Initialize()
 // 更新処理
 void BlockManager::Update()
 {
-	std::vector<BaseObject*> objects;
+	std::vector<BaseObject*> objects = {};
 	if (is_playing == false)
 	{
 		for (auto& obj : m_chara)   objects.push_back(obj.get());	// キャラ
@@ -165,12 +157,12 @@ std::string BlockManager::GetBlockID(const ID& id)
 {
 	switch (id)
 	{
-	case ID::Obj_Flozen:	return "Flozen";// 氷床
-	case ID::Obj_Cloud:		return "Cloud";	// 雲
-	case ID::Obj_Coin:	    return "Coin";	// コイン
-	case ID::Obj_Player:	return "Player";// キャラ
-	case ID::Obj_Goal:		return "Goal";	// ゴール
-	case ID::Obj_Spike:		return "Spike";	// 棘
+	case ID::PE_Flozen:		return "Flozen";// 氷床
+	case ID::PE_Cloud:		return "Cloud";	// 雲
+	case ID::PE_Coin:	    return "Coin";	// コイン
+	case ID::PE_Player:		return "Player";// キャラ
+	case ID::PE_Goal:		return "Goal";	// ゴール
+	case ID::PE_Spike:		return "Spike";	// 棘
 	default:		        return "";
 	}
 
@@ -180,13 +172,13 @@ std::string BlockManager::GetBlockID(const ID& id)
 // ブロック置き換え処理
 void BlockManager::ReplaceBlock()
 {
-	ReplaceObjects(ID::Obj_Flozen, m_flozens);	// 氷床
-	ReplaceObjects(ID::Obj_Cloud,  m_clouds);	// 雲
-	ReplaceObjects(ID::Obj_Coin,   m_coins);	// コイン
-	ReplaceObjects(ID::Obj_Air,    m_air);		// エアー
-	ReplaceObjects(ID::Obj_Player, m_chara);	// キャラ
-	ReplaceObjects(ID::Obj_Goal,   m_goals);	// ゴール
-	ReplaceObjects(ID::Obj_Spike,  m_spikes);	// 棘
+	ReplaceObjects(ID::PE_Flozen, m_flozens);	// 氷床
+	ReplaceObjects(ID::PE_Cloud,  m_clouds);	// 雲
+	ReplaceObjects(ID::PE_Coin,   m_coins);		// コイン
+	ReplaceObjects(ID::PE_Air,    m_air);		// エアー
+	ReplaceObjects(ID::PE_Player, m_chara);		// キャラ
+	ReplaceObjects(ID::PE_Goal,   m_goals);		// ゴール
+	ReplaceObjects(ID::PE_Spike,  m_spikes);	// 棘
 
 	// --オブジェクト追記箇所-- // 
 }
@@ -194,13 +186,13 @@ void BlockManager::ReplaceBlock()
 // ブロック作成
 void BlockManager::CreateBlock(ID id, SimpleMath::Vector3 pos)
 {
-	if (id == ID::Obj_Flozen)   m_flozens.push_back(std::make_unique<Flozen>(pos));	 // 氷床
-	if (id == ID::Obj_Cloud)	m_clouds.push_back(std::make_unique<Cloud>(pos));	 // 雲
-	if (id == ID::Obj_Coin)		m_coins.push_back(std::make_unique<Coin>(pos));		 // コイン
-	if (id == ID::Obj_Air)		m_air.push_back(std::make_unique<Air>(pos));		 // エアー
-	if (id == ID::Obj_Player)	m_chara.push_back(std::make_unique<EditChara>(pos)); // キャラ
-	if (id == ID::Obj_Goal)		m_goals.push_back(std::make_unique<Goal>(pos));		 // ゴール
-	if (id == ID::Obj_Spike)	m_spikes.push_back(std::make_unique<Spike>(pos));	 // 棘
+	if (id == ID::PE_Flozen)	m_flozens.push_back(std::make_unique<Flozen>(pos));	 // 氷床
+	if (id == ID::PE_Cloud)		m_clouds.push_back(std::make_unique<Cloud>(pos));	 // 雲
+	if (id == ID::PE_Coin)		m_coins.push_back(std::make_unique<Coin>(pos));		 // コイン
+	if (id == ID::PE_Air)		m_air.push_back(std::make_unique<Air>(pos));		 // エアー
+	if (id == ID::PE_Player)	m_chara.push_back(std::make_unique<EditChara>(pos)); // キャラ
+	if (id == ID::PE_Goal)		m_goals.push_back(std::make_unique<Goal>(pos));		 // ゴール
+	if (id == ID::PE_Spike)		m_spikes.push_back(std::make_unique<Spike>(pos));	 // 棘
 
 	// --オブジェクト追記箇所-- // 
 }
